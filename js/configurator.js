@@ -317,11 +317,42 @@ function wireActions() {
   });
 
   el("btnNext").addEventListener("click", () => {
-    // Phase ถัดไป: agent/order
     const r = validateSelection(state.selected);
     if (!r.ok) return showStatus("error", r.msg);
-    showStatus("info", "ต่อไปเราจะทำหน้า Agents/Order + Upload บัตร + Preview + ส่งเข้า Google Sheet");
-    // window.location.href = "agents.html"; // เปิดใช้ตอนเราทำหน้า order จริง
+
+    // สร้าง summaryLines
+    const summaryLines = [
+      `Safety Book: ${state.selected.sizeKey}`,
+      `Outside: ${state.selected.outsideMaterialKey} / ${state.selected.outsideColorName}`,
+      `Inside: ${state.selected.insideMaterialKey} / ${state.selected.insideColorName}`,
+      `Lock: fingerprint`,
+      `Device: ${state.selected.deviceType} / ${state.selected.deviceModel} / ${state.selected.storage} / ${state.selected.color}`
+    ];
+
+    // item_keys แบบง่าย
+    const item_keys = [
+      `SB_SIZE_${state.selected.sizeKey}`,
+      `SB_OUT_${state.selected.outsideMaterialKey}_${state.selected.outsideColorName}`,
+      `SB_IN_${state.selected.insideMaterialKey}_${state.selected.insideColorName}`,
+      `LOCK_fingerprint`,
+      `DEV_${state.selected.deviceType}_${state.selected.deviceModel}_${state.selected.storage}`
+    ];
+
+    // ดึงยอดขายจาก UI (ชั่วคราว)
+    const sell_total =
+      Number(document.getElementById("sellTotal").textContent.replace(/[^\d]/g, "")) || 0;
+
+    localStorage.setItem(
+      "ssb_draft",
+      JSON.stringify({
+        selection: state.selected,
+        item_keys,
+        sell_total,
+        summaryLines
+      })
+    );
+
+    window.location.href = "agents.html";
   });
 }
 
@@ -341,3 +372,4 @@ async function main() {
 }
 
 main();
+
