@@ -1,0 +1,15 @@
+{
+  "source_note":"Sell prices/colors/storages referenced from Studio7 (update via config only).",
+  "iphone": [
+    {"model":"iPhone 13","options":[{"storage":"128GB","colors":["Midnight","Starlight"],"sell_price":20000,"cost_price":15200}]},
+    {"model":"iPhone 14","options":[{"storage":"128GB","colors":["Midnight","Starlight"],"sell_price":25000,"cost_price":17100}]},
+    {"model":"iPhone 15","options":[{"storage":"128GB","colors":["Black","Pink"],"sell_price":30000,"cost_price":24100}]},
+    {"model":"iPhone 16","options":[{"storage":"128GB","colors":["Black","White","Pink","Ultramarine","Teal"],"sell_price":35000,"cost_price":26900}]},
+    {"model":"iPhone 17","options":[{"storage":"256GB","colors":["Black","White","Ultramarine","Pink","Teal"],"sell_price":40000,"cost_price":29900}]},
+    {"model":"iPhone 17 Pro","options":[{"storage":"256GB","colors":["Deep Blue","Cosmic Orange","Silver"],"sell_price":55000,"cost_price":43900}]},
+    {"model":"iPhone 17 Pro Max","options":[{"storage":"256GB","colors":["Deep Blue","Cosmic Orange","Silver"],"sell_price":60000,"cost_price":48900}]}
+  ],
+  "ipad": [
+    {"model":"iPad (Cellular only)","cellular_only":true,"options":[{"storage":"128GB","colors":["Starlight","Purple","Blue","Space Gray"],"sell_price":40000,"cost_price":23900}]}
+  ]
+}

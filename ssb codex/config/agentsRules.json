@@ -1,0 +1,4 @@
+{
+  "require_agent_card_upload": true,
+  "agent_fields": ["agent_code","agent_name","phone","card_image"]
+}

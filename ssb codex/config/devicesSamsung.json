@@ -1,0 +1,14 @@
+{
+  "android_rule":"Samsung only",
+  "phones":[
+    {"model":"Galaxy A07 5G","options":[{"storage":"128GB","colors":["Black","Light Violet"],"sell_price":11000,"cost_price":5499}]},
+    {"model":"Galaxy A17 5G","options":[{"storage":"256GB","colors":["Black","Blue"],"sell_price":14000,"cost_price":6999}]},
+    {"model":"Galaxy A56 5G","options":[{"storage":"256GB","colors":["Pink","Awesome Graphite","Awesome Olive"],"sell_price":25000,"cost_price":13999}]},
+    {"model":"Galaxy S26+ ","options":[{"storage":"512GB","colors":["White","Sky Blue","Black","Cobalt Violet"],"sell_price":55000,"cost_price":40900}]},
+    {"model":"Galaxy S26 Ultra","options":[{"storage":"512GB","colors":["White","Sky Blue","Black","Cobalt Violet"],"sell_price":60000,"cost_price":46900}]}
+  ],
+
+  "tablets":[
+    {"model":"Galaxy Tab Series","options":[{"storage":"128GB","colors":["Gray"],"sell_price":0,"cost_price":0}]}
+  ]
+}

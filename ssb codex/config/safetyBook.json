@@ -1,0 +1,29 @@
+{
+  "sizes": [
+    {"key":"S", "name":"เล็ก", "sell_price": 0, "cost_price": 0, "image":"assets/img/size_s.webp"},
+    {"key":"M", "name":"กลาง", "sell_price": 0, "cost_price": 0, "image":"assets/img/size_m.webp"},
+    {"key":"L", "name":"ใหญ่", "sell_price": 0, "cost_price": 0, "image":"assets/img/size_l.webp"}
+  ],
+  "outsideMaterials": [
+    {"key":"cow", "name":"หนังวัว", "colors":[
+      {"name":"Navy", "hex":"#0B2A5B", "swatch":"assets/swatches/cow_navy.webp", "texture":"assets/textures/cow_navy.webp", "sell_price":0, "cost_price":0}
+    ]},
+    {"key":"croc", "name":"หนังจระเข้", "colors":[
+      {"name":"Black", "hex":"#111111", "swatch":"assets/swatches/croc_black.webp", "texture":"assets/textures/croc_black.webp", "sell_price":0, "cost_price":0}
+    ]},
+    {"key":"ostrich", "name":"หนังนกกระจอกเทศ", "colors":[
+      {"name":"Brown", "hex":"#4A2C1A", "swatch":"assets/swatches/ostrich_brown.webp", "texture":"assets/textures/ostrich_brown.webp", "sell_price":0, "cost_price":0}
+    ]},
+    {"key":"donkoi_indigo", "name":"ผ้าย้อมครามดอนกอย", "colors":[
+      {"name":"Indigo", "hex":"#1E3A8A", "swatch":"assets/swatches/donkoi_indigo.webp", "texture":"assets/textures/donkoi_indigo.webp", "sell_price":0, "cost_price":0}
+    ]}
+  ],
+  "insideMaterials": [
+    {"key":"microfiber", "name":"ไมโครไฟเบอร์", "colors":[
+      {"name":"Light Gray", "hex":"#D1D5DB", "swatch":"assets/swatches/inside_gray.webp", "sell_price":0, "cost_price":0}
+    ]}
+  ],
+  "locks": [
+    {"key":"fingerprint", "name":"Fingerprint Lock", "sell_price":0, "cost_price":0}
+  ]
+}
