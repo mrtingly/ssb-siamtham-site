@@ -1,7 +1,7 @@
 import { submitOrder } from "./api.js";
 import { formatTHB } from "./pricing.js";
 
-const ENDPOINT_URL = "PUT_YOUR_GAS_WEBAPP_URL_HERE"; // <<<<<< สำคัญ
+const ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbwNcykK8wtRZCVePbedNLjVM1FQ1BUpC8biXh_9GP0X2sbyznoze8wnXpRwiD64ltdsRA/exec"; // <<<<<< สำคัญ
 
 const el = (id) => document.getElementById(id);
 
