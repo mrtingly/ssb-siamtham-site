@@ -103,11 +103,13 @@ async function main() {
       };
 
       showStatus("info", "กำลังส่งออเดอร์ไป Google Sheet...");
-      const res = await submitOrder(ENDPOINT_URL, payload);
-      showStatus("ok", `สำเร็จ ✅ Order ID: ${res.order_id}`);
-    } catch (e) {
-      showStatus("error", "ส่งไม่สำเร็จ: " + e.message);
-    }
+    const res = await submitOrder(payload);
+
+if (res && res.ok) {
+  showStatus("ok", `สำเร็จ ✅ Order ID: ${res.order_id || "-"}`);
+} else {
+  showStatus("error", res.message || "Submit failed");
+}
   });
 }
 
