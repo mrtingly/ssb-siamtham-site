@@ -316,44 +316,37 @@ function wireActions() {
     showStatus("ok", "ผ่านกฎ SSB แล้ว ✅ (Samsung-only / iPad Cellular-only / Fingerprint-only)");
   });
 
-  el("btnNext").addEventListener("click", () => {
-    const r = validateSelection(state.selected);
-    if (!r.ok) return showStatus("error", r.msg);
+el("btnNext").addEventListener("click", () => {
+  const r = validateSelection(state.selected);
+  if (!r.ok) return showStatus("error", r.msg);
 
-    // สร้าง summaryLines
-    const summaryLines = [
-      `Safety Book: ${state.selected.sizeKey}`,
-      `Outside: ${state.selected.outsideMaterialKey} / ${state.selected.outsideColorName}`,
-      `Inside: ${state.selected.insideMaterialKey} / ${state.selected.insideColorName}`,
-      `Lock: fingerprint`,
-      `Device: ${state.selected.deviceType} / ${state.selected.deviceModel} / ${state.selected.storage} / ${state.selected.color}`
-    ];
+  const total = calcSellTotal(state.safety, state.apple, state.samsung, state.selected);
 
-    // item_keys แบบง่าย
-    const item_keys = [
-      `SB_SIZE_${state.selected.sizeKey}`,
-      `SB_OUT_${state.selected.outsideMaterialKey}_${state.selected.outsideColorName}`,
-      `SB_IN_${state.selected.insideMaterialKey}_${state.selected.insideColorName}`,
-      `LOCK_fingerprint`,
-      `DEV_${state.selected.deviceType}_${state.selected.deviceModel}_${state.selected.storage}`
-    ];
+  const summaryLines = [
+    `Safety Book: ${state.selected.sizeKey}`,
+    `Outside: ${state.selected.outsideMaterialKey} / ${state.selected.outsideColorName}`,
+    `Inside: ${state.selected.insideMaterialKey} / ${state.selected.insideColorName}`,
+    `Lock: fingerprint`,
+    `Device: ${state.selected.deviceType} / ${state.selected.deviceModel} / ${state.selected.storage} / ${state.selected.color}`
+  ];
 
-    // ดึงยอดขายจาก UI (ชั่วคราว)
-    const sell_total =
-      Number(document.getElementById("sellTotal").textContent.replace(/[^\d]/g, "")) || 0;
+  const item_keys = [
+    `SB_SIZE_${state.selected.sizeKey}`,
+    `SB_OUT_${state.selected.outsideMaterialKey}_${state.selected.outsideColorName}`,
+    `SB_IN_${state.selected.insideMaterialKey}_${state.selected.insideColorName}`,
+    `LOCK_fingerprint`,
+    `DEV_${state.selected.deviceType}_${state.selected.deviceModel}_${state.selected.storage}`
+  ];
 
-    localStorage.setItem(
-      "ssb_draft",
-      JSON.stringify({
-        selection: state.selected,
-        item_keys,
-        sell_total,
-        summaryLines
-      })
-    );
+  localStorage.setItem("ssb_draft", JSON.stringify({
+    selection: state.selected,
+    item_keys,
+    sell_total: total,
+    summaryLines
+  }));
 
-    window.location.href = "agents.html";
-  });
+  window.location.href = "agents.html";
+});
 }
 
 async function main() {
@@ -372,4 +365,5 @@ async function main() {
 }
 
 main();
+
 
