@@ -1,16 +1,18 @@
 import { submitOrder } from "./api.js";
 import { formatTHB } from "./pricing.js";
 
-const ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbzKUf38mPTywUqOLXHqDPIeBH7_VV2w42CbLc5rg72dufSKAUd2XDkFhA4tXtjy_LMrFQ/exec"; // <<<<<< สำคัญ
+const ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbzKUf38mPTywUqOLXHqDPIeBH7_VV2w42CbLc5rg72dufSKAUd2XDkFhA4tXtjy_LMrFQ/exec";
 
 const el = (id) => document.getElementById(id);
 
 function showStatus(type, msg) {
   const box = el("statusBox");
   box.className = `mb-4 p-3 rounded-lg border ${
-    type === "error" ? "bg-red-50 border-red-200 text-red-700" :
-    type === "ok" ? "bg-green-50 border-green-200 text-green-700" :
-    "bg-slate-50 border-slate-200 text-slate-700"
+    type === "error"
+      ? "bg-red-50 border-red-200 text-red-700"
+      : type === "ok"
+      ? "bg-green-50 border-green-200 text-green-700"
+      : "bg-slate-50 border-slate-200 text-slate-700"
   }`;
   box.textContent = msg;
   box.classList.remove("hidden");
@@ -41,6 +43,7 @@ function renderSummary(draft) {
 
 async function main() {
   const draft = getDraft();
+
   if (!draft) {
     showStatus("error", "ไม่พบข้อมูลจาก Configurator — กรุณากลับไปเลือกสินค้าใหม่");
     return;
@@ -55,6 +58,7 @@ async function main() {
   el("cardFile").addEventListener("change", async (e) => {
     const f = e.target.files?.[0];
     if (!f) return;
+
     const dataUrl = await fileToDataUrl(f);
     el("cardPreview").src = dataUrl;
     el("cardPreview").classList.remove("hidden");
@@ -69,7 +73,8 @@ async function main() {
       };
 
       if (!customer.name || !customer.phone) {
-        return showStatus("error", "กรุณากรอก ชื่อ-นามสกุล และ เบอร์โทร");
+        showStatus("error", "กรุณากรอก ชื่อ-นามสกุล และ เบอร์โทร");
+        return;
       }
 
       const haveAgent = el("haveAgent").checked;
@@ -79,9 +84,20 @@ async function main() {
         const file = el("cardFile").files?.[0];
         const confirm = el("cardConfirm").checked;
 
-        if (!el("agentCode").value.trim()) return showStatus("error", "กรุณากรอก Agent Code");
-        if (!file) return showStatus("error", "กรุณาอัปโหลดรูปบัตรตัวแทน");
-        if (!confirm) return showStatus("error", "กรุณาติ๊กยืนยันว่าบัตรจริงตรงกับข้อมูล");
+        if (!el("agentCode").value.trim()) {
+          showStatus("error", "กรุณากรอก Agent Code");
+          return;
+        }
+
+        if (!file) {
+          showStatus("error", "กรุณาอัปโหลดรูปบัตรตัวแทน");
+          return;
+        }
+
+        if (!confirm) {
+          showStatus("error", "กรุณาติ๊กยืนยันว่าบัตรจริงตรงกับข้อมูล");
+          return;
+        }
 
         const cardBase64 = await fileToDataUrl(file);
 
@@ -103,13 +119,17 @@ async function main() {
       };
 
       showStatus("info", "กำลังส่งออเดอร์ไป Google Sheet...");
-    const res = await submitOrder(payload);
 
-if (res && res.ok) {
-  showStatus("ok", `สำเร็จ ✅ Order ID: ${res.order_id || "-"}`);
-} else {
-  showStatus("error", res.message || "Submit failed");
-}
+      const res = await submitOrder(ENDPOINT_URL, payload);
+
+      if (res && res.ok) {
+        showStatus("ok", `สำเร็จ ✅ Order ID: ${res.order_id || "-"}`);
+      } else {
+        showStatus("error", res?.message || "Submit failed");
+      }
+    } catch (e) {
+      showStatus("error", "ส่งไม่สำเร็จ: " + e.message);
+    }
   });
 }
 
