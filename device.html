@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SSB - เลือกโทรศัพท์</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: Inter, system-ui, sans-serif; background:#f8fafc; }
+    .card { background:#fff; border-radius:20px; box-shadow:0 10px 30px rgba(15,23,42,.06); border:1px solid #e2e8f0; }
+    .input-ui { width:100%; border:1px solid #cbd5e1; border-radius:14px; padding:.9rem 1rem; background:#fff; }
+    .btn { border-radius:14px; padding:.95rem 1rem; font-weight:700; }
+    .btn-main { background:linear-gradient(135deg,#2563eb,#1d4ed8); color:#fff; }
+  </style>
+</head>
+<body>
+  <header class="bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+      <h1 class="text-2xl font-bold text-slate-900">Step 3 — เลือกโทรศัพท์</h1>
+      <p class="text-sm text-slate-500">หลังดู Safety Book ครบแล้ว ให้เลือกรุ่นโทรศัพท์ต่อ</p>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+    <div id="statusBox" class="hidden mb-6"></div>
+
+    <div class="grid xl:grid-cols-3 gap-8">
+      <div class="xl:col-span-2 space-y-8">
+        <section class="card p-6">
+          <h3 class="text-xl font-bold text-slate-900 mb-4">เลือกแบรนด์</h3>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <button id="btnApple" class="btn border border-slate-300 bg-white text-slate-700">Apple</button>
+            <button id="btnSamsung" class="btn border border-slate-300 bg-white text-slate-700">Samsung</button>
+          </div>
+        </section>
+
+        <section class="card p-6">
+          <h3 class="text-xl font-bold text-slate-900 mb-4">เลือกรุ่น / ความจุ / สี</h3>
+          <div class="grid md:grid-cols-2 gap-5">
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 mb-2">ประเภท</label>
+              <select id="deviceTypeSelect" class="input-ui"></select>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 mb-2">รุ่น</label>
+              <select id="deviceModelSelect" class="input-ui"></select>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 mb-2">ความจุ</label>
+              <select id="deviceStorageSelect" class="input-ui"></select>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 mb-2">สี</label>
+              <select id="deviceColorSelect" class="input-ui"></select>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <aside class="card p-6 h-fit xl:sticky xl:top-24">
+        <h3 class="text-xl font-bold text-slate-900 mb-4">สรุปโทรศัพท์</h3>
+        <div id="summaryBox" class="space-y-2 text-sm text-slate-600 mb-6"></div>
+        <div class="rounded-2xl bg-slate-50 border border-slate-200 p-4">
+          <div class="flex items-center justify-between">
+            <span class="text-sm text-slate-600">ราคาขายรวม</span>
+            <span id="sellTotal" class="text-xl font-bold text-slate-900">฿0</span>
+          </div>
+        </div>
+        <button id="btnRender" class="btn btn-main w-full mt-6">Render ภาพโทรศัพท์</button>
+      </aside>
+    </div>
+  </main>
+
+  <script type="module" src="device.js"></script>
+</body>
+</html>
