@@ -1,7 +1,7 @@
 import { submitOrder } from "./api.js";
 import { formatTHB } from "./pricing.js";
 
-const ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbzKUf38mPTywUqOLXHqDPIeBH7_VV2w42CbLc5rg72dufSKAUd2XDkFhA4tXtjy_LMrFQ/exec";
+const ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbznNwpQDadPHEnyNbhEGHlzLea1wYYrgxcIbbCjeIr6Dhqd1R75cXWLWJeUzch2CxyjTg/exec";
 
 const el = (id) => document.getElementById(id);
 
