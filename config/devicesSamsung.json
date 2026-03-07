@@ -1,5 +1,6 @@
 {
   "android_rule": "Samsung only",
+  "source_note": "Built from samsung.co.th references. sell_price intentionally set to 0 for safe manual pricing later.",
   "phones": [
     {
       "model": "Galaxy A07 5G",
@@ -8,8 +9,8 @@
         {
           "storage": "128GB",
           "colors": ["Black", "Light Violet"],
-          "sell_price": 11000,
-          "cost_price": 5499
+          "sell_price": 0,
+          "cost_price": 5999
         }
       ]
     },
@@ -18,10 +19,16 @@
       "model_code": "galaxy_a17_5g",
       "options": [
         {
+          "storage": "128GB",
+          "colors": ["Black", "Blue"],
+          "sell_price": 0,
+          "cost_price": 6499
+        },
+        {
           "storage": "256GB",
           "colors": ["Black", "Blue"],
-          "sell_price": 14000,
-          "cost_price": 6999
+          "sell_price": 0,
+          "cost_price": 8999
         }
       ]
     },
@@ -30,10 +37,16 @@
       "model_code": "galaxy_a56_5g",
       "options": [
         {
-          "storage": "256GB",
-          "colors": ["Pink", "Awesome Graphite", "Awesome Olive"],
-          "sell_price": 25000,
+          "storage": "128GB",
+          "colors": ["Awesome Graphite", "Awesome Olive", "Awesome Pink"],
+          "sell_price": 0,
           "cost_price": 13999
+        },
+        {
+          "storage": "256GB",
+          "colors": ["Awesome Graphite", "Awesome Olive", "Awesome Pink"],
+          "sell_price": 0,
+          "cost_price": 15999
         }
       ]
     },
@@ -42,10 +55,16 @@
       "model_code": "galaxy_s26_plus",
       "options": [
         {
+          "storage": "256GB",
+          "colors": ["White", "Sky Blue", "Black", "Cobalt Violet"],
+          "sell_price": 0,
+          "cost_price": 40900
+        },
+        {
           "storage": "512GB",
           "colors": ["White", "Sky Blue", "Black", "Cobalt Violet"],
-          "sell_price": 55000,
-          "cost_price": 40900
+          "sell_price": 0,
+          "cost_price": 48900
         }
       ]
     },
@@ -54,10 +73,22 @@
       "model_code": "galaxy_s26_ultra",
       "options": [
         {
-          "storage": "512GB",
-          "colors": ["White", "Sky Blue", "Black", "Cobalt Violet"],
-          "sell_price": 60000,
+          "storage": "256GB",
+          "colors": ["Black", "Cobalt Violet", "Sky Blue", "White"],
+          "sell_price": 0,
           "cost_price": 46900
+        },
+        {
+          "storage": "512GB",
+          "colors": ["Black", "Cobalt Violet", "Sky Blue", "White"],
+          "sell_price": 0,
+          "cost_price": 54900
+        },
+        {
+          "storage": "1TB",
+          "colors": ["Black", "Cobalt Violet", "Sky Blue", "White"],
+          "sell_price": 0,
+          "cost_price": 66900
         }
       ]
     }
