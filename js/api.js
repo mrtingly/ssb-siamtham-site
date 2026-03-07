@@ -1,10 +1,8 @@
-export const ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbzKUf38mPTywUqOLXHqDPIeBH7_VV2w42CbLc5rg72dufSKAUd2XDkFhA4tXtjy_LMrFQ/exec";
-
-export async function submitOrder(payload) {
+export async function submitOrder(endpointUrl, payload) {
   const fd = new FormData();
   fd.append("payload", JSON.stringify(payload));
 
-  const res = await fetch(ENDPOINT_URL, {
+  const res = await fetch(endpointUrl, {
     method: "POST",
     body: fd
   });
