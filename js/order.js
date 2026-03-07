@@ -131,6 +131,6 @@ async function main() {
       showStatus("error", "ส่งไม่สำเร็จ: " + e.message);
     }
   });
-}
+
 
 main();
