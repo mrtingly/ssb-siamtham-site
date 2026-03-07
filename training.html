@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SSB - อบรมการใช้งาน</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: Inter, system-ui, sans-serif; background:#f8fafc; }
+    .card { background:#fff; border-radius:20px; border:1px solid #e2e8f0; box-shadow:0 10px 30px rgba(15,23,42,.06); }
+    .btn { border-radius:14px; padding:.95rem 1rem; font-weight:700; }
+    .btn-main { background:linear-gradient(135deg,#2563eb,#1d4ed8); color:#fff; }
+  </style>
+</head>
+<body>
+  <header class="bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+      <h1 class="text-2xl font-bold text-slate-900">Step 5 — อบรมการใช้งาน</h1>
+      <p class="text-sm text-slate-500">ก่อนปิดการขาย ต้องมีหลักฐานว่าลูกค้าได้รับการอบรมแล้ว</p>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+    <div id="statusBox" class="hidden mb-6"></div>
+
+    <section class="card p-6">
+      <h2 class="text-2xl font-bold text-slate-900">หลักฐานการอบรม</h2>
+      <p class="text-slate-600 mt-2">
+        ให้ลูกค้าถ่ายรูปพร้อมถือข้อความว่า
+        <span class="font-bold text-blue-700">“ได้รับการอบรมวิธีการใช้งานเรียบร้อยแล้ว”</span>
+      </p>
+
+      <div class="mt-6 rounded-2xl bg-blue-50 border border-blue-100 p-5">
+        <div class="font-semibold text-blue-800 mb-2">สิ่งที่เซลต้องทำให้ครบ</div>
+        <ul class="list-disc pl-5 text-sm text-blue-700 space-y-1">
+          <li>อธิบายวิธีใช้งานตามขั้นตอนจริง</li>
+          <li>ให้ลูกค้าถ่ายรูปพร้อมถือข้อความยืนยัน</li>
+          <li>อัปโหลดรูปเข้าระบบ</li>
+          <li>ติ๊กยืนยันว่าอบรมเสร็จแล้ว</li>
+        </ul>
+      </div>
+
+      <div class="mt-6 grid lg:grid-cols-2 gap-6">
+        <div>
+          <label for="trainingFile" class="block text-sm font-semibold text-slate-700 mb-2">อัปโหลดรูปยืนยันการอบรม *</label>
+          <label for="trainingFile" class="block rounded-2xl border-2 border-dashed border-blue-200 bg-blue-50 p-8 text-center cursor-pointer hover:bg-blue-100 transition">
+            <div class="text-blue-700 font-semibold">คลิกเพื่อเลือกรูป</div>
+            <div class="text-sm text-slate-500 mt-1">รองรับ .jpg / .png</div>
+          </label>
+          <input id="trainingFile" type="file" accept="image/png,image/jpeg" class="hidden" />
+        </div>
+
+        <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+          <div class="text-sm font-semibold text-slate-700 mb-3">ตัวอย่างรูปที่อัปโหลด</div>
+          <img id="trainingPreview" class="hidden w-full rounded-xl border border-slate-200 bg-white object-contain max-h-72" alt="Training proof preview" />
+          <div id="trainingFallback" class="text-sm text-slate-400">ยังไม่มีรูปที่อัปโหลด</div>
+        </div>
+      </div>
+
+      <label class="mt-6 flex items-start gap-3 rounded-2xl bg-slate-50 border border-slate-200 p-4">
+        <input id="trainedConfirm" type="checkbox" class="mt-1 accent-blue-600" />
+        <div class="text-sm text-slate-600">
+          ยืนยันว่าลูกค้าได้รับการอบรมการใช้งานเรียบร้อยแล้ว และรูปที่อัปโหลดเป็นหลักฐานของลูกค้าจริง
+        </div>
+      </label>
+
+      <button id="btnToAgents" class="btn btn-main w-full mt-6">ไปหน้า Agent / Order</button>
+    </section>
+  </main>
+
+  <script type="module" src="training.js"></script>
+</body>
+</html>
