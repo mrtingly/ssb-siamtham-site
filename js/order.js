@@ -37,8 +37,8 @@ function fileToDataUrl(file) {
 }
 
 function renderSummary(draft) {
-  el("summaryBox").innerHTML = draft.summaryLines.map(x => `<div>• ${x}</div>`).join("");
-  el("sellTotal").textContent = formatTHB(draft.sell_total);
+  el("summaryBox").innerHTML = (draft.summaryLines || []).map(x => `<div>• ${x}</div>`).join("");
+  el("sellTotal").textContent = formatTHB(draft.sell_total || 0);
 }
 
 async function main() {
@@ -131,6 +131,6 @@ async function main() {
       showStatus("error", "ส่งไม่สำเร็จ: " + e.message);
     }
   });
-
+}
 
 main();
