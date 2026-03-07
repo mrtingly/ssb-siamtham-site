@@ -1,29 +1,220 @@
 {
   "sizes": [
-    {"key":"S", "name":"เล็ก", "sell_price": 0, "cost_price": 0, "image":"assets/img/size_s.webp"},
-    {"key":"M", "name":"กลาง", "sell_price": 0, "cost_price": 0, "image":"assets/img/size_m.webp"},
-    {"key":"L", "name":"ใหญ่", "sell_price": 0, "cost_price": 0, "image":"assets/img/size_l.webp"}
+    {
+      "key": "m",
+      "name": "Safety Book M",
+      "sell_price": 4900,
+      "cost_price": 3000,
+      "faraday_cost": 1500,
+      "labor_cost": 1500
+    },
+    {
+      "key": "l",
+      "name": "Safety Book L",
+      "sell_price": 5900,
+      "cost_price": 3500,
+      "faraday_cost": 2000,
+      "labor_cost": 1500
+    }
   ],
   "outsideMaterials": [
-    {"key":"cow", "name":"หนังวัว", "colors":[
-      {"name":"Navy", "hex":"#0B2A5B", "swatch":"assets/swatches/cow_navy.webp", "texture":"assets/textures/cow_navy.webp", "sell_price":0, "cost_price":0}
-    ]},
-    {"key":"croc", "name":"หนังจระเข้", "colors":[
-      {"name":"Black", "hex":"#111111", "swatch":"assets/swatches/croc_black.webp", "texture":"assets/textures/croc_black.webp", "sell_price":0, "cost_price":0}
-    ]},
-    {"key":"ostrich", "name":"หนังนกกระจอกเทศ", "colors":[
-      {"name":"Brown", "hex":"#4A2C1A", "swatch":"assets/swatches/ostrich_brown.webp", "texture":"assets/textures/ostrich_brown.webp", "sell_price":0, "cost_price":0}
-    ]},
-    {"key":"donkoi_indigo", "name":"ผ้าย้อมครามดอนกอย", "colors":[
-      {"name":"Indigo", "hex":"#1E3A8A", "swatch":"assets/swatches/donkoi_indigo.webp", "texture":"assets/textures/donkoi_indigo.webp", "sell_price":0, "cost_price":0}
-    ]}
+    {
+      "key": "cowhide",
+      "name": "หนังวัว",
+      "colors": [
+        {
+          "name": "Black",
+          "label_th": "ดำ",
+          "hex": "#111827",
+          "sell_price": 2800,
+          "cost_price": 1600
+        },
+        {
+          "name": "Tan",
+          "label_th": "แทน",
+          "hex": "#C48A5A",
+          "sell_price": 2800,
+          "cost_price": 1600
+        },
+        {
+          "name": "Blue",
+          "label_th": "ฟ้า",
+          "hex": "#60A5FA",
+          "sell_price": 2800,
+          "cost_price": 1600
+        }
+      ]
+    },
+    {
+      "key": "ostrich",
+      "name": "หนังนกกระจอกเทศ",
+      "colors": [
+        {
+          "name": "Brown",
+          "label_th": "น้ำตาล",
+          "hex": "#8B5E3C",
+          "sell_price": 4200,
+          "cost_price": 2500
+        },
+        {
+          "name": "Black",
+          "label_th": "ดำ",
+          "hex": "#111827",
+          "sell_price": 4200,
+          "cost_price": 2500
+        },
+        {
+          "name": "Burgundy",
+          "label_th": "เบอร์กันดี",
+          "hex": "#7C2D12",
+          "sell_price": 4300,
+          "cost_price": 2600
+        },
+        {
+          "name": "Navy",
+          "label_th": "กรมท่า",
+          "hex": "#1E3A8A",
+          "sell_price": 4300,
+          "cost_price": 2600
+        }
+      ]
+    },
+    {
+      "key": "crocodile",
+      "name": "หนังจระเข้",
+      "colors": [
+        {
+          "name": "Black",
+          "label_th": "ดำ",
+          "hex": "#111827",
+          "sell_price": 5200,
+          "cost_price": 3200
+        },
+        {
+          "name": "DarkBrown",
+          "label_th": "น้ำตาลเข้ม",
+          "hex": "#5B3A29",
+          "sell_price": 5200,
+          "cost_price": 3200
+        },
+        {
+          "name": "ForestGreen",
+          "label_th": "เขียวเข้ม",
+          "hex": "#14532D",
+          "sell_price": 5400,
+          "cost_price": 3300
+        }
+      ]
+    },
+    {
+      "key": "louis",
+      "name": "หนังลายหลุย",
+      "colors": [
+        {
+          "name": "Monogram",
+          "label_th": "ลายหลุย",
+          "hex": "#6B4F3B",
+          "sell_price": 3800,
+          "cost_price": 2200
+        }
+      ]
+    },
+    {
+      "key": "donkoi_indigo",
+      "name": "ผ้าย้อมครามดอนกอย",
+      "colors": [
+        {
+          "name": "Navy",
+          "label_th": "กรมท่า",
+          "hex": "#1E3A8A",
+          "sell_price": 3200,
+          "cost_price": 1800
+        },
+        {
+          "name": "IndigoBlue",
+          "label_th": "ฟ้าคราม",
+          "hex": "#2563EB",
+          "sell_price": 3200,
+          "cost_price": 1800
+        }
+      ]
+    }
   ],
   "insideMaterials": [
-    {"key":"microfiber", "name":"ไมโครไฟเบอร์", "colors":[
-      {"name":"Light Gray", "hex":"#D1D5DB", "swatch":"assets/swatches/inside_gray.webp", "sell_price":0, "cost_price":0}
-    ]}
+    {
+      "key": "gumyee",
+      "name": "กำมะหยี่",
+      "colors": [
+        {
+          "name": "Black",
+          "label_th": "ดำ",
+          "hex": "#111827",
+          "sell_price": 1400,
+          "cost_price": 700
+        },
+        {
+          "name": "Red",
+          "label_th": "แดง",
+          "hex": "#B91C1C",
+          "sell_price": 1400,
+          "cost_price": 700
+        },
+        {
+          "name": "Navy",
+          "label_th": "กรมท่า",
+          "hex": "#1E3A8A",
+          "sell_price": 1400,
+          "cost_price": 700
+        },
+        {
+          "name": "Cream",
+          "label_th": "ครีม",
+          "hex": "#F5F5DC",
+          "sell_price": 1400,
+          "cost_price": 700
+        },
+        {
+          "name": "LightGray",
+          "label_th": "เทาอ่อน",
+          "hex": "#D1D5DB",
+          "sell_price": 1400,
+          "cost_price": 700
+        }
+      ]
+    },
+    {
+      "key": "lv_lining",
+      "name": "ซับในหลุยวิคตอง",
+      "colors": [
+        {
+          "name": "LouisPattern",
+          "label_th": "ลายหลุย",
+          "hex": "#6B4F3B",
+          "sell_price": 1700,
+          "cost_price": 950
+        }
+      ]
+    },
+    {
+      "key": "pigskin",
+      "name": "หนังหมู",
+      "colors": [
+        {
+          "name": "Tan",
+          "label_th": "แทน",
+          "hex": "#C48A5A",
+          "sell_price": 1600,
+          "cost_price": 900
+        }
+      ]
+    }
   ],
   "locks": [
-    {"key":"fingerprint", "name":"Fingerprint Lock", "sell_price":0, "cost_price":0}
+    {
+      "key": "fingerprint",
+      "name": "Fingerprint Lock",
+      "sell_price": 2200,
+      "cost_price": 1000
+    }
   ]
 }
