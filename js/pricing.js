@@ -77,7 +77,6 @@ export function buildItemKeys(sel) {
     );
   }
 
-  // ตอนนี้ระบบล็อกเป็น fingerprint only
   keys.push("lock_fingerprint");
 
   if (sel?.device_brand && sel?.deviceModel && sel?.storage) {
@@ -91,11 +90,11 @@ export function buildItemKeys(sel) {
 
 export function buildSummaryLines(sel) {
   return [
-    `ขนาด: ${sel?.sizeKey || "-"}`,
-    `ภายนอก: ${sel?.outsideMaterialKey || "-"} / ${sel?.outsideColorName || "-"}`,
-    `ภายใน: ${sel?.insideMaterialKey || "-"} / ${sel?.insideColorName || "-"}`,
-    `ล็อก: fingerprint`,
-    `อุปกรณ์: ${sel?.device_brand || "-"} ${sel?.deviceModel || "-"} ${sel?.storage || "-"}`
+    `Safety Book: ${sel?.sizeKey || "-"}`,
+    `Outside: ${sel?.outsideMaterialKey || "-"} / ${sel?.outsideColorName || "-"}`,
+    `Inside: ${sel?.insideMaterialKey || "-"} / ${sel?.insideColorName || "-"}`,
+    `Lock: fingerprint`,
+    `Device: ${sel?.deviceType || "-"} / ${sel?.deviceModel || "-"} / ${sel?.storage || "-"} / ${sel?.color || "-"}`
   ];
 }
 
