@@ -1,1 +1,27 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Agent Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-900">
+  <main class="max-w-md mx-auto px-4 py-10">
+    <div class="bg-white border rounded-2xl shadow-sm p-6">
+      <h1 class="text-2xl font-bold mb-4">Agent Login</h1>
 
+      <div id="statusBox" class="hidden mb-4 p-3 rounded-lg border"></div>
+
+      <input id="agentCode" class="border rounded-lg p-2 w-full mb-3" placeholder="Agent Code" />
+      <input id="agentPhone" class="border rounded-lg p-2 w-full mb-4" placeholder="Phone Number" />
+
+      <button id="btnLogin" class="w-full bg-blue-600 text-white rounded-xl py-3 hover:opacity-90">
+        Login
+      </button>
+    </div>
+  </main>
+
+  <script type="module" src="js/agentLogin.js"></script>
+</body>
+</html>
