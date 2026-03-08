@@ -457,6 +457,48 @@
     *{
   font-family:'Prompt', sans-serif !important;
 }
+    .ssb-footer{
+  margin-top:40px;
+  background:#0b4ea2;
+  color:#fff;
+  border-radius:20px;
+  overflow:hidden;
+  font-size:14px;
+}
+
+.ssb-footer-inner{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  padding:20px 24px;
+  flex-wrap:wrap;
+}
+
+.ssb-footer h3{
+  margin:0 0 6px;
+  font-size:18px;
+  font-weight:700;
+}
+
+.ssb-footer p{
+  margin:4px 0;
+  opacity:.95;
+}
+
+.ssb-footer-bottom{
+  background:#083a7c;
+  text-align:center;
+  padding:10px;
+  font-size:13px;
+  opacity:.85;
+}
+
+@media (max-width:768px){
+  .ssb-footer-inner{
+    flex-direction:column;
+    gap:12px;
+  }
+}
   </style>
 </head>
 <body>
@@ -633,27 +675,27 @@
         </div>
       </section>
 
-      <footer class="footer-contact">
-        <div class="footer-contact-inner">
-          <div>
-            <h2>ติดต่อบริษัท สยามทำ จำกัด</h2>
-            <p>Stealth Safety Bank System / Stealth Safety Bank Mobile</p>
-            <p>ที่อยู่: 54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
-            <p>Serial Number: 0105566099954</p>
-            <p>โทร: 02-043-2988</p>
-            <p>มือถือ: 063-656-1447 / 064-951-4888 / 080-204-5455</p>
-            <p>เว็บไซต์: www.siamtham.com</p>
-            <p>LINE Official Account: @siamtham</p>
-          </div>
+   <footer class="ssb-footer">
+  <div class="ssb-footer-inner">
 
-          <div class="footer-box">
-            <strong>ข้อมูลติดต่อด่วน</strong>
-            <p>บริษัท สยามทำ จำกัด</p>
-            <p>สอบถามข้อมูลสินค้า การใช้งาน การอบรม และตัวแทนจำหน่าย</p>
-            <p class="footer-note">ระบบนี้ออกแบบให้ใช้งานได้ทั้ง Desktop, iOS และ Android แบบ Responsive</p>
-          </div>
-        </div>
-      </footer>
+    <div class="ssb-footer-left">
+      <h3>บริษัท สยามทำ จำกัด</h3>
+      <p>Stealth Safety Bank System</p>
+      <p>54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
+    </div>
+
+    <div class="ssb-footer-right">
+      <p>Serial: 0105566099954</p>
+      <p>โทร 02-043-2988</p>
+      <p>063-656-1447 | 064-951-4888 | 080-204-5455</p>
+    </div>
+
+  </div>
+
+  <div class="ssb-footer-bottom">
+    © 2026 Siamtham Co., Ltd. All Rights Reserved.
+  </div>
+</footer>
     </main>
   </div>
 
