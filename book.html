@@ -13,6 +13,7 @@
     .btn { background:linear-gradient(135deg,#2563eb,#1d4ed8); color:#fff; border-radius:14px; padding:.95rem 1rem; font-weight:700; }
     .swatch.active { border-color:#2563eb; box-shadow:0 0 0 3px rgba(37,99,235,.15); }
   </style>
+  <link rel="stylesheet" href="css/shared-shell.css" />
 </head>
 <body>
 
@@ -138,5 +139,9 @@
   </footer>
 
   <script type="module" src="js/book.js"></script>
+  <script type="module">
+  import { renderSharedShell } from "./js/shared-shell.js";
+  renderSharedShell("Step 1 — เลือก Safety Book");
+</script>
 </body>
 </html>
