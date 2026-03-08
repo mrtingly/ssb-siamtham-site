@@ -232,12 +232,6 @@ html,body{
   font-weight:700;
 }
 
-.ssb-main{
-  flex:1;
-  min-width:0;
-  padding:24px;
-}
-
 .ssb-company-card{
   margin:14px 8px 0;
   background:linear-gradient(180deg,#eff6ff,#ffffff);
@@ -258,29 +252,11 @@ html,body{
     display:none;
   }
 
-  .ssb-sidebar{
-    position:fixed;
-    top:var(--topbar-h);
-    left:0;
-    bottom:0;
-    z-index:70;
-    transform:translateX(-100%);
-    box-shadow:0 18px 40px rgba(15,23,42,.18);
-  }
-
-  .ssb-sidebar.open{
-    transform:translateX(0);
-  }
-
-  .ssb-backdrop.show{
-    display:block;
-    position:fixed;
-    inset:var(--topbar-h) 0 0 0;
-    background:rgba(15,23,42,.34);
-    z-index:65;
-  }
-
   .ssb-main{
     padding:18px;
+  }
+
+  .ssb-main.shifted{
+    margin-left:0;
   }
 }
