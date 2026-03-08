@@ -11,10 +11,12 @@
       --ssb-blue:#0b4ea2;
       --ssb-blue-2:#0f6bda;
       --ssb-light:#f4f9ff;
+      --ssb-card:#ffffff;
       --ssb-text:#16324f;
-      --ssb-white:#ffffff;
-      --ssb-shadow:0 12px 32px rgba(11,78,162,.14);
-      --ssb-radius:22px;
+      --ssb-soft:#e8f2ff;
+      --ssb-border:rgba(11,78,162,.12);
+      --ssb-shadow:0 14px 36px rgba(11,78,162,.12);
+      --ssb-radius:24px;
       --ssb-max:1280px;
     }
 
@@ -23,10 +25,10 @@
     body{
       margin:0;
       font-family:Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(15,107,218,.10), transparent 30%),
-        linear-gradient(180deg, #f7fbff 0%, #eef6ff 100%);
       color:var(--ssb-text);
+      background:
+        radial-gradient(circle at top left, rgba(15,107,218,.10), transparent 28%),
+        linear-gradient(180deg, #f7fbff 0%, #edf5ff 100%);
     }
 
     .home-page{
@@ -39,8 +41,8 @@
       display:flex;
       justify-content:flex-end;
       align-items:center;
-      margin-bottom:14px;
       min-height:40px;
+      margin-bottom:14px;
     }
 
     .hero{
@@ -48,45 +50,46 @@
       grid-template-columns:1.05fr .95fr;
       gap:24px;
       align-items:center;
-      padding:26px;
+      padding:24px;
       border-radius:28px;
       background:linear-gradient(135deg, rgba(255,255,255,.95), rgba(231,242,255,.98));
       box-shadow:var(--ssb-shadow);
       overflow:hidden;
+      margin-bottom:24px;
     }
 
     .hero-text h1{
       margin:0 0 12px;
-      font-size:clamp(30px, 4vw, 54px);
-      line-height:1.05;
+      font-size:clamp(32px, 4vw, 58px);
+      line-height:1.02;
       color:var(--ssb-blue);
       font-weight:800;
       letter-spacing:.2px;
     }
 
     .hero-text p{
-      margin:0 0 18px;
-      font-size:clamp(15px, 1.7vw, 19px);
-      line-height:1.7;
+      margin:0 0 20px;
+      font-size:clamp(15px, 1.5vw, 19px);
+      line-height:1.75;
       color:#35506f;
-      max-width:700px;
+      max-width:720px;
     }
 
     .hero-badges{
       display:flex;
       flex-wrap:wrap;
       gap:10px;
-      margin:0 0 18px;
+      margin:0 0 20px;
     }
 
     .hero-badge{
       padding:10px 14px;
       border-radius:999px;
-      background:#e9f3ff;
+      background:#e8f2ff;
       color:var(--ssb-blue);
+      border:1px solid var(--ssb-border);
       font-size:14px;
       font-weight:700;
-      border:1px solid rgba(11,78,162,.12);
     }
 
     .hero-actions{
@@ -122,7 +125,7 @@
     .btn-secondary{
       background:#fff;
       color:var(--ssb-blue);
-      border:1px solid rgba(11,78,162,.16);
+      border:1px solid var(--ssb-border);
     }
 
     .btn-secondary:hover{
@@ -134,206 +137,187 @@
       min-width:0;
     }
 
-  .slider-card{
-  position:relative;
-  border-radius:24px;
-  overflow:hidden;
-  background:#dfeeff;
-  box-shadow:0 18px 40px rgba(11,78,162,.16);
-}
-
-.slider-viewport{
-  width:100%;
-  overflow:hidden;
-  border-radius:24px;
-  aspect-ratio:16 / 9;
-  background:#edf5ff;
-}
-
-.slider-track{
-  display:flex;
-  transition:transform .55s ease-in-out;
-  will-change:transform;
-}
-
-.slide{
-  min-width:100%;
-  flex:0 0 100%;
-  background:#edf5ff;
-}
-
-.slide img{
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  background:#fff;
-}
-
-.slider-dots{
-  position:absolute;
-  left:50%;
-  bottom:14px;
-  transform:translateX(-50%);
-  display:flex;
-  gap:8px;
-  z-index:5;
-}
-
-.slider-dot{
-  width:10px;
-  height:10px;
-  border:none;
-  border-radius:999px;
-  background:rgba(255,255,255,.55);
-  cursor:pointer;
-  padding:0;
-}
-
-.slider-dot.active{
-  width:28px;
-  background:#fff;
-}
-
-.slider-nav{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  width:42px;
-  height:42px;
-  border:none;
-  border-radius:999px;
-  background:rgba(255,255,255,.9);
-  color:#0b4ea2;
-  font-size:24px;
-  font-weight:700;
-  cursor:pointer;
-  z-index:6;
-  box-shadow:0 8px 20px rgba(0,0,0,.12);
-}
-
-.slider-nav.prev{left:12px}
-.slider-nav.next{right:12px}
-
-@media (max-width: 640px){
-  .slider-viewport{
-    aspect-ratio:4 / 5;
-  }
-
-  .slide img{
-    object-fit:contain;
-  }
-}
-    .ticker{
-      margin:18px 0 22px;
-      border-radius:16px;
+    .slider-card{
+      position:relative;
+      border-radius:24px;
       overflow:hidden;
-      background:linear-gradient(90deg, #063c85, #0e5bc0 50%, #2c87ff);
-      color:#fff;
-      box-shadow:var(--ssb-shadow);
-    }
-
-    .ticker-inner{
-      display:flex;
-      gap:56px;
-      white-space:nowrap;
-      min-width:max-content;
-      padding:12px 0;
-      animation:ssbTicker 26s linear infinite;
-      font-weight:700;
-    }
-
-    .ticker-item{
-      padding-left:20px;
-    }
-
-    @keyframes ssbTicker{
-      from{transform:translateX(0)}
-      to{transform:translateX(-50%)}
-    }
-
-    .quick-cards{
-      display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:18px;
-      margin-top:10px;
-    }
-
-    .quick-card{
       background:#fff;
-      border-radius:20px;
-      padding:22px 18px;
-      box-shadow:var(--ssb-shadow);
-      border:1px solid rgba(11,78,162,.08);
+      box-shadow:0 18px 40px rgba(11,78,162,.16);
     }
 
-    .quick-card h3{
-      margin:0 0 8px;
+    .slider-viewport{
+      width:100%;
+      overflow:hidden;
+      aspect-ratio:16 / 9;
+      background:#eef5ff;
+    }
+
+    .slider-track{
+      display:flex;
+      width:100%;
+      transition:transform .55s ease-in-out;
+      will-change:transform;
+    }
+
+    .slide{
+      min-width:100%;
+      flex:0 0 100%;
+      background:#eef5ff;
+    }
+
+    .slide img{
+      display:block;
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      background:#fff;
+    }
+
+    .slider-nav{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      width:44px;
+      height:44px;
+      border:none;
+      border-radius:999px;
+      background:rgba(255,255,255,.92);
       color:var(--ssb-blue);
-      font-size:20px;
+      font-size:24px;
+      font-weight:700;
+      cursor:pointer;
+      z-index:6;
+      box-shadow:0 8px 20px rgba(0,0,0,.12);
     }
 
-    .quick-card p{
-      margin:0 0 14px;
-      line-height:1.7;
-      color:#48627f;
+    .slider-nav.prev{left:12px}
+    .slider-nav.next{right:12px}
+
+    .slider-dots{
+      position:absolute;
+      left:50%;
+      bottom:14px;
+      transform:translateX(-50%);
+      display:flex;
+      gap:8px;
+      z-index:5;
+    }
+
+    .slider-dot{
+      width:10px;
+      height:10px;
+      border:none;
+      border-radius:999px;
+      background:rgba(255,255,255,.6);
+      cursor:pointer;
+      padding:0;
+    }
+
+    .slider-dot.active{
+      width:28px;
+      background:#fff;
+    }
+
+    .info-grid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:18px;
+    }
+
+    .info-card{
+      background:var(--ssb-card);
+      border:1px solid var(--ssb-border);
+      border-radius:22px;
+      box-shadow:var(--ssb-shadow);
+      padding:22px 20px;
+      display:flex;
+      flex-direction:column;
+      min-height:210px;
+    }
+
+    .info-card-number{
+      width:42px;
+      height:42px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(135deg, var(--ssb-blue-2), var(--ssb-blue));
+      color:#fff;
+      font-weight:800;
+      font-size:18px;
+      margin-bottom:14px;
+      box-shadow:0 8px 18px rgba(15,107,218,.22);
+    }
+
+    .info-card h3{
+      margin:0 0 10px;
+      color:var(--ssb-blue);
+      font-size:22px;
+      line-height:1.35;
+      font-weight:800;
+    }
+
+    .info-card p{
+      margin:0;
+      color:#4a6482;
       font-size:15px;
+      line-height:1.75;
+      flex:1;
     }
 
-    .quick-card a{
+    .info-card a{
+      display:inline-flex;
+      align-items:center;
+      margin-top:16px;
       color:var(--ssb-blue-2);
       text-decoration:none;
       font-weight:700;
+      font-size:15px;
     }
 
-    @media (max-width: 980px){
+    .info-card a:hover{
+      text-decoration:underline;
+    }
+
+    @media (max-width: 1100px){
       .hero{
         grid-template-columns:1fr;
-        padding:20px;
       }
 
-      .slider-card{
-        aspect-ratio:16 / 10;
-      }
-
-      .quick-cards{
-        grid-template-columns:1fr;
+      .info-grid{
+        grid-template-columns:repeat(2, minmax(0,1fr));
       }
     }
 
-    @media (max-width: 640px){
+    @media (max-width: 700px){
       .home-page{
         width:min(100% - 14px, var(--ssb-max));
         padding-top:12px;
       }
 
       .hero{
-        border-radius:22px;
-        gap:18px;
         padding:16px;
+        gap:18px;
+        border-radius:22px;
       }
 
-      .slider-card{
+      .slider-viewport{
         aspect-ratio:4 / 5;
-        min-height:360px;
       }
 
-      .slide img{
-        object-position:center top;
+      .info-grid{
+        grid-template-columns:1fr;
+      }
+
+      .info-card{
+        min-height:auto;
+        border-radius:18px;
       }
 
       .slider-nav{
-        width:38px;
-        height:38px;
-        font-size:20px;
-      }
-
-      .ticker{
-        border-radius:12px;
-      }
-
-      .quick-card{
-        border-radius:16px;
+        width:40px;
+        height:40px;
       }
     }
   </style>
@@ -368,107 +352,76 @@
         </div>
 
         <div class="hero-visual">
-         
-<div class="slider-card" id="homeSlider">
-  <button class="slider-nav prev" type="button" aria-label="ก่อนหน้า">&#8249;</button>
+          <div class="slider-card" id="homeSlider">
+            <button class="slider-nav prev" type="button" aria-label="ก่อนหน้า">&#8249;</button>
 
-  <div class="slider-viewport">
-    <div class="slider-track" id="sliderTrack">
-      <div class="slide"><img src="images/Slide1.JPG" alt="Slide 1"></div>
-      <div class="slide"><img src="images/Slide2.JPG" alt="Slide 2"></div>
-      <div class="slide"><img src="images/Slide3.JPG" alt="Slide 3"></div>
-      <div class="slide"><img src="images/Slide4.JPG" alt="Slide 4"></div>
-      <div class="slide"><img src="images/Slide5.JPG" alt="Slide 5"></div>
-      <div class="slide"><img src="images/Slide6.JPG" alt="Slide 6"></div>
-      <div class="slide"><img src="images/Slide8.JPG" alt="Slide 8"></div>
-      <div class="slide"><img src="images/Slide9.JPG" alt="Slide 9"></div>
-      <div class="slide"><img src="images/Slide10.JPG" alt="Slide 10"></div>
-      <div class="slide"><img src="images/Slide11.JPG" alt="Slide 11"></div>
-      <div class="slide"><img src="images/Slide12.JPG" alt="Slide 12"></div>
-      <div class="slide"><img src="images/Slide13.JPG" alt="Slide 13"></div>
-      <div class="slide"><img src="images/Slide14.JPG" alt="Slide 14"></div>
-      <div class="slide"><img src="images/Slide15.JPG" alt="Slide 15"></div>
-      <div class="slide"><img src="images/Slide16.JPG" alt="Slide 16"></div>
-    </div>
-  </div>
-
-  <button class="slider-nav next" type="button" aria-label="ถัดไป">&#8250;</button>
-  <div class="slider-dots" id="sliderDots"></div>
-</div>
-              <div class="slide">
-                <picture>
-                  <source media="(max-width: 640px)" srcset="images/slides/mobile/slide-2.jpg" />
-                  <img src="images/slides/desktop/slide-2.jpg" alt="Company Profile" />
-                </picture>
-                <div class="slide-overlay">
-                  <h3>บริษัท สยามทำ จำกัด</h3>
-                  <p>Stealth Safety Bank Mobile</p>
-                </div>
-              </div>
-
-              <div class="slide">
-                <picture>
-                  <source media="(max-width: 640px)" srcset="images/slides/mobile/slide-3.jpg" />
-                  <img src="images/slides/desktop/slide-3.jpg" alt="ระบบป้องกันแตกต่าง" />
-                </picture>
-                <div class="slide-overlay">
-                  <h3>ระบบป้องกันที่แตกต่าง</h3>
-                  <p>แนวคิดการใช้งานแบบล่องหน</p>
-                </div>
-              </div>
-
-              <div class="slide">
-                <picture>
-                  <source media="(max-width: 640px)" srcset="images/slides/mobile/slide-4.jpg" />
-                  <img src="images/slides/desktop/slide-4.jpg" alt="7 ระบบป้องกัน" />
-                </picture>
-                <div class="slide-overlay">
-                  <h3>7 ระบบป้องกัน</h3>
-                  <p>เสริมความปลอดภัยหลายชั้น</p>
-                </div>
+            <div class="slider-viewport">
+              <div class="slider-track" id="sliderTrack">
+                <div class="slide"><img src="images/Slide1.JPG" alt="Slide 1"></div>
+                <div class="slide"><img src="images/Slide2.JPG" alt="Slide 2"></div>
+                <div class="slide"><img src="images/Slide3.JPG" alt="Slide 3"></div>
+                <div class="slide"><img src="images/Slide4.JPG" alt="Slide 4"></div>
+                <div class="slide"><img src="images/Slide5.JPG" alt="Slide 5"></div>
+                <div class="slide"><img src="images/Slide6.JPG" alt="Slide 6"></div>
+                <div class="slide"><img src="images/Slide8.JPG" alt="Slide 8"></div>
+                <div class="slide"><img src="images/Slide9.JPG" alt="Slide 9"></div>
+                <div class="slide"><img src="images/Slide10.JPG" alt="Slide 10"></div>
+                <div class="slide"><img src="images/Slide11.JPG" alt="Slide 11"></div>
+                <div class="slide"><img src="images/Slide12.JPG" alt="Slide 12"></div>
+                <div class="slide"><img src="images/Slide13.JPG" alt="Slide 13"></div>
+                <div class="slide"><img src="images/Slide14.JPG" alt="Slide 14"></div>
+                <div class="slide"><img src="images/Slide15.JPG" alt="Slide 15"></div>
+                <div class="slide"><img src="images/Slide16.JPG" alt="Slide 16"></div>
               </div>
             </div>
 
             <button class="slider-nav next" type="button" aria-label="ถัดไป">&#8250;</button>
-
             <div class="slider-dots" id="sliderDots"></div>
           </div>
         </div>
       </section>
 
-      <section class="ticker" aria-label="ข้อความวิ่ง">
-        <div class="ticker-inner">
-          <span class="ticker-item">บริษัท สยามทำ จำกัด</span>
-          <span class="ticker-item">Stealth Safety Bank System</span>
-          <span class="ticker-item">54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ</span>
-          <span class="ticker-item">โทร 02-043-2988</span>
-          <span class="ticker-item">มือถือ 063-656-1447 / 064-951-4888 / 080-204-5455</span>
-
-          <span class="ticker-item">บริษัท สยามทำ จำกัด</span>
-          <span class="ticker-item">Stealth Safety Bank System</span>
-          <span class="ticker-item">54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ</span>
-          <span class="ticker-item">โทร 02-043-2988</span>
-          <span class="ticker-item">มือถือ 063-656-1447 / 064-951-4888 / 080-204-5455</span>
-        </div>
-      </section>
-
-      <section class="quick-cards">
-        <article class="quick-card">
-          <h3>สินค้า</h3>
-          <p>ดูรายละเอียด Stealth Safety Bank Mobile System และแนวทางการใช้งาน</p>
-          <a href="device.html">ไปหน้าสินค้า</a>
+      <section class="info-grid">
+        <article class="info-card">
+          <div class="info-card-number">1</div>
+          <h3>Stealth Safety Bank Mobile System คืออะไร</h3>
+          <p>ระบบความปลอดภัยทางการเงินที่ออกแบบมาเพื่อช่วยลดความเสี่ยงจากการแฮ็ก การโจรกรรมข้อมูล และการเข้าถึงบัญชีโดยไม่พึงประสงค์ผ่านอุปกรณ์ที่จัดระบบมาเฉพาะทาง</p>
+          <a href="device.html">ดูเพิ่มเติม</a>
         </article>
 
-        <article class="quick-card">
-          <h3>ตัวแทนจำหน่าย</h3>
-          <p>ตรวจรายชื่อ สมัครเป็นตัวแทน และเข้าระบบคำนวณผลงาน</p>
-          <a href="agents.html">ไปหน้าตัวแทนจำหน่าย</a>
+        <article class="info-card">
+          <div class="info-card-number">2</div>
+          <h3>Stealth Safety Bank คืออะไร</h3>
+          <p>แนวคิดการเก็บเงินและทำธุรกรรมแบบล่องหน เน้นการแยกการใช้งานที่สำคัญออกจากการใช้งานทั่วไป เพื่อลดโอกาสการรั่วไหลของข้อมูลสำคัญ</p>
+          <a href="company.html">ดูเพิ่มเติม</a>
         </article>
 
-        <article class="quick-card">
-          <h3>ติดต่อเรา</h3>
-          <p>สอบถามข้อมูลบริษัท สยามทำ จำกัด และรายละเอียดการสั่งซื้อเพิ่มเติม</p>
-          <a href="contact.html">ไปหน้าติดต่อเรา</a>
+        <article class="info-card">
+          <div class="info-card-number">3</div>
+          <h3>Stealth Safety Book คืออะไร</h3>
+          <p>อุปกรณ์หรือแนวทางการจัดเก็บแบบพรางตัว เพื่อช่วยเพิ่มความเป็นส่วนตัวและความปลอดภัยในการเก็บอุปกรณ์หรือข้อมูลที่สำคัญในการใช้งานจริง</p>
+          <a href="book.html">ดูเพิ่มเติม</a>
+        </article>
+
+        <article class="info-card">
+          <div class="info-card-number">4</div>
+          <h3>Flare Technology คืออะไร</h3>
+          <p>แนวทางการใช้งานที่ช่วยแยกอุปกรณ์หรือฟังก์ชันสำหรับใช้งานทั่วไปออกจากส่วนที่เกี่ยวข้องกับการเงิน เพื่อเพิ่มชั้นความปลอดภัยในการใช้งานประจำวัน</p>
+          <a href="training.html">ดูเพิ่มเติม</a>
+        </article>
+
+        <article class="info-card">
+          <div class="info-card-number">5</div>
+          <h3>อบรมการใช้งาน</h3>
+          <p>เรียนรู้ขั้นตอนการใช้งาน การตั้งค่า และวิธีใช้ระบบอย่างถูกต้อง เพื่อให้เกิดประสิทธิภาพและความปลอดภัยสูงสุดในการใช้งานจริง</p>
+          <a href="training.html">ดูเพิ่มเติม</a>
+        </article>
+
+        <article class="info-card">
+          <div class="info-card-number">6</div>
+          <h3>สมัครเป็นตัวแทนจำหน่ายกับเรา</h3>
+          <p>สำหรับผู้ที่สนใจร่วมงานกับบริษัท สามารถสมัครเป็นตัวแทนจำหน่าย เพื่อต่อยอดการขาย การให้คำแนะนำลูกค้า และขยายโอกาสทางธุรกิจร่วมกัน</p>
+          <a href="agents.html">สมัคร / ดูรายละเอียด</a>
         </article>
       </section>
     </main>
@@ -479,89 +432,98 @@
     renderSharedShell("หน้าแรก");
   </script>
 
- <script>
-  (function () {
-    const track = document.getElementById("sliderTrack");
-    const dotsWrap = document.getElementById("sliderDots");
-    const prevBtn = document.querySelector("#homeSlider .prev");
-    const nextBtn = document.querySelector("#homeSlider .next");
+  <script>
+    (function () {
+      const slider = document.getElementById("homeSlider");
+      const track = document.getElementById("sliderTrack");
+      const dotsWrap = document.getElementById("sliderDots");
+      const prevBtn = slider ? slider.querySelector(".prev") : null;
+      const nextBtn = slider ? slider.querySelector(".next") : null;
 
-    if (!track) return;
+      if (!slider || !track || !dotsWrap || !prevBtn || !nextBtn) return;
 
-    const slides = Array.from(track.querySelectorAll(".slide"));
-    let current = 0;
-    let auto = null;
-    const delay = 3500;
+      const slides = Array.from(track.querySelectorAll(".slide"));
+      if (!slides.length) return;
 
-    function renderDots() {
-      dotsWrap.innerHTML = "";
-      slides.forEach((_, index) => {
-        const dot = document.createElement("button");
-        dot.type = "button";
-        dot.className = "slider-dot" + (index === 0 ? " active" : "");
-        dot.addEventListener("click", function () {
-          goTo(index, true);
+      let current = 0;
+      let timer = null;
+      const delay = 15000;
+
+      function renderDots() {
+        dotsWrap.innerHTML = "";
+        slides.forEach((_, index) => {
+          const dot = document.createElement("button");
+          dot.type = "button";
+          dot.className = "slider-dot" + (index === 0 ? " active" : "");
+          dot.setAttribute("aria-label", "ไปสไลด์ " + (index + 1));
+          dot.addEventListener("click", function () {
+            goTo(index, true);
+          });
+          dotsWrap.appendChild(dot);
         });
-        dotsWrap.appendChild(dot);
-      });
-    }
-
-    function updateDots() {
-      const dots = dotsWrap.querySelectorAll(".slider-dot");
-      dots.forEach((dot, index) => {
-        dot.classList.toggle("active", index === current);
-      });
-    }
-
-    function updateSlider() {
-      track.style.transform = "translateX(-" + (current * 100) + "%)";
-      updateDots();
-    }
-
-    function goTo(index, reset) {
-      current = (index + slides.length) % slides.length;
-      updateSlider();
-      if (reset) restartAuto();
-    }
-
-    function nextSlide() {
-      goTo(current + 1, false);
-    }
-
-    function prevSlide() {
-      goTo(current - 1, false);
-    }
-
-    function startAuto() {
-      auto = setInterval(nextSlide, delay);
-    }
-
-    function stopAuto() {
-      if (auto) {
-        clearInterval(auto);
-        auto = null;
       }
-    }
 
-    function restartAuto() {
-      stopAuto();
+      function updateDots() {
+        const dots = dotsWrap.querySelectorAll(".slider-dot");
+        dots.forEach((dot, index) => {
+          dot.classList.toggle("active", index === current);
+        });
+      }
+
+      function updateSlider() {
+        track.style.transform = "translateX(-" + (current * 100) + "%)";
+        updateDots();
+      }
+
+      function goTo(index, resetTimer) {
+        current = (index + slides.length) % slides.length;
+        updateSlider();
+        if (resetTimer) restartAuto();
+      }
+
+      function nextSlide() {
+        goTo(current + 1, false);
+      }
+
+      function prevSlide() {
+        goTo(current - 1, false);
+      }
+
+      function startAuto() {
+        stopAuto();
+        timer = setInterval(nextSlide, delay);
+      }
+
+      function stopAuto() {
+        if (timer) {
+          clearInterval(timer);
+          timer = null;
+        }
+      }
+
+      function restartAuto() {
+        startAuto();
+      }
+
+      nextBtn.addEventListener("click", function () {
+        nextSlide();
+        restartAuto();
+      });
+
+      prevBtn.addEventListener("click", function () {
+        prevSlide();
+        restartAuto();
+      });
+
+      slider.addEventListener("mouseenter", stopAuto);
+      slider.addEventListener("mouseleave", startAuto);
+      slider.addEventListener("touchstart", stopAuto, { passive: true });
+      slider.addEventListener("touchend", startAuto);
+
+      renderDots();
+      updateSlider();
       startAuto();
-    }
-
-    nextBtn.addEventListener("click", function () {
-      nextSlide();
-      restartAuto();
-    });
-
-    prevBtn.addEventListener("click", function () {
-      prevSlide();
-      restartAuto();
-    });
-
-    renderDots();
-    updateSlider();
-    startAuto();
-  })();
+    })();
 
     function googleTranslateElementInit() {
       new google.translate.TranslateElement(
