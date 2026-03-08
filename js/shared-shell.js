@@ -32,11 +32,15 @@ function fileNameOf(pathname) {
 function buildMenuHtml(currentFile) {
   return MENU.map((item) => {
     if (item.href) {
-      const active = currentFile === item.href ? "active" : "";
-      return `<a class="ssb-nav-link ${active}" href="${item.href}"><span>${item.label}</span></a>`;
+      return `
+        <a class="ssb-nav-link ${currentFile === item.href ? "active" : ""}" href="${item.href}">
+          <span>${item.label}</span>
+        </a>
+      `;
     }
 
-    const hasActiveChild = item.children.some(c => c.href === currentFile);
+    const hasActiveChild = item.children.some((c) => c.href === currentFile);
+
     return `
       <div class="ssb-nav-group ${hasActiveChild ? "open" : ""}">
         <button class="ssb-nav-toggle" type="button">
@@ -44,7 +48,7 @@ function buildMenuHtml(currentFile) {
           <span>${hasActiveChild ? "−" : "+"}</span>
         </button>
         <div class="ssb-nav-children">
-          ${item.children.map(c => `
+          ${item.children.map((c) => `
             <a class="ssb-child-link ${currentFile === c.href ? "active" : ""}" href="${c.href}">
               ${c.label}
             </a>
@@ -55,15 +59,15 @@ function buildMenuHtml(currentFile) {
   }).join("");
 }
 
-function bindSidebar() {
-  const btn = document.getElementById("ssbMenuBtn");
+function bindShellEvents() {
+  const menuBtn = document.getElementById("ssbMenuBtn");
   const sidebar = document.getElementById("ssbSidebar");
   const backdrop = document.getElementById("ssbBackdrop");
   const main = document.querySelector(".ssb-main");
 
-  btn?.addEventListener("click", () => {
+  menuBtn?.addEventListener("click", () => {
     const willOpen = !sidebar.classList.contains("open");
-    sidebar.classList.toggle("open");
+    sidebar.classList.toggle("open", willOpen);
     backdrop.classList.toggle("show", willOpen);
 
     if (window.innerWidth > 1024) {
@@ -77,52 +81,73 @@ function bindSidebar() {
     main?.classList.remove("shifted");
   });
 
-  document.querySelectorAll(".ssb-nav-toggle").forEach((toggle) => {
-    toggle.addEventListener("click", () => {
-      const group = toggle.closest(".ssb-nav-group");
+  document.querySelectorAll(".ssb-nav-toggle").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const group = btn.closest(".ssb-nav-group");
       group?.classList.toggle("open");
-      const mark = toggle.querySelector("span:last-child");
-      if (mark) mark.textContent = group?.classList.contains("open") ? "−" : "+";
+      const mark = btn.querySelector("span:last-child");
+      if (mark) {
+        mark.textContent = group?.classList.contains("open") ? "−" : "+";
+      }
     });
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth <= 1024) {
+      main?.classList.remove("shifted");
+    }
   });
 }
 
 export function renderSharedShell(pageTitle = "") {
-  const shell = document.getElementById("appShell");
-  if (!shell) return;
+  const host = document.getElementById("appShell");
+  if (!host) return;
 
-  shell.innerHTML = `
-    <div class="ssb-topbar">
-      <div class="ssb-container">
-        <button id="menuToggle" class="ssb-menu-btn">☰</button>
-        <div class="ssb-brand">
-          <img src="images/logo.png" />
-          <div>
-            <div class="ssb-title">Stealth Safety Bank</div>
-            <div class="ssb-sub">${pageTitle}</div>
+  const currentFile = fileNameOf(window.location.pathname);
+
+  host.innerHTML = `
+    <div class="ssb-shell">
+      <div class="ssb-topbar">
+        <div class="ssb-topbar-inner">
+          <div class="ssb-topbar-left">
+            <button id="ssbMenuBtn" class="ssb-menu-btn" aria-label="Open menu">☰</button>
+
+            <div class="ssb-brand">
+              <img src="images/logo.png" alt="SSB Logo" />
+              <div>
+                <div class="ssb-brand-title">Stealth Safety Bank</div>
+                <div class="ssb-brand-sub">${pageTitle}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ssb-company-mini">
+            บริษัท สยามทำ จำกัด · 02-043-2988
           </div>
         </div>
       </div>
+
+      <aside id="ssbSidebar" class="ssb-sidebar">
+        <div class="ssb-sidebar-inner">
+          <div class="ssb-sidebar-title">เมนูหลัก</div>
+
+          <nav class="ssb-nav">
+            ${buildMenuHtml(currentFile)}
+          </nav>
+
+          <div class="ssb-company-card">
+            <div><strong>บริษัท สยามทำ จำกัด</strong></div>
+            <div>54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ</div>
+            <div>Serial Number: 0105566099954</div>
+            <div>โทร 02-043-2988</div>
+            <div>มือถือ 063-656-1447 / 064-951-4888 / 080-204-5455</div>
+          </div>
+        </div>
+      </aside>
+
+      <div id="ssbBackdrop" class="ssb-backdrop"></div>
     </div>
-
-    <aside id="ssbSidebar" class="ssb-sidebar">
-      <div class="ssb-sidebar-inner">
-        <div class="ssb-menu-title">เมนูหลัก</div>
-
-        <a href="index.html">หน้าแรก</a>
-        <a href="about.html">เกี่ยวกับเรา</a>
-        <a href="book.html">เลือก Safety Book</a>
-        <a href="agents.html">ตัวแทนจำหน่าย</a>
-        <a href="contact.html">ติดต่อเรา</a>
-      </div>
-    </aside>
   `;
 
-  const toggle = document.getElementById("menuToggle");
-  const sidebar = document.getElementById("ssbSidebar");
-
-  toggle?.addEventListener("click", () => {
-    sidebar.classList.toggle("open");
-    document.body.classList.toggle("menu-open");
-  });
+  bindShellEvents();
 }
