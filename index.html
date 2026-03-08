@@ -11,6 +11,10 @@
     href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet"
   />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  />
 
   <link rel="stylesheet" href="css/shared-shell.css" />
 
@@ -18,16 +22,15 @@
     :root{
       --ssb-blue:#0b4ea2;
       --ssb-blue-dark:#083a7c;
-      --ssb-blue-soft:#eaf3ff;
+      --ssb-blue-soft:#eef5ff;
       --ssb-gold:#d4af37;
-      --ssb-gold-soft:#f4e2a1;
+      --ssb-gold-soft:#f3df97;
       --ssb-text:#16324f;
-      --ssb-muted:#5d718a;
+      --ssb-muted:#5a7088;
       --ssb-border:rgba(11,78,162,.12);
       --ssb-card:#ffffff;
-      --ssb-bg:#f4f8ff;
-      --ssb-shadow:0 14px 34px rgba(11,78,162,.10);
-      --ssb-shadow-strong:0 18px 40px rgba(11,78,162,.14);
+      --ssb-shadow:0 14px 32px rgba(11,78,162,.10);
+      --ssb-shadow-strong:0 18px 44px rgba(11,78,162,.14);
       --ssb-max:1320px;
       --radius-xl:28px;
       --radius-lg:22px;
@@ -39,13 +42,15 @@
       font-family:'Prompt', sans-serif !important;
     }
 
-    html{scroll-behavior:smooth}
+    html{
+      scroll-behavior:smooth;
+    }
 
     body{
       margin:0;
       color:var(--ssb-text);
       background:
-        radial-gradient(circle at top left, rgba(15,107,218,.10), transparent 26%),
+        radial-gradient(circle at top left, rgba(15,107,218,.10), transparent 28%),
         linear-gradient(180deg, #f8fbff 0%, #edf5ff 100%);
     }
 
@@ -59,26 +64,30 @@
       display:flex;
       justify-content:flex-end;
       align-items:center;
-      min-height:42px;
+      min-height:44px;
       margin-bottom:14px;
     }
 
     .hero{
       display:grid;
-      grid-template-columns:minmax(0,1fr) minmax(420px,560px);
-      gap:26px;
+      grid-template-columns:minmax(0,1fr) minmax(430px,560px);
+      gap:28px;
       align-items:center;
-      padding:28px;
+      padding:30px;
       border-radius:var(--radius-xl);
       background:linear-gradient(135deg, rgba(255,255,255,.98), rgba(235,244,255,.98));
-      border:1px solid rgba(255,255,255,.72);
+      border:1px solid rgba(255,255,255,.75);
       box-shadow:var(--ssb-shadow-strong);
-      margin-bottom:22px;
+      margin-bottom:24px;
+    }
+
+    .hero-text{
+      min-width:0;
     }
 
     .hero-text h1{
       margin:0 0 12px;
-      font-size:clamp(36px, 4.4vw, 66px);
+      font-size:clamp(36px, 4.5vw, 68px);
       line-height:1.02;
       font-weight:800;
       color:var(--ssb-blue);
@@ -86,18 +95,18 @@
     }
 
     .hero-text p{
-      margin:0 0 18px;
-      font-size:clamp(15px, 1.4vw, 18px);
+      margin:0 0 20px;
+      font-size:clamp(15px, 1.45vw, 18px);
       line-height:1.85;
       color:#37526f;
-      max-width:720px;
+      max-width:740px;
     }
 
     .hero-badges{
       display:flex;
       flex-wrap:wrap;
       gap:10px;
-      margin:0 0 22px;
+      margin:0 0 24px;
     }
 
     .hero-badge{
@@ -110,12 +119,12 @@
       color:var(--ssb-blue);
       font-size:14px;
       font-weight:700;
-      box-shadow:0 6px 16px rgba(11,78,162,.05);
+      box-shadow:0 6px 14px rgba(11,78,162,.05);
     }
 
     .hero-actions{
       display:grid;
-      grid-template-columns:180px minmax(260px, 340px);
+      grid-template-columns:180px minmax(280px, 360px);
       gap:14px;
       align-items:center;
       justify-content:flex-start;
@@ -148,13 +157,13 @@
     }
 
     .btn-order{
-      background:linear-gradient(135deg, #0b4ea2 0%, #1e66c8 50%, #d4af37 100%);
+      background:linear-gradient(135deg, #0b4ea2 0%, #1f69cd 52%, #d4af37 100%);
       color:#fff;
       font-size:22px;
       font-weight:800;
-      border:1px solid rgba(212,175,55,.35);
-      box-shadow:0 16px 34px rgba(11,78,162,.18), 0 8px 20px rgba(212,175,55,.18);
       letter-spacing:.2px;
+      border:1px solid rgba(212,175,55,.35);
+      box-shadow:0 18px 36px rgba(11,78,162,.18), 0 8px 18px rgba(212,175,55,.18);
     }
 
     .btn-order:hover{
@@ -258,16 +267,16 @@
       background:#fff;
     }
 
+    .card-section{
+      margin-top:8px;
+    }
+
     .section-title{
       margin:0 0 16px;
       color:var(--ssb-blue);
       font-size:clamp(24px, 2.2vw, 34px);
       line-height:1.2;
       font-weight:800;
-    }
-
-    .card-section{
-      margin-top:8px;
     }
 
     .card-list{
@@ -289,7 +298,7 @@
       box-shadow:var(--ssb-shadow);
       overflow:hidden;
       transition:.25s ease;
-      min-height:170px;
+      min-height:172px;
     }
 
     .feature-card:hover{
@@ -299,8 +308,8 @@
 
     .feature-card-media{
       position:relative;
+      min-height:172px;
       height:100%;
-      min-height:170px;
       background:#dcecff;
       overflow:hidden;
     }
@@ -308,8 +317,8 @@
     .feature-card-media img{
       width:100%;
       height:100%;
-      object-fit:cover;
       display:block;
+      object-fit:cover;
       transition:transform .35s ease;
     }
 
@@ -332,7 +341,7 @@
       color:#fff;
       font-size:16px;
       font-weight:800;
-      box-shadow:0 10px 22px rgba(11,78,162,.2);
+      box-shadow:0 10px 22px rgba(11,78,162,.18);
       z-index:2;
     }
 
@@ -353,7 +362,7 @@
       margin:0;
       color:var(--ssb-muted);
       font-size:15px;
-      line-height:1.85;
+      line-height:1.82;
     }
 
     .feature-card-action{
@@ -382,7 +391,7 @@
       margin-top:24px;
       padding:12px 16px;
       border-radius:16px;
-      background:linear-gradient(135deg, #0a4697 0%, #0b4ea2 55%, #0e62c8 100%);
+      background:linear-gradient(135deg, #0a4697 0%, #0b4ea2 55%, #0d62c8 100%);
       color:#fff;
       box-shadow:0 12px 28px rgba(11,78,162,.14);
     }
@@ -390,7 +399,7 @@
     .ssb-footer-inner{
       display:grid;
       grid-template-columns:1fr auto;
-      gap:12px 18px;
+      gap:10px 18px;
       align-items:start;
     }
 
@@ -412,23 +421,90 @@
       text-align:right;
     }
 
-    .chat-fab{
+    .chat-widget{
       position:fixed;
       right:18px;
       bottom:18px;
-      z-index:99;
+      z-index:999;
+      display:flex;
+      flex-direction:column;
+      align-items:flex-end;
+      gap:10px;
+    }
+
+    .chat-menu{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-end;
+      gap:10px;
+      opacity:0;
+      pointer-events:none;
+      transform:translateY(12px) scale(.96);
+      transition:.30s ease;
+    }
+
+    .chat-widget.open .chat-menu{
+      opacity:1;
+      pointer-events:auto;
+      transform:translateY(0) scale(1);
+    }
+
+    .chat-item{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:180px;
+      padding:10px 14px;
+      border-radius:999px;
+      color:#fff;
+      text-decoration:none;
+      box-shadow:0 14px 28px rgba(11,78,162,.20);
+      border:1px solid rgba(255,255,255,.16);
+      transition:.22s ease;
+    }
+
+    .chat-item:hover{
+      transform:translateY(-2px) scale(1.02);
+    }
+
+    .chat-item.line{ background:linear-gradient(135deg, #06c755, #02a94b); }
+    .chat-item.facebook{ background:linear-gradient(135deg, #1877f2, #0f5fd3); }
+    .chat-item.tiktok{ background:linear-gradient(135deg, #111111, #333333); }
+    .chat-item.whatsapp{ background:linear-gradient(135deg, #25d366, #18b955); }
+
+    .chat-item-icon{
+      width:34px;
+      height:34px;
+      border-radius:999px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(255,255,255,.16);
+      font-size:16px;
+      flex:0 0 34px;
+    }
+
+    .chat-item-label{
+      font-size:14px;
+      font-weight:700;
+      line-height:1.2;
+    }
+
+    .chat-fab{
       display:flex;
       align-items:center;
       gap:10px;
       padding:12px 16px;
+      border:none;
       border-radius:999px;
       background:linear-gradient(135deg, #0b4ea2, #1f69cd);
       color:#fff;
-      text-decoration:none;
-      font-size:14px;
-      font-weight:700;
+      cursor:pointer;
       box-shadow:0 14px 30px rgba(11,78,162,.28);
       border:1px solid rgba(255,255,255,.22);
+      font-size:14px;
+      font-weight:700;
+      transition:.22s ease;
     }
 
     .chat-fab:hover{
@@ -444,7 +520,16 @@
       border-radius:999px;
       background:rgba(255,255,255,.18);
       font-size:16px;
-      font-weight:800;
+    }
+
+    .chat-fab-caret{
+      font-size:12px;
+      opacity:.92;
+      transition:.28s ease;
+    }
+
+    .chat-widget.open .chat-fab-caret{
+      transform:rotate(180deg);
     }
 
     @media (max-width: 1180px){
@@ -526,9 +611,16 @@
         text-align:left;
       }
 
-      .chat-fab{
+      .chat-widget{
         right:12px;
         bottom:12px;
+      }
+
+      .chat-item{
+        min-width:160px;
+      }
+
+      .chat-fab{
         padding:10px 14px;
       }
     }
@@ -570,21 +662,21 @@
 
             <div class="slider-viewport">
               <div class="slider-track" id="sliderTrack">
-                <div class="slide"><img src="images/Slide1.JPG" alt="Slide 1"></div>
-                <div class="slide"><img src="images/Slide2.JPG" alt="Slide 2"></div>
-                <div class="slide"><img src="images/Slide3.JPG" alt="Slide 3"></div>
-                <div class="slide"><img src="images/Slide4.JPG" alt="Slide 4"></div>
-                <div class="slide"><img src="images/Slide5.JPG" alt="Slide 5"></div>
-                <div class="slide"><img src="images/Slide6.JPG" alt="Slide 6"></div>
-                <div class="slide"><img src="images/Slide8.JPG" alt="Slide 8"></div>
-                <div class="slide"><img src="images/Slide9.JPG" alt="Slide 9"></div>
-                <div class="slide"><img src="images/Slide10.JPG" alt="Slide 10"></div>
-                <div class="slide"><img src="images/Slide11.JPG" alt="Slide 11"></div>
-                <div class="slide"><img src="images/Slide12.JPG" alt="Slide 12"></div>
-                <div class="slide"><img src="images/Slide13.JPG" alt="Slide 13"></div>
-                <div class="slide"><img src="images/Slide14.JPG" alt="Slide 14"></div>
-                <div class="slide"><img src="images/Slide15.JPG" alt="Slide 15"></div>
-                <div class="slide"><img src="images/Slide16.JPG" alt="Slide 16"></div>
+                <div class="slide"><img src="images/Slide1.JPG" alt="Slide 1" /></div>
+                <div class="slide"><img src="images/Slide2.JPG" alt="Slide 2" /></div>
+                <div class="slide"><img src="images/Slide3.JPG" alt="Slide 3" /></div>
+                <div class="slide"><img src="images/Slide4.JPG" alt="Slide 4" /></div>
+                <div class="slide"><img src="images/Slide5.JPG" alt="Slide 5" /></div>
+                <div class="slide"><img src="images/Slide6.JPG" alt="Slide 6" /></div>
+                <div class="slide"><img src="images/Slide8.JPG" alt="Slide 8" /></div>
+                <div class="slide"><img src="images/Slide9.JPG" alt="Slide 9" /></div>
+                <div class="slide"><img src="images/Slide10.JPG" alt="Slide 10" /></div>
+                <div class="slide"><img src="images/Slide11.JPG" alt="Slide 11" /></div>
+                <div class="slide"><img src="images/Slide12.JPG" alt="Slide 12" /></div>
+                <div class="slide"><img src="images/Slide13.JPG" alt="Slide 13" /></div>
+                <div class="slide"><img src="images/Slide14.JPG" alt="Slide 14" /></div>
+                <div class="slide"><img src="images/Slide15.JPG" alt="Slide 15" /></div>
+                <div class="slide"><img src="images/Slide16.JPG" alt="Slide 16" /></div>
               </div>
             </div>
 
@@ -702,10 +794,35 @@
     </main>
   </div>
 
-  <a class="chat-fab" href="contact.html" aria-label="แชทออนไลน์">
-    <span class="chat-fab-icon">💬</span>
-    <span>แชทออนไลน์</span>
-  </a>
+  <div class="chat-widget" id="chatWidget">
+    <div class="chat-menu" id="chatMenu">
+      <a class="chat-item line" href="#" target="_blank" rel="noopener">
+        <span class="chat-item-icon"><i class="fa-brands fa-line"></i></span>
+        <span class="chat-item-label">LINE Official</span>
+      </a>
+
+      <a class="chat-item facebook" href="#" target="_blank" rel="noopener">
+        <span class="chat-item-icon"><i class="fa-brands fa-facebook-f"></i></span>
+        <span class="chat-item-label">Facebook</span>
+      </a>
+
+      <a class="chat-item tiktok" href="#" target="_blank" rel="noopener">
+        <span class="chat-item-icon"><i class="fa-brands fa-tiktok"></i></span>
+        <span class="chat-item-label">TikTok</span>
+      </a>
+
+      <a class="chat-item whatsapp" href="#" target="_blank" rel="noopener">
+        <span class="chat-item-icon"><i class="fa-brands fa-whatsapp"></i></span>
+        <span class="chat-item-label">WhatsApp</span>
+      </a>
+    </div>
+
+    <button class="chat-fab" id="chatToggle" type="button" aria-label="เปิดเมนูแชท">
+      <span class="chat-fab-icon"><i class="fa-solid fa-comments"></i></span>
+      <span>แชทออนไลน์</span>
+      <span class="chat-fab-caret"><i class="fa-solid fa-chevron-up"></i></span>
+    </button>
+  </div>
 
   <script type="module">
     import { renderSharedShell } from "./js/shared-shell.js";
@@ -805,6 +922,23 @@
       startAuto();
     })();
 
+    (function () {
+      const chatWidget = document.getElementById("chatWidget");
+      const chatToggle = document.getElementById("chatToggle");
+
+      if (!chatWidget || !chatToggle) return;
+
+      chatToggle.addEventListener("click", function () {
+        chatWidget.classList.toggle("open");
+      });
+
+      document.addEventListener("click", function (event) {
+        if (!chatWidget.contains(event.target)) {
+          chatWidget.classList.remove("open");
+        }
+      });
+    })();
+
     function googleTranslateElementInit() {
       new google.translate.TranslateElement(
         {
@@ -820,4 +954,3 @@
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
-```
