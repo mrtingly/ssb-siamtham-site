@@ -33,18 +33,12 @@ function buildMenuHtml(currentFile) {
   return MENU.map((item) => {
     if (item.href) {
       const active = currentFile === item.href ? "active" : "";
-      return `
-        <a class="ssb-nav-link ${active}" href="${item.href}">
-          <span>${item.label}</span>
-        </a>
-      `;
+      return `<a class="ssb-nav-link ${active}" href="${item.href}"><span>${item.label}</span></a>`;
     }
 
     const hasActiveChild = item.children.some(c => c.href === currentFile);
-    const groupClass = hasActiveChild ? "ssb-nav-group open" : "ssb-nav-group";
-
     return `
-      <div class="${groupClass}">
+      <div class="ssb-nav-group ${hasActiveChild ? "open" : ""}">
         <button class="ssb-nav-toggle" type="button">
           <span>${item.label}</span>
           <span>${hasActiveChild ? "−" : "+"}</span>
@@ -68,11 +62,12 @@ function bindSidebar() {
   const main = document.querySelector(".ssb-main");
 
   btn?.addEventListener("click", () => {
-    const isOpen = sidebar?.classList.toggle("open");
-    backdrop?.classList.toggle("show");
+    const willOpen = !sidebar.classList.contains("open");
+    sidebar.classList.toggle("open");
+    backdrop.classList.toggle("show", willOpen);
 
     if (window.innerWidth > 1024) {
-      main?.classList.toggle("shifted", !!isOpen);
+      main?.classList.toggle("shifted", willOpen);
     }
   });
 
@@ -111,29 +106,25 @@ export function renderSharedShell(pageTitle = "") {
             </div>
           </div>
         </div>
-        <div class="ssb-company-mini">
-          บริษัท สยามทำ จำกัด · 02-043-2988
+        <div class="ssb-company-mini">บริษัท สยามทำ จำกัด · 02-043-2988</div>
+      </div>
+
+      <aside id="ssbSidebar" class="ssb-sidebar">
+        <div class="ssb-sidebar-title">เมนูหลัก</div>
+        <nav class="ssb-nav">
+          ${buildMenuHtml(currentFile)}
+        </nav>
+
+        <div class="ssb-company-card">
+          <div><strong>บริษัท สยามทำ จำกัด</strong></div>
+          <div>54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ</div>
+          <div>Serial Number: 0105566099954</div>
+          <div>โทร 02-043-2988</div>
+          <div>มือถือ 063-656-1447 / 064-951-4888 / 080-204-5455</div>
         </div>
-      </div>
+      </aside>
 
-      <div class="ssb-layout">
-        <aside id="ssbSidebar" class="ssb-sidebar">
-          <div class="ssb-sidebar-title">เมนูหลัก</div>
-          <nav class="ssb-nav">
-            ${buildMenuHtml(currentFile)}
-          </nav>
-
-          <div class="ssb-company-card">
-            <div><strong>บริษัท สยามทำ จำกัด</strong></div>
-            <div>54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ</div>
-            <div>Serial Number: 0105566099954</div>
-            <div>โทร 02-043-2988</div>
-            <div>มือถือ 063-656-1447 / 064-951-4888 / 080-204-5455</div>
-          </div>
-        </aside>
-
-        <div id="ssbBackdrop" class="ssb-backdrop"></div>
-      </div>
+      <div id="ssbBackdrop" class="ssb-backdrop"></div>
     </div>
   `;
 
