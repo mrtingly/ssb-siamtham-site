@@ -2,10 +2,568 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="refresh" content="0; url=configurator.html" />
-  <title>Stealth Safety Bank System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stealth Safety Bank System (SSB)</title>
+  <link rel="stylesheet" href="css/shared-shell.css" />
+
+  <style>
+    :root{
+      --ssb-blue:#0b4ea2;
+      --ssb-blue-2:#0f6bda;
+      --ssb-light:#f4f9ff;
+      --ssb-text:#16324f;
+      --ssb-white:#ffffff;
+      --ssb-shadow:0 12px 32px rgba(11,78,162,.14);
+      --ssb-radius:22px;
+      --ssb-max:1280px;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(15,107,218,.10), transparent 30%),
+        linear-gradient(180deg, #f7fbff 0%, #eef6ff 100%);
+      color:var(--ssb-text);
+    }
+
+    .home-page{
+      width:min(var(--ssb-max), calc(100% - 24px));
+      margin:0 auto;
+      padding:18px 0 40px;
+    }
+
+    .top-tools{
+      display:flex;
+      justify-content:flex-end;
+      align-items:center;
+      margin-bottom:14px;
+      min-height:40px;
+    }
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:24px;
+      align-items:center;
+      padding:26px;
+      border-radius:28px;
+      background:linear-gradient(135deg, rgba(255,255,255,.95), rgba(231,242,255,.98));
+      box-shadow:var(--ssb-shadow);
+      overflow:hidden;
+    }
+
+    .hero-text h1{
+      margin:0 0 12px;
+      font-size:clamp(30px, 4vw, 54px);
+      line-height:1.05;
+      color:var(--ssb-blue);
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+
+    .hero-text p{
+      margin:0 0 18px;
+      font-size:clamp(15px, 1.7vw, 19px);
+      line-height:1.7;
+      color:#35506f;
+      max-width:700px;
+    }
+
+    .hero-badges{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:0 0 18px;
+    }
+
+    .hero-badge{
+      padding:10px 14px;
+      border-radius:999px;
+      background:#e9f3ff;
+      color:var(--ssb-blue);
+      font-size:14px;
+      font-weight:700;
+      border:1px solid rgba(11,78,162,.12);
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+
+    .btn-primary,
+    .btn-secondary{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:48px;
+      padding:0 20px;
+      border-radius:12px;
+      text-decoration:none;
+      font-weight:700;
+      transition:.25s ease;
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg, var(--ssb-blue-2), var(--ssb-blue));
+      color:#fff;
+      box-shadow:0 10px 22px rgba(15,107,218,.22);
+    }
+
+    .btn-primary:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.02);
+    }
+
+    .btn-secondary{
+      background:#fff;
+      color:var(--ssb-blue);
+      border:1px solid rgba(11,78,162,.16);
+    }
+
+    .btn-secondary:hover{
+      background:#f6fbff;
+      transform:translateY(-1px);
+    }
+
+    .hero-visual{
+      min-width:0;
+    }
+
+    .slider-card{
+      position:relative;
+      border-radius:24px;
+      overflow:hidden;
+      background:#dfeeff;
+      box-shadow:0 18px 40px rgba(11,78,162,.16);
+      aspect-ratio:16 / 9;
+      min-height:260px;
+    }
+
+    .slider-track{
+      display:flex;
+      width:100%;
+      height:100%;
+      transition:transform .55s ease-in-out;
+      will-change:transform;
+    }
+
+    .slide{
+      position:relative;
+      min-width:100%;
+      height:100%;
+      overflow:hidden;
+      background:#edf5ff;
+    }
+
+    .slide picture,
+    .slide img{
+      width:100%;
+      height:100%;
+      display:block;
+    }
+
+    .slide img{
+      object-fit:cover;
+      object-position:center;
+      background:#edf5ff;
+    }
+
+    .slide-overlay{
+      position:absolute;
+      inset:auto 0 0 0;
+      padding:18px 18px 16px;
+      color:#fff;
+      background:linear-gradient(180deg, transparent 0%, rgba(4,26,59,.78) 100%);
+    }
+
+    .slide-overlay h3{
+      margin:0 0 4px;
+      font-size:clamp(18px, 2vw, 26px);
+      font-weight:800;
+    }
+
+    .slide-overlay p{
+      margin:0;
+      font-size:14px;
+      opacity:.96;
+    }
+
+    .slider-dots{
+      position:absolute;
+      left:50%;
+      bottom:12px;
+      transform:translateX(-50%);
+      display:flex;
+      gap:8px;
+      z-index:5;
+    }
+
+    .slider-dot{
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      border:none;
+      padding:0;
+      cursor:pointer;
+      background:rgba(255,255,255,.55);
+    }
+
+    .slider-dot.active{
+      width:28px;
+      background:#fff;
+    }
+
+    .slider-nav{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      width:42px;
+      height:42px;
+      border:none;
+      border-radius:999px;
+      cursor:pointer;
+      background:rgba(255,255,255,.82);
+      color:var(--ssb-blue);
+      font-size:22px;
+      font-weight:700;
+      z-index:6;
+      box-shadow:0 8px 20px rgba(0,0,0,.12);
+    }
+
+    .slider-nav.prev{left:12px}
+    .slider-nav.next{right:12px}
+
+    .ticker{
+      margin:18px 0 22px;
+      border-radius:16px;
+      overflow:hidden;
+      background:linear-gradient(90deg, #063c85, #0e5bc0 50%, #2c87ff);
+      color:#fff;
+      box-shadow:var(--ssb-shadow);
+    }
+
+    .ticker-inner{
+      display:flex;
+      gap:56px;
+      white-space:nowrap;
+      min-width:max-content;
+      padding:12px 0;
+      animation:ssbTicker 26s linear infinite;
+      font-weight:700;
+    }
+
+    .ticker-item{
+      padding-left:20px;
+    }
+
+    @keyframes ssbTicker{
+      from{transform:translateX(0)}
+      to{transform:translateX(-50%)}
+    }
+
+    .quick-cards{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:18px;
+      margin-top:10px;
+    }
+
+    .quick-card{
+      background:#fff;
+      border-radius:20px;
+      padding:22px 18px;
+      box-shadow:var(--ssb-shadow);
+      border:1px solid rgba(11,78,162,.08);
+    }
+
+    .quick-card h3{
+      margin:0 0 8px;
+      color:var(--ssb-blue);
+      font-size:20px;
+    }
+
+    .quick-card p{
+      margin:0 0 14px;
+      line-height:1.7;
+      color:#48627f;
+      font-size:15px;
+    }
+
+    .quick-card a{
+      color:var(--ssb-blue-2);
+      text-decoration:none;
+      font-weight:700;
+    }
+
+    @media (max-width: 980px){
+      .hero{
+        grid-template-columns:1fr;
+        padding:20px;
+      }
+
+      .slider-card{
+        aspect-ratio:16 / 10;
+      }
+
+      .quick-cards{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 640px){
+      .home-page{
+        width:min(100% - 14px, var(--ssb-max));
+        padding-top:12px;
+      }
+
+      .hero{
+        border-radius:22px;
+        gap:18px;
+        padding:16px;
+      }
+
+      .slider-card{
+        aspect-ratio:4 / 5;
+        min-height:360px;
+      }
+
+      .slide img{
+        object-position:center top;
+      }
+
+      .slider-nav{
+        width:38px;
+        height:38px;
+        font-size:20px;
+      }
+
+      .ticker{
+        border-radius:12px;
+      }
+
+      .quick-card{
+        border-radius:16px;
+      }
+    }
+  </style>
 </head>
 <body>
-  Redirecting to configurator...
+  <div id="appShell"></div>
+
+  <div class="ssb-main">
+    <main class="home-page">
+      <div class="top-tools">
+        <div id="google_translate_element"></div>
+      </div>
+
+      <section class="hero">
+        <div class="hero-text">
+          <h1>Stealth Safety Bank System</h1>
+          <p>
+            ระบบความปลอดภัยทางการเงินที่ออกแบบมาเพื่อช่วยลดความเสี่ยงจากการแฮ็ก
+            การโจรกรรมข้อมูล และการเข้าถึงบัญชีโดยไม่พึงประสงค์
+          </p>
+
+          <div class="hero-badges">
+            <span class="hero-badge">Stealth Technology</span>
+            <span class="hero-badge">Flare Technology</span>
+            <span class="hero-badge">Mobile Banking Security</span>
+          </div>
+
+          <div class="hero-actions">
+            <a class="btn-primary" href="device.html">เริ่มสั่งสินค้า</a>
+            <a class="btn-secondary" href="book.html">ดูสินค้า</a>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="slider-card" id="homeSlider">
+            <button class="slider-nav prev" type="button" aria-label="ก่อนหน้า">&#8249;</button>
+
+            <div class="slider-track" id="sliderTrack">
+              <div class="slide">
+                <picture>
+                  <source media="(max-width: 640px)" srcset="images/slides/mobile/slide-1.jpg" />
+                  <img src="images/slides/desktop/slide-1.jpg" alt="Stealth Safety Bank Mobile" />
+                </picture>
+                <div class="slide-overlay">
+                  <h3>Stealth Safety Bank Mobile</h3>
+                  <p>ระบบเครื่องเก็บเงินนิรภัยล่องหน</p>
+                </div>
+              </div>
+
+              <div class="slide">
+                <picture>
+                  <source media="(max-width: 640px)" srcset="images/slides/mobile/slide-2.jpg" />
+                  <img src="images/slides/desktop/slide-2.jpg" alt="Company Profile" />
+                </picture>
+                <div class="slide-overlay">
+                  <h3>บริษัท สยามทำ จำกัด</h3>
+                  <p>Stealth Safety Bank Mobile</p>
+                </div>
+              </div>
+
+              <div class="slide">
+                <picture>
+                  <source media="(max-width: 640px)" srcset="images/slides/mobile/slide-3.jpg" />
+                  <img src="images/slides/desktop/slide-3.jpg" alt="ระบบป้องกันแตกต่าง" />
+                </picture>
+                <div class="slide-overlay">
+                  <h3>ระบบป้องกันที่แตกต่าง</h3>
+                  <p>แนวคิดการใช้งานแบบล่องหน</p>
+                </div>
+              </div>
+
+              <div class="slide">
+                <picture>
+                  <source media="(max-width: 640px)" srcset="images/slides/mobile/slide-4.jpg" />
+                  <img src="images/slides/desktop/slide-4.jpg" alt="7 ระบบป้องกัน" />
+                </picture>
+                <div class="slide-overlay">
+                  <h3>7 ระบบป้องกัน</h3>
+                  <p>เสริมความปลอดภัยหลายชั้น</p>
+                </div>
+              </div>
+            </div>
+
+            <button class="slider-nav next" type="button" aria-label="ถัดไป">&#8250;</button>
+
+            <div class="slider-dots" id="sliderDots"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="ticker" aria-label="ข้อความวิ่ง">
+        <div class="ticker-inner">
+          <span class="ticker-item">บริษัท สยามทำ จำกัด</span>
+          <span class="ticker-item">Stealth Safety Bank System</span>
+          <span class="ticker-item">54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ</span>
+          <span class="ticker-item">โทร 02-043-2988</span>
+          <span class="ticker-item">มือถือ 063-656-1447 / 064-951-4888 / 080-204-5455</span>
+
+          <span class="ticker-item">บริษัท สยามทำ จำกัด</span>
+          <span class="ticker-item">Stealth Safety Bank System</span>
+          <span class="ticker-item">54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ</span>
+          <span class="ticker-item">โทร 02-043-2988</span>
+          <span class="ticker-item">มือถือ 063-656-1447 / 064-951-4888 / 080-204-5455</span>
+        </div>
+      </section>
+
+      <section class="quick-cards">
+        <article class="quick-card">
+          <h3>สินค้า</h3>
+          <p>ดูรายละเอียด Stealth Safety Bank Mobile System และแนวทางการใช้งาน</p>
+          <a href="device.html">ไปหน้าสินค้า</a>
+        </article>
+
+        <article class="quick-card">
+          <h3>ตัวแทนจำหน่าย</h3>
+          <p>ตรวจรายชื่อ สมัครเป็นตัวแทน และเข้าระบบคำนวณผลงาน</p>
+          <a href="agents.html">ไปหน้าตัวแทนจำหน่าย</a>
+        </article>
+
+        <article class="quick-card">
+          <h3>ติดต่อเรา</h3>
+          <p>สอบถามข้อมูลบริษัท สยามทำ จำกัด และรายละเอียดการสั่งซื้อเพิ่มเติม</p>
+          <a href="contact.html">ไปหน้าติดต่อเรา</a>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script type="module">
+    import { renderSharedShell } from "./js/shared-shell.js";
+    renderSharedShell("หน้าแรก");
+  </script>
+
+  <script>
+    (function () {
+      const slider = document.getElementById("homeSlider");
+      const track = document.getElementById("sliderTrack");
+      const slides = Array.from(track.children);
+      const dotsWrap = document.getElementById("sliderDots");
+      const prevBtn = slider.querySelector(".prev");
+      const nextBtn = slider.querySelector(".next");
+
+      let current = 0;
+      let timer = null;
+      const delay = 4500;
+
+      slides.forEach((_, index) => {
+        const dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "slider-dot" + (index === 0 ? " active" : "");
+        dot.setAttribute("aria-label", "ไปสไลด์ " + (index + 1));
+        dot.addEventListener("click", () => goTo(index, true));
+        dotsWrap.appendChild(dot);
+      });
+
+      const dots = Array.from(dotsWrap.children);
+
+      function update() {
+        track.style.transform = `translateX(-${current * 100}%)`;
+        dots.forEach((dot, i) => {
+          dot.classList.toggle("active", i === current);
+        });
+      }
+
+      function goTo(index, resetTimer) {
+        current = (index + slides.length) % slides.length;
+        update();
+        if (resetTimer) restart();
+      }
+
+      function next() {
+        goTo(current + 1, false);
+      }
+
+      function prev() {
+        goTo(current - 1, false);
+      }
+
+      function start() {
+        timer = setInterval(next, delay);
+      }
+
+      function stop() {
+        clearInterval(timer);
+        timer = null;
+      }
+
+      function restart() {
+        stop();
+        start();
+      }
+
+      nextBtn.addEventListener("click", () => goTo(current + 1, true));
+      prevBtn.addEventListener("click", () => goTo(current - 1, true));
+
+      slider.addEventListener("mouseenter", stop);
+      slider.addEventListener("mouseleave", start);
+      slider.addEventListener("touchstart", stop, { passive: true });
+      slider.addEventListener("touchend", start);
+
+      update();
+      start();
+    })();
+
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement(
+        {
+          pageLanguage: "th",
+          includedLanguages: "th,en,zh-CN,ja,ko",
+          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        },
+        "google_translate_element"
+      );
+    }
+  </script>
+
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
