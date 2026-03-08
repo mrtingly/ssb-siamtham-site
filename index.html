@@ -10,17 +10,22 @@
     :root{
       --ssb-blue:#0b4ea2;
       --ssb-blue-2:#0f6bda;
-      --ssb-light:#f4f9ff;
-      --ssb-card:#ffffff;
+      --ssb-blue-3:#174a96;
+      --ssb-light:#f3f8ff;
+      --ssb-white:#ffffff;
       --ssb-text:#16324f;
-      --ssb-soft:#e8f2ff;
+      --ssb-muted:#4f6784;
+      --ssb-soft:#e8f1ff;
       --ssb-border:rgba(11,78,162,.12);
-      --ssb-shadow:0 14px 36px rgba(11,78,162,.12);
+      --ssb-shadow:0 16px 40px rgba(11,78,162,.12);
+      --ssb-shadow-strong:0 20px 44px rgba(11,78,162,.16);
       --ssb-radius:24px;
-      --ssb-max:1280px;
+      --ssb-max:1320px;
     }
 
     *{box-sizing:border-box}
+
+    html{scroll-behavior:smooth}
 
     body{
       margin:0;
@@ -28,39 +33,41 @@
       color:var(--ssb-text);
       background:
         radial-gradient(circle at top left, rgba(15,107,218,.10), transparent 28%),
-        linear-gradient(180deg, #f7fbff 0%, #edf5ff 100%);
+        radial-gradient(circle at bottom right, rgba(11,78,162,.06), transparent 26%),
+        linear-gradient(180deg, #f8fbff 0%, #edf5ff 100%);
     }
 
     .home-page{
       width:min(var(--ssb-max), calc(100% - 24px));
       margin:0 auto;
-      padding:18px 0 40px;
+      padding:18px 0 44px;
     }
 
     .top-tools{
       display:flex;
       justify-content:flex-end;
       align-items:center;
-      min-height:40px;
+      min-height:42px;
       margin-bottom:14px;
     }
 
     .hero{
       display:grid;
-      grid-template-columns:1.05fr .95fr;
+      grid-template-columns:1.02fr .98fr;
       gap:24px;
       align-items:center;
-      padding:24px;
+      padding:26px;
       border-radius:28px;
-      background:linear-gradient(135deg, rgba(255,255,255,.95), rgba(231,242,255,.98));
-      box-shadow:var(--ssb-shadow);
+      background:linear-gradient(135deg, rgba(255,255,255,.96), rgba(233,243,255,.98));
+      box-shadow:var(--ssb-shadow-strong);
+      border:1px solid rgba(255,255,255,.65);
       overflow:hidden;
       margin-bottom:24px;
     }
 
     .hero-text h1{
       margin:0 0 12px;
-      font-size:clamp(32px, 4vw, 58px);
+      font-size:clamp(34px, 4.4vw, 62px);
       line-height:1.02;
       color:var(--ssb-blue);
       font-weight:800;
@@ -69,8 +76,8 @@
 
     .hero-text p{
       margin:0 0 20px;
-      font-size:clamp(15px, 1.5vw, 19px);
-      line-height:1.75;
+      font-size:clamp(15px, 1.55vw, 19px);
+      line-height:1.8;
       color:#35506f;
       max-width:720px;
     }
@@ -79,17 +86,18 @@
       display:flex;
       flex-wrap:wrap;
       gap:10px;
-      margin:0 0 20px;
+      margin:0 0 22px;
     }
 
     .hero-badge{
-      padding:10px 14px;
+      padding:10px 15px;
       border-radius:999px;
-      background:#e8f2ff;
+      background:#eaf3ff;
       color:var(--ssb-blue);
       border:1px solid var(--ssb-border);
       font-size:14px;
       font-weight:700;
+      box-shadow:0 6px 14px rgba(11,78,162,.06);
     }
 
     .hero-actions{
@@ -103,22 +111,23 @@
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      min-height:48px;
-      padding:0 20px;
-      border-radius:12px;
+      min-height:50px;
+      padding:0 22px;
+      border-radius:14px;
       text-decoration:none;
       font-weight:700;
       transition:.25s ease;
+      font-size:15px;
     }
 
     .btn-primary{
       background:linear-gradient(135deg, var(--ssb-blue-2), var(--ssb-blue));
       color:#fff;
-      box-shadow:0 10px 22px rgba(15,107,218,.22);
+      box-shadow:0 12px 24px rgba(15,107,218,.22);
     }
 
     .btn-primary:hover{
-      transform:translateY(-1px);
+      transform:translateY(-2px);
       filter:brightness(1.02);
     }
 
@@ -129,8 +138,8 @@
     }
 
     .btn-secondary:hover{
-      background:#f6fbff;
-      transform:translateY(-1px);
+      background:#f7fbff;
+      transform:translateY(-2px);
     }
 
     .hero-visual{
@@ -143,6 +152,7 @@
       overflow:hidden;
       background:#fff;
       box-shadow:0 18px 40px rgba(11,78,162,.16);
+      border:1px solid rgba(11,78,162,.08);
     }
 
     .slider-viewport{
@@ -155,7 +165,7 @@
     .slider-track{
       display:flex;
       width:100%;
-      transition:transform .55s ease-in-out;
+      transition:transform .6s ease-in-out;
       will-change:transform;
     }
 
@@ -177,17 +187,23 @@
       position:absolute;
       top:50%;
       transform:translateY(-50%);
-      width:44px;
-      height:44px;
+      width:46px;
+      height:46px;
       border:none;
       border-radius:999px;
-      background:rgba(255,255,255,.92);
+      background:rgba(255,255,255,.93);
       color:var(--ssb-blue);
       font-size:24px;
       font-weight:700;
       cursor:pointer;
       z-index:6;
       box-shadow:0 8px 20px rgba(0,0,0,.12);
+      transition:.2s ease;
+    }
+
+    .slider-nav:hover{
+      background:#fff;
+      transform:translateY(-50%) scale(1.03);
     }
 
     .slider-nav.prev{left:12px}
@@ -218,39 +234,88 @@
       background:#fff;
     }
 
-    .info-grid{
-      display:grid;
-      grid-template-columns:repeat(3, minmax(0,1fr));
-      gap:18px;
+    .section-title{
+      margin:0 0 18px;
+      color:var(--ssb-blue);
+      font-size:clamp(24px, 2.2vw, 34px);
+      line-height:1.2;
+      font-weight:800;
     }
 
-    .info-card{
-      background:var(--ssb-card);
+    .card-section{
+      margin-top:8px;
+    }
+
+    .card-grid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:20px;
+    }
+
+    .feature-card{
+      position:relative;
+      overflow:hidden;
+      border-radius:24px;
+      background:#fff;
       border:1px solid var(--ssb-border);
-      border-radius:22px;
       box-shadow:var(--ssb-shadow);
-      padding:22px 20px;
+      transition:.28s ease;
+      min-height:420px;
       display:flex;
       flex-direction:column;
-      min-height:210px;
     }
 
-    .info-card-number{
-      width:42px;
-      height:42px;
+    .feature-card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 22px 44px rgba(11,78,162,.18);
+    }
+
+    .feature-card-media{
+      position:relative;
+      height:220px;
+      overflow:hidden;
+      background:#dcecff;
+    }
+
+    .feature-card-media img{
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit:cover;
+      transition:transform .45s ease;
+    }
+
+    .feature-card:hover .feature-card-media img{
+      transform:scale(1.04);
+    }
+
+    .feature-card-badge{
+      position:absolute;
+      top:14px;
+      left:14px;
+      min-width:40px;
+      height:40px;
+      padding:0 12px;
       border-radius:999px;
-      display:flex;
+      display:inline-flex;
       align-items:center;
       justify-content:center;
       background:linear-gradient(135deg, var(--ssb-blue-2), var(--ssb-blue));
       color:#fff;
       font-weight:800;
-      font-size:18px;
-      margin-bottom:14px;
-      box-shadow:0 8px 18px rgba(15,107,218,.22);
+      font-size:16px;
+      box-shadow:0 10px 22px rgba(15,107,218,.24);
+      z-index:2;
     }
 
-    .info-card h3{
+    .feature-card-body{
+      padding:20px 18px 20px;
+      display:flex;
+      flex-direction:column;
+      flex:1;
+    }
+
+    .feature-card h3{
       margin:0 0 10px;
       color:var(--ssb-blue);
       font-size:22px;
@@ -258,39 +323,94 @@
       font-weight:800;
     }
 
-    .info-card p{
+    .feature-card p{
       margin:0;
-      color:#4a6482;
+      color:var(--ssb-muted);
       font-size:15px;
-      line-height:1.75;
+      line-height:1.8;
       flex:1;
     }
 
-    .info-card a{
+    .feature-card-link{
+      margin-top:16px;
       display:inline-flex;
       align-items:center;
-      margin-top:16px;
+      gap:8px;
       color:var(--ssb-blue-2);
-      text-decoration:none;
-      font-weight:700;
       font-size:15px;
+      font-weight:700;
+      text-decoration:none;
     }
 
-    .info-card a:hover{
+    .feature-card-link:hover{
       text-decoration:underline;
     }
 
-    @media (max-width: 1100px){
+    .footer-contact{
+      margin-top:28px;
+      border-radius:24px;
+      overflow:hidden;
+      background:linear-gradient(135deg, #0b4ea2 0%, #0f6bda 100%);
+      color:#fff;
+      box-shadow:0 18px 40px rgba(11,78,162,.18);
+    }
+
+    .footer-contact-inner{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:22px;
+      padding:24px;
+    }
+
+    .footer-contact h2{
+      margin:0 0 12px;
+      font-size:28px;
+      line-height:1.2;
+      font-weight:800;
+    }
+
+    .footer-contact p{
+      margin:0 0 8px;
+      line-height:1.75;
+      font-size:15px;
+      color:rgba(255,255,255,.96);
+    }
+
+    .footer-box{
+      background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.18);
+      border-radius:18px;
+      padding:18px;
+      backdrop-filter:blur(4px);
+    }
+
+    .footer-box strong{
+      display:block;
+      margin-bottom:8px;
+      font-size:17px;
+    }
+
+    .footer-note{
+      margin-top:6px;
+      font-size:13px;
+      opacity:.92;
+    }
+
+    @media (max-width: 1180px){
       .hero{
         grid-template-columns:1fr;
       }
 
-      .info-grid{
-        grid-template-columns:repeat(2, minmax(0,1fr));
+      .card-grid{
+        grid-template-columns:repeat(2, minmax(0, 1fr));
+      }
+
+      .footer-contact-inner{
+        grid-template-columns:1fr;
       }
     }
 
-    @media (max-width: 700px){
+    @media (max-width: 760px){
       .home-page{
         width:min(100% - 14px, var(--ssb-max));
         padding-top:12px;
@@ -306,13 +426,24 @@
         aspect-ratio:4 / 5;
       }
 
-      .info-grid{
+      .card-grid{
         grid-template-columns:1fr;
       }
 
-      .info-card{
+      .feature-card{
         min-height:auto;
+      }
+
+      .feature-card-media{
+        height:220px;
+      }
+
+      .footer-contact{
         border-radius:18px;
+      }
+
+      .footer-contact-inner{
+        padding:18px;
       }
 
       .slider-nav{
@@ -337,6 +468,7 @@
           <p>
             ระบบความปลอดภัยทางการเงินที่ออกแบบมาเพื่อช่วยลดความเสี่ยงจากการแฮ็ก
             การโจรกรรมข้อมูล และการเข้าถึงบัญชีโดยไม่พึงประสงค์
+            สำหรับผู้ที่ต้องการแนวทางใช้งานที่เป็นส่วนตัวและปลอดภัยมากขึ้น
           </p>
 
           <div class="hero-badges">
@@ -347,7 +479,7 @@
 
           <div class="hero-actions">
             <a class="btn-primary" href="device.html">เริ่มสั่งสินค้า</a>
-            <a class="btn-secondary" href="book.html">ดูสินค้า</a>
+            <a class="btn-secondary" href="#featureCards">ดูข้อมูลทั้งหมด</a>
           </div>
         </div>
 
@@ -381,49 +513,141 @@
         </div>
       </section>
 
-      <section class="info-grid">
-        <article class="info-card">
-          <div class="info-card-number">1</div>
-          <h3>Stealth Safety Bank Mobile System คืออะไร</h3>
-          <p>ระบบความปลอดภัยทางการเงินที่ออกแบบมาเพื่อช่วยลดความเสี่ยงจากการแฮ็ก การโจรกรรมข้อมูล และการเข้าถึงบัญชีโดยไม่พึงประสงค์ผ่านอุปกรณ์ที่จัดระบบมาเฉพาะทาง</p>
-          <a href="device.html">ดูเพิ่มเติม</a>
-        </article>
+      <section class="card-section" id="featureCards">
+        <h2 class="section-title">ข้อมูลสำคัญของระบบ</h2>
 
-        <article class="info-card">
-          <div class="info-card-number">2</div>
-          <h3>Stealth Safety Bank คืออะไร</h3>
-          <p>แนวคิดการเก็บเงินและทำธุรกรรมแบบล่องหน เน้นการแยกการใช้งานที่สำคัญออกจากการใช้งานทั่วไป เพื่อลดโอกาสการรั่วไหลของข้อมูลสำคัญ</p>
-          <a href="company.html">ดูเพิ่มเติม</a>
-        </article>
+        <div class="card-grid">
+          <a class="feature-card" href="device.html">
+            <div class="feature-card-media">
+              <span class="feature-card-badge">1</span>
+              <img
+                src="https://source.unsplash.com/random/900x1200/?smartphone,security,technology"
+                alt="Stealth Safety Bank Mobile System"
+                loading="lazy"
+                referrerpolicy="no-referrer"
+                onerror="this.onerror=null;this.src='https://placehold.co/900x1200/e8f1ff/0b4ea2?text=Stealth+Safety+Bank+Mobile+System';"
+              />
+            </div>
+            <div class="feature-card-body">
+              <h3>Stealth Safety Bank Mobile System คืออะไร</h3>
+              <p>ภาพรวมของระบบความปลอดภัยทางการเงินผ่านอุปกรณ์ที่จัดการใช้งานเฉพาะทาง เพื่อช่วยลดความเสี่ยงในการเข้าถึงข้อมูลสำคัญโดยไม่พึงประสงค์</p>
+              <span class="feature-card-link">เข้าสู่หน้าเพจ →</span>
+            </div>
+          </a>
 
-        <article class="info-card">
-          <div class="info-card-number">3</div>
-          <h3>Stealth Safety Book คืออะไร</h3>
-          <p>อุปกรณ์หรือแนวทางการจัดเก็บแบบพรางตัว เพื่อช่วยเพิ่มความเป็นส่วนตัวและความปลอดภัยในการเก็บอุปกรณ์หรือข้อมูลที่สำคัญในการใช้งานจริง</p>
-          <a href="book.html">ดูเพิ่มเติม</a>
-        </article>
+          <a class="feature-card" href="company.html">
+            <div class="feature-card-media">
+              <span class="feature-card-badge">2</span>
+              <img
+                src="https://source.unsplash.com/random/900x1200/?bank,vault,security"
+                alt="Stealth Safety Bank"
+                loading="lazy"
+                referrerpolicy="no-referrer"
+                onerror="this.onerror=null;this.src='https://placehold.co/900x1200/e8f1ff/0b4ea2?text=Stealth+Safety+Bank';"
+              />
+            </div>
+            <div class="feature-card-body">
+              <h3>Stealth Safety Bank คืออะไร</h3>
+              <p>แนวคิดการเก็บเงินและการทำธุรกรรมแบบล่องหน โดยเน้นความปลอดภัย ความเป็นส่วนตัว และการแยกการใช้งานสำคัญออกจากการใช้งานทั่วไป</p>
+              <span class="feature-card-link">เข้าสู่หน้าเพจ →</span>
+            </div>
+          </a>
 
-        <article class="info-card">
-          <div class="info-card-number">4</div>
-          <h3>Flare Technology คืออะไร</h3>
-          <p>แนวทางการใช้งานที่ช่วยแยกอุปกรณ์หรือฟังก์ชันสำหรับใช้งานทั่วไปออกจากส่วนที่เกี่ยวข้องกับการเงิน เพื่อเพิ่มชั้นความปลอดภัยในการใช้งานประจำวัน</p>
-          <a href="training.html">ดูเพิ่มเติม</a>
-        </article>
+          <a class="feature-card" href="book.html">
+            <div class="feature-card-media">
+              <span class="feature-card-badge">3</span>
+              <img
+                src="https://source.unsplash.com/random/900x1200/?book,safe,secret"
+                alt="Stealth Safety Book"
+                loading="lazy"
+                referrerpolicy="no-referrer"
+                onerror="this.onerror=null;this.src='https://placehold.co/900x1200/e8f1ff/0b4ea2?text=Stealth+Safety+Book';"
+              />
+            </div>
+            <div class="feature-card-body">
+              <h3>Stealth Safety Book คืออะไร</h3>
+              <p>แนวทางการจัดเก็บแบบพรางตัวเพื่อช่วยเสริมความปลอดภัยในการเก็บอุปกรณ์หรือข้อมูลที่สำคัญ ให้ดูกลมกลืนและเพิ่มความเป็นส่วนตัวมากขึ้น</p>
+              <span class="feature-card-link">เข้าสู่หน้าเพจ →</span>
+            </div>
+          </a>
 
-        <article class="info-card">
-          <div class="info-card-number">5</div>
-          <h3>อบรมการใช้งาน</h3>
-          <p>เรียนรู้ขั้นตอนการใช้งาน การตั้งค่า และวิธีใช้ระบบอย่างถูกต้อง เพื่อให้เกิดประสิทธิภาพและความปลอดภัยสูงสุดในการใช้งานจริง</p>
-          <a href="training.html">ดูเพิ่มเติม</a>
-        </article>
+          <a class="feature-card" href="training.html">
+            <div class="feature-card-media">
+              <span class="feature-card-badge">4</span>
+              <img
+                src="https://source.unsplash.com/random/900x1200/?cybersecurity,shield,digital"
+                alt="Flare Technology"
+                loading="lazy"
+                referrerpolicy="no-referrer"
+                onerror="this.onerror=null;this.src='https://placehold.co/900x1200/e8f1ff/0b4ea2?text=Flare+Technology';"
+              />
+            </div>
+            <div class="feature-card-body">
+              <h3>Flare Technology คืออะไร</h3>
+              <p>แนวทางการแยกบทบาทการใช้งานอุปกรณ์และฟังก์ชันต่าง ๆ เพื่อลดความเสี่ยงจากกิจกรรมทั่วไปที่อาจกระทบต่อความปลอดภัยของงานด้านการเงิน</p>
+              <span class="feature-card-link">เข้าสู่หน้าเพจ →</span>
+            </div>
+          </a>
 
-        <article class="info-card">
-          <div class="info-card-number">6</div>
-          <h3>สมัครเป็นตัวแทนจำหน่ายกับเรา</h3>
-          <p>สำหรับผู้ที่สนใจร่วมงานกับบริษัท สามารถสมัครเป็นตัวแทนจำหน่าย เพื่อต่อยอดการขาย การให้คำแนะนำลูกค้า และขยายโอกาสทางธุรกิจร่วมกัน</p>
-          <a href="agents.html">สมัคร / ดูรายละเอียด</a>
-        </article>
+          <a class="feature-card" href="training.html">
+            <div class="feature-card-media">
+              <span class="feature-card-badge">5</span>
+              <img
+                src="https://source.unsplash.com/random/900x1200/?training,classroom,technology"
+                alt="อบรมการใช้งาน"
+                loading="lazy"
+                referrerpolicy="no-referrer"
+                onerror="this.onerror=null;this.src='https://placehold.co/900x1200/e8f1ff/0b4ea2?text=Training';"
+              />
+            </div>
+            <div class="feature-card-body">
+              <h3>อบรมการใช้งาน</h3>
+              <p>เรียนรู้ขั้นตอนการใช้งาน การตั้งค่า และวิธีใช้งานระบบอย่างถูกต้อง เพื่อให้ลูกค้าใช้งานได้มั่นใจ เข้าใจง่าย และปลอดภัยมากขึ้น</p>
+              <span class="feature-card-link">เข้าสู่หน้าเพจ →</span>
+            </div>
+          </a>
+
+          <a class="feature-card" href="agents.html">
+            <div class="feature-card-media">
+              <span class="feature-card-badge">6</span>
+              <img
+                src="https://source.unsplash.com/random/900x1200/?business,partnership,team"
+                alt="สมัครเป็นตัวแทนจำหน่ายกับเรา"
+                loading="lazy"
+                referrerpolicy="no-referrer"
+                onerror="this.onerror=null;this.src='https://placehold.co/900x1200/e8f1ff/0b4ea2?text=Agent+Partner';"
+              />
+            </div>
+            <div class="feature-card-body">
+              <h3>สมัครเป็นตัวแทนจำหน่ายกับเรา</h3>
+              <p>สำหรับผู้ที่สนใจร่วมงานกับบริษัท สามารถสมัครเป็นตัวแทนจำหน่าย เพื่อขยายโอกาสทางธุรกิจและให้ข้อมูลสินค้ากับลูกค้าได้อย่างเป็นระบบ</p>
+              <span class="feature-card-link">เข้าสู่หน้าเพจ →</span>
+            </div>
+          </a>
+        </div>
       </section>
+
+      <footer class="footer-contact">
+        <div class="footer-contact-inner">
+          <div>
+            <h2>ติดต่อบริษัท สยามทำ จำกัด</h2>
+            <p>Stealth Safety Bank System / Stealth Safety Bank Mobile</p>
+            <p>ที่อยู่: 54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
+            <p>Serial Number: 0105566099954</p>
+            <p>โทร: 02-043-2988</p>
+            <p>มือถือ: 063-656-1447 / 064-951-4888 / 080-204-5455</p>
+            <p>เว็บไซต์: www.siamtham.com</p>
+            <p>LINE Official Account: @siamtham</p>
+          </div>
+
+          <div class="footer-box">
+            <strong>ข้อมูลติดต่อด่วน</strong>
+            <p>บริษัท สยามทำ จำกัด</p>
+            <p>สอบถามข้อมูลสินค้า การใช้งาน การอบรม และตัวแทนจำหน่าย</p>
+            <p class="footer-note">ระบบนี้ออกแบบให้ใช้งานได้ทั้ง Desktop, iOS และ Android แบบ Responsive</p>
+          </div>
+        </div>
+      </footer>
     </main>
   </div>
 
@@ -505,13 +729,13 @@
         startAuto();
       }
 
-      nextBtn.addEventListener("click", function () {
-        nextSlide();
+      prevBtn.addEventListener("click", function () {
+        prevSlide();
         restartAuto();
       });
 
-      prevBtn.addEventListener("click", function () {
-        prevSlide();
+      nextBtn.addEventListener("click", function () {
+        nextSlide();
         restartAuto();
       });
 
