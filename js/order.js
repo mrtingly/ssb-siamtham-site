@@ -74,10 +74,10 @@ async function main() {
   address: el("custAddress").value.trim()
 };
 
-      if (!customer.name || !customer.phone) {
-        showStatus("error", "กรุณากรอก ชื่อ-นามสกุล และ เบอร์โทร");
-        return;
-      }
+     if (!customer.name || !customer.phone || !customer.address) {
+  showStatus("error", "กรุณากรอก ชื่อ-นามสกุล เบอร์โทร และ ที่อยู่จัดส่ง");
+  return;
+}
 
       const haveAgent = el("haveAgent").checked;
       let agent = { have_agent: false };
