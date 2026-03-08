@@ -4,15 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SSB - ดูภาพ Safety Book</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+ <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/shared-shell.css" />
   <style>
     body { font-family: Inter, system-ui, sans-serif; background:#f8fafc; }
     .card { background:#fff; border-radius:20px; border:1px solid #e2e8f0; box-shadow:0 10px 30px rgba(15,23,42,.06); }
     .btn { border-radius:14px; padding:.9rem 1rem; font-weight:700; }
   </style>
 </head>
+  
 <body>
   <div id="siteHeader"></div>
+  <div id="appShell"></div>
+<div class="ssb-main">
 
   <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
     <div id="statusBox" class="hidden mb-6"></div>
@@ -52,14 +56,15 @@
         </button>
       </aside>
     </div>
+    </div>
   </main>
 
   <div id="siteFooter"></div>
 
-  <script type="module">
-    import { renderSiteChrome } from "./js/layout.js";
-    renderSiteChrome("Step 2 — Preview Safety Book", "ดูภาพให้ครบ 8 ภาพ");
-  </script>
+ <script type="module">
+  import { renderSharedShell } from "./js/shared-shell.js";
+  renderSharedShell("ชื่อหน้านี้");
+</script>
   <script type="module" src="js/book_preview.js"></script>
 </body>
 </html>
