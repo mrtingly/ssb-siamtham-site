@@ -88,45 +88,41 @@ function bindSidebar() {
 }
 
 export function renderSharedShell(pageTitle = "") {
-  const host = document.getElementById("appShell");
-  if (!host) return;
+  const shell = document.getElementById("appShell");
+  if (!shell) return;
 
-  const currentFile = fileNameOf(window.location.pathname);
-
-  host.innerHTML = `
-    <div class="ssb-shell">
-      <div class="ssb-topbar">
-        <div class="ssb-topbar-left">
-          <button id="ssbMenuBtn" class="ssb-menu-btn" aria-label="Open menu">☰</button>
-          <div class="ssb-brand">
-            <img src="images/logo.png" alt="SSB Logo" />
-            <div>
-              <div class="ssb-brand-title">Stealth Safety Bank</div>
-              <div class="ssb-brand-sub">${pageTitle || "Stealth Technology"}</div>
-            </div>
+  shell.innerHTML = `
+    <div class="ssb-topbar">
+      <div class="ssb-container">
+        <button id="menuToggle" class="ssb-menu-btn">☰</button>
+        <div class="ssb-brand">
+          <img src="images/logo.png" />
+          <div>
+            <div class="ssb-title">Stealth Safety Bank</div>
+            <div class="ssb-sub">${pageTitle}</div>
           </div>
         </div>
-        <div class="ssb-company-mini">บริษัท สยามทำ จำกัด · 02-043-2988</div>
       </div>
-
-      <aside id="ssbSidebar" class="ssb-sidebar">
-        <div class="ssb-sidebar-title">เมนูหลัก</div>
-        <nav class="ssb-nav">
-          ${buildMenuHtml(currentFile)}
-        </nav>
-
-        <div class="ssb-company-card">
-          <div><strong>บริษัท สยามทำ จำกัด</strong></div>
-          <div>54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ</div>
-          <div>Serial Number: 0105566099954</div>
-          <div>โทร 02-043-2988</div>
-          <div>มือถือ 063-656-1447 / 064-951-4888 / 080-204-5455</div>
-        </div>
-      </aside>
-
-      <div id="ssbBackdrop" class="ssb-backdrop"></div>
     </div>
+
+    <aside id="ssbSidebar" class="ssb-sidebar">
+      <div class="ssb-sidebar-inner">
+        <div class="ssb-menu-title">เมนูหลัก</div>
+
+        <a href="index.html">หน้าแรก</a>
+        <a href="about.html">เกี่ยวกับเรา</a>
+        <a href="book.html">เลือก Safety Book</a>
+        <a href="agents.html">ตัวแทนจำหน่าย</a>
+        <a href="contact.html">ติดต่อเรา</a>
+      </div>
+    </aside>
   `;
 
-  bindSidebar();
+  const toggle = document.getElementById("menuToggle");
+  const sidebar = document.getElementById("ssbSidebar");
+
+  toggle?.addEventListener("click", () => {
+    sidebar.classList.toggle("open");
+    document.body.classList.toggle("menu-open");
+  });
 }
