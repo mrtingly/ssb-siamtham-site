@@ -4,40 +4,52 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Stealth Safety Bank System (SSB)</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
   <link rel="stylesheet" href="css/shared-shell.css" />
 
   <style>
     :root{
       --ssb-blue:#0b4ea2;
-      --ssb-blue-2:#0f6bda;
-      --ssb-blue-3:#174a96;
-      --ssb-light:#f3f8ff;
-      --ssb-white:#ffffff;
+      --ssb-blue-dark:#083a7c;
+      --ssb-blue-soft:#eaf3ff;
+      --ssb-gold:#d4af37;
+      --ssb-gold-2:#f1d06c;
       --ssb-text:#16324f;
-      --ssb-muted:#4f6784;
-      --ssb-soft:#e8f1ff;
+      --ssb-muted:#5a708b;
       --ssb-border:rgba(11,78,162,.12);
-      --ssb-shadow:0 16px 40px rgba(11,78,162,.12);
-      --ssb-shadow-strong:0 20px 44px rgba(11,78,162,.16);
-      --ssb-radius:24px;
+      --ssb-card:#ffffff;
+      --ssb-bg:#f4f8ff;
+      --ssb-shadow:0 16px 40px rgba(11,78,162,.10);
+      --ssb-shadow-strong:0 20px 50px rgba(11,78,162,.14);
       --ssb-max:1320px;
+      --radius-xl:28px;
+      --radius-lg:22px;
+      --radius-md:16px;
     }
 
-    *{box-sizing:border-box}
+    *{
+      box-sizing:border-box;
+      font-family:'Prompt', sans-serif !important;
+    }
 
-    html{scroll-behavior:smooth}
+    html{
+      scroll-behavior:smooth;
+    }
 
-   body{
-  margin:0;
-  font-family:'Prompt', sans-serif;
+    body{
+      margin:0;
       color:var(--ssb-text);
       background:
-        radial-gradient(circle at top left, rgba(15,107,218,.10), transparent 28%),
-        radial-gradient(circle at bottom right, rgba(11,78,162,.06), transparent 26%),
-        linear-gradient(180deg, #f8fbff 0%, #edf5ff 100%);
+        radial-gradient(circle at top left, rgba(15,107,218,.10), transparent 26%),
+        radial-gradient(circle at bottom right, rgba(11,78,162,.07), transparent 28%),
+        linear-gradient(180deg, #f9fbff 0%, #edf5ff 100%);
     }
 
     .home-page{
@@ -56,106 +68,124 @@
 
     .hero{
       display:grid;
-      grid-template-columns:1.02fr .98fr;
-      gap:24px;
+      grid-template-columns:minmax(0, 1fr) minmax(460px, 560px);
+      gap:28px;
       align-items:center;
-      padding:26px;
-      border-radius:28px;
-      background:linear-gradient(135deg, rgba(255,255,255,.96), rgba(233,243,255,.98));
+      padding:30px;
+      border-radius:var(--radius-xl);
+      background:linear-gradient(135deg, rgba(255,255,255,.98), rgba(235,244,255,.98));
+      border:1px solid rgba(255,255,255,.7);
       box-shadow:var(--ssb-shadow-strong);
-      border:1px solid rgba(255,255,255,.65);
-      overflow:hidden;
-      margin-bottom:24px;
+      margin-bottom:28px;
+    }
+
+    .hero-text{
+      min-width:0;
     }
 
     .hero-text h1{
-      margin:0 0 12px;
-      font-size:clamp(34px, 4.4vw, 62px);
+      margin:0 0 14px;
+      font-size:clamp(36px, 4.4vw, 66px);
       line-height:1.02;
-      color:var(--ssb-blue);
       font-weight:800;
+      color:var(--ssb-blue);
       letter-spacing:.2px;
     }
 
     .hero-text p{
-      margin:0 0 20px;
-      font-size:clamp(15px, 1.55vw, 19px);
-      line-height:1.8;
+      margin:0 0 22px;
+      font-size:clamp(15px, 1.45vw, 19px);
+      line-height:1.9;
       color:#35506f;
-      max-width:720px;
+      max-width:740px;
     }
 
     .hero-badges{
       display:flex;
       flex-wrap:wrap;
       gap:10px;
-      margin:0 0 22px;
+      margin:0 0 26px;
     }
 
     .hero-badge{
-      padding:10px 15px;
+      display:inline-flex;
+      align-items:center;
+      padding:10px 16px;
       border-radius:999px;
-      background:#eaf3ff;
-      color:var(--ssb-blue);
+      background:linear-gradient(180deg, #f8fbff, #eaf3ff);
       border:1px solid var(--ssb-border);
+      color:var(--ssb-blue);
       font-size:14px;
       font-weight:700;
-      box-shadow:0 6px 14px rgba(11,78,162,.06);
+      box-shadow:0 6px 16px rgba(11,78,162,.05);
     }
 
     .hero-actions{
       display:flex;
+      align-items:center;
+      justify-content:flex-start;
+      gap:14px;
       flex-wrap:wrap;
-      gap:12px;
     }
 
-    .btn-primary,
-    .btn-secondary{
+    .btn-secondary,
+    .btn-order{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      min-height:50px;
-      padding:0 22px;
+      min-height:54px;
+      padding:0 24px;
       border-radius:14px;
       text-decoration:none;
-      font-weight:700;
       transition:.25s ease;
-      font-size:15px;
-    }
-
-    .btn-primary{
-      background:linear-gradient(135deg, var(--ssb-blue-2), var(--ssb-blue));
-      color:#fff;
-      box-shadow:0 12px 24px rgba(15,107,218,.22);
-    }
-
-    .btn-primary:hover{
-      transform:translateY(-2px);
-      filter:brightness(1.02);
+      white-space:nowrap;
     }
 
     .btn-secondary{
       background:#fff;
       color:var(--ssb-blue);
       border:1px solid var(--ssb-border);
+      font-size:16px;
+      font-weight:700;
+      box-shadow:0 10px 24px rgba(11,78,162,.06);
     }
 
     .btn-secondary:hover{
-      background:#f7fbff;
       transform:translateY(-2px);
+      background:#f7fbff;
+    }
+
+    .btn-order{
+      min-width:260px;
+      padding:0 34px;
+      background:linear-gradient(135deg, #0c4ca2 0%, #1b64c9 42%, #d4af37 100%);
+      color:#fff;
+      font-size:19px;
+      font-weight:800;
+      border:1px solid rgba(212,175,55,.35);
+      box-shadow:0 18px 36px rgba(11,78,162,.22), 0 8px 20px rgba(212,175,55,.18);
+    }
+
+    .btn-order:hover{
+      transform:translateY(-3px);
+      filter:brightness(1.03);
     }
 
     .hero-visual{
       min-width:0;
+      display:flex;
+      justify-content:center;
+      align-items:center;
     }
 
     .slider-card{
+      width:100%;
       position:relative;
-      border-radius:24px;
+      border-radius:26px;
       overflow:hidden;
-      background:#fff;
-      box-shadow:0 18px 40px rgba(11,78,162,.16);
-      border:1px solid rgba(11,78,162,.08);
+      background:linear-gradient(135deg, #fffdf8, #ffffff);
+      border:1px solid rgba(212,175,55,.22);
+      box-shadow:0 22px 48px rgba(11,78,162,.14);
     }
 
     .slider-viewport{
@@ -168,7 +198,7 @@
     .slider-track{
       display:flex;
       width:100%;
-      transition:transform .6s ease-in-out;
+      transition:transform .65s ease-in-out;
       will-change:transform;
     }
 
@@ -194,23 +224,23 @@
       height:46px;
       border:none;
       border-radius:999px;
-      background:rgba(255,255,255,.93);
+      background:rgba(255,255,255,.94);
       color:var(--ssb-blue);
       font-size:24px;
-      font-weight:700;
+      font-weight:800;
       cursor:pointer;
       z-index:6;
-      box-shadow:0 8px 20px rgba(0,0,0,.12);
+      box-shadow:0 10px 24px rgba(0,0,0,.12);
       transition:.2s ease;
     }
 
     .slider-nav:hover{
       background:#fff;
-      transform:translateY(-50%) scale(1.03);
+      transform:translateY(-50%) scale(1.04);
     }
 
-    .slider-nav.prev{left:12px}
-    .slider-nav.next{right:12px}
+    .slider-nav.prev{ left:14px; }
+    .slider-nav.next{ right:14px; }
 
     .slider-dots{
       position:absolute;
@@ -227,7 +257,7 @@
       height:10px;
       border:none;
       border-radius:999px;
-      background:rgba(255,255,255,.6);
+      background:rgba(255,255,255,.65);
       cursor:pointer;
       padding:0;
     }
@@ -246,7 +276,7 @@
     }
 
     .card-section{
-      margin-top:8px;
+      margin-top:6px;
     }
 
     .card-grid{
@@ -256,21 +286,22 @@
     }
 
     .feature-card{
-      position:relative;
+      display:flex;
+      flex-direction:column;
+      text-decoration:none;
+      color:inherit;
       overflow:hidden;
-      border-radius:24px;
-      background:#fff;
+      background:var(--ssb-card);
       border:1px solid var(--ssb-border);
+      border-radius:24px;
       box-shadow:var(--ssb-shadow);
       transition:.28s ease;
       min-height:420px;
-      display:flex;
-      flex-direction:column;
     }
 
     .feature-card:hover{
       transform:translateY(-4px);
-      box-shadow:0 22px 44px rgba(11,78,162,.18);
+      box-shadow:0 22px 44px rgba(11,78,162,.16);
     }
 
     .feature-card-media{
@@ -296,26 +327,26 @@
       position:absolute;
       top:14px;
       left:14px;
-      min-width:40px;
-      height:40px;
+      min-width:42px;
+      height:42px;
       padding:0 12px;
-      border-radius:999px;
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      background:linear-gradient(135deg, var(--ssb-blue-2), var(--ssb-blue));
+      border-radius:999px;
+      background:linear-gradient(135deg, var(--ssb-blue), var(--ssb-gold));
       color:#fff;
-      font-weight:800;
       font-size:16px;
-      box-shadow:0 10px 22px rgba(15,107,218,.24);
+      font-weight:800;
+      box-shadow:0 10px 22px rgba(11,78,162,.2);
       z-index:2;
     }
 
     .feature-card-body{
-      padding:20px 18px 20px;
       display:flex;
       flex-direction:column;
       flex:1;
+      padding:20px 18px 20px;
     }
 
     .feature-card h3{
@@ -335,67 +366,54 @@
     }
 
     .feature-card-link{
-      margin-top:16px;
       display:inline-flex;
       align-items:center;
       gap:8px;
-      color:var(--ssb-blue-2);
+      margin-top:16px;
+      color:var(--ssb-blue);
       font-size:15px;
       font-weight:700;
-      text-decoration:none;
     }
 
-    .feature-card-link:hover{
-      text-decoration:underline;
-    }
-
-    .footer-contact{
-      margin-top:28px;
-      border-radius:24px;
+    .ssb-footer{
+      margin-top:34px;
+      border-radius:20px;
       overflow:hidden;
-      background:linear-gradient(135deg, #0b4ea2 0%, #0f6bda 100%);
+      background:linear-gradient(135deg, #0a4697 0%, #0b4ea2 55%, #0e62c8 100%);
       color:#fff;
-      box-shadow:0 18px 40px rgba(11,78,162,.18);
+      box-shadow:0 16px 34px rgba(11,78,162,.16);
     }
 
-    .footer-contact-inner{
+    .ssb-footer-inner{
       display:grid;
-      grid-template-columns:1.2fr .8fr;
-      gap:22px;
-      padding:24px;
+      grid-template-columns:1.2fr .9fr;
+      gap:20px;
+      padding:18px 22px;
+      align-items:start;
     }
 
-    .footer-contact h2{
-      margin:0 0 12px;
-      font-size:28px;
-      line-height:1.2;
-      font-weight:800;
+    .ssb-footer h3{
+      margin:0 0 6px;
+      font-size:18px;
+      font-weight:700;
     }
 
-    .footer-contact p{
-      margin:0 0 8px;
-      line-height:1.75;
-      font-size:15px;
-      color:rgba(255,255,255,.96);
+    .ssb-footer p{
+      margin:4px 0;
+      font-size:14px;
+      line-height:1.65;
+      opacity:.96;
     }
 
-    .footer-box{
-      background:rgba(255,255,255,.1);
-      border:1px solid rgba(255,255,255,.18);
-      border-radius:18px;
-      padding:18px;
-      backdrop-filter:blur(4px);
+    .ssb-footer-right{
+      text-align:right;
     }
 
-    .footer-box strong{
-      display:block;
-      margin-bottom:8px;
-      font-size:17px;
-    }
-
-    .footer-note{
-      margin-top:6px;
-      font-size:13px;
+    .ssb-footer-bottom{
+      padding:10px 14px;
+      text-align:center;
+      font-size:12px;
+      background:rgba(0,0,0,.16);
       opacity:.92;
     }
 
@@ -404,12 +422,20 @@
         grid-template-columns:1fr;
       }
 
+      .hero-visual{
+        justify-content:flex-start;
+      }
+
       .card-grid{
         grid-template-columns:repeat(2, minmax(0, 1fr));
       }
 
-      .footer-contact-inner{
+      .ssb-footer-inner{
         grid-template-columns:1fr;
+      }
+
+      .ssb-footer-right{
+        text-align:left;
       }
     }
 
@@ -420,13 +446,31 @@
       }
 
       .hero{
-        padding:16px;
-        gap:18px;
+        padding:18px;
+        gap:20px;
         border-radius:22px;
+      }
+
+      .hero-actions{
+        flex-wrap:wrap;
+      }
+
+      .btn-order{
+        min-width:0;
+        width:100%;
+      }
+
+      .btn-secondary{
+        width:100%;
       }
 
       .slider-viewport{
         aspect-ratio:4 / 5;
+      }
+
+      .slider-nav{
+        width:40px;
+        height:40px;
       }
 
       .card-grid{
@@ -437,105 +481,14 @@
         min-height:auto;
       }
 
-      .feature-card-media{
-        height:220px;
-      }
-
-      .footer-contact{
+      .ssb-footer{
         border-radius:18px;
       }
 
-      .footer-contact-inner{
-        padding:18px;
-      }
-
-      .slider-nav{
-        width:40px;
-        height:40px;
+      .ssb-footer-inner{
+        padding:16px 18px;
       }
     }
-    *{
-  font-family:'Prompt', sans-serif !important;
-}
-    .ssb-footer{
-  margin-top:40px;
-  background:#0b4ea2;
-  color:#fff;
-  border-radius:20px;
-  overflow:hidden;
-  font-size:14px;
-}
-
-.ssb-footer-inner{
-  display:flex;
-  justify-content:space-between;
-  gap:20px;
-  padding:20px 24px;
-  flex-wrap:wrap;
-}
-
-.ssb-footer h3{
-  margin:0 0 6px;
-  font-size:18px;
-  font-weight:700;
-}
-
-.ssb-footer p{
-  margin:4px 0;
-  opacity:.95;
-}
-
-.ssb-footer-bottom{
-  background:#083a7c;
-  text-align:center;
-  padding:10px;
-  font-size:13px;
-  opacity:.85;
-}
-
-@media (max-width:768px){
-  .ssb-footer-inner{
-    flex-direction:column;
-    gap:12px;
-  }
-}
-    .hero-actions{
-  display:flex;
-  justify-content:flex-end;
-  gap:14px;
-  flex-wrap:wrap;
-}
-
-.btn-order{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:16px 36px;
-  border-radius:14px;
-  font-size:18px;
-  font-weight:800;
-  text-decoration:none;
-  color:#fff;
-  background:linear-gradient(135deg,#ff6a00,#ff2e00);
-  box-shadow:0 16px 32px rgba(255,80,0,.35);
-  transition:.25s ease;
-  min-width:240px;
-}
-
-.btn-order:hover{
-  transform:translateY(-3px);
-  box-shadow:0 20px 40px rgba(255,80,0,.45);
-}
-
-.btn-secondary{
-  padding:14px 22px;
-  border-radius:12px;
-  font-weight:600;
-  background:#fff;
-  color:#0b4ea2;
-  border:1px solid rgba(11,78,162,.15);
-  text-decoration:none;
-}
   </style>
 </head>
 <body>
@@ -562,10 +515,10 @@
             <span class="hero-badge">Mobile Banking Security</span>
           </div>
 
-         <div class="hero-actions">
-  <a class="btn-secondary" href="book.html">ดูสินค้า</a>
-  <a class="btn-order" href="device.html">เริ่มสั่งสินค้า</a>
-</div>
+          <div class="hero-actions">
+            <a class="btn-order" href="device.html">เริ่มสั่งสินค้า</a>
+            <a class="btn-secondary" href="book.html">ดูสินค้า</a>
+          </div>
         </div>
 
         <div class="hero-visual">
@@ -606,11 +559,9 @@
             <div class="feature-card-media">
               <span class="feature-card-badge">1</span>
               <img
-                src="https://source.unsplash.com/random/900x1200/?smartphone,security,technology"
+                src="https://placehold.co/900x1200/eaf3ff/0b4ea2?text=Mobile+Security+System"
                 alt="Stealth Safety Bank Mobile System"
                 loading="lazy"
-                referrerpolicy="no-referrer"
-                onerror="this.onerror=null;this.src='https://placehold.co/900x1200/e8f1ff/0b4ea2?text=Stealth+Safety+Bank+Mobile+System';"
               />
             </div>
             <div class="feature-card-body">
@@ -624,11 +575,9 @@
             <div class="feature-card-media">
               <span class="feature-card-badge">2</span>
               <img
-                src="https://source.unsplash.com/random/900x1200/?bank,vault,security"
+                src="https://placehold.co/900x1200/f7f3e8/0b4ea2?text=Stealth+Safety+Bank"
                 alt="Stealth Safety Bank"
                 loading="lazy"
-                referrerpolicy="no-referrer"
-                onerror="this.onerror=null;this.src='https://placehold.co/900x1200/e8f1ff/0b4ea2?text=Stealth+Safety+Bank';"
               />
             </div>
             <div class="feature-card-body">
@@ -642,11 +591,9 @@
             <div class="feature-card-media">
               <span class="feature-card-badge">3</span>
               <img
-                src="https://source.unsplash.com/random/900x1200/?book,safe,secret"
+                src="https://placehold.co/900x1200/edf5ff/0b4ea2?text=Stealth+Safety+Book"
                 alt="Stealth Safety Book"
                 loading="lazy"
-                referrerpolicy="no-referrer"
-                onerror="this.onerror=null;this.src='https://placehold.co/900x1200/e8f1ff/0b4ea2?text=Stealth+Safety+Book';"
               />
             </div>
             <div class="feature-card-body">
@@ -660,11 +607,9 @@
             <div class="feature-card-media">
               <span class="feature-card-badge">4</span>
               <img
-                src="https://source.unsplash.com/random/900x1200/?cybersecurity,shield,digital"
+                src="https://placehold.co/900x1200/e8f4ff/0b4ea2?text=Flare+Technology"
                 alt="Flare Technology"
                 loading="lazy"
-                referrerpolicy="no-referrer"
-                onerror="this.onerror=null;this.src='https://placehold.co/900x1200/e8f1ff/0b4ea2?text=Flare+Technology';"
               />
             </div>
             <div class="feature-card-body">
@@ -678,11 +623,9 @@
             <div class="feature-card-media">
               <span class="feature-card-badge">5</span>
               <img
-                src="https://source.unsplash.com/random/900x1200/?training,classroom,technology"
+                src="https://placehold.co/900x1200/f2f7ff/0b4ea2?text=Training"
                 alt="อบรมการใช้งาน"
                 loading="lazy"
-                referrerpolicy="no-referrer"
-                onerror="this.onerror=null;this.src='https://placehold.co/900x1200/e8f1ff/0b4ea2?text=Training';"
               />
             </div>
             <div class="feature-card-body">
@@ -696,11 +639,9 @@
             <div class="feature-card-media">
               <span class="feature-card-badge">6</span>
               <img
-                src="https://source.unsplash.com/random/900x1200/?business,partnership,team"
+                src="https://placehold.co/900x1200/f8f4ea/0b4ea2?text=Agent+Partner"
                 alt="สมัครเป็นตัวแทนจำหน่ายกับเรา"
                 loading="lazy"
-                referrerpolicy="no-referrer"
-                onerror="this.onerror=null;this.src='https://placehold.co/900x1200/e8f1ff/0b4ea2?text=Agent+Partner';"
               />
             </div>
             <div class="feature-card-body">
@@ -712,27 +653,25 @@
         </div>
       </section>
 
-   <footer class="ssb-footer">
-  <div class="ssb-footer-inner">
+      <footer class="ssb-footer">
+        <div class="ssb-footer-inner">
+          <div class="ssb-footer-left">
+            <h3>บริษัท สยามทำ จำกัด</h3>
+            <p>Stealth Safety Bank System</p>
+            <p>54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
+          </div>
 
-    <div class="ssb-footer-left">
-      <h3>บริษัท สยามทำ จำกัด</h3>
-      <p>Stealth Safety Bank System</p>
-      <p>54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
-    </div>
+          <div class="ssb-footer-right">
+            <p>Serial: 0105566099954</p>
+            <p>โทร 02-043-2988</p>
+            <p>063-656-1447 | 064-951-4888 | 080-204-5455</p>
+          </div>
+        </div>
 
-    <div class="ssb-footer-right">
-      <p>Serial: 0105566099954</p>
-      <p>โทร 02-043-2988</p>
-      <p>063-656-1447 | 064-951-4888 | 080-204-5455</p>
-    </div>
-
-  </div>
-
-  <div class="ssb-footer-bottom">
-    © 2026 Siamtham Co., Ltd. All Rights Reserved.
-  </div>
-</footer>
+        <div class="ssb-footer-bottom">
+          © 2026 Siamtham Co., Ltd. All Rights Reserved.
+        </div>
+      </footer>
     </main>
   </div>
 
