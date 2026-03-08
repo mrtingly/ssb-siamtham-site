@@ -66,11 +66,13 @@ async function main() {
 
   el("btnSubmit").addEventListener("click", async () => {
     try {
-      const customer = {
-        name: el("custName").value.trim(),
-        phone: el("custPhone").value.trim(),
-        email: el("custEmail").value.trim()
-      };
+      
+     const customer = {
+  name: el("custName").value.trim(),
+  phone: el("custPhone").value.trim(),
+  email: el("custEmail").value.trim(),
+  address: el("custAddress").value.trim()
+};
 
       if (!customer.name || !customer.phone) {
         showStatus("error", "กรุณากรอก ชื่อ-นามสกุล และ เบอร์โทร");
