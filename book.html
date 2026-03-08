@@ -15,7 +15,27 @@
   </style>
 </head>
 <body>
-  <div id="siteHeader"></div>
+
+  <!-- Top company bar -->
+  <div class="w-full bg-gradient-to-r from-blue-800 via-blue-700 to-blue-600 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 text-xs sm:text-sm leading-relaxed">
+      <div class="font-semibold">บริษัท สยามทำ จำกัด</div>
+      <div>54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ</div>
+      <div>Serial Number: 0105566099954</div>
+      <div>โทร 02-043-2988 | มือถือ 063-656-1447 / 064-951-4888 / 080-204-5455</div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center gap-3">
+      <img src="images/logo.png" alt="Logo" class="h-12 w-12 rounded-xl object-cover border border-slate-200 bg-white" />
+      <div>
+        <div class="text-xl font-bold text-slate-900">Stealth Safety Bank</div>
+        <div class="text-sm text-slate-500">Step 1 — เลือก Safety Book</div>
+      </div>
+    </div>
+  </header>
 
   <section class="bg-gradient-to-r from-blue-50 to-sky-50 border-b border-blue-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
@@ -82,12 +102,41 @@
     </div>
   </main>
 
-  <div id="siteFooter"></div>
+  <!-- Footer -->
+  <footer class="mt-16 bg-gradient-to-r from-blue-800 via-blue-700 to-blue-600 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="flex items-start gap-3">
+          <img src="images/logo.png" alt="Logo" class="h-12 w-12 rounded-xl bg-white p-1 object-contain shadow" />
+          <div>
+            <div class="font-bold">Stealth Safety Bank</div>
+            <div class="text-sm text-blue-100">Stealth Technology</div>
+          </div>
+        </div>
 
-  <script type="module">
-    import { renderSiteChrome } from "./js/layout.js";
-    renderSiteChrome("Step 1 — เลือก Safety Book", "เลือกตัวสินค้า");
-  </script>
+        <div class="text-sm text-blue-100 leading-7">
+          <div class="font-semibold text-white mb-2">ข้อมูลบริษัท</div>
+          <div>บริษัท สยามทำ จำกัด</div>
+          <div>54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ</div>
+          <div>Serial Number: 0105566099954</div>
+        </div>
+
+        <div class="text-sm text-blue-100 leading-7">
+          <div class="font-semibold text-white mb-2">ติดต่อ</div>
+          <div>โทร 02-043-2988</div>
+          <div>มือถือ 063-656-1447</div>
+          <div>มือถือ 064-951-4888</div>
+          <div>มือถือ 080-204-5455</div>
+        </div>
+      </div>
+
+      <div class="mt-8 pt-4 border-t border-white/20 text-xs sm:text-sm text-blue-100 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+        <div>© 2026 Stealth Safety Bank System by Siam Tham Co., Ltd.</div>
+        <div>Responsive for Desktop / Android / iPhone / iPad</div>
+      </div>
+    </div>
+  </footer>
+
   <script type="module" src="js/book.js"></script>
 </body>
 </html>
