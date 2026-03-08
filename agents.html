@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SSB Agent / Order</title>
   <script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="css/shared-shell.css" />
   <style>
     body {
       font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -95,6 +96,8 @@
 </head>
 <body>
   <div id="siteHeader"></div>
+  <div id="appShell"></div>
+<div class="ssb-main">
 
   <section class="hero-bg border-b border-blue-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-10">
@@ -307,6 +310,7 @@
         </div>
       </aside>
     </div>
+    </div>
   </main>
 
   <div id="siteFooter"></div>
@@ -336,5 +340,10 @@
   </script>
 
   <script type="module" src="order.js"></script>
+  <script type="module">
+  import { renderSharedShell } from "./js/shared-shell.js";
+  renderSharedShell("ชื่อหน้านี้");
+</script>
 </body>
 </html>
+
