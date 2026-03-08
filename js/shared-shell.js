@@ -65,15 +65,21 @@ function bindSidebar() {
   const btn = document.getElementById("ssbMenuBtn");
   const sidebar = document.getElementById("ssbSidebar");
   const backdrop = document.getElementById("ssbBackdrop");
+  const main = document.querySelector(".ssb-main");
 
   btn?.addEventListener("click", () => {
-    sidebar?.classList.toggle("open");
+    const isOpen = sidebar?.classList.toggle("open");
     backdrop?.classList.toggle("show");
+
+    if (window.innerWidth > 1024) {
+      main?.classList.toggle("shifted", !!isOpen);
+    }
   });
 
   backdrop?.addEventListener("click", () => {
     sidebar?.classList.remove("open");
     backdrop?.classList.remove("show");
+    main?.classList.remove("shifted");
   });
 
   document.querySelectorAll(".ssb-nav-toggle").forEach((toggle) => {
