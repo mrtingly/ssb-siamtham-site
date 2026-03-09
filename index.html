@@ -11,10 +11,6 @@
     href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet"
   />
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-  />
 
   <link rel="stylesheet" href="css/shared-shell.css" />
 
@@ -24,7 +20,6 @@
       --ssb-blue-dark:#083a7c;
       --ssb-blue-soft:#eef5ff;
       --ssb-gold:#d4af37;
-      --ssb-gold-soft:#f5dfa3;
       --ssb-text:#16324f;
       --ssb-muted:#58708a;
       --ssb-border:rgba(11,78,162,.12);
@@ -42,9 +37,7 @@
       font-family:'Prompt', sans-serif !important;
     }
 
-    html{
-      scroll-behavior:smooth;
-    }
+    html{ scroll-behavior:smooth; }
 
     body{
       margin:0;
@@ -68,7 +61,6 @@
       margin-bottom:14px;
     }
 
-    /* ทำให้แถบ shell ด้านบนลอยตาม */
     body .ssb-shell-topbar,
     body .shared-shell-topbar,
     body header.ssb-topbar,
@@ -84,7 +76,7 @@
       display:flex;
       flex-direction:column;
       gap:18px;
-      margin-bottom:22px;
+      margin-bottom:24px;
     }
 
     .hero-slider-wrap{
@@ -117,7 +109,6 @@
     .slider-track{
       display:flex;
       width:100%;
-      transition:transform .65s ease-in-out;
       will-change:transform;
     }
 
@@ -438,144 +429,157 @@
       text-align:right;
     }
 
-  .chat-widget{
-  position:fixed;
-  right:18px;
-  bottom:18px;
-  z-index:999;
-  display:flex;
-  flex-direction:column;
-  align-items:flex-end;
-  gap:12px;
-}
+    .chat-widget{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:999;
+      display:flex;
+      flex-direction:column;
+      align-items:flex-end;
+      gap:12px;
+    }
 
-.chat-menu{
-  display:flex;
-  flex-direction:column;
-  align-items:flex-end;
-  gap:10px;
-  opacity:0;
-  pointer-events:none;
-  transform:translateY(12px) scale(.96);
-  transition:.30s ease;
-}
+    .chat-menu{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-end;
+      gap:10px;
+      opacity:0;
+      pointer-events:none;
+      transform:translateY(12px) scale(.96);
+      transition:.30s ease;
+    }
 
-.chat-widget.open .chat-menu{
-  opacity:1;
-  pointer-events:auto;
-  transform:translateY(0) scale(1);
-}
+    .chat-widget.open .chat-menu{
+      opacity:1;
+      pointer-events:auto;
+      transform:translateY(0) scale(1);
+    }
 
-.chat-item{
-  min-width:190px;
-  height:54px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:0 14px;
-  text-decoration:none;
-  color:#fff;
-  border-radius:999px;
-  position:relative;
-  overflow:hidden;
-  box-shadow:
-    0 14px 28px rgba(11,78,162,.16),
-    inset 0 1px 0 rgba(255,255,255,.18);
-  transition:.24s ease;
-  border:1px solid rgba(255,255,255,.18);
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
-}
+    .chat-item{
+      min-width:210px;
+      height:56px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:0 16px;
+      text-decoration:none;
+      color:#fff;
+      border-radius:999px;
+      position:relative;
+      overflow:hidden;
+      box-shadow:0 14px 28px rgba(11,78,162,.16), inset 0 1px 0 rgba(255,255,255,.16);
+      transition:.24s ease;
+      border:1px solid rgba(255,255,255,.18);
+    }
 
-.chat-item::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,0));
-  pointer-events:none;
-}
+    .chat-item::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,0));
+      pointer-events:none;
+    }
 
-.chat-item:hover{
-  transform:translateY(-2px) scale(1.02);
-}
+    .chat-item:hover{
+      transform:translateY(-2px) scale(1.02);
+    }
 
-.chat-item.line{
-  background:linear-gradient(135deg, #10d95a 0%, #06c755 55%, #02a94b 100%);
-}
+    .chat-item.line{ background:linear-gradient(135deg, #10d95a 0%, #06c755 55%, #02a94b 100%); }
+    .chat-item.facebook{ background:linear-gradient(135deg, #2a86ff 0%, #1877f2 55%, #0f5fd3 100%); }
+    .chat-item.tiktok{ background:linear-gradient(135deg, #232323 0%, #111111 55%, #000000 100%); }
+    .chat-item.whatsapp{ background:linear-gradient(135deg, #34e57d 0%, #25d366 55%, #18b955 100%); }
+    .chat-item.youtube{ background:linear-gradient(135deg, #ff2f2f 0%, #ff0000 55%, #c90000 100%); }
 
-.chat-item.facebook{
-  background:linear-gradient(135deg, #2a86ff 0%, #1877f2 55%, #0f5fd3 100%);
-}
+    .chat-item-icon{
+      width:34px;
+      height:34px;
+      border-radius:999px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(255,255,255,.16);
+      flex:0 0 34px;
+    }
 
-.chat-item.tiktok{
-  background:linear-gradient(135deg, #232323 0%, #111111 55%, #000000 100%);
-}
+    .chat-item-label{
+      font-size:14px;
+      font-weight:700;
+      line-height:1.2;
+      letter-spacing:.2px;
+    }
 
-.chat-item.whatsapp{
-  background:linear-gradient(135deg, #34e57d 0%, #25d366 55%, #18b955 100%);
-}
+    .chat-item-icon svg{
+      width:20px;
+      height:20px;
+      display:block;
+      fill:#fff;
+    }
 
-.chat-item-icon{
-  width:34px;
-  height:34px;
-  border-radius:999px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  background:rgba(255,255,255,.16);
-  font-size:16px;
-  flex:0 0 34px;
-}
+    .chat-fab{
+      width:64px;
+      height:64px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:none;
+      border-radius:999px;
+      background:linear-gradient(135deg, #0b4ea2, #1f69cd);
+      color:#fff;
+      cursor:pointer;
+      box-shadow:0 16px 34px rgba(11,78,162,.28);
+      border:1px solid rgba(255,255,255,.22);
+      transition:.22s ease;
+      position:relative;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.2px;
+      text-transform:none;
+    }
 
-.chat-item-label{
-  font-size:14px;
-  font-weight:700;
-  line-height:1.2;
-  letter-spacing:.2px;
-}
+    .chat-fab:hover{
+      transform:translateY(-2px);
+    }
 
-.chat-fab{
-  width:62px;
-  height:62px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border:none;
-  border-radius:999px;
-  background:linear-gradient(135deg, #0b4ea2, #1f69cd);
-  color:#fff;
-  cursor:pointer;
-  box-shadow:0 16px 34px rgba(11,78,162,.28);
-  border:1px solid rgba(255,255,255,.22);
-  transition:.22s ease;
-  font-size:22px;
-  position:relative;
-}
+    .chat-fab-text{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      line-height:1.05;
+    }
 
-.chat-fab:hover{
-  transform:translateY(-2px);
-}
+    .chat-fab-text span:first-child{
+      font-size:12px;
+    }
 
-.chat-fab-caret{
-  position:absolute;
-  right:-2px;
-  top:-2px;
-  width:22px;
-  height:22px;
-  border-radius:999px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#fff;
-  color:var(--ssb-blue);
-  font-size:10px;
-  box-shadow:0 6px 16px rgba(11,78,162,.18);
-  transition:.28s ease;
-}
+    .chat-fab-text span:last-child{
+      font-size:11px;
+      opacity:.96;
+    }
 
-.chat-widget.open .chat-fab-caret{
-  transform:rotate(180deg);
-}
+    .chat-fab-caret{
+      position:absolute;
+      right:-2px;
+      top:-2px;
+      width:22px;
+      height:22px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#fff;
+      color:var(--ssb-blue);
+      font-size:10px;
+      box-shadow:0 6px 16px rgba(11,78,162,.18);
+      transition:.28s ease;
+    }
+
+    .chat-widget.open .chat-fab-caret{
+      transform:rotate(180deg);
+    }
+
     @media (max-width: 980px){
       .slider-viewport{
         aspect-ratio:16 / 9;
@@ -655,37 +659,44 @@
         text-align:left;
       }
 
-     .chat-widget{
-  right:12px;
-  bottom:12px;
-}
+      .chat-widget{
+        right:12px;
+        bottom:12px;
+      }
 
-.chat-menu{
-  gap:8px;
-}
+      .chat-item{
+        min-width:176px;
+        height:50px;
+        padding:0 12px;
+      }
 
-.chat-item{
-  min-width:160px;
-  height:48px;
-  padding:0 12px;
-}
+      .chat-item-icon{
+        width:30px;
+        height:30px;
+        flex:0 0 30px;
+      }
 
-.chat-item-icon{
-  width:30px;
-  height:30px;
-  flex:0 0 30px;
-  font-size:14px;
-}
+      .chat-item-icon svg{
+        width:17px;
+        height:17px;
+      }
 
-.chat-item-label{
-  font-size:12px;
-}
+      .chat-item-label{
+        font-size:12px;
+      }
 
-.chat-fab{
-  width:56px;
-  height:56px;
-  font-size:20px;
-}
+      .chat-fab{
+        width:58px;
+        height:58px;
+      }
+
+      .chat-fab-text span:first-child{
+        font-size:11px;
+      }
+
+      .chat-fab-text span:last-child{
+        font-size:10px;
+      }
     }
   </style>
 </head>
@@ -859,34 +870,62 @@
     </main>
   </div>
 
-<div class="chat-widget" id="chatWidget">
-  <div class="chat-menu" id="chatMenu">
-    <a class="chat-item line" href="#" target="_blank" rel="noopener">
-      <span class="chat-item-icon"><i class="fa-brands fa-line"></i></span>
-      <span class="chat-item-label">LINE Official</span>
-    </a>
+  <div class="chat-widget" id="chatWidget">
+    <div class="chat-menu" id="chatMenu">
+      <a class="chat-item line" href="#" target="_blank" rel="noopener" aria-label="LINE Official">
+        <span class="chat-item-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.32 10.09c0-4.2-3.8-7.62-8.47-7.62-4.67 0-8.47 3.42-8.47 7.62 0 3.77 3.01 6.92 7.08 7.51.28.06.66.19.76.43.09.22.06.57.03.79 0 0-.1.63-.13.76-.04.22-.17.86.75.47.92-.39 4.96-2.92 6.77-5 .01-.02.03-.03.05-.05 1.11-1.22 1.63-2.46 1.63-4.91Zm-11.91 2.2h-1.68a.45.45 0 0 1-.45-.45V8.37c0-.25.2-.45.45-.45s.45.2.45.45v3.02h1.23c.25 0 .45.2.45.45s-.2.45-.45.45Zm1.75-.45a.45.45 0 0 1-.9 0V8.37a.45.45 0 0 1 .9 0v3.47Zm3.95 0a.45.45 0 0 1-.39-.22l-1.79-2.45v2.23a.45.45 0 0 1-.9 0V8.37a.45.45 0 0 1 .39-.22c.14 0 .28.07.36.18l1.79 2.45V8.56a.45.45 0 0 1 .9 0v3.28a.45.45 0 0 1-.36.45Zm3.05-2.57h-1.23v.6h1.23a.45.45 0 0 1 0 .9h-1.23v.6h1.23a.45.45 0 0 1 0 .9h-1.68a.45.45 0 0 1-.45-.45V8.82c0-.25.2-.45.45-.45h1.68a.45.45 0 0 1 0 .9Z"/>
+          </svg>
+        </span>
+        <span class="chat-item-label">LINE Official</span>
+      </a>
 
-    <a class="chat-item facebook" href="#" target="_blank" rel="noopener">
-      <span class="chat-item-icon"><i class="fa-brands fa-facebook-f"></i></span>
-      <span class="chat-item-label">Facebook</span>
-    </a>
+      <a class="chat-item facebook" href="#" target="_blank" rel="noopener" aria-label="Facebook">
+        <span class="chat-item-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07c0 6.03 4.39 11.02 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.03 1.79-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.98h-1.51c-1.49 0-1.95.93-1.95 1.88v2.26h3.32l-.53 3.49h-2.79V24C19.61 23.09 24 18.1 24 12.07Z"/>
+          </svg>
+        </span>
+        <span class="chat-item-label">Facebook</span>
+      </a>
 
-    <a class="chat-item tiktok" href="#" target="_blank" rel="noopener">
-      <span class="chat-item-icon"><i class="fa-brands fa-tiktok"></i></span>
-      <span class="chat-item-label">TikTok</span>
-    </a>
+      <a class="chat-item tiktok" href="#" target="_blank" rel="noopener" aria-label="TikTok">
+        <span class="chat-item-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M16.6 5.82A4.83 4.83 0 0 0 19.43 7v2.8a7.66 7.66 0 0 1-2.83-.53v5.44a5.6 5.6 0 1 1-5.6-5.6c.2 0 .4.01.59.03v2.76a2.8 2.8 0 1 0 2.21 2.74V0h2.8v.2c0 2.02 1.44 4.8 4.2 5.62v2.63a7.74 7.74 0 0 1-4.2-2.63Z"/>
+          </svg>
+        </span>
+        <span class="chat-item-label">TikTok</span>
+      </a>
 
-    <a class="chat-item whatsapp" href="#" target="_blank" rel="noopener">
-      <span class="chat-item-icon"><i class="fa-brands fa-whatsapp"></i></span>
-      <span class="chat-item-label">WhatsApp</span>
-    </a>
+      <a class="chat-item whatsapp" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <span class="chat-item-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.52 3.48A11.88 11.88 0 0 0 12.03 0C5.41 0 .03 5.38.03 12c0 2.11.55 4.18 1.59 6L0 24l6.18-1.61A11.95 11.95 0 0 0 12.03 24C18.65 24 24 18.62 24 12c0-3.2-1.25-6.21-3.48-8.52ZM12.03 21.9a9.85 9.85 0 0 1-5.02-1.37l-.36-.21-3.67.96.98-3.58-.23-.37A9.83 9.83 0 0 1 2.12 12c0-5.46 4.45-9.9 9.91-9.9 2.64 0 5.12 1.03 6.99 2.89A9.83 9.83 0 0 1 21.93 12c0 5.46-4.44 9.9-9.9 9.9Zm5.42-7.42c-.3-.15-1.78-.88-2.05-.98-.27-.1-.47-.15-.67.15-.2.3-.77.98-.95 1.18-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.88-.78-1.48-1.75-1.66-2.05-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.48-.5-.67-.5h-.57c-.2 0-.52.08-.8.37-.27.3-1.05 1.03-1.05 2.5 0 1.48 1.08 2.9 1.23 3.1.15.2 2.12 3.24 5.13 4.54.72.31 1.28.5 1.72.64.72.23 1.37.2 1.89.12.58-.09 1.78-.73 2.03-1.43.25-.7.25-1.3.17-1.43-.07-.13-.27-.2-.57-.35Z"/>
+          </svg>
+        </span>
+        <span class="chat-item-label">WhatsApp</span>
+      </a>
+
+      <a class="chat-item youtube" href="#" target="_blank" rel="noopener" aria-label="YouTube">
+        <span class="chat-item-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M23.5 6.2a3 3 0 0 0-2.11-2.12C19.54 3.6 12 3.6 12 3.6s-7.54 0-9.39.48A3 3 0 0 0 .5 6.2 31.31 31.31 0 0 0 0 12a31.31 31.31 0 0 0 .5 5.8 3 3 0 0 0 2.11 2.12c1.85.48 9.39.48 9.39.48s7.54 0 9.39-.48a3 3 0 0 0 2.11-2.12A31.31 31.31 0 0 0 24 12a31.31 31.31 0 0 0-.5-5.8ZM9.6 15.6V8.4L15.84 12 9.6 15.6Z"/>
+          </svg>
+        </span>
+        <span class="chat-item-label">YouTube</span>
+      </a>
+    </div>
+
+    <button class="chat-fab" id="chatToggle" type="button" aria-label="เปิดเมนูแชท">
+      <span class="chat-fab-text">
+        <span>Chat</span>
+        <span>Online</span>
+      </span>
+      <span class="chat-fab-caret">⌃</span>
+    </button>
   </div>
-
-  <button class="chat-fab" id="chatToggle" type="button" aria-label="เปิดเมนูแชท">
-    <i class="fa-solid fa-comments"></i>
-    <span class="chat-fab-caret"><i class="fa-solid fa-chevron-up"></i></span>
-  </button>
-</div>
 
   <script type="module">
     import { renderSharedShell } from "./js/shared-shell.js";
@@ -911,7 +950,7 @@
           el.style.backdropFilter = "blur(10px)";
         });
       });
-    }, 50);
+    }, 80);
   </script>
 
   <script>
@@ -924,51 +963,71 @@
 
       if (!slider || !track || !dotsWrap || !prevBtn || !nextBtn) return;
 
-      const slides = Array.from(track.querySelectorAll(".slide"));
-      if (!slides.length) return;
+      const originalSlides = Array.from(track.querySelectorAll(".slide"));
+      if (!originalSlides.length) return;
+
+      const firstClone = originalSlides[0].cloneNode(true);
+      track.appendChild(firstClone);
 
       let current = 0;
       let timer = null;
       const delay = 15000;
+      const totalRealSlides = originalSlides.length;
+
+      function setTransition(enabled) {
+        track.style.transition = enabled ? "transform .65s ease-in-out" : "none";
+      }
+
+      function translateTo(index) {
+        track.style.transform = "translateX(-" + (index * 100) + "%)";
+      }
 
       function renderDots() {
         dotsWrap.innerHTML = "";
-        slides.forEach((_, index) => {
+        for (let i = 0; i < totalRealSlides; i++) {
           const dot = document.createElement("button");
           dot.type = "button";
-          dot.className = "slider-dot" + (index === 0 ? " active" : "");
-          dot.setAttribute("aria-label", "ไปสไลด์ " + (index + 1));
+          dot.className = "slider-dot" + (i === 0 ? " active" : "");
+          dot.setAttribute("aria-label", "ไปสไลด์ " + (i + 1));
           dot.addEventListener("click", function () {
-            goTo(index, true);
+            goTo(i, true);
           });
           dotsWrap.appendChild(dot);
-        });
+        }
       }
 
       function updateDots() {
         const dots = dotsWrap.querySelectorAll(".slider-dot");
+        let activeIndex = current;
+        if (activeIndex >= totalRealSlides) activeIndex = 0;
         dots.forEach((dot, index) => {
-          dot.classList.toggle("active", index === current);
+          dot.classList.toggle("active", index === activeIndex);
         });
       }
 
-      function updateSlider() {
-        track.style.transform = "translateX(-" + (current * 100) + "%)";
-        updateDots();
-      }
-
       function goTo(index, resetTimer) {
-        current = (index + slides.length) % slides.length;
-        updateSlider();
+        current = index;
+        setTransition(true);
+        translateTo(current);
+        updateDots();
         if (resetTimer) restartAuto();
       }
 
       function nextSlide() {
+        if (current === totalRealSlides) return;
         goTo(current + 1, false);
       }
 
       function prevSlide() {
-        goTo(current - 1, false);
+        if (current === 0) {
+          setTransition(false);
+          current = totalRealSlides;
+          translateTo(current);
+          track.offsetHeight;
+          goTo(totalRealSlides - 1, true);
+          return;
+        }
+        goTo(current - 1, true);
       }
 
       function startAuto() {
@@ -987,11 +1046,16 @@
         startAuto();
       }
 
-      prevBtn.addEventListener("click", function () {
-        prevSlide();
-        restartAuto();
+      track.addEventListener("transitionend", function () {
+        if (current === totalRealSlides) {
+          setTransition(false);
+          current = 0;
+          translateTo(0);
+          updateDots();
+        }
       });
 
+      prevBtn.addEventListener("click", prevSlide);
       nextBtn.addEventListener("click", function () {
         nextSlide();
         restartAuto();
@@ -1003,7 +1067,9 @@
       slider.addEventListener("touchend", startAuto);
 
       renderDots();
-      updateSlider();
+      setTransition(false);
+      translateTo(0);
+      updateDots();
       startAuto();
     })();
 
