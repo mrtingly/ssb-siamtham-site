@@ -228,7 +228,7 @@
 
     .hero-actions{
       display:grid;
-      grid-template-columns:240px minmax(320px, 420px);
+      grid-template-columns:200px minmax(320px, 420px);
       gap:14px;
       align-items:center;
       justify-content:flex-start;
@@ -275,7 +275,7 @@
       filter:brightness(1.03);
     }
 
-    .card-section{
+    .content-section{
       margin-top:8px;
     }
 
@@ -287,162 +287,68 @@
       font-weight:800;
     }
 
-    .section-subtitle{
-      margin:-6px 0 18px;
-      color:#4f6781;
-      font-size:15px;
-      line-height:1.85;
-      max-width:1080px;
-    }
-
-    .card-list{
+    .article-grid{
       display:flex;
       flex-direction:column;
-      gap:16px;
+      gap:18px;
     }
 
-    .feature-card{
+    .article-card{
       display:grid;
-      grid-template-columns:260px 1fr 170px;
-      align-items:center;
-      gap:18px;
-      text-decoration:none;
-      color:inherit;
+      grid-template-columns:320px 1fr;
+      gap:0;
       background:var(--ssb-card);
       border:1px solid var(--ssb-border);
       border-radius:22px;
+      overflow:hidden;
       box-shadow:var(--ssb-shadow);
-      overflow:hidden;
-      transition:.25s ease;
-      min-height:172px;
     }
 
-    .feature-card:hover{
-      transform:translateY(-3px);
-      box-shadow:0 18px 38px rgba(11,78,162,.14);
-    }
-
-    .feature-card-media{
-      position:relative;
-      min-height:172px;
-      height:100%;
+    .article-card-media{
+      min-height:100%;
       background:#dcecff;
-      overflow:hidden;
     }
 
-    .feature-card-media img{
+    .article-card-media img{
       width:100%;
       height:100%;
       display:block;
       object-fit:cover;
-      transition:transform .35s ease;
     }
 
-    .feature-card:hover .feature-card-media img{
-      transform:scale(1.04);
+    .article-card-body{
+      padding:26px 26px 24px;
     }
 
-    .feature-card-badge{
-      position:absolute;
-      top:14px;
-      left:14px;
-      min-width:42px;
-      height:42px;
-      padding:0 12px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      border-radius:999px;
-      background:linear-gradient(135deg, var(--ssb-blue), var(--ssb-gold));
-      color:#fff;
-      font-size:16px;
-      font-weight:800;
-      box-shadow:0 10px 22px rgba(11,78,162,.18);
-      z-index:2;
-    }
-
-    .feature-card-body{
-      padding:22px 0;
-      min-width:0;
-    }
-
-    .feature-card h3{
-      margin:0 0 10px;
+    .article-card h2{
+      margin:0 0 12px;
       color:var(--ssb-blue);
-      font-size:24px;
-      line-height:1.35;
+      font-size:28px;
+      line-height:1.25;
       font-weight:800;
     }
 
-    .feature-card p{
-      margin:0;
+    .article-card p{
+      margin:0 0 14px;
       color:var(--ssb-muted);
       font-size:15px;
-      line-height:1.82;
+      line-height:1.9;
     }
 
-    .feature-card-action{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      padding:0 20px;
+    .article-card p:last-child{
+      margin-bottom:0;
     }
 
-    .feature-card-link{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-width:132px;
-      min-height:46px;
-      padding:0 18px;
-      border-radius:999px;
-      background:linear-gradient(135deg, #0b4ea2, #1f69cd);
-      color:#fff;
-      font-size:15px;
-      font-weight:700;
-      box-shadow:0 10px 20px rgba(11,78,162,.18);
-    }
-
-    .info-grid{
-      display:grid;
-      grid-template-columns:repeat(4,minmax(0,1fr));
-      gap:16px;
-      margin-top:18px;
-    }
-
-    .info-box{
-      background:linear-gradient(180deg,#ffffff,#f4f8ff);
-      border:1px solid var(--ssb-border);
-      border-radius:20px;
-      box-shadow:var(--ssb-shadow);
-      padding:18px;
-    }
-
-    .info-box h4{
-      margin:0 0 10px;
-      color:var(--ssb-blue);
-      font-size:18px;
-      line-height:1.35;
-      font-weight:800;
-    }
-
-    .info-box p{
-      margin:0;
-      color:#506883;
-      font-size:14px;
-      line-height:1.8;
-    }
-
-    .article-block{
+    .full-article{
       background:linear-gradient(135deg, rgba(255,255,255,.98), rgba(236,244,255,.98));
       border:1px solid rgba(255,255,255,.72);
       border-radius:24px;
       box-shadow:var(--ssb-shadow);
-      padding:26px 28px;
-      margin-top:16px;
+      padding:28px;
+      margin-top:18px;
     }
 
-    .article-block h2{
+    .full-article h2{
       margin:0 0 14px;
       color:var(--ssb-blue);
       font-size:28px;
@@ -450,11 +356,32 @@
       font-weight:800;
     }
 
-    .article-block p{
+    .full-article p{
       margin:0 0 14px;
       color:#516983;
       font-size:15px;
-      line-height:1.92;
+      line-height:1.95;
+    }
+
+    .full-article p:last-child{
+      margin-bottom:0;
+    }
+
+    .quote-box{
+      margin-top:18px;
+      padding:18px 20px;
+      border-radius:20px;
+      background:linear-gradient(135deg, #0b4ea2 0%, #1f69cd 55%, #d4af37 100%);
+      color:#fff;
+      box-shadow:0 18px 36px rgba(11,78,162,.18);
+    }
+
+    .quote-box p{
+      margin:0;
+      color:#fff;
+      font-size:16px;
+      line-height:1.9;
+      font-weight:600;
     }
 
     .ssb-footer{
@@ -642,38 +569,13 @@
       transform:rotate(180deg);
     }
 
-    @media (max-width: 1180px){
-      .info-grid{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-      }
-    }
-
     @media (max-width: 980px){
       .slider-viewport{
         aspect-ratio:16 / 9;
       }
 
-      .feature-card{
-        grid-template-columns:220px 1fr 150px;
-      }
-    }
-
-    @media (max-width: 900px){
-      .feature-card{
+      .article-card{
         grid-template-columns:1fr;
-      }
-
-      .feature-card-media{
-        min-height:220px;
-      }
-
-      .feature-card-body{
-        padding:18px 18px 0;
-      }
-
-      .feature-card-action{
-        justify-content:flex-start;
-        padding:0 18px 18px;
       }
     }
 
@@ -713,10 +615,6 @@
       .slider-nav{
         width:40px;
         height:40px;
-      }
-
-      .feature-card h3{
-        font-size:21px;
       }
 
       .ssb-footer-inner{
@@ -766,12 +664,14 @@
         font-size:10px;
       }
 
-      .info-grid{
-        grid-template-columns:1fr;
+      .article-card-body,
+      .full-article{
+        padding:20px 18px;
       }
 
-      .article-block{
-        padding:20px 18px;
+      .article-card h2,
+      .full-article h2{
+        font-size:24px;
       }
     }
   </style>
@@ -822,9 +722,8 @@
               Stealth Safety Bank Mobile System คือระบบป้องกันภัยจากการถูกแฮ็กเงิน
               ที่ประกอบไปด้วย Stealth Safety Bank Mobile, Stealth Safety Book,
               Flare Technology และวิธีการใช้งานอย่างถูกต้อง ซึ่งจะขาดสิ่งใดสิ่งหนึ่งไม่ได้
-              ทั้งหมดนี้คือการป้องกันภัยแบบเป็นระบบ
-              ที่ออกแบบมาเพื่อทำให้การใช้งาน Mobile Banking หรือการเงินออนไลน์
-              ปลอดภัยที่สุดเท่าที่จะเป็นไปได้
+              ทั้งหมดนี้คือการป้องกันภัยแบบเป็นระบบที่จะทำให้การใช้งาน Mobile Banking
+              หรือการเงินออนไลน์ปลอดภัยที่สุด
             </p>
 
             <div class="hero-badges">
@@ -842,236 +741,141 @@
         </div>
       </section>
 
-      <section class="card-section" id="featureCards">
-        <h2 class="section-title">สาระสำคัญของระบบ Stealth Safety Bank Mobile System</h2>
-        <p class="section-subtitle">
-          หน้านี้อธิบายภาพรวมของระบบทั้งหมด ว่าทำไมจึงไม่ได้เป็นเพียงอุปกรณ์หนึ่งชิ้น
-          แต่เป็น “โครงสร้างการป้องกันภัยทางการเงิน” ที่ต้องทำงานร่วมกันครบทุกส่วน
-          ตั้งแต่ตัวอุปกรณ์ การจัดเก็บ การแยกบทบาทการใช้งาน
-          ไปจนถึงวิธีใช้งานที่ถูกต้อง
-        </p>
+      <section class="content-section">
+        <h2 class="section-title">Stealth Safety Bank Mobile System ทำงานอย่างไร</h2>
 
-        <div class="card-list">
-          <div class="feature-card">
-            <div class="feature-card-media">
-              <span class="feature-card-badge">1</span>
-              <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="Mobile Banking Security System" loading="lazy" />
+        <div class="article-grid">
+          <div class="article-card">
+            <div class="article-card-media">
+              <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="Mobile Banking Security" loading="lazy" />
             </div>
-            <div class="feature-card-body">
-              <h3>ระบบนี้ไม่ใช่แค่มือถือ แต่คือระบบป้องกันภัยแบบครบวงจร</h3>
+            <div class="article-card-body">
+              <h2>ระบบนี้ไม่ใช่เพียงอุปกรณ์เดียว แต่คือระบบป้องกันภัยแบบครบวงจร</h2>
               <p>
-                Stealth Safety Bank Mobile System ไม่ได้หมายถึงการนำสมาร์ตโฟนธรรมดามาใช้งานทางการเงินเท่านั้น
-                แต่คือการเปลี่ยนแนวคิดจาก “โทรศัพท์อเนกประสงค์”
-                ไปสู่ “อุปกรณ์เฉพาะทางด้านการเงิน”
-                ที่ถูกออกแบบให้ลดความเสี่ยงตั้งแต่โครงสร้างการใช้งาน
-                โดยมีองค์ประกอบหลักคือ Stealth Safety Bank Mobile,
-                Stealth Safety Book, Flare Technology และวิธีการใช้งานอย่างถูกต้อง
-                ซึ่งทุกส่วนต้องทำงานร่วมกันอย่างเป็นระบบ
+                Stealth Safety Bank Mobile System ไม่ได้หมายถึงการนำโทรศัพท์เครื่องหนึ่งมาใช้ทำธุรกรรมการเงินเท่านั้น
+                แต่เป็นการออกแบบระบบทั้งหมดให้ทำงานร่วมกันอย่างมีวัตถุประสงค์ชัดเจน
+                โดยทุกองค์ประกอบมีบทบาทของตัวเองและต้องทำงานร่วมกันอย่างครบถ้วน
               </p>
-            </div>
-            <div class="feature-card-action">
-              <span class="feature-card-link">ระบบครบวงจร</span>
+              <p>
+                ส่วนประกอบสำคัญได้แก่ Stealth Safety Bank Mobile ซึ่งเป็นอุปกรณ์เฉพาะทางด้านการเงิน,
+                Stealth Safety Book ซึ่งช่วยเรื่องการจัดเก็บและการพรางตัว,
+                Flare Technology ซึ่งช่วยแยกบทบาทการใช้งานออกจากกัน
+                และวิธีการใช้งานอย่างถูกต้องซึ่งเป็นหัวใจของประสิทธิภาพทั้งระบบ
+              </p>
             </div>
           </div>
 
-          <div class="feature-card">
-            <div class="feature-card-media">
-              <span class="feature-card-badge">2</span>
-              <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1200&q=80" alt="Private Financial Device" loading="lazy" />
+          <div class="article-card">
+            <div class="article-card-media">
+              <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1200&q=80" alt="Private Device" loading="lazy" />
             </div>
-            <div class="feature-card-body">
-              <h3>ทำไมจึงต้องแยกอุปกรณ์การเงินออกจากการใช้งานทั่วไป</h3>
+            <div class="article-card-body">
+              <h2>หลักการสำคัญคือการตัดช่องทางเสี่ยงของสมาร์ตโฟนทั่วไปออกให้มากที่สุด</h2>
               <p>
-                สมาร์ตโฟนทั่วไปมีแอปจำนวนมาก มีการใช้งานหลายรูปแบบ
-                ทั้งโซเชียล การท่องเว็บ การรับลิงก์ การติดตั้งแอป และการเปิดใช้งานตลอดเวลา
-                สิ่งเหล่านี้คือช่องทางความเสี่ยงที่สะสมอยู่ตลอดวัน
-                แต่ระบบนี้เลือกตัดปัจจัยเสี่ยงเหล่านั้นออก
-                โดยทำให้อุปกรณ์การเงินมีหน้าที่เฉพาะทาง
-                ใช้เมื่อจำเป็น และอยู่ในสภาพแวดล้อมที่ควบคุมได้มากกว่า
+                สมาร์ตโฟนทั่วไปมีแอปหลากหลาย มีการกดลิงก์ รับข้อความ ติดตั้งแอป ท่องเว็บ
+                และเชื่อมต่อกับกิจกรรมจำนวนมากในชีวิตประจำวัน
+                สิ่งเหล่านี้คือช่องทางที่เพิ่มความเสี่ยงต่อการโจมตีทางไซเบอร์
               </p>
-            </div>
-            <div class="feature-card-action">
-              <span class="feature-card-link">ลดช่องโหว่</span>
+              <p>
+                ระบบนี้จึงใช้แนวคิดตรงกันข้าม คือทำให้อุปกรณ์การเงินแยกออกจากการใช้งานทั่วไป
+                เพื่อลดปัจจัยเสี่ยง ลดโอกาสถูกหลอก ลดโอกาสรับไฟล์อันตราย
+                และลดโอกาสที่ผู้ไม่หวังดีจะใช้เครื่องมือใด ๆ เข้าถึงกระบวนการทางการเงินได้
+              </p>
             </div>
           </div>
 
-          <div class="feature-card">
-            <div class="feature-card-media">
-              <span class="feature-card-badge">3</span>
-              <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80" alt="Cyber Attack Prevention" loading="lazy" />
+          <div class="article-card">
+            <div class="article-card-media">
+              <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80" alt="Cyber Protection" loading="lazy" />
             </div>
-            <div class="feature-card-body">
-              <h3>แนวคิดหลักคือทำให้ผู้โจมตีใช้งานเครื่องมือได้ยากที่สุด</h3>
+            <div class="article-card-body">
+              <h2>เป้าหมายของระบบคือจำกัดความสามารถของแฮ็กเกอร์และสแกรมเมอร์ตั้งแต่ต้นทาง</h2>
               <p>
-                หลักการสำคัญของระบบนี้คือ
-                ถ้าแฮ็กเกอร์หรือสแกรมเมอร์ไม่สามารถใช้อุปกรณ์ เครื่องมือ หรือช่องทางต่าง ๆ
-                ในการโจมตีได้อย่างมีประสิทธิภาพ
-                ความปลอดภัยก็จะยกระดับขึ้นอย่างมาก
-                ระบบนี้จึงไม่เน้นเพียงการตอบโต้เมื่อถูกโจมตีแล้ว
-                แต่เน้นการจำกัดโอกาสของการโจมตีตั้งแต่ต้นทาง
-                ทั้งในเชิงพฤติกรรม อุปกรณ์ และสภาพแวดล้อมการใช้งาน
+                หลักคิดของ Stealth Safety Bank Mobile System คือ
+                หากผู้โจมตีไม่สามารถใช้อุปกรณ์หรือเครื่องมือในการดำเนินการได้อย่างมีประสิทธิภาพ
+                โอกาสในการโจมตีก็จะลดลงอย่างมาก
               </p>
-            </div>
-            <div class="feature-card-action">
-              <span class="feature-card-link">จำกัดผู้โจมตี</span>
-            </div>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-card-media">
-              <span class="feature-card-badge">4</span>
-              <img src="https://images.unsplash.com/photo-1545987796-200677ee1011?auto=format&fit=crop&w=1200&q=80" alt="Stealth Technology Concept" loading="lazy" />
-            </div>
-            <div class="feature-card-body">
-              <h3>Stealth Technology คือหัวใจของการไม่เปิดโอกาสให้ถูกโจมตี</h3>
               <p>
-                ระบบป้องกันทั่วไปจำนวนมากทำงานแบบเผชิญหน้า
-                คือเปิดระบบไว้ตลอด ตรวจจับตลอด และป้องกันตลอด
-                ซึ่งหมายความว่าผู้โจมตีก็ยังมีพื้นที่ให้ทดลองได้เช่นกัน
-                แต่แนวคิด Stealth Technology ของระบบนี้
-                คือการลดการมองเห็น ลดการเข้าถึง ลดการเปิดเผย และลดโอกาสในการทดลองโจมตี
-                ให้มากที่สุดตั้งแต่แรก
+                นี่คือการป้องกันภัยแบบเป็นระบบ ไม่ใช่รอให้ถูกโจมตีแล้วค่อยตอบโต้
+                แต่พยายามลดการเปิดเผย ลดการมองเห็น ลดการเข้าถึง
+                และลดโอกาสในการทดลองโจมตีให้มากที่สุดตั้งแต่แรก
               </p>
-            </div>
-            <div class="feature-card-action">
-              <span class="feature-card-link">Stealth Concept</span>
-            </div>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-card-media">
-              <span class="feature-card-badge">5</span>
-              <img src="https://images.unsplash.com/photo-1521790797524-b2497295b8a0?auto=format&fit=crop&w=1200&q=80" alt="Security Process and Training" loading="lazy" />
-            </div>
-            <div class="feature-card-body">
-              <h3>วิธีใช้งานที่ถูกต้อง คือส่วนหนึ่งของระบบ ไม่ใช่เรื่องเสริม</h3>
-              <p>
-                จุดแข็งของ Stealth Safety Bank Mobile System
-                ไม่ได้อยู่ที่ตัวอุปกรณ์เพียงอย่างเดียว
-                แต่อยู่ที่ “วิธีใช้งาน”
-                เพราะแม้จะมีอุปกรณ์ที่ดี หากใช้งานผิดหลัก
-                ความเสี่ยงก็ยังสามารถเกิดขึ้นได้
-                ดังนั้นระบบนี้จึงต้องมีแนวทางการใช้งานที่ชัดเจน
-                เพื่อให้ทุกองค์ประกอบทำงานร่วมกันได้เต็มประสิทธิภาพ
-              </p>
-            </div>
-            <div class="feature-card-action">
-              <span class="feature-card-link">ใช้งานถูกหลัก</span>
-            </div>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-card-media">
-              <span class="feature-card-badge">6</span>
-              <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80" alt="Innovation and Research" loading="lazy" />
-            </div>
-            <div class="feature-card-body">
-              <h3>ระบบนี้เกิดจากการวิจัยและพัฒนาจากเหตุการณ์จริง</h3>
-              <p>
-                แนวคิดนี้เกิดจากการคิดค้น วิจัย และพัฒนาอย่างต่อเนื่องของบริษัท สยามทำ จำกัด
-                เป็นระยะเวลากว่า 3 ปี
-                หลังจากเกิดเหตุการณ์การโจรกรรมข้อมูลของสมาชิกกว่า 15,000 คน
-                บริษัทจึงเริ่มมองหาแนวทางใหม่
-                ที่ไม่ใช่เพียงการเพิ่มการป้องกันแบบเดิม
-                แต่เป็นการออกแบบระบบใหม่ทั้งหมด
-                เพื่อให้การใช้งานการเงินออนไลน์ปลอดภัยยิ่งขึ้นในเชิงโครงสร้าง
-              </p>
-            </div>
-            <div class="feature-card-action">
-              <span class="feature-card-link">วิจัย 3 ปี</span>
             </div>
           </div>
         </div>
-      </section>
 
-      <section class="card-section">
-        <h2 class="section-title">องค์ประกอบสำคัญที่ต้องทำงานร่วมกัน</h2>
+        <div class="full-article">
+          <h2>แตกต่างจากระบบป้องกันทั่วไปอย่างไร</h2>
+          <p>
+            ระบบป้องกันภัยทั่วไปจำนวนมากทำงานด้วยแนวคิดการเผชิญหน้า
+            คือเปิดระบบไว้ตลอด ตรวจจับไว้ตลอด และป้องกันไว้ตลอดเวลา
+            วิธีนี้แม้จะช่วยรับมือภัยคุกคามได้ในระดับหนึ่ง
+            แต่ก็เปิดโอกาสให้แฮ็กเกอร์หรือสแกรมเมอร์มีพื้นที่ในการทดลอง ทดสอบ และปรับเปลี่ยนวิธีโจมตีได้เช่นกัน
+          </p>
+          <p>
+            Stealth Safety Bank Mobile System ใช้แนวคิดที่ต่างออกไป
+            คือการทำให้เป้าหมายในการโจมตี “เข้าถึงยาก” และ “มองเห็นน้อย”
+            ลดช่องทาง ลดเครื่องมือ ลดกิจกรรมที่ไม่เกี่ยวข้องกับการเงิน
+            เพื่อให้ความปลอดภัยมีขีดจำกัดที่สูงขึ้นอย่างเป็นระบบ
+          </p>
+          <p>
+            กล่าวอีกแบบคือ ระบบนี้ไม่ได้เน้นเพียงการสู้กับผู้โจมตี
+            แต่เน้นการไม่เปิดโอกาสให้ผู้โจมตีเข้ามาดำเนินการได้โดยง่าย
+            จึงเป็นการป้องกันเชิงโครงสร้าง เชิงพฤติกรรม และเชิงกระบวนการไปพร้อมกัน
+          </p>
 
-        <div class="info-grid">
-          <div class="info-box">
-            <h4>Stealth Safety Bank Mobile</h4>
+          <div class="quote-box">
             <p>
-              อุปกรณ์เฉพาะทางด้านการเงิน
-              ที่ถูกจัดการให้ลดช่องทางเสี่ยงจากการใช้งานแบบสมาร์ตโฟนทั่วไป
-            </p>
-          </div>
-
-          <div class="info-box">
-            <h4>Stealth Safety Book</h4>
-            <p>
-              ส่วนของการจัดเก็บและการพรางตัว
-              ที่ช่วยเพิ่มความเป็นส่วนตัวและลดโอกาสการเข้าถึงอุปกรณ์โดยไม่จำเป็น
-            </p>
-          </div>
-
-          <div class="info-box">
-            <h4>Flare Technology</h4>
-            <p>
-              แนวคิดการแยกบทบาทการใช้งานออกจากกัน
-              เพื่อไม่ให้กิจกรรมทั่วไปกระทบต่อความปลอดภัยของกิจกรรมทางการเงิน
-            </p>
-          </div>
-
-          <div class="info-box">
-            <h4>วิธีการใช้งานอย่างถูกต้อง</h4>
-            <p>
-              เป็นหัวใจสำคัญของระบบ
-              เพราะระบบนี้ถูกออกแบบให้พฤติกรรมการใช้งานเป็นส่วนหนึ่งของการป้องกันภัย
+              เมื่ออุปกรณ์การเงินถูกแยกออกจากการใช้งานทั่วไป
+              และทุกองค์ประกอบทำงานร่วมกันอย่างถูกต้อง
+              ความเสี่ยงจากการถูกแฮ็กเงิน การถูกหลอก และการถูกเข้าถึงโดยไม่พึงประสงค์
+              ก็จะลดลงอย่างมีนัยสำคัญ
             </p>
           </div>
         </div>
-      </section>
 
-      <section class="card-section">
-        <div class="article-block">
-          <h2>เปรียบเทียบแนวคิดของระบบนี้กับระบบป้องกันทั่วไป</h2>
+        <div class="full-article">
+          <h2>จุดเริ่มต้นของการวิจัยและพัฒนา</h2>
           <p>
-            ระบบป้องกันภัยทางไซเบอร์จำนวนมากในโลกปัจจุบัน
-            ใช้แนวคิดการเผชิญหน้าเป็นหลัก
-            คือเปิดระบบไว้ ตรวจสอบไว้ ป้องกันไว้ และตอบโต้ไว้ตลอดเวลา
-            วิธีนี้มีประโยชน์ในหลายด้าน
-            แต่ในอีกมุมหนึ่งก็หมายความว่า
-            ผู้ไม่หวังดียังมีโอกาสทดลอง ทดสอบ ปรับเปลี่ยนเครื่องมือ
-            และค้นหาช่องว่างได้เช่นกัน
+            ระบบนี้เป็นผลจากการคิดค้น วิจัย และพัฒนาอย่างต่อเนื่องเป็นระยะเวลากว่า 3 ปี
+            ของบริษัท สยามทำ จำกัด
+            หลังจากเกิดเหตุการณ์การโจรกรรมข้อมูลของสมาชิกกว่า 15,000 คน
+            บริษัทจึงเริ่มตั้งคำถามสำคัญว่า
+            หากระบบเดิมยังเปิดโอกาสให้ผู้โจมตีทดสอบได้อยู่เสมอ
+            จะมีวิธีคิดใหม่ที่ยกระดับความปลอดภัยได้มากกว่านี้หรือไม่
           </p>
           <p>
-            Stealth Safety Bank Mobile System
-            มีแนวคิดต่างออกไป
-            เพราะเน้นการลดการมองเห็น ลดการเข้าถึง
-            และลดความพร้อมของระบบต่อการถูกโจมตี
-            เป้าหมายคือทำให้ผู้โจมตี “ไม่มีพื้นที่ให้ทดลอง”
-            มากกว่าจะรอให้เข้ามาแล้วค่อยป้องกันภายหลัง
+            คำตอบจึงนำไปสู่การพัฒนา Stealth Safety Bank Mobile System
+            ซึ่งไม่ใช่เพียงผลิตภัณฑ์หนึ่งชิ้น
+            แต่เป็นระบบป้องกันภัยทางการเงินที่ออกแบบขึ้นใหม่โดยมองทั้งเรื่องอุปกรณ์
+            การจัดเก็บ การแยกบทบาทการใช้งาน และวินัยการใช้งานร่วมกัน
           </p>
           <p>
-            ด้วยเหตุนี้ ระบบนี้จึงไม่ได้มองเรื่องความปลอดภัยเป็นแค่ซอฟต์แวร์
-            แต่เป็นเรื่องของทั้งอุปกรณ์ สภาพแวดล้อม วิธีเก็บรักษา
-            และวินัยในการใช้งานร่วมกัน
+            แนวคิดนี้จึงสะท้อนการยกระดับจากการป้องกันภัยแบบเดิม
+            ไปสู่การป้องกันภัยแบบเป็นระบบ
+            เพื่อให้ผู้ใช้งาน Mobile Banking และการเงินออนไลน์มีแนวทางที่ปลอดภัยมากขึ้น
           </p>
         </div>
-      </section>
 
-      <section class="card-section">
-        <div class="article-block">
+        <div class="full-article">
           <h2>สรุปภาพรวมของ Stealth Safety Bank Mobile System</h2>
           <p>
             Stealth Safety Bank Mobile System คือระบบป้องกันภัยทางการเงิน
             ที่สร้างขึ้นบนหลักการว่า
-            หากสามารถจำกัดอุปกรณ์ เครื่องมือ ช่องทาง และสภาพแวดล้อมที่เอื้อต่อการโจมตีได้
-            ก็จะทำให้การเงินออนไลน์มีความปลอดภัยสูงขึ้นอย่างเป็นระบบ
+            หากสามารถจำกัดอุปกรณ์ เครื่องมือ ช่องทาง และพฤติกรรมที่เอื้อต่อการโจมตีได้
+            ก็จะช่วยให้การใช้งานการเงินออนไลน์ปลอดภัยขึ้นอย่างมีโครงสร้าง
           </p>
           <p>
             นี่จึงไม่ใช่เพียงการตั้งค่าโทรศัพท์เครื่องหนึ่ง
-            แต่เป็นการออกแบบทั้งระบบ
-            เพื่อเปลี่ยนจากสมาร์ตโฟนทั่วไป
-            ให้กลายเป็นเครื่องมือทางการเงินที่มีขอบเขตการใช้งานชัดเจน
-            ปลอดภัยยิ่งขึ้น และเหมาะกับผู้ที่ต้องการควบคุมความเสี่ยงอย่างจริงจัง
+            แต่เป็นการออกแบบระบบทั้งหมดให้ทำงานร่วมกันอย่างชัดเจน
+            ตั้งแต่ Stealth Safety Bank Mobile, Stealth Safety Book,
+            Flare Technology ไปจนถึงวิธีการใช้งานที่ถูกต้อง
           </p>
           <p>
-            เมื่อ Stealth Safety Bank Mobile, Stealth Safety Book,
-            Flare Technology และวิธีใช้งานที่ถูกต้อง
-            ทำงานร่วมกันครบทุกส่วน
-            ระบบนี้จึงกลายเป็นแนวทางการป้องกันภัยทางการเงินแบบเป็นระบบ
-            ที่ผู้ใช้งานสามารถนำไปต่อยอดเพื่อความปลอดภัยที่สูงขึ้นได้
+            เมื่อทุกองค์ประกอบทำงานร่วมกันครบทุกส่วน
+            ระบบนี้จึงเป็นแนวทางการป้องกันภัยแบบเป็นระบบ
+            สำหรับผู้ที่ต้องการยกระดับความปลอดภัยของ Mobile Banking
+            และการเงินออนไลน์ให้สูงขึ้นกว่าการใช้งานสมาร์ตโฟนทั่วไป
           </p>
         </div>
       </section>
