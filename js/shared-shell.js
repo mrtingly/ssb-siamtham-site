@@ -8,17 +8,19 @@ const MENU = [
     ]
   },
   {
-    label: "สินค้าของเรา",
+    label: "ข้อมูลระบบ SSB",
     children: [
-      { label: "Stealth Safety Bank Mobile System", href: "products.html" }
+      { label: "Stealth Safety Bank System คืออะไร", href: "what-ssb.html" },
+      { label: "Stealth Safety Bank คืออะไร", href: "what-ssbmobile.html" },
+      { label: "Stealth Safety Book คืออะไร", href: "what-safety-book.html" },
+      { label: "Flare Technology คืออะไร", href: "what-flare.html" },
+      { label: "อบรมการใช้งาน", href: "ssb-training.html" }
     ]
   },
   {
     label: "ตัวแทนจำหน่าย",
     children: [
-      { label: "ตรวจชื่อตัวแทนจำหน่าย", href: "dealer-check.html" },
-      { label: "สมัครเป็นตัวแทนจำหน่าย", href: "dealer-apply.html" },
-      { label: "ระบบคำนวณผลงาน", href: "dealer-calculator.html" }
+      { label: "สมัครเป็นตัวแทนจำหน่าย", href: "agents-partner.html" }
     ]
   },
   { label: "ติดต่อเรา", href: "contact.html" }
@@ -34,7 +36,7 @@ function buildMenuHtml(currentFile) {
     if (item.href) {
       return `
         <a class="ssb-nav-link ${currentFile === item.href ? "active" : ""}" href="${item.href}">
-          <span>${item.label}</span>
+          ${item.label}
         </a>
       `;
     }
@@ -45,7 +47,7 @@ function buildMenuHtml(currentFile) {
       <div class="ssb-nav-group ${hasActiveChild ? "open" : ""}">
         <button class="ssb-nav-toggle" type="button">
           <span>${item.label}</span>
-          <span>${hasActiveChild ? "−" : "+"}</span>
+          <span class="arrow">${hasActiveChild ? "▲" : "▼"}</span>
         </button>
         <div class="ssb-nav-children">
           ${item.children.map((c) => `
@@ -63,39 +65,27 @@ function bindShellEvents() {
   const menuBtn = document.getElementById("ssbMenuBtn");
   const sidebar = document.getElementById("ssbSidebar");
   const backdrop = document.getElementById("ssbBackdrop");
-  const main = document.querySelector(".ssb-main");
 
   menuBtn?.addEventListener("click", () => {
-    const willOpen = !sidebar.classList.contains("open");
-    sidebar.classList.toggle("open", willOpen);
-    backdrop.classList.toggle("show", willOpen);
-
-    if (window.innerWidth > 1024) {
-      main?.classList.toggle("shifted", willOpen);
-    }
+    sidebar.classList.toggle("open");
+    backdrop.classList.toggle("show");
   });
 
   backdrop?.addEventListener("click", () => {
-    sidebar?.classList.remove("open");
-    backdrop?.classList.remove("show");
-    main?.classList.remove("shifted");
+    sidebar.classList.remove("open");
+    backdrop.classList.remove("show");
   });
 
   document.querySelectorAll(".ssb-nav-toggle").forEach((btn) => {
     btn.addEventListener("click", () => {
       const group = btn.closest(".ssb-nav-group");
       group?.classList.toggle("open");
-      const mark = btn.querySelector("span:last-child");
-      if (mark) {
-        mark.textContent = group?.classList.contains("open") ? "−" : "+";
+
+      const arrow = btn.querySelector(".arrow");
+      if (arrow) {
+        arrow.textContent = group?.classList.contains("open") ? "▲" : "▼";
       }
     });
-  });
-
-  window.addEventListener("resize", () => {
-    if (window.innerWidth <= 1024) {
-      main?.classList.remove("shifted");
-    }
   });
 }
 
@@ -110,7 +100,7 @@ export function renderSharedShell(pageTitle = "") {
       <div class="ssb-topbar">
         <div class="ssb-topbar-inner">
           <div class="ssb-topbar-left">
-            <button id="ssbMenuBtn" class="ssb-menu-btn" aria-label="Open menu">☰</button>
+            <button id="ssbMenuBtn" class="ssb-menu-btn">☰</button>
 
             <div class="ssb-brand">
               <img src="images/logo.png" alt="SSB Logo" />
@@ -122,26 +112,16 @@ export function renderSharedShell(pageTitle = "") {
           </div>
 
           <div class="ssb-company-mini">
-            บริษัท สยามทำ จำกัด · 02-043-2988
+            บริษัท สยามทำ จำกัด
           </div>
         </div>
       </div>
 
       <aside id="ssbSidebar" class="ssb-sidebar">
         <div class="ssb-sidebar-inner">
-          <div class="ssb-sidebar-title">เมนูหลัก</div>
-
           <nav class="ssb-nav">
             ${buildMenuHtml(currentFile)}
           </nav>
-
-          <div class="ssb-company-card">
-            <div><strong>บริษัท สยามทำ จำกัด</strong></div>
-            <div>54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ</div>
-            <div>Serial Number: 0105566099954</div>
-            <div>โทร 02-043-2988</div>
-            <div>มือถือ 063-656-1447 / 064-951-4888 / 080-204-5455</div>
-          </div>
         </div>
       </aside>
 
