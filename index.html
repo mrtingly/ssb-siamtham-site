@@ -372,12 +372,11 @@
             </div>
           </div>
 
-          <div class="menu-pop bottom-left">
-            <div class="company-card">
-              <div class="info-line">บริษัท สยามทำ จำกัด</div>
-              <div class="info-line">54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</div>
-            </div>
-          </div>
+         <div class="menu-pop bottom-left">
+  <div class="menu-card">
+    <a href="javascript:void(0)" onclick="openCompanyPopup()">ติดต่อเรา</a>
+  </div>
+</div>
 
           <div class="menu-pop bottom-right">
             <div class="company-card">
@@ -387,31 +386,6 @@
             </div>
           </div>
 
-          <div class="menu-pop chat-left">
-            <div class="menu-card chat-card">
-              <a href="#" target="_blank" rel="noopener">
-                <span class="chat-icon line">LINE</span>
-                <span>LINE Official</span>
-              </a>
-              <a href="#" target="_blank" rel="noopener">
-                <span class="chat-icon facebook">FB</span>
-                <span>Facebook</span>
-              </a>
-            </div>
-          </div>
-
-          <div class="menu-pop chat-right">
-            <div class="menu-card chat-card">
-              <a href="#" target="_blank" rel="noopener">
-                <span class="chat-icon youtube">YT</span>
-                <span>YouTube</span>
-              </a>
-              <a href="#" target="_blank" rel="noopener">
-                <span class="chat-icon tiktok">TT</span>
-                <span>TikTok</span>
-              </a>
-            </div>
-          </div>
         </div>
       </section>
     </main>
@@ -537,6 +511,275 @@ z-index:9999;
 function openCompanyPopup(){
   document.getElementById("companyPopup").style.display="flex";
 }
+</script>
+  <!-- COMPANY POPUP -->
+<div id="companyPopup" style="
+position:fixed;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.35);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:9999;
+">
+  <div style="
+    background:#fff;
+    padding:24px 28px;
+    border-radius:18px;
+    max-width:420px;
+    width:90%;
+    text-align:center;
+    box-shadow:0 20px 40px rgba(0,0,0,.25);
+    font-family:'Prompt',sans-serif;
+  ">
+    <div style="font-size:18px;font-weight:700;color:#0b4ea2;margin-bottom:12px;">
+      บริษัท สยามทำ จำกัด
+    </div>
+
+    <div style="font-size:14px;line-height:1.7;margin-bottom:10px;">
+      54 ซอย 53 ถนนพุทธมณฑลสาย 1<br>
+      แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170
+    </div>
+
+    <div style="font-size:14px;margin-bottom:6px;">
+      Serial: 0105566099954
+    </div>
+
+    <div style="font-size:14px;line-height:1.7;margin-bottom:14px;">
+      โทร 02-043-2988<br>
+      063-656-1447 / 064-951-4888 / 080-204-5455
+    </div>
+
+    <button onclick="document.getElementById('companyPopup').style.display='none'" style="
+      background:#0b4ea2;
+      color:#fff;
+      border:none;
+      padding:10px 18px;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:600;
+    ">
+      ปิด
+    </button>
+  </div>
+</div>
+
+<!-- CHAT ONLINE -->
+<div id="chatWidget" style="
+position:fixed;
+right:18px;
+bottom:18px;
+z-index:9998;
+display:flex;
+flex-direction:column;
+align-items:flex-end;
+gap:12px;
+font-family:'Prompt',sans-serif;
+">
+  <div id="chatMenu" style="
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    gap:10px;
+    opacity:0;
+    pointer-events:none;
+    transform:translateY(12px) scale(.96);
+    transition:.3s ease;
+  ">
+    <a href="#" target="_blank" rel="noopener" style="
+      min-width:210px;
+      height:56px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:0 16px;
+      text-decoration:none;
+      color:#fff;
+      border-radius:999px;
+      background:linear-gradient(135deg, #10d95a 0%, #06c755 55%, #02a94b 100%);
+      box-shadow:0 14px 28px rgba(11,78,162,.16);
+      border:1px solid rgba(255,255,255,.18);
+      font-weight:700;
+    ">
+      <span style="
+        width:34px;
+        height:34px;
+        border-radius:999px;
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        background:rgba(255,255,255,.16);
+        flex:0 0 34px;
+      ">LINE</span>
+      <span>LINE Official</span>
+    </a>
+
+    <a href="#" target="_blank" rel="noopener" style="
+      min-width:210px;
+      height:56px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:0 16px;
+      text-decoration:none;
+      color:#fff;
+      border-radius:999px;
+      background:linear-gradient(135deg, #2a86ff 0%, #1877f2 55%, #0f5fd3 100%);
+      box-shadow:0 14px 28px rgba(11,78,162,.16);
+      border:1px solid rgba(255,255,255,.18);
+      font-weight:700;
+    ">
+      <span style="
+        width:34px;
+        height:34px;
+        border-radius:999px;
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        background:rgba(255,255,255,.16);
+        flex:0 0 34px;
+      ">FB</span>
+      <span>Facebook</span>
+    </a>
+
+    <a href="#" target="_blank" rel="noopener" style="
+      min-width:210px;
+      height:56px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:0 16px;
+      text-decoration:none;
+      color:#fff;
+      border-radius:999px;
+      background:linear-gradient(135deg, #ff2f2f 0%, #ff0000 55%, #c90000 100%);
+      box-shadow:0 14px 28px rgba(11,78,162,.16);
+      border:1px solid rgba(255,255,255,.18);
+      font-weight:700;
+    ">
+      <span style="
+        width:34px;
+        height:34px;
+        border-radius:999px;
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        background:rgba(255,255,255,.16);
+        flex:0 0 34px;
+      ">YT</span>
+      <span>YouTube</span>
+    </a>
+
+    <a href="#" target="_blank" rel="noopener" style="
+      min-width:210px;
+      height:56px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:0 16px;
+      text-decoration:none;
+      color:#fff;
+      border-radius:999px;
+      background:linear-gradient(135deg, #232323 0%, #111111 55%, #000000 100%);
+      box-shadow:0 14px 28px rgba(11,78,162,.16);
+      border:1px solid rgba(255,255,255,.18);
+      font-weight:700;
+    ">
+      <span style="
+        width:34px;
+        height:34px;
+        border-radius:999px;
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        background:rgba(255,255,255,.16);
+        flex:0 0 34px;
+      ">TT</span>
+      <span>TikTok</span>
+    </a>
+  </div>
+
+  <button id="chatToggle" type="button" style="
+    width:64px;
+    height:64px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:none;
+    border-radius:999px;
+    background:linear-gradient(135deg, #0b4ea2, #1f69cd);
+    color:#fff;
+    cursor:pointer;
+    box-shadow:0 16px 34px rgba(11,78,162,.28);
+    border:1px solid rgba(255,255,255,.22);
+    position:relative;
+    font-size:12px;
+    font-weight:800;
+    line-height:1.05;
+  ">
+    <span style="display:flex;flex-direction:column;align-items:center;">
+      <span>Chat</span>
+      <span>Online</span>
+    </span>
+    <span id="chatCaret" style="
+      position:absolute;
+      right:-2px;
+      top:-2px;
+      width:22px;
+      height:22px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#fff;
+      color:#0b4ea2;
+      font-size:10px;
+      box-shadow:0 6px 16px rgba(11,78,162,.18);
+      transition:.28s ease;
+    ">⌃</span>
+  </button>
+</div>
+
+<script>
+function openCompanyPopup(){
+  document.getElementById("companyPopup").style.display = "flex";
+}
+
+(function () {
+  const chatWidget = document.getElementById("chatWidget");
+  const chatMenu = document.getElementById("chatMenu");
+  const chatToggle = document.getElementById("chatToggle");
+  const chatCaret = document.getElementById("chatCaret");
+
+  if (!chatWidget || !chatMenu || !chatToggle) return;
+
+  chatToggle.addEventListener("click", function () {
+    const isOpen = chatMenu.style.opacity === "1";
+    if (isOpen) {
+      chatMenu.style.opacity = "0";
+      chatMenu.style.pointerEvents = "none";
+      chatMenu.style.transform = "translateY(12px) scale(.96)";
+      if (chatCaret) chatCaret.style.transform = "rotate(0deg)";
+    } else {
+      chatMenu.style.opacity = "1";
+      chatMenu.style.pointerEvents = "auto";
+      chatMenu.style.transform = "translateY(0) scale(1)";
+      if (chatCaret) chatCaret.style.transform = "rotate(180deg)";
+    }
+  });
+
+  document.addEventListener("click", function (event) {
+    if (!chatWidget.contains(event.target)) {
+      chatMenu.style.opacity = "0";
+      chatMenu.style.pointerEvents = "none";
+      chatMenu.style.transform = "translateY(12px) scale(.96)";
+      if (chatCaret) chatCaret.style.transform = "rotate(0deg)";
+    }
+  });
+})();
 </script>
 </body>
 </html>
