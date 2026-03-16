@@ -20,13 +20,12 @@
       --ssb-blue-dark:#083a7c;
       --ssb-gold:#d4af37;
       --ssb-text:#143250;
-      --ssb-muted:#5c7188;
-      --ssb-line:rgba(11,78,162,.10);
-      --ssb-soft:#f5f9ff;
-      --ssb-shadow:0 18px 50px rgba(8,58,124,.10);
-      --ssb-shadow-strong:0 28px 80px rgba(8,58,124,.18);
-      --ssb-max:1360px;
-      --radius-xl:34px;
+      --ssb-muted:#5f748b;
+      --ssb-line:rgba(11,78,162,.12);
+      --ssb-shadow:0 18px 46px rgba(8,58,124,.10);
+      --ssb-shadow-strong:0 28px 70px rgba(8,58,124,.16);
+      --ssb-max:1380px;
+      --radius-xl:30px;
       --radius-lg:24px;
       --radius-md:18px;
     }
@@ -41,8 +40,8 @@
     body{
       margin:0;
       background:
-        radial-gradient(circle at 50% 45%, rgba(212,175,55,.08) 0%, rgba(212,175,55,0) 20%),
-        radial-gradient(circle at 50% 50%, rgba(11,78,162,.05) 0%, rgba(11,78,162,0) 32%),
+        radial-gradient(circle at 50% 46%, rgba(212,175,55,.08) 0%, rgba(212,175,55,0) 18%),
+        radial-gradient(circle at 50% 48%, rgba(11,78,162,.05) 0%, rgba(11,78,162,0) 28%),
         #ffffff;
       color:var(--ssb-text);
     }
@@ -53,10 +52,10 @@
     }
 
     .home-page{
-      width:min(var(--ssb-max), calc(100% - 28px));
+      width:min(var(--ssb-max), calc(100% - 24px));
       margin:0 auto;
       min-height:calc(100vh - 80px);
-      padding:18px 0 36px;
+      padding:18px 0 34px;
       display:flex;
       flex-direction:column;
     }
@@ -85,58 +84,130 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:16px 0 44px;
+      padding:18px 0 36px;
     }
 
-    .hero-center{
+    .hero-grid{
       width:100%;
+      display:grid;
+      grid-template-columns:1fr minmax(360px, 460px) 1fr;
+      gap:34px;
+      align-items:center;
+    }
+
+    .side-col{
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+
+    .side-col.left{
+      align-items:flex-end;
+    }
+
+    .side-col.right{
+      align-items:flex-start;
+    }
+
+    .menu-box{
+      width:100%;
+      max-width:330px;
+      background:rgba(255,255,255,.88);
+      border:1px solid var(--ssb-line);
+      border-radius:var(--radius-xl);
+      box-shadow:var(--ssb-shadow);
+      padding:14px;
+      backdrop-filter:blur(10px);
+    }
+
+    .menu-box a,
+    .menu-box button{
+      width:100%;
+      min-height:60px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:12px 16px;
+      border-radius:18px;
+      text-decoration:none;
+      border:1px solid rgba(11,78,162,.10);
+      background:linear-gradient(180deg,#ffffff 0%, #eef5ff 100%);
+      color:var(--ssb-blue);
+      font-size:16px;
+      font-weight:700;
+      line-height:1.45;
+      cursor:pointer;
+      transition:.22s ease;
+      box-shadow:0 8px 18px rgba(11,78,162,.04);
+      margin-bottom:12px;
+    }
+
+    .menu-box a:last-child,
+    .menu-box button:last-child{
+      margin-bottom:0;
+    }
+
+    .menu-box a:hover,
+    .menu-box button:hover{
+      transform:translateY(-2px);
+      background:#ffffff;
+      box-shadow:0 14px 26px rgba(11,78,162,.10);
+    }
+
+    .menu-box .primary-link{
+      background:linear-gradient(135deg, #0b4ea2 0%, #1f69cd 60%, #d4af37 100%);
+      color:#fff;
+      border:none;
+      box-shadow:0 16px 30px rgba(11,78,162,.18);
+    }
+
+    .menu-box .primary-link:hover{
+      color:#fff;
+      background:linear-gradient(135deg, #0b4ea2 0%, #1f69cd 60%, #d4af37 100%);
+    }
+
+    .center-col{
       display:flex;
       flex-direction:column;
       align-items:center;
       justify-content:center;
+      gap:18px;
       text-align:center;
-      gap:20px;
       position:relative;
     }
 
-    .hero-center::before{
+    .center-col::before{
       content:"";
       position:absolute;
-      width:min(76vw, 820px);
-      height:min(76vw, 820px);
+      width:min(80vw, 760px);
+      height:min(80vw, 760px);
       border-radius:50%;
       background:
-        radial-gradient(circle, rgba(212,175,55,.10) 0%, rgba(212,175,55,.03) 35%, rgba(212,175,55,0) 65%);
-      filter:blur(10px);
-      z-index:0;
+        radial-gradient(circle, rgba(212,175,55,.08) 0%, rgba(212,175,55,.02) 36%, rgba(212,175,55,0) 66%);
       pointer-events:none;
+      z-index:0;
+      filter:blur(8px);
     }
 
-    .logo-button{
+    .logo-wrap{
       position:relative;
       z-index:1;
-      width:min(100%, 470px);
-      aspect-ratio:1 / 1;
-      border:none;
-      background:transparent;
-      padding:0;
-      cursor:pointer;
-      transition:transform .24s ease, filter .24s ease;
+      width:min(100%, 440px);
+      aspect-ratio:1/1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
 
-    .logo-button:hover{
-      transform:scale(1.025);
-      filter:brightness(1.02);
-    }
-
-    .logo-button img{
+    .logo-wrap img{
       width:100%;
       height:100%;
       object-fit:contain;
       display:block;
       filter:
-        drop-shadow(0 10px 24px rgba(0,0,0,.10))
-        drop-shadow(0 22px 44px rgba(11,78,162,.14));
+        drop-shadow(0 14px 26px rgba(0,0,0,.10))
+        drop-shadow(0 24px 44px rgba(11,78,162,.14));
     }
 
     .logo-note{
@@ -146,56 +217,54 @@
       align-items:center;
       justify-content:center;
       gap:10px;
-      min-height:52px;
-      padding:13px 24px;
+      min-height:56px;
+      padding:14px 22px;
       border-radius:999px;
-      background:rgba(255,255,255,.88);
-      border:1px solid rgba(11,78,162,.10);
+      background:rgba(255,255,255,.92);
+      border:1px solid rgba(11,78,162,.12);
       box-shadow:0 14px 34px rgba(11,78,162,.10);
       color:var(--ssb-blue);
-      font-size:18px;
+      font-size:20px;
       font-weight:800;
       letter-spacing:.2px;
       backdrop-filter:blur(10px);
     }
 
-    .logo-note .note-icon{
-      width:28px;
-      height:28px;
+    .logo-note-icon{
+      width:30px;
+      height:30px;
       border-radius:999px;
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      background:linear-gradient(135deg, #0b4ea2, #1f69cd);
+      background:linear-gradient(135deg, #0b4ea2 0%, #1f69cd 100%);
       color:#fff;
-      font-size:14px;
-      box-shadow:0 8px 18px rgba(11,78,162,.18);
-      flex:0 0 28px;
+      font-size:15px;
+      box-shadow:0 8px 18px rgba(11,78,162,.16);
+      flex:0 0 30px;
     }
 
-    .hero-caption{
+    .center-sub{
       position:relative;
       z-index:1;
       margin:0;
-      max-width:760px;
+      max-width:650px;
       color:var(--ssb-muted);
       font-size:16px;
       line-height:1.9;
       font-weight:500;
     }
 
-    /* POPUP ทั่วไป */
     .popup-backdrop{
       position:fixed;
       inset:0;
+      background:rgba(7,22,43,.45);
+      backdrop-filter:blur(10px);
       display:none;
       align-items:center;
       justify-content:center;
-      background:rgba(7,22,43,.48);
-      backdrop-filter:blur(10px);
       z-index:9999;
-      padding:20px;
-      animation:fadeIn .22s ease;
+      padding:18px;
     }
 
     .popup-backdrop.show{
@@ -203,143 +272,37 @@
     }
 
     .popup-card{
-      width:min(1100px, 100%);
-      max-height:90vh;
-      overflow:auto;
-      border-radius:34px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(248,251,255,1) 100%);
-      border:1px solid rgba(255,255,255,.7);
+      width:min(560px, 100%);
+      border-radius:28px;
+      background:linear-gradient(180deg,#ffffff 0%, #f8fbff 100%);
+      border:1px solid rgba(255,255,255,.75);
       box-shadow:var(--ssb-shadow-strong);
       position:relative;
-      padding:30px;
-      animation:popupUp .24s ease;
+      padding:28px 24px 22px;
+      text-align:center;
     }
 
     .popup-close{
       position:absolute;
-      top:18px;
-      right:18px;
-      width:48px;
-      height:48px;
+      right:16px;
+      top:16px;
+      width:46px;
+      height:46px;
       border:none;
       border-radius:999px;
-      background:linear-gradient(135deg, #0b4ea2 0%, #1f69cd 70%, #d4af37 100%);
+      background:linear-gradient(135deg, #0b4ea2 0%, #1f69cd 65%, #d4af37 100%);
       color:#fff;
       font-size:18px;
       font-weight:800;
       cursor:pointer;
-      box-shadow:0 14px 26px rgba(11,78,162,.20);
+      box-shadow:0 12px 24px rgba(11,78,162,.20);
     }
 
-    /* POPUP เมนูหลัก */
-    .menu-popup-card{
-      padding:34px 30px 30px;
-    }
-
-    .menu-popup-head{
-      text-align:center;
-      margin-bottom:24px;
-      padding:0 56px;
-    }
-
-    .menu-popup-head h2{
-      margin:0 0 8px;
-      color:var(--ssb-blue);
-      font-size:34px;
-      font-weight:800;
-      line-height:1.2;
-    }
-
-    .menu-popup-head p{
-      margin:0;
-      color:var(--ssb-muted);
-      font-size:16px;
-      line-height:1.8;
-    }
-
-    .menu-popup-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:24px;
-    }
-
-    .menu-panel{
-      background:rgba(255,255,255,.82);
-      border:1px solid rgba(11,78,162,.10);
-      border-radius:28px;
-      padding:20px;
-      box-shadow:0 14px 30px rgba(11,78,162,.08);
-    }
-
-    .menu-panel-title{
-      margin:0 0 14px;
-      font-size:18px;
-      font-weight:800;
-      color:var(--ssb-blue-dark);
-      letter-spacing:.2px;
-      text-align:center;
-    }
-
-    .menu-list{
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-    }
-
-    .menu-link,
-    .menu-action{
-      width:100%;
-      min-height:60px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding:14px 18px;
-      border-radius:18px;
-      text-decoration:none;
-      cursor:pointer;
-      border:1px solid rgba(11,78,162,.10);
-      background:linear-gradient(180deg,#ffffff 0%, #eef5ff 100%);
-      color:var(--ssb-blue);
-      font-size:16px;
-      font-weight:700;
-      line-height:1.45;
-      transition:.22s ease;
-      box-shadow:0 8px 20px rgba(11,78,162,.04);
-    }
-
-    .menu-link:hover,
-    .menu-action:hover{
-      transform:translateY(-2px);
-      box-shadow:0 16px 28px rgba(11,78,162,.10);
-      background:#fff;
-    }
-
-    .menu-link.primary{
-      background:linear-gradient(135deg, #0b4ea2 0%, #1f69cd 62%, #d4af37 100%);
-      color:#fff;
-      border:none;
-      box-shadow:0 16px 30px rgba(11,78,162,.18);
-    }
-
-    .menu-link.primary:hover{
-      color:#fff;
-      background:linear-gradient(135deg, #0b4ea2 0%, #1f69cd 62%, #d4af37 100%);
-    }
-
-    /* popup ติดต่อ */
-    .contact-popup-card{
-      width:min(560px, 100%);
-      text-align:center;
-      padding:30px 26px 24px;
-    }
-
-    .contact-popup-card h3{
-      margin:0 0 14px;
+    .popup-card h3{
+      margin:0 44px 14px;
       color:var(--ssb-blue);
       font-size:30px;
-      line-height:1.2;
+      line-height:1.25;
       font-weight:800;
     }
 
@@ -347,11 +310,10 @@
       display:flex;
       flex-direction:column;
       gap:12px;
-      margin-top:14px;
     }
 
     .contact-item{
-      background:linear-gradient(180deg,#ffffff 0%, #f6faff 100%);
+      background:linear-gradient(180deg,#ffffff 0%, #f5f9ff 100%);
       border:1px solid rgba(11,78,162,.10);
       border-radius:18px;
       padding:14px 16px;
@@ -361,8 +323,8 @@
     .contact-label{
       display:block;
       margin-bottom:4px;
+      color:#6a7f95;
       font-size:13px;
-      color:#6d8196;
       font-weight:600;
     }
 
@@ -374,69 +336,6 @@
       word-break:break-word;
     }
 
-    /* popup เนื้อหา */
-    .content-popup-card{
-      width:min(960px, 100%);
-      padding:30px 30px 26px;
-    }
-
-    .content-popup-card h3{
-      margin:0 56px 10px 0;
-      color:var(--ssb-blue);
-      font-size:30px;
-      line-height:1.25;
-      font-weight:800;
-    }
-
-    .content-popup-card p{
-      margin:0;
-      color:var(--ssb-muted);
-      font-size:16px;
-      line-height:1.9;
-      font-weight:500;
-    }
-
-    .video-wrap{
-      margin-top:22px;
-      width:100%;
-      aspect-ratio:16 / 9;
-      border-radius:22px;
-      overflow:hidden;
-      background:#081626;
-      box-shadow:0 18px 34px rgba(0,0,0,.16);
-    }
-
-    .video-wrap iframe{
-      width:100%;
-      height:100%;
-      border:none;
-      display:block;
-    }
-
-    .content-actions{
-      margin-top:20px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-    }
-
-    .content-actions a{
-      min-height:50px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      text-decoration:none;
-      padding:0 18px;
-      border-radius:14px;
-      background:linear-gradient(180deg,#ffffff 0%, #eef5ff 100%);
-      color:var(--ssb-blue);
-      border:1px solid rgba(11,78,162,.10);
-      font-size:15px;
-      font-weight:700;
-      box-shadow:0 10px 22px rgba(11,78,162,.06);
-    }
-
-    /* CHAT */
     .chat-widget{
       position:fixed;
       right:18px;
@@ -558,33 +457,19 @@
       transform:rotate(180deg);
     }
 
-    @keyframes fadeIn{
-      from{ opacity:0; }
-      to{ opacity:1; }
-    }
-
-    @keyframes popupUp{
-      from{
-        opacity:0;
-        transform:translateY(14px) scale(.98);
-      }
-      to{
-        opacity:1;
-        transform:translateY(0) scale(1);
-      }
-    }
-
-    @media (max-width: 920px){
-      .logo-button{
-        width:min(100%, 390px);
-      }
-
-      .menu-popup-grid{
+    @media (max-width: 1080px){
+      .hero-grid{
         grid-template-columns:1fr;
+        gap:24px;
       }
 
-      .menu-popup-head{
-        padding:0 44px;
+      .side-col.left,
+      .side-col.right{
+        align-items:center;
+      }
+
+      .center-col{
+        order:-1;
       }
     }
 
@@ -602,48 +487,49 @@
         padding:8px 0 80px;
       }
 
-      .logo-button{
-        width:min(100%, 320px);
+      .logo-wrap{
+        width:min(100%, 330px);
       }
 
       .logo-note{
-        font-size:15px;
+        font-size:16px;
+        min-height:50px;
         padding:12px 16px;
       }
 
-      .hero-caption{
+      .logo-note-icon{
+        width:26px;
+        height:26px;
+        flex:0 0 26px;
+        font-size:13px;
+      }
+
+      .center-sub{
         font-size:14px;
         line-height:1.8;
       }
 
-      .popup-card{
-        border-radius:26px;
-        padding:22px 18px 18px;
+      .menu-box{
+        max-width:none;
+        border-radius:22px;
       }
 
-      .menu-popup-card{
-        padding-top:24px;
-      }
-
-      .menu-popup-head{
-        padding:0 36px 0 8px;
-        margin-bottom:18px;
-      }
-
-      .menu-popup-head h2{
-        font-size:24px;
-      }
-
-      .content-popup-card h3,
-      .contact-popup-card h3{
-        font-size:24px;
-      }
-
-      .menu-link,
-      .menu-action{
-        min-height:56px;
+      .menu-box a,
+      .menu-box button{
+        min-height:54px;
         font-size:15px;
         border-radius:16px;
+      }
+
+      .popup-card{
+        border-radius:24px;
+        padding:22px 16px 18px;
+      }
+
+      .popup-card h3{
+        font-size:24px;
+        margin-left:34px;
+        margin-right:34px;
       }
 
       .chat-widget{
@@ -681,109 +567,59 @@
       </div>
 
       <section class="hero-stage">
-        <div class="hero-center">
-          <button class="logo-button" id="openMainMenu" type="button" aria-label="เปิดเมนูหลัก">
-            <img src="images/logo.png" alt="Stealth Safety Bank Logo" />
-          </button>
+        <div class="hero-grid">
 
-          <div class="logo-note">
-            <span class="note-icon">☰</span>
-            <span>คลิกที่โลโก้เพื่อเปิดเมนู</span>
+          <div class="side-col left">
+            <div class="menu-box">
+              <a href="what-ssb.html">Stealth Safety Bank Mobile System</a>
+              <a href="what-ssbmobile.html">Stealth Safety Bank</a>
+              <a href="what-safety-book.html">Stealth Safety Book</a>
+              <a href="what-flare.html">Flare Technology</a>
+            </div>
+
+            <div class="menu-box">
+              <a href="book.html">ดูสินค้า</a>
+              <a class="primary-link" href="book.html">เริ่มสั่งสินค้า</a>
+            </div>
           </div>
 
-          <p class="hero-caption">
-            Stealth Safety Bank System คือแนวทางการใช้งานด้านความปลอดภัยทางการเงิน
-            ที่ให้ลูกค้าได้เรียนรู้ ทำความเข้าใจ และยืนยันก่อนเข้าสู่ขั้นตอนการสั่งซื้อจริง
-          </p>
+          <div class="center-col">
+            <div class="logo-wrap">
+              <img src="images/logo.png" alt="Stealth Safety Bank Logo" />
+            </div>
+
+            <div class="logo-note">
+              <span class="logo-note-icon">★</span>
+              <span>Stealth Safety Bank System</span>
+            </div>
+
+            <p class="center-sub">
+              ระบบความปลอดภัยทางการเงินที่ออกแบบให้ลูกค้าได้เรียนรู้ ทำความเข้าใจ
+              และตัดสินใจก่อนเข้าสู่ขั้นตอนการใช้งานและการสั่งซื้อจริง
+            </p>
+          </div>
+
+          <div class="side-col right">
+            <div class="menu-box">
+              <a href="about.html">เกี่ยวกับบริษัท</a>
+              <button type="button" onclick="openCompanyPopup()">ติดต่อเรา</button>
+              <a href="agent-login.html">ล็อคอินตัวแทนจำหน่าย</a>
+            </div>
+
+            <div class="menu-box">
+              <a href="agent-partner.html">สมัครเป็นตัวแทนจำหน่าย</a>
+              <a href="ssb-training.html">อบรมการใช้งาน</a>
+            </div>
+          </div>
+
         </div>
       </section>
     </main>
   </div>
 
-  <!-- POPUP เมนูหลัก -->
-  <div id="mainMenuPopup" class="popup-backdrop">
-    <div class="popup-card menu-popup-card">
-      <button class="popup-close" type="button" id="closeMainMenu">✕</button>
-
-      <div class="menu-popup-head">
-        <h2>Stealth Safety Bank System</h2>
-        <p>
-          เลือกดูข้อมูลสินค้า แนวคิดระบบ ความรู้สำคัญ หรือเข้าสู่ขั้นตอนใช้งานจริงจากเมนูด้านล่าง
-        </p>
-      </div>
-
-      <div class="menu-popup-grid">
-        <div class="menu-panel">
-          <h3 class="menu-panel-title">เมนูเกี่ยวกับสินค้า</h3>
-          <div class="menu-list">
-            <button
-              class="menu-action"
-              type="button"
-              data-content-title="Stealth Safety Bank Mobile System"
-              data-content-text="ระบบความปลอดภัยทางการเงินที่ออกแบบให้ใช้งานอย่างเป็นระบบ ลดการใช้งานที่ไม่จำเป็น และเน้นกระบวนการที่รอบคอบก่อนทำธุรกรรมจริง"
-              data-content-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
-              Stealth Safety Bank Mobile System
-            </button>
-
-            <button
-              class="menu-action"
-              type="button"
-              data-content-title="Stealth Safety Bank"
-              data-content-text="แนวคิดการจัดการเงินและอุปกรณ์ให้มีความรัดกุมมากขึ้น ลดความเสี่ยงจากการเปิดเผยข้อมูล การหลอกลวง และการเข้าถึงโดยไม่จำเป็น"
-              data-content-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
-              Stealth Safety Bank
-            </button>
-
-            <button
-              class="menu-action"
-              type="button"
-              data-content-title="Stealth Safety Book"
-              data-content-text="Safety Book คือแนวทางการอำพรางและจัดเก็บอุปกรณ์ให้ดูเป็นของทั่วไป เพิ่มความแนบเนียนและความระมัดระวังในการใช้งานในชีวิตประจำวัน"
-              data-content-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
-              Stealth Safety Book
-            </button>
-
-            <button
-              class="menu-action"
-              type="button"
-              data-content-title="Flare Technology"
-              data-content-text="Flare Technology คือแนวคิดเสริมความปลอดภัยที่เน้นการลดช่องทางเสี่ยง แยกบทบาทของอุปกรณ์ และควบคุมสภาพแวดล้อมการใช้งานให้เหมาะกับธุรกรรมทางการเงิน"
-              data-content-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
-              Flare Technology
-            </button>
-
-            <a class="menu-link" href="book.html">ดูสินค้า</a>
-            <a class="menu-link primary" href="book.html">เริ่มสั่งสินค้า</a>
-          </div>
-        </div>
-
-        <div class="menu-panel">
-          <h3 class="menu-panel-title">เมนูเกี่ยวกับบริษัท</h3>
-          <div class="menu-list">
-            <a class="menu-link" href="about.html">เกี่ยวกับบริษัท</a>
-            <button class="menu-action" type="button" id="openContactPopup">ติดต่อเรา</button>
-            <a class="menu-link" href="agent-login.html">ล็อคอินตัวแทนจำหน่าย</a>
-            <a class="menu-link" href="agent-partner.html">สมัครเป็นตัวแทนจำหน่าย</a>
-
-            <button
-              class="menu-action"
-              type="button"
-              data-content-title="อบรมการใช้งาน"
-              data-content-text="ก่อนเริ่มใช้งาน ลูกค้าควรได้รับการอธิบายขั้นตอน วิธีใช้งาน และแนวคิดของระบบอย่างครบถ้วน เพื่อให้เข้าใจตรงกันก่อนเข้าสู่การใช้งานจริง"
-              data-content-video="https://www.youtube.com/embed/dQw4w9WgXcQ"
-              data-content-link="ssb-training.html">
-              อบรมการใช้งาน
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- POPUP ติดต่อเรา -->
-  <div id="contactPopup" class="popup-backdrop">
-    <div class="popup-card contact-popup-card">
-      <button class="popup-close" type="button" id="closeContactPopup">✕</button>
+  <div id="companyPopup" class="popup-backdrop">
+    <div class="popup-card">
+      <button class="popup-close" type="button" onclick="closeCompanyPopup()">✕</button>
       <h3>บริษัท สยามทำ จำกัด</h3>
 
       <div class="contact-lines">
@@ -810,28 +646,6 @@
     </div>
   </div>
 
-  <!-- POPUP เนื้อหา + YOUTUBE -->
-  <div id="contentPopup" class="popup-backdrop">
-    <div class="popup-card content-popup-card">
-      <button class="popup-close" type="button" id="closeContentPopup">✕</button>
-      <h3 id="contentTitle">หัวข้อ</h3>
-      <p id="contentText"></p>
-
-      <div class="video-wrap" id="videoWrap">
-        <iframe
-          id="contentVideo"
-          src=""
-          title="YouTube video"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen>
-        </iframe>
-      </div>
-
-      <div class="content-actions" id="contentActions"></div>
-    </div>
-  </div>
-
-  <!-- CHAT ONLINE -->
   <div class="chat-widget" id="chatWidget">
     <div class="chat-menu" id="chatMenu">
       <a class="chat-item line" href="#" target="_blank" rel="noopener">
@@ -891,108 +705,29 @@
   </script>
 
   <script>
-    function openPopup(el){
-      if(el) el.classList.add("show");
-      document.body.style.overflow = "hidden";
+    function openCompanyPopup(){
+      const popup = document.getElementById("companyPopup");
+      if (popup) {
+        popup.classList.add("show");
+        document.body.style.overflow = "hidden";
+      }
     }
 
-    function closePopup(el){
-      if(el) el.classList.remove("show");
-      if (!document.querySelector(".popup-backdrop.show")) {
+    function closeCompanyPopup(){
+      const popup = document.getElementById("companyPopup");
+      if (popup) {
+        popup.classList.remove("show");
         document.body.style.overflow = "";
       }
     }
 
-    (function(){
-      const mainMenuPopup = document.getElementById("mainMenuPopup");
-      const contactPopup = document.getElementById("contactPopup");
-      const contentPopup = document.getElementById("contentPopup");
+    (function () {
+      const popup = document.getElementById("companyPopup");
+      if (!popup) return;
 
-      const openMainMenu = document.getElementById("openMainMenu");
-      const closeMainMenu = document.getElementById("closeMainMenu");
-
-      const openContactPopup = document.getElementById("openContactPopup");
-      const closeContactPopup = document.getElementById("closeContactPopup");
-
-      const closeContentPopup = document.getElementById("closeContentPopup");
-
-      const contentTitle = document.getElementById("contentTitle");
-      const contentText = document.getElementById("contentText");
-      const contentVideo = document.getElementById("contentVideo");
-      const contentActions = document.getElementById("contentActions");
-      const videoWrap = document.getElementById("videoWrap");
-
-      openMainMenu?.addEventListener("click", function(){
-        openPopup(mainMenuPopup);
-      });
-
-      closeMainMenu?.addEventListener("click", function(){
-        closePopup(mainMenuPopup);
-      });
-
-      openContactPopup?.addEventListener("click", function(){
-        closePopup(mainMenuPopup);
-        openPopup(contactPopup);
-      });
-
-      closeContactPopup?.addEventListener("click", function(){
-        closePopup(contactPopup);
-      });
-
-      closeContentPopup?.addEventListener("click", function(){
-        contentVideo.src = "";
-        closePopup(contentPopup);
-      });
-
-      [mainMenuPopup, contactPopup, contentPopup].forEach((popup) => {
-        popup?.addEventListener("click", function(event){
-          if(event.target === popup){
-            if(popup === contentPopup){
-              contentVideo.src = "";
-            }
-            closePopup(popup);
-          }
-        });
-      });
-
-      document.querySelectorAll("[data-content-title]").forEach((btn) => {
-        btn.addEventListener("click", function(){
-          const title = btn.getAttribute("data-content-title") || "";
-          const text = btn.getAttribute("data-content-text") || "";
-          const video = btn.getAttribute("data-content-video") || "";
-          const link = btn.getAttribute("data-content-link") || "";
-
-          contentTitle.textContent = title;
-          contentText.textContent = text;
-          contentActions.innerHTML = "";
-
-          if(video){
-            videoWrap.style.display = "block";
-            contentVideo.src = video;
-          } else {
-            videoWrap.style.display = "none";
-            contentVideo.src = "";
-          }
-
-          if(link){
-            const a = document.createElement("a");
-            a.href = link;
-            a.textContent = "ไปหน้ารายละเอียด";
-            contentActions.appendChild(a);
-          }
-
-          closePopup(mainMenuPopup);
-          openPopup(contentPopup);
-        });
-      });
-
-      document.addEventListener("keydown", function(event){
-        if(event.key === "Escape"){
-          contentVideo.src = "";
-          closePopup(mainMenuPopup);
-          closePopup(contactPopup);
-          closePopup(contentPopup);
-          document.getElementById("chatWidget")?.classList.remove("open");
+      popup.addEventListener("click", function (event) {
+        if (event.target === popup) {
+          closeCompanyPopup();
         }
       });
     })();
