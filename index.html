@@ -3,463 +3,412 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stealth Safety Bank System (SSB)</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  />
-
+  <title>Stealth Safety Bank System</title>
   <link rel="stylesheet" href="css/shared-shell.css" />
-
   <style>
     :root{
-      --ssb-blue:#0b4ea2;
-      --ssb-blue-dark:#083a7c;
-      --ssb-gold:#d4af37;
-      --ssb-text:#16324f;
-      --ssb-border:rgba(11,78,162,.12);
-      --ssb-shadow:0 18px 40px rgba(11,78,162,.10);
-      --ssb-shadow-strong:0 22px 52px rgba(11,78,162,.14);
-      --ssb-max:1320px;
-      --radius-xl:28px;
-      --radius-lg:22px;
-      --radius-md:16px;
+      --ssb-text:#0f172a;
+      --ssb-muted:#475569;
+      --ssb-line:#e2e8f0;
+      --ssb-soft:#f8fafc;
+      --ssb-shadow:0 20px 60px rgba(15,23,42,.08);
+      --ssb-radius:24px;
     }
 
-    *{
-      box-sizing:border-box;
-      font-family:'Prompt', sans-serif !important;
-    }
-
-    html{ scroll-behavior:smooth; }
+    *{ box-sizing:border-box; }
 
     body{
       margin:0;
+      font-family:Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:#ffffff;
       color:var(--ssb-text);
     }
 
-    .home-page{
-      width:min(var(--ssb-max), calc(100% - 24px));
-      margin:0 auto;
-      padding:18px 0 34px;
-      min-height:calc(100vh - 80px);
+    .ssb-main{
+      min-height:100vh;
+      background:#fff;
     }
 
-    .top-tools{
-      display:flex;
-      justify-content:flex-end;
-      align-items:center;
-      min-height:42px;
-      margin-bottom:16px;
-    }
-
-    body .ssb-shell-topbar,
-    body .shared-shell-topbar,
-    body header.ssb-topbar,
-    body .topbar,
-    body .shell-topbar{
-      position:sticky !important;
-      top:0 !important;
-      z-index:1000 !important;
-      backdrop-filter:blur(10px);
-    }
-
-    .logo-stage{
-      min-height:calc(100vh - 160px);
+    .home-v2{
+      min-height:100vh;
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:10px 0 24px;
+      padding:48px 20px 80px;
+      position:relative;
+      overflow:hidden;
     }
 
-    .logo-layout{
-      width:100%;
+    .home-wrap{
+      width:min(1380px, 100%);
+      margin:0 auto;
       display:grid;
-      grid-template-columns:minmax(280px, 1fr) minmax(280px, 420px) minmax(280px, 1fr);
+      grid-template-columns:1fr minmax(340px, 460px) 1fr;
       gap:34px;
       align-items:center;
     }
 
-    .side-column{
+    .menu-column{
       display:flex;
       flex-direction:column;
-      gap:18px;
+      gap:14px;
     }
 
-    .side-column.right{
+    .menu-column.left{
       align-items:flex-end;
     }
 
-    .menu-group{
-      width:100%;
-      max-width:340px;
-      background:#ffffff;
-      border:1px solid var(--ssb-border);
-      border-radius:26px;
-      box-shadow:var(--ssb-shadow);
-      padding:14px;
+    .menu-column.right{
+      align-items:flex-start;
     }
 
-    .menu-group a,
-    .menu-group button{
-      width:100%;
-      min-height:58px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      text-decoration:none;
-      border:none;
+    .menu-btn{
+      width:min(100%, 360px);
+      border:1px solid var(--ssb-line);
+      background:#fff;
+      color:var(--ssb-text);
       border-radius:18px;
-      padding:12px 16px;
-      margin-bottom:12px;
-      cursor:pointer;
-      background:linear-gradient(180deg,#ffffff 0%, #eef5ff 100%);
-      color:var(--ssb-blue);
-      font-size:16px;
+      padding:16px 20px;
+      font-size:1rem;
       font-weight:700;
-      line-height:1.4;
-      border:1px solid rgba(11,78,162,.10);
-      transition:.22s ease;
-    }
-
-    .menu-group a:last-child,
-    .menu-group button:last-child{
-      margin-bottom:0;
-    }
-
-    .menu-group a:hover,
-    .menu-group button:hover{
-      transform:translateY(-2px);
-      background:#ffffff;
-      box-shadow:0 10px 22px rgba(11,78,162,.10);
-    }
-
-    .menu-group .primary-link{
-      background:linear-gradient(135deg, #0b4ea2 0%, #1f69cd 58%, #d4af37 100%);
-      color:#fff;
-      border:none;
-      box-shadow:0 14px 26px rgba(11,78,162,.16);
-    }
-
-    .menu-group .primary-link:hover{
-      color:#fff;
-      background:linear-gradient(135deg, #0b4ea2 0%, #1f69cd 58%, #d4af37 100%);
-    }
-
-    .logo-center{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      gap:18px;
-    }
-
-    .logo-button{
-      width:min(100%, 400px);
-      aspect-ratio:1 / 1;
-      border:none;
-      background:transparent;
-      padding:0;
+      text-decoration:none;
       cursor:pointer;
-      transition:transform .24s ease;
-    }
-
-    .logo-button:hover{
-      transform:scale(1.02);
-    }
-
-    .logo-button img{
-      width:100%;
-      height:100%;
-      object-fit:contain;
-      display:block;
-      filter:drop-shadow(0 18px 28px rgba(0,0,0,.18));
-    }
-
-    .logo-note{
+      transition:.22s ease;
+      box-shadow:0 8px 24px rgba(15,23,42,.04);
+      text-align:center;
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      min-height:42px;
-      padding:10px 18px;
-      border-radius:999px;
-      background:#ffffff;
-      border:1px solid rgba(11,78,162,.12);
-      color:var(--ssb-blue);
-      font-size:13px;
-      font-weight:700;
-      box-shadow:0 8px 18px rgba(11,78,162,.08);
-      text-align:center;
+      min-height:58px;
     }
 
-    .desktop-menus{
-      display:contents;
+    .menu-column.left .menu-btn:hover{
+      transform:translateX(6px);
+      box-shadow:var(--ssb-shadow);
+      border-color:#cbd5e1;
     }
 
-    .mobile-menu-wrap{
-      display:none;
-      width:100%;
-      max-width:520px;
-      margin:0 auto;
+    .menu-column.right .menu-btn:hover{
+      transform:translateX(-6px);
+      box-shadow:var(--ssb-shadow);
+      border-color:#cbd5e1;
     }
 
-    .mobile-menus{
-      display:none;
-      margin-top:16px;
-      gap:16px;
-    }
-
-    .mobile-menu-wrap.open .mobile-menus{
+    .center-brand{
       display:flex;
       flex-direction:column;
-    }
-
-    .popup-backdrop{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.35);
-      display:none;
       align-items:center;
       justify-content:center;
-      z-index:9999;
-      padding:16px;
-    }
-
-    .popup-card{
-      background:#fff;
-      width:min(92vw, 440px);
-      border-radius:22px;
-      padding:24px 24px 20px;
-      box-shadow:0 26px 60px rgba(0,0,0,.24);
       text-align:center;
+      gap:18px;
+      padding:12px;
     }
 
-    .popup-card h3{
-      margin:0 0 12px;
-      color:var(--ssb-blue);
-      font-size:22px;
+    .logo-shell{
+      width:min(100%, 430px);
+      aspect-ratio:1/1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:36px;
+      background:linear-gradient(180deg,#ffffff 0%, #f8fafc 100%);
+      border:1px solid #edf2f7;
+      box-shadow:0 28px 70px rgba(15,23,42,.08);
+      padding:28px;
+      position:relative;
+    }
+
+    .logo-shell::after{
+      content:"";
+      position:absolute;
+      inset:14px;
+      border-radius:28px;
+      border:1px solid rgba(148,163,184,.14);
+      pointer-events:none;
+    }
+
+    .brand-logo{
+      width:100%;
+      max-width:320px;
+      height:auto;
+      display:block;
+      object-fit:contain;
+      filter:drop-shadow(0 10px 28px rgba(15,23,42,.10));
+    }
+
+    .tap-hint{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      font-size:1.18rem;
+      font-weight:800;
+      color:#0f172a;
+      background:#fff;
+      border:1px solid var(--ssb-line);
+      border-radius:999px;
+      padding:14px 24px;
+      box-shadow:0 10px 26px rgba(15,23,42,.06);
       line-height:1.3;
     }
 
-    .popup-card p{
-      margin:0 0 10px;
-      color:#31506f;
-      font-size:15px;
-      line-height:1.8;
-      word-break:break-word;
+    .tap-hint .icon{
+      font-size:1.3rem;
     }
 
-    .popup-close{
-      margin-top:10px;
-      min-width:120px;
-      min-height:46px;
+    .brand-sub{
+      font-size:.98rem;
+      color:var(--ssb-muted);
+      max-width:380px;
+      line-height:1.7;
+      margin:0;
+    }
+
+    .modal{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:3000;
+      padding:20px;
+    }
+
+    .modal.active{
+      display:flex;
+    }
+
+    .modal-backdrop{
+      position:absolute;
+      inset:0;
+      background:rgba(15,23,42,.58);
+      backdrop-filter:blur(4px);
+    }
+
+    .modal-card{
+      position:relative;
+      width:min(920px, 100%);
+      max-height:90vh;
+      overflow:auto;
+      background:#fff;
+      border-radius:28px;
+      box-shadow:0 40px 90px rgba(15,23,42,.22);
+      border:1px solid rgba(226,232,240,.9);
+      z-index:1;
+      padding:28px;
+    }
+
+    .modal-close{
+      position:absolute;
+      right:16px;
+      top:16px;
+      width:44px;
+      height:44px;
       border:none;
-      border-radius:14px;
-      background:linear-gradient(135deg, #0b4ea2 0%, #1f69cd 58%, #d4af37 100%);
+      border-radius:999px;
+      background:#0f172a;
       color:#fff;
-      font-size:15px;
-      font-weight:700;
+      font-size:1.2rem;
+      font-weight:800;
       cursor:pointer;
     }
 
-    .chat-widget{
-      position:fixed;
-      right:18px;
-      bottom:18px;
-      z-index:9998;
-      display:flex;
-      flex-direction:column;
-      align-items:flex-end;
+    .modal-title{
+      font-size:1.6rem;
+      font-weight:900;
+      margin:0 56px 10px 0;
+      color:#0f172a;
+    }
+
+    .modal-text{
+      margin:0 0 18px 0;
+      color:#334155;
+      line-height:1.8;
+      font-size:1rem;
+    }
+
+    .contact-list{
+      display:grid;
       gap:12px;
-      font-family:'Prompt', sans-serif;
+      margin-top:18px;
     }
 
-    .chat-menu{
-      display:flex;
-      flex-direction:column;
-      align-items:flex-end;
-      gap:10px;
-      opacity:0;
-      pointer-events:none;
-      transform:translateY(12px) scale(.96);
-      transition:.30s ease;
+    .contact-item{
+      background:var(--ssb-soft);
+      border:1px solid var(--ssb-line);
+      border-radius:16px;
+      padding:14px 16px;
+      line-height:1.7;
     }
 
-    .chat-widget.open .chat-menu{
-      opacity:1;
-      pointer-events:auto;
-      transform:translateY(0) scale(1);
+    .contact-label{
+      display:block;
+      font-size:.86rem;
+      color:#64748b;
+      margin-bottom:2px;
     }
 
-    .chat-item{
-      min-width:220px;
-      height:56px;
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding:0 16px;
-      text-decoration:none;
-      color:#fff;
-      border-radius:999px;
+    .video-wrap{
       position:relative;
+      width:100%;
+      aspect-ratio:16/9;
+      border-radius:18px;
       overflow:hidden;
-      box-shadow:0 14px 28px rgba(11,78,162,.16), inset 0 1px 0 rgba(255,255,255,.16);
-      transition:.24s ease;
-      border:1px solid rgba(255,255,255,.18);
-      font-size:14px;
-      font-weight:700;
+      background:#0f172a;
+      margin-top:18px;
+      border:1px solid #cbd5e1;
     }
 
-    .chat-item:hover{
-      transform:translateY(-2px) scale(1.02);
+    .video-wrap iframe{
+      width:100%;
+      height:100%;
+      border:0;
     }
 
-    .chat-item.line{ background:linear-gradient(135deg, #10d95a 0%, #06c755 55%, #02a94b 100%); }
-    .chat-item.facebook{ background:linear-gradient(135deg, #2a86ff 0%, #1877f2 55%, #0f5fd3 100%); }
-    .chat-item.youtube{ background:linear-gradient(135deg, #ff2f2f 0%, #ff0000 55%, #c90000 100%); }
-    .chat-item.tiktok{ background:linear-gradient(135deg, #232323 0%, #111111 55%, #000000 100%); }
+    .modal-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:22px;
+    }
 
-    .chat-icon{
-      width:34px;
-      height:34px;
-      border-radius:999px;
+    .modal-link{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      background:rgba(255,255,255,.16);
-      flex:0 0 34px;
-      font-size:12px;
+      padding:12px 16px;
+      border-radius:14px;
+      text-decoration:none;
       font-weight:800;
+      border:1px solid var(--ssb-line);
+      color:#0f172a;
+      background:#fff;
     }
 
     .chat-fab{
-      width:64px;
-      height:64px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      position:fixed;
+      right:22px;
+      bottom:22px;
+      z-index:2600;
+    }
+
+    .chat-toggle{
       border:none;
       border-radius:999px;
-      background:linear-gradient(135deg, #0b4ea2, #1f69cd);
+      background:#0f172a;
       color:#fff;
-      cursor:pointer;
-      box-shadow:0 16px 34px rgba(11,78,162,.28);
-      border:1px solid rgba(255,255,255,.22);
-      transition:.22s ease;
-      position:relative;
-      font-size:12px;
+      font-size:1rem;
       font-weight:800;
-      line-height:1.05;
+      padding:14px 20px;
+      box-shadow:0 22px 50px rgba(15,23,42,.25);
+      cursor:pointer;
     }
 
-    .chat-fab:hover{
-      transform:translateY(-2px);
-    }
-
-    .chat-fab-text{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .chat-caret{
+    .chat-panel{
       position:absolute;
-      right:-2px;
-      top:-2px;
-      width:22px;
-      height:22px;
-      border-radius:999px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      right:0;
+      bottom:66px;
+      width:270px;
       background:#fff;
-      color:#0b4ea2;
-      font-size:10px;
-      box-shadow:0 6px 16px rgba(11,78,162,.18);
-      transition:.28s ease;
+      border:1px solid var(--ssb-line);
+      border-radius:22px;
+      padding:14px;
+      box-shadow:0 30px 70px rgba(15,23,42,.18);
+      display:none;
     }
 
-    .chat-widget.open .chat-caret{
-      transform:rotate(180deg);
+    .chat-panel.active{
+      display:block;
     }
 
-    @media (max-width: 1080px){
-      .logo-layout{
+    .chat-title{
+      font-size:1rem;
+      font-weight:900;
+      margin:0 0 10px 0;
+      color:#0f172a;
+    }
+
+    .chat-links{
+      display:grid;
+      gap:10px;
+    }
+
+    .chat-link{
+      text-decoration:none;
+      color:#0f172a;
+      font-weight:800;
+      border:1px solid var(--ssb-line);
+      border-radius:14px;
+      padding:12px 14px;
+      background:#fff;
+      transition:.18s ease;
+    }
+
+    .chat-link:hover{
+      transform:translateY(-2px);
+      box-shadow:0 12px 24px rgba(15,23,42,.08);
+    }
+
+    @media (max-width: 1100px){
+      .home-wrap{
         grid-template-columns:1fr;
-        gap:18px;
+        gap:24px;
       }
 
-      .desktop-menus{
-        display:none;
-      }
-
-      .mobile-menu-wrap{
-        display:block;
-      }
-
-      .logo-center{
+      .center-brand{
         order:1;
       }
 
-      .logo-button{
-        width:min(100%, 340px);
+      .menu-column.left,
+      .menu-column.right{
+        align-items:center;
+      }
+
+      .menu-column.left{
+        order:2;
+      }
+
+      .menu-column.right{
+        order:3;
+      }
+
+      .menu-column .menu-btn{
+        width:min(100%, 520px);
+      }
+
+      .menu-column.left .menu-btn:hover,
+      .menu-column.right .menu-btn:hover{
+        transform:translateY(-2px);
       }
     }
 
-    @media (max-width: 760px){
-      .home-page{
-        width:min(100% - 14px, var(--ssb-max));
-        padding-top:12px;
+    @media (max-width: 640px){
+      .home-v2{
+        padding:28px 16px 100px;
       }
 
-      .top-tools{
-        justify-content:flex-start;
+      .logo-shell{
+        width:min(100%, 340px);
+        padding:22px;
+        border-radius:28px;
       }
 
-      .menu-group{
-        max-width:none;
+      .brand-logo{
+        max-width:240px;
+      }
+
+      .tap-hint{
+        font-size:1rem;
+        padding:12px 18px;
+      }
+
+      .modal-card{
+        padding:22px 18px 18px;
         border-radius:22px;
       }
 
-      .menu-group a,
-      .menu-group button{
-        min-height:54px;
-        font-size:15px;
-        border-radius:16px;
-      }
-
-      .logo-note{
-        font-size:12px;
-        padding:9px 14px;
-      }
-
-      .chat-widget{
-        right:12px;
-        bottom:12px;
-      }
-
-      .chat-item{
-        min-width:188px;
-        height:50px;
-        font-size:12px;
-      }
-
-      .chat-icon{
-        width:30px;
-        height:30px;
-        flex:0 0 30px;
-        font-size:11px;
-      }
-
-      .chat-fab{
-        width:58px;
-        height:58px;
+      .modal-title{
+        font-size:1.25rem;
       }
     }
   </style>
@@ -468,208 +417,274 @@
   <div id="appShell"></div>
 
   <div class="ssb-main">
-    <main class="home-page">
-      <div class="top-tools">
-        <div id="google_translate_element"></div>
+    <main class="home-v2">
+      <div class="home-wrap">
+
+        <!-- เมนูซ้าย -->
+        <section class="menu-column left">
+          <button
+            class="menu-btn"
+            type="button"
+            data-popup-title="Stealth Safety Bank Mobile System"
+            data-popup-text="ระบบความปลอดภัยทางการเงินที่ออกแบบให้ใช้งานเฉพาะด้านธุรกรรม ลดความเสี่ยงจากแอปที่ไม่เกี่ยวข้อง ลดการเปิดเผยข้อมูล และทำให้การใช้งานเป็นระบบมากขึ้นก่อนทำธุรกรรมจริง"
+            data-popup-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+            Stealth Safety Bank Mobile System
+          </button>
+
+          <button
+            class="menu-btn"
+            type="button"
+            data-popup-title="Stealth Safety Bank"
+            data-popup-text="แนวคิดการเก็บเงินและข้อมูลทางการเงินแบบเป็นระบบ เน้นการป้องกันความเสี่ยงจากการเปิดเผยข้อมูล การหลอกลวง และการเข้าถึงอุปกรณ์โดยไม่จำเป็น"
+            data-popup-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+            Stealth Safety Bank
+          </button>
+
+          <button
+            class="menu-btn"
+            type="button"
+            data-popup-title="Stealth Safety Book"
+            data-popup-text="Safety Book คือรูปแบบการอำพรางและจัดเก็บอุปกรณ์หรือสิ่งสำคัญให้ดูเป็นของทั่วไป เพื่อเพิ่มความรอบคอบในการใช้งาน และช่วยลดโอกาสถูกสังเกตหรือถูกค้นพบโดยง่าย"
+            data-popup-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+            Stealth Safety Book
+          </button>
+
+          <button
+            class="menu-btn"
+            type="button"
+            data-popup-title="Flare Technology"
+            data-popup-text="Flare Technology คือแนวทางเสริมความปลอดภัยที่ช่วยลดช่องทางเสี่ยง แยกบทบาทของอุปกรณ์ และควบคุมสภาพแวดล้อมการใช้งานให้เหมาะกับธุรกรรมการเงินมากที่สุด"
+            data-popup-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+            Flare Technology
+          </button>
+
+          <a class="menu-btn" href="configurator.html">ดูสินค้า</a>
+          <a class="menu-btn" href="book.html">เริ่มสั่งสินค้า</a>
+        </section>
+
+        <!-- ตรงกลาง -->
+        <section class="center-brand">
+          <div class="logo-shell">
+            <img src="images/logo.png" alt="Stealth Safety Bank System Logo" class="brand-logo" />
+          </div>
+
+          <div class="tap-hint">
+            <span class="icon">☰</span>
+            <span>คลิกที่โลโก้เพื่อเปิดเมนู</span>
+          </div>
+
+          <p class="brand-sub">
+            ระบบความปลอดภัยทางการเงินที่ออกแบบให้ลูกค้าได้เรียนรู้ ทำความเข้าใจ และยืนยันก่อนเข้าสู่ขั้นตอนการสั่งซื้อ
+          </p>
+        </section>
+
+        <!-- เมนูขวา -->
+        <section class="menu-column right">
+          <a class="menu-btn" href="about.html">เกี่ยวกับบริษัท</a>
+
+          <button class="menu-btn" type="button" id="openContactPopup">
+            ติดต่อเรา
+          </button>
+
+          <a class="menu-btn" href="agent-login.html">ล็อคอินตัวแทนจำหน่าย</a>
+          <a class="menu-btn" href="agent-partner.html">สมัครเป็นตัวแทนจำหน่าย</a>
+
+          <button
+            class="menu-btn"
+            type="button"
+            data-popup-title="อบรมการใช้งาน"
+            data-popup-text="ก่อนสั่งซื้อ ลูกค้าต้องได้รับการอธิบายแนวทางการใช้งาน ขั้นตอนความปลอดภัย และแนวคิดของระบบ เพื่อให้เข้าใจตรงกันก่อนเริ่มใช้งานจริง"
+            data-popup-video="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            data-popup-link="training.html">
+            อบรมการใช้งาน
+          </button>
+        </section>
+
       </div>
-
-      <section class="logo-stage">
-        <div class="logo-layout">
-
-          <div class="desktop-menus">
-            <div class="side-column left">
-              <div class="menu-group product-group">
-                <a href="what-ssb.html">Stealth Safety Bank Mobile System</a>
-                <a href="what-ssbmobile.html">Stealth Safety Bank</a>
-                <a href="what-safety-book.html">Stealth Safety Book</a>
-                <a href="what-flare.html">Flare Technology</a>
-              </div>
-
-              <div class="menu-group product-group">
-                <a href="book.html">ดูสินค้า</a>
-                <a class="primary-link" href="what-ssb.html">เริ่มสั่งสินค้า</a>
-              </div>
-            </div>
-
-            <div class="side-column right">
-              <div class="menu-group company-group">
-                <a href="about.html">เกี่ยวกับบริษัท</a>
-                <button type="button" onclick="openCompanyPopup()">ติดต่อเรา</button>
-                <a href="agent-login.html">ล็อคอินตัวแทนจำหน่าย</a>
-              </div>
-
-              <div class="menu-group company-group">
-                <a href="agent-partner.html">สมัครเป็นตัวแทนจำหน่าย</a>
-                <a href="ssb-training.html">อบรมการใช้งาน</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="logo-center">
-            <button class="logo-button" id="logoMenuButton" type="button" aria-label="เปิดเมนู">
-              <img src="images/logo.png" alt="Stealth Safety Bank Logo" />
-            </button>
-
-            <div class="logo-note">คลิกโลโก้เพื่อเปิดเมนู</div>
-
-            <div class="mobile-menu-wrap" id="mobileMenuWrap">
-              <div class="mobile-menus">
-                <div class="menu-group">
-                  <a href="what-ssb.html">Stealth Safety Bank Mobile System</a>
-                  <a href="what-ssbmobile.html">Stealth Safety Bank</a>
-                  <a href="what-safety-book.html">Stealth Safety Book</a>
-                  <a href="what-flare.html">Flare Technology</a>
-                  <a href="book.html">ดูสินค้า</a>
-                  <a class="primary-link" href="what-ssb.html">เริ่มสั่งสินค้า</a>
-                </div>
-
-                <div class="menu-group">
-                  <a href="about.html">เกี่ยวกับบริษัท</a>
-                  <button type="button" onclick="openCompanyPopup()">ติดต่อเรา</button>
-                  <a href="agent-login.html">ล็อคอินตัวแทนจำหน่าย</a>
-                  <a href="agent-partner.html">สมัครเป็นตัวแทนจำหน่าย</a>
-                  <a href="ssb-training.html">อบรมการใช้งาน</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
     </main>
   </div>
 
-  <div id="companyPopup" class="popup-backdrop">
-    <div class="popup-card">
-      <h3>บริษัท สยามทำ จำกัด</h3>
-      <p>54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
-      <p>Serial: 0105566099954</p>
-      <p>โทร 02-043-2988</p>
-      <p>063-656-1447 / 064-951-4888 / 080-204-5455</p>
-      <button class="popup-close" type="button" onclick="closeCompanyPopup()">ปิด</button>
+  <!-- Popup ติดต่อเรา -->
+  <div class="modal" id="contactModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal="contactModal"></div>
+    <div class="modal-card">
+      <button class="modal-close" type="button" data-close-modal="contactModal">✕</button>
+      <h2 class="modal-title">ติดต่อเรา</h2>
+      <p class="modal-text">
+        ข้อมูลติดต่อของบริษัท สยามทำ จำกัด
+      </p>
+
+      <div class="contact-list">
+        <div class="contact-item">
+          <span class="contact-label">บริษัท</span>
+          บริษัท สยามทำ จำกัด
+        </div>
+
+        <div class="contact-item">
+          <span class="contact-label">ที่อยู่</span>
+          54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170
+        </div>
+
+        <div class="contact-item">
+          <span class="contact-label">Serial Number</span>
+          0105566099954
+        </div>
+
+        <div class="contact-item">
+          <span class="contact-label">โทรศัพท์</span>
+          02-043-2988
+        </div>
+
+        <div class="contact-item">
+          <span class="contact-label">มือถือ</span>
+          063-656-1447<br />
+          064-951-4888<br />
+          080-204-5455
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="chat-widget" id="chatWidget">
-    <div class="chat-menu" id="chatMenu">
-      <a class="chat-item line" href="#" target="_blank" rel="noopener">
-        <span class="chat-icon">LINE</span>
-        <span>LINE Official</span>
-      </a>
+  <!-- Popup เนื้อหา + YouTube -->
+  <div class="modal" id="contentModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal="contentModal"></div>
+    <div class="modal-card">
+      <button class="modal-close" type="button" data-close-modal="contentModal">✕</button>
+      <h2 class="modal-title" id="contentModalTitle">หัวข้อ</h2>
+      <p class="modal-text" id="contentModalText"></p>
 
-      <a class="chat-item facebook" href="#" target="_blank" rel="noopener">
-        <span class="chat-icon">FB</span>
-        <span>Facebook</span>
-      </a>
+      <div class="video-wrap" id="contentVideoWrap">
+        <iframe
+          id="contentModalVideo"
+          src=""
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+      </div>
 
-      <a class="chat-item youtube" href="#" target="_blank" rel="noopener">
-        <span class="chat-icon">YT</span>
-        <span>YouTube</span>
-      </a>
-
-      <a class="chat-item tiktok" href="#" target="_blank" rel="noopener">
-        <span class="chat-icon">TT</span>
-        <span>TikTok</span>
-      </a>
+      <div class="modal-actions" id="contentModalActions"></div>
     </div>
+  </div>
 
-    <button class="chat-fab" id="chatToggle" type="button" aria-label="เปิดเมนูแชท">
-      <span class="chat-fab-text">
-        <span>Chat</span>
-        <span>Online</span>
-      </span>
-      <span class="chat-caret">⌃</span>
-    </button>
+  <!-- Chat Online -->
+  <div class="chat-fab">
+    <div class="chat-panel" id="chatPanel">
+      <p class="chat-title">Chat Online</p>
+      <div class="chat-links">
+        <a class="chat-link" href="#" target="_blank" rel="noopener">LINE Official</a>
+        <a class="chat-link" href="#" target="_blank" rel="noopener">Facebook</a>
+        <a class="chat-link" href="#" target="_blank" rel="noopener">YouTube</a>
+        <a class="chat-link" href="#" target="_blank" rel="noopener">TikTok</a>
+      </div>
+    </div>
+    <button class="chat-toggle" type="button" id="chatToggle">Chat Online</button>
   </div>
 
   <script type="module">
     import { renderSharedShell } from "./js/shared-shell.js";
     renderSharedShell("หน้าแรก");
-
-    setTimeout(() => {
-      const stickyTargets = [
-        ".ssb-shell-topbar",
-        ".shared-shell-topbar",
-        "header.ssb-topbar",
-        ".topbar",
-        ".shell-topbar",
-        "#appShell header",
-        "#appShell .topbar",
-        "#appShell .ssb-topbar"
-      ];
-      stickyTargets.forEach((selector) => {
-        document.querySelectorAll(selector).forEach((el) => {
-          el.style.position = "sticky";
-          el.style.top = "0";
-          el.style.zIndex = "1000";
-          el.style.backdropFilter = "blur(10px)";
-        });
-      });
-    }, 80);
   </script>
 
   <script>
-    function openCompanyPopup(){
-      const popup = document.getElementById("companyPopup");
-      if (popup) popup.style.display = "flex";
+    const contactModal = document.getElementById("contactModal");
+    const contentModal = document.getElementById("contentModal");
+    const openContactPopup = document.getElementById("openContactPopup");
+    const contentModalTitle = document.getElementById("contentModalTitle");
+    const contentModalText = document.getElementById("contentModalText");
+    const contentModalVideo = document.getElementById("contentModalVideo");
+    const contentModalActions = document.getElementById("contentModalActions");
+    const contentVideoWrap = document.getElementById("contentVideoWrap");
+    const chatToggle = document.getElementById("chatToggle");
+    const chatPanel = document.getElementById("chatPanel");
+
+    function openModal(modal){
+      modal.classList.add("active");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
     }
 
-    function closeCompanyPopup(){
-      const popup = document.getElementById("companyPopup");
-      if (popup) popup.style.display = "none";
+    function closeModal(modal){
+      modal.classList.remove("active");
+      modal.setAttribute("aria-hidden", "true");
+      if(modal === contentModal){
+        contentModalVideo.src = "";
+      }
+      document.body.style.overflow = "";
     }
 
-    (function () {
-      const popup = document.getElementById("companyPopup");
-      if (!popup) return;
+    openContactPopup?.addEventListener("click", () => {
+      openModal(contactModal);
+    });
 
-      popup.addEventListener("click", function (event) {
-        if (event.target === popup) {
-          closeCompanyPopup();
+    document.querySelectorAll("[data-close-modal]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const modalId = btn.getAttribute("data-close-modal");
+        const modal = document.getElementById(modalId);
+        if(modal) closeModal(modal);
+      });
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape"){
+        if(contactModal.classList.contains("active")) closeModal(contactModal);
+        if(contentModal.classList.contains("active")) closeModal(contentModal);
+        chatPanel.classList.remove("active");
+      }
+    });
+
+    document.querySelectorAll("[data-popup-title]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const title = btn.dataset.popupTitle || "";
+        const text = btn.dataset.popupText || "";
+        const video = btn.dataset.popupVideo || "";
+        const link = btn.dataset.popupLink || "";
+
+        contentModalTitle.textContent = title;
+        contentModalText.textContent = text;
+
+        if(video){
+          contentVideoWrap.style.display = "";
+          contentModalVideo.src = video;
+        } else {
+          contentVideoWrap.style.display = "none";
+          contentModalVideo.src = "";
         }
-      });
-    })();
 
-    (function () {
-      const mobileWrap = document.getElementById("mobileMenuWrap");
-      const logoBtn = document.getElementById("logoMenuButton");
-
-      if (!mobileWrap || !logoBtn) return;
-
-      logoBtn.addEventListener("click", function () {
-        mobileWrap.classList.toggle("open");
-      });
-    })();
-
-    (function () {
-      const chatWidget = document.getElementById("chatWidget");
-      const chatToggle = document.getElementById("chatToggle");
-
-      if (!chatWidget || !chatToggle) return;
-
-      chatToggle.addEventListener("click", function () {
-        chatWidget.classList.toggle("open");
-      });
-
-      document.addEventListener("click", function (event) {
-        if (!chatWidget.contains(event.target)) {
-          chatWidget.classList.remove("open");
+        contentModalActions.innerHTML = "";
+        if(link){
+          const a = document.createElement("a");
+          a.href = link;
+          a.className = "modal-link";
+          a.textContent = "ไปหน้ารายละเอียด";
+          contentModalActions.appendChild(a);
         }
-      });
-    })();
 
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement(
-        {
-          pageLanguage: "th",
-          includedLanguages: "th,en,zh-CN,ja,ko",
-          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-        },
-        "google_translate_element"
-      );
-    }
+        openModal(contentModal);
+      });
+    });
+
+    chatToggle?.addEventListener("click", () => {
+      chatPanel.classList.toggle("active");
+    });
+
+    document.addEventListener("click", (e) => {
+      const isInsideChat = e.target.closest(".chat-fab");
+      if(!isInsideChat){
+        chatPanel.classList.remove("active");
+      }
+    });
+
+    // คลิกโลโก้ให้เปิดเมนู shell
+    const logoShell = document.querySelector(".logo-shell");
+    logoShell?.addEventListener("click", () => {
+      const shellToggle = document.querySelector(".ssb-shell-toggle, .ssb-menu-toggle, .menu-toggle, [data-shell-toggle]");
+      if(shellToggle){
+        shellToggle.click();
+      }
+    });
+
+    logoShell.style.cursor = "pointer";
   </script>
-
-  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
