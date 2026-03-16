@@ -3,412 +3,670 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stealth Safety Bank System</title>
+  <title>Stealth Safety Bank System (SSB)</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
   <link rel="stylesheet" href="css/shared-shell.css" />
+
   <style>
     :root{
-      --ssb-text:#0f172a;
-      --ssb-muted:#475569;
-      --ssb-line:#e2e8f0;
-      --ssb-soft:#f8fafc;
-      --ssb-shadow:0 20px 60px rgba(15,23,42,.08);
-      --ssb-radius:24px;
+      --ssb-blue:#0b4ea2;
+      --ssb-blue-dark:#083a7c;
+      --ssb-gold:#d4af37;
+      --ssb-text:#143250;
+      --ssb-muted:#5c7188;
+      --ssb-line:rgba(11,78,162,.10);
+      --ssb-soft:#f5f9ff;
+      --ssb-shadow:0 18px 50px rgba(8,58,124,.10);
+      --ssb-shadow-strong:0 28px 80px rgba(8,58,124,.18);
+      --ssb-max:1360px;
+      --radius-xl:34px;
+      --radius-lg:24px;
+      --radius-md:18px;
     }
 
-    *{ box-sizing:border-box; }
+    *{
+      box-sizing:border-box;
+      font-family:'Prompt', sans-serif !important;
+    }
+
+    html{ scroll-behavior:smooth; }
 
     body{
       margin:0;
-      font-family:Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:#ffffff;
+      background:
+        radial-gradient(circle at 50% 45%, rgba(212,175,55,.08) 0%, rgba(212,175,55,0) 20%),
+        radial-gradient(circle at 50% 50%, rgba(11,78,162,.05) 0%, rgba(11,78,162,0) 32%),
+        #ffffff;
       color:var(--ssb-text);
     }
 
     .ssb-main{
       min-height:100vh;
-      background:#fff;
+      background:transparent;
     }
 
-    .home-v2{
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:48px 20px 80px;
-      position:relative;
-      overflow:hidden;
-    }
-
-    .home-wrap{
-      width:min(1380px, 100%);
+    .home-page{
+      width:min(var(--ssb-max), calc(100% - 28px));
       margin:0 auto;
-      display:grid;
-      grid-template-columns:1fr minmax(340px, 460px) 1fr;
-      gap:34px;
-      align-items:center;
-    }
-
-    .menu-column{
+      min-height:calc(100vh - 80px);
+      padding:18px 0 36px;
       display:flex;
       flex-direction:column;
-      gap:14px;
     }
 
-    .menu-column.left{
-      align-items:flex-end;
+    .top-tools{
+      display:flex;
+      justify-content:flex-end;
+      align-items:center;
+      min-height:44px;
+      margin-bottom:10px;
     }
 
-    .menu-column.right{
-      align-items:flex-start;
+    body .ssb-shell-topbar,
+    body .shared-shell-topbar,
+    body header.ssb-topbar,
+    body .topbar,
+    body .shell-topbar{
+      position:sticky !important;
+      top:0 !important;
+      z-index:1000 !important;
+      backdrop-filter:blur(10px);
     }
 
-    .menu-btn{
-      width:min(100%, 360px);
-      border:1px solid var(--ssb-line);
-      background:#fff;
-      color:var(--ssb-text);
-      border-radius:18px;
-      padding:16px 20px;
-      font-size:1rem;
-      font-weight:700;
-      text-decoration:none;
-      cursor:pointer;
-      transition:.22s ease;
-      box-shadow:0 8px 24px rgba(15,23,42,.04);
-      text-align:center;
-      display:inline-flex;
+    .hero-stage{
+      flex:1;
+      display:flex;
       align-items:center;
       justify-content:center;
-      min-height:58px;
+      padding:16px 0 44px;
     }
 
-    .menu-column.left .menu-btn:hover{
-      transform:translateX(6px);
-      box-shadow:var(--ssb-shadow);
-      border-color:#cbd5e1;
-    }
-
-    .menu-column.right .menu-btn:hover{
-      transform:translateX(-6px);
-      box-shadow:var(--ssb-shadow);
-      border-color:#cbd5e1;
-    }
-
-    .center-brand{
+    .hero-center{
+      width:100%;
       display:flex;
       flex-direction:column;
       align-items:center;
       justify-content:center;
       text-align:center;
-      gap:18px;
-      padding:12px;
-    }
-
-    .logo-shell{
-      width:min(100%, 430px);
-      aspect-ratio:1/1;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border-radius:36px;
-      background:linear-gradient(180deg,#ffffff 0%, #f8fafc 100%);
-      border:1px solid #edf2f7;
-      box-shadow:0 28px 70px rgba(15,23,42,.08);
-      padding:28px;
+      gap:20px;
       position:relative;
     }
 
-    .logo-shell::after{
+    .hero-center::before{
       content:"";
       position:absolute;
-      inset:14px;
-      border-radius:28px;
-      border:1px solid rgba(148,163,184,.14);
+      width:min(76vw, 820px);
+      height:min(76vw, 820px);
+      border-radius:50%;
+      background:
+        radial-gradient(circle, rgba(212,175,55,.10) 0%, rgba(212,175,55,.03) 35%, rgba(212,175,55,0) 65%);
+      filter:blur(10px);
+      z-index:0;
       pointer-events:none;
     }
 
-    .brand-logo{
-      width:100%;
-      max-width:320px;
-      height:auto;
-      display:block;
-      object-fit:contain;
-      filter:drop-shadow(0 10px 28px rgba(15,23,42,.10));
+    .logo-button{
+      position:relative;
+      z-index:1;
+      width:min(100%, 470px);
+      aspect-ratio:1 / 1;
+      border:none;
+      background:transparent;
+      padding:0;
+      cursor:pointer;
+      transition:transform .24s ease, filter .24s ease;
     }
 
-    .tap-hint{
+    .logo-button:hover{
+      transform:scale(1.025);
+      filter:brightness(1.02);
+    }
+
+    .logo-button img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      display:block;
+      filter:
+        drop-shadow(0 10px 24px rgba(0,0,0,.10))
+        drop-shadow(0 22px 44px rgba(11,78,162,.14));
+    }
+
+    .logo-note{
+      position:relative;
+      z-index:1;
       display:inline-flex;
       align-items:center;
       justify-content:center;
       gap:10px;
-      font-size:1.18rem;
-      font-weight:800;
-      color:#0f172a;
-      background:#fff;
-      border:1px solid var(--ssb-line);
+      min-height:52px;
+      padding:13px 24px;
       border-radius:999px;
-      padding:14px 24px;
-      box-shadow:0 10px 26px rgba(15,23,42,.06);
-      line-height:1.3;
+      background:rgba(255,255,255,.88);
+      border:1px solid rgba(11,78,162,.10);
+      box-shadow:0 14px 34px rgba(11,78,162,.10);
+      color:var(--ssb-blue);
+      font-size:18px;
+      font-weight:800;
+      letter-spacing:.2px;
+      backdrop-filter:blur(10px);
     }
 
-    .tap-hint .icon{
-      font-size:1.3rem;
+    .logo-note .note-icon{
+      width:28px;
+      height:28px;
+      border-radius:999px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(135deg, #0b4ea2, #1f69cd);
+      color:#fff;
+      font-size:14px;
+      box-shadow:0 8px 18px rgba(11,78,162,.18);
+      flex:0 0 28px;
     }
 
-    .brand-sub{
-      font-size:.98rem;
-      color:var(--ssb-muted);
-      max-width:380px;
-      line-height:1.7;
+    .hero-caption{
+      position:relative;
+      z-index:1;
       margin:0;
+      max-width:760px;
+      color:var(--ssb-muted);
+      font-size:16px;
+      line-height:1.9;
+      font-weight:500;
     }
 
-    .modal{
+    /* POPUP ทั่วไป */
+    .popup-backdrop{
       position:fixed;
       inset:0;
       display:none;
       align-items:center;
       justify-content:center;
-      z-index:3000;
+      background:rgba(7,22,43,.48);
+      backdrop-filter:blur(10px);
+      z-index:9999;
       padding:20px;
+      animation:fadeIn .22s ease;
     }
 
-    .modal.active{
+    .popup-backdrop.show{
       display:flex;
     }
 
-    .modal-backdrop{
-      position:absolute;
-      inset:0;
-      background:rgba(15,23,42,.58);
-      backdrop-filter:blur(4px);
-    }
-
-    .modal-card{
-      position:relative;
-      width:min(920px, 100%);
+    .popup-card{
+      width:min(1100px, 100%);
       max-height:90vh;
       overflow:auto;
-      background:#fff;
-      border-radius:28px;
-      box-shadow:0 40px 90px rgba(15,23,42,.22);
-      border:1px solid rgba(226,232,240,.9);
-      z-index:1;
-      padding:28px;
+      border-radius:34px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(248,251,255,1) 100%);
+      border:1px solid rgba(255,255,255,.7);
+      box-shadow:var(--ssb-shadow-strong);
+      position:relative;
+      padding:30px;
+      animation:popupUp .24s ease;
     }
 
-    .modal-close{
+    .popup-close{
       position:absolute;
-      right:16px;
-      top:16px;
-      width:44px;
-      height:44px;
+      top:18px;
+      right:18px;
+      width:48px;
+      height:48px;
       border:none;
       border-radius:999px;
-      background:#0f172a;
+      background:linear-gradient(135deg, #0b4ea2 0%, #1f69cd 70%, #d4af37 100%);
       color:#fff;
-      font-size:1.2rem;
+      font-size:18px;
       font-weight:800;
       cursor:pointer;
+      box-shadow:0 14px 26px rgba(11,78,162,.20);
     }
 
-    .modal-title{
-      font-size:1.6rem;
-      font-weight:900;
-      margin:0 56px 10px 0;
-      color:#0f172a;
+    /* POPUP เมนูหลัก */
+    .menu-popup-card{
+      padding:34px 30px 30px;
     }
 
-    .modal-text{
-      margin:0 0 18px 0;
-      color:#334155;
+    .menu-popup-head{
+      text-align:center;
+      margin-bottom:24px;
+      padding:0 56px;
+    }
+
+    .menu-popup-head h2{
+      margin:0 0 8px;
+      color:var(--ssb-blue);
+      font-size:34px;
+      font-weight:800;
+      line-height:1.2;
+    }
+
+    .menu-popup-head p{
+      margin:0;
+      color:var(--ssb-muted);
+      font-size:16px;
       line-height:1.8;
-      font-size:1rem;
     }
 
-    .contact-list{
+    .menu-popup-grid{
       display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
+    }
+
+    .menu-panel{
+      background:rgba(255,255,255,.82);
+      border:1px solid rgba(11,78,162,.10);
+      border-radius:28px;
+      padding:20px;
+      box-shadow:0 14px 30px rgba(11,78,162,.08);
+    }
+
+    .menu-panel-title{
+      margin:0 0 14px;
+      font-size:18px;
+      font-weight:800;
+      color:var(--ssb-blue-dark);
+      letter-spacing:.2px;
+      text-align:center;
+    }
+
+    .menu-list{
+      display:flex;
+      flex-direction:column;
       gap:12px;
-      margin-top:18px;
+    }
+
+    .menu-link,
+    .menu-action{
+      width:100%;
+      min-height:60px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:14px 18px;
+      border-radius:18px;
+      text-decoration:none;
+      cursor:pointer;
+      border:1px solid rgba(11,78,162,.10);
+      background:linear-gradient(180deg,#ffffff 0%, #eef5ff 100%);
+      color:var(--ssb-blue);
+      font-size:16px;
+      font-weight:700;
+      line-height:1.45;
+      transition:.22s ease;
+      box-shadow:0 8px 20px rgba(11,78,162,.04);
+    }
+
+    .menu-link:hover,
+    .menu-action:hover{
+      transform:translateY(-2px);
+      box-shadow:0 16px 28px rgba(11,78,162,.10);
+      background:#fff;
+    }
+
+    .menu-link.primary{
+      background:linear-gradient(135deg, #0b4ea2 0%, #1f69cd 62%, #d4af37 100%);
+      color:#fff;
+      border:none;
+      box-shadow:0 16px 30px rgba(11,78,162,.18);
+    }
+
+    .menu-link.primary:hover{
+      color:#fff;
+      background:linear-gradient(135deg, #0b4ea2 0%, #1f69cd 62%, #d4af37 100%);
+    }
+
+    /* popup ติดต่อ */
+    .contact-popup-card{
+      width:min(560px, 100%);
+      text-align:center;
+      padding:30px 26px 24px;
+    }
+
+    .contact-popup-card h3{
+      margin:0 0 14px;
+      color:var(--ssb-blue);
+      font-size:30px;
+      line-height:1.2;
+      font-weight:800;
+    }
+
+    .contact-lines{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      margin-top:14px;
     }
 
     .contact-item{
-      background:var(--ssb-soft);
-      border:1px solid var(--ssb-line);
-      border-radius:16px;
+      background:linear-gradient(180deg,#ffffff 0%, #f6faff 100%);
+      border:1px solid rgba(11,78,162,.10);
+      border-radius:18px;
       padding:14px 16px;
-      line-height:1.7;
+      box-shadow:0 10px 22px rgba(11,78,162,.05);
     }
 
     .contact-label{
       display:block;
-      font-size:.86rem;
-      color:#64748b;
-      margin-bottom:2px;
+      margin-bottom:4px;
+      font-size:13px;
+      color:#6d8196;
+      font-weight:600;
+    }
+
+    .contact-value{
+      color:var(--ssb-text);
+      font-size:15px;
+      line-height:1.8;
+      font-weight:600;
+      word-break:break-word;
+    }
+
+    /* popup เนื้อหา */
+    .content-popup-card{
+      width:min(960px, 100%);
+      padding:30px 30px 26px;
+    }
+
+    .content-popup-card h3{
+      margin:0 56px 10px 0;
+      color:var(--ssb-blue);
+      font-size:30px;
+      line-height:1.25;
+      font-weight:800;
+    }
+
+    .content-popup-card p{
+      margin:0;
+      color:var(--ssb-muted);
+      font-size:16px;
+      line-height:1.9;
+      font-weight:500;
     }
 
     .video-wrap{
-      position:relative;
+      margin-top:22px;
       width:100%;
-      aspect-ratio:16/9;
-      border-radius:18px;
+      aspect-ratio:16 / 9;
+      border-radius:22px;
       overflow:hidden;
-      background:#0f172a;
-      margin-top:18px;
-      border:1px solid #cbd5e1;
+      background:#081626;
+      box-shadow:0 18px 34px rgba(0,0,0,.16);
     }
 
     .video-wrap iframe{
       width:100%;
       height:100%;
-      border:0;
-    }
-
-    .modal-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-top:22px;
-    }
-
-    .modal-link{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:12px 16px;
-      border-radius:14px;
-      text-decoration:none;
-      font-weight:800;
-      border:1px solid var(--ssb-line);
-      color:#0f172a;
-      background:#fff;
-    }
-
-    .chat-fab{
-      position:fixed;
-      right:22px;
-      bottom:22px;
-      z-index:2600;
-    }
-
-    .chat-toggle{
       border:none;
-      border-radius:999px;
-      background:#0f172a;
-      color:#fff;
-      font-size:1rem;
-      font-weight:800;
-      padding:14px 20px;
-      box-shadow:0 22px 50px rgba(15,23,42,.25);
-      cursor:pointer;
-    }
-
-    .chat-panel{
-      position:absolute;
-      right:0;
-      bottom:66px;
-      width:270px;
-      background:#fff;
-      border:1px solid var(--ssb-line);
-      border-radius:22px;
-      padding:14px;
-      box-shadow:0 30px 70px rgba(15,23,42,.18);
-      display:none;
-    }
-
-    .chat-panel.active{
       display:block;
     }
 
-    .chat-title{
-      font-size:1rem;
-      font-weight:900;
-      margin:0 0 10px 0;
-      color:#0f172a;
+    .content-actions{
+      margin-top:20px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
     }
 
-    .chat-links{
-      display:grid;
-      gap:10px;
-    }
-
-    .chat-link{
+    .content-actions a{
+      min-height:50px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
       text-decoration:none;
-      color:#0f172a;
-      font-weight:800;
-      border:1px solid var(--ssb-line);
+      padding:0 18px;
       border-radius:14px;
-      padding:12px 14px;
-      background:#fff;
-      transition:.18s ease;
+      background:linear-gradient(180deg,#ffffff 0%, #eef5ff 100%);
+      color:var(--ssb-blue);
+      border:1px solid rgba(11,78,162,.10);
+      font-size:15px;
+      font-weight:700;
+      box-shadow:0 10px 22px rgba(11,78,162,.06);
     }
 
-    .chat-link:hover{
+    /* CHAT */
+    .chat-widget{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:9998;
+      display:flex;
+      flex-direction:column;
+      align-items:flex-end;
+      gap:12px;
+    }
+
+    .chat-menu{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-end;
+      gap:10px;
+      opacity:0;
+      pointer-events:none;
+      transform:translateY(12px) scale(.96);
+      transition:.30s ease;
+    }
+
+    .chat-widget.open .chat-menu{
+      opacity:1;
+      pointer-events:auto;
+      transform:translateY(0) scale(1);
+    }
+
+    .chat-item{
+      min-width:230px;
+      height:56px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:0 16px;
+      text-decoration:none;
+      color:#fff;
+      border-radius:999px;
+      position:relative;
+      overflow:hidden;
+      box-shadow:0 14px 28px rgba(11,78,162,.16), inset 0 1px 0 rgba(255,255,255,.16);
+      transition:.24s ease;
+      border:1px solid rgba(255,255,255,.18);
+      font-size:14px;
+      font-weight:700;
+    }
+
+    .chat-item:hover{
+      transform:translateY(-2px) scale(1.02);
+    }
+
+    .chat-item.line{ background:linear-gradient(135deg, #10d95a 0%, #06c755 55%, #02a94b 100%); }
+    .chat-item.facebook{ background:linear-gradient(135deg, #2a86ff 0%, #1877f2 55%, #0f5fd3 100%); }
+    .chat-item.youtube{ background:linear-gradient(135deg, #ff2f2f 0%, #ff0000 55%, #c90000 100%); }
+    .chat-item.tiktok{ background:linear-gradient(135deg, #232323 0%, #111111 55%, #000000 100%); }
+
+    .chat-icon{
+      width:34px;
+      height:34px;
+      border-radius:999px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(255,255,255,.16);
+      flex:0 0 34px;
+      font-size:12px;
+      font-weight:800;
+    }
+
+    .chat-fab{
+      width:68px;
+      height:68px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:none;
+      border-radius:999px;
+      background:linear-gradient(135deg, #0b4ea2, #1f69cd 65%, #d4af37 100%);
+      color:#fff;
+      cursor:pointer;
+      box-shadow:0 18px 36px rgba(11,78,162,.30);
+      border:1px solid rgba(255,255,255,.24);
+      transition:.22s ease;
+      position:relative;
+      font-size:12px;
+      font-weight:800;
+      line-height:1.05;
+    }
+
+    .chat-fab:hover{
       transform:translateY(-2px);
-      box-shadow:0 12px 24px rgba(15,23,42,.08);
     }
 
-    @media (max-width: 1100px){
-      .home-wrap{
+    .chat-fab-text{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .chat-caret{
+      position:absolute;
+      right:-1px;
+      top:-1px;
+      width:22px;
+      height:22px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#fff;
+      color:#0b4ea2;
+      font-size:10px;
+      box-shadow:0 6px 16px rgba(11,78,162,.18);
+      transition:.28s ease;
+    }
+
+    .chat-widget.open .chat-caret{
+      transform:rotate(180deg);
+    }
+
+    @keyframes fadeIn{
+      from{ opacity:0; }
+      to{ opacity:1; }
+    }
+
+    @keyframes popupUp{
+      from{
+        opacity:0;
+        transform:translateY(14px) scale(.98);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+      }
+    }
+
+    @media (max-width: 920px){
+      .logo-button{
+        width:min(100%, 390px);
+      }
+
+      .menu-popup-grid{
         grid-template-columns:1fr;
-        gap:24px;
       }
 
-      .center-brand{
-        order:1;
-      }
-
-      .menu-column.left,
-      .menu-column.right{
-        align-items:center;
-      }
-
-      .menu-column.left{
-        order:2;
-      }
-
-      .menu-column.right{
-        order:3;
-      }
-
-      .menu-column .menu-btn{
-        width:min(100%, 520px);
-      }
-
-      .menu-column.left .menu-btn:hover,
-      .menu-column.right .menu-btn:hover{
-        transform:translateY(-2px);
+      .menu-popup-head{
+        padding:0 44px;
       }
     }
 
-    @media (max-width: 640px){
-      .home-v2{
-        padding:28px 16px 100px;
+    @media (max-width: 760px){
+      .home-page{
+        width:min(var(--ssb-max), calc(100% - 16px));
+        padding-top:12px;
       }
 
-      .logo-shell{
-        width:min(100%, 340px);
-        padding:22px;
-        border-radius:28px;
+      .top-tools{
+        justify-content:flex-start;
       }
 
-      .brand-logo{
-        max-width:240px;
+      .hero-stage{
+        padding:8px 0 80px;
       }
 
-      .tap-hint{
-        font-size:1rem;
-        padding:12px 18px;
+      .logo-button{
+        width:min(100%, 320px);
       }
 
-      .modal-card{
+      .logo-note{
+        font-size:15px;
+        padding:12px 16px;
+      }
+
+      .hero-caption{
+        font-size:14px;
+        line-height:1.8;
+      }
+
+      .popup-card{
+        border-radius:26px;
         padding:22px 18px 18px;
-        border-radius:22px;
       }
 
-      .modal-title{
-        font-size:1.25rem;
+      .menu-popup-card{
+        padding-top:24px;
+      }
+
+      .menu-popup-head{
+        padding:0 36px 0 8px;
+        margin-bottom:18px;
+      }
+
+      .menu-popup-head h2{
+        font-size:24px;
+      }
+
+      .content-popup-card h3,
+      .contact-popup-card h3{
+        font-size:24px;
+      }
+
+      .menu-link,
+      .menu-action{
+        min-height:56px;
+        font-size:15px;
+        border-radius:16px;
+      }
+
+      .chat-widget{
+        right:12px;
+        bottom:12px;
+      }
+
+      .chat-item{
+        min-width:190px;
+        height:50px;
+        font-size:12px;
+      }
+
+      .chat-icon{
+        width:30px;
+        height:30px;
+        flex:0 0 30px;
+        font-size:11px;
+      }
+
+      .chat-fab{
+        width:60px;
+        height:60px;
       }
     }
   </style>
@@ -417,274 +675,358 @@
   <div id="appShell"></div>
 
   <div class="ssb-main">
-    <main class="home-v2">
-      <div class="home-wrap">
+    <main class="home-page">
+      <div class="top-tools">
+        <div id="google_translate_element"></div>
+      </div>
 
-        <!-- เมนูซ้าย -->
-        <section class="menu-column left">
-          <button
-            class="menu-btn"
-            type="button"
-            data-popup-title="Stealth Safety Bank Mobile System"
-            data-popup-text="ระบบความปลอดภัยทางการเงินที่ออกแบบให้ใช้งานเฉพาะด้านธุรกรรม ลดความเสี่ยงจากแอปที่ไม่เกี่ยวข้อง ลดการเปิดเผยข้อมูล และทำให้การใช้งานเป็นระบบมากขึ้นก่อนทำธุรกรรมจริง"
-            data-popup-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
-            Stealth Safety Bank Mobile System
+      <section class="hero-stage">
+        <div class="hero-center">
+          <button class="logo-button" id="openMainMenu" type="button" aria-label="เปิดเมนูหลัก">
+            <img src="images/logo.png" alt="Stealth Safety Bank Logo" />
           </button>
 
-          <button
-            class="menu-btn"
-            type="button"
-            data-popup-title="Stealth Safety Bank"
-            data-popup-text="แนวคิดการเก็บเงินและข้อมูลทางการเงินแบบเป็นระบบ เน้นการป้องกันความเสี่ยงจากการเปิดเผยข้อมูล การหลอกลวง และการเข้าถึงอุปกรณ์โดยไม่จำเป็น"
-            data-popup-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
-            Stealth Safety Bank
-          </button>
-
-          <button
-            class="menu-btn"
-            type="button"
-            data-popup-title="Stealth Safety Book"
-            data-popup-text="Safety Book คือรูปแบบการอำพรางและจัดเก็บอุปกรณ์หรือสิ่งสำคัญให้ดูเป็นของทั่วไป เพื่อเพิ่มความรอบคอบในการใช้งาน และช่วยลดโอกาสถูกสังเกตหรือถูกค้นพบโดยง่าย"
-            data-popup-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
-            Stealth Safety Book
-          </button>
-
-          <button
-            class="menu-btn"
-            type="button"
-            data-popup-title="Flare Technology"
-            data-popup-text="Flare Technology คือแนวทางเสริมความปลอดภัยที่ช่วยลดช่องทางเสี่ยง แยกบทบาทของอุปกรณ์ และควบคุมสภาพแวดล้อมการใช้งานให้เหมาะกับธุรกรรมการเงินมากที่สุด"
-            data-popup-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
-            Flare Technology
-          </button>
-
-          <a class="menu-btn" href="configurator.html">ดูสินค้า</a>
-          <a class="menu-btn" href="book.html">เริ่มสั่งสินค้า</a>
-        </section>
-
-        <!-- ตรงกลาง -->
-        <section class="center-brand">
-          <div class="logo-shell">
-            <img src="images/logo.png" alt="Stealth Safety Bank System Logo" class="brand-logo" />
-          </div>
-
-          <div class="tap-hint">
-            <span class="icon">☰</span>
+          <div class="logo-note">
+            <span class="note-icon">☰</span>
             <span>คลิกที่โลโก้เพื่อเปิดเมนู</span>
           </div>
 
-          <p class="brand-sub">
-            ระบบความปลอดภัยทางการเงินที่ออกแบบให้ลูกค้าได้เรียนรู้ ทำความเข้าใจ และยืนยันก่อนเข้าสู่ขั้นตอนการสั่งซื้อ
+          <p class="hero-caption">
+            Stealth Safety Bank System คือแนวทางการใช้งานด้านความปลอดภัยทางการเงิน
+            ที่ให้ลูกค้าได้เรียนรู้ ทำความเข้าใจ และยืนยันก่อนเข้าสู่ขั้นตอนการสั่งซื้อจริง
           </p>
-        </section>
-
-        <!-- เมนูขวา -->
-        <section class="menu-column right">
-          <a class="menu-btn" href="about.html">เกี่ยวกับบริษัท</a>
-
-          <button class="menu-btn" type="button" id="openContactPopup">
-            ติดต่อเรา
-          </button>
-
-          <a class="menu-btn" href="agent-login.html">ล็อคอินตัวแทนจำหน่าย</a>
-          <a class="menu-btn" href="agent-partner.html">สมัครเป็นตัวแทนจำหน่าย</a>
-
-          <button
-            class="menu-btn"
-            type="button"
-            data-popup-title="อบรมการใช้งาน"
-            data-popup-text="ก่อนสั่งซื้อ ลูกค้าต้องได้รับการอธิบายแนวทางการใช้งาน ขั้นตอนความปลอดภัย และแนวคิดของระบบ เพื่อให้เข้าใจตรงกันก่อนเริ่มใช้งานจริง"
-            data-popup-video="https://www.youtube.com/embed/dQw4w9WgXcQ"
-            data-popup-link="training.html">
-            อบรมการใช้งาน
-          </button>
-        </section>
-
-      </div>
+        </div>
+      </section>
     </main>
   </div>
 
-  <!-- Popup ติดต่อเรา -->
-  <div class="modal" id="contactModal" aria-hidden="true">
-    <div class="modal-backdrop" data-close-modal="contactModal"></div>
-    <div class="modal-card">
-      <button class="modal-close" type="button" data-close-modal="contactModal">✕</button>
-      <h2 class="modal-title">ติดต่อเรา</h2>
-      <p class="modal-text">
-        ข้อมูลติดต่อของบริษัท สยามทำ จำกัด
-      </p>
+  <!-- POPUP เมนูหลัก -->
+  <div id="mainMenuPopup" class="popup-backdrop">
+    <div class="popup-card menu-popup-card">
+      <button class="popup-close" type="button" id="closeMainMenu">✕</button>
 
-      <div class="contact-list">
-        <div class="contact-item">
-          <span class="contact-label">บริษัท</span>
-          บริษัท สยามทำ จำกัด
+      <div class="menu-popup-head">
+        <h2>Stealth Safety Bank System</h2>
+        <p>
+          เลือกดูข้อมูลสินค้า แนวคิดระบบ ความรู้สำคัญ หรือเข้าสู่ขั้นตอนใช้งานจริงจากเมนูด้านล่าง
+        </p>
+      </div>
+
+      <div class="menu-popup-grid">
+        <div class="menu-panel">
+          <h3 class="menu-panel-title">เมนูเกี่ยวกับสินค้า</h3>
+          <div class="menu-list">
+            <button
+              class="menu-action"
+              type="button"
+              data-content-title="Stealth Safety Bank Mobile System"
+              data-content-text="ระบบความปลอดภัยทางการเงินที่ออกแบบให้ใช้งานอย่างเป็นระบบ ลดการใช้งานที่ไม่จำเป็น และเน้นกระบวนการที่รอบคอบก่อนทำธุรกรรมจริง"
+              data-content-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+              Stealth Safety Bank Mobile System
+            </button>
+
+            <button
+              class="menu-action"
+              type="button"
+              data-content-title="Stealth Safety Bank"
+              data-content-text="แนวคิดการจัดการเงินและอุปกรณ์ให้มีความรัดกุมมากขึ้น ลดความเสี่ยงจากการเปิดเผยข้อมูล การหลอกลวง และการเข้าถึงโดยไม่จำเป็น"
+              data-content-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+              Stealth Safety Bank
+            </button>
+
+            <button
+              class="menu-action"
+              type="button"
+              data-content-title="Stealth Safety Book"
+              data-content-text="Safety Book คือแนวทางการอำพรางและจัดเก็บอุปกรณ์ให้ดูเป็นของทั่วไป เพิ่มความแนบเนียนและความระมัดระวังในการใช้งานในชีวิตประจำวัน"
+              data-content-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+              Stealth Safety Book
+            </button>
+
+            <button
+              class="menu-action"
+              type="button"
+              data-content-title="Flare Technology"
+              data-content-text="Flare Technology คือแนวคิดเสริมความปลอดภัยที่เน้นการลดช่องทางเสี่ยง แยกบทบาทของอุปกรณ์ และควบคุมสภาพแวดล้อมการใช้งานให้เหมาะกับธุรกรรมทางการเงิน"
+              data-content-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+              Flare Technology
+            </button>
+
+            <a class="menu-link" href="book.html">ดูสินค้า</a>
+            <a class="menu-link primary" href="book.html">เริ่มสั่งสินค้า</a>
+          </div>
         </div>
 
-        <div class="contact-item">
-          <span class="contact-label">ที่อยู่</span>
-          54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170
-        </div>
+        <div class="menu-panel">
+          <h3 class="menu-panel-title">เมนูเกี่ยวกับบริษัท</h3>
+          <div class="menu-list">
+            <a class="menu-link" href="about.html">เกี่ยวกับบริษัท</a>
+            <button class="menu-action" type="button" id="openContactPopup">ติดต่อเรา</button>
+            <a class="menu-link" href="agent-login.html">ล็อคอินตัวแทนจำหน่าย</a>
+            <a class="menu-link" href="agent-partner.html">สมัครเป็นตัวแทนจำหน่าย</a>
 
-        <div class="contact-item">
-          <span class="contact-label">Serial Number</span>
-          0105566099954
-        </div>
-
-        <div class="contact-item">
-          <span class="contact-label">โทรศัพท์</span>
-          02-043-2988
-        </div>
-
-        <div class="contact-item">
-          <span class="contact-label">มือถือ</span>
-          063-656-1447<br />
-          064-951-4888<br />
-          080-204-5455
+            <button
+              class="menu-action"
+              type="button"
+              data-content-title="อบรมการใช้งาน"
+              data-content-text="ก่อนเริ่มใช้งาน ลูกค้าควรได้รับการอธิบายขั้นตอน วิธีใช้งาน และแนวคิดของระบบอย่างครบถ้วน เพื่อให้เข้าใจตรงกันก่อนเข้าสู่การใช้งานจริง"
+              data-content-video="https://www.youtube.com/embed/dQw4w9WgXcQ"
+              data-content-link="ssb-training.html">
+              อบรมการใช้งาน
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Popup เนื้อหา + YouTube -->
-  <div class="modal" id="contentModal" aria-hidden="true">
-    <div class="modal-backdrop" data-close-modal="contentModal"></div>
-    <div class="modal-card">
-      <button class="modal-close" type="button" data-close-modal="contentModal">✕</button>
-      <h2 class="modal-title" id="contentModalTitle">หัวข้อ</h2>
-      <p class="modal-text" id="contentModalText"></p>
+  <!-- POPUP ติดต่อเรา -->
+  <div id="contactPopup" class="popup-backdrop">
+    <div class="popup-card contact-popup-card">
+      <button class="popup-close" type="button" id="closeContactPopup">✕</button>
+      <h3>บริษัท สยามทำ จำกัด</h3>
 
-      <div class="video-wrap" id="contentVideoWrap">
+      <div class="contact-lines">
+        <div class="contact-item">
+          <span class="contact-label">ที่อยู่</span>
+          <div class="contact-value">54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</div>
+        </div>
+
+        <div class="contact-item">
+          <span class="contact-label">Serial Number</span>
+          <div class="contact-value">0105566099954</div>
+        </div>
+
+        <div class="contact-item">
+          <span class="contact-label">โทรศัพท์</span>
+          <div class="contact-value">02-043-2988</div>
+        </div>
+
+        <div class="contact-item">
+          <span class="contact-label">มือถือ</span>
+          <div class="contact-value">063-656-1447 / 064-951-4888 / 080-204-5455</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- POPUP เนื้อหา + YOUTUBE -->
+  <div id="contentPopup" class="popup-backdrop">
+    <div class="popup-card content-popup-card">
+      <button class="popup-close" type="button" id="closeContentPopup">✕</button>
+      <h3 id="contentTitle">หัวข้อ</h3>
+      <p id="contentText"></p>
+
+      <div class="video-wrap" id="videoWrap">
         <iframe
-          id="contentModalVideo"
+          id="contentVideo"
           src=""
-          title="YouTube video player"
+          title="YouTube video"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen>
         </iframe>
       </div>
 
-      <div class="modal-actions" id="contentModalActions"></div>
+      <div class="content-actions" id="contentActions"></div>
     </div>
   </div>
 
-  <!-- Chat Online -->
-  <div class="chat-fab">
-    <div class="chat-panel" id="chatPanel">
-      <p class="chat-title">Chat Online</p>
-      <div class="chat-links">
-        <a class="chat-link" href="#" target="_blank" rel="noopener">LINE Official</a>
-        <a class="chat-link" href="#" target="_blank" rel="noopener">Facebook</a>
-        <a class="chat-link" href="#" target="_blank" rel="noopener">YouTube</a>
-        <a class="chat-link" href="#" target="_blank" rel="noopener">TikTok</a>
-      </div>
+  <!-- CHAT ONLINE -->
+  <div class="chat-widget" id="chatWidget">
+    <div class="chat-menu" id="chatMenu">
+      <a class="chat-item line" href="#" target="_blank" rel="noopener">
+        <span class="chat-icon">LINE</span>
+        <span>LINE Official</span>
+      </a>
+
+      <a class="chat-item facebook" href="#" target="_blank" rel="noopener">
+        <span class="chat-icon">FB</span>
+        <span>Facebook</span>
+      </a>
+
+      <a class="chat-item youtube" href="#" target="_blank" rel="noopener">
+        <span class="chat-icon">YT</span>
+        <span>YouTube</span>
+      </a>
+
+      <a class="chat-item tiktok" href="#" target="_blank" rel="noopener">
+        <span class="chat-icon">TT</span>
+        <span>TikTok</span>
+      </a>
     </div>
-    <button class="chat-toggle" type="button" id="chatToggle">Chat Online</button>
+
+    <button class="chat-fab" id="chatToggle" type="button" aria-label="เปิดเมนูแชท">
+      <span class="chat-fab-text">
+        <span>Chat</span>
+        <span>Online</span>
+      </span>
+      <span class="chat-caret">⌃</span>
+    </button>
   </div>
 
   <script type="module">
     import { renderSharedShell } from "./js/shared-shell.js";
     renderSharedShell("หน้าแรก");
+
+    setTimeout(() => {
+      const stickyTargets = [
+        ".ssb-shell-topbar",
+        ".shared-shell-topbar",
+        "header.ssb-topbar",
+        ".topbar",
+        ".shell-topbar",
+        "#appShell header",
+        "#appShell .topbar",
+        "#appShell .ssb-topbar"
+      ];
+      stickyTargets.forEach((selector) => {
+        document.querySelectorAll(selector).forEach((el) => {
+          el.style.position = "sticky";
+          el.style.top = "0";
+          el.style.zIndex = "1000";
+          el.style.backdropFilter = "blur(10px)";
+        });
+      });
+    }, 80);
   </script>
 
   <script>
-    const contactModal = document.getElementById("contactModal");
-    const contentModal = document.getElementById("contentModal");
-    const openContactPopup = document.getElementById("openContactPopup");
-    const contentModalTitle = document.getElementById("contentModalTitle");
-    const contentModalText = document.getElementById("contentModalText");
-    const contentModalVideo = document.getElementById("contentModalVideo");
-    const contentModalActions = document.getElementById("contentModalActions");
-    const contentVideoWrap = document.getElementById("contentVideoWrap");
-    const chatToggle = document.getElementById("chatToggle");
-    const chatPanel = document.getElementById("chatPanel");
-
-    function openModal(modal){
-      modal.classList.add("active");
-      modal.setAttribute("aria-hidden", "false");
+    function openPopup(el){
+      if(el) el.classList.add("show");
       document.body.style.overflow = "hidden";
     }
 
-    function closeModal(modal){
-      modal.classList.remove("active");
-      modal.setAttribute("aria-hidden", "true");
-      if(modal === contentModal){
-        contentModalVideo.src = "";
+    function closePopup(el){
+      if(el) el.classList.remove("show");
+      if (!document.querySelector(".popup-backdrop.show")) {
+        document.body.style.overflow = "";
       }
-      document.body.style.overflow = "";
     }
 
-    openContactPopup?.addEventListener("click", () => {
-      openModal(contactModal);
-    });
+    (function(){
+      const mainMenuPopup = document.getElementById("mainMenuPopup");
+      const contactPopup = document.getElementById("contactPopup");
+      const contentPopup = document.getElementById("contentPopup");
 
-    document.querySelectorAll("[data-close-modal]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const modalId = btn.getAttribute("data-close-modal");
-        const modal = document.getElementById(modalId);
-        if(modal) closeModal(modal);
+      const openMainMenu = document.getElementById("openMainMenu");
+      const closeMainMenu = document.getElementById("closeMainMenu");
+
+      const openContactPopup = document.getElementById("openContactPopup");
+      const closeContactPopup = document.getElementById("closeContactPopup");
+
+      const closeContentPopup = document.getElementById("closeContentPopup");
+
+      const contentTitle = document.getElementById("contentTitle");
+      const contentText = document.getElementById("contentText");
+      const contentVideo = document.getElementById("contentVideo");
+      const contentActions = document.getElementById("contentActions");
+      const videoWrap = document.getElementById("videoWrap");
+
+      openMainMenu?.addEventListener("click", function(){
+        openPopup(mainMenuPopup);
       });
-    });
 
-    document.addEventListener("keydown", (e) => {
-      if(e.key === "Escape"){
-        if(contactModal.classList.contains("active")) closeModal(contactModal);
-        if(contentModal.classList.contains("active")) closeModal(contentModal);
-        chatPanel.classList.remove("active");
-      }
-    });
-
-    document.querySelectorAll("[data-popup-title]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const title = btn.dataset.popupTitle || "";
-        const text = btn.dataset.popupText || "";
-        const video = btn.dataset.popupVideo || "";
-        const link = btn.dataset.popupLink || "";
-
-        contentModalTitle.textContent = title;
-        contentModalText.textContent = text;
-
-        if(video){
-          contentVideoWrap.style.display = "";
-          contentModalVideo.src = video;
-        } else {
-          contentVideoWrap.style.display = "none";
-          contentModalVideo.src = "";
-        }
-
-        contentModalActions.innerHTML = "";
-        if(link){
-          const a = document.createElement("a");
-          a.href = link;
-          a.className = "modal-link";
-          a.textContent = "ไปหน้ารายละเอียด";
-          contentModalActions.appendChild(a);
-        }
-
-        openModal(contentModal);
+      closeMainMenu?.addEventListener("click", function(){
+        closePopup(mainMenuPopup);
       });
-    });
 
-    chatToggle?.addEventListener("click", () => {
-      chatPanel.classList.toggle("active");
-    });
+      openContactPopup?.addEventListener("click", function(){
+        closePopup(mainMenuPopup);
+        openPopup(contactPopup);
+      });
 
-    document.addEventListener("click", (e) => {
-      const isInsideChat = e.target.closest(".chat-fab");
-      if(!isInsideChat){
-        chatPanel.classList.remove("active");
-      }
-    });
+      closeContactPopup?.addEventListener("click", function(){
+        closePopup(contactPopup);
+      });
 
-    // คลิกโลโก้ให้เปิดเมนู shell
-    const logoShell = document.querySelector(".logo-shell");
-    logoShell?.addEventListener("click", () => {
-      const shellToggle = document.querySelector(".ssb-shell-toggle, .ssb-menu-toggle, .menu-toggle, [data-shell-toggle]");
-      if(shellToggle){
-        shellToggle.click();
-      }
-    });
+      closeContentPopup?.addEventListener("click", function(){
+        contentVideo.src = "";
+        closePopup(contentPopup);
+      });
 
-    logoShell.style.cursor = "pointer";
+      [mainMenuPopup, contactPopup, contentPopup].forEach((popup) => {
+        popup?.addEventListener("click", function(event){
+          if(event.target === popup){
+            if(popup === contentPopup){
+              contentVideo.src = "";
+            }
+            closePopup(popup);
+          }
+        });
+      });
+
+      document.querySelectorAll("[data-content-title]").forEach((btn) => {
+        btn.addEventListener("click", function(){
+          const title = btn.getAttribute("data-content-title") || "";
+          const text = btn.getAttribute("data-content-text") || "";
+          const video = btn.getAttribute("data-content-video") || "";
+          const link = btn.getAttribute("data-content-link") || "";
+
+          contentTitle.textContent = title;
+          contentText.textContent = text;
+          contentActions.innerHTML = "";
+
+          if(video){
+            videoWrap.style.display = "block";
+            contentVideo.src = video;
+          } else {
+            videoWrap.style.display = "none";
+            contentVideo.src = "";
+          }
+
+          if(link){
+            const a = document.createElement("a");
+            a.href = link;
+            a.textContent = "ไปหน้ารายละเอียด";
+            contentActions.appendChild(a);
+          }
+
+          closePopup(mainMenuPopup);
+          openPopup(contentPopup);
+        });
+      });
+
+      document.addEventListener("keydown", function(event){
+        if(event.key === "Escape"){
+          contentVideo.src = "";
+          closePopup(mainMenuPopup);
+          closePopup(contactPopup);
+          closePopup(contentPopup);
+          document.getElementById("chatWidget")?.classList.remove("open");
+        }
+      });
+    })();
+
+    (function () {
+      const chatWidget = document.getElementById("chatWidget");
+      const chatToggle = document.getElementById("chatToggle");
+
+      if (!chatWidget || !chatToggle) return;
+
+      chatToggle.addEventListener("click", function (event) {
+        event.stopPropagation();
+        chatWidget.classList.toggle("open");
+      });
+
+      document.addEventListener("click", function (event) {
+        if (!chatWidget.contains(event.target)) {
+          chatWidget.classList.remove("open");
+        }
+      });
+    })();
+
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement(
+        {
+          pageLanguage: "th",
+          includedLanguages: "th,en,zh-CN,ja,ko",
+          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        },
+        "google_translate_element"
+      );
+    }
   </script>
+
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
