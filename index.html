@@ -17,7 +17,6 @@
   <style>
     :root{
       --ssb-blue:#0b4ea2;
-      --ssb-blue-dark:#083a7c;
       --ssb-gold:#d4af37;
       --ssb-text:#16324f;
       --ssb-border:rgba(11,78,162,.12);
@@ -75,8 +74,8 @@
 
     .logo-menu-wrap{
       position:relative;
-      width:min(100%, 980px);
-      min-height:720px;
+      width:min(100%, 1100px);
+      min-height:760px;
       display:flex;
       align-items:center;
       justify-content:center;
@@ -122,12 +121,14 @@
       transform:scale(1);
     }
 
-    .menu-pop.top-left{ left:3%; top:5%; transform-origin:right bottom; }
-    .menu-pop.top-right{ right:3%; top:5%; transform-origin:left bottom; }
-    .menu-pop.mid-left{ left:0; top:34%; transform-origin:right center; }
-    .menu-pop.mid-right{ right:0; top:34%; transform-origin:left center; }
-    .menu-pop.bottom-left{ left:5%; bottom:7%; transform-origin:right top; }
-    .menu-pop.bottom-right{ right:5%; bottom:7%; transform-origin:left top; }
+    .menu-pop.top-left{ left:3%; top:4%; transform-origin:right bottom; }
+    .menu-pop.top-right{ right:3%; top:4%; transform-origin:left bottom; }
+    .menu-pop.mid-left{ left:0; top:28%; transform-origin:right center; }
+    .menu-pop.mid-right{ right:0; top:28%; transform-origin:left center; }
+    .menu-pop.bottom-left{ left:4%; bottom:18%; transform-origin:right top; }
+    .menu-pop.bottom-right{ right:4%; bottom:18%; transform-origin:left top; }
+    .menu-pop.chat-left{ left:8%; bottom:3%; transform-origin:right top; }
+    .menu-pop.chat-right{ right:8%; bottom:3%; transform-origin:left top; }
 
     .menu-card{
       background:#ffffff;
@@ -138,7 +139,6 @@
     }
 
     .menu-card a,
-    .menu-card button,
     .menu-card .info-line{
       width:100%;
       display:flex;
@@ -208,6 +208,33 @@
       margin-bottom:0;
     }
 
+    .chat-card a{
+      justify-content:flex-start;
+      gap:10px;
+      padding-left:14px;
+      padding-right:14px;
+      text-align:left;
+    }
+
+    .chat-icon{
+      width:34px;
+      height:34px;
+      border-radius:999px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 34px;
+      color:#fff;
+      font-size:12px;
+      font-weight:800;
+      box-shadow:0 6px 14px rgba(0,0,0,.12);
+    }
+
+    .chat-icon.line{ background:#06c755; }
+    .chat-icon.facebook{ background:#1877f2; }
+    .chat-icon.youtube{ background:#ff0000; }
+    .chat-icon.tiktok{ background:#111111; }
+
     .menu-toggle-note{
       position:absolute;
       left:50%;
@@ -227,7 +254,7 @@
 
     @media (max-width: 1100px){
       .logo-menu-wrap{
-        min-height:860px;
+        min-height:900px;
       }
 
       .logo-menu{
@@ -295,6 +322,8 @@
       .menu-pop.mid-right{order:6;}
       .menu-pop.bottom-left{order:7;}
       .menu-pop.bottom-right{order:8;}
+      .menu-pop.chat-left{order:9;}
+      .menu-pop.chat-right{order:10;}
     }
   </style>
 </head>
@@ -355,6 +384,32 @@
               <div class="info-line">Serial: 0105566099954</div>
               <div class="info-line">โทร 02-043-2988</div>
               <div class="info-line">063-656-1447 / 064-951-4888 / 080-204-5455</div>
+            </div>
+          </div>
+
+          <div class="menu-pop chat-left">
+            <div class="menu-card chat-card">
+              <a href="#" target="_blank" rel="noopener">
+                <span class="chat-icon line">LINE</span>
+                <span>LINE Official</span>
+              </a>
+              <a href="#" target="_blank" rel="noopener">
+                <span class="chat-icon facebook">FB</span>
+                <span>Facebook</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="menu-pop chat-right">
+            <div class="menu-card chat-card">
+              <a href="#" target="_blank" rel="noopener">
+                <span class="chat-icon youtube">YT</span>
+                <span>YouTube</span>
+              </a>
+              <a href="#" target="_blank" rel="noopener">
+                <span class="chat-icon tiktok">TT</span>
+                <span>TikTok</span>
+              </a>
             </div>
           </div>
         </div>
@@ -419,5 +474,69 @@
   </script>
 
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<!-- COMPANY POPUP -->
+<div id="companyPopup" style="
+position:fixed;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.35);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:9999;
+">
+
+  <div style="
+  background:#fff;
+  padding:24px 28px;
+  border-radius:18px;
+  max-width:420px;
+  width:90%;
+  text-align:center;
+  box-shadow:0 20px 40px rgba(0,0,0,.25);
+  font-family:'Prompt',sans-serif;
+  ">
+
+    <div style="font-size:18px;font-weight:700;color:#0b4ea2;margin-bottom:12px;">
+      บริษัท สยามทำ จำกัด
+    </div>
+
+    <div style="font-size:14px;line-height:1.6;margin-bottom:10px;">
+      54 ซอย 53 ถนนพุทธมณฑลสาย 1<br>
+      แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170
+    </div>
+
+    <div style="font-size:14px;margin-bottom:6px;">
+      Serial: 0105566099954
+    </div>
+
+    <div style="font-size:14px;margin-bottom:14px;">
+      โทร 02-043-2988<br>
+      063-656-1447 / 064-951-4888 / 080-204-5455
+    </div>
+
+    <button onclick="document.getElementById('companyPopup').style.display='none'"
+    style="
+    background:#0b4ea2;
+    color:#fff;
+    border:none;
+    padding:10px 18px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+    ">
+      ปิด
+    </button>
+
+  </div>
+</div>
+
+<script>
+function openCompanyPopup(){
+  document.getElementById("companyPopup").style.display="flex";
+}
+</script>
 </body>
 </html>
