@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -86,7 +87,7 @@
       flex-direction:column;
       align-items:center;
       justify-content:center;
-      gap:10px;
+      gap:12px;
     }
 
     .logo-orbit-wrap{
@@ -139,16 +140,12 @@
       font-weight:800;
       box-shadow:0 10px 22px rgba(11,78,162,.08);
       text-align:center;
-      margin-top:-40px;
+      margin-top:-34px;
       position:relative;
       z-index:25;
-      cursor:pointer;
       text-decoration:none;
-    }
-
-    .logo-note:hover{
-      transform:translateY(-1px);
-      box-shadow:0 14px 28px rgba(11,78,162,.12);
+      pointer-events:none;
+      user-select:none;
     }
 
     .orbit-item{
@@ -211,12 +208,12 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      background:#ffffff;
-      color:var(--ssb-blue);
+      background:var(--ssb-blue);
+      color:#ffffff;
       border:2px solid var(--ssb-blue);
       font-size:12px;
       font-weight:800;
-      box-shadow:0 8px 18px rgba(11,78,162,.10);
+      box-shadow:0 8px 18px rgba(11,78,162,.14);
       flex:0 0 44px;
     }
 
@@ -224,8 +221,8 @@
       width:48px;
       height:48px;
       flex:0 0 48px;
-      background:#ffffff;
-      color:var(--ssb-blue);
+      background:var(--ssb-blue);
+      color:#ffffff;
       border:2px solid var(--ssb-blue);
     }
 
@@ -449,7 +446,7 @@
         font-size:16px;
         min-height:46px;
         padding:10px 22px;
-        margin-top:-34px;
+        margin-top:-30px;
       }
 
       .logo-orbit-wrap.open .orbit-1{ transform:translate(-50%, -50%) translate(0, -235px) scale(1); }
@@ -523,7 +520,7 @@
         font-size:13px;
         min-height:42px;
         padding:8px 18px;
-        margin-top:-26px;
+        margin-top:-22px;
       }
 
       .logo-orbit-wrap.open .orbit-1{ transform:translate(-50%, -50%) translate(0, -146px) scale(1); }
@@ -630,7 +627,7 @@
               </a>
             </div>
 
-            <button class="logo-note" id="logoNoteButton" type="button">คลิกโลโก้เพื่อเปิดเมนู</button>
+            <div class="logo-note">คลิกที่โลโก้เพื่อเปิดเมนู</div>
           </div>
         </div>
       </section>
@@ -731,20 +728,13 @@
     (function () {
       const orbitWrap = document.getElementById("logoOrbitWrap");
       const logoBtn = document.getElementById("logoMenuButton");
-      const logoNoteButton = document.getElementById("logoNoteButton");
 
       if (!orbitWrap || !logoBtn) return;
 
-      function toggleOrbit(event){
-        if (event) event.stopPropagation();
+      logoBtn.addEventListener("click", function (event) {
+        event.stopPropagation();
         orbitWrap.classList.toggle("open");
-      }
-
-      logoBtn.addEventListener("click", toggleOrbit);
-
-      if (logoNoteButton){
-        logoNoteButton.addEventListener("click", toggleOrbit);
-      }
+      });
 
       orbitWrap.addEventListener("click", function (event) {
         event.stopPropagation();
@@ -788,3 +778,4 @@
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
+```
