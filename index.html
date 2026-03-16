@@ -17,11 +17,18 @@
   <style>
     :root{
       --ssb-blue:#0b4ea2;
-      --ssb-blue-dark:#083a7c;
+      --ssb-blue-2:#1b67cf;
+      --ssb-blue-dark:#072f66;
       --ssb-gold:#d4af37;
       --ssb-text:#16324f;
-      --ssb-shadow:0 18px 40px rgba(11,78,162,.12);
-      --ssb-shadow-strong:0 22px 54px rgba(11,78,162,.18);
+      --ssb-white:#ffffff;
+      --ssb-page-1:#f8fbff;
+      --ssb-page-2:#edf3fb;
+      --ssb-page-3:#dfe8f5;
+      --ssb-glass:rgba(255,255,255,.58);
+      --ssb-glass-border:rgba(255,255,255,.42);
+      --ssb-shadow:0 20px 60px rgba(10,54,112,.12);
+      --ssb-shadow-strong:0 26px 70px rgba(10,54,112,.18);
       --ssb-max:1320px;
     }
 
@@ -34,8 +41,40 @@
 
     body{
       margin:0;
-      background:#f2f4f7;
       color:var(--ssb-text);
+      background:
+        radial-gradient(circle at 50% 42%, rgba(255,255,255,.98) 0%, rgba(255,255,255,.96) 16%, rgba(237,243,251,.94) 34%, rgba(223,232,245,.96) 68%, #dce6f3 100%),
+        linear-gradient(135deg, var(--ssb-page-1) 0%, var(--ssb-page-2) 45%, var(--ssb-page-3) 100%);
+      overflow-x:hidden;
+      position:relative;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:0;
+      background:
+        radial-gradient(circle at 50% 48%, rgba(11,78,162,.10) 0%, rgba(11,78,162,.06) 16%, rgba(11,78,162,.03) 28%, transparent 52%),
+        radial-gradient(circle at 14% 12%, rgba(255,255,255,.92) 0%, rgba(255,255,255,.48) 16%, transparent 40%),
+        radial-gradient(circle at 86% 14%, rgba(255,255,255,.85) 0%, rgba(255,255,255,.36) 14%, transparent 34%),
+        radial-gradient(circle at 50% 92%, rgba(11,78,162,.05) 0%, transparent 34%);
+    }
+
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:0;
+      opacity:.50;
+      background-image:
+        linear-gradient(rgba(255,255,255,.24) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.24) 1px, transparent 1px);
+      background-size:42px 42px;
+      mask-image:radial-gradient(circle at center, rgba(0,0,0,.95) 0%, rgba(0,0,0,.55) 40%, transparent 78%);
+      -webkit-mask-image:radial-gradient(circle at center, rgba(0,0,0,.95) 0%, rgba(0,0,0,.55) 40%, transparent 78%);
     }
 
     body .ssb-shell-topbar,
@@ -46,7 +85,13 @@
       position:sticky !important;
       top:0 !important;
       z-index:1000 !important;
-      backdrop-filter:blur(10px);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+    }
+
+    .ssb-main{
+      position:relative;
+      z-index:1;
     }
 
     .home-page{
@@ -61,15 +106,18 @@
       justify-content:flex-end;
       align-items:center;
       min-height:42px;
-      margin-bottom:4px;
+      margin-bottom:2px;
+      position:relative;
+      z-index:5;
     }
 
     .logo-stage{
-      min-height:calc(100vh - 140px);
+      min-height:calc(100vh - 145px);
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:0 0 16px;
+      padding:2px 0 20px;
+      position:relative;
     }
 
     .logo-layout{
@@ -90,11 +138,44 @@
 
     .logo-orbit-wrap{
       position:relative;
-      width:min(94vw, 920px);
-      height:min(94vw, 920px);
+      width:min(94vw, 930px);
+      height:min(94vw, 930px);
       display:flex;
       align-items:center;
       justify-content:center;
+      isolation:isolate;
+    }
+
+    .logo-orbit-wrap::before{
+      content:"";
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:660px;
+      height:660px;
+      transform:translate(-50%, -50%);
+      border-radius:50%;
+      z-index:1;
+      background:
+        radial-gradient(circle, rgba(255,255,255,.98) 0%, rgba(255,255,255,.94) 18%, rgba(219,231,248,.74) 34%, rgba(156,187,230,.26) 48%, rgba(11,78,162,.08) 59%, transparent 75%);
+      filter:blur(1px);
+    }
+
+    .logo-orbit-wrap::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:520px;
+      height:520px;
+      transform:translate(-50%, -50%);
+      border-radius:50%;
+      z-index:2;
+      border:1px solid rgba(11,78,162,.10);
+      box-shadow:
+        0 0 0 20px rgba(11,78,162,.035),
+        0 0 0 52px rgba(11,78,162,.025),
+        0 0 0 92px rgba(11,78,162,.015);
     }
 
     .logo-button{
@@ -108,7 +189,7 @@
     }
 
     .logo-button:hover{
-      transform:scale(1.03);
+      transform:scale(1.035);
     }
 
     .logo-button img{
@@ -116,78 +197,75 @@
       height:100%;
       object-fit:contain;
       display:block;
-      filter:drop-shadow(0 18px 28px rgba(0,0,0,.20));
+      filter:
+        drop-shadow(0 20px 34px rgba(0,0,0,.18))
+        drop-shadow(0 0 28px rgba(212,175,55,.18));
     }
 
     .main-logo{
-      width:min(31vw, 280px);
-      height:min(31vw, 280px);
-    }
-
-    .logo-note{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:52px;
-      padding:12px 28px;
-      border-radius:999px;
-      background:#ffffff;
-      border:1px solid rgba(11,78,162,.16);
-      color:var(--ssb-blue);
-      font-size:18px;
-      font-weight:800;
-      box-shadow:0 10px 24px rgba(11,78,162,.08);
-      text-align:center;
-      margin-top:-16px;
-      position:relative;
-      z-index:35;
-      pointer-events:none;
-      user-select:none;
+      width:min(31vw, 285px);
+      height:min(31vw, 285px);
     }
 
     .orbit-item{
       position:absolute;
       left:50%;
       top:50%;
-      width:142px;
+      width:144px;
       min-height:98px;
       display:flex;
       flex-direction:column;
       align-items:center;
       justify-content:center;
       gap:8px;
-      padding:10px 10px 12px;
+      padding:11px 10px 13px;
       text-decoration:none;
       border:none;
       border-radius:24px;
       cursor:pointer;
-      background:var(--ssb-blue);
       color:#fff;
-      box-shadow:0 14px 30px rgba(11,78,162,.18);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,.04) 100%),
+        linear-gradient(135deg, #0b4ea2 0%, #155fbe 54%, #083a7c 100%);
+      box-shadow:
+        0 18px 36px rgba(11,78,162,.20),
+        inset 0 1px 0 rgba(255,255,255,.18),
+        inset 0 -1px 0 rgba(0,0,0,.06);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
       opacity:0;
       pointer-events:none;
       transform:translate(-50%, -50%) scale(.72);
-      transition:opacity .28s ease, transform .28s ease, box-shadow .22s ease;
+      transition:
+        opacity .28s ease,
+        transform .28s ease,
+        box-shadow .24s ease,
+        filter .24s ease;
       outline:none;
       z-index:10;
     }
 
     .orbit-item:hover{
-      box-shadow:0 18px 36px rgba(11,78,162,.24);
+      box-shadow:
+        0 24px 44px rgba(11,78,162,.26),
+        inset 0 1px 0 rgba(255,255,255,.24),
+        inset 0 -1px 0 rgba(0,0,0,.08);
+      filter:brightness(1.04);
     }
 
     .orbit-item.primary{
-      width:190px;
-      min-height:118px;
+      width:204px;
+      min-height:126px;
       border-radius:30px;
-      background:linear-gradient(135deg, #0b4ea2 0%, #1d6fe0 62%, #d4af37 100%);
-      box-shadow:0 20px 42px rgba(11,78,162,.24);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.18) 0%, rgba(255,255,255,.05) 100%),
+        linear-gradient(135deg, #0b4ea2 0%, #2c7cea 58%, #d4af37 100%);
+      box-shadow:
+        0 26px 54px rgba(11,78,162,.28),
+        inset 0 1px 0 rgba(255,255,255,.24),
+        inset 0 -1px 0 rgba(0,0,0,.08),
+        0 0 28px rgba(43,123,232,.18);
       z-index:18;
-    }
-
-    .logo-orbit-wrap.open .orbit-item{
-      opacity:1;
-      pointer-events:auto;
     }
 
     .orbit-icon{
@@ -197,18 +275,22 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      background:#fff;
+      background:
+        linear-gradient(180deg, #ffffff 0%, #f3f7fd 100%);
       color:var(--ssb-blue);
       font-size:12px;
       font-weight:800;
       flex:0 0 46px;
-      box-shadow:0 6px 16px rgba(0,0,0,.12);
+      box-shadow:
+        0 8px 18px rgba(0,0,0,.10),
+        inset 0 1px 0 rgba(255,255,255,.88);
+      border:1px solid rgba(11,78,162,.08);
     }
 
     .orbit-item.primary .orbit-icon{
-      width:54px;
-      height:54px;
-      flex:0 0 54px;
+      width:56px;
+      height:56px;
+      flex:0 0 56px;
       font-size:14px;
     }
 
@@ -222,40 +304,87 @@
     }
 
     .orbit-item.primary .orbit-label{
-      font-size:17px;
+      font-size:18px;
       line-height:1.18;
     }
 
-    /* DESKTOP - ล้อมรอบโลโก้ */
-    .logo-orbit-wrap.open .orbit-1{ transform:translate(-50%, -50%) translate(0, -325px) scale(1); }
-    .logo-orbit-wrap.open .orbit-2{ transform:translate(-50%, -50%) translate(222px, -248px) scale(1); }
-    .logo-orbit-wrap.open .orbit-3{ transform:translate(-50%, -50%) translate(320px, -72px) scale(1); }
-    .logo-orbit-wrap.open .orbit-4{ transform:translate(-50%, -50%) translate(318px, 108px) scale(1); }
-    .logo-orbit-wrap.open .orbit-5{ transform:translate(-50%, -50%) translate(215px, 272px) scale(1); }
-    .logo-orbit-wrap.open .orbit-6{ transform:translate(-50%, -50%) translate(0, 315px) scale(1); }
-    .logo-orbit-wrap.open .orbit-7{ transform:translate(-50%, -50%) translate(-215px, 272px) scale(1); }
-    .logo-orbit-wrap.open .orbit-8{ transform:translate(-50%, -50%) translate(-318px, 108px) scale(1); }
-    .logo-orbit-wrap.open .orbit-9{ transform:translate(-50%, -50%) translate(-320px, -72px) scale(1); }
-    .logo-orbit-wrap.open .orbit-10{ transform:translate(-50%, -50%) translate(-222px, -248px) scale(1); }
+    .logo-orbit-wrap.open .orbit-item{
+      opacity:1;
+      pointer-events:auto;
+      animation:ssbFloatIn .45s ease both;
+    }
+
+    @keyframes ssbFloatIn{
+      0%{
+        opacity:0;
+        filter:blur(4px);
+      }
+      100%{
+        opacity:1;
+        filter:blur(0);
+      }
+    }
+
+    /* ล้อมรอบโลโก้ */
+    .logo-orbit-wrap.open .orbit-1{ transform:translate(-50%, -50%) translate(0, -332px) scale(1); }
+    .logo-orbit-wrap.open .orbit-2{ transform:translate(-50%, -50%) translate(226px, -252px) scale(1); }
+    .logo-orbit-wrap.open .orbit-3{ transform:translate(-50%, -50%) translate(324px, -72px) scale(1); }
+    .logo-orbit-wrap.open .orbit-4{ transform:translate(-50%, -50%) translate(322px, 114px) scale(1); }
+    .logo-orbit-wrap.open .orbit-5{ transform:translate(-50%, -50%) translate(218px, 278px) scale(1); }
+    .logo-orbit-wrap.open .orbit-6{ transform:translate(-50%, -50%) translate(0, 320px) scale(1); }
+    .logo-orbit-wrap.open .orbit-7{ transform:translate(-50%, -50%) translate(-218px, 278px) scale(1); }
+    .logo-orbit-wrap.open .orbit-8{ transform:translate(-50%, -50%) translate(-322px, 114px) scale(1); }
+    .logo-orbit-wrap.open .orbit-9{ transform:translate(-50%, -50%) translate(-324px, -72px) scale(1); }
+    .logo-orbit-wrap.open .orbit-10{ transform:translate(-50%, -50%) translate(-226px, -252px) scale(1); }
+
+    .logo-note{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:54px;
+      padding:12px 30px;
+      border-radius:999px;
+      background:rgba(255,255,255,.74);
+      border:1px solid rgba(11,78,162,.12);
+      color:var(--ssb-blue);
+      font-size:18px;
+      font-weight:800;
+      box-shadow:
+        0 14px 30px rgba(11,78,162,.08),
+        inset 0 1px 0 rgba(255,255,255,.72);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+      text-align:center;
+      margin-top:-8px;
+      position:relative;
+      z-index:35;
+      pointer-events:none;
+      user-select:none;
+    }
 
     .popup-backdrop{
       position:fixed;
       inset:0;
-      background:rgba(0,0,0,.38);
+      background:rgba(2,15,35,.42);
       display:none;
       align-items:center;
       justify-content:center;
       z-index:9999;
       padding:16px;
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
     }
 
     .popup-card{
-      background:#fff;
-      width:min(92vw, 440px);
-      border-radius:22px;
+      background:rgba(255,255,255,.88);
+      border:1px solid rgba(255,255,255,.52);
+      width:min(92vw, 460px);
+      border-radius:24px;
       padding:24px 24px 20px;
-      box-shadow:0 26px 60px rgba(0,0,0,.24);
+      box-shadow:0 28px 70px rgba(0,0,0,.24);
       text-align:center;
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
     }
 
     .popup-card h3{
@@ -284,6 +413,7 @@
       font-size:15px;
       font-weight:700;
       cursor:pointer;
+      box-shadow:0 12px 28px rgba(11,78,162,.20);
     }
 
     .chat-widget{
@@ -324,11 +454,15 @@
       text-decoration:none;
       color:#fff;
       border-radius:999px;
-      box-shadow:0 14px 28px rgba(11,78,162,.16), inset 0 1px 0 rgba(255,255,255,.16);
+      box-shadow:
+        0 14px 28px rgba(11,78,162,.16),
+        inset 0 1px 0 rgba(255,255,255,.16);
       transition:.24s ease;
       border:1px solid rgba(255,255,255,.18);
       font-size:14px;
       font-weight:700;
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
     }
 
     .chat-item:hover{
@@ -361,10 +495,14 @@
       justify-content:center;
       border:none;
       border-radius:999px;
-      background:linear-gradient(135deg, #0b4ea2, #1f69cd);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,.04) 100%),
+        linear-gradient(135deg, #0b4ea2, #1f69cd);
       color:#fff;
       cursor:pointer;
-      box-shadow:0 16px 34px rgba(11,78,162,.28);
+      box-shadow:
+        0 18px 38px rgba(11,78,162,.28),
+        inset 0 1px 0 rgba(255,255,255,.18);
       border:1px solid rgba(255,255,255,.22);
       transition:.22s ease;
       position:relative;
@@ -411,9 +549,23 @@
         height:min(96vw, 760px);
       }
 
+      .logo-orbit-wrap::before{
+        width:520px;
+        height:520px;
+      }
+
+      .logo-orbit-wrap::after{
+        width:390px;
+        height:390px;
+        box-shadow:
+          0 0 0 16px rgba(11,78,162,.035),
+          0 0 0 40px rgba(11,78,162,.025),
+          0 0 0 72px rgba(11,78,162,.015);
+      }
+
       .main-logo{
-        width:min(38vw, 240px);
-        height:min(38vw, 240px);
+        width:min(37vw, 240px);
+        height:min(37vw, 240px);
       }
 
       .orbit-item{
@@ -422,30 +574,34 @@
       }
 
       .orbit-item.primary{
-        width:170px;
-        min-height:108px;
+        width:176px;
+        min-height:112px;
       }
 
       .logo-note{
         font-size:16px;
         min-height:46px;
         padding:10px 22px;
-        margin-top:-8px;
       }
 
-      .logo-orbit-wrap.open .orbit-1{ transform:translate(-50%, -50%) translate(0, -260px) scale(1); }
-      .logo-orbit-wrap.open .orbit-2{ transform:translate(-50%, -50%) translate(178px, -198px) scale(1); }
-      .logo-orbit-wrap.open .orbit-3{ transform:translate(-50%, -50%) translate(258px, -62px) scale(1); }
-      .logo-orbit-wrap.open .orbit-4{ transform:translate(-50%, -50%) translate(256px, 86px) scale(1); }
-      .logo-orbit-wrap.open .orbit-5{ transform:translate(-50%, -50%) translate(172px, 220px) scale(1); }
-      .logo-orbit-wrap.open .orbit-6{ transform:translate(-50%, -50%) translate(0, 255px) scale(1); }
-      .logo-orbit-wrap.open .orbit-7{ transform:translate(-50%, -50%) translate(-172px, 220px) scale(1); }
-      .logo-orbit-wrap.open .orbit-8{ transform:translate(-50%, -50%) translate(-256px, 86px) scale(1); }
-      .logo-orbit-wrap.open .orbit-9{ transform:translate(-50%, -50%) translate(-258px, -62px) scale(1); }
-      .logo-orbit-wrap.open .orbit-10{ transform:translate(-50%, -50%) translate(-178px, -198px) scale(1); }
+      .logo-orbit-wrap.open .orbit-1{ transform:translate(-50%, -50%) translate(0, -264px) scale(1); }
+      .logo-orbit-wrap.open .orbit-2{ transform:translate(-50%, -50%) translate(180px, -200px) scale(1); }
+      .logo-orbit-wrap.open .orbit-3{ transform:translate(-50%, -50%) translate(260px, -62px) scale(1); }
+      .logo-orbit-wrap.open .orbit-4{ transform:translate(-50%, -50%) translate(258px, 90px) scale(1); }
+      .logo-orbit-wrap.open .orbit-5{ transform:translate(-50%, -50%) translate(176px, 224px) scale(1); }
+      .logo-orbit-wrap.open .orbit-6{ transform:translate(-50%, -50%) translate(0, 258px) scale(1); }
+      .logo-orbit-wrap.open .orbit-7{ transform:translate(-50%, -50%) translate(-176px, 224px) scale(1); }
+      .logo-orbit-wrap.open .orbit-8{ transform:translate(-50%, -50%) translate(-258px, 90px) scale(1); }
+      .logo-orbit-wrap.open .orbit-9{ transform:translate(-50%, -50%) translate(-260px, -62px) scale(1); }
+      .logo-orbit-wrap.open .orbit-10{ transform:translate(-50%, -50%) translate(-180px, -200px) scale(1); }
     }
 
     @media (max-width: 760px){
+      body::after{
+        background-size:30px 30px;
+        opacity:.38;
+      }
+
       .home-page{
         width:min(100% - 14px, var(--ssb-max));
         padding-top:12px;
@@ -456,7 +612,7 @@
       }
 
       .logo-stage{
-        min-height:calc(100vh - 110px);
+        min-height:calc(100vh - 115px);
         align-items:flex-start;
         padding-top:8px;
       }
@@ -466,9 +622,23 @@
         height:min(96vw, 450px);
       }
 
+      .logo-orbit-wrap::before{
+        width:330px;
+        height:330px;
+      }
+
+      .logo-orbit-wrap::after{
+        width:260px;
+        height:260px;
+        box-shadow:
+          0 0 0 14px rgba(11,78,162,.035),
+          0 0 0 34px rgba(11,78,162,.025),
+          0 0 0 60px rgba(11,78,162,.015);
+      }
+
       .main-logo{
-        width:min(44vw, 150px);
-        height:min(44vw, 150px);
+        width:min(44vw, 152px);
+        height:min(44vw, 152px);
       }
 
       .orbit-item{
@@ -479,8 +649,8 @@
       }
 
       .orbit-item.primary{
-        width:138px;
-        min-height:90px;
+        width:140px;
+        min-height:92px;
         border-radius:24px;
       }
 
@@ -688,7 +858,8 @@
           el.style.position = "sticky";
           el.style.top = "0";
           el.style.zIndex = "1000";
-          el.style.backdropFilter = "blur(10px)";
+          el.style.backdropFilter = "blur(14px)";
+          el.style.webkitBackdropFilter = "blur(14px)";
         });
       });
     }, 80);
