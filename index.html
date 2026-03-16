@@ -17,12 +17,16 @@
   <style>
     :root{
       --ssb-blue:#0b4ea2;
+      --ssb-blue-dark:#083a7c;
       --ssb-gold:#d4af37;
       --ssb-text:#16324f;
       --ssb-border:rgba(11,78,162,.12);
-      --ssb-shadow:0 18px 40px rgba(11,78,162,.12);
-      --ssb-shadow-strong:0 24px 54px rgba(11,78,162,.18);
+      --ssb-shadow:0 18px 40px rgba(11,78,162,.10);
+      --ssb-shadow-strong:0 22px 52px rgba(11,78,162,.14);
       --ssb-max:1320px;
+      --radius-xl:28px;
+      --radius-lg:22px;
+      --radius-md:16px;
     }
 
     *{
@@ -30,7 +34,7 @@
       font-family:'Prompt', sans-serif !important;
     }
 
-    html{scroll-behavior:smooth;}
+    html{ scroll-behavior:smooth; }
 
     body{
       margin:0;
@@ -41,7 +45,7 @@
     .home-page{
       width:min(var(--ssb-max), calc(100% - 24px));
       margin:0 auto;
-      padding:16px 0 32px;
+      padding:18px 0 34px;
       min-height:calc(100vh - 80px);
     }
 
@@ -50,7 +54,7 @@
       justify-content:flex-end;
       align-items:center;
       min-height:42px;
-      margin-bottom:10px;
+      margin-bottom:16px;
     }
 
     body .ssb-shell-topbar,
@@ -65,156 +69,260 @@
     }
 
     .logo-stage{
-      min-height:calc(100vh - 150px);
+      min-height:calc(100vh - 160px);
       display:flex;
       align-items:center;
       justify-content:center;
       padding:10px 0 24px;
     }
 
-    .logo-menu-wrap{
-      position:relative;
-      width:min(100%, 1100px);
-      min-height:760px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .logo-menu{
-      position:relative;
-      z-index:20;
-      width:min(56vw, 520px);
-      aspect-ratio:1/1;
-      border:none;
-      background:transparent;
-      padding:0;
-      cursor:pointer;
-      transition:transform .25s ease;
-    }
-
-    .logo-menu:hover{
-      transform:scale(1.02);
-    }
-
-    .logo-menu img{
+    .logo-layout{
       width:100%;
-      height:100%;
-      object-fit:contain;
-      display:block;
-      filter:drop-shadow(0 18px 30px rgba(0,0,0,.18));
+      display:grid;
+      grid-template-columns:minmax(280px, 1fr) minmax(280px, 420px) minmax(280px, 1fr);
+      gap:34px;
+      align-items:center;
     }
 
-    .menu-pop{
-      position:absolute;
-      z-index:10;
-      opacity:0;
-      pointer-events:none;
-      transform:scale(.88);
-      transition:opacity .28s ease, transform .28s ease;
-      width:min(31vw, 270px);
+    .side-column{
+      display:flex;
+      flex-direction:column;
+      gap:18px;
     }
 
-    .menu-open .menu-pop{
-      opacity:1;
-      pointer-events:auto;
-      transform:scale(1);
+    .side-column.right{
+      align-items:flex-end;
     }
 
-    .menu-pop.top-left{ left:3%; top:4%; transform-origin:right bottom; }
-    .menu-pop.top-right{ right:3%; top:4%; transform-origin:left bottom; }
-    .menu-pop.mid-left{ left:0; top:28%; transform-origin:right center; }
-    .menu-pop.mid-right{ right:0; top:28%; transform-origin:left center; }
-    .menu-pop.bottom-left{ left:4%; bottom:18%; transform-origin:right top; }
-    .menu-pop.bottom-right{ right:4%; bottom:18%; transform-origin:left top; }
-    .menu-pop.chat-left{ left:8%; bottom:3%; transform-origin:right top; }
-    .menu-pop.chat-right{ right:8%; bottom:3%; transform-origin:left top; }
-
-    .menu-card{
+    .menu-group{
+      width:100%;
+      max-width:340px;
       background:#ffffff;
       border:1px solid var(--ssb-border);
-      border-radius:24px;
+      border-radius:26px;
       box-shadow:var(--ssb-shadow);
       padding:14px;
     }
 
-    .menu-card a,
-    .menu-card .info-line{
+    .menu-group a,
+    .menu-group button{
       width:100%;
+      min-height:58px;
       display:flex;
       align-items:center;
       justify-content:center;
-      min-height:54px;
-      padding:10px 14px;
-      border-radius:16px;
       text-align:center;
       text-decoration:none;
-      font-size:15px;
+      border:none;
+      border-radius:18px;
+      padding:12px 16px;
+      margin-bottom:12px;
+      cursor:pointer;
+      background:linear-gradient(180deg,#ffffff 0%, #eef5ff 100%);
+      color:var(--ssb-blue);
+      font-size:16px;
       font-weight:700;
       line-height:1.4;
-      border:none;
-    }
-
-    .menu-card a{
-      color:var(--ssb-blue);
-      background:linear-gradient(180deg,#ffffff 0%, #eef5ff 100%);
       border:1px solid rgba(11,78,162,.10);
-      margin-bottom:10px;
-      transition:.2s ease;
+      transition:.22s ease;
     }
 
-    .menu-card a:last-child{
+    .menu-group a:last-child,
+    .menu-group button:last-child{
       margin-bottom:0;
     }
 
-    .menu-card a:hover{
+    .menu-group a:hover,
+    .menu-group button:hover{
       transform:translateY(-2px);
-      box-shadow:0 10px 20px rgba(11,78,162,.10);
       background:#ffffff;
+      box-shadow:0 10px 22px rgba(11,78,162,.10);
     }
 
-    .menu-card .primary-link{
+    .menu-group .primary-link{
       background:linear-gradient(135deg, #0b4ea2 0%, #1f69cd 58%, #d4af37 100%);
       color:#fff;
       border:none;
-      box-shadow:0 12px 24px rgba(11,78,162,.16);
+      box-shadow:0 14px 26px rgba(11,78,162,.16);
     }
 
-    .menu-card .primary-link:hover{
-      background:linear-gradient(135deg, #0b4ea2 0%, #1f69cd 58%, #d4af37 100%);
+    .menu-group .primary-link:hover{
       color:#fff;
+      background:linear-gradient(135deg, #0b4ea2 0%, #1f69cd 58%, #d4af37 100%);
     }
 
-    .company-card{
+    .logo-center{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:18px;
+    }
+
+    .logo-button{
+      width:min(100%, 400px);
+      aspect-ratio:1 / 1;
+      border:none;
+      background:transparent;
+      padding:0;
+      cursor:pointer;
+      transition:transform .24s ease;
+    }
+
+    .logo-button:hover{
+      transform:scale(1.02);
+    }
+
+    .logo-button img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      display:block;
+      filter:drop-shadow(0 18px 28px rgba(0,0,0,.18));
+    }
+
+    .logo-note{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:42px;
+      padding:10px 18px;
+      border-radius:999px;
       background:#ffffff;
-      border:1px solid var(--ssb-border);
-      border-radius:24px;
-      box-shadow:var(--ssb-shadow-strong);
+      border:1px solid rgba(11,78,162,.12);
+      color:var(--ssb-blue);
+      font-size:13px;
+      font-weight:700;
+      box-shadow:0 8px 18px rgba(11,78,162,.08);
+      text-align:center;
+    }
+
+    .desktop-menus{
+      display:contents;
+    }
+
+    .mobile-menu-wrap{
+      display:none;
+      width:100%;
+      max-width:520px;
+      margin:0 auto;
+    }
+
+    .mobile-menus{
+      display:none;
+      margin-top:16px;
+      gap:16px;
+    }
+
+    .mobile-menu-wrap.open .mobile-menus{
+      display:flex;
+      flex-direction:column;
+    }
+
+    .popup-backdrop{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.35);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:9999;
       padding:16px;
     }
 
-    .company-card .info-line{
-      background:linear-gradient(180deg,#ffffff 0%, #f7fbff 100%);
-      border:1px solid rgba(11,78,162,.10);
+    .popup-card{
+      background:#fff;
+      width:min(92vw, 440px);
+      border-radius:22px;
+      padding:24px 24px 20px;
+      box-shadow:0 26px 60px rgba(0,0,0,.24);
+      text-align:center;
+    }
+
+    .popup-card h3{
+      margin:0 0 12px;
       color:var(--ssb-blue);
-      margin-bottom:10px;
-      min-height:auto;
-      padding:12px 14px;
+      font-size:22px;
+      line-height:1.3;
+    }
+
+    .popup-card p{
+      margin:0 0 10px;
+      color:#31506f;
+      font-size:15px;
+      line-height:1.8;
+      word-break:break-word;
+    }
+
+    .popup-close{
+      margin-top:10px;
+      min-width:120px;
+      min-height:46px;
+      border:none;
+      border-radius:14px;
+      background:linear-gradient(135deg, #0b4ea2 0%, #1f69cd 58%, #d4af37 100%);
+      color:#fff;
+      font-size:15px;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    .chat-widget{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:9998;
+      display:flex;
+      flex-direction:column;
+      align-items:flex-end;
+      gap:12px;
+      font-family:'Prompt', sans-serif;
+    }
+
+    .chat-menu{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-end;
+      gap:10px;
+      opacity:0;
+      pointer-events:none;
+      transform:translateY(12px) scale(.96);
+      transition:.30s ease;
+    }
+
+    .chat-widget.open .chat-menu{
+      opacity:1;
+      pointer-events:auto;
+      transform:translateY(0) scale(1);
+    }
+
+    .chat-item{
+      min-width:220px;
+      height:56px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:0 16px;
+      text-decoration:none;
+      color:#fff;
+      border-radius:999px;
+      position:relative;
+      overflow:hidden;
+      box-shadow:0 14px 28px rgba(11,78,162,.16), inset 0 1px 0 rgba(255,255,255,.16);
+      transition:.24s ease;
+      border:1px solid rgba(255,255,255,.18);
       font-size:14px;
       font-weight:700;
     }
 
-    .company-card .info-line:last-child{
-      margin-bottom:0;
+    .chat-item:hover{
+      transform:translateY(-2px) scale(1.02);
     }
 
-    .chat-card a{
-      justify-content:flex-start;
-      gap:10px;
-      padding-left:14px;
-      padding-right:14px;
-      text-align:left;
-    }
+    .chat-item.line{ background:linear-gradient(135deg, #10d95a 0%, #06c755 55%, #02a94b 100%); }
+    .chat-item.facebook{ background:linear-gradient(135deg, #2a86ff 0%, #1877f2 55%, #0f5fd3 100%); }
+    .chat-item.youtube{ background:linear-gradient(135deg, #ff2f2f 0%, #ff0000 55%, #c90000 100%); }
+    .chat-item.tiktok{ background:linear-gradient(135deg, #232323 0%, #111111 55%, #000000 100%); }
 
     .chat-icon{
       width:34px;
@@ -223,50 +331,88 @@
       display:inline-flex;
       align-items:center;
       justify-content:center;
+      background:rgba(255,255,255,.16);
       flex:0 0 34px;
-      color:#fff;
       font-size:12px;
       font-weight:800;
-      box-shadow:0 6px 14px rgba(0,0,0,.12);
     }
 
-    .chat-icon.line{ background:#06c755; }
-    .chat-icon.facebook{ background:#1877f2; }
-    .chat-icon.youtube{ background:#ff0000; }
-    .chat-icon.tiktok{ background:#111111; }
-
-    .menu-toggle-note{
-      position:absolute;
-      left:50%;
-      bottom:-6px;
-      transform:translateX(-50%);
-      z-index:25;
-      background:#ffffff;
-      color:var(--ssb-blue);
-      border:1px solid rgba(11,78,162,.10);
+    .chat-fab{
+      width:64px;
+      height:64px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:none;
       border-radius:999px;
-      padding:8px 14px;
-      font-size:13px;
-      font-weight:700;
-      box-shadow:0 8px 18px rgba(11,78,162,.10);
-      white-space:nowrap;
+      background:linear-gradient(135deg, #0b4ea2, #1f69cd);
+      color:#fff;
+      cursor:pointer;
+      box-shadow:0 16px 34px rgba(11,78,162,.28);
+      border:1px solid rgba(255,255,255,.22);
+      transition:.22s ease;
+      position:relative;
+      font-size:12px;
+      font-weight:800;
+      line-height:1.05;
     }
 
-    @media (max-width: 1100px){
-      .logo-menu-wrap{
-        min-height:900px;
+    .chat-fab:hover{
+      transform:translateY(-2px);
+    }
+
+    .chat-fab-text{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .chat-caret{
+      position:absolute;
+      right:-2px;
+      top:-2px;
+      width:22px;
+      height:22px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#fff;
+      color:#0b4ea2;
+      font-size:10px;
+      box-shadow:0 6px 16px rgba(11,78,162,.18);
+      transition:.28s ease;
+    }
+
+    .chat-widget.open .chat-caret{
+      transform:rotate(180deg);
+    }
+
+    @media (max-width: 1080px){
+      .logo-layout{
+        grid-template-columns:1fr;
+        gap:18px;
       }
 
-      .logo-menu{
-        width:min(62vw, 460px);
+      .desktop-menus{
+        display:none;
       }
 
-      .menu-pop{
-        width:min(36vw, 250px);
+      .mobile-menu-wrap{
+        display:block;
+      }
+
+      .logo-center{
+        order:1;
+      }
+
+      .logo-button{
+        width:min(100%, 340px);
       }
     }
 
-    @media (max-width: 840px){
+    @media (max-width: 760px){
       .home-page{
         width:min(100% - 14px, var(--ssb-max));
         padding-top:12px;
@@ -276,54 +422,45 @@
         justify-content:flex-start;
       }
 
-      .logo-stage{
-        align-items:flex-start;
+      .menu-group{
+        max-width:none;
+        border-radius:22px;
       }
 
-      .logo-menu-wrap{
-        min-height:auto;
-        display:grid;
-        grid-template-columns:1fr;
-        gap:14px;
+      .menu-group a,
+      .menu-group button{
+        min-height:54px;
+        font-size:15px;
+        border-radius:16px;
       }
 
-      .logo-menu{
-        width:min(100%, 360px);
-        margin:0 auto;
-        order:1;
+      .logo-note{
+        font-size:12px;
+        padding:9px 14px;
       }
 
-      .menu-toggle-note{
-        position:static;
-        transform:none;
-        margin:10px auto 0;
-        width:max-content;
-        order:2;
+      .chat-widget{
+        right:12px;
+        bottom:12px;
       }
 
-      .menu-pop{
-        position:static;
-        opacity:0;
-        pointer-events:none;
-        transform:none;
-        width:100%;
-        display:none;
+      .chat-item{
+        min-width:188px;
+        height:50px;
+        font-size:12px;
       }
 
-      .menu-open .menu-pop{
-        display:block;
-        opacity:1;
-        pointer-events:auto;
+      .chat-icon{
+        width:30px;
+        height:30px;
+        flex:0 0 30px;
+        font-size:11px;
       }
 
-      .menu-pop.top-left{order:3;}
-      .menu-pop.top-right{order:4;}
-      .menu-pop.mid-left{order:5;}
-      .menu-pop.mid-right{order:6;}
-      .menu-pop.bottom-left{order:7;}
-      .menu-pop.bottom-right{order:8;}
-      .menu-pop.chat-left{order:9;}
-      .menu-pop.chat-right{order:10;}
+      .chat-fab{
+        width:58px;
+        height:58px;
+      }
     }
   </style>
 </head>
@@ -337,58 +474,112 @@
       </div>
 
       <section class="logo-stage">
-        <div class="logo-menu-wrap" id="logoMenuWrap">
-          <button class="logo-menu" id="logoMenuButton" type="button" aria-label="เปิดเมนูหลัก">
-            <img src="images/logo.png" alt="Stealth Safety Bank Logo" />
-          </button>
+        <div class="logo-layout">
 
-          <div class="menu-toggle-note">คลิกโลโก้เพื่อเปิดเมนู</div>
+          <div class="desktop-menus">
+            <div class="side-column left">
+              <div class="menu-group product-group">
+                <a href="what-ssb.html">Stealth Safety Bank Mobile System</a>
+                <a href="what-ssbmobile.html">Stealth Safety Bank</a>
+                <a href="what-safety-book.html">Stealth Safety Book</a>
+                <a href="what-flare.html">Flare Technology</a>
+              </div>
 
-          <div class="menu-pop top-left">
-            <div class="menu-card">
-              <a href="what-ssb.html">Stealth Safety Bank Mobile System</a>
-              <a href="what-ssbmobile.html">Stealth Safety Bank</a>
+              <div class="menu-group product-group">
+                <a href="book.html">ดูสินค้า</a>
+                <a class="primary-link" href="what-ssb.html">เริ่มสั่งสินค้า</a>
+              </div>
+            </div>
+
+            <div class="side-column right">
+              <div class="menu-group company-group">
+                <a href="about.html">เกี่ยวกับบริษัท</a>
+                <button type="button" onclick="openCompanyPopup()">ติดต่อเรา</button>
+                <a href="agent-login.html">ล็อคอินตัวแทนจำหน่าย</a>
+              </div>
+
+              <div class="menu-group company-group">
+                <a href="agent-partner.html">สมัครเป็นตัวแทนจำหน่าย</a>
+                <a href="ssb-training.html">อบรมการใช้งาน</a>
+              </div>
             </div>
           </div>
 
-          <div class="menu-pop top-right">
-            <div class="menu-card">
-              <a href="what-safety-book.html">Stealth Safety Book</a>
-              <a href="what-flare.html">Flare Technology</a>
-            </div>
-          </div>
+          <div class="logo-center">
+            <button class="logo-button" id="logoMenuButton" type="button" aria-label="เปิดเมนู">
+              <img src="images/logo.png" alt="Stealth Safety Bank Logo" />
+            </button>
 
-          <div class="menu-pop mid-left">
-            <div class="menu-card">
-              <a href="ssb-training.html">อบรมการใช้งาน</a>
-              <a href="agent-partner.html">สมัครเป็นตัวแทนจำหน่าย</a>
-            </div>
-          </div>
+            <div class="logo-note">คลิกโลโก้เพื่อเปิดเมนู</div>
 
-          <div class="menu-pop mid-right">
-            <div class="menu-card">
-              <a href="book.html">ดูสินค้า</a>
-              <a class="primary-link" href="what-ssb.html">เริ่มสั่งสินค้า</a>
-            </div>
-          </div>
+            <div class="mobile-menu-wrap" id="mobileMenuWrap">
+              <div class="mobile-menus">
+                <div class="menu-group">
+                  <a href="what-ssb.html">Stealth Safety Bank Mobile System</a>
+                  <a href="what-ssbmobile.html">Stealth Safety Bank</a>
+                  <a href="what-safety-book.html">Stealth Safety Book</a>
+                  <a href="what-flare.html">Flare Technology</a>
+                  <a href="book.html">ดูสินค้า</a>
+                  <a class="primary-link" href="what-ssb.html">เริ่มสั่งสินค้า</a>
+                </div>
 
-         <div class="menu-pop bottom-left">
-  <div class="menu-card">
-    <a href="javascript:void(0)" onclick="openCompanyPopup()">ติดต่อเรา</a>
-  </div>
-</div>
-
-          <div class="menu-pop bottom-right">
-            <div class="company-card">
-              <div class="info-line">Serial: 0105566099954</div>
-              <div class="info-line">โทร 02-043-2988</div>
-              <div class="info-line">063-656-1447 / 064-951-4888 / 080-204-5455</div>
+                <div class="menu-group">
+                  <a href="about.html">เกี่ยวกับบริษัท</a>
+                  <button type="button" onclick="openCompanyPopup()">ติดต่อเรา</button>
+                  <a href="agent-login.html">ล็อคอินตัวแทนจำหน่าย</a>
+                  <a href="agent-partner.html">สมัครเป็นตัวแทนจำหน่าย</a>
+                  <a href="ssb-training.html">อบรมการใช้งาน</a>
+                </div>
+              </div>
             </div>
           </div>
 
         </div>
       </section>
     </main>
+  </div>
+
+  <div id="companyPopup" class="popup-backdrop">
+    <div class="popup-card">
+      <h3>บริษัท สยามทำ จำกัด</h3>
+      <p>54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
+      <p>Serial: 0105566099954</p>
+      <p>โทร 02-043-2988</p>
+      <p>063-656-1447 / 064-951-4888 / 080-204-5455</p>
+      <button class="popup-close" type="button" onclick="closeCompanyPopup()">ปิด</button>
+    </div>
+  </div>
+
+  <div class="chat-widget" id="chatWidget">
+    <div class="chat-menu" id="chatMenu">
+      <a class="chat-item line" href="#" target="_blank" rel="noopener">
+        <span class="chat-icon">LINE</span>
+        <span>LINE Official</span>
+      </a>
+
+      <a class="chat-item facebook" href="#" target="_blank" rel="noopener">
+        <span class="chat-icon">FB</span>
+        <span>Facebook</span>
+      </a>
+
+      <a class="chat-item youtube" href="#" target="_blank" rel="noopener">
+        <span class="chat-icon">YT</span>
+        <span>YouTube</span>
+      </a>
+
+      <a class="chat-item tiktok" href="#" target="_blank" rel="noopener">
+        <span class="chat-icon">TT</span>
+        <span>TikTok</span>
+      </a>
+    </div>
+
+    <button class="chat-fab" id="chatToggle" type="button" aria-label="เปิดเมนูแชท">
+      <span class="chat-fab-text">
+        <span>Chat</span>
+        <span>Online</span>
+      </span>
+      <span class="chat-caret">⌃</span>
+    </button>
   </div>
 
   <script type="module">
@@ -418,19 +609,51 @@
   </script>
 
   <script>
+    function openCompanyPopup(){
+      const popup = document.getElementById("companyPopup");
+      if (popup) popup.style.display = "flex";
+    }
+
+    function closeCompanyPopup(){
+      const popup = document.getElementById("companyPopup");
+      if (popup) popup.style.display = "none";
+    }
+
     (function () {
-      const wrap = document.getElementById("logoMenuWrap");
-      const button = document.getElementById("logoMenuButton");
+      const popup = document.getElementById("companyPopup");
+      if (!popup) return;
 
-      if (!wrap || !button) return;
+      popup.addEventListener("click", function (event) {
+        if (event.target === popup) {
+          closeCompanyPopup();
+        }
+      });
+    })();
 
-      button.addEventListener("click", function () {
-        wrap.classList.toggle("menu-open");
+    (function () {
+      const mobileWrap = document.getElementById("mobileMenuWrap");
+      const logoBtn = document.getElementById("logoMenuButton");
+
+      if (!mobileWrap || !logoBtn) return;
+
+      logoBtn.addEventListener("click", function () {
+        mobileWrap.classList.toggle("open");
+      });
+    })();
+
+    (function () {
+      const chatWidget = document.getElementById("chatWidget");
+      const chatToggle = document.getElementById("chatToggle");
+
+      if (!chatWidget || !chatToggle) return;
+
+      chatToggle.addEventListener("click", function () {
+        chatWidget.classList.toggle("open");
       });
 
       document.addEventListener("click", function (event) {
-        if (!wrap.contains(event.target)) {
-          wrap.classList.remove("menu-open");
+        if (!chatWidget.contains(event.target)) {
+          chatWidget.classList.remove("open");
         }
       });
     })();
@@ -448,338 +671,5 @@
   </script>
 
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-<!-- COMPANY POPUP -->
-<div id="companyPopup" style="
-position:fixed;
-left:0;
-top:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.35);
-display:none;
-align-items:center;
-justify-content:center;
-z-index:9999;
-">
-
-  <div style="
-  background:#fff;
-  padding:24px 28px;
-  border-radius:18px;
-  max-width:420px;
-  width:90%;
-  text-align:center;
-  box-shadow:0 20px 40px rgba(0,0,0,.25);
-  font-family:'Prompt',sans-serif;
-  ">
-
-    <div style="font-size:18px;font-weight:700;color:#0b4ea2;margin-bottom:12px;">
-      บริษัท สยามทำ จำกัด
-    </div>
-
-    <div style="font-size:14px;line-height:1.6;margin-bottom:10px;">
-      54 ซอย 53 ถนนพุทธมณฑลสาย 1<br>
-      แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170
-    </div>
-
-    <div style="font-size:14px;margin-bottom:6px;">
-      Serial: 0105566099954
-    </div>
-
-    <div style="font-size:14px;margin-bottom:14px;">
-      โทร 02-043-2988<br>
-      063-656-1447 / 064-951-4888 / 080-204-5455
-    </div>
-
-    <button onclick="document.getElementById('companyPopup').style.display='none'"
-    style="
-    background:#0b4ea2;
-    color:#fff;
-    border:none;
-    padding:10px 18px;
-    border-radius:10px;
-    cursor:pointer;
-    font-weight:600;
-    ">
-      ปิด
-    </button>
-
-  </div>
-</div>
-
-<script>
-function openCompanyPopup(){
-  document.getElementById("companyPopup").style.display="flex";
-}
-</script>
-  <!-- COMPANY POPUP -->
-<div id="companyPopup" style="
-position:fixed;
-left:0;
-top:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.35);
-display:none;
-align-items:center;
-justify-content:center;
-z-index:9999;
-">
-  <div style="
-    background:#fff;
-    padding:24px 28px;
-    border-radius:18px;
-    max-width:420px;
-    width:90%;
-    text-align:center;
-    box-shadow:0 20px 40px rgba(0,0,0,.25);
-    font-family:'Prompt',sans-serif;
-  ">
-    <div style="font-size:18px;font-weight:700;color:#0b4ea2;margin-bottom:12px;">
-      บริษัท สยามทำ จำกัด
-    </div>
-
-    <div style="font-size:14px;line-height:1.7;margin-bottom:10px;">
-      54 ซอย 53 ถนนพุทธมณฑลสาย 1<br>
-      แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170
-    </div>
-
-    <div style="font-size:14px;margin-bottom:6px;">
-      Serial: 0105566099954
-    </div>
-
-    <div style="font-size:14px;line-height:1.7;margin-bottom:14px;">
-      โทร 02-043-2988<br>
-      063-656-1447 / 064-951-4888 / 080-204-5455
-    </div>
-
-    <button onclick="document.getElementById('companyPopup').style.display='none'" style="
-      background:#0b4ea2;
-      color:#fff;
-      border:none;
-      padding:10px 18px;
-      border-radius:10px;
-      cursor:pointer;
-      font-weight:600;
-    ">
-      ปิด
-    </button>
-  </div>
-</div>
-
-<!-- CHAT ONLINE -->
-<div id="chatWidget" style="
-position:fixed;
-right:18px;
-bottom:18px;
-z-index:9998;
-display:flex;
-flex-direction:column;
-align-items:flex-end;
-gap:12px;
-font-family:'Prompt',sans-serif;
-">
-  <div id="chatMenu" style="
-    display:flex;
-    flex-direction:column;
-    align-items:flex-end;
-    gap:10px;
-    opacity:0;
-    pointer-events:none;
-    transform:translateY(12px) scale(.96);
-    transition:.3s ease;
-  ">
-    <a href="#" target="_blank" rel="noopener" style="
-      min-width:210px;
-      height:56px;
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding:0 16px;
-      text-decoration:none;
-      color:#fff;
-      border-radius:999px;
-      background:linear-gradient(135deg, #10d95a 0%, #06c755 55%, #02a94b 100%);
-      box-shadow:0 14px 28px rgba(11,78,162,.16);
-      border:1px solid rgba(255,255,255,.18);
-      font-weight:700;
-    ">
-      <span style="
-        width:34px;
-        height:34px;
-        border-radius:999px;
-        display:inline-flex;
-        align-items:center;
-        justify-content:center;
-        background:rgba(255,255,255,.16);
-        flex:0 0 34px;
-      ">LINE</span>
-      <span>LINE Official</span>
-    </a>
-
-    <a href="#" target="_blank" rel="noopener" style="
-      min-width:210px;
-      height:56px;
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding:0 16px;
-      text-decoration:none;
-      color:#fff;
-      border-radius:999px;
-      background:linear-gradient(135deg, #2a86ff 0%, #1877f2 55%, #0f5fd3 100%);
-      box-shadow:0 14px 28px rgba(11,78,162,.16);
-      border:1px solid rgba(255,255,255,.18);
-      font-weight:700;
-    ">
-      <span style="
-        width:34px;
-        height:34px;
-        border-radius:999px;
-        display:inline-flex;
-        align-items:center;
-        justify-content:center;
-        background:rgba(255,255,255,.16);
-        flex:0 0 34px;
-      ">FB</span>
-      <span>Facebook</span>
-    </a>
-
-    <a href="#" target="_blank" rel="noopener" style="
-      min-width:210px;
-      height:56px;
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding:0 16px;
-      text-decoration:none;
-      color:#fff;
-      border-radius:999px;
-      background:linear-gradient(135deg, #ff2f2f 0%, #ff0000 55%, #c90000 100%);
-      box-shadow:0 14px 28px rgba(11,78,162,.16);
-      border:1px solid rgba(255,255,255,.18);
-      font-weight:700;
-    ">
-      <span style="
-        width:34px;
-        height:34px;
-        border-radius:999px;
-        display:inline-flex;
-        align-items:center;
-        justify-content:center;
-        background:rgba(255,255,255,.16);
-        flex:0 0 34px;
-      ">YT</span>
-      <span>YouTube</span>
-    </a>
-
-    <a href="#" target="_blank" rel="noopener" style="
-      min-width:210px;
-      height:56px;
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding:0 16px;
-      text-decoration:none;
-      color:#fff;
-      border-radius:999px;
-      background:linear-gradient(135deg, #232323 0%, #111111 55%, #000000 100%);
-      box-shadow:0 14px 28px rgba(11,78,162,.16);
-      border:1px solid rgba(255,255,255,.18);
-      font-weight:700;
-    ">
-      <span style="
-        width:34px;
-        height:34px;
-        border-radius:999px;
-        display:inline-flex;
-        align-items:center;
-        justify-content:center;
-        background:rgba(255,255,255,.16);
-        flex:0 0 34px;
-      ">TT</span>
-      <span>TikTok</span>
-    </a>
-  </div>
-
-  <button id="chatToggle" type="button" style="
-    width:64px;
-    height:64px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border:none;
-    border-radius:999px;
-    background:linear-gradient(135deg, #0b4ea2, #1f69cd);
-    color:#fff;
-    cursor:pointer;
-    box-shadow:0 16px 34px rgba(11,78,162,.28);
-    border:1px solid rgba(255,255,255,.22);
-    position:relative;
-    font-size:12px;
-    font-weight:800;
-    line-height:1.05;
-  ">
-    <span style="display:flex;flex-direction:column;align-items:center;">
-      <span>Chat</span>
-      <span>Online</span>
-    </span>
-    <span id="chatCaret" style="
-      position:absolute;
-      right:-2px;
-      top:-2px;
-      width:22px;
-      height:22px;
-      border-radius:999px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:#fff;
-      color:#0b4ea2;
-      font-size:10px;
-      box-shadow:0 6px 16px rgba(11,78,162,.18);
-      transition:.28s ease;
-    ">⌃</span>
-  </button>
-</div>
-
-<script>
-function openCompanyPopup(){
-  document.getElementById("companyPopup").style.display = "flex";
-}
-
-(function () {
-  const chatWidget = document.getElementById("chatWidget");
-  const chatMenu = document.getElementById("chatMenu");
-  const chatToggle = document.getElementById("chatToggle");
-  const chatCaret = document.getElementById("chatCaret");
-
-  if (!chatWidget || !chatMenu || !chatToggle) return;
-
-  chatToggle.addEventListener("click", function () {
-    const isOpen = chatMenu.style.opacity === "1";
-    if (isOpen) {
-      chatMenu.style.opacity = "0";
-      chatMenu.style.pointerEvents = "none";
-      chatMenu.style.transform = "translateY(12px) scale(.96)";
-      if (chatCaret) chatCaret.style.transform = "rotate(0deg)";
-    } else {
-      chatMenu.style.opacity = "1";
-      chatMenu.style.pointerEvents = "auto";
-      chatMenu.style.transform = "translateY(0) scale(1)";
-      if (chatCaret) chatCaret.style.transform = "rotate(180deg)";
-    }
-  });
-
-  document.addEventListener("click", function (event) {
-    if (!chatWidget.contains(event.target)) {
-      chatMenu.style.opacity = "0";
-      chatMenu.style.pointerEvents = "none";
-      chatMenu.style.transform = "translateY(12px) scale(.96)";
-      if (chatCaret) chatCaret.style.transform = "rotate(0deg)";
-    }
-  });
-})();
-</script>
 </body>
 </html>
