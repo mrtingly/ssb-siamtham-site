@@ -12,20 +12,26 @@
     rel="stylesheet"
   />
 
-  <link rel="stylesheet" href="css/shared-shell.css" />
-
   <style>
     :root{
       --ssb-blue:#0b4ea2;
-      --ssb-blue-2:#2b7cea;
-      --ssb-blue-3:#69a7ff;
+      --ssb-blue-2:#1a66cf;
       --ssb-blue-dark:#072f66;
       --ssb-gold:#d4af37;
-      --ssb-text:#16324f;
-      --white:#ffffff;
-      --page-1:#f9fbff;
+      --ssb-red:#e31b23;
+      --ssb-red-dark:#b90f16;
+      --ssb-white:#ffffff;
+      --ssb-text:#183452;
+      --page-1:#f8fbff;
       --page-2:#eef4fc;
       --page-3:#dde8f6;
+      --glass:rgba(255,255,255,.72);
+      --shadow-soft:0 18px 44px rgba(7,47,102,.10);
+      --shadow-strong:0 28px 70px rgba(7,47,102,.18);
+      --radius-xl:28px;
+      --radius-lg:22px;
+      --radius-md:18px;
+      --max-width:1320px;
     }
 
     *{
@@ -64,78 +70,169 @@
       inset:0;
       pointer-events:none;
       z-index:0;
-      opacity:.45;
+      opacity:.38;
       background-image:
         linear-gradient(rgba(255,255,255,.22) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,.22) 1px, transparent 1px);
       background-size:42px 42px;
-      mask-image:radial-gradient(circle at center, rgba(0,0,0,.96) 0%, rgba(0,0,0,.55) 42%, transparent 78%);
-      -webkit-mask-image:radial-gradient(circle at center, rgba(0,0,0,.96) 0%, rgba(0,0,0,.55) 42%, transparent 78%);
+      mask-image:radial-gradient(circle at center, rgba(0,0,0,.95) 0%, rgba(0,0,0,.58) 42%, transparent 78%);
+      -webkit-mask-image:radial-gradient(circle at center, rgba(0,0,0,.95) 0%, rgba(0,0,0,.58) 42%, transparent 78%);
     }
 
-    body .ssb-shell-topbar,
-    body .shared-shell-topbar,
-    body header.ssb-topbar,
-    body .topbar,
-    body .shell-topbar{
-      position:sticky !important;
-      top:0 !important;
-      z-index:1000 !important;
+    .site-wrap{
+      position:relative;
+      z-index:1;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+    }
+
+    /* HEAD */
+    .ssb-topbar{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:linear-gradient(135deg, var(--ssb-blue-dark) 0%, var(--ssb-blue) 52%, var(--ssb-blue-2) 100%);
+      box-shadow:0 10px 28px rgba(7,47,102,.22);
+      border-bottom:1px solid rgba(255,255,255,.12);
       backdrop-filter:blur(14px);
       -webkit-backdrop-filter:blur(14px);
     }
 
-    .ssb-main{
+    .ssb-topbar::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,0)),
+        radial-gradient(circle at 12% 20%, rgba(255,255,255,.14), transparent 26%),
+        radial-gradient(circle at 88% 10%, rgba(255,255,255,.10), transparent 24%);
+      pointer-events:none;
+    }
+
+    .topbar-inner{
+      width:min(var(--max-width), calc(100% - 20px));
+      margin:0 auto;
+      min-height:78px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
       position:relative;
       z-index:1;
+      padding:10px 0;
     }
 
-    .home-page{
-      width:min(1320px, calc(100% - 24px));
-      margin:0 auto;
-      padding:18px 0 34px;
-      min-height:calc(100vh - 80px);
-    }
-
-    .top-tools{
+    .brand-wrap{
       display:flex;
-      justify-content:flex-end;
       align-items:center;
-      min-height:42px;
-      margin-bottom:0;
-      position:relative;
-      z-index:5;
+      gap:14px;
+      min-width:0;
     }
 
-    .logo-stage{
-      min-height:calc(100vh - 145px);
+    .brand-logo{
+      width:54px;
+      height:54px;
+      border-radius:16px;
+      background:rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.18);
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:4px 0 20px;
-      position:relative;
+      overflow:hidden;
+      flex:0 0 54px;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.18);
     }
 
-    .logo-layout{
+    .brand-logo img{
       width:100%;
+      height:100%;
+      object-fit:contain;
+      display:block;
+    }
+
+    .brand-text{
+      min-width:0;
       display:flex;
-      align-items:center;
+      flex-direction:column;
       justify-content:center;
     }
 
-    .logo-center{
+    .brand-name{
+      color:#fff;
+      font-size:20px;
+      font-weight:800;
+      line-height:1.15;
+      letter-spacing:.2px;
+      text-shadow:0 2px 8px rgba(0,0,0,.12);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .brand-site{
+      color:rgba(255,255,255,.92);
+      font-size:13px;
+      font-weight:600;
+      line-height:1.2;
+      margin-top:4px;
+      white-space:nowrap;
+    }
+
+    .brand-site a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .topbar-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex:0 0 auto;
+    }
+
+    .translate-box{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:42px;
+      padding:6px 10px;
+      border-radius:14px;
+      background:rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.16);
+      max-width:260px;
+    }
+
+    /* MAIN */
+    .main-content{
+      flex:1;
+      width:min(var(--max-width), calc(100% - 20px));
+      margin:0 auto;
+      padding:12px 0 24px;
+    }
+
+    .hero-stage{
+      min-height:calc(100vh - 160px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 0 24px;
+    }
+
+    .hero-center{
       width:100%;
       display:flex;
       flex-direction:column;
       align-items:center;
       justify-content:center;
-      gap:8px;
+      gap:12px;
     }
 
     .logo-orbit-wrap{
       position:relative;
-      width:min(94vw, 940px);
-      height:min(94vw, 940px);
+      width:min(94vw, 930px);
+      height:min(94vw, 930px);
       display:flex;
       align-items:center;
       justify-content:center;
@@ -149,13 +246,13 @@
       position:absolute;
       left:50%;
       top:50%;
-      width:690px;
-      height:690px;
+      width:680px;
+      height:680px;
       transform:translate(-50%, -50%);
       border-radius:50%;
       z-index:1;
       background:
-        radial-gradient(circle, rgba(255,255,255,.98) 0%, rgba(255,255,255,.94) 16%, rgba(219,231,248,.78) 35%, rgba(141,180,235,.28) 48%, rgba(11,78,162,.08) 60%, transparent 76%);
+        radial-gradient(circle, rgba(255,255,255,.99) 0%, rgba(255,255,255,.95) 16%, rgba(219,231,248,.78) 35%, rgba(141,180,235,.28) 48%, rgba(11,78,162,.08) 60%, transparent 76%);
       filter:blur(1px);
       animation:auraPulse 7s ease-in-out infinite;
     }
@@ -230,8 +327,8 @@
     }
 
     .main-logo{
-      width:min(31vw, 290px);
-      height:min(31vw, 290px);
+      width:min(31vw, 292px);
+      height:min(31vw, 292px);
     }
 
     .orbit-item{
@@ -325,31 +422,31 @@
         scale(1.01);
     }
 
-    .orbit-item.primary{
-      width:214px;
-      min-height:132px;
+    .orbit-item.order-button{
+      width:220px;
+      min-height:138px;
       border-radius:32px;
       background:
-        linear-gradient(180deg, rgba(255,255,255,.18) 0%, rgba(255,255,255,.05) 100%),
-        linear-gradient(135deg, #0b4ea2 0%, #2c7cea 52%, #d4af37 100%);
+        linear-gradient(180deg, rgba(255,255,255,.20) 0%, rgba(255,255,255,.05) 100%),
+        linear-gradient(135deg, var(--ssb-red) 0%, #ff3942 54%, var(--ssb-red-dark) 100%);
       box-shadow:
-        0 28px 56px rgba(11,78,162,.30),
-        inset 0 1px 0 rgba(255,255,255,.24),
-        inset 0 -1px 0 rgba(0,0,0,.08),
-        0 0 30px rgba(43,123,232,.18);
-      z-index:18;
+        0 30px 58px rgba(227,27,35,.26),
+        inset 0 1px 0 rgba(255,255,255,.26),
+        inset 0 -1px 0 rgba(0,0,0,.10),
+        0 0 34px rgba(227,27,35,.18);
+      z-index:20;
     }
 
-    .orbit-item.primary::before{
+    .orbit-item.order-button::before{
       border-radius:31px;
     }
 
-    .orbit-item.primary:hover{
+    .orbit-item.order-button:hover{
       box-shadow:
-        0 34px 66px rgba(11,78,162,.34),
-        0 0 34px rgba(43,123,232,.22),
-        inset 0 1px 0 rgba(255,255,255,.28),
-        inset 0 -1px 0 rgba(0,0,0,.10);
+        0 36px 72px rgba(227,27,35,.30),
+        0 0 40px rgba(227,27,35,.20),
+        inset 0 1px 0 rgba(255,255,255,.30),
+        inset 0 -1px 0 rgba(0,0,0,.12);
     }
 
     .orbit-icon{
@@ -376,11 +473,12 @@
       box-shadow:0 12px 24px rgba(0,0,0,.12), 0 0 18px rgba(43,123,232,.12), inset 0 1px 0 rgba(255,255,255,.88);
     }
 
-    .orbit-item.primary .orbit-icon{
-      width:58px;
-      height:58px;
-      flex:0 0 58px;
-      font-size:14px;
+    .orbit-item.order-button .orbit-icon{
+      width:60px;
+      height:60px;
+      flex:0 0 60px;
+      font-size:15px;
+      color:var(--ssb-red);
     }
 
     .orbit-label{
@@ -395,35 +493,15 @@
       letter-spacing:.1px;
     }
 
-    .orbit-item.primary .orbit-label{
-      font-size:19px;
-      line-height:1.18;
+    .orbit-item.order-button .orbit-label{
+      font-size:20px;
+      line-height:1.16;
     }
 
     .logo-orbit-wrap.open .orbit-item{
       opacity:1;
       pointer-events:auto;
       animation:ssbFloatIn .45s ease both;
-    }
-
-    @keyframes ssbFloatIn{
-      0%{ opacity:0; filter:blur(5px); }
-      100%{ opacity:1; filter:blur(0); }
-    }
-
-    @keyframes auraPulse{
-      0%,100%{ transform:translate(-50%, -50%) scale(1); opacity:1; }
-      50%{ transform:translate(-50%, -50%) scale(1.035); opacity:.92; }
-    }
-
-    @keyframes ringRotate{
-      from{ transform:translate(-50%, -50%) rotate(0deg); }
-      to{ transform:translate(-50%, -50%) rotate(360deg); }
-    }
-
-    @keyframes ringRotateReverse{
-      from{ transform:translate(-50%, -50%) rotate(360deg); }
-      to{ transform:translate(-50%, -50%) rotate(0deg); }
     }
 
     .orbit-1{ --tx:0px; --ty:-332px; }
@@ -457,7 +535,7 @@
       min-height:56px;
       padding:12px 32px;
       border-radius:999px;
-      background:rgba(255,255,255,.76);
+      background:rgba(255,255,255,.78);
       border:1px solid rgba(11,78,162,.12);
       color:var(--ssb-blue);
       font-size:18px;
@@ -468,13 +546,14 @@
       backdrop-filter:blur(16px);
       -webkit-backdrop-filter:blur(16px);
       text-align:center;
-      margin-top:-6px;
+      margin-top:-4px;
       position:relative;
       z-index:35;
       pointer-events:none;
       user-select:none;
     }
 
+    /* POPUP */
     .popup-backdrop{
       position:fixed;
       inset:0;
@@ -549,7 +628,7 @@
     }
 
     .popup-text{
-      background:rgba(255,255,255,.72);
+      background:rgba(255,255,255,.74);
       border:1px solid rgba(11,78,162,.10);
       border-radius:20px;
       padding:18px;
@@ -610,6 +689,7 @@
       filter:brightness(1.04);
     }
 
+    /* CHAT */
     .chat-widget{
       position:fixed;
       right:18px;
@@ -726,7 +806,137 @@
 
     .chat-widget.open .chat-caret{ transform:rotate(180deg); }
 
+    /* FOOTER */
+    .ssb-footer{
+      position:relative;
+      z-index:1;
+      background:linear-gradient(135deg, var(--ssb-blue-dark) 0%, var(--ssb-blue) 52%, var(--ssb-blue-2) 100%);
+      border-top:1px solid rgba(255,255,255,.12);
+      box-shadow:0 -10px 28px rgba(7,47,102,.18);
+      overflow:hidden;
+      margin-top:18px;
+    }
+
+    .ssb-footer::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,0)),
+        radial-gradient(circle at 10% 20%, rgba(255,255,255,.10), transparent 24%),
+        radial-gradient(circle at 88% 16%, rgba(255,255,255,.08), transparent 20%);
+      pointer-events:none;
+    }
+
+    .footer-inner{
+      width:min(var(--max-width), calc(100% - 20px));
+      margin:0 auto;
+      padding:26px 0 22px;
+      position:relative;
+      z-index:1;
+      color:#fff;
+    }
+
+    .footer-grid{
+      display:grid;
+      grid-template-columns:1fr 1.15fr;
+      gap:22px;
+      align-items:stretch;
+    }
+
+    .footer-card{
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:24px;
+      padding:20px;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.12);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+    }
+
+    .footer-title{
+      margin:0 0 12px;
+      font-size:20px;
+      font-weight:800;
+      line-height:1.2;
+      color:#fff;
+    }
+
+    .footer-text{
+      margin:0 0 10px;
+      font-size:15px;
+      line-height:1.8;
+      color:rgba(255,255,255,.95);
+      word-break:break-word;
+    }
+
+    .footer-text strong{
+      color:#fff;
+    }
+
+    .footer-link{
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
+    }
+
+    .footer-map{
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow:0 14px 28px rgba(0,0,0,.12);
+      background:rgba(255,255,255,.10);
+      min-height:300px;
+    }
+
+    .footer-map iframe{
+      width:100%;
+      height:100%;
+      min-height:300px;
+      border:0;
+      display:block;
+    }
+
+    .footer-bottom{
+      margin-top:16px;
+      padding-top:14px;
+      border-top:1px solid rgba(255,255,255,.12);
+      color:rgba(255,255,255,.92);
+      font-size:13px;
+      text-align:center;
+    }
+
+    /* ANIMATION */
+    @keyframes ssbFloatIn{
+      0%{ opacity:0; filter:blur(5px); }
+      100%{ opacity:1; filter:blur(0); }
+    }
+
+    @keyframes auraPulse{
+      0%,100%{ transform:translate(-50%, -50%) scale(1); opacity:1; }
+      50%{ transform:translate(-50%, -50%) scale(1.035); opacity:.92; }
+    }
+
+    @keyframes ringRotate{
+      from{ transform:translate(-50%, -50%) rotate(0deg); }
+      to{ transform:translate(-50%, -50%) rotate(360deg); }
+    }
+
+    @keyframes ringRotateReverse{
+      from{ transform:translate(-50%, -50%) rotate(360deg); }
+      to{ transform:translate(-50%, -50%) rotate(0deg); }
+    }
+
+    /* TABLET */
     @media (max-width:1100px){
+      .topbar-inner{
+        min-height:72px;
+      }
+
+      .brand-name{
+        font-size:18px;
+      }
+
       .logo-orbit-wrap{
         width:min(96vw, 760px);
         height:min(96vw, 760px);
@@ -759,9 +969,13 @@
         min-height:88px;
       }
 
-      .orbit-item.primary{
-        width:176px;
-        min-height:112px;
+      .orbit-item.order-button{
+        width:184px;
+        min-height:116px;
+      }
+
+      .orbit-item.order-button .orbit-label{
+        font-size:17px;
       }
 
       .logo-note{
@@ -781,218 +995,360 @@
       .orbit-9{ --tx:-260px; --ty:-62px; }
       .orbit-10{ --tx:-180px; --ty:-200px; }
 
-      .popup-grid{
+      .popup-grid,
+      .footer-grid{
         grid-template-columns:1fr;
       }
     }
-@media (max-width:760px){
-  .logo-stage{
-    min-height:calc(100vh - 115px);
-    align-items:center;
-    padding-top:0;
-  }
 
-  .logo-orbit-wrap{
-    width:min(96vw, 430px);
-    height:min(96vw, 430px);
-  }
+    /* SMARTPHONE */
+    @media (max-width:760px){
+      body::after{
+        background-size:30px 30px;
+        opacity:.34;
+      }
 
-  .logo-orbit-wrap::before{
-    width:300px;
-    height:300px;
-  }
+      .topbar-inner{
+        width:min(100% - 14px, var(--max-width));
+        min-height:unset;
+        align-items:flex-start;
+        flex-direction:column;
+        gap:10px;
+        padding:10px 0;
+      }
 
-  .logo-orbit-wrap::after{
-    width:232px;
-    height:232px;
-    box-shadow:
-      0 0 0 12px rgba(11,78,162,.035),
-      0 0 0 28px rgba(11,78,162,.025),
-      0 0 0 48px rgba(11,78,162,.015);
-  }
+      .brand-wrap{
+        width:100%;
+        align-items:center;
+      }
 
-  .tech-ring{
-    width:200px;
-    height:200px;
-  }
+      .brand-logo{
+        width:48px;
+        height:48px;
+        border-radius:14px;
+        flex:0 0 48px;
+      }
 
-  .tech-ring-2{
-    width:285px;
-    height:285px;
-  }
+      .brand-name{
+        font-size:15px;
+        white-space:normal;
+        overflow:visible;
+        text-overflow:clip;
+      }
 
-  .main-logo{
-    width:min(42vw, 145px);
-    height:min(42vw, 145px);
-  }
+      .brand-site{
+        font-size:12px;
+      }
 
-  .orbit-item{
-    width:88px;
-    min-height:66px;
-    border-radius:18px;
-    padding:8px 6px;
-    gap:6px;
-  }
+      .topbar-actions{
+        width:100%;
+        justify-content:flex-start;
+      }
 
-  .orbit-item.primary{
-    width:122px;
-    min-height:82px;
-    border-radius:22px;
-  }
+      .translate-box{
+        max-width:100%;
+        width:auto;
+      }
 
-  .orbit-icon{
-    width:32px;
-    height:32px;
-    flex:0 0 32px;
-    font-size:9px;
-  }
+      .main-content{
+        width:min(100% - 14px, var(--max-width));
+        padding-top:10px;
+      }
 
-  .orbit-item.primary .orbit-icon{
-    width:38px;
-    height:38px;
-    flex:0 0 38px;
-    font-size:10px;
-  }
+      .hero-stage{
+        min-height:calc(100vh - 180px);
+        align-items:flex-start;
+        padding-top:8px;
+      }
 
-  .orbit-label{
-    font-size:9px;
-    line-height:1.1;
-  }
+      .logo-orbit-wrap{
+        width:min(96vw, 430px);
+        height:min(96vw, 430px);
+      }
 
-  .orbit-item.primary .orbit-label{
-    font-size:12px;
-    line-height:1.12;
-  }
+      .logo-orbit-wrap::before{
+        width:300px;
+        height:300px;
+      }
 
-  .logo-note{
-    font-size:12px;
-    min-height:38px;
-    padding:8px 14px;
-    margin-top:10px;
-  }
+      .logo-orbit-wrap::after{
+        width:232px;
+        height:232px;
+        box-shadow:
+          0 0 0 12px rgba(11,78,162,.035),
+          0 0 0 28px rgba(11,78,162,.025),
+          0 0 0 48px rgba(11,78,162,.015);
+      }
 
-  /* วงให้สมดุลจริงบนมือถือ */
-  .orbit-1{ --tx:0px; --ty:-150px; }
-  .orbit-2{ --tx:102px; --ty:-108px; }
-  .orbit-3{ --tx:146px; --ty:-34px; }
-  .orbit-4{ --tx:146px; --ty:46px; }
-  .orbit-5{ --tx:102px; --ty:122px; }
-  .orbit-6{ --tx:0px; --ty:150px; }
-  .orbit-7{ --tx:-102px; --ty:122px; }
-  .orbit-8{ --tx:-146px; --ty:46px; }
-  .orbit-9{ --tx:-146px; --ty:-34px; }
-  .orbit-10{ --tx:-102px; --ty:-108px; }
+      .tech-ring{
+        width:200px;
+        height:200px;
+      }
 
-  .orbit-item:hover{
-    transform:
-      translate(-50%, -50%)
-      translate(var(--tx), var(--ty))
-      translateY(-4px)
-      scale(1.02);
-  }
+      .tech-ring-2{
+        width:285px;
+        height:285px;
+      }
 
-  .chat-widget{
-    right:12px;
-    bottom:12px;
-  }
+      .main-logo{
+        width:min(42vw, 145px);
+        height:min(42vw, 145px);
+      }
 
-  .chat-item{
-    min-width:188px;
-    height:50px;
-    font-size:12px;
-  }
+      .orbit-item{
+        width:88px;
+        min-height:66px;
+        border-radius:18px;
+        padding:8px 6px;
+        gap:6px;
+      }
 
-  .chat-icon{
-    width:30px;
-    height:30px;
-    flex:0 0 30px;
-    font-size:11px;
-  }
+      .orbit-item.order-button{
+        width:124px;
+        min-height:84px;
+        border-radius:22px;
+      }
 
-  .chat-fab{
-    width:58px;
-    height:58px;
-  }
-}
-   
+      .orbit-icon{
+        width:32px;
+        height:32px;
+        flex:0 0 32px;
+        font-size:9px;
+      }
+
+      .orbit-item.order-button .orbit-icon{
+        width:38px;
+        height:38px;
+        flex:0 0 38px;
+        font-size:10px;
+      }
+
+      .orbit-label{
+        font-size:9px;
+        line-height:1.1;
+      }
+
+      .orbit-item.order-button .orbit-label{
+        font-size:12px;
+        line-height:1.12;
+      }
+
+      .logo-note{
+        font-size:12px;
+        min-height:38px;
+        padding:8px 14px;
+        margin-top:10px;
+      }
+
+      .orbit-1{ --tx:0px; --ty:-150px; }
+      .orbit-2{ --tx:102px; --ty:-108px; }
+      .orbit-3{ --tx:146px; --ty:-34px; }
+      .orbit-4{ --tx:146px; --ty:46px; }
+      .orbit-5{ --tx:102px; --ty:122px; }
+      .orbit-6{ --tx:0px; --ty:150px; }
+      .orbit-7{ --tx:-102px; --ty:122px; }
+      .orbit-8{ --tx:-146px; --ty:46px; }
+      .orbit-9{ --tx:-146px; --ty:-34px; }
+      .orbit-10{ --tx:-102px; --ty:-108px; }
+
+      .orbit-item:hover{
+        transform:
+          translate(-50%, -50%)
+          translate(var(--tx), var(--ty))
+          translateY(-4px)
+          scale(1.02);
+      }
+
+      .popup-card{
+        width:min(96vw, 980px);
+        padding:16px;
+        border-radius:20px;
+      }
+
+      .popup-head h3{
+        font-size:20px;
+      }
+
+      .popup-text{
+        padding:14px;
+      }
+
+      .popup-text p{
+        font-size:14px;
+        line-height:1.75;
+      }
+
+      .footer-inner{
+        width:min(100% - 14px, var(--max-width));
+        padding:20px 0 18px;
+      }
+
+      .footer-card{
+        padding:16px;
+        border-radius:18px;
+      }
+
+      .footer-title{
+        font-size:18px;
+      }
+
+      .footer-text{
+        font-size:14px;
+        line-height:1.7;
+      }
+
+      .footer-map,
+      .footer-map iframe{
+        min-height:240px;
+      }
+
+      .chat-widget{
+        right:12px;
+        bottom:12px;
+      }
+
+      .chat-item{
+        min-width:188px;
+        height:50px;
+        font-size:12px;
+      }
+
+      .chat-icon{
+        width:30px;
+        height:30px;
+        flex:0 0 30px;
+        font-size:11px;
+      }
+
+      .chat-fab{
+        width:58px;
+        height:58px;
+      }
+    }
   </style>
 </head>
 <body>
-  <div id="appShell"></div>
-
-  <div class="ssb-main">
-    <main class="home-page">
-      <div class="top-tools">
-        <div id="google_translate_element"></div>
-      </div>
-
-      <section class="logo-stage">
-        <div class="logo-layout">
-          <div class="logo-center">
-            <div class="logo-orbit-wrap" id="logoOrbitWrap">
-              <span class="tech-ring"></span>
-              <span class="tech-ring-2"></span>
-
-              <button class="logo-button main-logo" id="logoMenuButton" type="button" aria-label="เปิดเมนู">
-                <img src="images/logo.png" alt="Stealth Safety Bank Logo" />
-              </button>
-
-              <button class="orbit-item orbit-1" type="button" data-popup="ssbmobile">
-                <span class="orbit-icon">SM</span>
-                <span class="orbit-label">SSB Mobile</span>
-              </button>
-
-              <button class="orbit-item orbit-2" type="button" data-popup="stealthbank">
-                <span class="orbit-icon">SB</span>
-                <span class="orbit-label">Stealth Safety Bank</span>
-              </button>
-
-              <button class="orbit-item orbit-3" type="button" data-popup="safetybook">
-                <span class="orbit-icon">BK</span>
-                <span class="orbit-label">Stealth Safety Book</span>
-              </button>
-
-              <button class="orbit-item orbit-4" type="button" data-popup="stealthtech">
-                <span class="orbit-icon">ST</span>
-                <span class="orbit-label">Stealth Technology</span>
-              </button>
-
-              <button class="orbit-item orbit-5" type="button" data-popup="flare">
-                <span class="orbit-icon">FL</span>
-                <span class="orbit-label">Flare Technology</span>
-              </button>
-
-              <a class="orbit-item orbit-6 primary" href="book.html">
-                <span class="orbit-icon">GO</span>
-                <span class="orbit-label">เริ่มสั่งสินค้า</span>
-              </a>
-
-              <button class="orbit-item orbit-7" type="button" id="contactButton">
-                <span class="orbit-icon">CT</span>
-                <span class="orbit-label">ติดต่อเรา</span>
-              </button>
-
-              <a class="orbit-item orbit-8" href="agent-login.html">
-                <span class="orbit-icon">LG</span>
-                <span class="orbit-label">ล็อคอินตัวแทน</span>
-              </a>
-
-              <a class="orbit-item orbit-9" href="agent-partner.html">
-                <span class="orbit-icon">AG</span>
-                <span class="orbit-label">สมัครตัวแทน</span>
-              </a>
-
-              <a class="orbit-item orbit-10" href="about.html">
-                <span class="orbit-icon">AB</span>
-                <span class="orbit-label">เกี่ยวกับบริษัท</span>
-              </a>
-            </div>
-
-            <div class="logo-note">คลิกที่โลโก้เพื่อเปิดเมนู</div>
+  <div class="site-wrap">
+    <header class="ssb-topbar">
+      <div class="topbar-inner">
+        <div class="brand-wrap">
+          <div class="brand-logo">
+            <img src="images/logo.png" alt="Stealth Safety Bank Logo" />
           </div>
+          <div class="brand-text">
+            <div class="brand-name">บริษัท สยามทำ จำกัด • Stealth Safety Bank System</div>
+            <div class="brand-site">
+              <a href="https://www.siamtham.com" target="_blank" rel="noopener">www.siamtham.com</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <div class="translate-box">
+            <div id="google_translate_element"></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <section class="hero-stage">
+        <div class="hero-center">
+          <div class="logo-orbit-wrap" id="logoOrbitWrap">
+            <span class="tech-ring"></span>
+            <span class="tech-ring-2"></span>
+
+            <button class="logo-button main-logo" id="logoMenuButton" type="button" aria-label="เปิดเมนู">
+              <img src="images/logo.png" alt="Stealth Safety Bank Logo" />
+            </button>
+
+            <button class="orbit-item orbit-1" type="button" data-popup="ssbmobile">
+              <span class="orbit-icon">SM</span>
+              <span class="orbit-label">SSB Mobile</span>
+            </button>
+
+            <button class="orbit-item orbit-2" type="button" data-popup="stealthbank">
+              <span class="orbit-icon">SB</span>
+              <span class="orbit-label">Stealth Safety Bank</span>
+            </button>
+
+            <button class="orbit-item orbit-3" type="button" data-popup="safetybook">
+              <span class="orbit-icon">BK</span>
+              <span class="orbit-label">Stealth Safety Book</span>
+            </button>
+
+            <button class="orbit-item orbit-4" type="button" data-popup="stealthtech">
+              <span class="orbit-icon">ST</span>
+              <span class="orbit-label">Stealth Technology</span>
+            </button>
+
+            <button class="orbit-item orbit-5" type="button" data-popup="flare">
+              <span class="orbit-icon">FL</span>
+              <span class="orbit-label">Flare Technology</span>
+            </button>
+
+            <a class="orbit-item orbit-6 order-button" href="book.html">
+              <span class="orbit-icon">GO</span>
+              <span class="orbit-label">เริ่มสั่งสินค้า</span>
+            </a>
+
+            <button class="orbit-item orbit-7" type="button" id="contactButton">
+              <span class="orbit-icon">CT</span>
+              <span class="orbit-label">ติดต่อเรา</span>
+            </button>
+
+            <a class="orbit-item orbit-8" href="agent-login.html">
+              <span class="orbit-icon">LG</span>
+              <span class="orbit-label">ล็อคอินตัวแทน</span>
+            </a>
+
+            <a class="orbit-item orbit-9" href="agent-partner.html">
+              <span class="orbit-icon">AG</span>
+              <span class="orbit-label">สมัครตัวแทน</span>
+            </a>
+
+            <a class="orbit-item orbit-10" href="about.html">
+              <span class="orbit-icon">AB</span>
+              <span class="orbit-label">เกี่ยวกับบริษัท</span>
+            </a>
+          </div>
+
+          <div class="logo-note">คลิกที่โลโก้เพื่อเปิดเมนู</div>
         </div>
       </section>
     </main>
+
+    <footer class="ssb-footer">
+      <div class="footer-inner">
+        <div class="footer-grid">
+          <div class="footer-card">
+            <h3 class="footer-title">บริษัท สยามทำ จำกัด</h3>
+            <p class="footer-text"><strong>ที่อยู่:</strong> 54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
+            <p class="footer-text"><strong>เลขทะเบียน:</strong> 0105566099954</p>
+            <p class="footer-text"><strong>โทร:</strong> 02-043-2988</p>
+            <p class="footer-text"><strong>มือถือ:</strong> 064-951-4888</p>
+            <p class="footer-text"><strong>เว็บไซต์:</strong> <a class="footer-link" href="https://www.siamtham.com" target="_blank" rel="noopener">www.siamtham.com</a></p>
+            <p class="footer-text"><strong>อีเมล:</strong> <a class="footer-link" href="mailto:mysiamtham@gmail.com">mysiamtham@gmail.com</a></p>
+          </div>
+
+          <div class="footer-card">
+            <h3 class="footer-title">Google Map</h3>
+            <div class="footer-map">
+              <iframe
+                src="https://www.google.com/maps?q=54%20Soi%2053%20Phutthamonthon%20Sai%201%20Road%20Chimphli%20Taling%20Chan%20Bangkok%2010170&z=16&output=embed"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          © Siam Tum Co., Ltd. • Stealth Safety Bank System
+        </div>
+      </div>
+    </footer>
   </div>
 
   <div id="companyPopup" class="popup-backdrop">
@@ -1001,10 +1357,10 @@
         <h3>บริษัท สยามทำ จำกัด</h3>
         <button class="popup-x" type="button" id="closeCompanyPopupTop">×</button>
       </div>
-      <p>54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
-      <p>Serial: 0105566099954</p>
-      <p>โทร 02-043-2988</p>
-      <p>063-656-1447 / 064-951-4888 / 080-204-5455</p>
+      <p class="footer-text" style="color:#31506f;"><strong>ที่อยู่:</strong> 54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
+      <p class="footer-text" style="color:#31506f;"><strong>เลขทะเบียน:</strong> 0105566099954</p>
+      <p class="footer-text" style="color:#31506f;"><strong>โทร:</strong> 02-043-2988</p>
+      <p class="footer-text" style="color:#31506f;"><strong>มือถือ:</strong> 064-951-4888</p>
       <button class="popup-close" type="button" id="closeCompanyPopupBottom">ปิด</button>
     </div>
   </div>
@@ -1068,33 +1424,6 @@
     </button>
   </div>
 
-  <script type="module">
-    import { renderSharedShell } from "./js/shared-shell.js";
-    renderSharedShell("หน้าแรก");
-
-    setTimeout(() => {
-      const stickyTargets = [
-        ".ssb-shell-topbar",
-        ".shared-shell-topbar",
-        "header.ssb-topbar",
-        ".topbar",
-        ".shell-topbar",
-        "#appShell header",
-        "#appShell .topbar",
-        "#appShell .ssb-topbar"
-      ];
-      stickyTargets.forEach((selector) => {
-        document.querySelectorAll(selector).forEach((el) => {
-          el.style.position = "sticky";
-          el.style.top = "0";
-          el.style.zIndex = "1000";
-          el.style.backdropFilter = "blur(14px)";
-          el.style.webkitBackdropFilter = "blur(14px)";
-        });
-      });
-    }, 80);
-  </script>
-
   <script>
     const popupData = {
       ssbmobile: {
@@ -1103,7 +1432,7 @@
         text: `
           <p>SSB Mobile คือระบบการใช้งานอุปกรณ์สำหรับธุรกรรมการเงินที่ออกแบบให้แยกจากการใช้งานทั่วไป เพื่อลดความเสี่ยงจากแอปไม่จำเป็น การหลอกลวง และการโจมตีทางไซเบอร์</p>
           <p>แนวคิดหลักคือใช้งานเฉพาะสิ่งที่จำเป็นต่อการทำธุรกรรมอย่างปลอดภัย เรียบง่าย และควบคุมได้</p>
-          <p>ระบบนี้เหมาะกับผู้ที่ต้องการความมั่นใจสูงในการจัดการเงินผ่านมือถืออย่างจริงจัง</p>
+          <p>เหมาะกับผู้ที่ต้องการความมั่นใจสูงในการจัดการเงินผ่านมือถืออย่างจริงจัง</p>
         `
       },
       stealthbank: {
