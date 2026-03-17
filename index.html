@@ -847,6 +847,17 @@
   -webkit-backdrop-filter:blur(10px);
 }
 
+.footer-main{
+  display:grid;
+  grid-template-columns: 1.2fr .95fr .9fr;
+  gap:14px;
+  align-items:center;
+}
+
+.footer-col{
+  min-width:0;
+}
+
 .footer-title{
   margin:0 0 10px;
   font-size:17px;
@@ -873,20 +884,40 @@
   font-weight:700;
 }
 
-.footer-map-inline{
-  margin-top:10px;
-  border-radius:14px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.14);
-  box-shadow:0 10px 20px rgba(0,0,0,.10);
-  background:rgba(255,255,255,.10);
+.footer-contact-center{
+  text-align:center;
 }
 
-.footer-map-inline iframe{
-  width:100%;
-  height:180px;
-  border:0;
-  display:block;
+.footer-contact-center .footer-text{
+  margin:0 0 8px;
+}
+
+.footer-nav-wrap{
+  display:flex;
+  justify-content:flex-end;
+}
+
+.footer-map-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:52px;
+  padding:0 20px;
+  border-radius:999px;
+  background:linear-gradient(135deg, #ffffff 0%, #eef4ff 100%);
+  color:var(--ssb-blue);
+  text-decoration:none;
+  font-size:14px;
+  font-weight:800;
+  box-shadow:0 12px 24px rgba(0,0,0,.12);
+  border:1px solid rgba(255,255,255,.28);
+  transition:transform .22s ease, filter .22s ease;
+  text-align:center;
+}
+
+.footer-map-button:hover{
+  transform:translateY(-2px);
+  filter:brightness(1.03);
 }
 
 .footer-bottom{
@@ -1194,6 +1225,25 @@
         min-height:240px;
       }
 
+      .footer-main{
+  grid-template-columns:1fr;
+  gap:10px;
+}
+
+.footer-contact-center{
+  text-align:left;
+}
+
+.footer-nav-wrap{
+  justify-content:flex-start;
+}
+
+.footer-map-button{
+  width:100%;
+  min-height:48px;
+  font-size:13px;
+}
+
       .chat-widget{
         right:12px;
         bottom:12px;
@@ -1340,20 +1390,28 @@
 <footer class="ssb-footer">
   <div class="footer-inner">
     <div class="footer-card">
-      <h3 class="footer-title">บริษัท สยามทำ จำกัด</h3>
-      <p class="footer-text"><strong>ที่อยู่:</strong> 54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
-      <p class="footer-text"><strong>เลขทะเบียน:</strong> 0105566099954</p>
-      <p class="footer-text"><strong>โทร:</strong> 02-043-2988</p>
-      <p class="footer-text"><strong>มือถือ:</strong> 064-951-4888</p>
-      <p class="footer-text"><strong>เว็บไซต์:</strong> <a class="footer-link" href="https://www.siamtham.com" target="_blank" rel="noopener">www.siamtham.com</a></p>
+      <div class="footer-main">
+        <div class="footer-col">
+          <h3 class="footer-title">บริษัท สยามทำ จำกัด</h3>
+          <p class="footer-text"><strong>ที่อยู่:</strong> 54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
+        </div>
 
-      <div class="footer-map-inline">
-        <iframe
-          src="https://www.google.com/maps?q=54%20Soi%2053%20Phutthamonthon%20Sai%201%20Road%20Chimphli%20Taling%20Chan%20Bangkok%2010170&z=16&output=embed"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          allowfullscreen
-        ></iframe>
+        <div class="footer-col footer-contact-center">
+          <p class="footer-text"><strong>โทร:</strong> <a class="footer-link" href="tel:020432988">02-043-2988</a></p>
+          <p class="footer-text"><strong>มือถือ:</strong> <a class="footer-link" href="tel:0649514888">064-951-4888</a></p>
+          <p class="footer-text"><strong>เว็บไซต์:</strong> <a class="footer-link" href="https://www.siamtham.com" target="_blank" rel="noopener">www.siamtham.com</a></p>
+        </div>
+
+        <div class="footer-col footer-nav-wrap">
+          <a
+            class="footer-map-button"
+            href="https://www.google.com/maps/dir/?api=1&destination=54%20Soi%2053%20Phutthamonthon%20Sai%201%20Road%20Chimphli%20Taling%20Chan%20Bangkok%2010170"
+            target="_blank"
+            rel="noopener"
+          >
+            คลิกเพื่อเดินทางไปบริษัท
+          </a>
+        </div>
       </div>
     </div>
 
