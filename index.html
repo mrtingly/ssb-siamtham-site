@@ -807,105 +807,97 @@
     .chat-widget.open .chat-caret{ transform:rotate(180deg); }
 
     /* FOOTER */
-    .ssb-footer{
-      position:relative;
-      z-index:1;
-      background:linear-gradient(135deg, var(--ssb-blue-dark) 0%, var(--ssb-blue) 52%, var(--ssb-blue-2) 100%);
-      border-top:1px solid rgba(255,255,255,.12);
-      box-shadow:0 -10px 28px rgba(7,47,102,.18);
-      overflow:hidden;
-      margin-top:18px;
-    }
+   .ssb-footer{
+  position:relative;
+  z-index:1;
+  background:linear-gradient(135deg, var(--ssb-blue-dark) 0%, var(--ssb-blue) 52%, var(--ssb-blue-2) 100%);
+  border-top:1px solid rgba(255,255,255,.12);
+  box-shadow:0 -10px 28px rgba(7,47,102,.18);
+  overflow:hidden;
+  margin-top:18px;
+}
 
-    .ssb-footer::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,0)),
-        radial-gradient(circle at 10% 20%, rgba(255,255,255,.10), transparent 24%),
-        radial-gradient(circle at 88% 16%, rgba(255,255,255,.08), transparent 20%);
-      pointer-events:none;
-    }
+.ssb-footer::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,0)),
+    radial-gradient(circle at 10% 20%, rgba(255,255,255,.10), transparent 24%),
+    radial-gradient(circle at 88% 16%, rgba(255,255,255,.08), transparent 20%);
+  pointer-events:none;
+}
 
-    .footer-inner{
-      width:min(var(--max-width), calc(100% - 20px));
-      margin:0 auto;
-      padding:26px 0 22px;
-      position:relative;
-      z-index:1;
-      color:#fff;
-    }
+.footer-inner{
+  width:min(var(--max-width), calc(100% - 20px));
+  margin:0 auto;
+  padding:18px 0 14px;
+  position:relative;
+  z-index:1;
+  color:#fff;
+}
 
-    .footer-grid{
-      display:grid;
-      grid-template-columns:1fr 1.15fr;
-      gap:22px;
-      align-items:stretch;
-    }
+.footer-card{
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:20px;
+  padding:14px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
 
-    .footer-card{
-      background:rgba(255,255,255,.10);
-      border:1px solid rgba(255,255,255,.14);
-      border-radius:24px;
-      padding:20px;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.12);
-      backdrop-filter:blur(10px);
-      -webkit-backdrop-filter:blur(10px);
-    }
+.footer-title{
+  margin:0 0 10px;
+  font-size:17px;
+  font-weight:800;
+  line-height:1.2;
+  color:#fff;
+}
 
-    .footer-title{
-      margin:0 0 12px;
-      font-size:20px;
-      font-weight:800;
-      line-height:1.2;
-      color:#fff;
-    }
+.footer-text{
+  margin:0 0 6px;
+  font-size:13px;
+  line-height:1.65;
+  color:rgba(255,255,255,.95);
+  word-break:break-word;
+}
 
-    .footer-text{
-      margin:0 0 10px;
-      font-size:15px;
-      line-height:1.8;
-      color:rgba(255,255,255,.95);
-      word-break:break-word;
-    }
+.footer-text strong{
+  color:#fff;
+}
 
-    .footer-text strong{
-      color:#fff;
-    }
+.footer-link{
+  color:#fff;
+  text-decoration:none;
+  font-weight:700;
+}
 
-    .footer-link{
-      color:#fff;
-      text-decoration:none;
-      font-weight:700;
-    }
+.footer-map-inline{
+  margin-top:10px;
+  border-radius:14px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 10px 20px rgba(0,0,0,.10);
+  background:rgba(255,255,255,.10);
+}
 
-    .footer-map{
-      border-radius:18px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.14);
-      box-shadow:0 14px 28px rgba(0,0,0,.12);
-      background:rgba(255,255,255,.10);
-      min-height:300px;
-    }
+.footer-map-inline iframe{
+  width:100%;
+  height:180px;
+  border:0;
+  display:block;
+}
 
-    .footer-map iframe{
-      width:100%;
-      height:100%;
-      min-height:300px;
-      border:0;
-      display:block;
-    }
-
-    .footer-bottom{
-      margin-top:16px;
-      padding-top:14px;
-      border-top:1px solid rgba(255,255,255,.12);
-      color:rgba(255,255,255,.92);
-      font-size:13px;
-      text-align:center;
-    }
-
+.footer-bottom{
+  margin-top:12px;
+  padding-top:10px;
+  border-top:1px solid rgba(255,255,255,.12);
+  color:rgba(255,255,255,.92);
+  font-size:12px;
+  text-align:center;
+  line-height:1.7;
+}
     /* ANIMATION */
     @keyframes ssbFloatIn{
       0%{ opacity:0; filter:blur(5px); }
@@ -1224,6 +1216,33 @@
         width:58px;
         height:58px;
       }
+
+      .footer-inner{
+  width:min(100% - 14px, var(--max-width));
+  padding:14px 0 12px;
+}
+
+.footer-card{
+  padding:12px;
+  border-radius:16px;
+}
+
+.footer-title{
+  font-size:15px;
+}
+
+.footer-text{
+  font-size:12px;
+  line-height:1.6;
+}
+
+.footer-map-inline iframe{
+  height:160px;
+}
+
+.footer-bottom{
+  font-size:11px;
+}
     }
   </style>
 </head>
@@ -1318,37 +1337,32 @@
       </section>
     </main>
 
-    <footer class="ssb-footer">
-      <div class="footer-inner">
-        <div class="footer-grid">
-          <div class="footer-card">
-            <h3 class="footer-title">บริษัท สยามทำ จำกัด</h3>
-            <p class="footer-text"><strong>ที่อยู่:</strong> 54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
-            <p class="footer-text"><strong>เลขทะเบียน:</strong> 0105566099954</p>
-            <p class="footer-text"><strong>โทร:</strong> 02-043-2988</p>
-            <p class="footer-text"><strong>มือถือ:</strong> 064-951-4888</p>
-            <p class="footer-text"><strong>เว็บไซต์:</strong> <a class="footer-link" href="https://www.siamtham.com" target="_blank" rel="noopener">www.siamtham.com</a></p>
-            <p class="footer-text"><strong>อีเมล:</strong> <a class="footer-link" href="mailto:mysiamtham@gmail.com">mysiamtham@gmail.com</a></p>
-          </div>
+<footer class="ssb-footer">
+  <div class="footer-inner">
+    <div class="footer-card">
+      <h3 class="footer-title">บริษัท สยามทำ จำกัด</h3>
+      <p class="footer-text"><strong>ที่อยู่:</strong> 54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
+      <p class="footer-text"><strong>เลขทะเบียน:</strong> 0105566099954</p>
+      <p class="footer-text"><strong>โทร:</strong> 02-043-2988</p>
+      <p class="footer-text"><strong>มือถือ:</strong> 064-951-4888</p>
+      <p class="footer-text"><strong>เว็บไซต์:</strong> <a class="footer-link" href="https://www.siamtham.com" target="_blank" rel="noopener">www.siamtham.com</a></p>
 
-          <div class="footer-card">
-            <h3 class="footer-title">Google Map</h3>
-            <div class="footer-map">
-              <iframe
-                src="https://www.google.com/maps?q=54%20Soi%2053%20Phutthamonthon%20Sai%201%20Road%20Chimphli%20Taling%20Chan%20Bangkok%2010170&z=16&output=embed"
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-                allowfullscreen
-              ></iframe>
-            </div>
-          </div>
-        </div>
-
-        <div class="footer-bottom">
-          © Siam Tum Co., Ltd. • Stealth Safety Bank System
-        </div>
+      <div class="footer-map-inline">
+        <iframe
+          src="https://www.google.com/maps?q=54%20Soi%2053%20Phutthamonthon%20Sai%201%20Road%20Chimphli%20Taling%20Chan%20Bangkok%2010170&z=16&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+        ></iframe>
       </div>
-    </footer>
+    </div>
+
+    <div class="footer-bottom">
+      © Siam Tum Co., Ltd. • Stealth Safety Bank System<br>
+      เว็บไซต์นี้ทำโดย Mr.Tingly Marketing Online
+    </div>
+  </div>
+</footer>
   </div>
 
   <div id="companyPopup" class="popup-backdrop">
