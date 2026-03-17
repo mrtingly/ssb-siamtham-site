@@ -21,17 +21,11 @@
       --ssb-blue-3:#69a7ff;
       --ssb-blue-dark:#072f66;
       --ssb-gold:#d4af37;
-      --ssb-gold-soft:#f3df95;
       --ssb-text:#16324f;
-      --ssb-white:#ffffff;
+      --white:#ffffff;
       --page-1:#f9fbff;
       --page-2:#eef4fc;
       --page-3:#dde8f6;
-      --glass:rgba(255,255,255,.58);
-      --glass-2:rgba(255,255,255,.74);
-      --shadow-1:0 18px 50px rgba(7,47,102,.10);
-      --shadow-2:0 28px 80px rgba(7,47,102,.16);
-      --ring:rgba(11,78,162,.10);
     }
 
     *{
@@ -146,8 +140,8 @@
       align-items:center;
       justify-content:center;
       isolation:isolate;
-      --mx: 0px;
-      --my: 0px;
+      --mx:0px;
+      --my:0px;
     }
 
     .logo-orbit-wrap::before{
@@ -192,21 +186,20 @@
       border-radius:50%;
       pointer-events:none;
       z-index:2;
-      border:1px dashed rgba(11,78,162,.14);
       transform:translate(-50%, -50%);
     }
 
     .tech-ring{
       width:430px;
       height:430px;
+      border:1px dashed rgba(11,78,162,.14);
       animation:ringRotate 18s linear infinite;
     }
 
     .tech-ring-2{
       width:600px;
       height:600px;
-      border-style:solid;
-      border-color:rgba(11,78,162,.06);
+      border:1px solid rgba(11,78,162,.06);
       animation:ringRotateReverse 26s linear infinite;
     }
 
@@ -215,9 +208,9 @@
       background:transparent;
       padding:0;
       cursor:pointer;
-      transition:transform .30s ease, filter .30s ease;
       position:relative;
       z-index:30;
+      transition:transform .30s ease, filter .30s ease;
       transform:translate(calc(var(--mx) * .10), calc(var(--my) * .10));
     }
 
@@ -274,8 +267,7 @@
         opacity .30s ease,
         transform .32s cubic-bezier(.2,.7,.2,1),
         box-shadow .26s ease,
-        filter .26s ease,
-        background .26s ease;
+        filter .26s ease;
       outline:none;
       z-index:10;
       overflow:hidden;
@@ -313,7 +305,11 @@
         inset 0 1px 0 rgba(255,255,255,.24),
         inset 0 -1px 0 rgba(0,0,0,.08);
       filter:brightness(1.05) saturate(1.05);
-      transform:translate(-50%, -50%) translate(var(--tx, 0px), var(--ty, 0px)) translate3d(0,-10px,0) scale(1.06) rotateX(7deg) rotateY(-7deg);
+      transform:
+        translate(-50%, -50%)
+        translate(var(--tx), var(--ty))
+        translateY(-10px)
+        scale(1.06);
     }
 
     .orbit-item:hover::after{
@@ -322,7 +318,11 @@
     }
 
     .orbit-item:active{
-      transform:translate(-50%, -50%) translate(var(--tx, 0px), var(--ty, 0px)) translate3d(0,-3px,0) scale(1.01);
+      transform:
+        translate(-50%, -50%)
+        translate(var(--tx), var(--ty))
+        translateY(-3px)
+        scale(1.01);
     }
 
     .orbit-item.primary{
@@ -407,14 +407,8 @@
     }
 
     @keyframes ssbFloatIn{
-      0%{
-        opacity:0;
-        filter:blur(5px);
-      }
-      100%{
-        opacity:1;
-        filter:blur(0);
-      }
+      0%{ opacity:0; filter:blur(5px); }
+      100%{ opacity:1; filter:blur(0); }
     }
 
     @keyframes auraPulse{
@@ -443,16 +437,18 @@
     .orbit-9{ --tx:-324px; --ty:-72px; }
     .orbit-10{ --tx:-226px; --ty:-252px; }
 
-    .logo-orbit-wrap.open .orbit-1{ transform:translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1); }
-    .logo-orbit-wrap.open .orbit-2{ transform:translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1); }
-    .logo-orbit-wrap.open .orbit-3{ transform:translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1); }
-    .logo-orbit-wrap.open .orbit-4{ transform:translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1); }
-    .logo-orbit-wrap.open .orbit-5{ transform:translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1); }
-    .logo-orbit-wrap.open .orbit-6{ transform:translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1); }
-    .logo-orbit-wrap.open .orbit-7{ transform:translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1); }
-    .logo-orbit-wrap.open .orbit-8{ transform:translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1); }
-    .logo-orbit-wrap.open .orbit-9{ transform:translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1); }
-    .logo-orbit-wrap.open .orbit-10{ transform:translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1); }
+    .logo-orbit-wrap.open .orbit-1,
+    .logo-orbit-wrap.open .orbit-2,
+    .logo-orbit-wrap.open .orbit-3,
+    .logo-orbit-wrap.open .orbit-4,
+    .logo-orbit-wrap.open .orbit-5,
+    .logo-orbit-wrap.open .orbit-6,
+    .logo-orbit-wrap.open .orbit-7,
+    .logo-orbit-wrap.open .orbit-8,
+    .logo-orbit-wrap.open .orbit-9,
+    .logo-orbit-wrap.open .orbit-10{
+      transform:translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1);
+    }
 
     .logo-note{
       display:inline-flex;
@@ -730,7 +726,7 @@
 
     .chat-widget.open .chat-caret{ transform:rotate(180deg); }
 
-    @media (max-width: 1100px){
+    @media (max-width:1100px){
       .logo-orbit-wrap{
         width:min(96vw, 760px);
         height:min(96vw, 760px);
@@ -790,7 +786,7 @@
       }
     }
 
-    @media (max-width: 760px){
+    @media (max-width:760px){
       body::after{
         background-size:30px 30px;
         opacity:.38;
@@ -889,7 +885,11 @@
       .orbit-10{ --tx:-112px; --ty:-120px; }
 
       .orbit-item:hover{
-        transform:translate(-50%, -50%) translate(var(--tx), var(--ty)) translate3d(0,-6px,0) scale(1.03);
+        transform:
+          translate(-50%, -50%)
+          translate(var(--tx), var(--ty))
+          translateY(-6px)
+          scale(1.03);
       }
 
       .popup-card{
@@ -955,27 +955,27 @@
                 <img src="images/logo.png" alt="Stealth Safety Bank Logo" />
               </button>
 
-              <button class="orbit-item orbit-1" type="button" onclick="openInfoPopup('ssbmobile')">
+              <button class="orbit-item orbit-1" type="button" data-popup="ssbmobile">
                 <span class="orbit-icon">SM</span>
                 <span class="orbit-label">SSB Mobile</span>
               </button>
 
-              <button class="orbit-item orbit-2" type="button" onclick="openInfoPopup('stealthbank')">
+              <button class="orbit-item orbit-2" type="button" data-popup="stealthbank">
                 <span class="orbit-icon">SB</span>
                 <span class="orbit-label">Stealth Safety Bank</span>
               </button>
 
-              <button class="orbit-item orbit-3" type="button" onclick="openInfoPopup('safetybook')">
+              <button class="orbit-item orbit-3" type="button" data-popup="safetybook">
                 <span class="orbit-icon">BK</span>
                 <span class="orbit-label">Stealth Safety Book</span>
               </button>
 
-              <button class="orbit-item orbit-4" type="button" onclick="openInfoPopup('stealthtech')">
+              <button class="orbit-item orbit-4" type="button" data-popup="stealthtech">
                 <span class="orbit-icon">ST</span>
                 <span class="orbit-label">Stealth Technology</span>
               </button>
 
-              <button class="orbit-item orbit-5" type="button" onclick="openInfoPopup('flare')">
+              <button class="orbit-item orbit-5" type="button" data-popup="flare">
                 <span class="orbit-icon">FL</span>
                 <span class="orbit-label">Flare Technology</span>
               </button>
@@ -985,7 +985,7 @@
                 <span class="orbit-label">เริ่มสั่งสินค้า</span>
               </a>
 
-              <button class="orbit-item orbit-7" type="button" onclick="openCompanyPopup()">
+              <button class="orbit-item orbit-7" type="button" id="contactButton">
                 <span class="orbit-icon">CT</span>
                 <span class="orbit-label">ติดต่อเรา</span>
               </button>
@@ -1017,13 +1017,13 @@
     <div class="popup-card company">
       <div class="popup-head">
         <h3>บริษัท สยามทำ จำกัด</h3>
-        <button class="popup-x" type="button" onclick="closeCompanyPopup()">×</button>
+        <button class="popup-x" type="button" id="closeCompanyPopupTop">×</button>
       </div>
       <p>54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
       <p>Serial: 0105566099954</p>
       <p>โทร 02-043-2988</p>
       <p>063-656-1447 / 064-951-4888 / 080-204-5455</p>
-      <button class="popup-close" type="button" onclick="closeCompanyPopup()">ปิด</button>
+      <button class="popup-close" type="button" id="closeCompanyPopupBottom">ปิด</button>
     </div>
   </div>
 
@@ -1031,11 +1031,12 @@
     <div class="popup-card">
       <div class="popup-head">
         <h3 id="infoTitle">หัวข้อ</h3>
-        <button class="popup-x" type="button" onclick="closeInfoPopup()">×</button>
+        <button class="popup-x" type="button" id="closeInfoPopupTop">×</button>
       </div>
 
       <div class="popup-grid">
         <div class="popup-text" id="infoText"></div>
+
         <div class="video-wrap">
           <div class="video-frame">
             <iframe
@@ -1049,7 +1050,7 @@
         </div>
       </div>
 
-      <button class="popup-close" type="button" onclick="closeInfoPopup()">ปิด</button>
+      <button class="popup-close" type="button" id="closeInfoPopupBottom">ปิด</button>
     </div>
   </div>
 
@@ -1161,119 +1162,120 @@
       }
     };
 
-    function openCompanyPopup(){
-      const popup = document.getElementById("companyPopup");
-      if (popup) popup.style.display = "flex";
-    }
+    const logoOrbitWrap = document.getElementById("logoOrbitWrap");
+    const logoMenuButton = document.getElementById("logoMenuButton");
 
-    function closeCompanyPopup(){
-      const popup = document.getElementById("companyPopup");
-      if (popup) popup.style.display = "none";
-    }
+    const infoPopup = document.getElementById("infoPopup");
+    const infoTitle = document.getElementById("infoTitle");
+    const infoText = document.getElementById("infoText");
+    const infoVideo = document.getElementById("infoVideo");
+
+    const companyPopup = document.getElementById("companyPopup");
 
     function openInfoPopup(key){
       const data = popupData[key];
       if (!data) return;
 
-      const popup = document.getElementById("infoPopup");
-      const title = document.getElementById("infoTitle");
-      const text = document.getElementById("infoText");
-      const video = document.getElementById("infoVideo");
-
-      title.innerHTML = data.title;
-      text.innerHTML = data.text;
-      video.src = data.video + "?rel=0";
-      popup.style.display = "flex";
+      infoTitle.innerHTML = data.title;
+      infoText.innerHTML = data.text;
+      infoVideo.src = data.video + "?rel=0&autoplay=0";
+      infoPopup.style.display = "flex";
     }
 
     function closeInfoPopup(){
-      const popup = document.getElementById("infoPopup");
-      const video = document.getElementById("infoVideo");
-      if (video) video.src = "";
-      if (popup) popup.style.display = "none";
+      infoVideo.src = "";
+      infoPopup.style.display = "none";
     }
 
-    (function () {
-      const companyPopup = document.getElementById("companyPopup");
-      const infoPopup = document.getElementById("infoPopup");
+    function openCompanyPopup(){
+      companyPopup.style.display = "flex";
+    }
 
-      if (companyPopup) {
-        companyPopup.addEventListener("click", function (event) {
-          if (event.target === companyPopup) closeCompanyPopup();
-        });
-      }
+    function closeCompanyPopup(){
+      companyPopup.style.display = "none";
+    }
 
-      if (infoPopup) {
-        infoPopup.addEventListener("click", function (event) {
-          if (event.target === infoPopup) closeInfoPopup();
-        });
-      }
-    })();
-
-    (function () {
-      const orbitWrap = document.getElementById("logoOrbitWrap");
-      const logoBtn = document.getElementById("logoMenuButton");
-
-      if (!orbitWrap || !logoBtn) return;
-
-      logoBtn.addEventListener("click", function (event) {
+    if (logoMenuButton && logoOrbitWrap) {
+      logoMenuButton.addEventListener("click", function(event){
         event.stopPropagation();
-        orbitWrap.classList.toggle("open");
+        logoOrbitWrap.classList.toggle("open");
       });
+    }
 
-      orbitWrap.addEventListener("click", function (event) {
+    if (logoOrbitWrap) {
+      logoOrbitWrap.addEventListener("click", function(event){
         event.stopPropagation();
       });
 
-      document.addEventListener("click", function () {
-        const infoPopup = document.getElementById("infoPopup");
-        const companyPopup = document.getElementById("companyPopup");
-
-        const infoOpen = infoPopup && infoPopup.style.display === "flex";
-        const companyOpen = companyPopup && companyPopup.style.display === "flex";
-
-        if (!infoOpen && !companyOpen) {
-          orbitWrap.classList.remove("open");
-        }
+      const popupButtons = logoOrbitWrap.querySelectorAll("[data-popup]");
+      popupButtons.forEach((btn) => {
+        btn.addEventListener("click", function(event){
+          event.stopPropagation();
+          const key = btn.getAttribute("data-popup");
+          openInfoPopup(key);
+        });
       });
-    })();
 
-    (function () {
-      const chatWidget = document.getElementById("chatWidget");
-      const chatToggle = document.getElementById("chatToggle");
+      const contactButton = document.getElementById("contactButton");
+      if (contactButton) {
+        contactButton.addEventListener("click", function(event){
+          event.stopPropagation();
+          openCompanyPopup();
+        });
+      }
 
-      if (!chatWidget || !chatToggle) return;
+      logoOrbitWrap.addEventListener("mousemove", function(event){
+        if (window.innerWidth <= 760) return;
+        const rect = logoOrbitWrap.getBoundingClientRect();
+        const x = ((event.clientX - rect.left) / rect.width) - 0.5;
+        const y = ((event.clientY - rect.top) / rect.height) - 0.5;
+        logoOrbitWrap.style.setProperty("--mx", `${x * 18}px`);
+        logoOrbitWrap.style.setProperty("--my", `${y * 18}px`);
+      });
 
-      chatToggle.addEventListener("click", function (event) {
+      logoOrbitWrap.addEventListener("mouseleave", function(){
+        logoOrbitWrap.style.setProperty("--mx", "0px");
+        logoOrbitWrap.style.setProperty("--my", "0px");
+      });
+    }
+
+    document.getElementById("closeInfoPopupTop")?.addEventListener("click", closeInfoPopup);
+    document.getElementById("closeInfoPopupBottom")?.addEventListener("click", closeInfoPopup);
+    document.getElementById("closeCompanyPopupTop")?.addEventListener("click", closeCompanyPopup);
+    document.getElementById("closeCompanyPopupBottom")?.addEventListener("click", closeCompanyPopup);
+
+    infoPopup?.addEventListener("click", function(event){
+      if (event.target === infoPopup) closeInfoPopup();
+    });
+
+    companyPopup?.addEventListener("click", function(event){
+      if (event.target === companyPopup) closeCompanyPopup();
+    });
+
+    document.addEventListener("click", function(event){
+      const infoOpen = infoPopup && infoPopup.style.display === "flex";
+      const companyOpen = companyPopup && companyPopup.style.display === "flex";
+
+      if (!infoOpen && !companyOpen && logoOrbitWrap && !logoOrbitWrap.contains(event.target)) {
+        logoOrbitWrap.classList.remove("open");
+      }
+    });
+
+    const chatWidget = document.getElementById("chatWidget");
+    const chatToggle = document.getElementById("chatToggle");
+
+    if (chatWidget && chatToggle) {
+      chatToggle.addEventListener("click", function(event){
         event.stopPropagation();
         chatWidget.classList.toggle("open");
       });
 
-      document.addEventListener("click", function (event) {
+      document.addEventListener("click", function(event){
         if (!chatWidget.contains(event.target)) {
           chatWidget.classList.remove("open");
         }
       });
-    })();
-
-    (function () {
-      const orbitWrap = document.getElementById("logoOrbitWrap");
-      if (!orbitWrap) return;
-
-      orbitWrap.addEventListener("mousemove", function (event) {
-        if (window.innerWidth <= 760) return;
-        const rect = orbitWrap.getBoundingClientRect();
-        const x = ((event.clientX - rect.left) / rect.width) - 0.5;
-        const y = ((event.clientY - rect.top) / rect.height) - 0.5;
-        orbitWrap.style.setProperty("--mx", `${x * 18}px`);
-        orbitWrap.style.setProperty("--my", `${y * 18}px`);
-      });
-
-      orbitWrap.addEventListener("mouseleave", function () {
-        orbitWrap.style.setProperty("--mx", "0px");
-        orbitWrap.style.setProperty("--my", "0px");
-      });
-    })();
+    }
 
     function googleTranslateElementInit() {
       new google.translate.TranslateElement(
@@ -1285,6 +1287,8 @@
         "google_translate_element"
       );
     }
+
+    window.googleTranslateElementInit = googleTranslateElementInit;
   </script>
 
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
