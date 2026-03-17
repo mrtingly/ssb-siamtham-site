@@ -17,15 +17,21 @@
   <style>
     :root{
       --ssb-blue:#0b4ea2;
-      --ssb-blue-2:#1b67cf;
+      --ssb-blue-2:#2b7cea;
+      --ssb-blue-3:#69a7ff;
       --ssb-blue-dark:#072f66;
       --ssb-gold:#d4af37;
+      --ssb-gold-soft:#f3df95;
       --ssb-text:#16324f;
       --ssb-white:#ffffff;
-      --ssb-page-1:#f8fbff;
-      --ssb-page-2:#edf3fb;
-      --ssb-page-3:#dfe8f5;
-      --ssb-shadow:0 20px 60px rgba(10,54,112,.12);
+      --page-1:#f9fbff;
+      --page-2:#eef4fc;
+      --page-3:#dde8f6;
+      --glass:rgba(255,255,255,.58);
+      --glass-2:rgba(255,255,255,.74);
+      --shadow-1:0 18px 50px rgba(7,47,102,.10);
+      --shadow-2:0 28px 80px rgba(7,47,102,.16);
+      --ring:rgba(11,78,162,.10);
     }
 
     *{
@@ -39,8 +45,8 @@
       margin:0;
       color:var(--ssb-text);
       background:
-        radial-gradient(circle at 50% 42%, rgba(255,255,255,.98) 0%, rgba(255,255,255,.96) 16%, rgba(237,243,251,.94) 34%, rgba(223,232,245,.96) 68%, #dce6f3 100%),
-        linear-gradient(135deg, var(--ssb-page-1) 0%, var(--ssb-page-2) 45%, var(--ssb-page-3) 100%);
+        radial-gradient(circle at 50% 42%, rgba(255,255,255,.98) 0%, rgba(255,255,255,.96) 16%, rgba(237,243,251,.94) 36%, rgba(223,232,245,.96) 72%, #dce6f3 100%),
+        linear-gradient(135deg, var(--page-1) 0%, var(--page-2) 44%, var(--page-3) 100%);
       overflow-x:hidden;
       position:relative;
     }
@@ -52,10 +58,10 @@
       pointer-events:none;
       z-index:0;
       background:
-        radial-gradient(circle at 50% 48%, rgba(11,78,162,.10) 0%, rgba(11,78,162,.06) 16%, rgba(11,78,162,.03) 28%, transparent 52%),
-        radial-gradient(circle at 14% 12%, rgba(255,255,255,.92) 0%, rgba(255,255,255,.48) 16%, transparent 40%),
-        radial-gradient(circle at 86% 14%, rgba(255,255,255,.85) 0%, rgba(255,255,255,.36) 14%, transparent 34%),
-        radial-gradient(circle at 50% 92%, rgba(11,78,162,.05) 0%, transparent 34%);
+        radial-gradient(circle at 50% 48%, rgba(11,78,162,.10) 0%, rgba(11,78,162,.06) 18%, rgba(11,78,162,.025) 30%, transparent 54%),
+        radial-gradient(circle at 14% 12%, rgba(255,255,255,.94) 0%, rgba(255,255,255,.45) 16%, transparent 40%),
+        radial-gradient(circle at 86% 14%, rgba(255,255,255,.88) 0%, rgba(255,255,255,.35) 15%, transparent 35%),
+        radial-gradient(circle at 52% 90%, rgba(11,78,162,.05) 0%, transparent 34%);
     }
 
     body::after{
@@ -64,13 +70,13 @@
       inset:0;
       pointer-events:none;
       z-index:0;
-      opacity:.50;
+      opacity:.45;
       background-image:
-        linear-gradient(rgba(255,255,255,.24) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.24) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,.22) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.22) 1px, transparent 1px);
       background-size:42px 42px;
-      mask-image:radial-gradient(circle at center, rgba(0,0,0,.95) 0%, rgba(0,0,0,.55) 40%, transparent 78%);
-      -webkit-mask-image:radial-gradient(circle at center, rgba(0,0,0,.95) 0%, rgba(0,0,0,.55) 40%, transparent 78%);
+      mask-image:radial-gradient(circle at center, rgba(0,0,0,.96) 0%, rgba(0,0,0,.55) 42%, transparent 78%);
+      -webkit-mask-image:radial-gradient(circle at center, rgba(0,0,0,.96) 0%, rgba(0,0,0,.55) 42%, transparent 78%);
     }
 
     body .ssb-shell-topbar,
@@ -102,7 +108,7 @@
       justify-content:flex-end;
       align-items:center;
       min-height:42px;
-      margin-bottom:2px;
+      margin-bottom:0;
       position:relative;
       z-index:5;
     }
@@ -112,7 +118,7 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:2px 0 20px;
+      padding:4px 0 20px;
       position:relative;
     }
 
@@ -129,17 +135,19 @@
       flex-direction:column;
       align-items:center;
       justify-content:center;
-      gap:6px;
+      gap:8px;
     }
 
     .logo-orbit-wrap{
       position:relative;
-      width:min(94vw, 930px);
-      height:min(94vw, 930px);
+      width:min(94vw, 940px);
+      height:min(94vw, 940px);
       display:flex;
       align-items:center;
       justify-content:center;
       isolation:isolate;
+      --mx: 0px;
+      --my: 0px;
     }
 
     .logo-orbit-wrap::before{
@@ -147,14 +155,15 @@
       position:absolute;
       left:50%;
       top:50%;
-      width:660px;
-      height:660px;
+      width:690px;
+      height:690px;
       transform:translate(-50%, -50%);
       border-radius:50%;
       z-index:1;
       background:
-        radial-gradient(circle, rgba(255,255,255,.98) 0%, rgba(255,255,255,.94) 18%, rgba(219,231,248,.74) 34%, rgba(156,187,230,.26) 48%, rgba(11,78,162,.08) 59%, transparent 75%);
+        radial-gradient(circle, rgba(255,255,255,.98) 0%, rgba(255,255,255,.94) 16%, rgba(219,231,248,.78) 35%, rgba(141,180,235,.28) 48%, rgba(11,78,162,.08) 60%, transparent 76%);
       filter:blur(1px);
+      animation:auraPulse 7s ease-in-out infinite;
     }
 
     .logo-orbit-wrap::after{
@@ -162,16 +171,43 @@
       position:absolute;
       left:50%;
       top:50%;
-      width:520px;
-      height:520px;
+      width:540px;
+      height:540px;
       transform:translate(-50%, -50%);
       border-radius:50%;
       z-index:2;
       border:1px solid rgba(11,78,162,.10);
       box-shadow:
         0 0 0 20px rgba(11,78,162,.035),
-        0 0 0 52px rgba(11,78,162,.025),
-        0 0 0 92px rgba(11,78,162,.015);
+        0 0 0 52px rgba(11,78,162,.022),
+        0 0 0 96px rgba(11,78,162,.014);
+      animation:ringRotate 22s linear infinite;
+    }
+
+    .tech-ring,
+    .tech-ring-2{
+      position:absolute;
+      left:50%;
+      top:50%;
+      border-radius:50%;
+      pointer-events:none;
+      z-index:2;
+      border:1px dashed rgba(11,78,162,.14);
+      transform:translate(-50%, -50%);
+    }
+
+    .tech-ring{
+      width:430px;
+      height:430px;
+      animation:ringRotate 18s linear infinite;
+    }
+
+    .tech-ring-2{
+      width:600px;
+      height:600px;
+      border-style:solid;
+      border-color:rgba(11,78,162,.06);
+      animation:ringRotateReverse 26s linear infinite;
     }
 
     .logo-button{
@@ -179,12 +215,16 @@
       background:transparent;
       padding:0;
       cursor:pointer;
-      transition:transform .24s ease;
+      transition:transform .30s ease, filter .30s ease;
       position:relative;
       z-index:30;
+      transform:translate(calc(var(--mx) * .10), calc(var(--my) * .10));
     }
 
-    .logo-button:hover{ transform:scale(1.035); }
+    .logo-button:hover{
+      transform:translate(calc(var(--mx) * .10), calc(var(--my) * .10)) scale(1.04);
+      filter:brightness(1.03);
+    }
 
     .logo-button img{
       width:100%;
@@ -192,30 +232,30 @@
       object-fit:contain;
       display:block;
       filter:
-        drop-shadow(0 20px 34px rgba(0,0,0,.18))
+        drop-shadow(0 22px 36px rgba(0,0,0,.18))
         drop-shadow(0 0 28px rgba(212,175,55,.18));
     }
 
     .main-logo{
-      width:min(31vw, 285px);
-      height:min(31vw, 285px);
+      width:min(31vw, 290px);
+      height:min(31vw, 290px);
     }
 
     .orbit-item{
       position:absolute;
       left:50%;
       top:50%;
-      width:144px;
-      min-height:98px;
+      width:148px;
+      min-height:102px;
       display:flex;
       flex-direction:column;
       align-items:center;
       justify-content:center;
-      gap:8px;
-      padding:11px 10px 13px;
+      gap:9px;
+      padding:12px 10px 14px;
       text-decoration:none;
       border:none;
-      border-radius:24px;
+      border-radius:26px;
       cursor:pointer;
       color:#fff;
       background:
@@ -225,42 +265,96 @@
         0 18px 36px rgba(11,78,162,.20),
         inset 0 1px 0 rgba(255,255,255,.18),
         inset 0 -1px 0 rgba(0,0,0,.06);
-      backdrop-filter:blur(12px);
-      -webkit-backdrop-filter:blur(12px);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
       opacity:0;
       pointer-events:none;
       transform:translate(-50%, -50%) scale(.72);
-      transition:opacity .28s ease, transform .28s ease, box-shadow .24s ease, filter .24s ease;
+      transition:
+        opacity .30s ease,
+        transform .32s cubic-bezier(.2,.7,.2,1),
+        box-shadow .26s ease,
+        filter .26s ease,
+        background .26s ease;
       outline:none;
       z-index:10;
+      overflow:hidden;
+      will-change:transform;
+    }
+
+    .orbit-item::before{
+      content:"";
+      position:absolute;
+      inset:1px;
+      border-radius:25px;
+      background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,0));
+      opacity:.9;
+      pointer-events:none;
+    }
+
+    .orbit-item::after{
+      content:"";
+      position:absolute;
+      left:-45%;
+      top:-55%;
+      width:65%;
+      height:210%;
+      transform:rotate(24deg);
+      background:linear-gradient(180deg, rgba(255,255,255,0), rgba(255,255,255,.34), rgba(255,255,255,0));
+      opacity:0;
+      transition:transform .60s ease, opacity .26s ease;
+      pointer-events:none;
     }
 
     .orbit-item:hover{
       box-shadow:
-        0 24px 44px rgba(11,78,162,.26),
+        0 26px 46px rgba(11,78,162,.28),
+        0 0 24px rgba(43,123,232,.12),
         inset 0 1px 0 rgba(255,255,255,.24),
         inset 0 -1px 0 rgba(0,0,0,.08);
-      filter:brightness(1.04);
+      filter:brightness(1.05) saturate(1.05);
+      transform:translate(-50%, -50%) translate(var(--tx, 0px), var(--ty, 0px)) translate3d(0,-10px,0) scale(1.06) rotateX(7deg) rotateY(-7deg);
+    }
+
+    .orbit-item:hover::after{
+      opacity:1;
+      transform:translateX(210%) rotate(24deg);
+    }
+
+    .orbit-item:active{
+      transform:translate(-50%, -50%) translate(var(--tx, 0px), var(--ty, 0px)) translate3d(0,-3px,0) scale(1.01);
     }
 
     .orbit-item.primary{
-      width:204px;
-      min-height:126px;
-      border-radius:30px;
+      width:214px;
+      min-height:132px;
+      border-radius:32px;
       background:
         linear-gradient(180deg, rgba(255,255,255,.18) 0%, rgba(255,255,255,.05) 100%),
-        linear-gradient(135deg, #0b4ea2 0%, #2c7cea 58%, #d4af37 100%);
+        linear-gradient(135deg, #0b4ea2 0%, #2c7cea 52%, #d4af37 100%);
       box-shadow:
-        0 26px 54px rgba(11,78,162,.28),
+        0 28px 56px rgba(11,78,162,.30),
         inset 0 1px 0 rgba(255,255,255,.24),
         inset 0 -1px 0 rgba(0,0,0,.08),
-        0 0 28px rgba(43,123,232,.18);
+        0 0 30px rgba(43,123,232,.18);
       z-index:18;
     }
 
+    .orbit-item.primary::before{
+      border-radius:31px;
+    }
+
+    .orbit-item.primary:hover{
+      box-shadow:
+        0 34px 66px rgba(11,78,162,.34),
+        0 0 34px rgba(43,123,232,.22),
+        inset 0 1px 0 rgba(255,255,255,.28),
+        inset 0 -1px 0 rgba(0,0,0,.10);
+    }
+
     .orbit-icon{
-      width:46px;
-      height:46px;
+      width:48px;
+      height:48px;
       border-radius:999px;
       display:flex;
       align-items:center;
@@ -269,15 +363,23 @@
       color:var(--ssb-blue);
       font-size:12px;
       font-weight:800;
-      flex:0 0 46px;
+      flex:0 0 48px;
       box-shadow:0 8px 18px rgba(0,0,0,.10), inset 0 1px 0 rgba(255,255,255,.88);
       border:1px solid rgba(11,78,162,.08);
+      position:relative;
+      z-index:1;
+      transition:transform .26s ease, box-shadow .26s ease;
+    }
+
+    .orbit-item:hover .orbit-icon{
+      transform:translateY(-3px) scale(1.06);
+      box-shadow:0 12px 24px rgba(0,0,0,.12), 0 0 18px rgba(43,123,232,.12), inset 0 1px 0 rgba(255,255,255,.88);
     }
 
     .orbit-item.primary .orbit-icon{
-      width:56px;
-      height:56px;
-      flex:0 0 56px;
+      width:58px;
+      height:58px;
+      flex:0 0 58px;
       font-size:14px;
     }
 
@@ -288,10 +390,13 @@
       text-align:center;
       color:#fff;
       word-break:break-word;
+      position:relative;
+      z-index:1;
+      letter-spacing:.1px;
     }
 
     .orbit-item.primary .orbit-label{
-      font-size:18px;
+      font-size:19px;
       line-height:1.18;
     }
 
@@ -302,38 +407,72 @@
     }
 
     @keyframes ssbFloatIn{
-      0%{ opacity:0; filter:blur(4px); }
-      100%{ opacity:1; filter:blur(0); }
+      0%{
+        opacity:0;
+        filter:blur(5px);
+      }
+      100%{
+        opacity:1;
+        filter:blur(0);
+      }
     }
 
-    .logo-orbit-wrap.open .orbit-1{ transform:translate(-50%, -50%) translate(0, -332px) scale(1); }
-    .logo-orbit-wrap.open .orbit-2{ transform:translate(-50%, -50%) translate(226px, -252px) scale(1); }
-    .logo-orbit-wrap.open .orbit-3{ transform:translate(-50%, -50%) translate(324px, -72px) scale(1); }
-    .logo-orbit-wrap.open .orbit-4{ transform:translate(-50%, -50%) translate(322px, 114px) scale(1); }
-    .logo-orbit-wrap.open .orbit-5{ transform:translate(-50%, -50%) translate(218px, 278px) scale(1); }
-    .logo-orbit-wrap.open .orbit-6{ transform:translate(-50%, -50%) translate(0, 320px) scale(1); }
-    .logo-orbit-wrap.open .orbit-7{ transform:translate(-50%, -50%) translate(-218px, 278px) scale(1); }
-    .logo-orbit-wrap.open .orbit-8{ transform:translate(-50%, -50%) translate(-322px, 114px) scale(1); }
-    .logo-orbit-wrap.open .orbit-9{ transform:translate(-50%, -50%) translate(-324px, -72px) scale(1); }
-    .logo-orbit-wrap.open .orbit-10{ transform:translate(-50%, -50%) translate(-226px, -252px) scale(1); }
+    @keyframes auraPulse{
+      0%,100%{ transform:translate(-50%, -50%) scale(1); opacity:1; }
+      50%{ transform:translate(-50%, -50%) scale(1.035); opacity:.92; }
+    }
+
+    @keyframes ringRotate{
+      from{ transform:translate(-50%, -50%) rotate(0deg); }
+      to{ transform:translate(-50%, -50%) rotate(360deg); }
+    }
+
+    @keyframes ringRotateReverse{
+      from{ transform:translate(-50%, -50%) rotate(360deg); }
+      to{ transform:translate(-50%, -50%) rotate(0deg); }
+    }
+
+    .orbit-1{ --tx:0px; --ty:-332px; }
+    .orbit-2{ --tx:226px; --ty:-252px; }
+    .orbit-3{ --tx:324px; --ty:-72px; }
+    .orbit-4{ --tx:322px; --ty:114px; }
+    .orbit-5{ --tx:218px; --ty:278px; }
+    .orbit-6{ --tx:0px; --ty:320px; }
+    .orbit-7{ --tx:-218px; --ty:278px; }
+    .orbit-8{ --tx:-322px; --ty:114px; }
+    .orbit-9{ --tx:-324px; --ty:-72px; }
+    .orbit-10{ --tx:-226px; --ty:-252px; }
+
+    .logo-orbit-wrap.open .orbit-1{ transform:translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1); }
+    .logo-orbit-wrap.open .orbit-2{ transform:translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1); }
+    .logo-orbit-wrap.open .orbit-3{ transform:translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1); }
+    .logo-orbit-wrap.open .orbit-4{ transform:translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1); }
+    .logo-orbit-wrap.open .orbit-5{ transform:translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1); }
+    .logo-orbit-wrap.open .orbit-6{ transform:translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1); }
+    .logo-orbit-wrap.open .orbit-7{ transform:translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1); }
+    .logo-orbit-wrap.open .orbit-8{ transform:translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1); }
+    .logo-orbit-wrap.open .orbit-9{ transform:translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1); }
+    .logo-orbit-wrap.open .orbit-10{ transform:translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1); }
 
     .logo-note{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      min-height:54px;
-      padding:12px 30px;
+      min-height:56px;
+      padding:12px 32px;
       border-radius:999px;
-      background:rgba(255,255,255,.74);
+      background:rgba(255,255,255,.76);
       border:1px solid rgba(11,78,162,.12);
       color:var(--ssb-blue);
       font-size:18px;
       font-weight:800;
-      box-shadow:0 14px 30px rgba(11,78,162,.08), inset 0 1px 0 rgba(255,255,255,.72);
-      backdrop-filter:blur(14px);
-      -webkit-backdrop-filter:blur(14px);
+      box-shadow:
+        0 16px 32px rgba(11,78,162,.08),
+        inset 0 1px 0 rgba(255,255,255,.72);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
       text-align:center;
-      margin-top:-8px;
+      margin-top:-6px;
       position:relative;
       z-index:35;
       pointer-events:none;
@@ -343,14 +482,14 @@
     .popup-backdrop{
       position:fixed;
       inset:0;
-      background:rgba(2,15,35,.50);
+      background:rgba(2,15,35,.52);
       display:none;
       align-items:center;
       justify-content:center;
       z-index:9999;
       padding:16px;
-      backdrop-filter:blur(8px);
-      -webkit-backdrop-filter:blur(8px);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
     }
 
     .popup-card{
@@ -359,15 +498,15 @@
       width:min(94vw, 980px);
       max-height:90vh;
       overflow:auto;
-      border-radius:26px;
+      border-radius:28px;
       padding:22px;
-      box-shadow:0 28px 70px rgba(0,0,0,.24);
+      box-shadow:0 30px 80px rgba(0,0,0,.24);
       backdrop-filter:blur(18px);
       -webkit-backdrop-filter:blur(18px);
     }
 
     .popup-card.company{
-      width:min(92vw, 460px);
+      width:min(92vw, 470px);
       text-align:center;
     }
 
@@ -387,8 +526,8 @@
     }
 
     .popup-x{
-      width:42px;
-      height:42px;
+      width:44px;
+      height:44px;
       border:none;
       border-radius:999px;
       background:linear-gradient(135deg, #0b4ea2, #1f69cd);
@@ -396,7 +535,14 @@
       font-size:18px;
       font-weight:800;
       cursor:pointer;
-      flex:0 0 42px;
+      flex:0 0 44px;
+      box-shadow:0 10px 24px rgba(11,78,162,.18);
+      transition:transform .22s ease, filter .22s ease;
+    }
+
+    .popup-x:hover{
+      transform:translateY(-2px) scale(1.04);
+      filter:brightness(1.05);
     }
 
     .popup-grid{
@@ -411,6 +557,7 @@
       border:1px solid rgba(11,78,162,.10);
       border-radius:20px;
       padding:18px;
+      box-shadow:0 14px 30px rgba(11,78,162,.06);
     }
 
     .popup-text p{
@@ -450,7 +597,7 @@
     .popup-close{
       margin-top:14px;
       min-width:120px;
-      min-height:46px;
+      min-height:48px;
       border:none;
       border-radius:14px;
       background:linear-gradient(135deg, #0b4ea2 0%, #1f69cd 58%, #d4af37 100%);
@@ -459,6 +606,12 @@
       font-weight:700;
       cursor:pointer;
       box-shadow:0 12px 28px rgba(11,78,162,.20);
+      transition:transform .22s ease, filter .22s ease;
+    }
+
+    .popup-close:hover{
+      transform:translateY(-2px);
+      filter:brightness(1.04);
     }
 
     .chat-widget{
@@ -509,7 +662,6 @@
     }
 
     .chat-item:hover{ transform:translateY(-2px) scale(1.02); }
-
     .chat-item.line{ background:linear-gradient(135deg, #10d95a 0%, #06c755 55%, #02a94b 100%); }
     .chat-item.facebook{ background:linear-gradient(135deg, #2a86ff 0%, #1877f2 55%, #0f5fd3 100%); }
     .chat-item.youtube{ background:linear-gradient(135deg, #ff2f2f 0%, #ff0000 55%, #c90000 100%); }
@@ -598,6 +750,9 @@
           0 0 0 72px rgba(11,78,162,.015);
       }
 
+      .tech-ring{ width:320px; height:320px; }
+      .tech-ring-2{ width:470px; height:470px; }
+
       .main-logo{
         width:min(37vw, 240px);
         height:min(37vw, 240px);
@@ -619,16 +774,16 @@
         padding:10px 22px;
       }
 
-      .logo-orbit-wrap.open .orbit-1{ transform:translate(-50%, -50%) translate(0, -264px) scale(1); }
-      .logo-orbit-wrap.open .orbit-2{ transform:translate(-50%, -50%) translate(180px, -200px) scale(1); }
-      .logo-orbit-wrap.open .orbit-3{ transform:translate(-50%, -50%) translate(260px, -62px) scale(1); }
-      .logo-orbit-wrap.open .orbit-4{ transform:translate(-50%, -50%) translate(258px, 90px) scale(1); }
-      .logo-orbit-wrap.open .orbit-5{ transform:translate(-50%, -50%) translate(176px, 224px) scale(1); }
-      .logo-orbit-wrap.open .orbit-6{ transform:translate(-50%, -50%) translate(0, 258px) scale(1); }
-      .logo-orbit-wrap.open .orbit-7{ transform:translate(-50%, -50%) translate(-176px, 224px) scale(1); }
-      .logo-orbit-wrap.open .orbit-8{ transform:translate(-50%, -50%) translate(-258px, 90px) scale(1); }
-      .logo-orbit-wrap.open .orbit-9{ transform:translate(-50%, -50%) translate(-260px, -62px) scale(1); }
-      .logo-orbit-wrap.open .orbit-10{ transform:translate(-50%, -50%) translate(-180px, -200px) scale(1); }
+      .orbit-1{ --tx:0px; --ty:-264px; }
+      .orbit-2{ --tx:180px; --ty:-200px; }
+      .orbit-3{ --tx:260px; --ty:-62px; }
+      .orbit-4{ --tx:258px; --ty:90px; }
+      .orbit-5{ --tx:176px; --ty:224px; }
+      .orbit-6{ --tx:0px; --ty:258px; }
+      .orbit-7{ --tx:-176px; --ty:224px; }
+      .orbit-8{ --tx:-258px; --ty:90px; }
+      .orbit-9{ --tx:-260px; --ty:-62px; }
+      .orbit-10{ --tx:-180px; --ty:-200px; }
 
       .popup-grid{
         grid-template-columns:1fr;
@@ -645,8 +800,6 @@
         width:min(100% - 14px, 1320px);
         padding-top:12px;
       }
-
-      .top-tools{ margin-bottom:0; }
 
       .logo-stage{
         min-height:calc(100vh - 115px);
@@ -672,6 +825,9 @@
           0 0 0 34px rgba(11,78,162,.025),
           0 0 0 60px rgba(11,78,162,.015);
       }
+
+      .tech-ring{ width:220px; height:220px; }
+      .tech-ring-2{ width:320px; height:320px; }
 
       .main-logo{
         width:min(44vw, 152px);
@@ -721,16 +877,20 @@
         margin-top:8px;
       }
 
-      .logo-orbit-wrap.open .orbit-1{ transform:translate(-50%, -50%) translate(0, -162px) scale(1); }
-      .logo-orbit-wrap.open .orbit-2{ transform:translate(-50%, -50%) translate(112px, -120px) scale(1); }
-      .logo-orbit-wrap.open .orbit-3{ transform:translate(-50%, -50%) translate(156px, -38px) scale(1); }
-      .logo-orbit-wrap.open .orbit-4{ transform:translate(-50%, -50%) translate(156px, 52px) scale(1); }
-      .logo-orbit-wrap.open .orbit-5{ transform:translate(-50%, -50%) translate(108px, 136px) scale(1); }
-      .logo-orbit-wrap.open .orbit-6{ transform:translate(-50%, -50%) translate(0, 166px) scale(1); }
-      .logo-orbit-wrap.open .orbit-7{ transform:translate(-50%, -50%) translate(-108px, 136px) scale(1); }
-      .logo-orbit-wrap.open .orbit-8{ transform:translate(-50%, -50%) translate(-156px, 52px) scale(1); }
-      .logo-orbit-wrap.open .orbit-9{ transform:translate(-50%, -50%) translate(-156px, -38px) scale(1); }
-      .logo-orbit-wrap.open .orbit-10{ transform:translate(-50%, -50%) translate(-112px, -120px) scale(1); }
+      .orbit-1{ --tx:0px; --ty:-162px; }
+      .orbit-2{ --tx:112px; --ty:-120px; }
+      .orbit-3{ --tx:156px; --ty:-38px; }
+      .orbit-4{ --tx:156px; --ty:52px; }
+      .orbit-5{ --tx:108px; --ty:136px; }
+      .orbit-6{ --tx:0px; --ty:166px; }
+      .orbit-7{ --tx:-108px; --ty:136px; }
+      .orbit-8{ --tx:-156px; --ty:52px; }
+      .orbit-9{ --tx:-156px; --ty:-38px; }
+      .orbit-10{ --tx:-112px; --ty:-120px; }
+
+      .orbit-item:hover{
+        transform:translate(-50%, -50%) translate(var(--tx), var(--ty)) translate3d(0,-6px,0) scale(1.03);
+      }
 
       .popup-card{
         padding:16px;
@@ -788,6 +948,9 @@
         <div class="logo-layout">
           <div class="logo-center">
             <div class="logo-orbit-wrap" id="logoOrbitWrap">
+              <span class="tech-ring"></span>
+              <span class="tech-ring-2"></span>
+
               <button class="logo-button main-logo" id="logoMenuButton" type="button" aria-label="เปิดเมนู">
                 <img src="images/logo.png" alt="Stealth Safety Bank Logo" />
               </button>
@@ -873,7 +1036,6 @@
 
       <div class="popup-grid">
         <div class="popup-text" id="infoText"></div>
-
         <div class="video-wrap">
           <div class="video-frame">
             <iframe
@@ -1063,7 +1225,7 @@
         event.stopPropagation();
       });
 
-      document.addEventListener("click", function (event) {
+      document.addEventListener("click", function () {
         const infoPopup = document.getElementById("infoPopup");
         const companyPopup = document.getElementById("companyPopup");
 
@@ -1091,6 +1253,25 @@
         if (!chatWidget.contains(event.target)) {
           chatWidget.classList.remove("open");
         }
+      });
+    })();
+
+    (function () {
+      const orbitWrap = document.getElementById("logoOrbitWrap");
+      if (!orbitWrap) return;
+
+      orbitWrap.addEventListener("mousemove", function (event) {
+        if (window.innerWidth <= 760) return;
+        const rect = orbitWrap.getBoundingClientRect();
+        const x = ((event.clientX - rect.left) / rect.width) - 0.5;
+        const y = ((event.clientY - rect.top) / rect.height) - 0.5;
+        orbitWrap.style.setProperty("--mx", `${x * 18}px`);
+        orbitWrap.style.setProperty("--my", `${y * 18}px`);
+      });
+
+      orbitWrap.addEventListener("mouseleave", function () {
+        orbitWrap.style.setProperty("--mx", "0px");
+        orbitWrap.style.setProperty("--my", "0px");
       });
     })();
 
