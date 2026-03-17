@@ -785,154 +785,136 @@
         grid-template-columns:1fr;
       }
     }
+@media (max-width:760px){
+  .logo-stage{
+    min-height:calc(100vh - 115px);
+    align-items:center;
+    padding-top:0;
+  }
 
-    @media (max-width:760px){
-      body::after{
-        background-size:30px 30px;
-        opacity:.38;
-      }
+  .logo-orbit-wrap{
+    width:min(96vw, 430px);
+    height:min(96vw, 430px);
+  }
 
-      .home-page{
-        width:min(100% - 14px, 1320px);
-        padding-top:12px;
-      }
+  .logo-orbit-wrap::before{
+    width:300px;
+    height:300px;
+  }
 
-      .logo-stage{
-        min-height:calc(100vh - 115px);
-        align-items:flex-start;
-        padding-top:8px;
-      }
+  .logo-orbit-wrap::after{
+    width:232px;
+    height:232px;
+    box-shadow:
+      0 0 0 12px rgba(11,78,162,.035),
+      0 0 0 28px rgba(11,78,162,.025),
+      0 0 0 48px rgba(11,78,162,.015);
+  }
 
-      .logo-orbit-wrap{
-        width:min(96vw, 450px);
-        height:min(96vw, 450px);
-      }
+  .tech-ring{
+    width:200px;
+    height:200px;
+  }
 
-      .logo-orbit-wrap::before{
-        width:330px;
-        height:330px;
-      }
+  .tech-ring-2{
+    width:285px;
+    height:285px;
+  }
 
-      .logo-orbit-wrap::after{
-        width:260px;
-        height:260px;
-        box-shadow:
-          0 0 0 14px rgba(11,78,162,.035),
-          0 0 0 34px rgba(11,78,162,.025),
-          0 0 0 60px rgba(11,78,162,.015);
-      }
+  .main-logo{
+    width:min(42vw, 145px);
+    height:min(42vw, 145px);
+  }
 
-      .tech-ring{ width:220px; height:220px; }
-      .tech-ring-2{ width:320px; height:320px; }
+  .orbit-item{
+    width:88px;
+    min-height:66px;
+    border-radius:18px;
+    padding:8px 6px;
+    gap:6px;
+  }
 
-      .main-logo{
-        width:min(44vw, 152px);
-        height:min(44vw, 152px);
-      }
+  .orbit-item.primary{
+    width:122px;
+    min-height:82px;
+    border-radius:22px;
+  }
 
-      .orbit-item{
-        width:92px;
-        min-height:68px;
-        border-radius:18px;
-        padding:8px 6px;
-      }
+  .orbit-icon{
+    width:32px;
+    height:32px;
+    flex:0 0 32px;
+    font-size:9px;
+  }
 
-      .orbit-item.primary{
-        width:140px;
-        min-height:92px;
-        border-radius:24px;
-      }
+  .orbit-item.primary .orbit-icon{
+    width:38px;
+    height:38px;
+    flex:0 0 38px;
+    font-size:10px;
+  }
 
-      .orbit-icon{
-        width:34px;
-        height:34px;
-        flex:0 0 34px;
-        font-size:10px;
-      }
+  .orbit-label{
+    font-size:9px;
+    line-height:1.1;
+  }
 
-      .orbit-item.primary .orbit-icon{
-        width:42px;
-        height:42px;
-        flex:0 0 42px;
-        font-size:11px;
-      }
+  .orbit-item.primary .orbit-label{
+    font-size:12px;
+    line-height:1.12;
+  }
 
-      .orbit-label{
-        font-size:10px;
-        line-height:1.12;
-      }
+  .logo-note{
+    font-size:12px;
+    min-height:38px;
+    padding:8px 14px;
+    margin-top:10px;
+  }
 
-      .orbit-item.primary .orbit-label{
-        font-size:14px;
-      }
+  /* วงให้สมดุลจริงบนมือถือ */
+  .orbit-1{ --tx:0px; --ty:-150px; }
+  .orbit-2{ --tx:102px; --ty:-108px; }
+  .orbit-3{ --tx:146px; --ty:-34px; }
+  .orbit-4{ --tx:146px; --ty:46px; }
+  .orbit-5{ --tx:102px; --ty:122px; }
+  .orbit-6{ --tx:0px; --ty:150px; }
+  .orbit-7{ --tx:-102px; --ty:122px; }
+  .orbit-8{ --tx:-146px; --ty:46px; }
+  .orbit-9{ --tx:-146px; --ty:-34px; }
+  .orbit-10{ --tx:-102px; --ty:-108px; }
 
-      .logo-note{
-        font-size:13px;
-        min-height:40px;
-        padding:8px 16px;
-        margin-top:8px;
-      }
+  .orbit-item:hover{
+    transform:
+      translate(-50%, -50%)
+      translate(var(--tx), var(--ty))
+      translateY(-4px)
+      scale(1.02);
+  }
 
-      .orbit-1{ --tx:0px; --ty:-162px; }
-      .orbit-2{ --tx:112px; --ty:-120px; }
-      .orbit-3{ --tx:156px; --ty:-38px; }
-      .orbit-4{ --tx:156px; --ty:52px; }
-      .orbit-5{ --tx:108px; --ty:136px; }
-      .orbit-6{ --tx:0px; --ty:166px; }
-      .orbit-7{ --tx:-108px; --ty:136px; }
-      .orbit-8{ --tx:-156px; --ty:52px; }
-      .orbit-9{ --tx:-156px; --ty:-38px; }
-      .orbit-10{ --tx:-112px; --ty:-120px; }
+  .chat-widget{
+    right:12px;
+    bottom:12px;
+  }
 
-      .orbit-item:hover{
-        transform:
-          translate(-50%, -50%)
-          translate(var(--tx), var(--ty))
-          translateY(-6px)
-          scale(1.03);
-      }
+  .chat-item{
+    min-width:188px;
+    height:50px;
+    font-size:12px;
+  }
 
-      .popup-card{
-        padding:16px;
-        border-radius:20px;
-      }
+  .chat-icon{
+    width:30px;
+    height:30px;
+    flex:0 0 30px;
+    font-size:11px;
+  }
 
-      .popup-head h3{
-        font-size:20px;
-      }
-
-      .popup-text{
-        padding:14px;
-      }
-
-      .popup-text p{
-        font-size:14px;
-        line-height:1.75;
-      }
-
-      .chat-widget{
-        right:12px;
-        bottom:12px;
-      }
-
-      .chat-item{
-        min-width:188px;
-        height:50px;
-        font-size:12px;
-      }
-
-      .chat-icon{
-        width:30px;
-        height:30px;
-        flex:0 0 30px;
-        font-size:11px;
-      }
-
-      .chat-fab{
-        width:58px;
-        height:58px;
-      }
-    }
+  .chat-fab{
+    width:58px;
+    height:58px;
+  }
+}
+   
   </style>
 </head>
 <body>
