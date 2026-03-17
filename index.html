@@ -15,17 +15,18 @@
   <style>
     :root{
       --ssb-blue:#0b4ea2;
-      --ssb-blue-2:#1a66cf;
+      --ssb-blue-2:#1b67cf;
       --ssb-blue-dark:#072f66;
+      --ssb-blue-soft:#eaf2ff;
       --ssb-gold:#d4af37;
       --ssb-red:#e31b23;
       --ssb-red-dark:#b90f16;
-      --ssb-white:#ffffff;
       --ssb-text:#183452;
+      --ssb-text-soft:#56708d;
+      --white:#ffffff;
       --page-1:#f8fbff;
       --page-2:#eef4fc;
       --page-3:#dde8f6;
-      --glass:rgba(255,255,255,.72);
       --shadow-soft:0 18px 44px rgba(7,47,102,.10);
       --shadow-strong:0 28px 70px rgba(7,47,102,.18);
       --radius-xl:28px;
@@ -70,7 +71,7 @@
       inset:0;
       pointer-events:none;
       z-index:0;
-      opacity:.38;
+      opacity:.34;
       background-image:
         linear-gradient(rgba(255,255,255,.22) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,.22) 1px, transparent 1px);
@@ -113,7 +114,7 @@
     .topbar-inner{
       width:min(var(--max-width), calc(100% - 20px));
       margin:0 auto;
-      min-height:78px;
+      min-height:80px;
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -131,8 +132,8 @@
     }
 
     .brand-logo{
-      width:54px;
-      height:54px;
+      width:56px;
+      height:56px;
       border-radius:16px;
       background:rgba(255,255,255,.14);
       border:1px solid rgba(255,255,255,.18);
@@ -140,7 +141,7 @@
       align-items:center;
       justify-content:center;
       overflow:hidden;
-      flex:0 0 54px;
+      flex:0 0 56px;
       box-shadow:inset 0 1px 0 rgba(255,255,255,.18);
     }
 
@@ -162,7 +163,7 @@
       color:#fff;
       font-size:20px;
       font-weight:800;
-      line-height:1.15;
+      line-height:1.14;
       letter-spacing:.2px;
       text-shadow:0 2px 8px rgba(0,0,0,.12);
       white-space:nowrap;
@@ -568,8 +569,8 @@
     }
 
     .popup-card{
-      background:rgba(255,255,255,.92);
-      border:1px solid rgba(255,255,255,.52);
+      background:rgba(255,255,255,.96);
+      border:1px solid rgba(255,255,255,.60);
       width:min(94vw, 980px);
       max-height:90vh;
       overflow:auto;
@@ -581,8 +582,8 @@
     }
 
     .popup-card.company{
-      width:min(92vw, 470px);
-      text-align:center;
+      width:min(92vw, 500px);
+      text-align:left;
     }
 
     .popup-head{
@@ -590,7 +591,7 @@
       justify-content:space-between;
       align-items:center;
       gap:12px;
-      margin-bottom:14px;
+      margin-bottom:16px;
     }
 
     .popup-head h3{
@@ -628,7 +629,7 @@
     }
 
     .popup-text{
-      background:rgba(255,255,255,.74);
+      background:var(--white);
       border:1px solid rgba(11,78,162,.10);
       border-radius:20px;
       padding:18px;
@@ -643,6 +644,31 @@
     }
 
     .popup-text p:last-child{ margin-bottom:0; }
+
+    .company-detail{
+      background:var(--white);
+      border:1px solid rgba(11,78,162,.10);
+      border-radius:20px;
+      padding:18px;
+      box-shadow:0 14px 30px rgba(11,78,162,.06);
+    }
+
+    .company-detail p{
+      margin:0 0 10px;
+      color:var(--ssb-text);
+      font-size:15px;
+      line-height:1.75;
+      font-weight:500;
+    }
+
+    .company-detail p:last-child{
+      margin-bottom:0;
+    }
+
+    .company-detail strong{
+      color:var(--ssb-blue);
+      font-weight:800;
+    }
 
     .video-wrap{
       background:#fff;
@@ -807,129 +833,147 @@
     .chat-widget.open .chat-caret{ transform:rotate(180deg); }
 
     /* FOOTER */
-   .ssb-footer{
-  position:relative;
-  z-index:1;
-  background:linear-gradient(135deg, var(--ssb-blue-dark) 0%, var(--ssb-blue) 52%, var(--ssb-blue-2) 100%);
-  border-top:1px solid rgba(255,255,255,.12);
-  box-shadow:0 -10px 28px rgba(7,47,102,.18);
-  overflow:hidden;
-  margin-top:18px;
-}
+    .ssb-footer{
+      position:relative;
+      z-index:1;
+      background:linear-gradient(135deg, var(--ssb-blue-dark) 0%, var(--ssb-blue) 52%, var(--ssb-blue-2) 100%);
+      border-top:1px solid rgba(255,255,255,.12);
+      box-shadow:0 -10px 28px rgba(7,47,102,.18);
+      overflow:hidden;
+      margin-top:18px;
+    }
 
-.ssb-footer::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,0)),
-    radial-gradient(circle at 10% 20%, rgba(255,255,255,.10), transparent 24%),
-    radial-gradient(circle at 88% 16%, rgba(255,255,255,.08), transparent 20%);
-  pointer-events:none;
-}
+    .ssb-footer::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,0)),
+        radial-gradient(circle at 10% 20%, rgba(255,255,255,.10), transparent 24%),
+        radial-gradient(circle at 88% 16%, rgba(255,255,255,.08), transparent 20%);
+      pointer-events:none;
+    }
 
-.footer-inner{
-  width:min(var(--max-width), calc(100% - 20px));
-  margin:0 auto;
-  padding:18px 0 14px;
-  position:relative;
-  z-index:1;
-  color:#fff;
-}
+    .footer-inner{
+      width:min(var(--max-width), calc(100% - 20px));
+      margin:0 auto;
+      padding:18px 0 14px;
+      position:relative;
+      z-index:1;
+      color:#fff;
+    }
 
-.footer-card{
-  background:rgba(255,255,255,.10);
-  border:1px solid rgba(255,255,255,.14);
-  border-radius:20px;
-  padding:14px;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.12);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-}
+    .footer-card{
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:20px;
+      padding:14px;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.12);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+    }
 
-.footer-main{
-  display:grid;
-  grid-template-columns: 1.2fr .95fr .9fr;
-  gap:14px;
-  align-items:center;
-}
+    .footer-main{
+      display:grid;
+      grid-template-columns:1.2fr .95fr .95fr;
+      gap:14px;
+      align-items:center;
+    }
 
-.footer-col{
-  min-width:0;
-}
+    .footer-col{
+      min-width:0;
+    }
 
-.footer-title{
-  margin:0 0 10px;
-  font-size:17px;
-  font-weight:800;
-  line-height:1.2;
-  color:#fff;
-}
+    .footer-title{
+      margin:0 0 10px;
+      font-size:17px;
+      font-weight:800;
+      line-height:1.2;
+      color:#fff;
+    }
 
-.footer-text{
-  margin:0 0 6px;
-  font-size:13px;
-  line-height:1.65;
-  color:rgba(255,255,255,.95);
-  word-break:break-word;
-}
+    .footer-text{
+      margin:0 0 6px;
+      font-size:13px;
+      line-height:1.65;
+      color:rgba(255,255,255,.95);
+      word-break:break-word;
+    }
 
-.footer-text strong{
-  color:#fff;
-}
+    .footer-text strong{
+      color:#fff;
+    }
 
-.footer-link{
-  color:#fff;
-  text-decoration:none;
-  font-weight:700;
-}
+    .footer-link{
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
+    }
 
-.footer-contact-center{
-  text-align:center;
-}
+    .footer-contact-center{
+      text-align:center;
+    }
 
-.footer-contact-center .footer-text{
-  margin:0 0 8px;
-}
+    .footer-contact-center .footer-text{
+      margin:0 0 8px;
+    }
 
-.footer-nav-wrap{
-  display:flex;
-  justify-content:flex-end;
-}
+    .footer-nav-wrap{
+      display:flex;
+      justify-content:flex-end;
+      align-items:center;
+      position:relative;
+      z-index:3;
+    }
 
-.footer-map-button{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height:52px;
-  padding:12px 20px;
-  border-radius:999px;
-  background:linear-gradient(135deg,#ffffff,#eef4ff);
-  color:#0b4ea2;
-  text-decoration:none;
-  font-size:14px;
-  font-weight:800;
-  box-shadow:0 12px 24px rgba(0,0,0,.12);
-  border:1px solid rgba(255,255,255,.28);
-  transition:.25s;
-  cursor:pointer;
-  pointer-events:auto;
-}
+    .footer-map-button{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:12px;
+      min-height:58px;
+      padding:12px 22px;
+      border-radius:999px;
+      background:linear-gradient(135deg,#ffffff 0%, #eef4ff 100%);
+      color:var(--ssb-blue);
+      text-decoration:none;
+      font-size:15px;
+      font-weight:800;
+      box-shadow:0 12px 24px rgba(0,0,0,.12);
+      border:1px solid rgba(255,255,255,.28);
+      transition:transform .22s ease, filter .22s ease, box-shadow .22s ease;
+      text-align:center;
+      cursor:pointer;
+      pointer-events:auto;
+      position:relative;
+      z-index:5;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-.footer-map-button:hover{
-  transform:translateY(-2px);
-  filter:brightness(1.05);
-}
+    .footer-map-button:hover{
+      transform:translateY(-2px);
+      filter:brightness(1.03);
+      box-shadow:0 16px 30px rgba(0,0,0,.14);
+    }
 
-.footer-bottom{
-  margin-top:12px;
-  padding-top:10px;
-  border-top:1px solid rgba(255,255,255,.12);
-  color:rgba(255,255,255,.92);
-  font-size:12px;
-  text-align:center;
-  line-height:1.7;
-}
+    .footer-pin{
+      width:34px;
+      height:34px;
+      flex:0 0 34px;
+      display:block;
+    }
+
+    .footer-bottom{
+      margin-top:12px;
+      padding-top:10px;
+      border-top:1px solid rgba(255,255,255,.12);
+      color:rgba(255,255,255,.92);
+      font-size:12px;
+      text-align:center;
+      line-height:1.7;
+    }
+
     /* ANIMATION */
     @keyframes ssbFloatIn{
       0%{ opacity:0; filter:blur(5px); }
@@ -1019,9 +1063,21 @@
       .orbit-9{ --tx:-260px; --ty:-62px; }
       .orbit-10{ --tx:-180px; --ty:-200px; }
 
-      .popup-grid,
-      .footer-grid{
+      .popup-grid{
         grid-template-columns:1fr;
+      }
+
+      .footer-main{
+        grid-template-columns:1fr;
+        gap:10px;
+      }
+
+      .footer-contact-center{
+        text-align:left;
+      }
+
+      .footer-nav-wrap{
+        justify-content:flex-start;
       }
     }
 
@@ -1193,57 +1249,52 @@
         font-size:20px;
       }
 
-      .popup-text{
+      .popup-text,
+      .company-detail{
         padding:14px;
       }
 
-      .popup-text p{
+      .popup-text p,
+      .company-detail p{
         font-size:14px;
-        line-height:1.75;
+        line-height:1.72;
       }
 
       .footer-inner{
         width:min(100% - 14px, var(--max-width));
-        padding:20px 0 18px;
+        padding:14px 0 12px;
       }
 
       .footer-card{
-        padding:16px;
-        border-radius:18px;
+        padding:12px;
+        border-radius:16px;
       }
 
       .footer-title{
-        font-size:18px;
+        font-size:15px;
       }
 
       .footer-text{
-        font-size:14px;
-        line-height:1.7;
+        font-size:12px;
+        line-height:1.6;
       }
 
-      .footer-map,
-      .footer-map iframe{
-        min-height:240px;
+      .footer-map-button{
+        width:100%;
+        min-height:52px;
+        font-size:13px;
+        justify-content:flex-start;
       }
 
-      .footer-main{
-  grid-template-columns:1fr;
-  gap:10px;
-}
+      .footer-pin{
+        width:30px;
+        height:30px;
+        flex:0 0 30px;
+      }
 
-.footer-contact-center{
-  text-align:left;
-}
-
-.footer-nav-wrap{
-  justify-content:flex-start;
-}
-
-.footer-map-button{
-  width:100%;
-  min-height:48px;
-  font-size:13px;
-}
+      .footer-bottom{
+        font-size:11px;
+      }
 
       .chat-widget{
         right:12px;
@@ -1267,33 +1318,6 @@
         width:58px;
         height:58px;
       }
-
-      .footer-inner{
-  width:min(100% - 14px, var(--max-width));
-  padding:14px 0 12px;
-}
-
-.footer-card{
-  padding:12px;
-  border-radius:16px;
-}
-
-.footer-title{
-  font-size:15px;
-}
-
-.footer-text{
-  font-size:12px;
-  line-height:1.6;
-}
-
-.footer-map-inline iframe{
-  height:160px;
-}
-
-.footer-bottom{
-  font-size:11px;
-}
     }
   </style>
 </head>
@@ -1388,39 +1412,47 @@
       </section>
     </main>
 
-<footer class="ssb-footer">
-  <div class="footer-inner">
-    <div class="footer-card">
-      <div class="footer-main">
-        <div class="footer-col">
-          <h3 class="footer-title">บริษัท สยามทำ จำกัด</h3>
-          <p class="footer-text"><strong>ที่อยู่:</strong> 54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
+    <footer class="ssb-footer">
+      <div class="footer-inner">
+        <div class="footer-card">
+          <div class="footer-main">
+            <div class="footer-col">
+              <h3 class="footer-title">บริษัท สยามทำ จำกัด</h3>
+              <p class="footer-text"><strong>ที่อยู่:</strong> 54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
+            </div>
+
+            <div class="footer-col footer-contact-center">
+              <p class="footer-text"><strong>โทร:</strong> <a class="footer-link" href="tel:020432988">02-043-2988</a></p>
+              <p class="footer-text"><strong>มือถือ:</strong> <a class="footer-link" href="tel:0649514888">064-951-4888</a></p>
+              <p class="footer-text"><strong>เว็บไซต์:</strong> <a class="footer-link" href="https://www.siamtham.com" target="_blank" rel="noopener">www.siamtham.com</a></p>
+            </div>
+
+            <div class="footer-col footer-nav-wrap">
+              <a
+                id="footerMapButton"
+                class="footer-map-button"
+                href="https://www.google.com/maps/dir/?api=1&destination=13.769648,100.413973"
+                target="_blank"
+                rel="noopener"
+                aria-label="คลิกเพื่อเดินทางไปบริษัท"
+              >
+                <svg class="footer-pin" viewBox="0 0 64 64" aria-hidden="true">
+                  <path fill="#ff2a2a" d="M32 4C20.4 4 11 13.4 11 25c0 16.3 18.8 34 20.1 35.2a1.3 1.3 0 0 0 1.8 0C34.2 59 53 41.3 53 25 53 13.4 43.6 4 32 4z"/>
+                  <circle cx="32" cy="25" r="10.5" fill="#ffffff"/>
+                  <circle cx="32" cy="25" r="5.3" fill="#ff2a2a"/>
+                </svg>
+                <span>คลิกเพื่อเดินทางไปบริษัท</span>
+              </a>
+            </div>
+          </div>
         </div>
 
-        <div class="footer-col footer-contact-center">
-          <p class="footer-text"><strong>โทร:</strong> <a class="footer-link" href="tel:020432988">02-043-2988</a></p>
-          <p class="footer-text"><strong>มือถือ:</strong> <a class="footer-link" href="tel:0649514888">064-951-4888</a></p>
-          <p class="footer-text"><strong>เว็บไซต์:</strong> <a class="footer-link" href="https://www.siamtham.com" target="_blank" rel="noopener">www.siamtham.com</a></p>
-        </div>
-
-        <div class="footer-col footer-nav-wrap">
-       <a 
-class="footer-map-button"
-href="https://www.google.com/maps/dir/?api=1&destination=13.768217,100.434665"
-target="_blank">
-
-📍 คลิกเพื่อเดินทางไปบริษัท
-</a>
+        <div class="footer-bottom">
+          © Siam Tum Co., Ltd. • Stealth Safety Bank System<br>
+          เว็บไซต์นี้ทำโดย Mr.Tingly Marketing Online
         </div>
       </div>
-    </div>
-
-    <div class="footer-bottom">
-      © Siam Tum Co., Ltd. • Stealth Safety Bank System<br>
-      เว็บไซต์นี้ทำโดย Mr.Tingly Marketing Online
-    </div>
-  </div>
-</footer>
+    </footer>
   </div>
 
   <div id="companyPopup" class="popup-backdrop">
@@ -1429,10 +1461,14 @@ target="_blank">
         <h3>บริษัท สยามทำ จำกัด</h3>
         <button class="popup-x" type="button" id="closeCompanyPopupTop">×</button>
       </div>
-      <p class="footer-text" style="color:#31506f;"><strong>ที่อยู่:</strong> 54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
-      <p class="footer-text" style="color:#31506f;"><strong>เลขทะเบียน:</strong> 0105566099954</p>
-      <p class="footer-text" style="color:#31506f;"><strong>โทร:</strong> 02-043-2988</p>
-      <p class="footer-text" style="color:#31506f;"><strong>มือถือ:</strong> 064-951-4888</p>
+
+      <div class="company-detail">
+        <p><strong>ที่อยู่:</strong> 54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
+        <p><strong>เลขทะเบียน:</strong> 0105566099954</p>
+        <p><strong>โทร:</strong> 02-043-2988</p>
+        <p><strong>มือถือ:</strong> 064-951-4888</p>
+      </div>
+
       <button class="popup-close" type="button" id="closeCompanyPopupBottom">ปิด</button>
     </div>
   </div>
@@ -1554,6 +1590,7 @@ target="_blank">
     const infoVideo = document.getElementById("infoVideo");
 
     const companyPopup = document.getElementById("companyPopup");
+    const footerMapButton = document.getElementById("footerMapButton");
 
     function openInfoPopup(key){
       const data = popupData[key];
@@ -1576,6 +1613,17 @@ target="_blank">
 
     function closeCompanyPopup(){
       companyPopup.style.display = "none";
+    }
+
+    function openNavigation(event){
+      if (event) event.stopPropagation();
+
+      const appLink = "https://www.google.com/maps/dir/?api=1&destination=13.769648,100.413973";
+      window.open(appLink, "_blank");
+    }
+
+    if (footerMapButton) {
+      footerMapButton.addEventListener("click", openNavigation);
     }
 
     if (logoMenuButton && logoOrbitWrap) {
