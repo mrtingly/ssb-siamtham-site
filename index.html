@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stealth Safety Bank Mobile System (SSB)</title>
+  <title>Stealth Safety Bank System (SSB)</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&family=Orbitron:wght@500;600;700;800&display=swap"
     rel="stylesheet"
   />
 
@@ -17,33 +17,46 @@
       --bg-1:#020818;
       --bg-2:#04112c;
       --bg-3:#071d4a;
-      --cy-1:#7ad8ff;
-      --cy-2:#3ca8ff;
-      --cy-3:#0b63d8;
-      --cy-soft:rgba(111,207,255,.22);
-      --cy-line:rgba(103,198,255,.92);
-      --cy-line-soft:rgba(103,198,255,.24);
-      --red-1:#ff9aa2;
-      --red-2:#ff5d69;
-      --red-3:#e01624;
-      --white:#eefaff;
-      --text-soft:rgba(221,241,255,.86);
-      --glass:rgba(255,255,255,.08);
+
+      --cy-1:#9be3ff;
+      --cy-2:#62c8ff;
+      --cy-3:#178cff;
+      --cy-line:rgba(112,214,255,.96);
+      --cy-line-soft:rgba(112,214,255,.22);
+
+      --red-1:#ffd2d8;
+      --red-2:#ff6b79;
+      --red-3:#d91628;
+
+      --text-soft:rgba(220,241,255,.86);
+      --head-foot-1:#0b4ea2;
+      --head-foot-2:#1b67cf;
+      --head-foot-3:#0a3f84;
+
       --max:1320px;
     }
 
     *{ box-sizing:border-box; }
+
     html{ scroll-behavior:smooth; }
 
     body{
       margin:0;
-      font-family:'Prompt',sans-serif;
       color:#fff;
       background:
-        radial-gradient(circle at 50% 18%, rgba(31,113,255,.13), transparent 28%),
-        radial-gradient(circle at 50% 50%, rgba(38,121,255,.08), transparent 40%),
-        linear-gradient(180deg, #020816 0%, #031129 26%, #05173a 65%, #031129 100%);
+        radial-gradient(circle at 50% 18%, rgba(28,118,255,.12), transparent 30%),
+        radial-gradient(circle at 50% 50%, rgba(31,126,255,.08), transparent 42%),
+        linear-gradient(180deg, #020816 0%, #031129 28%, #05173a 66%, #031129 100%);
       overflow-x:hidden;
+      font-family:'Prompt',sans-serif;
+    }
+
+    .th-font{
+      font-family:'Prompt',sans-serif;
+    }
+
+    .en-font{
+      font-family:'Orbitron',sans-serif;
     }
 
     body::before{
@@ -52,7 +65,7 @@
       inset:0;
       pointer-events:none;
       z-index:0;
-      opacity:.38;
+      opacity:.34;
       background-image:
         radial-gradient(circle at 14% 22%, rgba(255,255,255,.85) 0 1px, transparent 1.6px),
         radial-gradient(circle at 83% 18%, rgba(255,255,255,.7) 0 1px, transparent 1.6px),
@@ -60,8 +73,7 @@
         radial-gradient(circle at 24% 74%, rgba(255,255,255,.55) 0 1px, transparent 1.6px),
         radial-gradient(circle at 34% 42%, rgba(255,255,255,.55) 0 1px, transparent 1.6px),
         radial-gradient(circle at 58% 24%, rgba(255,255,255,.45) 0 1px, transparent 1.6px),
-        radial-gradient(circle at 91% 62%, rgba(255,255,255,.4) 0 1px, transparent 1.6px),
-        radial-gradient(circle at 6% 88%, rgba(255,255,255,.35) 0 1px, transparent 1.6px);
+        radial-gradient(circle at 91% 62%, rgba(255,255,255,.4) 0 1px, transparent 1.6px);
     }
 
     body::after{
@@ -70,13 +82,13 @@
       inset:0;
       pointer-events:none;
       z-index:0;
-      opacity:.1;
+      opacity:.08;
       background-image:
-        linear-gradient(rgba(116,192,255,.16) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(116,192,255,.16) 1px, transparent 1px);
+        linear-gradient(rgba(113,197,255,.18) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(113,197,255,.18) 1px, transparent 1px);
       background-size:40px 40px;
-      mask-image:radial-gradient(circle at center, rgba(0,0,0,.9) 0%, rgba(0,0,0,.75) 42%, transparent 84%);
-      -webkit-mask-image:radial-gradient(circle at center, rgba(0,0,0,.9) 0%, rgba(0,0,0,.75) 42%, transparent 84%);
+      mask-image:radial-gradient(circle at center, rgba(0,0,0,.95) 0%, rgba(0,0,0,.72) 46%, transparent 84%);
+      -webkit-mask-image:radial-gradient(circle at center, rgba(0,0,0,.95) 0%, rgba(0,0,0,.72) 46%, transparent 84%);
     }
 
     .site-wrap{
@@ -87,28 +99,41 @@
       flex-direction:column;
     }
 
-    /* topbar */
+    /* HEADER */
     .ssb-topbar{
       position:sticky;
       top:0;
       z-index:1000;
-      border-bottom:1px solid rgba(145,210,255,.12);
+      border-bottom:1px solid rgba(255,255,255,.14);
       background:
-        linear-gradient(180deg, rgba(7,23,56,.92), rgba(5,18,44,.88));
-      backdrop-filter:blur(16px);
-      -webkit-backdrop-filter:blur(16px);
+        linear-gradient(135deg, var(--head-foot-3) 0%, var(--head-foot-1) 52%, var(--head-foot-2) 100%);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
       box-shadow:0 10px 26px rgba(0,0,0,.22);
+    }
+
+    .ssb-topbar::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.13), rgba(255,255,255,0)),
+        radial-gradient(circle at 14% 18%, rgba(255,255,255,.14), transparent 24%),
+        radial-gradient(circle at 88% 12%, rgba(255,255,255,.10), transparent 22%);
     }
 
     .topbar-inner{
       width:min(var(--max), calc(100% - 20px));
       margin:0 auto;
-      min-height:78px;
+      min-height:80px;
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:16px;
       padding:10px 0;
+      position:relative;
+      z-index:1;
     }
 
     .brand-wrap{
@@ -123,9 +148,9 @@
       height:56px;
       border-radius:16px;
       overflow:hidden;
-      border:1px solid rgba(148,214,255,.18);
-      background:linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.03));
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.12), 0 0 18px rgba(76,170,255,.12);
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.12);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.14), 0 0 18px rgba(255,255,255,.10);
       flex:0 0 56px;
       display:flex;
       align-items:center;
@@ -144,14 +169,14 @@
       font-weight:800;
       line-height:1.15;
       color:#fff;
-      text-shadow:0 0 14px rgba(95,191,255,.18);
+      text-shadow:0 0 14px rgba(255,255,255,.14);
     }
 
     .brand-site{
       margin-top:4px;
       font-size:13px;
-      font-weight:600;
-      color:rgba(226,244,255,.86);
+      font-weight:700;
+      color:rgba(255,255,255,.92);
     }
 
     .brand-site a{
@@ -170,9 +195,9 @@
       min-height:42px;
       padding:6px 10px;
       border-radius:14px;
-      border:1px solid rgba(140,207,255,.14);
-      background:rgba(255,255,255,.06);
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.10);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.10);
       display:flex;
       align-items:center;
       justify-content:center;
@@ -198,7 +223,7 @@
       display:flex;
       flex-direction:column;
       align-items:center;
-      gap:14px;
+      gap:16px;
     }
 
     .tech-hero{
@@ -213,10 +238,10 @@
       justify-content:center;
       isolation:isolate;
       background:
-        radial-gradient(circle at 50% 50%, rgba(29,125,255,.10) 0%, rgba(17,81,180,.08) 14%, rgba(7,27,69,.92) 40%, rgba(3,13,34,.98) 76%, rgba(2,8,24,1) 100%);
+        radial-gradient(circle at 50% 50%, rgba(29,125,255,.08) 0%, rgba(18,81,180,.07) 15%, rgba(7,27,69,.93) 40%, rgba(3,13,34,.985) 76%, rgba(2,8,24,1) 100%);
       box-shadow:
         inset 0 0 0 1px rgba(122,216,255,.08),
-        inset 0 0 70px rgba(58,151,255,.08),
+        inset 0 0 70px rgba(58,151,255,.06),
         0 34px 90px rgba(0,0,0,.36);
     }
 
@@ -225,10 +250,10 @@
       position:absolute;
       inset:0;
       background:
-        linear-gradient(rgba(120,195,255,.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(120,195,255,.05) 1px, transparent 1px);
+        linear-gradient(rgba(120,195,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(120,195,255,.04) 1px, transparent 1px);
       background-size:36px 36px;
-      opacity:.5;
+      opacity:.55;
       pointer-events:none;
       z-index:0;
     }
@@ -239,7 +264,7 @@
       inset:14px;
       border-radius:28px;
       border:1px solid rgba(126,204,255,.08);
-      box-shadow:inset 0 0 24px rgba(95,176,255,.06);
+      box-shadow:inset 0 0 24px rgba(95,176,255,.05);
       pointer-events:none;
       z-index:0;
     }
@@ -249,7 +274,7 @@
       inset:0;
       pointer-events:none;
       z-index:0;
-      opacity:.45;
+      opacity:.40;
       background-image:
         radial-gradient(circle at 14% 20%, rgba(255,255,255,.78) 0 1px, transparent 1.7px),
         radial-gradient(circle at 85% 15%, rgba(255,255,255,.62) 0 1px, transparent 1.7px),
@@ -261,61 +286,24 @@
         radial-gradient(circle at 7% 87%, rgba(255,255,255,.32) 0 1px, transparent 1.7px);
     }
 
-    /* glow หลังโลโก้ให้เล็กลง */
+    /* glow หลังโลโก้ลดลง */
     .center-glow{
       position:absolute;
       left:50%;
       top:50%;
-      width:190px;
-      height:190px;
+      width:170px;
+      height:170px;
       transform:translate(-50%, -50%);
       z-index:1;
       pointer-events:none;
       background:
         radial-gradient(circle,
-          rgba(226,247,255,.88) 0%,
-          rgba(171,227,255,.42) 32%,
-          rgba(90,188,255,.14) 52%,
+          rgba(228,248,255,.88) 0%,
+          rgba(169,228,255,.38) 34%,
+          rgba(90,188,255,.10) 54%,
           transparent 70%);
-      filter:blur(5px);
+      filter:blur(4px);
       animation:centerGlow 5s ease-in-out infinite;
-    }
-
-    .center-burst{
-      position:absolute;
-      left:50%;
-      top:50%;
-      width:640px;
-      height:640px;
-      transform:translate(-50%, -50%);
-      pointer-events:none;
-      z-index:1;
-      opacity:.72;
-    }
-
-    .center-burst::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      border-radius:50%;
-      background:
-        conic-gradient(
-          from 0deg,
-          transparent 0deg 5deg,
-          rgba(112,210,255,.48) 5deg 7deg,
-          transparent 7deg 13deg,
-          rgba(112,210,255,.18) 13deg 14deg,
-          transparent 14deg 20deg,
-          rgba(112,210,255,.38) 20deg 22deg,
-          transparent 22deg 29deg,
-          rgba(112,210,255,.16) 29deg 30deg,
-          transparent 30deg 39deg,
-          rgba(112,210,255,.34) 39deg 41deg,
-          transparent 41deg 360deg
-        );
-      mask-image:radial-gradient(circle, transparent 0 17%, rgba(0,0,0,.88) 25%, transparent 48%);
-      -webkit-mask-image:radial-gradient(circle, transparent 0 17%, rgba(0,0,0,.88) 25%, transparent 48%);
-      animation:ringRotate 30s linear infinite;
     }
 
     .center-rings{
@@ -336,24 +324,24 @@
     }
 
     .ring.r1{
-      width:190px;
-      height:190px;
-      border:1px solid rgba(131,208,255,.10);
-      box-shadow:0 0 20px rgba(78,168,255,.06), inset 0 0 16px rgba(78,168,255,.04);
+      width:184px;
+      height:184px;
+      border:1px solid rgba(131,208,255,.08);
+      box-shadow:0 0 20px rgba(78,168,255,.05), inset 0 0 16px rgba(78,168,255,.03);
     }
 
     .ring.r2{
-      width:340px;
-      height:340px;
-      border:1px dashed rgba(131,208,255,.12);
-      animation:ringRotateReverse 28s linear infinite;
+      width:332px;
+      height:332px;
+      border:1px dashed rgba(131,208,255,.10);
+      animation:ringRotateReverse 30s linear infinite;
     }
 
     .ring.r3{
-      width:520px;
-      height:520px;
-      border:1px solid rgba(131,208,255,.05);
-      animation:ringRotate 34s linear infinite;
+      width:470px;
+      height:470px;
+      border:1px solid rgba(131,208,255,.04);
+      animation:ringRotate 38s linear infinite;
     }
 
     .tech-svg{
@@ -366,8 +354,8 @@
     .logo-core{
       position:relative;
       z-index:8;
-      width:min(27vw, 220px);
-      height:min(27vw, 220px);
+      width:min(25vw, 210px);
+      height:min(25vw, 210px);
       padding:0;
       border:none;
       background:transparent;
@@ -389,8 +377,8 @@
       object-fit:contain;
       display:block;
       filter:
-        drop-shadow(0 0 12px rgba(120,212,255,.22))
-        drop-shadow(0 18px 28px rgba(0,0,0,.28));
+        drop-shadow(0 0 10px rgba(120,212,255,.16))
+        drop-shadow(0 16px 26px rgba(0,0,0,.28));
     }
 
     .menu-layer{
@@ -412,7 +400,7 @@
       background:none;
       padding:0;
       margin:0;
-      color:var(--white);
+      color:#fff;
       text-decoration:none;
       display:flex;
       align-items:center;
@@ -445,7 +433,7 @@
     .menu-node.bottom{
       flex-direction:column;
       text-align:center;
-      gap:10px;
+      gap:12px;
     }
 
     .menu-node:hover{
@@ -494,30 +482,29 @@
 
     .node-shell{
       position:relative;
-      min-width:236px;
-      min-height:56px;
-      padding:12px 20px;
+      min-width:260px;
+      min-height:58px;
+      padding:12px 22px;
       display:flex;
       align-items:center;
-      background:
-        linear-gradient(180deg, rgba(12,40,92,.16), rgba(8,22,54,.10));
-      clip-path:polygon(14px 0, 100% 0, calc(100% - 18px) 50%, 100% 100%, 14px 100%, 0 50%);
-      border:1px solid rgba(111,208,255,.18);
-      box-shadow:
-        inset 0 0 0 1px rgba(162,228,255,.08),
-        0 0 20px rgba(69,170,255,.12);
-      transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
       overflow:hidden;
+      border:1px solid rgba(110,209,255,.18);
+      background:
+        linear-gradient(180deg, rgba(11,39,90,.18), rgba(7,20,52,.10));
+      box-shadow:
+        inset 0 0 0 1px rgba(162,228,255,.06),
+        0 0 20px rgba(69,170,255,.10);
+      transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
     }
 
     .menu-node.left .node-shell{
       justify-content:flex-end;
-      clip-path:polygon(18px 0, 100% 0, calc(100% - 14px) 50%, 100% 100%, 18px 100%, 0 50%);
+      clip-path:polygon(12px 0, 100% 0, calc(100% - 18px) 50%, 100% 100%, 12px 100%, 0 50%);
     }
 
     .menu-node.right .node-shell{
       justify-content:flex-start;
-      clip-path:polygon(14px 0, 100% 0, calc(100% - 18px) 50%, 100% 100%, 14px 100%, 0 50%);
+      clip-path:polygon(18px 0, 100% 0, calc(100% - 12px) 50%, 100% 100%, 18px 100%, 0 50%);
     }
 
     .node-shell::before{
@@ -525,8 +512,7 @@
       position:absolute;
       inset:0;
       background:
-        linear-gradient(90deg, transparent 0%, rgba(116,214,255,.20) 10%, transparent 18%, transparent 82%, rgba(116,214,255,.18) 90%, transparent 100%);
-      opacity:.9;
+        linear-gradient(90deg, transparent 0%, rgba(116,214,255,.16) 8%, transparent 17%, transparent 83%, rgba(116,214,255,.16) 92%, transparent 100%);
       pointer-events:none;
     }
 
@@ -534,17 +520,24 @@
       content:"";
       position:absolute;
       inset:1px;
-      clip-path:inherit;
-      border:1px solid rgba(122,218,255,.26);
+      border:1px solid rgba(142,224,255,.20);
       pointer-events:none;
-      opacity:.6;
+      opacity:.55;
+    }
+
+    .menu-node.left .node-shell::after{
+      clip-path:polygon(12px 0, 100% 0, calc(100% - 18px) 50%, 100% 100%, 12px 100%, 0 50%);
+    }
+
+    .menu-node.right .node-shell::after{
+      clip-path:polygon(18px 0, 100% 0, calc(100% - 12px) 50%, 100% 100%, 18px 100%, 0 50%);
     }
 
     .menu-node:hover .node-shell{
       border-color:rgba(145,226,255,.28);
       box-shadow:
-        inset 0 0 0 1px rgba(184,239,255,.12),
-        0 0 26px rgba(82,186,255,.18);
+        inset 0 0 0 1px rgba(184,239,255,.08),
+        0 0 26px rgba(82,186,255,.16);
     }
 
     .node-text{
@@ -558,20 +551,21 @@
     .node-title{
       font-size:15px;
       font-weight:800;
-      letter-spacing:1.5px;
+      letter-spacing:1.1px;
       text-transform:uppercase;
       color:#eefaff;
       text-shadow:
-        0 0 10px rgba(141,222,255,.65),
-        0 0 26px rgba(141,222,255,.16);
+        0 0 10px rgba(141,222,255,.62),
+        0 0 26px rgba(141,222,255,.14);
       white-space:nowrap;
       transition:text-shadow .22s ease;
     }
 
     .node-sub{
       margin-top:6px;
-      font-size:9px;
-      letter-spacing:2.4px;
+      font-size:8px;
+      font-weight:600;
+      letter-spacing:2.2px;
       text-transform:uppercase;
       color:rgba(203,236,255,.74);
       white-space:nowrap;
@@ -579,41 +573,42 @@
 
     .menu-node:hover .node-title{
       text-shadow:
-        0 0 12px rgba(168,233,255,.9),
-        0 0 30px rgba(141,222,255,.32);
+        0 0 12px rgba(168,233,255,.88),
+        0 0 30px rgba(141,222,255,.28);
     }
 
-    /* start order ให้แดงเด่น */
+    /* START ORDER */
     .menu-node.bottom .node-dot{
-      width:20px;
-      height:20px;
-      flex:0 0 20px;
+      width:22px;
+      height:22px;
+      flex:0 0 22px;
       background:
-        radial-gradient(circle, #fff 0%, #ffd6da 18%, #ff6f7a 50%, #d81122 100%);
+        radial-gradient(circle, #fff 0%, #ffdfe4 18%, #ff7783 50%, #d91628 100%);
       box-shadow:
-        0 0 0 5px rgba(255,93,105,.12),
-        0 0 18px rgba(255,80,94,.82),
-        0 0 40px rgba(255,80,94,.36);
+        0 0 0 6px rgba(255,93,105,.12),
+        0 0 22px rgba(255,80,94,.90),
+        0 0 48px rgba(255,80,94,.42);
     }
 
     .menu-node.bottom:hover .node-dot{
       box-shadow:
-        0 0 0 6px rgba(255,93,105,.14),
-        0 0 24px rgba(255,80,94,.92),
-        0 0 48px rgba(255,80,94,.42);
+        0 0 0 7px rgba(255,93,105,.14),
+        0 0 28px rgba(255,80,94,.95),
+        0 0 56px rgba(255,80,94,.48);
     }
 
     .menu-node.bottom .node-shell{
-      min-width:250px;
-      min-height:62px;
-      padding:13px 22px;
+      min-width:320px;
+      min-height:72px;
+      padding:16px 26px;
+      justify-content:center;
       background:
-        linear-gradient(180deg, rgba(93,7,18,.24), rgba(62,4,12,.14));
-      border:1px solid rgba(255,118,128,.30);
+        linear-gradient(180deg, rgba(106,10,22,.34), rgba(67,4,14,.18));
+      border:1px solid rgba(255,118,128,.34);
       clip-path:polygon(16px 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 16px 100%, 0 50%);
       box-shadow:
         inset 0 0 0 1px rgba(255,176,182,.08),
-        0 0 24px rgba(255,76,92,.18);
+        0 0 28px rgba(255,76,92,.22);
     }
 
     .menu-node.bottom .node-shell::before{
@@ -622,46 +617,50 @@
     }
 
     .menu-node.bottom .node-shell::after{
-      border-color:rgba(255,130,138,.30);
+      border-color:rgba(255,130,138,.28);
+      clip-path:polygon(16px 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 16px 100%, 0 50%);
     }
 
     .menu-node.bottom .node-title{
-      color:#fff1f2;
+      font-size:21px;
+      color:#fff3f4;
       text-shadow:
-        0 0 10px rgba(255,148,157,.72),
-        0 0 28px rgba(255,96,107,.24);
+        0 0 12px rgba(255,148,157,.74),
+        0 0 30px rgba(255,96,107,.28);
     }
 
     .menu-node.bottom .node-sub{
-      color:rgba(255,205,210,.85);
+      font-size:9px;
+      letter-spacing:2.8px;
+      color:rgba(255,214,218,.90);
     }
 
     .menu-node.bottom:hover .node-shell{
-      border-color:rgba(255,146,154,.42);
+      border-color:rgba(255,146,154,.46);
       box-shadow:
         inset 0 0 0 1px rgba(255,183,188,.10),
-        0 0 30px rgba(255,76,92,.25);
+        0 0 36px rgba(255,76,92,.28);
     }
 
-    /* ตำแหน่งใหม่ไม่ให้ขวาซ้อน */
-    .n1{ --x:24%; --y:19%; }  /* SSB MOBILE */
-    .n2{ --x:22%; --y:35%; }  /* STEALTH SAFETY BANK */
-    .n3{ --x:20%; --y:52%; }  /* AGENT LOGIN */
-    .n4{ --x:26%; --y:70%; }  /* ABOUT COMPANY */
+    /* ตำแหน่งใหม่ แยกซ้ายขวาใกล้กันขึ้น */
+    .n1{ --x:29%; --y:21%; }
+    .n2{ --x:26%; --y:39%; }
+    .n3{ --x:24%; --y:57%; }
+    .n4{ --x:31%; --y:74%; }
 
-    .n5{ --x:76%; --y:19%; }  /* STEALTH SAFETY BANK */
-    .n6{ --x:82%; --y:35%; }  /* STEALTH SAFETY BOOK */
-    .n7{ --x:79%; --y:52%; }  /* FLARE TECH */
-    .n8{ --x:74%; --y:69%; }  /* CONTACT */
+    .n5{ --x:71%; --y:21%; }
+    .n6{ --x:74%; --y:39%; }
+    .n7{ --x:76%; --y:57%; }
+    .n8{ --x:69%; --y:74%; }
 
-    .n9{ --x:50%; --y:83%; }  /* START ORDER */
+    .n9{ --x:50%; --y:86%; }
 
     .node-note{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      min-height:52px;
-      padding:11px 26px;
+      min-height:54px;
+      padding:12px 28px;
       border-radius:999px;
       background:rgba(255,255,255,.08);
       color:#dff5ff;
@@ -675,7 +674,7 @@
       pointer-events:none;
     }
 
-    /* popup */
+    /* POPUP */
     .popup-backdrop{
       position:fixed;
       inset:0;
@@ -799,7 +798,7 @@
       cursor:pointer;
     }
 
-    /* chat */
+    /* CHAT */
     .chat-widget{
       position:fixed;
       right:18px;
@@ -846,6 +845,7 @@
     }
 
     .chat-item:hover{ transform:translateY(-2px) scale(1.02); }
+
     .chat-item.line{ background:linear-gradient(135deg, #10d95a 0%, #06c755 55%, #02a94b 100%); }
     .chat-item.facebook{ background:linear-gradient(135deg, #2a86ff 0%, #1877f2 55%, #0f5fd3 100%); }
     .chat-item.youtube{ background:linear-gradient(135deg, #ff2f2f 0%, #ff0000 55%, #c90000 100%); }
@@ -916,28 +916,42 @@
       transform:rotate(180deg);
     }
 
-    /* footer */
+    /* FOOTER */
     .ssb-footer{
       position:relative;
       z-index:1;
       margin-top:16px;
-      border-top:1px solid rgba(128,206,255,.12);
-      background:linear-gradient(180deg, rgba(5,18,44,.96), rgba(3,12,32,.98));
+      border-top:1px solid rgba(255,255,255,.12);
+      background:
+        linear-gradient(135deg, var(--head-foot-3) 0%, var(--head-foot-1) 52%, var(--head-foot-2) 100%);
       box-shadow:0 -12px 30px rgba(0,0,0,.22);
+    }
+
+    .ssb-footer::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,0)),
+        radial-gradient(circle at 10% 20%, rgba(255,255,255,.10), transparent 24%),
+        radial-gradient(circle at 88% 16%, rgba(255,255,255,.08), transparent 20%);
     }
 
     .footer-inner{
       width:min(var(--max), calc(100% - 20px));
       margin:0 auto;
       padding:18px 0 14px;
+      position:relative;
+      z-index:1;
     }
 
     .footer-card{
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(139,215,255,.12);
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.14);
       border-radius:20px;
       padding:14px;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.10);
       backdrop-filter:blur(10px);
       -webkit-backdrop-filter:blur(10px);
     }
@@ -958,7 +972,7 @@
 
     .footer-text{
       margin:0 0 6px;
-      color:rgba(230,244,255,.95);
+      color:rgba(255,255,255,.94);
       font-size:13px;
       line-height:1.65;
       word-break:break-word;
@@ -1011,9 +1025,9 @@
     .footer-bottom{
       margin-top:12px;
       padding-top:10px;
-      border-top:1px solid rgba(139,215,255,.10);
+      border-top:1px solid rgba(255,255,255,.12);
       text-align:center;
-      color:rgba(230,244,255,.9);
+      color:rgba(255,255,255,.92);
       font-size:12px;
       line-height:1.7;
     }
@@ -1035,7 +1049,7 @@
 
     @keyframes centerGlow{
       0%,100%{ transform:translate(-50%, -50%) scale(1); opacity:1; }
-      50%{ transform:translate(-50%, -50%) scale(1.04); opacity:.88; }
+      50%{ transform:translate(-50%, -50%) scale(1.03); opacity:.88; }
     }
 
     @media (max-width:1120px){
@@ -1046,34 +1060,35 @@
       }
 
       .logo-core{
-        width:min(28vw, 200px);
-        height:min(28vw, 200px);
+        width:min(28vw, 188px);
+        height:min(28vw, 188px);
       }
 
-      .center-glow{ width:172px; height:172px; }
-      .center-burst{ width:540px; height:540px; }
+      .center-glow{ width:155px; height:155px; }
 
-      .ring.r1{ width:176px; height:176px; }
+      .ring.r1{ width:170px; height:170px; }
       .ring.r2{ width:300px; height:300px; }
-      .ring.r3{ width:460px; height:460px; }
+      .ring.r3{ width:420px; height:420px; }
 
-      .node-shell{ min-width:214px; min-height:52px; padding:11px 18px; }
-      .menu-node.bottom .node-shell{ min-width:228px; min-height:58px; }
+      .node-shell{ min-width:228px; min-height:54px; padding:11px 18px; }
+      .menu-node.bottom .node-shell{ min-width:280px; min-height:66px; }
 
       .node-title{ font-size:13px; }
-      .node-sub{ font-size:8px; letter-spacing:2px; }
+      .node-sub{ font-size:7px; letter-spacing:1.8px; }
 
-      .n1{ --x:25%; --y:20%; }
-      .n2{ --x:22%; --y:36%; }
-      .n3{ --x:21%; --y:53%; }
-      .n4{ --x:27%; --y:70%; }
+      .menu-node.bottom .node-title{ font-size:18px; }
 
-      .n5{ --x:76%; --y:20%; }
-      .n6{ --x:81%; --y:36%; }
-      .n7{ --x:78%; --y:53%; }
-      .n8{ --x:73%; --y:70%; }
+      .n1{ --x:30%; --y:22%; }
+      .n2{ --x:27%; --y:40%; }
+      .n3{ --x:25%; --y:57%; }
+      .n4{ --x:32%; --y:74%; }
 
-      .n9{ --x:50%; --y:83%; }
+      .n5{ --x:70%; --y:22%; }
+      .n6{ --x:73%; --y:40%; }
+      .n7{ --x:75%; --y:57%; }
+      .n8{ --x:68%; --y:74%; }
+
+      .n9{ --x:50%; --y:86%; }
 
       .popup-grid{ grid-template-columns:1fr; }
       .footer-main{ grid-template-columns:1fr; }
@@ -1082,10 +1097,6 @@
     }
 
     @media (max-width:760px){
-      body::after{
-        background-size:30px 30px;
-      }
-
       .topbar-inner{
         width:min(100% - 14px, var(--max));
         min-height:unset;
@@ -1105,7 +1116,9 @@
         font-size:15px;
       }
 
-      .brand-site{ font-size:12px; }
+      .brand-site{
+        font-size:12px;
+      }
 
       .main-content{
         width:min(100% - 14px, var(--max));
@@ -1125,16 +1138,18 @@
       }
 
       .logo-core{
-        width:min(42vw, 132px);
-        height:min(42vw, 132px);
+        width:min(42vw, 126px);
+        height:min(42vw, 126px);
       }
 
-      .center-glow{ width:122px; height:122px; }
-      .center-burst{ width:340px; height:340px; opacity:.58; }
+      .center-glow{
+        width:110px;
+        height:110px;
+      }
 
-      .ring.r1{ width:126px; height:126px; }
-      .ring.r2{ width:214px; height:214px; }
-      .ring.r3{ width:320px; height:320px; }
+      .ring.r1{ width:120px; height:120px; }
+      .ring.r2{ width:210px; height:210px; }
+      .ring.r3{ width:300px; height:300px; }
 
       .menu-node{ gap:8px; }
 
@@ -1145,46 +1160,54 @@
       }
 
       .menu-node.bottom .node-dot{
-        width:15px;
-        height:15px;
-        flex:0 0 15px;
+        width:16px;
+        height:16px;
+        flex:0 0 16px;
       }
 
       .node-shell{
-        min-width:128px;
+        min-width:138px;
         min-height:42px;
         padding:8px 10px;
       }
 
       .menu-node.bottom .node-shell{
-        min-width:164px;
-        min-height:48px;
-        padding:9px 12px;
+        min-width:190px;
+        min-height:52px;
+        padding:10px 12px;
       }
 
       .node-title{
         font-size:9px;
-        letter-spacing:.9px;
+        letter-spacing:.7px;
       }
 
       .node-sub{
         margin-top:4px;
-        font-size:5.8px;
+        font-size:5.5px;
+        letter-spacing:1px;
+      }
+
+      .menu-node.bottom .node-title{
+        font-size:14px;
+      }
+
+      .menu-node.bottom .node-sub{
+        font-size:6px;
         letter-spacing:1.2px;
       }
 
-      /* มือถือก็ขยับให้แออัดแต่ไม่ซ้อน */
-      .n1{ --x:31%; --y:18%; }
-      .n2{ --x:23%; --y:34%; }
-      .n3{ --x:22%; --y:52%; }
-      .n4{ --x:31%; --y:70%; }
+      .n1{ --x:31%; --y:20%; }
+      .n2{ --x:26%; --y:38%; }
+      .n3{ --x:23%; --y:56%; }
+      .n4{ --x:31%; --y:73%; }
 
-      .n5{ --x:72%; --y:18%; }
-      .n6{ --x:80%; --y:34%; }
-      .n7{ --x:78%; --y:52%; }
-      .n8{ --x:70%; --y:70%; }
+      .n5{ --x:69%; --y:20%; }
+      .n6{ --x:74%; --y:38%; }
+      .n7{ --x:77%; --y:56%; }
+      .n8{ --x:69%; --y:73%; }
 
-      .n9{ --x:50%; --y:84%; }
+      .n9{ --x:50%; --y:86%; }
 
       .node-note{
         font-size:12px;
@@ -1273,8 +1296,8 @@
             <img src="images/logo.png" alt="Stealth Safety Bank Logo" />
           </div>
           <div>
-            <div class="brand-name">บริษัท สยามทำ จำกัด • Stealth Safety Bank System</div>
-            <div class="brand-site">
+            <div class="brand-name th-font">บริษัท สยามทำ จำกัด • <span class="en-font">Stealth Safety Bank System</span></div>
+            <div class="brand-site en-font">
               <a href="https://www.siamtham.com" target="_blank" rel="noopener">www.siamtham.com</a>
             </div>
           </div>
@@ -1291,10 +1314,9 @@
     <main class="main-content">
       <section class="hero-stage">
         <div class="hero-center">
-          <div class="tech-hero" id="techHero">
+          <div class="tech-hero open" id="techHero">
             <div class="hero-stars"></div>
             <div class="center-glow"></div>
-            <div class="center-burst"></div>
 
             <div class="center-rings">
               <span class="ring r1"></span>
@@ -1309,12 +1331,11 @@
             </button>
 
             <div class="menu-layer">
-              <!-- LEFT -->
               <button class="menu-node left n1" type="button" data-popup="ssbmobile">
                 <div class="node-shell">
                   <span class="node-text">
-                    <span class="node-title">SSB MOBILE</span>
-                    <span class="node-sub">secure mobile access</span>
+                    <span class="node-title en-font">SSB MOBILE</span>
+                    <span class="node-sub en-font">SECURE MOBILE ACCESS</span>
                   </span>
                 </div>
                 <span class="node-dot"></span>
@@ -1323,8 +1344,8 @@
               <button class="menu-node left n2" type="button" data-popup="stealthbank">
                 <div class="node-shell">
                   <span class="node-text">
-                    <span class="node-title">STEALTH SAFETY BANK</span>
-                    <span class="node-sub">private banking shield</span>
+                    <span class="node-title en-font">STEALTH SAFETY BANK</span>
+                    <span class="node-sub en-font">PRIVATE BANKING SHIELD</span>
                   </span>
                 </div>
                 <span class="node-dot"></span>
@@ -1333,8 +1354,8 @@
               <a class="menu-node left n3" href="agent-login.html">
                 <div class="node-shell">
                   <span class="node-text">
-                    <span class="node-title">AGENT LOGIN</span>
-                    <span class="node-sub">dealer member access</span>
+                    <span class="node-title en-font">AGENT LOGIN</span>
+                    <span class="node-sub en-font">DEALER MEMBER ACCESS</span>
                   </span>
                 </div>
                 <span class="node-dot"></span>
@@ -1343,20 +1364,19 @@
               <a class="menu-node left n4" href="about.html">
                 <div class="node-shell">
                   <span class="node-text">
-                    <span class="node-title">ABOUT COMPANY</span>
-                    <span class="node-sub">siam tum profile</span>
+                    <span class="node-title en-font">ABOUT COMPANY</span>
+                    <span class="node-sub en-font">SIAM TUM PROFILE</span>
                   </span>
                 </div>
                 <span class="node-dot"></span>
               </a>
 
-              <!-- RIGHT -->
               <button class="menu-node right n5" type="button" data-popup="stealthbank">
                 <span class="node-dot"></span>
                 <div class="node-shell">
                   <span class="node-text">
-                    <span class="node-title">STEALTH SAFETY BANK</span>
-                    <span class="node-sub">private banking shield</span>
+                    <span class="node-title en-font">STEALTH SAFETY BANK</span>
+                    <span class="node-sub en-font">PRIVATE BANKING SHIELD</span>
                   </span>
                 </div>
               </button>
@@ -1365,8 +1385,8 @@
                 <span class="node-dot"></span>
                 <div class="node-shell">
                   <span class="node-text">
-                    <span class="node-title">STEALTH SAFETY BOOK</span>
-                    <span class="node-sub">discreet storage system</span>
+                    <span class="node-title en-font">STEALTH SAFETY BOOK</span>
+                    <span class="node-sub en-font">DISCREET STORAGE SYSTEM</span>
                   </span>
                 </div>
               </button>
@@ -1375,8 +1395,8 @@
                 <span class="node-dot"></span>
                 <div class="node-shell">
                   <span class="node-text">
-                    <span class="node-title">FLARE TECHNOLOGY</span>
-                    <span class="node-sub">awareness protection mode</span>
+                    <span class="node-title en-font">FLARE TECHNOLOGY</span>
+                    <span class="node-sub en-font">AWARENESS PROTECTION MODE</span>
                   </span>
                 </div>
               </button>
@@ -1385,26 +1405,25 @@
                 <span class="node-dot"></span>
                 <div class="node-shell">
                   <span class="node-text">
-                    <span class="node-title">CONTACT</span>
-                    <span class="node-sub">siam tum company</span>
+                    <span class="node-title en-font">CONTACT</span>
+                    <span class="node-sub en-font">SIAM TUM COMPANY</span>
                   </span>
                 </div>
               </button>
 
-              <!-- BOTTOM -->
               <a class="menu-node bottom n9" href="book.html">
                 <span class="node-dot"></span>
                 <div class="node-shell">
                   <span class="node-text">
-                    <span class="node-title">START ORDER</span>
-                    <span class="node-sub">go to product booking</span>
+                    <span class="node-title en-font">START ORDER</span>
+                    <span class="node-sub en-font">GO TO PRODUCT BOOKING</span>
                   </span>
                 </div>
               </a>
             </div>
           </div>
 
-          <div class="node-note">คลิกที่โลโก้เพื่อเปิดเมนู</div>
+          <div class="node-note th-font">คลิกที่โลโก้เพื่อเปิดเมนู</div>
         </div>
       </section>
     </main>
@@ -1414,19 +1433,19 @@
         <div class="footer-card">
           <div class="footer-main">
             <div>
-              <h3 class="footer-title">บริษัท สยามทำ จำกัด</h3>
-              <p class="footer-text"><strong>ที่อยู่:</strong> 54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
+              <h3 class="footer-title th-font">บริษัท สยามทำ จำกัด</h3>
+              <p class="footer-text th-font"><strong>ที่อยู่:</strong> 54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
             </div>
 
             <div class="footer-contact-center">
-              <p class="footer-text"><strong>โทร:</strong> <a class="footer-link" href="tel:020432988">02-043-2988</a></p>
-              <p class="footer-text"><strong>มือถือ:</strong> <a class="footer-link" href="tel:0649514888">064-951-4888</a></p>
-              <p class="footer-text"><strong>เว็บไซต์:</strong> <a class="footer-link" href="https://www.siamtham.com" target="_blank" rel="noopener">www.siamtham.com</a></p>
+              <p class="footer-text th-font"><strong>โทร:</strong> <a class="footer-link" href="tel:020432988">02-043-2988</a></p>
+              <p class="footer-text th-font"><strong>มือถือ:</strong> <a class="footer-link" href="tel:0649514888">064-951-4888</a></p>
+              <p class="footer-text th-font"><strong>เว็บไซต์:</strong> <a class="footer-link en-font" href="https://www.siamtham.com" target="_blank" rel="noopener">www.siamtham.com</a></p>
             </div>
 
             <div class="footer-nav-wrap">
               <a
-                class="footer-map-button"
+                class="footer-map-button th-font"
                 href="https://maps.app.goo.gl/Dz4B1kpqVbmWhkYX7"
                 target="_blank"
                 rel="noopener"
@@ -1442,9 +1461,9 @@
           </div>
         </div>
 
-        <div class="footer-bottom">
-          © Siam Tum Co., Ltd. • Stealth Safety Bank System<br>
-          เว็บไซต์นี้ทำโดย Mr.Tingly Marketing Online
+        <div class="footer-bottom th-font">
+          © Siam Tum Co., Ltd. • <span class="en-font">Stealth Safety Bank System</span><br>
+          เว็บไซต์นี้ทำโดย <span class="en-font">Mr.Tingly Marketing Online</span>
         </div>
       </div>
     </footer>
@@ -1453,30 +1472,30 @@
   <div id="companyPopup" class="popup-backdrop">
     <div class="popup-card company">
       <div class="popup-head">
-        <h3>บริษัท สยามทำ จำกัด</h3>
+        <h3 class="th-font">บริษัท สยามทำ จำกัด</h3>
         <button class="popup-x" type="button" id="closeCompanyPopupTop">×</button>
       </div>
 
       <div class="company-detail">
-        <p><strong>ที่อยู่:</strong> 54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
-        <p><strong>เลขทะเบียน:</strong> 0105566099954</p>
-        <p><strong>โทร:</strong> 02-043-2988</p>
-        <p><strong>มือถือ:</strong> 064-951-4888</p>
+        <p class="th-font"><strong>ที่อยู่:</strong> 54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
+        <p class="th-font"><strong>เลขทะเบียน:</strong> 0105566099954</p>
+        <p class="th-font"><strong>โทร:</strong> 02-043-2988</p>
+        <p class="th-font"><strong>มือถือ:</strong> 064-951-4888</p>
       </div>
 
-      <button class="popup-close" type="button" id="closeCompanyPopupBottom">ปิด</button>
+      <button class="popup-close th-font" type="button" id="closeCompanyPopupBottom">ปิด</button>
     </div>
   </div>
 
   <div id="infoPopup" class="popup-backdrop">
     <div class="popup-card">
       <div class="popup-head">
-        <h3 id="infoTitle">หัวข้อ</h3>
+        <h3 id="infoTitle" class="en-font">TITLE</h3>
         <button class="popup-x" type="button" id="closeInfoPopupTop">×</button>
       </div>
 
       <div class="popup-grid">
-        <div class="popup-text" id="infoText"></div>
+        <div class="popup-text th-font" id="infoText"></div>
 
         <div class="video-wrap">
           <div class="video-frame">
@@ -1491,37 +1510,37 @@
         </div>
       </div>
 
-      <button class="popup-close" type="button" id="closeInfoPopupBottom">ปิด</button>
+      <button class="popup-close th-font" type="button" id="closeInfoPopupBottom">ปิด</button>
     </div>
   </div>
 
   <div class="chat-widget" id="chatWidget">
     <div class="chat-menu" id="chatMenu">
       <a class="chat-item line" href="https://line.me/R/ti/p/@siamtham" target="_blank" rel="noopener">
-        <span class="chat-icon">LINE</span>
-        <span>LINE Official</span>
+        <span class="chat-icon en-font">LINE</span>
+        <span class="en-font">LINE OFFICIAL</span>
       </a>
 
       <a class="chat-item facebook" href="https://www.facebook.com/profile.php?id=61556844339863" target="_blank" rel="noopener">
-        <span class="chat-icon">FB</span>
-        <span>Facebook</span>
+        <span class="chat-icon en-font">FB</span>
+        <span class="en-font">FACEBOOK</span>
       </a>
 
       <a class="chat-item youtube" href="https://www.youtube.com/@siamtham" target="_blank" rel="noopener">
-        <span class="chat-icon">YT</span>
-        <span>YouTube</span>
+        <span class="chat-icon en-font">YT</span>
+        <span class="en-font">YOUTUBE</span>
       </a>
 
       <a class="chat-item tiktok" href="#" target="_blank" rel="noopener">
-        <span class="chat-icon">TT</span>
-        <span>TikTok</span>
+        <span class="chat-icon en-font">TT</span>
+        <span class="en-font">TIKTOK</span>
       </a>
     </div>
 
     <button class="chat-fab" id="chatToggle" type="button" aria-label="เปิดเมนูแชท">
       <span class="chat-fab-text">
-        <span>Chat</span>
-        <span>Online</span>
+        <span class="en-font">Chat</span>
+        <span class="en-font">Online</span>
       </span>
       <span class="chat-caret">⌃</span>
     </button>
@@ -1530,7 +1549,7 @@
   <script>
     const popupData = {
       ssbmobile: {
-        title: "SSB Mobile",
+        title: "SSB MOBILE",
         video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
         text: `
           <p>SSB Mobile คือระบบการใช้งานอุปกรณ์สำหรับธุรกรรมการเงินที่แยกจากการใช้งานทั่วไป เพื่อลดความเสี่ยงจากแอปที่ไม่จำเป็น การหลอกลวง และการโจมตีทางไซเบอร์</p>
@@ -1539,7 +1558,7 @@
         `
       },
       stealthbank: {
-        title: "Stealth Safety Bank",
+        title: "STEALTH SAFETY BANK",
         video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
         text: `
           <p>Stealth Safety Bank คือแนวคิดการปกป้องการเงินด้วยการลดการเปิดเผยข้อมูล ลดช่องทางเสี่ยง และจัดระบบการใช้งานให้ปลอดภัยกว่ามือถือทั่วไป</p>
@@ -1548,7 +1567,7 @@
         `
       },
       safetybook: {
-        title: "Stealth Safety Book",
+        title: "STEALTH SAFETY BOOK",
         video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
         text: `
           <p>Stealth Safety Book คืออุปกรณ์จัดเก็บที่ออกแบบให้ดูเหมือนหนังสือ เพื่ออำพรางสิ่งสำคัญและเสริมความปลอดภัยในการเก็บอุปกรณ์หรือข้อมูลที่มีมูลค่าสูง</p>
@@ -1557,7 +1576,7 @@
         `
       },
       flare: {
-        title: "Flare Technology",
+        title: "FLARE TECHNOLOGY",
         video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
         text: `
           <p>Flare Technology คือแนวคิดเสริมด้านความปลอดภัยที่ช่วยให้การใช้งานระบบมีความชัดเจน รอบคอบ และเตือนผู้ใช้ให้ไม่ตกเป็นเหยื่อของความเสี่ยงรูปแบบต่าง ๆ</p>
@@ -1581,7 +1600,7 @@
     function openInfoPopup(key){
       const data = popupData[key];
       if (!data) return;
-      infoTitle.innerHTML = data.title;
+      infoTitle.textContent = data.title;
       infoText.innerHTML = data.text;
       infoVideo.src = data.video + "?rel=0&autoplay=0";
       infoPopup.style.display = "flex";
@@ -1602,15 +1621,14 @@
 
     function buildCircuitPath(cx, cy, x, y, side, isBottom){
       if (isBottom){
-        const midY = cy + (y - cy) * 0.58;
+        const midY = cy + (y - cy) * 0.60;
         return `M ${cx} ${cy} L ${cx} ${midY} L ${x} ${y}`;
       }
 
       const dir = side === "left" ? -1 : 1;
-      const spread = Math.max(40, Math.abs(x - cx) * 0.18);
-      const elbow1X = cx + dir * spread;
-      const elbow2X = x - dir * Math.max(28, Math.abs(x - cx) * 0.08);
-      return `M ${cx} ${cy} L ${elbow1X} ${cy} L ${elbow2X} ${y} L ${x} ${y}`;
+      const midX = cx + dir * Math.max(28, Math.abs(x - cx) * 0.10);
+      const nearX = x - dir * Math.max(18, Math.abs(x - cx) * 0.04);
+      return `M ${cx} ${cy} L ${midX} ${cy} L ${nearX} ${y} L ${x} ${y}`;
     }
 
     function drawTechLines(){
@@ -1626,14 +1644,14 @@
       let html = `
         <defs>
           <filter id="blueGlow" x="-90%" y="-90%" width="280%" height="280%">
-            <feGaussianBlur stdDeviation="2.5" result="blur"/>
+            <feGaussianBlur stdDeviation="2.4" result="blur"/>
             <feMerge>
               <feMergeNode in="blur"/>
               <feMergeNode in="SourceGraphic"/>
             </feMerge>
           </filter>
           <filter id="redGlow" x="-90%" y="-90%" width="280%" height="280%">
-            <feGaussianBlur stdDeviation="2.7" result="blur"/>
+            <feGaussianBlur stdDeviation="2.8" result="blur"/>
             <feMerge>
               <feMergeNode in="blur"/>
               <feMergeNode in="SourceGraphic"/>
@@ -1659,14 +1677,14 @@
 
         if (isBottom){
           html += `
-            <path d="${pathD}" fill="none" stroke="rgba(255,107,120,.94)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#redGlow)"/>
-            <path d="${pathD}" fill="none" stroke="rgba(255,121,132,.22)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="${x}" cy="${y}" r="3.2" fill="rgba(255,241,244,.98)" filter="url(#redGlow)"/>
+            <path d="${pathD}" fill="none" stroke="rgba(255,107,120,.96)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#redGlow)"/>
+            <path d="${pathD}" fill="none" stroke="rgba(255,121,132,.22)" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="${x}" cy="${y}" r="3.3" fill="rgba(255,241,244,.98)" filter="url(#redGlow)"/>
           `;
         } else {
           html += `
-            <path d="${pathD}" fill="none" stroke="rgba(111,210,255,.95)" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round" filter="url(#blueGlow)"/>
-            <path d="${pathD}" fill="none" stroke="rgba(111,210,255,.22)" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="${pathD}" fill="none" stroke="rgba(111,210,255,.96)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#blueGlow)"/>
+            <path d="${pathD}" fill="none" stroke="rgba(111,210,255,.20)" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/>
             <circle cx="${x}" cy="${y}" r="3" fill="rgba(235,248,255,.98)" filter="url(#blueGlow)"/>
           `;
         }
