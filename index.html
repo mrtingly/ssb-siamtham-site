@@ -18,11 +18,10 @@
       --head-foot-2:#1b67cf;
       --head-foot-3:#0a3f84;
 
-      --cy-1:#e8fbff;
-      --cy-2:#8ee0ff;
-      --cy-3:#1b94ff;
-      --cy-4:#74cfff;
-      --cy-5:#153f7b;
+      --cy-1:#f4fbff;
+      --cy-2:#cdeeff;
+      --cy-3:#8fdcff;
+      --cy-4:#54bfff;
 
       --red-1:#ffd8dd;
       --red-2:#ff7180;
@@ -38,8 +37,8 @@
       margin:0;
       color:#fff;
       background:
-        radial-gradient(circle at 50% 10%, rgba(29,122,255,.12), transparent 28%),
-        radial-gradient(circle at 50% 40%, rgba(19,103,215,.08), transparent 40%),
+        radial-gradient(circle at 50% 12%, rgba(32,126,255,.10), transparent 26%),
+        radial-gradient(circle at 50% 42%, rgba(20,95,200,.08), transparent 38%),
         linear-gradient(180deg, #010611 0%, #031129 26%, #05173a 64%, #031129 100%);
       overflow-x:hidden;
       font-family:'Prompt',sans-serif;
@@ -56,13 +55,13 @@
       z-index:0;
       opacity:.22;
       background-image:
-        radial-gradient(circle at 14% 22%, rgba(255,255,255,.90) 0 1px, transparent 1.8px),
-        radial-gradient(circle at 83% 18%, rgba(255,255,255,.66) 0 1px, transparent 1.8px),
-        radial-gradient(circle at 74% 72%, rgba(255,255,255,.44) 0 1px, transparent 1.8px),
-        radial-gradient(circle at 24% 74%, rgba(255,255,255,.55) 0 1px, transparent 1.8px),
-        radial-gradient(circle at 34% 42%, rgba(255,255,255,.46) 0 1px, transparent 1.8px),
-        radial-gradient(circle at 58% 24%, rgba(255,255,255,.40) 0 1px, transparent 1.8px),
-        radial-gradient(circle at 91% 62%, rgba(255,255,255,.34) 0 1px, transparent 1.8px);
+        radial-gradient(circle at 14% 22%, rgba(255,255,255,.86) 0 1px, transparent 1.7px),
+        radial-gradient(circle at 83% 18%, rgba(255,255,255,.64) 0 1px, transparent 1.7px),
+        radial-gradient(circle at 74% 72%, rgba(255,255,255,.44) 0 1px, transparent 1.7px),
+        radial-gradient(circle at 24% 74%, rgba(255,255,255,.48) 0 1px, transparent 1.7px),
+        radial-gradient(circle at 34% 42%, rgba(255,255,255,.42) 0 1px, transparent 1.7px),
+        radial-gradient(circle at 58% 24%, rgba(255,255,255,.38) 0 1px, transparent 1.7px),
+        radial-gradient(circle at 91% 62%, rgba(255,255,255,.32) 0 1px, transparent 1.7px);
     }
 
     body::after{
@@ -75,9 +74,9 @@
       background-image:
         linear-gradient(rgba(113,197,255,.18) 1px, transparent 1px),
         linear-gradient(90deg, rgba(113,197,255,.18) 1px, transparent 1px);
-      background-size:46px 46px;
-      mask-image:radial-gradient(circle at center, rgba(0,0,0,.95) 0%, rgba(0,0,0,.72) 48%, transparent 84%);
-      -webkit-mask-image:radial-gradient(circle at center, rgba(0,0,0,.95) 0%, rgba(0,0,0,.72) 48%, transparent 84%);
+      background-size:44px 44px;
+      mask-image:radial-gradient(circle at center, rgba(0,0,0,.95) 0%, rgba(0,0,0,.72) 46%, transparent 84%);
+      -webkit-mask-image:radial-gradient(circle at center, rgba(0,0,0,.95) 0%, rgba(0,0,0,.72) 46%, transparent 84%);
     }
 
     .site-wrap{
@@ -214,7 +213,6 @@
       gap:14px;
     }
 
-    /* HERO ULTRA */
     .tech-hero{
       position:relative;
       width:min(96vw, 1220px);
@@ -227,10 +225,10 @@
       justify-content:center;
       isolation:isolate;
       background:
-        radial-gradient(circle at 50% 50%, rgba(31,125,255,.08) 0%, rgba(18,81,180,.06) 16%, rgba(7,27,69,.95) 42%, rgba(2,10,28,.988) 74%, rgba(1,6,18,1) 100%);
+        radial-gradient(circle at 50% 50%, rgba(24,107,205,.06) 0%, rgba(12,52,128,.06) 18%, rgba(6,23,58,.94) 42%, rgba(2,10,28,.988) 78%, rgba(1,6,18,1) 100%);
       box-shadow:
         inset 0 0 0 1px rgba(122,216,255,.08),
-        inset 0 0 80px rgba(58,151,255,.05),
+        inset 0 0 70px rgba(58,151,255,.04),
         0 34px 90px rgba(0,0,0,.36);
     }
 
@@ -242,7 +240,7 @@
         linear-gradient(rgba(120,195,255,.028) 1px, transparent 1px),
         linear-gradient(90deg, rgba(120,195,255,.028) 1px, transparent 1px);
       background-size:38px 38px;
-      opacity:.5;
+      opacity:.44;
       pointer-events:none;
       z-index:0;
     }
@@ -258,23 +256,12 @@
       z-index:0;
     }
 
-    .hero-vignette{
-      position:absolute;
-      inset:0;
-      z-index:0;
-      pointer-events:none;
-      background:
-        radial-gradient(circle at 50% 50%, transparent 0 34%, rgba(0,0,0,.12) 55%, rgba(0,0,0,.42) 100%);
-    }
-
     .hero-stars,
     .hero-stars-2{
       position:absolute;
-      inset:-10%;
+      inset:-8%;
       pointer-events:none;
       z-index:0;
-      background-repeat:repeat;
-      background-position:0 0;
     }
 
     .hero-stars{
@@ -290,7 +277,7 @@
     }
 
     .hero-stars-2{
-      opacity:.14;
+      opacity:.13;
       background-image:
         radial-gradient(circle at 22% 14%, rgba(255,255,255,.82) 0 1px, transparent 1.9px),
         radial-gradient(circle at 58% 42%, rgba(255,255,255,.52) 0 1px, transparent 1.9px),
@@ -302,185 +289,104 @@
 
     @keyframes starDriftA{
       from{ transform:translate3d(0,0,0); }
-      to{ transform:translate3d(-30px,-60px,0); }
+      to{ transform:translate3d(-28px,-54px,0); }
     }
 
     @keyframes starDriftB{
       from{ transform:translate3d(0,0,0); }
-      to{ transform:translate3d(18px,-42px,0); }
+      to{ transform:translate3d(18px,-40px,0); }
     }
 
-    /* GLOBE SYSTEM */
+    /* GLOBE OUTLINE */
     .globe-wrap{
       position:absolute;
       left:50%;
-      top:50%;
+      top:48%;
       width:min(74vw, 800px);
       height:min(74vw, 800px);
       transform:translate(-50%, -50%);
       z-index:1;
       pointer-events:none;
+      opacity:.98;
       filter:
-        drop-shadow(0 0 14px rgba(114,215,255,.16))
-        drop-shadow(0 0 34px rgba(70,165,255,.08));
+        drop-shadow(0 0 10px rgba(255,255,255,.12))
+        drop-shadow(0 0 28px rgba(120,220,255,.10));
     }
 
-    .globe-shell{
-      position:relative;
-      width:100%;
-      height:100%;
-      border-radius:50%;
-      overflow:hidden;
-      opacity:.96;
-      background:
-        radial-gradient(circle at 34% 30%, rgba(118,206,255,.18), transparent 22%),
-        radial-gradient(circle at 50% 50%, rgba(18,72,154,.22), rgba(4,20,54,.40) 58%, rgba(3,10,28,.70) 80%, rgba(2,7,20,.94) 100%);
-      box-shadow:
-        inset 0 0 0 1px rgba(169,233,255,.18),
-        inset 0 0 42px rgba(89,179,255,.10),
-        inset -80px 0 160px rgba(0,0,0,.16);
-    }
-
-    .globe-track{
-      position:absolute;
-      inset:0;
-      width:200%;
-      display:flex;
-      animation:earthSpin 72s linear infinite;
-      will-change:transform;
-    }
-
-    @keyframes earthSpin{
-      from{ transform:translateX(0); }
-      to{ transform:translateX(-50%); }
-    }
-
-    .globe-panel{
-      width:50%;
-      height:100%;
-      flex:0 0 50%;
-      display:block;
-    }
-
-    .globe-panel svg{
+    .globe-outline-svg{
       width:100%;
       height:100%;
       display:block;
+      overflow:visible;
     }
 
-    .globe-grid{
-      position:absolute;
-      inset:0;
-      z-index:2;
-      border-radius:50%;
-      overflow:hidden;
-      background:
-        repeating-linear-gradient(0deg, rgba(135,224,255,.11) 0 1px, transparent 1px 56px),
-        repeating-linear-gradient(90deg, rgba(135,224,255,.10) 0 1px, transparent 1px 56px);
-      opacity:.22;
-      mix-blend-mode:screen;
-      mask-image:radial-gradient(circle at center, #000 0 72%, transparent 100%);
-      -webkit-mask-image:radial-gradient(circle at center, #000 0 72%, transparent 100%);
+    .globe-outer{
+      fill:none;
+      stroke:rgba(255,255,255,.92);
+      stroke-width:1.2;
     }
 
-    .globe-graticule{
-      position:absolute;
-      inset:0;
-      z-index:2;
-      border-radius:50%;
-      overflow:hidden;
-      opacity:.46;
-      background:
-        radial-gradient(ellipse at center, transparent 0 34%, rgba(122,216,255,.08) 34.5% 35%, transparent 35.5%),
-        radial-gradient(ellipse at center, transparent 0 47%, rgba(122,216,255,.07) 47.5% 48%, transparent 48.5%),
-        radial-gradient(ellipse at center, transparent 0 62%, rgba(122,216,255,.06) 62.5% 63%, transparent 63.5%);
+    .globe-grid-line{
+      fill:none;
+      stroke:rgba(255,255,255,.48);
+      stroke-width:.8;
     }
 
-    .globe-shadow{
-      position:absolute;
-      inset:0;
-      z-index:3;
-      border-radius:50%;
-      background:
-        radial-gradient(circle at 34% 30%, rgba(255,255,255,.08), transparent 22%),
-        radial-gradient(circle at 22% 46%, transparent 0 26%, rgba(0,0,0,.02) 28%, rgba(0,0,0,.48) 78%, rgba(0,0,0,.68) 100%);
-      mix-blend-mode:normal;
+    .globe-grid-line.soft{
+      stroke:rgba(255,255,255,.28);
     }
 
-    .globe-night{
-      position:absolute;
-      inset:0;
-      z-index:4;
-      border-radius:50%;
-      background:
-        linear-gradient(90deg,
-          rgba(0,0,0,.68) 0%,
-          rgba(0,0,0,.46) 20%,
-          rgba(0,0,0,.06) 42%,
-          rgba(0,0,0,0) 55%,
-          rgba(0,0,0,.22) 76%,
-          rgba(0,0,0,.58) 100%);
-      animation:nightShift 22s ease-in-out infinite alternate;
+    .globe-continent{
+      fill:none;
+      stroke:rgba(255,255,255,.92);
+      stroke-width:1.05;
+      stroke-linecap:round;
+      stroke-linejoin:round;
     }
 
-    @keyframes nightShift{
-      from{ transform:translateX(-4%); opacity:.82; }
-      to{ transform:translateX(4%); opacity:.96; }
-    }
-
-    .globe-atmosphere{
-      position:absolute;
-      inset:-2.2%;
-      z-index:5;
-      border-radius:50%;
-      border:1px solid rgba(167,236,255,.20);
-      box-shadow:
-        0 0 18px rgba(108,208,255,.18),
-        0 0 54px rgba(27,148,255,.08),
-        inset 0 0 18px rgba(168,234,255,.10);
+    .globe-ring{
+      fill:none;
+      stroke:rgba(180,230,255,.22);
+      stroke-width:1;
     }
 
     .globe-sweep{
-      position:absolute;
-      inset:-10% -30%;
-      z-index:5;
-      background:linear-gradient(105deg, transparent 0%, transparent 36%, rgba(188,241,255,.08) 49%, rgba(118,215,255,.18) 50.5%, rgba(188,241,255,.08) 52%, transparent 65%, transparent 100%);
-      transform:rotate(8deg);
-      animation:globeSweep 9s linear infinite;
-      mix-blend-mode:screen;
-      opacity:.9;
+      fill:none;
+      stroke:rgba(255,255,255,.22);
+      stroke-width:1.4;
+      stroke-linecap:round;
+      stroke-dasharray:120 900;
+      animation:globeSweepMove 12s linear infinite;
     }
 
-    @keyframes globeSweep{
-      from{ transform:translateX(-18%) rotate(8deg); }
-      to{ transform:translateX(18%) rotate(8deg); }
+    @keyframes globeSweepMove{
+      from{ stroke-dashoffset:0; }
+      to{ stroke-dashoffset:-1020; }
     }
 
     .hero-halo{
       position:absolute;
       left:50%;
-      top:50%;
-      width:min(21vw, 210px);
-      height:min(21vw, 210px);
+      top:48%;
+      width:min(18vw, 180px);
+      height:min(18vw, 180px);
       transform:translate(-50%, -50%);
       z-index:6;
       pointer-events:none;
       background:
         radial-gradient(circle,
-          rgba(229,248,255,.85) 0%,
-          rgba(169,228,255,.28) 34%,
-          rgba(90,188,255,.08) 58%,
-          transparent 76%);
-      filter:blur(8px);
+          rgba(255,255,255,.30) 0%,
+          rgba(180,230,255,.10) 38%,
+          transparent 72%);
+      filter:blur(6px);
       animation:centerGlow 5s ease-in-out infinite;
     }
 
     @keyframes centerGlow{
       0%,100%{ transform:translate(-50%, -50%) scale(1); opacity:1; }
-      50%{ transform:translate(-50%, -50%) scale(1.04); opacity:.86; }
+      50%{ transform:translate(-50%, -50%) scale(1.04); opacity:.84; }
     }
 
-    /* LOGO */
     .logo-core{
       position:relative;
       z-index:12;
@@ -497,8 +403,8 @@
     }
 
     .logo-core:hover{
-      transform:scale(1.032);
-      filter:brightness(1.04);
+      transform:scale(1.03);
+      filter:brightness(1.05);
     }
 
     .logo-core img{
@@ -507,7 +413,7 @@
       object-fit:contain;
       display:block;
       filter:
-        drop-shadow(0 0 8px rgba(120,212,255,.16))
+        drop-shadow(0 0 8px rgba(255,255,255,.10))
         drop-shadow(0 12px 22px rgba(0,0,0,.24));
     }
 
@@ -525,32 +431,32 @@
 
     .line-main{
       fill:none;
-      stroke:rgba(109,211,255,.18);
-      stroke-width:1.2;
+      stroke:rgba(185,233,255,.18);
+      stroke-width:1.1;
       stroke-linecap:round;
     }
 
     .line-glow{
       fill:none;
-      stroke:rgba(109,211,255,.08);
-      stroke-width:5;
+      stroke:rgba(185,233,255,.06);
+      stroke-width:4;
       stroke-linecap:round;
       filter:blur(2px);
     }
 
     .line-pulse{
       fill:none;
-      stroke:rgba(169,235,255,.72);
-      stroke-width:1.2;
+      stroke:rgba(255,255,255,.50);
+      stroke-width:1;
       stroke-linecap:round;
-      stroke-dasharray:6 18;
-      animation:dashFlow 8s linear infinite;
-      opacity:.7;
+      stroke-dasharray:6 20;
+      animation:dashFlow 9s linear infinite;
+      opacity:.6;
     }
 
     @keyframes dashFlow{
       from{ stroke-dashoffset:0; }
-      to{ stroke-dashoffset:-96; }
+      to{ stroke-dashoffset:-104; }
     }
 
     /* MENU */
@@ -566,7 +472,7 @@
       position:absolute;
       left:var(--x);
       top:var(--y);
-      transform:translate(-50%, -50%) scale(.98);
+      transform:translate(-50%, -50%) scale(1);
       border:none;
       background:none;
       padding:0;
@@ -602,7 +508,7 @@
     }
 
     .menu-node:hover{
-      filter:brightness(1.15);
+      filter:brightness(1.14);
       transform:translate(-50%, -50%) scale(1.02);
     }
 
@@ -612,11 +518,11 @@
       height:16px;
       flex:0 0 16px;
       border-radius:50%;
-      background:radial-gradient(circle, #ffffff 0%, #e9fbff 20%, #89dcff 52%, #198cff 100%);
+      background:radial-gradient(circle, #ffffff 0%, #eefbff 24%, #8fddff 54%, #2a9cff 100%);
       box-shadow:
-        0 0 0 4px rgba(90,185,255,.08),
-        0 0 14px rgba(77,180,255,.64),
-        0 0 28px rgba(77,180,255,.24);
+        0 0 0 4px rgba(120,210,255,.06),
+        0 0 14px rgba(120,210,255,.46),
+        0 0 28px rgba(120,210,255,.16);
       animation:dotPulse 2.2s ease-in-out infinite;
       transition:transform .22s ease, box-shadow .22s ease;
     }
@@ -626,7 +532,7 @@
       position:absolute;
       inset:-4px;
       border-radius:50%;
-      border:1px solid rgba(139,215,255,.18);
+      border:1px solid rgba(185,233,255,.14);
     }
 
     .node-dot::after{
@@ -634,20 +540,16 @@
       position:absolute;
       inset:-9px;
       border-radius:50%;
-      border:1px solid rgba(139,215,255,.06);
+      border:1px solid rgba(185,233,255,.05);
     }
 
     @keyframes dotPulse{
       0%,100%{ transform:scale(1); opacity:1; }
-      50%{ transform:scale(1.11); opacity:.92; }
+      50%{ transform:scale(1.12); opacity:.92; }
     }
 
     .menu-node:hover .node-dot{
-      transform:scale(1.16);
-      box-shadow:
-        0 0 0 4px rgba(90,185,255,.10),
-        0 0 18px rgba(77,180,255,.80),
-        0 0 34px rgba(77,180,255,.34);
+      transform:scale(1.15);
     }
 
     .node-shell{
@@ -658,16 +560,15 @@
       display:flex;
       align-items:center;
       overflow:hidden;
-      border:1px solid rgba(122,220,255,.28);
-      background:
-        linear-gradient(180deg, rgba(13,52,122,.42), rgba(5,21,58,.26));
+      border:1px solid rgba(173,232,255,.20);
+      background:linear-gradient(180deg, rgba(10,42,96,.38), rgba(5,20,52,.22));
       box-shadow:
-        inset 0 0 0 1px rgba(175,237,255,.05),
-        inset 0 0 18px rgba(125,220,255,.08),
-        0 0 20px rgba(82,186,255,.14),
-        0 16px 30px rgba(0,0,0,.20);
-      backdrop-filter:blur(12px);
-      -webkit-backdrop-filter:blur(12px);
+        inset 0 0 0 1px rgba(190,240,255,.04),
+        inset 0 0 16px rgba(120,210,255,.05),
+        0 0 18px rgba(90,185,255,.10),
+        0 14px 28px rgba(0,0,0,.18);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
       transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
     }
 
@@ -688,10 +589,10 @@
       background:
         linear-gradient(90deg,
           transparent 0%,
-          rgba(116,214,255,.12) 10%,
+          rgba(190,240,255,.09) 10%,
           transparent 18%,
           transparent 82%,
-          rgba(116,214,255,.12) 90%,
+          rgba(190,240,255,.09) 90%,
           transparent 100%);
       pointer-events:none;
     }
@@ -700,9 +601,9 @@
       content:"";
       position:absolute;
       inset:1px;
-      border:1px solid rgba(170,234,255,.16);
+      border:1px solid rgba(198,243,255,.10);
       pointer-events:none;
-      opacity:.55;
+      opacity:.45;
     }
 
     .menu-node.left .node-shell::after{
@@ -714,12 +615,12 @@
     }
 
     .menu-node:hover .node-shell{
-      border-color:rgba(176,235,255,.34);
+      border-color:rgba(210,246,255,.28);
       box-shadow:
-        inset 0 0 0 1px rgba(193,241,255,.08),
-        inset 0 0 22px rgba(126,220,255,.10),
-        0 0 28px rgba(82,186,255,.18),
-        0 20px 36px rgba(0,0,0,.24);
+        inset 0 0 0 1px rgba(210,246,255,.05),
+        inset 0 0 18px rgba(130,220,255,.06),
+        0 0 24px rgba(95,190,255,.14),
+        0 16px 30px rgba(0,0,0,.22);
     }
 
     .node-text{
@@ -734,14 +635,13 @@
     .node-title{
       font-size:14px;
       font-weight:800;
-      letter-spacing:.85px;
+      letter-spacing:.8px;
       text-transform:uppercase;
-      color:#f2fbff;
+      color:#f6fdff;
       text-shadow:
-        0 0 10px rgba(145,226,255,.78),
-        0 0 26px rgba(145,226,255,.18);
+        0 0 8px rgba(210,246,255,.42),
+        0 0 22px rgba(170,235,255,.10);
       white-space:nowrap;
-      transition:text-shadow .22s ease;
     }
 
     .node-sub{
@@ -749,14 +649,8 @@
       font-weight:600;
       letter-spacing:1.8px;
       text-transform:uppercase;
-      color:rgba(213,242,255,.80);
+      color:rgba(220,246,255,.72);
       white-space:nowrap;
-    }
-
-    .menu-node:hover .node-title{
-      text-shadow:
-        0 0 12px rgba(184,240,255,.90),
-        0 0 30px rgba(145,226,255,.24);
     }
 
     /* START ORDER */
@@ -764,18 +658,11 @@
       width:22px;
       height:22px;
       flex:0 0 22px;
-      background:radial-gradient(circle, #fff 0%, #ffe9ec 18%, #ff7d89 50%, #d91628 100%);
+      background:radial-gradient(circle, #fff 0%, #ffe4e8 18%, #ff7783 50%, #d91628 100%);
       box-shadow:
-        0 0 0 5px rgba(255,93,105,.10),
-        0 0 22px rgba(255,80,94,.86),
-        0 0 44px rgba(255,80,94,.34);
-    }
-
-    .menu-node.bottom:hover .node-dot{
-      box-shadow:
-        0 0 0 6px rgba(255,93,105,.12),
-        0 0 26px rgba(255,80,94,.92),
-        0 0 52px rgba(255,80,94,.42);
+        0 0 0 5px rgba(255,93,105,.08),
+        0 0 22px rgba(255,80,94,.76),
+        0 0 44px rgba(255,80,94,.26);
     }
 
     .menu-node.bottom .node-shell{
@@ -784,12 +671,12 @@
       padding:14px 26px;
       justify-content:center;
       background:linear-gradient(180deg, rgba(128,14,28,.34), rgba(73,4,15,.18));
-      border:1px solid rgba(255,118,128,.34);
+      border:1px solid rgba(255,118,128,.30);
       clip-path:polygon(16px 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 16px 100%, 0 50%);
       box-shadow:
-        inset 0 0 0 1px rgba(255,176,182,.06),
-        inset 0 0 16px rgba(255,136,145,.08),
-        0 0 26px rgba(255,76,92,.22),
+        inset 0 0 0 1px rgba(255,176,182,.05),
+        inset 0 0 14px rgba(255,136,145,.08),
+        0 0 24px rgba(255,76,92,.20),
         0 18px 36px rgba(0,0,0,.22);
       animation:startBreath 2.8s ease-in-out infinite;
     }
@@ -800,49 +687,40 @@
     }
 
     .menu-node.bottom .node-shell::before{
-      background:linear-gradient(90deg, transparent 0%, rgba(255,124,134,.16) 12%, transparent 22%, transparent 78%, rgba(255,124,134,.16) 88%, transparent 100%);
+      background:linear-gradient(90deg, transparent 0%, rgba(255,124,134,.14) 12%, transparent 22%, transparent 78%, rgba(255,124,134,.14) 88%, transparent 100%);
     }
 
     .menu-node.bottom .node-shell::after{
-      border-color:rgba(255,130,138,.24);
+      border-color:rgba(255,130,138,.18);
       clip-path:polygon(16px 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 16px 100%, 0 50%);
     }
 
     .menu-node.bottom .node-title{
       font-size:21px;
-      color:#fff6f6;
+      color:#fff7f7;
       text-shadow:
-        0 0 12px rgba(255,156,165,.72),
-        0 0 28px rgba(255,96,107,.26);
+        0 0 12px rgba(255,156,165,.60),
+        0 0 28px rgba(255,96,107,.18);
     }
 
     .menu-node.bottom .node-sub{
       font-size:8px;
       letter-spacing:2px;
-      color:rgba(255,222,226,.90);
+      color:rgba(255,226,230,.86);
     }
 
-    .menu-node.bottom:hover .node-shell{
-      border-color:rgba(255,146,154,.40);
-      box-shadow:
-        inset 0 0 0 1px rgba(255,183,188,.08),
-        inset 0 0 20px rgba(255,132,142,.10),
-        0 0 34px rgba(255,76,92,.28),
-        0 22px 40px rgba(0,0,0,.26);
-    }
+    /* MENU LOWERED TO MIDDLE OF GLOBE */
+    .n1{ --x:31%; --y:39%; }
+    .n2{ --x:27%; --y:47%; }
+    .n3{ --x:25.5%; --y:55%; }
+    .n4{ --x:31%; --y:63%; }
 
-    /* DESKTOP MENU POSITIONS - TRUE BRACKET ARC */
-    .n1{ --x:31%; --y:32.5%; }
-    .n2{ --x:27%; --y:41.5%; }
-    .n3{ --x:25.5%; --y:50.5%; }
-    .n4{ --x:30.5%; --y:59.5%; }
+    .n5{ --x:69%; --y:39%; }
+    .n6{ --x:73%; --y:47%; }
+    .n7{ --x:74.5%; --y:55%; }
+    .n8{ --x:69%; --y:63%; }
 
-    .n5{ --x:69%; --y:32.5%; }
-    .n6{ --x:73%; --y:41.5%; }
-    .n7{ --x:74.5%; --y:50.5%; }
-    .n8{ --x:69.5%; --y:59.5%; }
-
-    .n9{ --x:50%; --y:79.5%; }
+    .n9{ --x:50%; --y:81%; }
 
     .node-note{
       display:inline-flex;
@@ -1208,7 +1086,6 @@
       line-height:1.7;
     }
 
-    /* RESPONSIVE */
     @media (max-width:1120px){
       .tech-hero{
         width:min(96vw, 1020px);
@@ -1226,7 +1103,7 @@
         height:min(27vw, 188px);
       }
 
-      .hero-halo{ width:170px; height:170px; }
+      .hero-halo{ width:160px; height:160px; }
 
       .node-shell{ min-width:228px; min-height:52px; padding:10px 16px; }
       .menu-node.bottom .node-shell{ min-width:290px; min-height:66px; }
@@ -1235,17 +1112,17 @@
       .node-sub{ font-size:7px; letter-spacing:1.5px; }
       .menu-node.bottom .node-title{ font-size:18px; }
 
-      .n1{ --x:31%; --y:33%; }
-      .n2{ --x:27.5%; --y:42%; }
-      .n3{ --x:26%; --y:50.8%; }
-      .n4{ --x:31%; --y:59.2%; }
+      .n1{ --x:31%; --y:40%; }
+      .n2{ --x:27.5%; --y:48%; }
+      .n3{ --x:26%; --y:56%; }
+      .n4{ --x:31%; --y:64%; }
 
-      .n5{ --x:69%; --y:33%; }
-      .n6{ --x:72.5%; --y:42%; }
-      .n7{ --x:74%; --y:50.8%; }
-      .n8{ --x:69%; --y:59.2%; }
+      .n5{ --x:69%; --y:40%; }
+      .n6{ --x:72.5%; --y:48%; }
+      .n7{ --x:74%; --y:56%; }
+      .n8{ --x:69%; --y:64%; }
 
-      .n9{ --x:50%; --y:79%; }
+      .n9{ --x:50%; --y:81%; }
 
       .popup-grid{ grid-template-columns:1fr; }
       .footer-main{ grid-template-columns:1fr; }
@@ -1279,8 +1156,8 @@
 
       .tech-hero{
         width:min(96vw, 430px);
-        height:760px;
-        min-height:760px;
+        height:770px;
+        min-height:770px;
         border-radius:28px;
       }
 
@@ -1292,19 +1169,18 @@
       .globe-wrap{
         width:min(90vw, 372px);
         height:min(90vw, 372px);
-        top:46%;
+        top:42%;
       }
 
       .hero-halo{
-        width:108px;
-        height:108px;
-        top:46%;
+        width:100px;
+        height:100px;
+        top:42%;
       }
 
       .logo-core{
         width:min(42vw, 126px);
         height:min(42vw, 126px);
-        top:auto;
       }
 
       .line-layer{ display:none; }
@@ -1354,18 +1230,17 @@
         letter-spacing:1px;
       }
 
-      /* MOBILE COMPACT BRACKETS */
-      .n1{ --x:31.5%; --y:31.5%; }
-      .n2{ --x:26.5%; --y:39.8%; }
-      .n3{ --x:24.2%; --y:48.4%; }
-      .n4{ --x:31%; --y:57%; }
+      .n1{ --x:31.5%; --y:37%; }
+      .n2{ --x:26.5%; --y:44.5%; }
+      .n3{ --x:24.2%; --y:52.2%; }
+      .n4{ --x:31%; --y:60%; }
 
-      .n5{ --x:68.5%; --y:31.5%; }
-      .n6{ --x:73.5%; --y:39.8%; }
-      .n7{ --x:75.8%; --y:48.4%; }
-      .n8{ --x:69%; --y:57%; }
+      .n5{ --x:68.5%; --y:37%; }
+      .n6{ --x:73.5%; --y:44.5%; }
+      .n7{ --x:75.8%; --y:52.2%; }
+      .n8{ --x:69%; --y:60%; }
 
-      .n9{ --x:50%; --y:76.4%; }
+      .n9{ --x:50%; --y:79%; }
 
       .node-note{
         font-size:12px;
@@ -1473,306 +1348,196 @@
           <div class="tech-hero open" id="techHero">
             <div class="hero-stars"></div>
             <div class="hero-stars-2"></div>
-            <div class="hero-vignette"></div>
 
             <div class="globe-wrap" aria-hidden="true">
-              <div class="globe-shell">
-                <div class="globe-track">
-                  <div class="globe-panel">
-                    <svg viewBox="0 0 800 800" preserveAspectRatio="none" aria-hidden="true">
-                      <defs>
-                        <linearGradient id="oceanGradA" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stop-color="rgba(52,138,215,0.22)"/>
-                          <stop offset="55%" stop-color="rgba(18,72,154,0.08)"/>
-                          <stop offset="100%" stop-color="rgba(5,24,58,0)"/>
-                        </linearGradient>
-                        <filter id="continentGlowA" x="-50%" y="-50%" width="200%" height="200%">
-                          <feGaussianBlur stdDeviation="4" result="blur"/>
-                          <feMerge>
-                            <feMergeNode in="blur"/>
-                            <feMergeNode in="SourceGraphic"/>
-                          </feMerge>
-                        </filter>
-                      </defs>
+              <svg class="globe-outline-svg" viewBox="0 0 800 800" preserveAspectRatio="xMidYMid meet">
+                <!-- outer -->
+                <circle class="globe-outer" cx="400" cy="400" r="250"/>
 
-                      <rect width="800" height="800" fill="url(#oceanGradA)"/>
+                <!-- latitudes -->
+                <ellipse class="globe-grid-line soft" cx="400" cy="400" rx="250" ry="52"/>
+                <ellipse class="globe-grid-line" cx="400" cy="400" rx="250" ry="100"/>
+                <ellipse class="globe-grid-line" cx="400" cy="400" rx="250" ry="150"/>
+                <ellipse class="globe-grid-line soft" cx="400" cy="400" rx="250" ry="205"/>
 
-                      <!-- NORTH AMERICA -->
-                      <path d="M126 218
-                               C144 186, 194 162, 232 168
-                               C262 172, 282 184, 292 200
-                               C304 219, 295 241, 283 254
-                               C270 269, 268 282, 272 296
-                               C276 311, 268 324, 252 336
-                               C236 348, 220 364, 198 370
-                               C178 376, 158 368, 145 350
-                               C131 330, 124 308, 110 295
-                               C96 282, 92 266, 96 250
-                               C100 236, 111 232, 126 218Z"
-                            fill="rgba(150,228,255,.40)" filter="url(#continentGlowA)"/>
-                      <!-- SOUTH AMERICA -->
-                      <path d="M250 404
-                               C270 400, 286 412, 293 430
-                               C300 448, 294 465, 286 480
-                               C278 495, 275 512, 278 530
-                               C281 548, 274 566, 258 584
-                               C244 598, 230 598, 220 584
-                               C210 570, 211 549, 216 533
-                               C222 514, 226 497, 224 480
-                               C222 460, 229 440, 250 404Z"
-                            fill="rgba(143,224,255,.38)" filter="url(#continentGlowA)"/>
-                      <!-- EUROPE / AFRICA -->
-                      <path d="M398 204
-                               C418 186, 450 180, 478 186
-                               C498 191, 514 204, 518 220
-                               C522 238, 514 252, 502 262
-                               C492 270, 487 281, 488 294
-                               C489 310, 500 324, 510 340
-                               C522 360, 521 382, 512 402
-                               C505 418, 491 430, 474 438
-                               C456 446, 440 442, 426 428
-                               C412 414, 404 396, 400 376
-                               C396 356, 390 337, 380 320
-                               C368 299, 364 280, 370 260
-                               C376 240, 384 220, 398 204Z"
-                            fill="rgba(155,232,255,.42)" filter="url(#continentGlowA)"/>
-                      <!-- AFRICA lower -->
-                      <path d="M438 414
-                               C456 412, 470 422, 478 438
-                               C488 458, 490 486, 482 510
-                               C474 535, 456 556, 438 570
-                               C424 582, 409 577, 398 560
-                               C388 544, 385 523, 389 503
-                               C394 480, 404 462, 414 445
-                               C420 433, 427 418, 438 414Z"
-                            fill="rgba(136,223,255,.36)" filter="url(#continentGlowA)"/>
-                      <!-- ASIA -->
-                      <path d="M486 204
-                               C522 182, 578 182, 622 198
-                               C664 214, 692 240, 700 272
-                               C706 296, 694 316, 669 326
-                               C647 335, 626 338, 610 350
-                               C592 364, 577 371, 556 372
-                               C534 372, 514 364, 500 346
-                               C486 328, 478 310, 474 290
-                               C470 268, 468 240, 486 204Z"
-                            fill="rgba(151,229,255,.38)" filter="url(#continentGlowA)"/>
-                      <!-- INDIA / SEA -->
-                      <path d="M578 366
-                               C590 366, 600 374, 604 384
-                               C608 395, 602 408, 592 416
-                               C584 422, 576 419, 570 410
-                               C563 400, 565 388, 570 378
-                               C572 372, 574 368, 578 366Z"
-                            fill="rgba(160,236,255,.42)"/>
-                      <!-- AUSTRALIA -->
-                      <path d="M614 520
-                               C634 506, 664 506, 686 516
-                               C708 526, 716 544, 712 560
-                               C708 574, 690 585, 668 588
-                               C647 590, 625 584, 612 571
-                               C599 558, 596 538, 614 520Z"
-                            fill="rgba(148,228,255,.40)" filter="url(#continentGlowA)"/>
+                <!-- longitudes -->
+                <ellipse class="globe-grid-line soft" cx="400" cy="400" rx="62" ry="250"/>
+                <ellipse class="globe-grid-line" cx="400" cy="400" rx="120" ry="250"/>
+                <ellipse class="globe-grid-line" cx="400" cy="400" rx="178" ry="250"/>
+                <ellipse class="globe-grid-line soft" cx="400" cy="400" rx="225" ry="250"/>
 
-                      <!-- city glows -->
-                      <circle cx="198" cy="248" r="3" fill="rgba(223,249,255,.90)"/>
-                      <circle cx="242" cy="272" r="3" fill="rgba(223,249,255,.80)"/>
-                      <circle cx="452" cy="234" r="3" fill="rgba(223,249,255,.90)"/>
-                      <circle cx="526" cy="248" r="3" fill="rgba(223,249,255,.75)"/>
-                      <circle cx="612" cy="290" r="3" fill="rgba(223,249,255,.85)"/>
-                      <circle cx="448" cy="474" r="3" fill="rgba(223,249,255,.74)"/>
-                      <circle cx="650" cy="548" r="3" fill="rgba(223,249,255,.76)"/>
-                    </svg>
-                  </div>
+                <!-- extra rings -->
+                <circle class="globe-ring" cx="400" cy="400" r="284"/>
+                <circle class="globe-ring" cx="400" cy="400" r="318"/>
 
-                  <div class="globe-panel">
-                    <svg viewBox="0 0 800 800" preserveAspectRatio="none" aria-hidden="true">
-                      <defs>
-                        <linearGradient id="oceanGradB" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stop-color="rgba(52,138,215,0.22)"/>
-                          <stop offset="55%" stop-color="rgba(18,72,154,0.08)"/>
-                          <stop offset="100%" stop-color="rgba(5,24,58,0)"/>
-                        </linearGradient>
-                        <filter id="continentGlowB" x="-50%" y="-50%" width="200%" height="200%">
-                          <feGaussianBlur stdDeviation="4" result="blur"/>
-                          <feMerge>
-                            <feMergeNode in="blur"/>
-                            <feMergeNode in="SourceGraphic"/>
-                          </feMerge>
-                        </filter>
-                      </defs>
+                <!-- continents outline -->
+                <path class="globe-continent"
+                  d="M266 220
+                     C240 220,221 232,205 250
+                     C186 272,184 301,197 318
+                     C210 336,230 344,245 360
+                     C256 371,261 389,258 406
+                     C255 421,261 436,275 446
+                     C287 455,302 455,316 445
+                     C330 435,337 421,336 403
+                     C335 384,342 372,356 360
+                     C369 348,375 332,370 319
+                     C364 305,349 296,344 283
+                     C338 268,346 252,343 240
+                     C338 226,319 216,300 215
+                     C287 214,276 216,266 220Z"/>
 
-                      <rect width="800" height="800" fill="url(#oceanGradB)"/>
+                <path class="globe-continent"
+                  d="M314 458
+                     C301 462,290 472,286 486
+                     C282 499,286 513,293 526
+                     C301 541,304 560,299 579
+                     C295 595,297 611,307 625
+                     C317 639,330 640,340 626
+                     C350 613,350 595,347 579
+                     C344 561,349 544,354 528
+                     C360 511,358 492,349 476
+                     C341 463,329 455,314 458Z"/>
 
-                      <path d="M126 218
-                               C144 186, 194 162, 232 168
-                               C262 172, 282 184, 292 200
-                               C304 219, 295 241, 283 254
-                               C270 269, 268 282, 272 296
-                               C276 311, 268 324, 252 336
-                               C236 348, 220 364, 198 370
-                               C178 376, 158 368, 145 350
-                               C131 330, 124 308, 110 295
-                               C96 282, 92 266, 96 250
-                               C100 236, 111 232, 126 218Z"
-                            fill="rgba(150,228,255,.40)" filter="url(#continentGlowB)"/>
-                      <path d="M250 404
-                               C270 400, 286 412, 293 430
-                               C300 448, 294 465, 286 480
-                               C278 495, 275 512, 278 530
-                               C281 548, 274 566, 258 584
-                               C244 598, 230 598, 220 584
-                               C210 570, 211 549, 216 533
-                               C222 514, 226 497, 224 480
-                               C222 460, 229 440, 250 404Z"
-                            fill="rgba(143,224,255,.38)" filter="url(#continentGlowB)"/>
-                      <path d="M398 204
-                               C418 186, 450 180, 478 186
-                               C498 191, 514 204, 518 220
-                               C522 238, 514 252, 502 262
-                               C492 270, 487 281, 488 294
-                               C489 310, 500 324, 510 340
-                               C522 360, 521 382, 512 402
-                               C505 418, 491 430, 474 438
-                               C456 446, 440 442, 426 428
-                               C412 414, 404 396, 400 376
-                               C396 356, 390 337, 380 320
-                               C368 299, 364 280, 370 260
-                               C376 240, 384 220, 398 204Z"
-                            fill="rgba(155,232,255,.42)" filter="url(#continentGlowB)"/>
-                      <path d="M438 414
-                               C456 412, 470 422, 478 438
-                               C488 458, 490 486, 482 510
-                               C474 535, 456 556, 438 570
-                               C424 582, 409 577, 398 560
-                               C388 544, 385 523, 389 503
-                               C394 480, 404 462, 414 445
-                               C420 433, 427 418, 438 414Z"
-                            fill="rgba(136,223,255,.36)" filter="url(#continentGlowB)"/>
-                      <path d="M486 204
-                               C522 182, 578 182, 622 198
-                               C664 214, 692 240, 700 272
-                               C706 296, 694 316, 669 326
-                               C647 335, 626 338, 610 350
-                               C592 364, 577 371, 556 372
-                               C534 372, 514 364, 500 346
-                               C486 328, 478 310, 474 290
-                               C470 268, 468 240, 486 204Z"
-                            fill="rgba(151,229,255,.38)" filter="url(#continentGlowB)"/>
-                      <path d="M578 366
-                               C590 366, 600 374, 604 384
-                               C608 395, 602 408, 592 416
-                               C584 422, 576 419, 570 410
-                               C563 400, 565 388, 570 378
-                               C572 372, 574 368, 578 366Z"
-                            fill="rgba(160,236,255,.42)"/>
-                      <path d="M614 520
-                               C634 506, 664 506, 686 516
-                               C708 526, 716 544, 712 560
-                               C708 574, 690 585, 668 588
-                               C647 590, 625 584, 612 571
-                               C599 558, 596 538, 614 520Z"
-                            fill="rgba(148,228,255,.40)" filter="url(#continentGlowB)"/>
+                <path class="globe-continent"
+                  d="M416 228
+                     C396 234,382 249,381 267
+                     C380 286,390 299,404 311
+                     C418 323,433 329,438 346
+                     C442 360,436 373,427 384
+                     C419 395,418 409,428 421
+                     C438 434,450 439,465 438
+                     C481 437,494 427,500 412
+                     C507 396,507 379,501 362
+                     C494 342,489 327,496 311
+                     C504 292,518 278,524 260
+                     C529 245,522 230,506 221
+                     C489 212,470 211,451 215
+                     C438 217,426 221,416 228Z"/>
 
-                      <circle cx="198" cy="248" r="3" fill="rgba(223,249,255,.90)"/>
-                      <circle cx="242" cy="272" r="3" fill="rgba(223,249,255,.80)"/>
-                      <circle cx="452" cy="234" r="3" fill="rgba(223,249,255,.90)"/>
-                      <circle cx="526" cy="248" r="3" fill="rgba(223,249,255,.75)"/>
-                      <circle cx="612" cy="290" r="3" fill="rgba(223,249,255,.85)"/>
-                      <circle cx="448" cy="474" r="3" fill="rgba(223,249,255,.74)"/>
-                      <circle cx="650" cy="548" r="3" fill="rgba(223,249,255,.76)"/>
-                    </svg>
-                  </div>
-                </div>
+                <path class="globe-continent"
+                  d="M463 445
+                     C447 446,435 454,428 467
+                     C420 482,418 503,422 522
+                     C426 542,435 560,446 576
+                     C454 588,468 593,479 586
+                     C491 579,498 564,502 549
+                     C506 531,513 516,514 497
+                     C515 480,510 463,498 452
+                     C489 445,476 443,463 445Z"/>
 
-                <div class="globe-grid"></div>
-                <div class="globe-graticule"></div>
-                <div class="globe-shadow"></div>
-                <div class="globe-night"></div>
-                <div class="globe-sweep"></div>
-                <div class="globe-atmosphere"></div>
-              </div>
+                <path class="globe-continent"
+                  d="M503 238
+                     C527 226,557 224,586 229
+                     C614 234,639 247,651 264
+                     C663 280,665 296,656 308
+                     C648 319,633 324,619 327
+                     C603 331,590 338,582 349
+                     C573 362,562 370,547 371
+                     C530 372,516 367,506 354
+                     C495 340,493 324,492 307
+                     C490 289,489 271,494 255
+                     C497 247,499 242,503 238Z"/>
+
+                <path class="globe-continent"
+                  d="M578 379
+                     C587 379,594 384,598 391
+                     C601 400,597 409,589 415
+                     C582 420,575 418,570 411
+                     C565 404,564 396,567 388
+                     C570 383,573 380,578 379Z"/>
+
+                <path class="globe-continent"
+                  d="M590 539
+                     C606 529,625 527,644 531
+                     C662 535,676 545,680 557
+                     C684 570,678 581,665 586
+                     C651 591,635 591,620 587
+                     C606 583,593 574,589 563
+                     C585 554,585 545,590 539Z"/>
+
+                <!-- sweep -->
+                <circle class="globe-sweep" cx="400" cy="400" r="250"/>
+              </svg>
             </div>
 
             <svg class="line-layer" viewBox="0 0 1220 860" preserveAspectRatio="none" aria-hidden="true">
               <!-- left -->
-              <path class="line-glow" d="M610 430 Q540 370 385 280" />
-              <path class="line-main" d="M610 430 Q540 370 385 280" />
-              <path class="line-pulse" d="M610 430 Q540 370 385 280" />
+              <path class="line-glow" d="M610 410 Q542 390 390 336" />
+              <path class="line-main" d="M610 410 Q542 390 390 336" />
+              <path class="line-pulse" d="M610 410 Q542 390 390 336" />
 
-              <path class="line-glow" d="M610 430 Q535 400 338 356" />
-              <path class="line-main" d="M610 430 Q535 400 338 356" />
-              <path class="line-pulse" d="M610 430 Q535 400 338 356" />
+              <path class="line-glow" d="M610 420 Q534 420 340 404" />
+              <path class="line-main" d="M610 420 Q534 420 340 404" />
+              <path class="line-pulse" d="M610 420 Q534 420 340 404" />
 
-              <path class="line-glow" d="M610 430 Q530 430 315 434" />
-              <path class="line-main" d="M610 430 Q530 430 315 434" />
-              <path class="line-pulse" d="M610 430 Q530 430 315 434" />
+              <path class="line-glow" d="M610 432 Q530 450 318 470" />
+              <path class="line-main" d="M610 432 Q530 450 318 470" />
+              <path class="line-pulse" d="M610 432 Q530 450 318 470" />
 
-              <path class="line-glow" d="M610 430 Q535 462 382 510" />
-              <path class="line-main" d="M610 430 Q535 462 382 510" />
-              <path class="line-pulse" d="M610 430 Q535 462 382 510" />
+              <path class="line-glow" d="M610 446 Q536 486 388 540" />
+              <path class="line-main" d="M610 446 Q536 486 388 540" />
+              <path class="line-pulse" d="M610 446 Q536 486 388 540" />
 
               <!-- right -->
-              <path class="line-glow" d="M610 430 Q680 370 835 280" />
-              <path class="line-main" d="M610 430 Q680 370 835 280" />
-              <path class="line-pulse" d="M610 430 Q680 370 835 280" />
+              <path class="line-glow" d="M610 410 Q678 390 830 336" />
+              <path class="line-main" d="M610 410 Q678 390 830 336" />
+              <path class="line-pulse" d="M610 410 Q678 390 830 336" />
 
-              <path class="line-glow" d="M610 430 Q685 400 882 356" />
-              <path class="line-main" d="M610 430 Q685 400 882 356" />
-              <path class="line-pulse" d="M610 430 Q685 400 882 356" />
+              <path class="line-glow" d="M610 420 Q686 420 880 404" />
+              <path class="line-main" d="M610 420 Q686 420 880 404" />
+              <path class="line-pulse" d="M610 420 Q686 420 880 404" />
 
-              <path class="line-glow" d="M610 430 Q690 430 905 434" />
-              <path class="line-main" d="M610 430 Q690 430 905 434" />
-              <path class="line-pulse" d="M610 430 Q690 430 905 434" />
+              <path class="line-glow" d="M610 432 Q690 450 902 470" />
+              <path class="line-main" d="M610 432 Q690 450 902 470" />
+              <path class="line-pulse" d="M610 432 Q690 450 902 470" />
 
-              <path class="line-glow" d="M610 430 Q685 462 838 510" />
-              <path class="line-main" d="M610 430 Q685 462 838 510" />
-              <path class="line-pulse" d="M610 430 Q685 462 838 510" />
+              <path class="line-glow" d="M610 446 Q684 486 832 540" />
+              <path class="line-main" d="M610 446 Q684 486 832 540" />
+              <path class="line-pulse" d="M610 446 Q684 486 832 540" />
 
               <!-- bottom -->
-              <path class="line-glow" d="M610 430 Q610 540 610 655" />
-              <path class="line-main" d="M610 430 Q610 540 610 655" />
-              <path class="line-pulse" d="M610 430 Q610 540 610 655" />
+              <path class="line-glow" d="M610 450 Q610 555 610 665" />
+              <path class="line-main" d="M610 450 Q610 555 610 665" />
+              <path class="line-pulse" d="M610 450 Q610 555 610 665" />
             </svg>
 
-            <svg class="line-layer-mobile" viewBox="0 0 430 760" preserveAspectRatio="none" aria-hidden="true">
-              <!-- left -->
-              <path class="line-glow" d="M215 350 Q176 304 135 239" />
-              <path class="line-main" d="M215 350 Q176 304 135 239" />
-              <path class="line-pulse" d="M215 350 Q176 304 135 239" />
+            <svg class="line-layer-mobile" viewBox="0 0 430 770" preserveAspectRatio="none" aria-hidden="true">
+              <path class="line-glow" d="M215 320 Q176 310 136 265" />
+              <path class="line-main" d="M215 320 Q176 310 136 265" />
+              <path class="line-pulse" d="M215 320 Q176 310 136 265" />
 
-              <path class="line-glow" d="M215 350 Q169 325 114 302" />
-              <path class="line-main" d="M215 350 Q169 325 114 302" />
-              <path class="line-pulse" d="M215 350 Q169 325 114 302" />
+              <path class="line-glow" d="M215 328 Q169 336 114 320" />
+              <path class="line-main" d="M215 328 Q169 336 114 320" />
+              <path class="line-pulse" d="M215 328 Q169 336 114 320" />
 
-              <path class="line-glow" d="M215 350 Q165 350 104 368" />
-              <path class="line-main" d="M215 350 Q165 350 104 368" />
-              <path class="line-pulse" d="M215 350 Q165 350 104 368" />
+              <path class="line-glow" d="M215 338 Q165 356 104 378" />
+              <path class="line-main" d="M215 338 Q165 356 104 378" />
+              <path class="line-pulse" d="M215 338 Q165 356 104 378" />
 
-              <path class="line-glow" d="M215 350 Q176 388 134 434" />
-              <path class="line-main" d="M215 350 Q176 388 134 434" />
-              <path class="line-pulse" d="M215 350 Q176 388 134 434" />
+              <path class="line-glow" d="M215 352 Q176 392 134 442" />
+              <path class="line-main" d="M215 352 Q176 392 134 442" />
+              <path class="line-pulse" d="M215 352 Q176 392 134 442" />
 
-              <!-- right -->
-              <path class="line-glow" d="M215 350 Q254 304 295 239" />
-              <path class="line-main" d="M215 350 Q254 304 295 239" />
-              <path class="line-pulse" d="M215 350 Q254 304 295 239" />
+              <path class="line-glow" d="M215 320 Q254 310 294 265" />
+              <path class="line-main" d="M215 320 Q254 310 294 265" />
+              <path class="line-pulse" d="M215 320 Q254 310 294 265" />
 
-              <path class="line-glow" d="M215 350 Q261 325 316 302" />
-              <path class="line-main" d="M215 350 Q261 325 316 302" />
-              <path class="line-pulse" d="M215 350 Q261 325 316 302" />
+              <path class="line-glow" d="M215 328 Q261 336 316 320" />
+              <path class="line-main" d="M215 328 Q261 336 316 320" />
+              <path class="line-pulse" d="M215 328 Q261 336 316 320" />
 
-              <path class="line-glow" d="M215 350 Q265 350 326 368" />
-              <path class="line-main" d="M215 350 Q265 350 326 368" />
-              <path class="line-pulse" d="M215 350 Q265 350 326 368" />
+              <path class="line-glow" d="M215 338 Q265 356 326 378" />
+              <path class="line-main" d="M215 338 Q265 356 326 378" />
+              <path class="line-pulse" d="M215 338 Q265 356 326 378" />
 
-              <path class="line-glow" d="M215 350 Q254 388 296 434" />
-              <path class="line-main" d="M215 350 Q254 388 296 434" />
-              <path class="line-pulse" d="M215 350 Q254 388 296 434" />
+              <path class="line-glow" d="M215 352 Q254 392 296 442" />
+              <path class="line-main" d="M215 352 Q254 392 296 442" />
+              <path class="line-pulse" d="M215 352 Q254 392 296 442" />
 
-              <path class="line-glow" d="M215 350 Q215 470 215 582" />
-              <path class="line-main" d="M215 350 Q215 470 215 582" />
-              <path class="line-pulse" d="M215 350 Q215 470 215 582" />
+              <path class="line-glow" d="M215 358 Q215 480 215 598" />
+              <path class="line-main" d="M215 358 Q215 480 215 598" />
+              <path class="line-pulse" d="M215 358 Q215 480 215 598" />
             </svg>
 
             <div class="hero-halo"></div>
