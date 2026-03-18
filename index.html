@@ -225,89 +225,163 @@
       gap:14px;
     }
 
-    .logo-orbit-wrap{
+    .tech-hero{
       position:relative;
-      width:min(96vw, 1100px);
+      width:min(96vw, 1180px);
       height:min(88vh, 860px);
+      min-height:700px;
+      border-radius:44px;
+      overflow:hidden;
       display:flex;
       align-items:center;
       justify-content:center;
       isolation:isolate;
-      overflow:hidden;
-      border-radius:42px;
       background:
-        radial-gradient(circle at center, rgba(20,43,88,.98) 0%, rgba(12,31,67,.98) 28%, rgba(8,24,52,.98) 56%, rgba(5,18,39,.99) 100%);
+        radial-gradient(circle at 50% 50%, rgba(28,82,180,.32) 0%, rgba(16,52,118,.18) 18%, rgba(8,31,74,.95) 40%, rgba(4,18,46,.98) 72%, rgba(3,14,36,.99) 100%);
       box-shadow:
-        0 30px 80px rgba(7,47,102,.22),
-        inset 0 0 0 1px rgba(126,183,255,.10),
-        inset 0 0 80px rgba(51,122,255,.10);
-      --mx:0px;
-      --my:0px;
+        0 40px 90px rgba(7,47,102,.24),
+        inset 0 0 0 1px rgba(129,186,255,.08),
+        inset 0 0 120px rgba(66,136,255,.10);
     }
 
-    .logo-orbit-wrap::before{
+    .tech-hero::before{
       content:"";
       position:absolute;
       inset:0;
       z-index:0;
       pointer-events:none;
       background:
-        radial-gradient(circle at center, rgba(67,148,255,.16) 0%, rgba(67,148,255,.07) 18%, rgba(67,148,255,.02) 34%, transparent 54%),
-        linear-gradient(rgba(132,190,255,.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(132,190,255,.06) 1px, transparent 1px);
+        radial-gradient(circle at center, rgba(95,170,255,.18) 0%, rgba(95,170,255,.08) 18%, rgba(95,170,255,.03) 34%, transparent 56%),
+        linear-gradient(rgba(129,186,255,.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(129,186,255,.07) 1px, transparent 1px);
       background-size:100% 100%, 38px 38px, 38px 38px;
-      mask-image:radial-gradient(circle at center, rgba(0,0,0,.98) 0%, rgba(0,0,0,.88) 60%, transparent 92%);
-      -webkit-mask-image:radial-gradient(circle at center, rgba(0,0,0,.98) 0%, rgba(0,0,0,.88) 60%, transparent 92%);
+      mask-image:radial-gradient(circle at center, rgba(0,0,0,1) 0%, rgba(0,0,0,.95) 54%, transparent 88%);
+      -webkit-mask-image:radial-gradient(circle at center, rgba(0,0,0,1) 0%, rgba(0,0,0,.95) 54%, transparent 88%);
+      opacity:.9;
     }
 
-    .logo-orbit-wrap::after{
+    .tech-hero::after{
       content:"";
       position:absolute;
       inset:18px;
-      border-radius:34px;
-      border:1px solid rgba(146,196,255,.08);
+      border-radius:32px;
+      border:1px solid rgba(132,189,255,.08);
       z-index:0;
       pointer-events:none;
-      box-shadow:inset 0 0 50px rgba(88,152,255,.05);
+      box-shadow:inset 0 0 50px rgba(80,145,255,.04);
     }
 
-    .tech-ring,
-    .tech-ring-2,
-    .tech-ring-3{
+    .hero-stars{
+      position:absolute;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+      opacity:.65;
+      background-image:
+        radial-gradient(circle at 12% 20%, rgba(255,255,255,.8) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 22% 72%, rgba(255,255,255,.65) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 80% 15%, rgba(255,255,255,.7) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 88% 55%, rgba(255,255,255,.55) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 72% 82%, rgba(255,255,255,.6) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 42% 14%, rgba(255,255,255,.55) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 58% 28%, rgba(255,255,255,.45) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 16% 48%, rgba(255,255,255,.5) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 91% 29%, rgba(255,255,255,.5) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 9% 84%, rgba(255,255,255,.4) 0 1px, transparent 1.5px);
+    }
+
+    .center-glow{
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:560px;
+      height:560px;
+      transform:translate(-50%, -50%);
+      z-index:1;
+      pointer-events:none;
+      background:
+        radial-gradient(circle, rgba(148,213,255,.42) 0%, rgba(102,186,255,.18) 20%, rgba(78,153,255,.08) 36%, transparent 64%);
+      filter:blur(8px);
+      animation:centerGlow 6s ease-in-out infinite;
+    }
+
+    .center-burst{
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:800px;
+      height:800px;
+      transform:translate(-50%, -50%);
+      z-index:1;
+      pointer-events:none;
+      opacity:.65;
+    }
+
+    .center-burst::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:50%;
+      background:
+        conic-gradient(
+          from 0deg,
+          transparent 0deg 8deg,
+          rgba(133,203,255,.65) 8deg 10deg,
+          transparent 10deg 18deg,
+          rgba(133,203,255,.32) 18deg 19deg,
+          transparent 19deg 28deg,
+          rgba(133,203,255,.55) 28deg 30deg,
+          transparent 30deg 42deg,
+          rgba(133,203,255,.30) 42deg 43deg,
+          transparent 43deg 54deg,
+          rgba(133,203,255,.55) 54deg 56deg,
+          transparent 56deg 360deg
+        );
+      mask-image:radial-gradient(circle, transparent 0 23%, rgba(0,0,0,.9) 39%, transparent 70%);
+      -webkit-mask-image:radial-gradient(circle, transparent 0 23%, rgba(0,0,0,.9) 39%, transparent 70%);
+      animation:ringRotate 26s linear infinite;
+      filter:blur(.2px);
+    }
+
+    .center-rings{
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%, -50%);
+      z-index:1;
+      pointer-events:none;
+    }
+
+    .ring{
       position:absolute;
       left:50%;
       top:50%;
       border-radius:50%;
-      pointer-events:none;
       transform:translate(-50%, -50%);
     }
 
-    .tech-ring{
-      width:320px;
-      height:320px;
-      border:1px solid rgba(125,191,255,.12);
-      box-shadow:0 0 30px rgba(75,145,255,.08), inset 0 0 30px rgba(75,145,255,.05);
-      z-index:1;
-      animation:ringRotate 20s linear infinite;
+    .ring.r1{
+      width:310px;
+      height:310px;
+      border:1px solid rgba(137,201,255,.12);
+      box-shadow:0 0 22px rgba(104,176,255,.08), inset 0 0 22px rgba(104,176,255,.05);
     }
 
-    .tech-ring-2{
+    .ring.r2{
       width:470px;
       height:470px;
-      border:1px dashed rgba(125,191,255,.15);
-      z-index:1;
-      animation:ringRotateReverse 30s linear infinite;
+      border:1px dashed rgba(137,201,255,.16);
+      animation:ringRotateReverse 28s linear infinite;
     }
 
-    .tech-ring-3{
-      width:620px;
-      height:620px;
-      border:1px solid rgba(125,191,255,.06);
-      z-index:1;
-      animation:ringRotate 36s linear infinite;
+    .ring.r3{
+      width:660px;
+      height:660px;
+      border:1px solid rgba(137,201,255,.06);
+      animation:ringRotate 34s linear infinite;
     }
 
-    .tech-lines{
+    .tech-svg{
       position:absolute;
       inset:0;
       z-index:2;
@@ -316,185 +390,184 @@
 
     .logo-core{
       position:relative;
-      z-index:10;
-      width:min(32vw, 310px);
-      height:min(32vw, 310px);
+      z-index:8;
+      width:min(31vw, 290px);
+      height:min(31vw, 290px);
+      border:none;
+      padding:0;
+      background:transparent;
+      cursor:pointer;
       display:flex;
       align-items:center;
       justify-content:center;
-      border:none;
-      background:transparent;
-      padding:0;
-      cursor:pointer;
-      transform:translate(calc(var(--mx) * .08), calc(var(--my) * .08));
-      transition:transform .26s ease, filter .26s ease;
+      transition:transform .28s ease, filter .28s ease;
     }
 
     .logo-core:hover{
-      transform:translate(calc(var(--mx) * .08), calc(var(--my) * .08)) scale(1.03);
-      filter:brightness(1.05);
-    }
-
-    .logo-core::before{
-      content:"";
-      position:absolute;
-      inset:12%;
-      border-radius:50%;
-      background:radial-gradient(circle, rgba(255,255,255,.22) 0%, rgba(90,155,255,.10) 38%, rgba(61,134,255,.04) 56%, transparent 72%);
-      filter:blur(12px);
-      z-index:0;
-      animation:corePulse 4.5s ease-in-out infinite;
+      transform:scale(1.035);
+      filter:brightness(1.04);
     }
 
     .logo-core img{
-      position:relative;
-      z-index:1;
       width:100%;
       height:100%;
       object-fit:contain;
       display:block;
       filter:
-        drop-shadow(0 0 18px rgba(116,184,255,.22))
-        drop-shadow(0 22px 36px rgba(0,0,0,.26))
-        drop-shadow(0 0 38px rgba(212,175,55,.12));
+        drop-shadow(0 0 22px rgba(136,208,255,.38))
+        drop-shadow(0 20px 36px rgba(0,0,0,.26))
+        drop-shadow(0 0 44px rgba(212,175,55,.14));
     }
 
-    .tech-menu{
+    .menu-layer{
       position:absolute;
       inset:0;
-      z-index:3;
+      z-index:6;
     }
 
-    .tech-node{
+    .menu-node{
       --x:50%;
       --y:50%;
       position:absolute;
       left:var(--x);
       top:var(--y);
-      transform:translate(-50%, -50%);
-      display:flex;
-      align-items:center;
-      gap:12px;
-      color:#dff1ff;
-      text-decoration:none;
+      transform:translate(-50%, -50%) scale(.9);
+      opacity:0;
+      pointer-events:none;
       background:none;
       border:none;
       padding:0;
+      text-decoration:none;
+      display:flex;
+      align-items:center;
+      gap:14px;
       cursor:pointer;
-      opacity:0;
-      pointer-events:none;
-      transition:opacity .32s ease, transform .32s ease, filter .24s ease;
+      transition:transform .34s cubic-bezier(.2,.8,.2,1), opacity .32s ease, filter .24s ease;
+      color:#eaf7ff;
+    }
+
+    .menu-node.left{
+      flex-direction:row;
+      justify-content:flex-end;
+      text-align:right;
+    }
+
+    .menu-node.right{
+      flex-direction:row;
+      justify-content:flex-start;
       text-align:left;
     }
 
-    .tech-node.right{ flex-direction:row; }
-    .tech-node.left{ flex-direction:row-reverse; text-align:right; }
-    .tech-node.down{ flex-direction:column; text-align:center; gap:10px; }
+    .menu-node.bottom{
+      flex-direction:column;
+      text-align:center;
+      gap:12px;
+    }
 
-    .logo-orbit-wrap.open .tech-node{
+    .menu-node:hover{
+      filter:brightness(1.16);
+    }
+
+    .tech-hero.open .menu-node{
       opacity:1;
       pointer-events:auto;
-    }
-
-    .logo-orbit-wrap.open .tech-node.right{
-      transform:translate(-50%, -50%) translateX(0);
-    }
-
-    .logo-orbit-wrap.open .tech-node.left{
-      transform:translate(-50%, -50%) translateX(0);
-    }
-
-    .logo-orbit-wrap.open .tech-node.down{
-      transform:translate(-50%, -50%) translateY(0);
-    }
-
-    .tech-node:hover{
-      filter:brightness(1.12);
+      transform:translate(-50%, -50%) scale(1);
     }
 
     .node-dot{
       position:relative;
-      width:14px;
-      height:14px;
+      width:18px;
+      height:18px;
       border-radius:50%;
-      flex:0 0 14px;
-      background:radial-gradient(circle, #ffffff 0%, #8fd2ff 42%, #2f87ff 100%);
+      flex:0 0 18px;
+      background:radial-gradient(circle, #ffffff 0%, #b8e6ff 26%, #61b7ff 64%, #2d84ff 100%);
       box-shadow:
-        0 0 0 4px rgba(81,160,255,.12),
-        0 0 16px rgba(81,160,255,.55),
-        0 0 30px rgba(81,160,255,.28);
-      animation:dotPulse 2.4s ease-in-out infinite;
+        0 0 0 4px rgba(82,163,255,.10),
+        0 0 16px rgba(82,163,255,.65),
+        0 0 34px rgba(82,163,255,.35);
+      animation:dotPulse 2.1s ease-in-out infinite;
+    }
+
+    .node-dot::before{
+      content:"";
+      position:absolute;
+      inset:-6px;
+      border-radius:50%;
+      border:1px solid rgba(132,200,255,.28);
+      opacity:.85;
     }
 
     .node-dot::after{
       content:"";
       position:absolute;
-      inset:-7px;
+      inset:-12px;
       border-radius:50%;
-      border:1px solid rgba(123,191,255,.22);
-      opacity:.75;
+      border:1px solid rgba(132,200,255,.10);
     }
 
-    .node-label{
+    .node-text{
       display:flex;
       flex-direction:column;
-      gap:2px;
+      line-height:1;
     }
 
     .node-title{
-      color:#eaf6ff;
-      font-size:18px;
-      font-weight:700;
-      letter-spacing:2.2px;
-      line-height:1.06;
+      font-size:17px;
+      font-weight:800;
+      letter-spacing:1.9px;
       text-transform:uppercase;
+      color:#ebf8ff;
       text-shadow:
-        0 0 8px rgba(118,184,255,.45),
-        0 0 22px rgba(118,184,255,.20);
+        0 0 8px rgba(117,191,255,.58),
+        0 0 22px rgba(117,191,255,.22);
       white-space:nowrap;
     }
 
     .node-sub{
-      color:rgba(176,216,255,.82);
+      margin-top:6px;
       font-size:10px;
       font-weight:500;
       letter-spacing:3px;
       text-transform:uppercase;
+      color:rgba(185,223,255,.88);
+      text-shadow:0 0 10px rgba(117,191,255,.18);
       white-space:nowrap;
     }
 
-    .tech-node.order .node-dot{
-      width:18px;
-      height:18px;
-      flex:0 0 18px;
-      background:radial-gradient(circle, #ffffff 0%, #ffd4d6 32%, #ff585e 68%, #d9121b 100%);
-      box-shadow:
-        0 0 0 5px rgba(227,27,35,.14),
-        0 0 18px rgba(227,27,35,.60),
-        0 0 34px rgba(227,27,35,.30);
-    }
-
-    .tech-node.order .node-title{
-      color:#fff1f2;
+    .menu-node.bottom .node-title{
+      color:#ffeef0;
       text-shadow:
-        0 0 8px rgba(255,103,114,.45),
-        0 0 22px rgba(255,103,114,.25);
+        0 0 8px rgba(255,92,104,.55),
+        0 0 24px rgba(255,92,104,.25);
     }
 
-    .tech-node.order .node-sub{
-      color:rgba(255,196,201,.86);
+    .menu-node.bottom .node-sub{
+      color:rgba(255,201,206,.92);
+      text-shadow:0 0 10px rgba(255,92,104,.18);
     }
 
-    .node-1{ --x:22%; --y:22%; }
-    .node-2{ --x:77%; --y:21%; }
-    .node-3{ --x:85%; --y:38%; }
-    .node-4{ --x:82%; --y:58%; }
-    .node-5{ --x:75%; --y:75%; }
-    .node-6{ --x:50%; --y:86%; }
-    .node-7{ --x:26%; --y:75%; }
-    .node-8{ --x:17%; --y:58%; }
-    .node-9{ --x:15%; --y:38%; }
-    .node-10{ --x:23%; --y:21%; }
+    .menu-node.bottom .node-dot{
+      width:20px;
+      height:20px;
+      flex:0 0 20px;
+      background:radial-gradient(circle, #ffffff 0%, #ffd7db 26%, #ff6b73 62%, #d81a22 100%);
+      box-shadow:
+        0 0 0 5px rgba(227,27,35,.12),
+        0 0 18px rgba(227,27,35,.65),
+        0 0 36px rgba(227,27,35,.32);
+    }
+
+    /* positions desktop */
+    .n1{ --x:26%; --y:18%; }
+    .n2{ --x:74%; --y:18%; }
+    .n3{ --x:83%; --y:36%; }
+    .n4{ --x:79%; --y:56%; }
+    .n5{ --x:73%; --y:74%; }
+    .n6{ --x:50%; --y:83%; }
+    .n7{ --x:27%; --y:74%; }
+    .n8{ --x:21%; --y:56%; }
+    .n9{ --x:17%; --y:36%; }
+    .n10{ --x:24%; --y:18%; }
 
     .node-note{
       display:inline-flex;
@@ -939,7 +1012,7 @@
       line-height:1.7;
     }
 
-    /* ANIMATION */
+    /* animation */
     @keyframes ringRotate{
       from{ transform:translate(-50%, -50%) rotate(0deg); }
       to{ transform:translate(-50%, -50%) rotate(360deg); }
@@ -950,38 +1023,48 @@
       to{ transform:translate(-50%, -50%) rotate(0deg); }
     }
 
-    @keyframes corePulse{
-      0%,100%{ transform:scale(1); opacity:1; }
-      50%{ transform:scale(1.06); opacity:.82; }
-    }
-
     @keyframes dotPulse{
       0%,100%{ transform:scale(1); opacity:1; }
-      50%{ transform:scale(1.18); opacity:.88; }
+      50%{ transform:scale(1.16); opacity:.9; }
     }
 
-    /* TABLET */
+    @keyframes centerGlow{
+      0%,100%{ transform:translate(-50%, -50%) scale(1); opacity:1; }
+      50%{ transform:translate(-50%, -50%) scale(1.05); opacity:.85; }
+    }
+
+    /* tablet */
     @media (max-width:1100px){
       .topbar-inner{ min-height:72px; }
       .brand-name{ font-size:18px; }
 
-      .logo-orbit-wrap{
-        width:min(96vw, 880px);
-        height:min(86vh, 720px);
+      .tech-hero{
+        width:min(96vw, 980px);
+        height:min(86vh, 740px);
+        min-height:660px;
       }
 
       .logo-core{
-        width:min(32vw, 250px);
-        height:min(32vw, 250px);
+        width:min(32vw, 240px);
+        height:min(32vw, 240px);
       }
 
-      .tech-ring{ width:270px; height:270px; }
-      .tech-ring-2{ width:390px; height:390px; }
-      .tech-ring-3{ width:520px; height:520px; }
+      .center-glow{
+        width:460px;
+        height:460px;
+      }
 
-      .node-title{ font-size:15px; letter-spacing:1.8px; }
-      .node-sub{ font-size:9px; letter-spacing:2.4px; }
-      .node-note{ font-size:16px; min-height:46px; padding:10px 22px; }
+      .center-burst{
+        width:650px;
+        height:650px;
+      }
+
+      .ring.r1{ width:270px; height:270px; }
+      .ring.r2{ width:410px; height:410px; }
+      .ring.r3{ width:560px; height:560px; }
+
+      .node-title{ font-size:14px; letter-spacing:1.4px; }
+      .node-sub{ font-size:9px; letter-spacing:2.2px; }
 
       .popup-grid{
         grid-template-columns:1fr;
@@ -1001,7 +1084,7 @@
       }
     }
 
-    /* SMARTPHONE */
+    /* mobile */
     @media (max-width:760px){
       body::after{
         background-size:30px 30px;
@@ -1054,61 +1137,79 @@
       }
 
       .hero-stage{
-        min-height:calc(100vh - 180px);
-        align-items:flex-start;
+        min-height:auto;
         padding-top:8px;
       }
 
-      .logo-orbit-wrap{
+      .tech-hero{
         width:min(96vw, 430px);
-        height:600px;
-        border-radius:26px;
+        height:700px;
+        min-height:700px;
+        border-radius:28px;
+      }
+
+      .tech-hero::after{
+        inset:10px;
+        border-radius:22px;
       }
 
       .logo-core{
-        width:min(44vw, 150px);
-        height:min(44vw, 150px);
+        width:min(42vw, 145px);
+        height:min(42vw, 145px);
       }
 
-      .tech-ring{ width:170px; height:170px; }
-      .tech-ring-2{ width:240px; height:240px; }
-      .tech-ring-3{ width:320px; height:320px; }
+      .center-glow{
+        width:260px;
+        height:260px;
+      }
 
-      .tech-node{ gap:8px; }
-      .tech-node.down{ gap:8px; }
+      .center-burst{
+        width:420px;
+        height:420px;
+        opacity:.52;
+      }
+
+      .ring.r1{ width:170px; height:170px; }
+      .ring.r2{ width:250px; height:250px; }
+      .ring.r3{ width:340px; height:340px; }
+
+      .menu-node{
+        gap:8px;
+      }
 
       .node-dot{
-        width:10px;
-        height:10px;
-        flex:0 0 10px;
+        width:12px;
+        height:12px;
+        flex:0 0 12px;
       }
 
-      .tech-node.order .node-dot{
-        width:14px;
-        height:14px;
-        flex:0 0 14px;
+      .menu-node.bottom .node-dot{
+        width:15px;
+        height:15px;
+        flex:0 0 15px;
       }
 
       .node-title{
         font-size:10px;
-        letter-spacing:1.1px;
+        letter-spacing:1px;
       }
 
       .node-sub{
-        font-size:7px;
-        letter-spacing:1.8px;
+        margin-top:4px;
+        font-size:6.5px;
+        letter-spacing:1.5px;
       }
 
-      .node-1{ --x:24%; --y:18%; }
-      .node-2{ --x:76%; --y:18%; }
-      .node-3{ --x:84%; --y:33%; }
-      .node-4{ --x:83%; --y:50%; }
-      .node-5{ --x:74%; --y:68%; }
-      .node-6{ --x:50%; --y:82%; }
-      .node-7{ --x:26%; --y:68%; }
-      .node-8{ --x:17%; --y:50%; }
-      .node-9{ --x:16%; --y:33%; }
-      .node-10{ --x:24%; --y:18%; }
+      .n1{ --x:30%; --y:16%; }
+      .n2{ --x:74%; --y:16%; }
+      .n3{ --x:82%; --y:33%; }
+      .n4{ --x:78%; --y:50%; }
+      .n5{ --x:72%; --y:67%; }
+      .n6{ --x:50%; --y:82%; }
+      .n7{ --x:28%; --y:67%; }
+      .n8{ --x:22%; --y:50%; }
+      .n9{ --x:18%; --y:33%; }
+      .n10{ --x:30%; --y:16%; }
 
       .node-note{
         font-size:12px;
@@ -1220,95 +1321,101 @@
     <main class="main-content">
       <section class="hero-stage">
         <div class="hero-center">
-          <div class="logo-orbit-wrap" id="logoOrbitWrap">
-            <span class="tech-ring"></span>
-            <span class="tech-ring-2"></span>
-            <span class="tech-ring-3"></span>
+          <div class="tech-hero" id="techHero">
+            <div class="hero-stars"></div>
+            <div class="center-glow"></div>
+            <div class="center-burst"></div>
 
-            <svg class="tech-lines" id="techLines" viewBox="0 0 1100 860" preserveAspectRatio="none"></svg>
+            <div class="center-rings">
+              <span class="ring r1"></span>
+              <span class="ring r2"></span>
+              <span class="ring r3"></span>
+            </div>
+
+            <svg class="tech-svg" id="techSvg" preserveAspectRatio="none"></svg>
 
             <button class="logo-core" id="logoMenuButton" type="button" aria-label="เปิดเมนู">
               <img src="images/logo.png" alt="Stealth Safety Bank Logo" />
             </button>
 
-            <div class="tech-menu">
-              <button class="tech-node left node-1" type="button" data-popup="ssbmobile">
+            <div class="menu-layer">
+              <a class="menu-node left n1" href="about.html">
+                <span class="node-text">
+                  <span class="node-title">ABOUT COMPANY</span>
+                  <span class="node-sub">siam tum profile</span>
+                </span>
                 <span class="node-dot"></span>
-                <span class="node-label">
+              </a>
+
+              <button class="menu-node left n10" type="button" data-popup="ssbmobile">
+                <span class="node-text">
                   <span class="node-title">SSB MOBILE</span>
                   <span class="node-sub">secure mobile access</span>
                 </span>
+                <span class="node-dot"></span>
               </button>
 
-              <button class="tech-node right node-2" type="button" data-popup="stealthbank">
+              <a class="menu-node left n9" href="agent-partner.html">
+                <span class="node-text">
+                  <span class="node-title">AGENT APPLY</span>
+                  <span class="node-sub">join as partner</span>
+                </span>
                 <span class="node-dot"></span>
-                <span class="node-label">
+              </a>
+
+              <a class="menu-node left n8" href="agent-login.html">
+                <span class="node-text">
+                  <span class="node-title">AGENT LOGIN</span>
+                  <span class="node-sub">dealer member access</span>
+                </span>
+                <span class="node-dot"></span>
+              </a>
+
+              <button class="menu-node left n7" type="button" id="contactButton">
+                <span class="node-text">
+                  <span class="node-title">CONTACT</span>
+                  <span class="node-sub">siam tum company</span>
+                </span>
+                <span class="node-dot"></span>
+              </button>
+
+              <button class="menu-node right n2" type="button" data-popup="stealthbank">
+                <span class="node-dot"></span>
+                <span class="node-text">
                   <span class="node-title">STEALTH SAFETY BANK</span>
                   <span class="node-sub">private banking shield</span>
                 </span>
               </button>
 
-              <button class="tech-node right node-3" type="button" data-popup="safetybook">
+              <button class="menu-node right n3" type="button" data-popup="safetybook">
                 <span class="node-dot"></span>
-                <span class="node-label">
-                  <span class="node-title">SAFETY BOOK</span>
+                <span class="node-text">
+                  <span class="node-title">STEALTH SAFETY BOOK</span>
                   <span class="node-sub">discreet storage system</span>
                 </span>
               </button>
 
-              <button class="tech-node right node-4" type="button" data-popup="stealthtech">
+              <button class="menu-node right n4" type="button" data-popup="stealthtech">
                 <span class="node-dot"></span>
-                <span class="node-label">
+                <span class="node-text">
                   <span class="node-title">STEALTH TECHNOLOGY</span>
                   <span class="node-sub">hidden security layer</span>
                 </span>
               </button>
 
-              <button class="tech-node right node-5" type="button" data-popup="flare">
+              <button class="menu-node right n5" type="button" data-popup="flare">
                 <span class="node-dot"></span>
-                <span class="node-label">
+                <span class="node-text">
                   <span class="node-title">FLARE TECHNOLOGY</span>
                   <span class="node-sub">awareness protection mode</span>
                 </span>
               </button>
 
-              <a class="tech-node down node-6 order" href="book.html">
+              <a class="menu-node bottom n6" href="book.html">
                 <span class="node-dot"></span>
-                <span class="node-label">
+                <span class="node-text">
                   <span class="node-title">START ORDER</span>
                   <span class="node-sub">go to product booking</span>
-                </span>
-              </a>
-
-              <button class="tech-node left node-7" type="button" id="contactButton">
-                <span class="node-dot"></span>
-                <span class="node-label">
-                  <span class="node-title">CONTACT</span>
-                  <span class="node-sub">siam tum company</span>
-                </span>
-              </button>
-
-              <a class="tech-node left node-8" href="agent-login.html">
-                <span class="node-dot"></span>
-                <span class="node-label">
-                  <span class="node-title">AGENT LOGIN</span>
-                  <span class="node-sub">dealer member access</span>
-                </span>
-              </a>
-
-              <a class="tech-node left node-9" href="agent-partner.html">
-                <span class="node-dot"></span>
-                <span class="node-label">
-                  <span class="node-title">AGENT APPLY</span>
-                  <span class="node-sub">join as partner</span>
-                </span>
-              </a>
-
-              <a class="tech-node left node-10" href="about.html">
-                <span class="node-dot"></span>
-                <span class="node-label">
-                  <span class="node-title">ABOUT COMPANY</span>
-                  <span class="node-sub">siam tum profile</span>
                 </span>
               </a>
             </div>
@@ -1486,9 +1593,9 @@
       }
     };
 
-    const logoOrbitWrap = document.getElementById("logoOrbitWrap");
+    const techHero = document.getElementById("techHero");
     const logoMenuButton = document.getElementById("logoMenuButton");
-    const techLines = document.getElementById("techLines");
+    const techSvg = document.getElementById("techSvg");
 
     const infoPopup = document.getElementById("infoPopup");
     const infoTitle = document.getElementById("infoTitle");
@@ -1519,55 +1626,95 @@
       companyPopup.style.display = "none";
     }
 
-    function drawTechLines(){
-      if (!logoOrbitWrap || !techLines) return;
+    function buildCircuitPath(cx, cy, x, y, side, isBottom){
+      if (isBottom) {
+        const midY = cy + (y - cy) * 0.58;
+        return `M ${cx} ${cy} L ${cx} ${midY} L ${x} ${y}`;
+      }
 
-      const wrapRect = logoOrbitWrap.getBoundingClientRect();
-      const nodes = logoOrbitWrap.querySelectorAll(".tech-node");
-      const centerX = wrapRect.width / 2;
-      const centerY = wrapRect.height / 2;
+      const dir = side === "left" ? -1 : 1;
+      const step1X = cx + dir * Math.max(58, Math.abs(x - cx) * 0.28);
+      const step2X = x + (dir * -1) * Math.max(36, Math.abs(x - cx) * 0.10);
+      const bendY = y;
 
-      techLines.setAttribute("viewBox", `0 0 ${wrapRect.width} ${wrapRect.height}`);
-
-      let paths = "";
-
-      nodes.forEach((node) => {
-        const rect = node.getBoundingClientRect();
-        const x = rect.left - wrapRect.left + rect.width / 2;
-        const y = rect.top - wrapRect.top + rect.height / 2;
-
-        const midX = x > centerX ? centerX + (x - centerX) * 0.45 : centerX - (centerX - x) * 0.45;
-        const curveOffset = y > centerY ? 20 : -20;
-
-        paths += `
-          <path d="M ${centerX} ${centerY} Q ${midX} ${centerY + curveOffset} ${x} ${y}"
-                fill="none"
-                stroke="rgba(120,190,255,0.45)"
-                stroke-width="1.6"
-                stroke-linecap="round" />
-          <circle cx="${x}" cy="${y}" r="2.4" fill="rgba(173,225,255,0.92)" />
-        `;
-      });
-
-      techLines.innerHTML = paths;
-      techLines.style.opacity = logoOrbitWrap.classList.contains("open") ? "1" : "0";
-      techLines.style.transition = "opacity .28s ease";
+      return `M ${cx} ${cy} L ${step1X} ${cy} L ${step2X} ${bendY} L ${x} ${y}`;
     }
 
-    if (logoMenuButton && logoOrbitWrap) {
+    function drawTechLines(){
+      if (!techHero || !techSvg) return;
+
+      const rect = techHero.getBoundingClientRect();
+      const cx = rect.width / 2;
+      const cy = rect.height / 2;
+
+      techSvg.setAttribute("viewBox", `0 0 ${rect.width} ${rect.height}`);
+
+      const nodes = techHero.querySelectorAll(".menu-node");
+      let html = `
+        <defs>
+          <filter id="blueGlow" x="-80%" y="-80%" width="260%" height="260%">
+            <feGaussianBlur stdDeviation="2.6" result="blur"/>
+            <feMerge>
+              <feMergeNode in="blur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+          <filter id="redGlow" x="-80%" y="-80%" width="260%" height="260%">
+            <feGaussianBlur stdDeviation="2.8" result="blur"/>
+            <feMerge>
+              <feMergeNode in="blur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+      `;
+
+      nodes.forEach(node => {
+        const nRect = node.getBoundingClientRect();
+        const side = node.classList.contains("left") ? "left" : node.classList.contains("right") ? "right" : "bottom";
+        const isBottom = node.classList.contains("bottom");
+        const dotEl = node.querySelector(".node-dot");
+        const dotRect = dotEl.getBoundingClientRect();
+
+        const x = dotRect.left - rect.left + dotRect.width / 2;
+        const y = dotRect.top - rect.top + dotRect.height / 2;
+
+        const pathD = buildCircuitPath(cx, cy, x, y, side, isBottom);
+
+        if (isBottom) {
+          html += `
+            <path d="${pathD}" fill="none" stroke="rgba(255,98,108,.92)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#redGlow)"/>
+            <path d="${pathD}" fill="none" stroke="rgba(255,159,168,.28)" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round" />
+            <circle cx="${x}" cy="${y}" r="3.2" fill="rgba(255,235,239,.98)" filter="url(#redGlow)"/>
+          `;
+        } else {
+          html += `
+            <path d="${pathD}" fill="none" stroke="rgba(116,193,255,.96)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#blueGlow)"/>
+            <path d="${pathD}" fill="none" stroke="rgba(116,193,255,.22)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="${x}" cy="${y}" r="3" fill="rgba(232,247,255,.98)" filter="url(#blueGlow)"/>
+          `;
+        }
+      });
+
+      techSvg.innerHTML = html;
+      techSvg.style.opacity = techHero.classList.contains("open") ? "1" : "0";
+      techSvg.style.transition = "opacity .3s ease";
+    }
+
+    if (logoMenuButton && techHero) {
       logoMenuButton.addEventListener("click", function(event){
         event.stopPropagation();
-        logoOrbitWrap.classList.toggle("open");
+        techHero.classList.toggle("open");
         drawTechLines();
       });
     }
 
-    if (logoOrbitWrap) {
-      logoOrbitWrap.addEventListener("click", function(event){
+    if (techHero) {
+      techHero.addEventListener("click", function(event){
         event.stopPropagation();
       });
 
-      const popupButtons = logoOrbitWrap.querySelectorAll("[data-popup]");
+      const popupButtons = techHero.querySelectorAll("[data-popup]");
       popupButtons.forEach((btn) => {
         btn.addEventListener("click", function(event){
           event.stopPropagation();
@@ -1583,24 +1730,10 @@
           openCompanyPopup();
         });
       }
-
-      logoOrbitWrap.addEventListener("mousemove", function(event){
-        if (window.innerWidth <= 760) return;
-        const rect = logoOrbitWrap.getBoundingClientRect();
-        const x = ((event.clientX - rect.left) / rect.width) - 0.5;
-        const y = ((event.clientY - rect.top) / rect.height) - 0.5;
-        logoOrbitWrap.style.setProperty("--mx", `${x * 18}px`);
-        logoOrbitWrap.style.setProperty("--my", `${y * 18}px`);
-      });
-
-      logoOrbitWrap.addEventListener("mouseleave", function(){
-        logoOrbitWrap.style.setProperty("--mx", "0px");
-        logoOrbitWrap.style.setProperty("--my", "0px");
-      });
     }
 
-    window.addEventListener("resize", drawTechLines);
     window.addEventListener("load", drawTechLines);
+    window.addEventListener("resize", drawTechLines);
 
     document.getElementById("closeInfoPopupTop")?.addEventListener("click", closeInfoPopup);
     document.getElementById("closeInfoPopupBottom")?.addEventListener("click", closeInfoPopup);
@@ -1619,8 +1752,8 @@
       const infoOpen = infoPopup && infoPopup.style.display === "flex";
       const companyOpen = companyPopup && companyPopup.style.display === "flex";
 
-      if (!infoOpen && !companyOpen && logoOrbitWrap && !logoOrbitWrap.contains(event.target)) {
-        logoOrbitWrap.classList.remove("open");
+      if (!infoOpen && !companyOpen && techHero && !techHero.contains(event.target)) {
+        techHero.classList.remove("open");
         drawTechLines();
       }
     });
