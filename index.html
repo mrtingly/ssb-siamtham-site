@@ -8,164 +8,130 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&family=Orbitron:wght@500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&family=Orbitron:wght@500;700;800&display=swap"
     rel="stylesheet"
   />
 
   <style>
     :root{
-      --bg-0:#010814;
-      --bg-1:#041328;
-      --bg-2:#071e44;
-      --panel:#0b2147cc;
-      --panel-2:#102c5acc;
-      --line:#79d9ff;
-      --line-soft:rgba(121,217,255,.18);
-      --line-mid:rgba(121,217,255,.42);
-      --white:#f4fbff;
-      --text-soft:#bddfff;
-      --red:#ff4c61;
-      --red-2:#d91c36;
-      --gold:#e4b85f;
-      --header-1:#0a3e84;
-      --header-2:#0d58b6;
-      --header-3:#2f7be6;
-      --max:1400px;
-      --hero-h:880px;
+      --bg1:#020817;
+      --bg2:#071a37;
+      --bg3:#0a2c5f;
+      --blue:#74d7ff;
+      --blue2:#bfeeff;
+      --white:#f7fcff;
+      --red:#ff4b5c;
+      --header1:#0a3e84;
+      --header2:#0f5dc3;
+      --glass:rgba(10,24,54,.72);
+      --line:rgba(116,215,255,.22);
+      --max:1360px;
     }
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
       margin:0;
-      color:#fff;
+      color:var(--white);
       font-family:'Prompt',sans-serif;
       background:
-        radial-gradient(circle at 50% 10%, rgba(45,125,255,.16), transparent 28%),
-        radial-gradient(circle at 50% 45%, rgba(30,132,255,.10), transparent 36%),
-        linear-gradient(180deg,#010814 0%,#031126 30%,#041730 60%,#020b18 100%);
+        radial-gradient(circle at 50% 20%, rgba(80,170,255,.14), transparent 24%),
+        radial-gradient(circle at 50% 55%, rgba(80,170,255,.08), transparent 32%),
+        linear-gradient(180deg,var(--bg1) 0%, var(--bg2) 42%, #03101f 100%);
       overflow-x:hidden;
     }
 
-    .th-font{font-family:'Prompt',sans-serif}
-    .en-font{font-family:'Orbitron',sans-serif}
+    .en{font-family:'Orbitron',sans-serif}
 
     body::before{
       content:"";
       position:fixed;
       inset:0;
-      z-index:0;
       pointer-events:none;
-      opacity:.28;
+      opacity:.18;
       background-image:
-        radial-gradient(circle at 8% 18%, rgba(255,255,255,.82) 0 1px, transparent 1.7px),
-        radial-gradient(circle at 24% 78%, rgba(255,255,255,.42) 0 1px, transparent 1.7px),
-        radial-gradient(circle at 44% 14%, rgba(255,255,255,.66) 0 1px, transparent 1.7px),
-        radial-gradient(circle at 61% 72%, rgba(255,255,255,.44) 0 1px, transparent 1.7px),
-        radial-gradient(circle at 83% 19%, rgba(255,255,255,.72) 0 1px, transparent 1.7px),
-        radial-gradient(circle at 93% 62%, rgba(255,255,255,.34) 0 1px, transparent 1.7px);
+        radial-gradient(circle at 10% 20%, #fff 0 1px, transparent 2px),
+        radial-gradient(circle at 22% 78%, #fff 0 1px, transparent 2px),
+        radial-gradient(circle at 45% 15%, #fff 0 1px, transparent 2px),
+        radial-gradient(circle at 64% 72%, #fff 0 1px, transparent 2px),
+        radial-gradient(circle at 84% 18%, #fff 0 1px, transparent 2px),
+        radial-gradient(circle at 93% 62%, #fff 0 1px, transparent 2px);
     }
 
-    body::after{
-      content:"";
-      position:fixed;
-      inset:0;
-      z-index:0;
-      pointer-events:none;
-      opacity:.05;
-      background-image:
-        linear-gradient(rgba(112,196,255,.22) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(112,196,255,.22) 1px, transparent 1px);
-      background-size:42px 42px;
-      mask-image:radial-gradient(circle at center, rgba(0,0,0,.95) 0%, rgba(0,0,0,.72) 50%, transparent 88%);
-      -webkit-mask-image:radial-gradient(circle at center, rgba(0,0,0,.95) 0%, rgba(0,0,0,.72) 50%, transparent 88%);
-    }
-
-    .site-wrap{
-      position:relative;
-      z-index:1;
+    .site{
       min-height:100vh;
       display:flex;
       flex-direction:column;
-    }
-
-    /* HEADER */
-    .ssb-topbar{
-      position:sticky;
-      top:0;
-      z-index:1000;
-      border-bottom:1px solid rgba(255,255,255,.14);
-      background:linear-gradient(135deg,var(--header-1) 0%,var(--header-2) 52%,var(--header-3) 100%);
-      box-shadow:0 12px 30px rgba(0,0,0,.22);
-      backdrop-filter:blur(14px);
-      -webkit-backdrop-filter:blur(14px);
-    }
-
-    .ssb-topbar::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.15), rgba(255,255,255,0)),
-        radial-gradient(circle at 18% 14%, rgba(255,255,255,.12), transparent 24%),
-        radial-gradient(circle at 88% 10%, rgba(255,255,255,.10), transparent 26%);
-    }
-
-    .topbar-inner{
-      width:min(var(--max), calc(100% - 24px));
-      min-height:82px;
-      margin:0 auto;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:18px;
-      padding:10px 0;
       position:relative;
       z-index:1;
     }
 
-    .brand-wrap{
+    .topbar,
+    .footer{
+      background:linear-gradient(135deg,var(--header1),var(--header2));
+      border-bottom:1px solid rgba(255,255,255,.12);
+      box-shadow:0 10px 28px rgba(0,0,0,.24);
+    }
+
+    .footer{
+      border-bottom:none;
+      border-top:1px solid rgba(255,255,255,.12);
+      margin-top:18px;
+    }
+
+    .topbar-inner,
+    .footer-inner,
+    .main{
+      width:min(var(--max), calc(100% - 24px));
+      margin:0 auto;
+    }
+
+    .topbar-inner{
+      min-height:82px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:10px 0;
+    }
+
+    .brand{
       display:flex;
       align-items:center;
       gap:14px;
       min-width:0;
     }
 
-    .brand-logo{
+    .logo-box{
       width:56px;
       height:56px;
       border-radius:16px;
       overflow:hidden;
-      flex:0 0 56px;
-      border:1px solid rgba(255,255,255,.18);
       background:rgba(255,255,255,.10);
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.12), 0 0 18px rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.15);
       display:flex;
       align-items:center;
       justify-content:center;
+      flex:0 0 56px;
     }
 
-    .brand-logo img{
+    .logo-box img{
       width:100%;
       height:100%;
       object-fit:contain;
       display:block;
     }
 
-    .brand-name{
+    .brand-title{
       font-size:20px;
-      line-height:1.15;
       font-weight:800;
-      color:#fff;
-      text-shadow:0 0 12px rgba(255,255,255,.12);
+      line-height:1.15;
     }
 
     .brand-site{
-      margin-top:4px;
       font-size:13px;
       font-weight:700;
-      color:rgba(255,255,255,.92);
+      opacity:.95;
     }
 
     .brand-site a{
@@ -173,176 +139,186 @@
       text-decoration:none;
     }
 
-    .topbar-actions{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      flex:0 0 auto;
-    }
-
     .translate-box{
       min-height:42px;
       padding:6px 10px;
       border-radius:14px;
-      border:1px solid rgba(255,255,255,.18);
+      border:1px solid rgba(255,255,255,.16);
       background:rgba(255,255,255,.10);
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.10);
       display:flex;
       align-items:center;
       justify-content:center;
     }
 
-    /* MAIN */
-    .main-content{
+    .main{
       flex:1;
-      width:min(var(--max), calc(100% - 24px));
-      margin:0 auto;
-      padding:14px 0 28px;
+      padding:14px 0 24px;
     }
 
-    .hero-stage{
-      min-height:calc(100vh - 150px);
+    .hero{
+      min-height:calc(100vh - 152px);
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:4px 0 18px;
     }
 
-    .hero-center{
-      width:100%;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:14px;
-    }
-
-    .tech-hero{
+    .panel{
       position:relative;
-      width:min(98vw, 1360px);
-      height:min(88vh, var(--hero-h));
-      min-height:760px;
-      border-radius:40px;
+      width:min(100%, 1320px);
+      min-height:820px;
+      border-radius:34px;
       overflow:hidden;
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      background:
+        linear-gradient(180deg, rgba(4,18,44,.86), rgba(2,11,28,.96)),
+        linear-gradient(90deg, rgba(116,215,255,.04), rgba(116,215,255,0));
+      border:1px solid rgba(116,215,255,.10);
+      box-shadow:0 30px 80px rgba(0,0,0,.30), inset 0 0 0 1px rgba(255,255,255,.02);
       isolation:isolate;
-      background:
-        radial-gradient(circle at 50% 46%, rgba(11,84,198,.10), transparent 18%),
-        radial-gradient(circle at 50% 50%, rgba(18,87,190,.06), transparent 34%),
-        linear-gradient(180deg, rgba(2,18,42,.92), rgba(2,13,33,.98));
-      box-shadow:
-        inset 0 0 0 1px rgba(112,214,255,.07),
-        inset 0 0 90px rgba(47,132,255,.06),
-        0 34px 90px rgba(0,0,0,.34);
     }
 
-    .tech-hero::before{
+    .panel::before{
       content:"";
       position:absolute;
       inset:0;
-      z-index:0;
+      background-image:
+        linear-gradient(rgba(116,215,255,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(116,215,255,.045) 1px, transparent 1px);
+      background-size:36px 36px;
+      opacity:.55;
       pointer-events:none;
-      background:
-        linear-gradient(rgba(116,196,255,.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(116,196,255,.04) 1px, transparent 1px);
-      background-size:38px 38px;
-      opacity:.6;
     }
 
-    .tech-hero::after{
+    .panel::after{
       content:"";
       position:absolute;
-      inset:14px;
-      border-radius:30px;
-      border:1px solid rgba(115,205,255,.08);
-      box-shadow:inset 0 0 30px rgba(84,177,255,.05);
-      pointer-events:none;
-      z-index:0;
-    }
-
-    #globe3d{
-      position:absolute;
-      inset:0;
-      z-index:1;
+      inset:10px;
+      border-radius:26px;
+      border:1px solid rgba(116,215,255,.10);
       pointer-events:none;
     }
 
-    .world-overlay{
-      position:absolute;
-      inset:0;
-      z-index:2;
-      pointer-events:none;
-      background:
-        radial-gradient(circle at 50% 50%, transparent 0 22%, rgba(3,12,28,.05) 28%, rgba(3,12,28,.20) 52%, rgba(2,9,22,.48) 72%, rgba(1,6,16,.70) 100%);
-      mix-blend-mode:screen;
-      opacity:.75;
-    }
-
-    .menu-vignette{
-      position:absolute;
-      inset:0;
-      z-index:3;
-      pointer-events:none;
-      background:
-        radial-gradient(circle at 18% 44%, rgba(2,8,22,.58), transparent 23%),
-        radial-gradient(circle at 18% 59%, rgba(2,8,22,.58), transparent 24%),
-        radial-gradient(circle at 82% 44%, rgba(2,8,22,.58), transparent 23%),
-        radial-gradient(circle at 82% 59%, rgba(2,8,22,.58), transparent 24%);
-    }
-
-    .orbital-rings{
-      position:absolute;
-      inset:0;
-      z-index:4;
-      pointer-events:none;
-      opacity:.45;
-      mix-blend-mode:screen;
-    }
-
-    .orbital-rings svg{
-      width:100%;
-      height:100%;
-      display:block;
-    }
-
-    .logo-glow{
+    .glow-center{
       position:absolute;
       left:50%;
       top:50%;
-      width:170px;
-      height:170px;
       transform:translate(-50%,-50%);
-      z-index:5;
-      pointer-events:none;
+      width:420px;
+      height:420px;
+      border-radius:50%;
       background:
-        radial-gradient(circle,
-        rgba(230,246,255,.82) 0%,
-        rgba(164,226,255,.30) 36%,
-        rgba(84,181,255,.08) 56%,
-        transparent 74%);
-      filter:blur(5px);
-      animation:pulseGlow 4.8s ease-in-out infinite;
+        radial-gradient(circle, rgba(170,233,255,.22) 0%, rgba(90,181,255,.10) 34%, rgba(44,122,255,.06) 48%, transparent 72%);
+      filter:blur(4px);
+      pointer-events:none;
+      z-index:1;
+    }
+
+    .globe{
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
+      width:420px;
+      height:420px;
+      border-radius:50%;
+      border:1px solid rgba(116,215,255,.16);
+      background:
+        radial-gradient(circle at 35% 32%, rgba(255,255,255,.18), transparent 18%),
+        radial-gradient(circle at 50% 50%, rgba(0,164,255,.18), rgba(0,54,122,.10) 52%, transparent 70%),
+        radial-gradient(circle at 50% 50%, rgba(8,34,84,.82), rgba(2,10,28,.96));
+      box-shadow:
+        inset 0 0 40px rgba(125,214,255,.08),
+        0 0 28px rgba(72,178,255,.16);
+      z-index:2;
+      overflow:hidden;
+    }
+
+    .globe::before,
+    .globe::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:50%;
+    }
+
+    .globe::before{
+      background:
+        linear-gradient(
+          transparent 0 14%,
+          rgba(116,215,255,.12) 14% 15%,
+          transparent 15% 29%,
+          rgba(116,215,255,.10) 29% 30%,
+          transparent 30% 44%,
+          rgba(116,215,255,.10) 44% 45%,
+          transparent 45% 59%,
+          rgba(116,215,255,.10) 59% 60%,
+          transparent 60% 74%,
+          rgba(116,215,255,.10) 74% 75%,
+          transparent 75%
+        );
+      opacity:.6;
+    }
+
+    .globe::after{
+      background:
+        linear-gradient(
+          90deg,
+          transparent 0 12%,
+          rgba(116,215,255,.12) 12% 13%,
+          transparent 13% 24%,
+          rgba(116,215,255,.09) 24% 25%,
+          transparent 25% 36%,
+          rgba(116,215,255,.09) 36% 37%,
+          transparent 37% 48%,
+          rgba(116,215,255,.10) 48% 49%,
+          transparent 49% 60%,
+          rgba(116,215,255,.09) 60% 61%,
+          transparent 61% 72%,
+          rgba(116,215,255,.09) 72% 73%,
+          transparent 73% 84%,
+          rgba(116,215,255,.12) 84% 85%,
+          transparent 85%
+        );
+      opacity:.45;
+    }
+
+    .ring,
+    .ring-2,
+    .ring-3{
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
+      border-radius:50%;
+      border:1px solid rgba(116,215,255,.16);
+      pointer-events:none;
+      z-index:1;
+    }
+
+    .ring{width:520px;height:520px}
+    .ring-2{
+      width:470px;
+      height:560px;
+      transform:translate(-50%,-50%) rotate(24deg);
+    }
+    .ring-3{
+      width:470px;
+      height:560px;
+      transform:translate(-50%,-50%) rotate(-24deg);
+      opacity:.7;
     }
 
     .logo-core{
-      position:relative;
-      z-index:8;
-      width:min(18vw, 178px);
-      height:min(18vw, 178px);
-      padding:0;
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
+      width:162px;
+      height:162px;
       border:none;
       background:transparent;
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      padding:0;
       cursor:pointer;
-      transition:transform .24s ease, filter .24s ease;
-    }
-
-    .logo-core:hover{
-      transform:scale(1.03);
-      filter:brightness(1.04);
+      z-index:5;
     }
 
     .logo-core img{
@@ -350,279 +326,131 @@
       height:100%;
       object-fit:contain;
       display:block;
-      filter:
-        drop-shadow(0 0 16px rgba(125,214,255,.12))
-        drop-shadow(0 16px 30px rgba(0,0,0,.26));
+      filter:drop-shadow(0 0 14px rgba(255,255,255,.12)) drop-shadow(0 12px 22px rgba(0,0,0,.26));
     }
 
-    .menu-layer{
+    .menu{
       position:absolute;
       inset:0;
-      z-index:10;
+      z-index:6;
     }
 
-    .menu-node{
+    .item{
       --x:50%;
       --y:50%;
       position:absolute;
       left:var(--x);
       top:var(--y);
-      transform:translate(-50%,-50%) scale(.96);
-      opacity:0;
-      pointer-events:none;
+      transform:translate(-50%,-50%);
       display:flex;
       align-items:center;
       gap:12px;
       color:#fff;
       text-decoration:none;
-      border:none;
       background:none;
+      border:none;
       padding:0;
-      margin:0;
       cursor:pointer;
-      transition:
-        transform .34s cubic-bezier(.2,.8,.2,1),
-        opacity .28s ease,
-        filter .22s ease;
     }
 
-    .tech-hero.open .menu-node{
-      opacity:1;
-      pointer-events:auto;
-      transform:translate(-50%,-50%) scale(1);
-    }
+    .item.left{justify-content:flex-end;text-align:right}
+    .item.right{justify-content:flex-start;text-align:left}
+    .item.bottom{flex-direction:column;gap:12px;text-align:center}
 
-    .menu-node.left{
-      justify-content:flex-end;
-      text-align:right;
-    }
-
-    .menu-node.right{
-      justify-content:flex-start;
-      text-align:left;
-    }
-
-    .menu-node.bottom{
-      flex-direction:column;
-      gap:12px;
-      text-align:center;
-    }
-
-    .menu-node:hover{
-      filter:brightness(1.08);
-    }
-
-    .node-dot{
-      position:relative;
+    .dot{
       width:18px;
       height:18px;
       flex:0 0 18px;
       border-radius:50%;
-      background:
-        radial-gradient(circle, #ffffff 0%, #def7ff 18%, #7ed8ff 48%, #1f95ff 100%);
-      box-shadow:
-        0 0 0 4px rgba(95,186,255,.10),
-        0 0 18px rgba(89,188,255,.90),
-        0 0 38px rgba(89,188,255,.34);
-      animation:dotPulse 2.2s ease-in-out infinite;
-      transition:transform .22s ease, box-shadow .22s ease;
+      background:radial-gradient(circle, #fff 0%, #dff7ff 22%, #79d7ff 54%, #168fff 100%);
+      box-shadow:0 0 0 4px rgba(95,186,255,.10), 0 0 16px rgba(89,188,255,.82);
     }
 
-    .node-dot::before{
-      content:"";
-      position:absolute;
-      inset:-5px;
-      border-radius:50%;
-      border:1px solid rgba(145,219,255,.20);
-    }
-
-    .node-dot::after{
-      content:"";
-      position:absolute;
-      inset:-11px;
-      border-radius:50%;
-      border:1px solid rgba(145,219,255,.08);
-    }
-
-    .menu-node:hover .node-dot{
-      transform:scale(1.14);
-      box-shadow:
-        0 0 0 5px rgba(95,186,255,.12),
-        0 0 22px rgba(89,188,255,.96),
-        0 0 46px rgba(89,188,255,.42);
-    }
-
-    .node-shell{
-      position:relative;
-      min-width:290px;
-      min-height:64px;
-      padding:14px 24px;
+    .shell{
+      min-width:280px;
+      min-height:62px;
+      padding:14px 20px;
       display:flex;
       align-items:center;
-      overflow:hidden;
-      border:1px solid rgba(140,223,255,.34);
-      background:
-        linear-gradient(180deg, rgba(14,34,72,.88), rgba(8,20,45,.92));
-      box-shadow:
-        inset 0 0 0 1px rgba(198,241,255,.08),
-        inset 0 10px 18px rgba(132,204,255,.04),
-        0 0 0 1px rgba(62,164,255,.08),
-        0 0 24px rgba(48,150,255,.16),
-        0 12px 28px rgba(0,0,0,.18);
-      backdrop-filter:blur(10px);
-      -webkit-backdrop-filter:blur(10px);
-      transition:border-color .22s ease, box-shadow .22s ease, transform .22s ease;
+      background:var(--glass);
+      border:1px solid rgba(140,223,255,.26);
+      box-shadow:0 12px 24px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.04);
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
     }
 
-    .menu-node.left .node-shell{
+    .item.left .shell{
       justify-content:flex-end;
       clip-path:polygon(16px 0, 100% 0, calc(100% - 20px) 50%, 100% 100%, 16px 100%, 0 50%);
     }
 
-    .menu-node.right .node-shell{
+    .item.right .shell{
       justify-content:flex-start;
       clip-path:polygon(20px 0, 100% 0, calc(100% - 16px) 50%, 100% 100%, 20px 100%, 0 50%);
     }
 
-    .node-shell::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,0) 44%),
-        linear-gradient(90deg, transparent 0%, rgba(115,215,255,.16) 10%, transparent 20%, transparent 80%, rgba(115,215,255,.16) 90%, transparent 100%);
-      pointer-events:none;
-    }
-
-    .node-shell::after{
-      content:"";
-      position:absolute;
-      inset:1px;
-      border:1px solid rgba(168,234,255,.24);
-      opacity:.6;
-      pointer-events:none;
-    }
-
-    .menu-node.left .node-shell::after{
-      clip-path:polygon(16px 0, 100% 0, calc(100% - 20px) 50%, 100% 100%, 16px 100%, 0 50%);
-    }
-
-    .menu-node.right .node-shell::after{
-      clip-path:polygon(20px 0, 100% 0, calc(100% - 16px) 50%, 100% 100%, 20px 100%, 0 50%);
-    }
-
-    .menu-node:hover .node-shell{
-      border-color:rgba(170,236,255,.48);
-      box-shadow:
-        inset 0 0 0 1px rgba(214,245,255,.10),
-        inset 0 10px 18px rgba(142,206,255,.05),
-        0 0 0 1px rgba(84,177,255,.10),
-        0 0 32px rgba(72,178,255,.24),
-        0 14px 32px rgba(0,0,0,.18);
-    }
-
-    .node-text{
-      position:relative;
-      z-index:1;
+    .text{
       display:flex;
       flex-direction:column;
-      gap:5px;
+      gap:4px;
       line-height:1;
     }
 
-    .node-title{
+    .title{
       font-size:16px;
       font-weight:800;
-      letter-spacing:.9px;
+      letter-spacing:.8px;
       text-transform:uppercase;
-      color:#f8fdff;
-      text-shadow:
-        0 0 10px rgba(165,232,255,.42),
-        0 0 26px rgba(165,232,255,.12);
-      white-space:nowrap;
+      text-shadow:0 0 10px rgba(165,232,255,.24);
     }
 
-    .node-sub{
+    .sub{
       font-size:8px;
       font-weight:600;
       letter-spacing:2px;
       text-transform:uppercase;
-      color:#b8dfff;
-      white-space:nowrap;
+      color:var(--blue2);
     }
 
-    /* START ORDER */
-    .menu-node.bottom .node-dot{
+    .item.bottom .dot{
       width:24px;
       height:24px;
       flex:0 0 24px;
-      background:
-        radial-gradient(circle, #fff 0%, #ffdce1 16%, #ff6f80 50%, #d71b35 100%);
-      box-shadow:
-        0 0 0 6px rgba(255,92,106,.12),
-        0 0 24px rgba(255,92,106,.92),
-        0 0 52px rgba(255,92,106,.44);
+      background:radial-gradient(circle, #fff 0%, #ffdce1 18%, #ff6f80 50%, #d71b35 100%);
+      box-shadow:0 0 0 6px rgba(255,92,106,.12), 0 0 22px rgba(255,92,106,.84);
     }
 
-    .menu-node.bottom .node-dot::before{
-      inset:-6px;
-      border-color:rgba(255,166,173,.28);
-    }
-
-    .menu-node.bottom .node-dot::after{
-      inset:-12px;
-      border-color:rgba(255,166,173,.10);
-    }
-
-    .menu-node.bottom .node-shell{
-      min-width:362px;
+    .item.bottom .shell{
+      min-width:360px;
       min-height:76px;
       justify-content:center;
-      border-color:rgba(255,134,145,.38);
-      background:
-        linear-gradient(180deg, rgba(88,15,29,.86), rgba(44,6,15,.94));
-      box-shadow:
-        inset 0 0 0 1px rgba(255,187,194,.08),
-        inset 0 10px 18px rgba(255,138,152,.04),
-        0 0 0 1px rgba(255,112,125,.10),
-        0 0 28px rgba(255,92,106,.18),
-        0 14px 32px rgba(0,0,0,.22);
+      background:linear-gradient(180deg, rgba(88,15,29,.86), rgba(44,6,15,.94));
+      border-color:rgba(255,134,145,.30);
       clip-path:polygon(18px 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 18px 100%, 0 50%);
     }
 
-    .menu-node.bottom .node-shell::after{
-      border-color:rgba(255,168,176,.26);
-      clip-path:polygon(18px 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 18px 100%, 0 50%);
-    }
-
-    .menu-node.bottom .node-title{
+    .item.bottom .title{
       font-size:24px;
       color:#fff2f3;
-      text-shadow:
-        0 0 12px rgba(255,172,180,.56),
-        0 0 30px rgba(255,120,131,.14);
     }
 
-    .menu-node.bottom .node-sub{
+    .item.bottom .sub{
       font-size:9px;
-      letter-spacing:2.3px;
       color:#ffd8dc;
     }
 
-    /* POSITIONS - balanced standard layout */
-    .n1{ --x:25.5%; --y:37.5%; }
-    .n2{ --x:23.5%; --y:47.2%; }
-    .n3{ --x:22.2%; --y:56.8%; }
-    .n4{ --x:24.8%; --y:66.5%; }
+    .n1{--x:25.5%;--y:37.5%}
+    .n2{--x:23.5%;--y:47.2%}
+    .n3{--x:22.2%;--y:56.8%}
+    .n4{--x:24.8%;--y:66.5%}
+    .n5{--x:74.5%;--y:37.5%}
+    .n6{--x:76.5%;--y:47.2%}
+    .n7{--x:77.8%;--y:56.8%}
+    .n8{--x:75.2%;--y:66.5%}
+    .n9{--x:50%;--y:82.2%}
 
-    .n5{ --x:74.5%; --y:37.5%; }
-    .n6{ --x:76.5%; --y:47.2%; }
-    .n7{ --x:77.8%; --y:56.8%; }
-    .n8{ --x:75.2%; --y:66.5%; }
-
-    .n9{ --x:50%; --y:82.2%; }
-
-    .node-note{
+    .note{
+      margin-top:14px;
       display:inline-flex;
       align-items:center;
       justify-content:center;
@@ -631,18 +459,11 @@
       border-radius:999px;
       background:rgba(255,255,255,.06);
       border:1px solid rgba(145,219,255,.12);
-      color:#dff4ff;
-      box-shadow:0 10px 24px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.06);
-      backdrop-filter:blur(14px);
-      -webkit-backdrop-filter:blur(14px);
       font-size:15px;
       font-weight:800;
-      text-align:center;
-      pointer-events:none;
     }
 
-    /* POPUPS */
-    .popup-backdrop{
+    .popup{
       position:fixed;
       inset:0;
       z-index:9999;
@@ -650,21 +471,20 @@
       align-items:center;
       justify-content:center;
       padding:16px;
-      background:rgba(2,10,28,.68);
-      backdrop-filter:blur(10px);
-      -webkit-backdrop-filter:blur(10px);
+      background:rgba(2,10,28,.72);
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
     }
 
     .popup-card{
-      width:min(95vw, 980px);
+      width:min(95vw, 940px);
       max-height:90vh;
       overflow:auto;
-      border-radius:26px;
-      padding:22px;
-      background:rgba(255,255,255,.97);
+      border-radius:24px;
+      padding:20px;
+      background:#fff;
       color:#14355f;
-      border:1px solid rgba(255,255,255,.55);
-      box-shadow:0 30px 80px rgba(0,0,0,.28);
+      box-shadow:0 28px 70px rgba(0,0,0,.28);
     }
 
     .popup-card.company{
@@ -676,71 +496,62 @@
       justify-content:space-between;
       align-items:center;
       gap:12px;
-      margin-bottom:16px;
+      margin-bottom:14px;
     }
 
     .popup-head h3{
       margin:0;
       font-size:24px;
       color:#0b4ea2;
-      line-height:1.2;
     }
 
-    .popup-x{
-      width:44px;
-      height:44px;
+    .xbtn{
+      width:42px;
+      height:42px;
       border:none;
       border-radius:999px;
+      cursor:pointer;
       background:linear-gradient(135deg,#0b4ea2,#1d6bd4);
       color:#fff;
       font-size:18px;
       font-weight:800;
-      cursor:pointer;
-      flex:0 0 44px;
     }
 
     .popup-grid{
       display:grid;
-      grid-template-columns:1.04fr .96fr;
+      grid-template-columns:1fr 1fr;
       gap:16px;
-      align-items:start;
     }
 
-    .popup-text,
-    .company-detail,
-    .video-wrap{
+    .box{
       background:#fff;
       border:1px solid rgba(11,78,162,.10);
-      border-radius:20px;
-      padding:18px;
-      box-shadow:0 14px 28px rgba(11,78,162,.06);
+      border-radius:18px;
+      padding:16px;
+      box-shadow:0 12px 24px rgba(11,78,162,.05);
     }
 
-    .popup-text p,
-    .company-detail p{
+    .box p{
       margin:0 0 12px;
       font-size:15px;
-      line-height:1.82;
+      line-height:1.78;
       color:#34506b;
     }
 
-    .popup-text p:last-child,
-    .company-detail p:last-child{margin-bottom:0}
+    .box p:last-child{margin-bottom:0}
 
-    .company-detail strong{color:#0b4ea2}
+    .video{padding:12px}
 
-    .video-wrap{padding:12px}
-
-    .video-frame{
+    .frame{
       position:relative;
       width:100%;
       padding-top:56.25%;
       overflow:hidden;
-      border-radius:16px;
+      border-radius:14px;
       background:#dce7f7;
     }
 
-    .video-frame iframe{
+    .frame iframe{
       position:absolute;
       inset:0;
       width:100%;
@@ -748,21 +559,20 @@
       border:0;
     }
 
-    .popup-close{
+    .close-btn{
       margin-top:14px;
       min-width:120px;
-      min-height:48px;
+      min-height:46px;
       border:none;
       border-radius:14px;
-      background:linear-gradient(135deg,#0b4ea2 0%,#1f69cd 60%,#d4af37 100%);
+      cursor:pointer;
+      background:linear-gradient(135deg,#0b4ea2,#1f69cd,#d4af37);
       color:#fff;
       font-size:15px;
       font-weight:700;
-      cursor:pointer;
     }
 
-    /* CHAT */
-    .chat-widget{
+    .chat{
       position:fixed;
       right:18px;
       bottom:18px;
@@ -774,145 +584,67 @@
     }
 
     .chat-menu{
-      display:flex;
+      display:none;
       flex-direction:column;
       align-items:flex-end;
       gap:10px;
-      opacity:0;
-      pointer-events:none;
-      transform:translateY(12px) scale(.96);
-      transition:.28s ease;
     }
 
-    .chat-widget.open .chat-menu{
-      opacity:1;
-      pointer-events:auto;
-      transform:translateY(0) scale(1);
-    }
+    .chat.open .chat-menu{display:flex}
 
-    .chat-item{
+    .chat-link{
       min-width:220px;
       height:56px;
-      display:flex;
-      align-items:center;
-      gap:12px;
       padding:0 16px;
       border-radius:999px;
       color:#fff;
       text-decoration:none;
+      display:flex;
+      align-items:center;
+      gap:12px;
       font-size:14px;
       font-weight:700;
-      border:1px solid rgba(255,255,255,.16);
       box-shadow:0 14px 28px rgba(0,0,0,.18);
-      transition:.22s ease;
     }
 
-    .chat-item:hover{ transform:translateY(-2px) scale(1.02); }
-    .chat-item.line{ background:linear-gradient(135deg,#10d95a 0%,#06c755 55%,#02a94b 100%); }
-    .chat-item.facebook{ background:linear-gradient(135deg,#2a86ff 0%,#1877f2 55%,#0f5fd3 100%); }
-    .chat-item.youtube{ background:linear-gradient(135deg,#ff2f2f 0%,#ff0000 55%,#c90000 100%); }
-    .chat-item.tiktok{ background:linear-gradient(135deg,#232323 0%,#111111 55%,#000000 100%); }
+    .line{background:linear-gradient(135deg,#10d95a,#06c755,#02a94b)}
+    .facebook{background:linear-gradient(135deg,#2a86ff,#1877f2,#0f5fd3)}
+    .youtube{background:linear-gradient(135deg,#ff2f2f,#ff0000,#c90000)}
+    .tiktok{background:linear-gradient(135deg,#232323,#111,#000)}
 
     .chat-icon{
       width:34px;
       height:34px;
-      border-radius:999px;
+      flex:0 0 34px;
+      border-radius:50%;
       background:rgba(255,255,255,.16);
-      display:inline-flex;
+      display:flex;
       align-items:center;
       justify-content:center;
-      flex:0 0 34px;
       font-size:12px;
       font-weight:800;
     }
 
-    .chat-fab{
+    .chat-btn{
       width:66px;
       height:66px;
       border:none;
-      border-radius:999px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.04)),
-        linear-gradient(135deg,#0b4ea2,#1f69cd);
-      color:#fff;
+      border-radius:50%;
       cursor:pointer;
+      color:#fff;
+      background:linear-gradient(135deg,#0b4ea2,#1f69cd);
       box-shadow:0 18px 38px rgba(0,0,0,.28);
       border:1px solid rgba(255,255,255,.18);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      position:relative;
-      transition:.22s ease;
-    }
-
-    .chat-fab:hover{ transform:translateY(-2px); }
-
-    .chat-fab-text{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      font-size:12px;
       font-weight:800;
-      line-height:1.04;
     }
 
-    .chat-caret{
-      position:absolute;
-      right:-2px;
-      top:-2px;
-      width:22px;
-      height:22px;
-      border-radius:999px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:#fff;
-      color:#0b4ea2;
-      font-size:10px;
-      box-shadow:0 6px 16px rgba(11,78,162,.18);
-      transition:.28s ease;
-    }
-
-    .chat-widget.open .chat-caret{ transform:rotate(180deg); }
-
-    /* FOOTER */
-    .ssb-footer{
-      position:relative;
-      z-index:1;
-      margin-top:16px;
-      border-top:1px solid rgba(255,255,255,.12);
-      background:linear-gradient(135deg,var(--header-1) 0%,var(--header-2) 52%,var(--header-3) 100%);
-      box-shadow:0 -12px 30px rgba(0,0,0,.22);
-    }
-
-    .ssb-footer::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,0)),
-        radial-gradient(circle at 10% 20%, rgba(255,255,255,.10), transparent 24%),
-        radial-gradient(circle at 88% 16%, rgba(255,255,255,.08), transparent 20%);
-    }
-
-    .footer-inner{
-      width:min(var(--max), calc(100% - 24px));
-      margin:0 auto;
-      padding:18px 0 14px;
-      position:relative;
-      z-index:1;
-    }
+    .footer-inner{padding:18px 0 14px}
 
     .footer-card{
       background:rgba(255,255,255,.10);
       border:1px solid rgba(255,255,255,.14);
       border-radius:20px;
       padding:14px;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.10);
-      backdrop-filter:blur(10px);
-      -webkit-backdrop-filter:blur(10px);
     }
 
     .footer-main{
@@ -922,506 +654,282 @@
       align-items:center;
     }
 
-    .footer-title{
+    .ft-title{
       margin:0 0 10px;
       font-size:17px;
       font-weight:800;
-      color:#fff;
     }
 
-    .footer-text{
+    .ft-text{
       margin:0 0 6px;
-      color:rgba(255,255,255,.94);
       font-size:13px;
       line-height:1.65;
-      word-break:break-word;
+      color:rgba(255,255,255,.94);
     }
 
-    .footer-link{
+    .ft-link{
       color:#fff;
       text-decoration:none;
       font-weight:700;
     }
 
-    .footer-contact-center{text-align:center}
-
-    .footer-nav-wrap{
+    .ft-center{text-align:center}
+    .ft-right{
       display:flex;
       justify-content:flex-end;
-      align-items:center;
     }
 
-    .footer-map-button{
+    .map-btn{
       min-height:58px;
       padding:12px 22px;
       border-radius:999px;
+      text-decoration:none;
       display:inline-flex;
       align-items:center;
-      justify-content:center;
       gap:12px;
-      text-decoration:none;
-      color:#0b4ea2;
       font-size:15px;
       font-weight:800;
-      background:linear-gradient(135deg,#ffffff 0%,#edf5ff 100%);
+      color:#0b4ea2;
+      background:linear-gradient(135deg,#fff,#edf5ff);
       box-shadow:0 12px 24px rgba(0,0,0,.16);
-      border:1px solid rgba(255,255,255,.24);
-      transition:.22s ease;
     }
 
-    .footer-map-button:hover{ transform:translateY(-2px); }
-
-    .footer-pin{
+    .pin{
       width:34px;
       height:34px;
       flex:0 0 34px;
     }
 
-    .footer-bottom{
+    .copy{
       margin-top:12px;
       padding-top:10px;
       border-top:1px solid rgba(255,255,255,.12);
       text-align:center;
-      color:rgba(255,255,255,.92);
       font-size:12px;
       line-height:1.7;
+      color:rgba(255,255,255,.92);
     }
 
-    /* ANIMATION */
-    @keyframes pulseGlow{
-      0%,100%{transform:translate(-50%,-50%) scale(1); opacity:1}
-      50%{transform:translate(-50%,-50%) scale(1.04); opacity:.88}
-    }
-
-    @keyframes dotPulse{
-      0%,100%{transform:scale(1); opacity:1}
-      50%{transform:scale(1.14); opacity:.92}
-    }
-
-    /* TABLET */
     @media (max-width:1180px){
-      .tech-hero{
-        width:min(98vw, 1100px);
-        min-height:720px;
-      }
-
-      .logo-core{
-        width:min(20vw, 160px);
-        height:min(20vw, 160px);
-      }
-
-      .logo-glow{
-        width:152px;
-        height:152px;
-      }
-
-      .node-shell{
-        min-width:248px;
-        min-height:58px;
-        padding:12px 18px;
-      }
-
-      .menu-node.bottom .node-shell{
-        min-width:320px;
-        min-height:70px;
-      }
-
-      .node-title{font-size:14px}
-      .node-sub{font-size:7px; letter-spacing:1.6px}
-      .menu-node.bottom .node-title{font-size:20px}
-
-      .n1{ --x:25%; --y:38%; }
-      .n2{ --x:23.2%; --y:47.2%; }
-      .n3{ --x:22%; --y:56.4%; }
-      .n4{ --x:24.3%; --y:65.6%; }
-
-      .n5{ --x:75%; --y:38%; }
-      .n6{ --x:76.8%; --y:47.2%; }
-      .n7{ --x:78%; --y:56.4%; }
-      .n8{ --x:75.7%; --y:65.6%; }
-
-      .n9{ --x:50%; --y:81.5%; }
-
+      .panel{min-height:720px}
+      .globe{width:340px;height:340px}
+      .glow-center{width:340px;height:340px}
+      .ring{width:430px;height:430px}
+      .ring-2,.ring-3{width:390px;height:470px}
+      .logo-core{width:140px;height:140px}
+      .shell{min-width:246px;min-height:58px;padding:12px 16px}
+      .item.bottom .shell{min-width:320px;min-height:68px}
+      .title{font-size:14px}
+      .sub{font-size:7px;letter-spacing:1.6px}
+      .item.bottom .title{font-size:20px}
       .popup-grid{grid-template-columns:1fr}
       .footer-main{grid-template-columns:1fr}
-      .footer-contact-center{text-align:left}
-      .footer-nav-wrap{justify-content:flex-start}
+      .ft-center{text-align:left}
+      .ft-right{justify-content:flex-start}
     }
 
-    /* MOBILE */
     @media (max-width:760px){
       .topbar-inner{
-        width:min(100% - 14px, var(--max));
-        min-height:unset;
         flex-direction:column;
         align-items:flex-start;
-        gap:10px;
+        min-height:auto;
         padding:10px 0;
+        gap:10px;
       }
 
-      .brand-logo{
-        width:48px;
-        height:48px;
-        flex:0 0 48px;
-      }
-
-      .brand-name{font-size:15px}
+      .logo-box{width:48px;height:48px;flex:0 0 48px}
+      .brand-title{font-size:15px}
       .brand-site{font-size:12px}
-
-      .main-content{
-        width:min(100% - 14px, var(--max));
-        padding-top:10px;
-      }
-
-      .hero-stage{
-        padding:0 0 14px;
-      }
-
-      .tech-hero{
-        width:min(96vw, 440px);
-        height:auto;
-        min-height:940px;
-        border-radius:28px;
-      }
-
-      .tech-hero::after{
-        inset:10px;
-        border-radius:20px;
-      }
-
-      .logo-glow{
-        width:112px;
-        height:112px;
-        top:31.5%;
-      }
-
-      .logo-core{
-        width:min(36vw, 132px);
-        height:min(36vw, 132px);
-        position:absolute;
-        top:31.5%;
-        left:50%;
-        transform:translate(-50%,-50%);
-      }
-
-      .logo-core:hover{
-        transform:translate(-50%,-50%) scale(1.03);
-      }
-
-      .menu-node{
-        gap:8px;
-      }
-
-      .menu-node.left,
-      .menu-node.right{
-        flex-direction:row;
-      }
-
-      .node-dot{
-        width:13px;
-        height:13px;
-        flex:0 0 13px;
-      }
-
-      .menu-node.bottom .node-dot{
-        width:18px;
-        height:18px;
-        flex:0 0 18px;
-      }
-
-      .node-shell{
-        min-width:168px;
-        min-height:46px;
-        padding:8px 10px;
-      }
-
-      .menu-node.bottom .node-shell{
-        min-width:220px;
-        min-height:56px;
-        padding:12px 16px;
-      }
-
-      .node-title{
-        font-size:9px;
-        letter-spacing:.45px;
-      }
-
-      .node-sub{
-        font-size:5px;
-        letter-spacing:.9px;
-      }
-
-      .menu-node.bottom .node-title{font-size:15px}
-      .menu-node.bottom .node-sub{
-        font-size:6px;
-        letter-spacing:1.2px;
-      }
-
-      /* mobile balanced standard */
-      .n1{ --x:26%; --y:45.5%; }
-      .n2{ --x:24.4%; --y:53.5%; }
-      .n3{ --x:23.2%; --y:61.5%; }
-      .n4{ --x:25.4%; --y:69.5%; }
-
-      .n5{ --x:74%; --y:45.5%; }
-      .n6{ --x:75.6%; --y:53.5%; }
-      .n7{ --x:76.8%; --y:61.5%; }
-      .n8{ --x:74.6%; --y:69.5%; }
-
-      .n9{ --x:50%; --y:83.5%; }
-
-      .node-note{
-        font-size:12px;
-        min-height:38px;
-        padding:8px 14px;
-      }
-
-      .popup-card{
-        width:min(96vw, 980px);
-        padding:16px;
-        border-radius:20px;
-      }
-
+      .main{padding-top:10px}
+      .panel{min-height:940px;border-radius:26px}
+      .globe,.glow-center{width:240px;height:240px;top:31.5%}
+      .ring{width:300px;height:300px;top:31.5%}
+      .ring-2,.ring-3{width:270px;height:340px;top:31.5%}
+      .logo-core{width:118px;height:118px;top:31.5%}
+      .dot{width:13px;height:13px;flex:0 0 13px}
+      .item.bottom .dot{width:18px;height:18px;flex:0 0 18px}
+      .shell{min-width:168px;min-height:46px;padding:8px 10px}
+      .item.bottom .shell{min-width:220px;min-height:56px;padding:12px 16px}
+      .title{font-size:9px;letter-spacing:.45px}
+      .sub{font-size:5px;letter-spacing:.9px}
+      .item.bottom .title{font-size:15px}
+      .item.bottom .sub{font-size:6px;letter-spacing:1.2px}
+      .n1{--x:26%;--y:45.5%}
+      .n2{--x:24.4%;--y:53.5%}
+      .n3{--x:23.2%;--y:61.5%}
+      .n4{--x:25.4%;--y:69.5%}
+      .n5{--x:74%;--y:45.5%}
+      .n6{--x:75.6%;--y:53.5%}
+      .n7{--x:76.8%;--y:61.5%}
+      .n8{--x:74.6%;--y:69.5%}
+      .n9{--x:50%;--y:83.5%}
+      .note{font-size:12px;min-height:38px;padding:8px 14px}
+      .popup-card{padding:16px;border-radius:20px}
       .popup-head h3{font-size:20px}
-
-      .popup-text,
-      .company-detail{padding:14px}
-
-      .popup-text p,
-      .company-detail p{
-        font-size:14px;
-        line-height:1.72;
-      }
-
-      .footer-inner{
-        width:min(100% - 14px, var(--max));
-        padding:14px 0 12px;
-      }
-
-      .footer-card{
-        padding:12px;
-        border-radius:16px;
-      }
-
-      .footer-title{font-size:15px}
-      .footer-text{font-size:12px; line-height:1.6}
-
-      .footer-map-button{
-        width:100%;
-        min-height:52px;
-        justify-content:flex-start;
-        font-size:13px;
-      }
-
-      .footer-pin{
-        width:30px;
-        height:30px;
-        flex:0 0 30px;
-      }
-
-      .footer-bottom{font-size:11px}
-
-      .chat-widget{
-        right:12px;
-        bottom:12px;
-      }
-
-      .chat-item{
-        min-width:188px;
-        height:50px;
-        font-size:12px;
-      }
-
-      .chat-icon{
-        width:30px;
-        height:30px;
-        flex:0 0 30px;
-        font-size:11px;
-      }
-
-      .chat-fab{
-        width:58px;
-        height:58px;
-      }
+      .box{padding:14px}
+      .box p{font-size:14px;line-height:1.72}
+      .chat{right:12px;bottom:12px}
+      .chat-link{min-width:188px;height:50px;font-size:12px}
+      .chat-icon{width:30px;height:30px;flex:0 0 30px;font-size:11px}
+      .chat-btn{width:58px;height:58px}
+      .map-btn{width:100%;justify-content:flex-start;font-size:13px}
+      .pin{width:30px;height:30px;flex:0 0 30px}
+      .copy{font-size:11px}
     }
   </style>
 </head>
 <body>
-  <div class="site-wrap">
-    <header class="ssb-topbar">
+  <div class="site">
+    <header class="topbar">
       <div class="topbar-inner">
-        <div class="brand-wrap">
-          <div class="brand-logo">
-            <img src="images/logo.png" alt="Stealth Safety Bank Logo" />
+        <div class="brand">
+          <div class="logo-box">
+            <img src="images/logo.png" alt="SSB Logo" />
           </div>
           <div>
-            <div class="brand-name th-font">บริษัท สยามทำ จำกัด • <span class="en-font">Stealth Safety Bank System</span></div>
-            <div class="brand-site en-font">
+            <div class="brand-title">บริษัท สยามทำ จำกัด • <span class="en">Stealth Safety Bank System</span></div>
+            <div class="brand-site en">
               <a href="https://www.siamtham.com" target="_blank" rel="noopener">www.siamtham.com</a>
             </div>
           </div>
         </div>
 
-        <div class="topbar-actions">
-          <div class="translate-box">
-            <div id="google_translate_element"></div>
-          </div>
+        <div class="translate-box">
+          <div id="google_translate_element"></div>
         </div>
       </div>
     </header>
 
-    <main class="main-content">
-      <section class="hero-stage">
-        <div class="hero-center">
-          <div class="tech-hero open" id="techHero">
-            <div id="globe3d"></div>
-            <div class="world-overlay"></div>
-            <div class="menu-vignette"></div>
+    <main class="main">
+      <section class="hero">
+        <div>
+          <div class="panel">
+            <div class="glow-center"></div>
+            <div class="ring"></div>
+            <div class="ring-2"></div>
+            <div class="ring-3"></div>
+            <div class="globe"></div>
 
-            <div class="orbital-rings">
-              <svg viewBox="0 0 1400 900" aria-hidden="true">
-                <defs>
-                  <filter id="orbitGlow" x="-100%" y="-100%" width="300%" height="300%">
-                    <feGaussianBlur stdDeviation="2.2" result="blur"/>
-                    <feMerge>
-                      <feMergeNode in="blur"/>
-                      <feMergeNode in="SourceGraphic"/>
-                    </feMerge>
-                  </filter>
-                </defs>
-                <ellipse cx="700" cy="450" rx="320" ry="300" fill="none" stroke="rgba(125,218,255,.18)" stroke-width="1.4" filter="url(#orbitGlow)"/>
-                <ellipse cx="700" cy="450" rx="280" ry="338" fill="none" stroke="rgba(125,218,255,.12)" stroke-width="1.2" transform="rotate(28 700 450)"/>
-                <ellipse cx="700" cy="450" rx="280" ry="338" fill="none" stroke="rgba(125,218,255,.10)" stroke-width="1.2" transform="rotate(-28 700 450)"/>
-              </svg>
-            </div>
-
-            <div class="logo-glow"></div>
-
-            <button class="logo-core" id="logoMenuButton" type="button" aria-label="เปิดเมนู">
-              <img src="images/logo.png" alt="Stealth Safety Bank Logo" />
+            <button class="logo-core" type="button" aria-label="เปิดเมนู">
+              <img src="images/logo.png" alt="SSB Logo" />
             </button>
 
-            <div class="menu-layer">
-              <button class="menu-node left n1" type="button" data-popup="ssbmobile">
-                <div class="node-shell">
-                  <span class="node-text">
-                    <span class="node-title en-font">SSB MOBILE</span>
-                    <span class="node-sub en-font">SECURE MOBILE ACCESS</span>
+            <div class="menu">
+              <button class="item left n1" type="button" data-popup="ssbmobile">
+                <div class="shell">
+                  <span class="text">
+                    <span class="title en">SSB MOBILE</span>
+                    <span class="sub en">SECURE MOBILE ACCESS</span>
                   </span>
                 </div>
-                <span class="node-dot"></span>
+                <span class="dot"></span>
               </button>
 
-              <button class="menu-node left n2" type="button" data-popup="stealthbank">
-                <div class="node-shell">
-                  <span class="node-text">
-                    <span class="node-title en-font">STEALTH SAFETY BANK</span>
-                    <span class="node-sub en-font">PRIVATE BANKING SHIELD</span>
+              <button class="item left n2" type="button" data-popup="stealthbank">
+                <div class="shell">
+                  <span class="text">
+                    <span class="title en">STEALTH SAFETY BANK</span>
+                    <span class="sub en">PRIVATE BANKING SHIELD</span>
                   </span>
                 </div>
-                <span class="node-dot"></span>
+                <span class="dot"></span>
               </button>
 
-              <a class="menu-node left n3" href="agent-login.html">
-                <div class="node-shell">
-                  <span class="node-text">
-                    <span class="node-title en-font">AGENT LOGIN</span>
-                    <span class="node-sub en-font">DEALER MEMBER ACCESS</span>
+              <a class="item left n3" href="agent-login.html">
+                <div class="shell">
+                  <span class="text">
+                    <span class="title en">AGENT LOGIN</span>
+                    <span class="sub en">DEALER MEMBER ACCESS</span>
                   </span>
                 </div>
-                <span class="node-dot"></span>
+                <span class="dot"></span>
               </a>
 
-              <a class="menu-node left n4" href="about.html">
-                <div class="node-shell">
-                  <span class="node-text">
-                    <span class="node-title en-font">ABOUT COMPANY</span>
-                    <span class="node-sub en-font">SIAM TUM PROFILE</span>
+              <a class="item left n4" href="about.html">
+                <div class="shell">
+                  <span class="text">
+                    <span class="title en">ABOUT COMPANY</span>
+                    <span class="sub en">SIAM TUM PROFILE</span>
                   </span>
                 </div>
-                <span class="node-dot"></span>
+                <span class="dot"></span>
               </a>
 
-              <button class="menu-node right n5" type="button" data-popup="stealthbank">
-                <span class="node-dot"></span>
-                <div class="node-shell">
-                  <span class="node-text">
-                    <span class="node-title en-font">STEALTH SAFETY BANK</span>
-                    <span class="node-sub en-font">PRIVATE BANKING SHIELD</span>
+              <button class="item right n5" type="button" data-popup="stealthbank">
+                <span class="dot"></span>
+                <div class="shell">
+                  <span class="text">
+                    <span class="title en">STEALTH SAFETY BANK</span>
+                    <span class="sub en">PRIVATE BANKING SHIELD</span>
                   </span>
                 </div>
               </button>
 
-              <button class="menu-node right n6" type="button" data-popup="safetybook">
-                <span class="node-dot"></span>
-                <div class="node-shell">
-                  <span class="node-text">
-                    <span class="node-title en-font">STEALTH SAFETY BOOK</span>
-                    <span class="node-sub en-font">DISCREET STORAGE SYSTEM</span>
+              <button class="item right n6" type="button" data-popup="safetybook">
+                <span class="dot"></span>
+                <div class="shell">
+                  <span class="text">
+                    <span class="title en">STEALTH SAFETY BOOK</span>
+                    <span class="sub en">DISCREET STORAGE SYSTEM</span>
                   </span>
                 </div>
               </button>
 
-              <button class="menu-node right n7" type="button" data-popup="flare">
-                <span class="node-dot"></span>
-                <div class="node-shell">
-                  <span class="node-text">
-                    <span class="node-title en-font">FLARE TECHNOLOGY</span>
-                    <span class="node-sub en-font">AWARENESS PROTECTION MODE</span>
+              <button class="item right n7" type="button" data-popup="flare">
+                <span class="dot"></span>
+                <div class="shell">
+                  <span class="text">
+                    <span class="title en">FLARE TECHNOLOGY</span>
+                    <span class="sub en">AWARENESS PROTECTION MODE</span>
                   </span>
                 </div>
               </button>
 
-              <button class="menu-node right n8" type="button" id="contactButton">
-                <span class="node-dot"></span>
-                <div class="node-shell">
-                  <span class="node-text">
-                    <span class="node-title en-font">CONTACT</span>
-                    <span class="node-sub en-font">SIAM TUM COMPANY</span>
+              <button class="item right n8" type="button" id="contactBtn">
+                <span class="dot"></span>
+                <div class="shell">
+                  <span class="text">
+                    <span class="title en">CONTACT</span>
+                    <span class="sub en">SIAM TUM COMPANY</span>
                   </span>
                 </div>
               </button>
 
-              <a class="menu-node bottom n9" href="book.html">
-                <span class="node-dot"></span>
-                <div class="node-shell">
-                  <span class="node-text">
-                    <span class="node-title en-font">START ORDER</span>
-                    <span class="node-sub en-font">GO TO PRODUCT BOOKING</span>
+              <a class="item bottom n9" href="book.html">
+                <span class="dot"></span>
+                <div class="shell">
+                  <span class="text">
+                    <span class="title en">START ORDER</span>
+                    <span class="sub en">GO TO PRODUCT BOOKING</span>
                   </span>
                 </div>
               </a>
             </div>
           </div>
 
-          <div class="node-note th-font">คลิกที่โลโก้เพื่อเปิดเมนู</div>
+          <div class="note">คลิกที่โลโก้เพื่อเปิดเมนู</div>
         </div>
       </section>
     </main>
 
-    <footer class="ssb-footer">
+    <footer class="footer">
       <div class="footer-inner">
         <div class="footer-card">
           <div class="footer-main">
             <div>
-              <h3 class="footer-title th-font">บริษัท สยามทำ จำกัด</h3>
-              <p class="footer-text th-font"><strong>ที่อยู่:</strong> 54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
+              <h3 class="ft-title">บริษัท สยามทำ จำกัด</h3>
+              <p class="ft-text"><strong>ที่อยู่:</strong> 54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
             </div>
 
-            <div class="footer-contact-center">
-              <p class="footer-text th-font"><strong>โทร:</strong> <a class="footer-link" href="tel:020432988">02-043-2988</a></p>
-              <p class="footer-text th-font"><strong>มือถือ:</strong> <a class="footer-link" href="tel:0649514888">064-951-4888</a></p>
-              <p class="footer-text th-font"><strong>เว็บไซต์:</strong> <a class="footer-link en-font" href="https://www.siamtham.com" target="_blank" rel="noopener">www.siamtham.com</a></p>
+            <div class="ft-center">
+              <p class="ft-text"><strong>โทร:</strong> <a class="ft-link" href="tel:020432988">02-043-2988</a></p>
+              <p class="ft-text"><strong>มือถือ:</strong> <a class="ft-link" href="tel:0649514888">064-951-4888</a></p>
+              <p class="ft-text"><strong>เว็บไซต์:</strong> <a class="ft-link en" href="https://www.siamtham.com" target="_blank" rel="noopener">www.siamtham.com</a></p>
             </div>
 
-            <div class="footer-nav-wrap">
-              <a
-                class="footer-map-button th-font"
-                href="https://maps.app.goo.gl/Dz4B1kpqVbmWhkYX7"
-                target="_blank"
-                rel="noopener"
-              >
-                <svg class="footer-pin" viewBox="0 0 64 64" aria-hidden="true">
+            <div class="ft-right">
+              <a class="map-btn" href="https://maps.app.goo.gl/Dz4B1kpqVbmWhkYX7" target="_blank" rel="noopener">
+                <svg class="pin" viewBox="0 0 64 64" aria-hidden="true">
                   <path fill="#ff2a2a" d="M32 4C20.4 4 11 13.4 11 25c0 16.3 18.8 34 20.1 35.2a1.3 1.3 0 0 0 1.8 0C34.2 59 53 41.3 53 25 53 13.4 43.6 4 32 4z"/>
                   <circle cx="32" cy="25" r="10.5" fill="#ffffff"/>
                   <circle cx="32" cy="25" r="5.3" fill="#ff2a2a"/>
@@ -1432,44 +940,26 @@
           </div>
         </div>
 
-        <div class="footer-bottom th-font">
-          © Siam Tum Co., Ltd. • <span class="en-font">Stealth Safety Bank System</span><br>
-          เว็บไซต์นี้ทำโดย <span class="en-font">Mr.Tingly Marketing Online</span>
+        <div class="copy">
+          © Siam Tum Co., Ltd. • <span class="en">Stealth Safety Bank System</span><br>
+          เว็บไซต์นี้ทำโดย <span class="en">Mr.Tingly Marketing Online</span>
         </div>
       </div>
     </footer>
   </div>
 
-  <div id="companyPopup" class="popup-backdrop">
-    <div class="popup-card company">
-      <div class="popup-head">
-        <h3 class="th-font">บริษัท สยามทำ จำกัด</h3>
-        <button class="popup-x" type="button" id="closeCompanyPopupTop">×</button>
-      </div>
-
-      <div class="company-detail">
-        <p class="th-font"><strong>ที่อยู่:</strong> 54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
-        <p class="th-font"><strong>เลขทะเบียน:</strong> 0105566099954</p>
-        <p class="th-font"><strong>โทร:</strong> 02-043-2988</p>
-        <p class="th-font"><strong>มือถือ:</strong> 064-951-4888</p>
-      </div>
-
-      <button class="popup-close th-font" type="button" id="closeCompanyPopupBottom">ปิด</button>
-    </div>
-  </div>
-
-  <div id="infoPopup" class="popup-backdrop">
+  <div class="popup" id="infoPopup">
     <div class="popup-card">
       <div class="popup-head">
-        <h3 id="infoTitle" class="en-font">TITLE</h3>
-        <button class="popup-x" type="button" id="closeInfoPopupTop">×</button>
+        <h3 id="infoTitle" class="en">TITLE</h3>
+        <button class="xbtn" type="button" id="closeInfoTop">×</button>
       </div>
 
       <div class="popup-grid">
-        <div class="popup-text th-font" id="infoText"></div>
+        <div class="box" id="infoText"></div>
 
-        <div class="video-wrap">
-          <div class="video-frame">
+        <div class="box video">
+          <div class="frame">
             <iframe
               id="infoVideo"
               src=""
@@ -1481,51 +971,62 @@
         </div>
       </div>
 
-      <button class="popup-close th-font" type="button" id="closeInfoPopupBottom">ปิด</button>
+      <button class="close-btn" type="button" id="closeInfoBottom">ปิด</button>
     </div>
   </div>
 
-  <div class="chat-widget" id="chatWidget">
-    <div class="chat-menu" id="chatMenu">
-      <a class="chat-item line" href="https://line.me/R/ti/p/@siamtham" target="_blank" rel="noopener">
-        <span class="chat-icon en-font">LINE</span>
-        <span class="en-font">LINE OFFICIAL</span>
+  <div class="popup" id="companyPopup">
+    <div class="popup-card company">
+      <div class="popup-head">
+        <h3>บริษัท สยามทำ จำกัด</h3>
+        <button class="xbtn" type="button" id="closeCompanyTop">×</button>
+      </div>
+
+      <div class="box">
+        <p><strong>ที่อยู่:</strong> 54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
+        <p><strong>เลขทะเบียน:</strong> 0105566099954</p>
+        <p><strong>โทร:</strong> 02-043-2988</p>
+        <p><strong>มือถือ:</strong> 064-951-4888</p>
+      </div>
+
+      <button class="close-btn" type="button" id="closeCompanyBottom">ปิด</button>
+    </div>
+  </div>
+
+  <div class="chat" id="chatWidget">
+    <div class="chat-menu">
+      <a class="chat-link line" href="https://line.me/R/ti/p/@siamtham" target="_blank" rel="noopener">
+        <span class="chat-icon en">LINE</span>
+        <span class="en">LINE OFFICIAL</span>
       </a>
 
-      <a class="chat-item facebook" href="https://www.facebook.com/profile.php?id=61556844339863" target="_blank" rel="noopener">
-        <span class="chat-icon en-font">FB</span>
-        <span class="en-font">FACEBOOK</span>
+      <a class="chat-link facebook" href="https://www.facebook.com/profile.php?id=61556844339863" target="_blank" rel="noopener">
+        <span class="chat-icon en">FB</span>
+        <span class="en">FACEBOOK</span>
       </a>
 
-      <a class="chat-item youtube" href="https://www.youtube.com/@siamtham" target="_blank" rel="noopener">
-        <span class="chat-icon en-font">YT</span>
-        <span class="en-font">YOUTUBE</span>
+      <a class="chat-link youtube" href="https://www.youtube.com/@siamtham" target="_blank" rel="noopener">
+        <span class="chat-icon en">YT</span>
+        <span class="en">YOUTUBE</span>
       </a>
 
-      <a class="chat-item tiktok" href="#" target="_blank" rel="noopener">
-        <span class="chat-icon en-font">TT</span>
-        <span class="en-font">TIKTOK</span>
+      <a class="chat-link tiktok" href="#" target="_blank" rel="noopener">
+        <span class="chat-icon en">TT</span>
+        <span class="en">TIKTOK</span>
       </a>
     </div>
 
-    <button class="chat-fab" id="chatToggle" type="button" aria-label="เปิดเมนูแชท">
-      <span class="chat-fab-text">
-        <span class="en-font">Chat</span>
-        <span class="en-font">Online</span>
-      </span>
-      <span class="chat-caret">⌃</span>
-    </button>
+    <button class="chat-btn en" id="chatToggle" type="button">Chat</button>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
   <script>
     const popupData = {
       ssbmobile: {
         title: "SSB MOBILE",
         video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
         text: `
-          <p>SSB Mobile คือระบบการใช้งานอุปกรณ์สำหรับธุรกรรมการเงินที่แยกจากการใช้งานทั่วไป เพื่อลดความเสี่ยงจากแอปที่ไม่จำเป็น การหลอกลวง และการโจมตีทางไซเบอร์</p>
-          <p>แนวคิดสำคัญคือใช้งานเฉพาะสิ่งที่จำเป็นต่อการทำธุรกรรมให้ปลอดภัย เรียบง่าย และควบคุมได้มากขึ้น</p>
+          <p>SSB Mobile คือระบบสำหรับใช้งานธุรกรรมการเงินแบบแยกจากการใช้งานทั่วไป เพื่อลดความเสี่ยงจากแอปที่ไม่จำเป็น การหลอกลวง และการโจมตีทางไซเบอร์</p>
+          <p>แนวคิดคือใช้งานเฉพาะสิ่งที่จำเป็นต่อการทำธุรกรรมให้ปลอดภัย เรียบง่าย และควบคุมได้มากขึ้น</p>
           <p>เหมาะสำหรับผู้ที่ต้องการความมั่นใจสูงในการจัดการเงินผ่านมือถือ</p>
         `
       },
@@ -1558,103 +1059,60 @@
       }
     };
 
-    const techHero = document.getElementById("techHero");
-    const logoMenuButton = document.getElementById("logoMenuButton");
     const infoPopup = document.getElementById("infoPopup");
+    const companyPopup = document.getElementById("companyPopup");
     const infoTitle = document.getElementById("infoTitle");
     const infoText = document.getElementById("infoText");
     const infoVideo = document.getElementById("infoVideo");
-    const companyPopup = document.getElementById("companyPopup");
 
-    function openInfoPopup(key){
-      const data = popupData[key];
-      if (!data) return;
-      infoTitle.textContent = data.title;
-      infoText.innerHTML = data.text;
-      infoVideo.src = data.video + "?rel=0&autoplay=0";
-      infoPopup.style.display = "flex";
-    }
+    document.querySelectorAll("[data-popup]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const data = popupData[btn.dataset.popup];
+        if (!data) return;
+        infoTitle.textContent = data.title;
+        infoText.innerHTML = data.text;
+        infoVideo.src = data.video + "?rel=0";
+        infoPopup.style.display = "flex";
+      });
+    });
 
-    function closeInfoPopup(){
+    function closeInfo(){
       infoVideo.src = "";
       infoPopup.style.display = "none";
     }
 
-    function openCompanyPopup(){
-      companyPopup.style.display = "flex";
-    }
-
-    function closeCompanyPopup(){
+    function closeCompany(){
       companyPopup.style.display = "none";
     }
 
-    if (logoMenuButton && techHero){
-      logoMenuButton.addEventListener("click", function(event){
-        event.stopPropagation();
-        techHero.classList.toggle("open");
-      });
-    }
-
-    if (techHero){
-      techHero.addEventListener("click", function(event){
-        event.stopPropagation();
-      });
-
-      const popupButtons = techHero.querySelectorAll("[data-popup]");
-      popupButtons.forEach(btn => {
-        btn.addEventListener("click", function(event){
-          event.stopPropagation();
-          const key = btn.getAttribute("data-popup");
-          openInfoPopup(key);
-        });
-      });
-
-      const contactButton = document.getElementById("contactButton");
-      if (contactButton){
-        contactButton.addEventListener("click", function(event){
-          event.stopPropagation();
-          openCompanyPopup();
-        });
-      }
-    }
-
-    document.getElementById("closeInfoPopupTop")?.addEventListener("click", closeInfoPopup);
-    document.getElementById("closeInfoPopupBottom")?.addEventListener("click", closeInfoPopup);
-    document.getElementById("closeCompanyPopupTop")?.addEventListener("click", closeCompanyPopup);
-    document.getElementById("closeCompanyPopupBottom")?.addEventListener("click", closeCompanyPopup);
-
-    infoPopup?.addEventListener("click", function(event){
-      if (event.target === infoPopup) closeInfoPopup();
+    document.getElementById("contactBtn").addEventListener("click", () => {
+      companyPopup.style.display = "flex";
     });
 
-    companyPopup?.addEventListener("click", function(event){
-      if (event.target === companyPopup) closeCompanyPopup();
+    document.getElementById("closeInfoTop").addEventListener("click", closeInfo);
+    document.getElementById("closeInfoBottom").addEventListener("click", closeInfo);
+    document.getElementById("closeCompanyTop").addEventListener("click", closeCompany);
+    document.getElementById("closeCompanyBottom").addEventListener("click", closeCompany);
+
+    infoPopup.addEventListener("click", e => {
+      if (e.target === infoPopup) closeInfo();
     });
 
-    document.addEventListener("click", function(event){
-      const infoOpen = infoPopup && infoPopup.style.display === "flex";
-      const companyOpen = companyPopup && companyPopup.style.display === "flex";
-
-      if (!infoOpen && !companyOpen && techHero && !techHero.contains(event.target)){
-        techHero.classList.remove("open");
-      }
+    companyPopup.addEventListener("click", e => {
+      if (e.target === companyPopup) closeCompany();
     });
 
     const chatWidget = document.getElementById("chatWidget");
-    const chatToggle = document.getElementById("chatToggle");
+    document.getElementById("chatToggle").addEventListener("click", e => {
+      e.stopPropagation();
+      chatWidget.classList.toggle("open");
+    });
 
-    if (chatWidget && chatToggle){
-      chatToggle.addEventListener("click", function(event){
-        event.stopPropagation();
-        chatWidget.classList.toggle("open");
-      });
-
-      document.addEventListener("click", function(event){
-        if (!chatWidget.contains(event.target)){
-          chatWidget.classList.remove("open");
-        }
-      });
-    }
+    document.addEventListener("click", e => {
+      if (!chatWidget.contains(e.target)) {
+        chatWidget.classList.remove("open");
+      }
+    });
 
     function googleTranslateElementInit() {
       new google.translate.TranslateElement(
@@ -1666,161 +1124,8 @@
         "google_translate_element"
       );
     }
+
     window.googleTranslateElementInit = googleTranslateElementInit;
-
-    /* THREE.JS GLOBE */
-    (function(){
-      const mount = document.getElementById("globe3d");
-      if (!mount || !window.THREE) return;
-
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(42, mount.clientWidth / mount.clientHeight, 0.1, 1000);
-
-      const renderer = new THREE.WebGLRenderer({
-        antialias:true,
-        alpha:true,
-        powerPreference:"high-performance"
-      });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.setSize(mount.clientWidth, mount.clientHeight);
-      renderer.outputEncoding = THREE.sRGBEncoding;
-      mount.appendChild(renderer.domElement);
-
-      const isMobile = window.matchMedia("(max-width: 760px)").matches;
-
-      /* world textures */
-      const loader = new THREE.TextureLoader();
-      const earthMap = loader.load("https://threejs.org/examples/textures/planets/earth_atmos_2048.jpg");
-      const earthBump = loader.load("https://threejs.org/examples/textures/planets/earth_normal_2048.jpg");
-      const earthSpec = loader.load("https://threejs.org/examples/textures/planets/earth_specular_2048.jpg");
-      const cloudMap = loader.load("https://threejs.org/examples/textures/planets/earth_clouds_1024.png");
-
-      const group = new THREE.Group();
-      scene.add(group);
-
-      const earthRadius = isMobile ? 2.55 : 3.5;
-
-      const earth = new THREE.Mesh(
-        new THREE.SphereGeometry(earthRadius, 96, 96),
-        new THREE.MeshPhongMaterial({
-          map: earthMap,
-          bumpMap: earthBump,
-          bumpScale: 0.08,
-          specularMap: earthSpec,
-          specular: new THREE.Color(0x335577),
-          shininess: 20
-        })
-      );
-      group.add(earth);
-
-      const clouds = new THREE.Mesh(
-        new THREE.SphereGeometry(earthRadius * 1.012, 96, 96),
-        new THREE.MeshPhongMaterial({
-          map: cloudMap,
-          transparent:true,
-          opacity:0.34,
-          depthWrite:false
-        })
-      );
-      group.add(clouds);
-
-      const atmosphere = new THREE.Mesh(
-        new THREE.SphereGeometry(earthRadius * 1.08, 96, 96),
-        new THREE.ShaderMaterial({
-          transparent:true,
-          blending:THREE.AdditiveBlending,
-          side:THREE.BackSide,
-          uniforms:{
-            c:{ value:0.55 },
-            p:{ value:3.0 },
-            glowColor:{ value:new THREE.Color(0x6fd4ff) },
-            viewVector:{ value:camera.position }
-          },
-          vertexShader:`
-            uniform vec3 viewVector;
-            uniform float c;
-            uniform float p;
-            varying float intensity;
-            void main() {
-              vec3 vNormal = normalize(normalMatrix * normal);
-              vec3 vNormel = normalize(normalMatrix * viewVector);
-              intensity = pow(c - dot(vNormal, vNormel), p);
-              gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-            }
-          `,
-          fragmentShader:`
-            uniform vec3 glowColor;
-            varying float intensity;
-            void main() {
-              gl_FragColor = vec4(glowColor * intensity, intensity * 0.72);
-            }
-          `
-        })
-      );
-      group.add(atmosphere);
-
-      /* rings */
-      function makeRing(radiusX, radiusY, tiltX, tiltY, color, opacity){
-        const curve = new THREE.EllipseCurve(0,0,radiusX,radiusY,0,Math.PI * 2,false,0);
-        const points = curve.getPoints(240);
-        const geometry = new THREE.BufferGeometry().setFromPoints(points.map(p => new THREE.Vector3(p.x, p.y, 0)));
-        const material = new THREE.LineBasicMaterial({
-          color,
-          transparent:true,
-          opacity
-        });
-        const line = new THREE.LineLoop(geometry, material);
-        line.rotation.x = tiltX;
-        line.rotation.y = tiltY;
-        return line;
-      }
-
-      const ringGroup = new THREE.Group();
-      ringGroup.add(makeRing(earthRadius * 1.28, earthRadius * 1.28, 0.9, 0.1, 0x67d8ff, 0.20));
-      ringGroup.add(makeRing(earthRadius * 1.15, earthRadius * 1.45, 0.5, 0.75, 0x67d8ff, 0.14));
-      ringGroup.add(makeRing(earthRadius * 1.15, earthRadius * 1.45, -0.5, -0.75, 0x67d8ff, 0.12));
-      group.add(ringGroup);
-
-      /* lights */
-      scene.add(new THREE.AmbientLight(0xbadfff, 0.90));
-
-      const light1 = new THREE.DirectionalLight(0xffffff, 1.55);
-      light1.position.set(8, 3, 6);
-      scene.add(light1);
-
-      const light2 = new THREE.DirectionalLight(0x63beff, 1.1);
-      light2.position.set(-10, -3, -8);
-      scene.add(light2);
-
-      const point = new THREE.PointLight(0x5cc6ff, 1.6, 60, 2);
-      point.position.set(0, 0, 8);
-      scene.add(point);
-
-      camera.position.z = isMobile ? 8.4 : 10.8;
-      group.position.y = isMobile ? 0.85 : 0.55;
-
-      let raf;
-      function animate(){
-        raf = requestAnimationFrame(animate);
-        earth.rotation.y += 0.0018;
-        clouds.rotation.y += 0.00215;
-        ringGroup.rotation.z += 0.0012;
-        ringGroup.rotation.y += 0.00055;
-        renderer.render(scene, camera);
-      }
-      animate();
-
-      function resize(){
-        const w = mount.clientWidth;
-        const h = mount.clientHeight;
-        renderer.setSize(w, h);
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
-      }
-      window.addEventListener("resize", resize);
-
-      window.addEventListener("beforeunload", () => cancelAnimationFrame(raf));
-    })();
   </script>
 
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
