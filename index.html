@@ -17,13 +17,10 @@
       --ssb-blue:#0b4ea2;
       --ssb-blue-2:#1b67cf;
       --ssb-blue-dark:#072f66;
-      --ssb-blue-soft:#eaf2ff;
       --ssb-gold:#d4af37;
       --ssb-red:#e31b23;
       --ssb-red-dark:#b90f16;
       --ssb-text:#183452;
-      --ssb-text-soft:#56708d;
-      --white:#ffffff;
       --page-1:#f8fbff;
       --page-2:#eef4fc;
       --page-3:#dde8f6;
@@ -83,12 +80,11 @@
       flex-direction:column;
     }
 
-    /* HEAD */
     .ssb-topbar{
       position:sticky;
       top:0;
       z-index:1000;
-      background:linear-gradient(135deg, var(--ssb-blue-dark) 0%, var(--ssb-blue) 52%, var(--ssb-blue-2) 100%);
+      background:linear-gradient(135deg, #072f66 0%, #0b4ea2 52%, #1b67cf 100%);
       box-shadow:0 10px 28px rgba(7,47,102,.22);
       border-bottom:1px solid rgba(255,255,255,.12);
       backdrop-filter:blur(14px);
@@ -200,7 +196,6 @@
       max-width:260px;
     }
 
-    /* MAIN */
     .main-content{
       flex:1;
       width:min(var(--max-width), calc(100% - 20px));
@@ -237,11 +232,11 @@
       justify-content:center;
       isolation:isolate;
       background:
-        radial-gradient(circle at 50% 50%, rgba(28,82,180,.32) 0%, rgba(16,52,118,.18) 18%, rgba(8,31,74,.95) 40%, rgba(4,18,46,.98) 72%, rgba(3,14,36,.99) 100%);
+        radial-gradient(circle at 50% 50%, rgba(22,70,158,.26) 0%, rgba(12,43,98,.16) 20%, rgba(7,29,71,.96) 46%, rgba(4,18,46,.99) 76%, rgba(3,14,36,.995) 100%);
       box-shadow:
         0 40px 90px rgba(7,47,102,.24),
         inset 0 0 0 1px rgba(129,186,255,.08),
-        inset 0 0 120px rgba(66,136,255,.10);
+        inset 0 0 120px rgba(66,136,255,.08);
     }
 
     .tech-hero::before{
@@ -251,13 +246,10 @@
       z-index:0;
       pointer-events:none;
       background:
-        radial-gradient(circle at center, rgba(95,170,255,.18) 0%, rgba(95,170,255,.08) 18%, rgba(95,170,255,.03) 34%, transparent 56%),
-        linear-gradient(rgba(129,186,255,.07) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(129,186,255,.07) 1px, transparent 1px);
-      background-size:100% 100%, 38px 38px, 38px 38px;
-      mask-image:radial-gradient(circle at center, rgba(0,0,0,1) 0%, rgba(0,0,0,.95) 54%, transparent 88%);
-      -webkit-mask-image:radial-gradient(circle at center, rgba(0,0,0,1) 0%, rgba(0,0,0,.95) 54%, transparent 88%);
-      opacity:.9;
+        linear-gradient(rgba(129,186,255,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(129,186,255,.06) 1px, transparent 1px);
+      background-size:38px 38px, 38px 38px;
+      opacity:.85;
     }
 
     .tech-hero::after{
@@ -276,7 +268,7 @@
       inset:0;
       z-index:0;
       pointer-events:none;
-      opacity:.65;
+      opacity:.55;
       background-image:
         radial-gradient(circle at 12% 20%, rgba(255,255,255,.8) 0 1px, transparent 1.5px),
         radial-gradient(circle at 22% 72%, rgba(255,255,255,.65) 0 1px, transparent 1.5px),
@@ -294,27 +286,26 @@
       position:absolute;
       left:50%;
       top:50%;
-      width:560px;
-      height:560px;
+      width:250px;
+      height:250px;
       transform:translate(-50%, -50%);
       z-index:1;
       pointer-events:none;
-      background:
-        radial-gradient(circle, rgba(148,213,255,.42) 0%, rgba(102,186,255,.18) 20%, rgba(78,153,255,.08) 36%, transparent 64%);
+      background:radial-gradient(circle, rgba(255,255,255,.82) 0%, rgba(210,235,255,.48) 34%, rgba(139,197,255,.16) 55%, transparent 74%);
       filter:blur(8px);
-      animation:centerGlow 6s ease-in-out infinite;
+      animation:centerGlow 5.8s ease-in-out infinite;
     }
 
     .center-burst{
       position:absolute;
       left:50%;
       top:50%;
-      width:800px;
-      height:800px;
+      width:760px;
+      height:760px;
       transform:translate(-50%, -50%);
       z-index:1;
       pointer-events:none;
-      opacity:.65;
+      opacity:.62;
     }
 
     .center-burst::before{
@@ -325,22 +316,21 @@
       background:
         conic-gradient(
           from 0deg,
-          transparent 0deg 8deg,
-          rgba(133,203,255,.65) 8deg 10deg,
-          transparent 10deg 18deg,
-          rgba(133,203,255,.32) 18deg 19deg,
-          transparent 19deg 28deg,
-          rgba(133,203,255,.55) 28deg 30deg,
-          transparent 30deg 42deg,
-          rgba(133,203,255,.30) 42deg 43deg,
-          transparent 43deg 54deg,
-          rgba(133,203,255,.55) 54deg 56deg,
-          transparent 56deg 360deg
+          transparent 0deg 7deg,
+          rgba(133,203,255,.55) 7deg 9deg,
+          transparent 9deg 17deg,
+          rgba(133,203,255,.22) 17deg 18deg,
+          transparent 18deg 27deg,
+          rgba(133,203,255,.42) 27deg 29deg,
+          transparent 29deg 41deg,
+          rgba(133,203,255,.18) 41deg 42deg,
+          transparent 42deg 53deg,
+          rgba(133,203,255,.40) 53deg 55deg,
+          transparent 55deg 360deg
         );
-      mask-image:radial-gradient(circle, transparent 0 23%, rgba(0,0,0,.9) 39%, transparent 70%);
-      -webkit-mask-image:radial-gradient(circle, transparent 0 23%, rgba(0,0,0,.9) 39%, transparent 70%);
+      mask-image:radial-gradient(circle, transparent 0 20%, rgba(0,0,0,.86) 29%, transparent 53%);
+      -webkit-mask-image:radial-gradient(circle, transparent 0 20%, rgba(0,0,0,.86) 29%, transparent 53%);
       animation:ringRotate 26s linear infinite;
-      filter:blur(.2px);
     }
 
     .center-rings{
@@ -361,23 +351,23 @@
     }
 
     .ring.r1{
-      width:310px;
-      height:310px;
-      border:1px solid rgba(137,201,255,.12);
-      box-shadow:0 0 22px rgba(104,176,255,.08), inset 0 0 22px rgba(104,176,255,.05);
+      width:220px;
+      height:220px;
+      border:1px solid rgba(137,201,255,.10);
+      box-shadow:0 0 16px rgba(104,176,255,.06), inset 0 0 16px rgba(104,176,255,.04);
     }
 
     .ring.r2{
-      width:470px;
-      height:470px;
-      border:1px dashed rgba(137,201,255,.16);
+      width:420px;
+      height:420px;
+      border:1px dashed rgba(137,201,255,.12);
       animation:ringRotateReverse 28s linear infinite;
     }
 
     .ring.r3{
-      width:660px;
-      height:660px;
-      border:1px solid rgba(137,201,255,.06);
+      width:620px;
+      height:620px;
+      border:1px solid rgba(137,201,255,.05);
       animation:ringRotate 34s linear infinite;
     }
 
@@ -391,8 +381,8 @@
     .logo-core{
       position:relative;
       z-index:8;
-      width:min(31vw, 290px);
-      height:min(31vw, 290px);
+      width:min(31vw, 250px);
+      height:min(31vw, 250px);
       border:none;
       padding:0;
       background:transparent;
@@ -414,9 +404,9 @@
       object-fit:contain;
       display:block;
       filter:
-        drop-shadow(0 0 22px rgba(136,208,255,.38))
-        drop-shadow(0 20px 36px rgba(0,0,0,.26))
-        drop-shadow(0 0 44px rgba(212,175,55,.14));
+        drop-shadow(0 0 14px rgba(136,208,255,.24))
+        drop-shadow(0 16px 30px rgba(0,0,0,.24))
+        drop-shadow(0 0 32px rgba(212,175,55,.12));
     }
 
     .menu-layer{
@@ -431,7 +421,7 @@
       position:absolute;
       left:var(--x);
       top:var(--y);
-      transform:translate(-50%, -50%) scale(.9);
+      transform:translate(-50%, -50%) scale(.92);
       opacity:0;
       pointer-events:none;
       background:none;
@@ -442,7 +432,11 @@
       align-items:center;
       gap:14px;
       cursor:pointer;
-      transition:transform .34s cubic-bezier(.2,.8,.2,1), opacity .32s ease, filter .24s ease;
+      transition:
+        transform .34s cubic-bezier(.2,.8,.2,1),
+        opacity .32s ease,
+        filter .24s ease,
+        text-shadow .24s ease;
       color:#eaf7ff;
     }
 
@@ -464,14 +458,39 @@
       gap:12px;
     }
 
-    .menu-node:hover{
-      filter:brightness(1.16);
-    }
-
     .tech-hero.open .menu-node{
       opacity:1;
       pointer-events:auto;
       transform:translate(-50%, -50%) scale(1);
+    }
+
+    .menu-node:hover{
+      filter:brightness(1.22);
+    }
+
+    .menu-node:hover .node-title{
+      text-shadow:
+        0 0 10px rgba(150,214,255,.78),
+        0 0 30px rgba(150,214,255,.34);
+    }
+
+    .menu-node:hover .node-sub{
+      color:rgba(222,242,255,.98);
+    }
+
+    .menu-node:hover .node-dot{
+      transform:scale(1.18);
+      box-shadow:
+        0 0 0 5px rgba(82,163,255,.13),
+        0 0 22px rgba(82,163,255,.8),
+        0 0 42px rgba(82,163,255,.42);
+    }
+
+    .menu-node.bottom:hover .node-dot{
+      box-shadow:
+        0 0 0 6px rgba(227,27,35,.14),
+        0 0 24px rgba(227,27,35,.82),
+        0 0 44px rgba(227,27,35,.38);
     }
 
     .node-dot{
@@ -486,6 +505,7 @@
         0 0 16px rgba(82,163,255,.65),
         0 0 34px rgba(82,163,255,.35);
       animation:dotPulse 2.1s ease-in-out infinite;
+      transition:transform .22s ease, box-shadow .22s ease;
     }
 
     .node-dot::before{
@@ -521,6 +541,7 @@
         0 0 8px rgba(117,191,255,.58),
         0 0 22px rgba(117,191,255,.22);
       white-space:nowrap;
+      transition:text-shadow .22s ease;
     }
 
     .node-sub{
@@ -532,6 +553,7 @@
       color:rgba(185,223,255,.88);
       text-shadow:0 0 10px rgba(117,191,255,.18);
       white-space:nowrap;
+      transition:color .22s ease;
     }
 
     .menu-node.bottom .node-title{
@@ -557,17 +579,18 @@
         0 0 36px rgba(227,27,35,.32);
     }
 
-    /* positions desktop */
-    .n1{ --x:26%; --y:18%; }
-    .n2{ --x:74%; --y:18%; }
-    .n3{ --x:83%; --y:36%; }
-    .n4{ --x:79%; --y:56%; }
-    .n5{ --x:73%; --y:74%; }
-    .n6{ --x:50%; --y:83%; }
-    .n7{ --x:27%; --y:74%; }
-    .n8{ --x:21%; --y:56%; }
-    .n9{ --x:17%; --y:36%; }
-    .n10{ --x:24%; --y:18%; }
+    /* positions desktop fixed */
+    .n1{ --x:31%; --y:19%; }
+    .n10{ --x:27%; --y:19%; }
+
+    .n2{ --x:72%; --y:19%; }
+    .n3{ --x:79%; --y:37%; }
+    .n4{ --x:76%; --y:57%; }
+    .n5{ --x:71%; --y:74%; }
+    .n6{ --x:50%; --y:82%; }
+    .n7{ --x:29%; --y:74%; }
+    .n8{ --x:23%; --y:57%; }
+    .n9{ --x:18%; --y:37%; }
 
     .node-note{
       display:inline-flex;
@@ -594,7 +617,6 @@
       user-select:none;
     }
 
-    /* POPUP */
     .popup-backdrop{
       position:fixed;
       inset:0;
@@ -669,7 +691,7 @@
     }
 
     .popup-text{
-      background:var(--white);
+      background:#fff;
       border:1px solid rgba(11,78,162,.10);
       border-radius:20px;
       padding:18px;
@@ -686,7 +708,7 @@
     .popup-text p:last-child{ margin-bottom:0; }
 
     .company-detail{
-      background:var(--white);
+      background:#fff;
       border:1px solid rgba(11,78,162,.10);
       border-radius:20px;
       padding:18px;
@@ -753,7 +775,6 @@
       filter:brightness(1.04);
     }
 
-    /* CHAT */
     .chat-widget{
       position:fixed;
       right:18px;
@@ -870,11 +891,10 @@
 
     .chat-widget.open .chat-caret{ transform:rotate(180deg); }
 
-    /* FOOTER */
     .ssb-footer{
       position:relative;
       z-index:1;
-      background:linear-gradient(135deg, var(--ssb-blue-dark) 0%, var(--ssb-blue) 52%, var(--ssb-blue-2) 100%);
+      background:linear-gradient(135deg, #072f66 0%, #0b4ea2 52%, #1b67cf 100%);
       border-top:1px solid rgba(255,255,255,.12);
       box-shadow:0 -10px 28px rgba(7,47,102,.18);
       overflow:hidden;
@@ -1012,7 +1032,6 @@
       line-height:1.7;
     }
 
-    /* animation */
     @keyframes ringRotate{
       from{ transform:translate(-50%, -50%) rotate(0deg); }
       to{ transform:translate(-50%, -50%) rotate(360deg); }
@@ -1030,10 +1049,9 @@
 
     @keyframes centerGlow{
       0%,100%{ transform:translate(-50%, -50%) scale(1); opacity:1; }
-      50%{ transform:translate(-50%, -50%) scale(1.05); opacity:.85; }
+      50%{ transform:translate(-50%, -50%) scale(1.04); opacity:.86; }
     }
 
-    /* tablet */
     @media (max-width:1100px){
       .topbar-inner{ min-height:72px; }
       .brand-name{ font-size:18px; }
@@ -1045,26 +1063,37 @@
       }
 
       .logo-core{
-        width:min(32vw, 240px);
-        height:min(32vw, 240px);
+        width:min(32vw, 220px);
+        height:min(32vw, 220px);
       }
 
       .center-glow{
-        width:460px;
-        height:460px;
+        width:220px;
+        height:220px;
       }
 
       .center-burst{
-        width:650px;
-        height:650px;
+        width:620px;
+        height:620px;
       }
 
-      .ring.r1{ width:270px; height:270px; }
-      .ring.r2{ width:410px; height:410px; }
-      .ring.r3{ width:560px; height:560px; }
+      .ring.r1{ width:200px; height:200px; }
+      .ring.r2{ width:360px; height:360px; }
+      .ring.r3{ width:520px; height:520px; }
 
       .node-title{ font-size:14px; letter-spacing:1.4px; }
       .node-sub{ font-size:9px; letter-spacing:2.2px; }
+
+      .n1{ --x:33%; --y:20%; }
+      .n10{ --x:28%; --y:20%; }
+      .n2{ --x:72%; --y:20%; }
+      .n3{ --x:80%; --y:37%; }
+      .n4{ --x:77%; --y:57%; }
+      .n5{ --x:71%; --y:74%; }
+      .n6{ --x:50%; --y:82%; }
+      .n7{ --x:29%; --y:74%; }
+      .n8{ --x:23%; --y:57%; }
+      .n9{ --x:18%; --y:37%; }
 
       .popup-grid{
         grid-template-columns:1fr;
@@ -1084,7 +1113,6 @@
       }
     }
 
-    /* mobile */
     @media (max-width:760px){
       body::after{
         background-size:30px 30px;
@@ -1143,8 +1171,8 @@
 
       .tech-hero{
         width:min(96vw, 430px);
-        height:700px;
-        min-height:700px;
+        height:720px;
+        min-height:720px;
         border-radius:28px;
       }
 
@@ -1154,24 +1182,24 @@
       }
 
       .logo-core{
-        width:min(42vw, 145px);
-        height:min(42vw, 145px);
+        width:min(42vw, 135px);
+        height:min(42vw, 135px);
       }
 
       .center-glow{
-        width:260px;
-        height:260px;
+        width:150px;
+        height:150px;
       }
 
       .center-burst{
-        width:420px;
-        height:420px;
+        width:360px;
+        height:360px;
         opacity:.52;
       }
 
-      .ring.r1{ width:170px; height:170px; }
-      .ring.r2{ width:250px; height:250px; }
-      .ring.r3{ width:340px; height:340px; }
+      .ring.r1{ width:130px; height:130px; }
+      .ring.r2{ width:220px; height:220px; }
+      .ring.r3{ width:320px; height:320px; }
 
       .menu-node{
         gap:8px;
@@ -1200,16 +1228,16 @@
         letter-spacing:1.5px;
       }
 
-      .n1{ --x:30%; --y:16%; }
-      .n2{ --x:74%; --y:16%; }
-      .n3{ --x:82%; --y:33%; }
-      .n4{ --x:78%; --y:50%; }
-      .n5{ --x:72%; --y:67%; }
-      .n6{ --x:50%; --y:82%; }
-      .n7{ --x:28%; --y:67%; }
-      .n8{ --x:22%; --y:50%; }
-      .n9{ --x:18%; --y:33%; }
-      .n10{ --x:30%; --y:16%; }
+      .n1{ --x:36%; --y:17%; }
+      .n10{ --x:30%; --y:17%; }
+      .n2{ --x:73%; --y:17%; }
+      .n3{ --x:80%; --y:33%; }
+      .n4{ --x:77%; --y:50%; }
+      .n5{ --x:71%; --y:67%; }
+      .n6{ --x:50%; --y:83%; }
+      .n7{ --x:29%; --y:67%; }
+      .n8{ --x:23%; --y:50%; }
+      .n9{ --x:19%; --y:33%; }
 
       .node-note{
         font-size:12px;
@@ -1628,16 +1656,14 @@
 
     function buildCircuitPath(cx, cy, x, y, side, isBottom){
       if (isBottom) {
-        const midY = cy + (y - cy) * 0.58;
+        const midY = cy + (y - cy) * 0.62;
         return `M ${cx} ${cy} L ${cx} ${midY} L ${x} ${y}`;
       }
 
       const dir = side === "left" ? -1 : 1;
-      const step1X = cx + dir * Math.max(58, Math.abs(x - cx) * 0.28);
-      const step2X = x + (dir * -1) * Math.max(36, Math.abs(x - cx) * 0.10);
-      const bendY = y;
-
-      return `M ${cx} ${cy} L ${step1X} ${cy} L ${step2X} ${bendY} L ${x} ${y}`;
+      const step1X = cx + dir * Math.max(48, Math.abs(x - cx) * 0.22);
+      const step2X = x + (dir * -1) * Math.max(24, Math.abs(x - cx) * 0.06);
+      return `M ${cx} ${cy} L ${step1X} ${cy} L ${step2X} ${y} L ${x} ${y}`;
     }
 
     function drawTechLines(){
@@ -1653,14 +1679,14 @@
       let html = `
         <defs>
           <filter id="blueGlow" x="-80%" y="-80%" width="260%" height="260%">
-            <feGaussianBlur stdDeviation="2.6" result="blur"/>
+            <feGaussianBlur stdDeviation="2.4" result="blur"/>
             <feMerge>
               <feMergeNode in="blur"/>
               <feMergeNode in="SourceGraphic"/>
             </feMerge>
           </filter>
           <filter id="redGlow" x="-80%" y="-80%" width="260%" height="260%">
-            <feGaussianBlur stdDeviation="2.8" result="blur"/>
+            <feGaussianBlur stdDeviation="2.6" result="blur"/>
             <feMerge>
               <feMergeNode in="blur"/>
               <feMergeNode in="SourceGraphic"/>
@@ -1670,7 +1696,6 @@
       `;
 
       nodes.forEach(node => {
-        const nRect = node.getBoundingClientRect();
         const side = node.classList.contains("left") ? "left" : node.classList.contains("right") ? "right" : "bottom";
         const isBottom = node.classList.contains("bottom");
         const dotEl = node.querySelector(".node-dot");
@@ -1683,15 +1708,15 @@
 
         if (isBottom) {
           html += `
-            <path d="${pathD}" fill="none" stroke="rgba(255,98,108,.92)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#redGlow)"/>
-            <path d="${pathD}" fill="none" stroke="rgba(255,159,168,.28)" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round" />
-            <circle cx="${x}" cy="${y}" r="3.2" fill="rgba(255,235,239,.98)" filter="url(#redGlow)"/>
+            <path d="${pathD}" fill="none" stroke="rgba(255,98,108,.92)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" filter="url(#redGlow)"/>
+            <path d="${pathD}" fill="none" stroke="rgba(255,159,168,.22)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="${x}" cy="${y}" r="3.1" fill="rgba(255,240,243,.98)" filter="url(#redGlow)"/>
           `;
         } else {
           html += `
-            <path d="${pathD}" fill="none" stroke="rgba(116,193,255,.96)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#blueGlow)"/>
-            <path d="${pathD}" fill="none" stroke="rgba(116,193,255,.22)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="${x}" cy="${y}" r="3" fill="rgba(232,247,255,.98)" filter="url(#blueGlow)"/>
+            <path d="${pathD}" fill="none" stroke="rgba(116,193,255,.95)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" filter="url(#blueGlow)"/>
+            <path d="${pathD}" fill="none" stroke="rgba(116,193,255,.18)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="${x}" cy="${y}" r="2.9" fill="rgba(232,247,255,.98)" filter="url(#blueGlow)"/>
           `;
         }
       });
