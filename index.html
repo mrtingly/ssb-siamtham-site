@@ -280,6 +280,9 @@
     }
 
     /* wireframe globe */
+
+
+    
     .globe-wrap{
       position:absolute;
       left:50%;
@@ -287,6 +290,7 @@
       width:min(70vw, 760px);
       height:min(70vw, 760px);
       transform:translate(-50%, -50%);
+      animation: globeRotate 90s linear infinite;
       z-index:1;
       pointer-events:none;
       opacity:.95;
@@ -1026,6 +1030,15 @@
       0%,100%{ transform:translate(-50%, -50%) scale(1); opacity:1; }
       50%{ transform:translate(-50%, -50%) scale(1.02); opacity:.86; }
     }
+
+    @keyframes globeRotate{
+  from{
+    transform:translate(-50%, -50%) rotate(0deg);
+  }
+  to{
+    transform:translate(-50%, -50%) rotate(360deg);
+  }
+}
 
     @media (max-width:1120px){
       .tech-hero{
