@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stealth Safety Bank Mobile System (SSB)</title>
+  <title>Stealth Safety Bank System (SSB)</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -18,10 +18,9 @@
       --head-foot-2:#1b67cf;
       --head-foot-3:#0a3f84;
 
-      --cy-1:#f4fbff;
-      --cy-2:#cdeeff;
-      --cy-3:#8fdcff;
-      --cy-4:#54bfff;
+      --cy-1:#d9f5ff;
+      --cy-2:#7ed8ff;
+      --cy-3:#1b94ff;
 
       --red-1:#ffd8dd;
       --red-2:#ff7180;
@@ -37,9 +36,9 @@
       margin:0;
       color:#fff;
       background:
-        radial-gradient(circle at 50% 12%, rgba(32,126,255,.10), transparent 26%),
-        radial-gradient(circle at 50% 42%, rgba(20,95,200,.08), transparent 38%),
-        linear-gradient(180deg, #010611 0%, #031129 26%, #05173a 64%, #031129 100%);
+        radial-gradient(circle at 50% 16%, rgba(28,118,255,.12), transparent 30%),
+        radial-gradient(circle at 50% 48%, rgba(31,126,255,.08), transparent 42%),
+        linear-gradient(180deg, #020816 0%, #031129 28%, #05173a 66%, #031129 100%);
       overflow-x:hidden;
       font-family:'Prompt',sans-serif;
     }
@@ -53,15 +52,15 @@
       inset:0;
       pointer-events:none;
       z-index:0;
-      opacity:.22;
+      opacity:.28;
       background-image:
-        radial-gradient(circle at 14% 22%, rgba(255,255,255,.86) 0 1px, transparent 1.7px),
-        radial-gradient(circle at 83% 18%, rgba(255,255,255,.64) 0 1px, transparent 1.7px),
-        radial-gradient(circle at 74% 72%, rgba(255,255,255,.44) 0 1px, transparent 1.7px),
-        radial-gradient(circle at 24% 74%, rgba(255,255,255,.48) 0 1px, transparent 1.7px),
-        radial-gradient(circle at 34% 42%, rgba(255,255,255,.42) 0 1px, transparent 1.7px),
-        radial-gradient(circle at 58% 24%, rgba(255,255,255,.38) 0 1px, transparent 1.7px),
-        radial-gradient(circle at 91% 62%, rgba(255,255,255,.32) 0 1px, transparent 1.7px);
+        radial-gradient(circle at 14% 22%, rgba(255,255,255,.84) 0 1px, transparent 1.6px),
+        radial-gradient(circle at 83% 18%, rgba(255,255,255,.68) 0 1px, transparent 1.6px),
+        radial-gradient(circle at 74% 72%, rgba(255,255,255,.48) 0 1px, transparent 1.6px),
+        radial-gradient(circle at 24% 74%, rgba(255,255,255,.54) 0 1px, transparent 1.6px),
+        radial-gradient(circle at 34% 42%, rgba(255,255,255,.50) 0 1px, transparent 1.6px),
+        radial-gradient(circle at 58% 24%, rgba(255,255,255,.42) 0 1px, transparent 1.6px),
+        radial-gradient(circle at 91% 62%, rgba(255,255,255,.38) 0 1px, transparent 1.6px);
     }
 
     body::after{
@@ -70,11 +69,11 @@
       inset:0;
       pointer-events:none;
       z-index:0;
-      opacity:.04;
+      opacity:.05;
       background-image:
         linear-gradient(rgba(113,197,255,.18) 1px, transparent 1px),
         linear-gradient(90deg, rgba(113,197,255,.18) 1px, transparent 1px);
-      background-size:44px 44px;
+      background-size:42px 42px;
       mask-image:radial-gradient(circle at center, rgba(0,0,0,.95) 0%, rgba(0,0,0,.72) 46%, transparent 84%);
       -webkit-mask-image:radial-gradient(circle at center, rgba(0,0,0,.95) 0%, rgba(0,0,0,.72) 46%, transparent 84%);
     }
@@ -225,10 +224,10 @@
       justify-content:center;
       isolation:isolate;
       background:
-        radial-gradient(circle at 50% 50%, rgba(24,107,205,.06) 0%, rgba(12,52,128,.06) 18%, rgba(6,23,58,.94) 42%, rgba(2,10,28,.988) 78%, rgba(1,6,18,1) 100%);
+        radial-gradient(circle at 50% 50%, rgba(29,125,255,.06) 0%, rgba(18,81,180,.06) 15%, rgba(7,27,69,.93) 40%, rgba(3,13,34,.985) 76%, rgba(2,8,24,1) 100%);
       box-shadow:
         inset 0 0 0 1px rgba(122,216,255,.08),
-        inset 0 0 70px rgba(58,151,255,.04),
+        inset 0 0 70px rgba(58,151,255,.05),
         0 34px 90px rgba(0,0,0,.36);
     }
 
@@ -237,10 +236,10 @@
       position:absolute;
       inset:0;
       background:
-        linear-gradient(rgba(120,195,255,.028) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(120,195,255,.028) 1px, transparent 1px);
+        linear-gradient(rgba(120,195,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(120,195,255,.035) 1px, transparent 1px);
       background-size:38px 38px;
-      opacity:.44;
+      opacity:.45;
       pointer-events:none;
       z-index:0;
     }
@@ -256,142 +255,100 @@
       z-index:0;
     }
 
-    .hero-stars,
-    .hero-stars-2{
+    .hero-stars{
       position:absolute;
-      inset:-8%;
+      inset:0;
       pointer-events:none;
       z-index:0;
-    }
-
-    .hero-stars{
       opacity:.22;
       background-image:
-        radial-gradient(circle at 10% 20%, rgba(255,255,255,.95) 0 1px, transparent 1.8px),
-        radial-gradient(circle at 35% 80%, rgba(255,255,255,.65) 0 1px, transparent 1.8px),
-        radial-gradient(circle at 80% 30%, rgba(255,255,255,.72) 0 1px, transparent 1.8px),
-        radial-gradient(circle at 90% 70%, rgba(255,255,255,.54) 0 1px, transparent 1.8px),
-        radial-gradient(circle at 60% 15%, rgba(255,255,255,.46) 0 1px, transparent 1.8px),
-        radial-gradient(circle at 14% 64%, rgba(255,255,255,.38) 0 1px, transparent 1.8px);
-      animation:starDriftA 90s linear infinite;
+        radial-gradient(circle at 14% 20%, rgba(255,255,255,.78) 0 1px, transparent 1.7px),
+        radial-gradient(circle at 85% 15%, rgba(255,255,255,.62) 0 1px, transparent 1.7px),
+        radial-gradient(circle at 79% 72%, rgba(255,255,255,.45) 0 1px, transparent 1.7px),
+        radial-gradient(circle at 21% 73%, rgba(255,255,255,.48) 0 1px, transparent 1.7px),
+        radial-gradient(circle at 33% 40%, rgba(255,255,255,.45) 0 1px, transparent 1.7px),
+        radial-gradient(circle at 60% 30%, rgba(255,255,255,.40) 0 1px, transparent 1.7px),
+        radial-gradient(circle at 90% 60%, rgba(255,255,255,.35) 0 1px, transparent 1.7px),
+        radial-gradient(circle at 7% 87%, rgba(255,255,255,.32) 0 1px, transparent 1.7px);
     }
 
-    .hero-stars-2{
-      opacity:.13;
-      background-image:
-        radial-gradient(circle at 22% 14%, rgba(255,255,255,.82) 0 1px, transparent 1.9px),
-        radial-gradient(circle at 58% 42%, rgba(255,255,255,.52) 0 1px, transparent 1.9px),
-        radial-gradient(circle at 84% 20%, rgba(255,255,255,.56) 0 1px, transparent 1.9px),
-        radial-gradient(circle at 76% 76%, rgba(255,255,255,.42) 0 1px, transparent 1.9px),
-        radial-gradient(circle at 9% 84%, rgba(255,255,255,.30) 0 1px, transparent 1.9px);
-      animation:starDriftB 130s linear infinite;
-    }
-
-    @keyframes starDriftA{
-      from{ transform:translate3d(0,0,0); }
-      to{ transform:translate3d(-28px,-54px,0); }
-    }
-
-    @keyframes starDriftB{
-      from{ transform:translate3d(0,0,0); }
-      to{ transform:translate3d(18px,-40px,0); }
-    }
-
-    /* GLOBE OUTLINE */
+    /* GLOBE */
     .globe-wrap{
       position:absolute;
       left:50%;
-      top:48%;
-      width:min(74vw, 800px);
-      height:min(74vw, 800px);
+      top:50%;
+      width:min(72vw, 780px);
+      height:min(72vw, 780px);
       transform:translate(-50%, -50%);
       z-index:1;
       pointer-events:none;
-      opacity:.98;
+      opacity:.9;
+      animation:globeRotate 95s linear infinite;
       filter:
-        drop-shadow(0 0 10px rgba(255,255,255,.12))
-        drop-shadow(0 0 28px rgba(120,220,255,.10));
+        drop-shadow(0 0 8px rgba(114,215,255,.18))
+        drop-shadow(0 0 22px rgba(70,165,255,.10));
     }
 
-    .globe-outline-svg{
+    .globe-svg{
       width:100%;
       height:100%;
       display:block;
-      overflow:visible;
     }
 
-    .globe-outer{
+    .globe-core{
       fill:none;
-      stroke:rgba(255,255,255,.92);
-      stroke-width:1.2;
-    }
-
-    .globe-grid-line{
-      fill:none;
-      stroke:rgba(255,255,255,.48);
-      stroke-width:.8;
-    }
-
-    .globe-grid-line.soft{
-      stroke:rgba(255,255,255,.28);
-    }
-
-    .globe-continent{
-      fill:none;
-      stroke:rgba(255,255,255,.92);
-      stroke-width:1.05;
-      stroke-linecap:round;
-      stroke-linejoin:round;
-    }
-
-    .globe-ring{
-      fill:none;
-      stroke:rgba(180,230,255,.22);
+      stroke:rgba(139,223,255,.22);
       stroke-width:1;
     }
 
-    .globe-sweep{
+    .globe-core.soft{
+      stroke:rgba(139,223,255,.12);
+    }
+
+    .globe-core.strong{
+      stroke:rgba(154,232,255,.30);
+      stroke-width:1.1;
+    }
+
+    .globe-laser{
       fill:none;
-      stroke:rgba(255,255,255,.22);
-      stroke-width:1.4;
+      stroke:rgba(112,214,255,.62);
+      stroke-width:1.15;
       stroke-linecap:round;
-      stroke-dasharray:120 900;
-      animation:globeSweepMove 12s linear infinite;
+      filter:url(#glowLine);
     }
 
-    @keyframes globeSweepMove{
-      from{ stroke-dashoffset:0; }
-      to{ stroke-dashoffset:-1020; }
+    .globe-laser-soft{
+      fill:none;
+      stroke:rgba(112,214,255,.16);
+      stroke-width:2.4;
+      stroke-linecap:round;
     }
 
-    .hero-halo{
+    .center-glow{
       position:absolute;
       left:50%;
-      top:48%;
-      width:min(18vw, 180px);
-      height:min(18vw, 180px);
+      top:50%;
+      width:120px;
+      height:120px;
       transform:translate(-50%, -50%);
-      z-index:6;
+      z-index:2;
       pointer-events:none;
       background:
         radial-gradient(circle,
-          rgba(255,255,255,.30) 0%,
-          rgba(180,230,255,.10) 38%,
+          rgba(228,248,255,.70) 0%,
+          rgba(169,228,255,.24) 34%,
+          rgba(90,188,255,.06) 56%,
           transparent 72%);
-      filter:blur(6px);
+      filter:blur(4px);
       animation:centerGlow 5s ease-in-out infinite;
-    }
-
-    @keyframes centerGlow{
-      0%,100%{ transform:translate(-50%, -50%) scale(1); opacity:1; }
-      50%{ transform:translate(-50%, -50%) scale(1.04); opacity:.84; }
     }
 
     .logo-core{
       position:relative;
-      z-index:12;
-      width:min(24vw, 210px);
-      height:min(24vw, 210px);
+      z-index:8;
+      width:min(25vw, 210px);
+      height:min(25vw, 210px);
       padding:0;
       border:none;
       background:transparent;
@@ -403,7 +360,7 @@
     }
 
     .logo-core:hover{
-      transform:scale(1.03);
+      transform:scale(1.035);
       filter:brightness(1.05);
     }
 
@@ -413,57 +370,14 @@
       object-fit:contain;
       display:block;
       filter:
-        drop-shadow(0 0 8px rgba(255,255,255,.10))
+        drop-shadow(0 0 8px rgba(120,212,255,.12))
         drop-shadow(0 12px 22px rgba(0,0,0,.24));
     }
 
-    /* LINES */
-    .line-layer,
-    .line-layer-mobile{
-      position:absolute;
-      inset:0;
-      z-index:7;
-      pointer-events:none;
-      overflow:visible;
-    }
-
-    .line-layer-mobile{ display:none; }
-
-    .line-main{
-      fill:none;
-      stroke:rgba(185,233,255,.18);
-      stroke-width:1.1;
-      stroke-linecap:round;
-    }
-
-    .line-glow{
-      fill:none;
-      stroke:rgba(185,233,255,.06);
-      stroke-width:4;
-      stroke-linecap:round;
-      filter:blur(2px);
-    }
-
-    .line-pulse{
-      fill:none;
-      stroke:rgba(255,255,255,.50);
-      stroke-width:1;
-      stroke-linecap:round;
-      stroke-dasharray:6 20;
-      animation:dashFlow 9s linear infinite;
-      opacity:.6;
-    }
-
-    @keyframes dashFlow{
-      from{ stroke-dashoffset:0; }
-      to{ stroke-dashoffset:-104; }
-    }
-
-    /* MENU */
     .menu-layer{
       position:absolute;
       inset:0;
-      z-index:10;
+      z-index:6;
     }
 
     .menu-node{
@@ -472,7 +386,9 @@
       position:absolute;
       left:var(--x);
       top:var(--y);
-      transform:translate(-50%, -50%) scale(1);
+      transform:translate(-50%, -50%) scale(.92);
+      opacity:0;
+      pointer-events:none;
       border:none;
       background:none;
       padding:0;
@@ -484,9 +400,15 @@
       gap:12px;
       cursor:pointer;
       transition:
-        transform .32s cubic-bezier(.2,.8,.2,1),
+        transform .34s cubic-bezier(.2,.8,.2,1),
+        opacity .3s ease,
         filter .22s ease;
-      will-change:transform;
+    }
+
+    .tech-hero.open .menu-node{
+      opacity:1;
+      pointer-events:auto;
+      transform:translate(-50%, -50%) scale(1);
     }
 
     .menu-node.left{
@@ -507,10 +429,7 @@
       gap:12px;
     }
 
-    .menu-node:hover{
-      filter:brightness(1.14);
-      transform:translate(-50%, -50%) scale(1.02);
-    }
+    .menu-node:hover{ filter:brightness(1.16); }
 
     .node-dot{
       position:relative;
@@ -518,11 +437,11 @@
       height:16px;
       flex:0 0 16px;
       border-radius:50%;
-      background:radial-gradient(circle, #ffffff 0%, #eefbff 24%, #8fddff 54%, #2a9cff 100%);
+      background:radial-gradient(circle, #ffffff 0%, #dff7ff 18%, #77d3ff 48%, #198cff 100%);
       box-shadow:
-        0 0 0 4px rgba(120,210,255,.06),
-        0 0 14px rgba(120,210,255,.46),
-        0 0 28px rgba(120,210,255,.16);
+        0 0 0 4px rgba(90,185,255,.08),
+        0 0 14px rgba(77,180,255,.64),
+        0 0 28px rgba(77,180,255,.24);
       animation:dotPulse 2.2s ease-in-out infinite;
       transition:transform .22s ease, box-shadow .22s ease;
     }
@@ -532,7 +451,7 @@
       position:absolute;
       inset:-4px;
       border-radius:50%;
-      border:1px solid rgba(185,233,255,.14);
+      border:1px solid rgba(139,215,255,.18);
     }
 
     .node-dot::after{
@@ -540,46 +459,41 @@
       position:absolute;
       inset:-9px;
       border-radius:50%;
-      border:1px solid rgba(185,233,255,.05);
-    }
-
-    @keyframes dotPulse{
-      0%,100%{ transform:scale(1); opacity:1; }
-      50%{ transform:scale(1.12); opacity:.92; }
+      border:1px solid rgba(139,215,255,.06);
     }
 
     .menu-node:hover .node-dot{
-      transform:scale(1.15);
+      transform:scale(1.14);
+      box-shadow:
+        0 0 0 4px rgba(90,185,255,.10),
+        0 0 18px rgba(77,180,255,.78),
+        0 0 34px rgba(77,180,255,.34);
     }
 
     .node-shell{
       position:relative;
-      min-width:252px;
-      min-height:56px;
+      min-width:248px;
+      min-height:54px;
       padding:10px 18px;
       display:flex;
       align-items:center;
       overflow:hidden;
-      border:1px solid rgba(173,232,255,.20);
-      background:linear-gradient(180deg, rgba(10,42,96,.38), rgba(5,20,52,.22));
+      border:1px solid rgba(110,209,255,.16);
+      background:linear-gradient(180deg, rgba(11,39,90,.14), rgba(7,20,52,.08));
       box-shadow:
-        inset 0 0 0 1px rgba(190,240,255,.04),
-        inset 0 0 16px rgba(120,210,255,.05),
-        0 0 18px rgba(90,185,255,.10),
-        0 14px 28px rgba(0,0,0,.18);
-      backdrop-filter:blur(10px);
-      -webkit-backdrop-filter:blur(10px);
+        inset 0 0 0 1px rgba(162,228,255,.05),
+        0 0 16px rgba(69,170,255,.08);
       transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
     }
 
     .menu-node.left .node-shell{
       justify-content:flex-end;
-      clip-path:polygon(14px 0, 100% 0, calc(100% - 18px) 50%, 100% 100%, 14px 100%, 0 50%);
+      clip-path:polygon(12px 0, 100% 0, calc(100% - 16px) 50%, 100% 100%, 12px 100%, 0 50%);
     }
 
     .menu-node.right .node-shell{
       justify-content:flex-start;
-      clip-path:polygon(18px 0, 100% 0, calc(100% - 14px) 50%, 100% 100%, 18px 100%, 0 50%);
+      clip-path:polygon(16px 0, 100% 0, calc(100% - 12px) 50%, 100% 100%, 16px 100%, 0 50%);
     }
 
     .node-shell::before{
@@ -587,13 +501,7 @@
       position:absolute;
       inset:0;
       background:
-        linear-gradient(90deg,
-          transparent 0%,
-          rgba(190,240,255,.09) 10%,
-          transparent 18%,
-          transparent 82%,
-          rgba(190,240,255,.09) 90%,
-          transparent 100%);
+        linear-gradient(90deg, transparent 0%, rgba(116,214,255,.12) 8%, transparent 17%, transparent 83%, rgba(116,214,255,.12) 92%, transparent 100%);
       pointer-events:none;
     }
 
@@ -601,26 +509,24 @@
       content:"";
       position:absolute;
       inset:1px;
-      border:1px solid rgba(198,243,255,.10);
+      border:1px solid rgba(142,224,255,.16);
       pointer-events:none;
-      opacity:.45;
+      opacity:.5;
     }
 
     .menu-node.left .node-shell::after{
-      clip-path:polygon(14px 0, 100% 0, calc(100% - 18px) 50%, 100% 100%, 14px 100%, 0 50%);
+      clip-path:polygon(12px 0, 100% 0, calc(100% - 16px) 50%, 100% 100%, 12px 100%, 0 50%);
     }
 
     .menu-node.right .node-shell::after{
-      clip-path:polygon(18px 0, 100% 0, calc(100% - 14px) 50%, 100% 100%, 18px 100%, 0 50%);
+      clip-path:polygon(16px 0, 100% 0, calc(100% - 12px) 50%, 100% 100%, 16px 100%, 0 50%);
     }
 
     .menu-node:hover .node-shell{
-      border-color:rgba(210,246,255,.28);
+      border-color:rgba(145,226,255,.24);
       box-shadow:
-        inset 0 0 0 1px rgba(210,246,255,.05),
-        inset 0 0 18px rgba(130,220,255,.06),
-        0 0 24px rgba(95,190,255,.14),
-        0 16px 30px rgba(0,0,0,.22);
+        inset 0 0 0 1px rgba(184,239,255,.06),
+        0 0 22px rgba(82,186,255,.14);
     }
 
     .node-text{
@@ -637,11 +543,12 @@
       font-weight:800;
       letter-spacing:.8px;
       text-transform:uppercase;
-      color:#f6fdff;
+      color:#eefaff;
       text-shadow:
-        0 0 8px rgba(210,246,255,.42),
-        0 0 22px rgba(170,235,255,.10);
+        0 0 8px rgba(141,222,255,.52),
+        0 0 20px rgba(141,222,255,.10);
       white-space:nowrap;
+      transition:text-shadow .22s ease;
     }
 
     .node-sub{
@@ -649,8 +556,14 @@
       font-weight:600;
       letter-spacing:1.8px;
       text-transform:uppercase;
-      color:rgba(220,246,255,.72);
+      color:rgba(203,236,255,.72);
       white-space:nowrap;
+    }
+
+    .menu-node:hover .node-title{
+      text-shadow:
+        0 0 10px rgba(168,233,255,.76),
+        0 0 24px rgba(141,222,255,.22);
     }
 
     /* START ORDER */
@@ -658,69 +571,75 @@
       width:22px;
       height:22px;
       flex:0 0 22px;
-      background:radial-gradient(circle, #fff 0%, #ffe4e8 18%, #ff7783 50%, #d91628 100%);
+      background:radial-gradient(circle, #fff 0%, #ffdfe4 18%, #ff7783 50%, #d91628 100%);
       box-shadow:
-        0 0 0 5px rgba(255,93,105,.08),
-        0 0 22px rgba(255,80,94,.76),
-        0 0 44px rgba(255,80,94,.26);
+        0 0 0 5px rgba(255,93,105,.10),
+        0 0 22px rgba(255,80,94,.86),
+        0 0 44px rgba(255,80,94,.34);
+    }
+
+    .menu-node.bottom:hover .node-dot{
+      box-shadow:
+        0 0 0 6px rgba(255,93,105,.12),
+        0 0 26px rgba(255,80,94,.92),
+        0 0 52px rgba(255,80,94,.42);
     }
 
     .menu-node.bottom .node-shell{
-      min-width:336px;
-      min-height:72px;
-      padding:14px 26px;
+      min-width:316px;
+      min-height:68px;
+      padding:14px 24px;
       justify-content:center;
-      background:linear-gradient(180deg, rgba(128,14,28,.34), rgba(73,4,15,.18));
+      background:linear-gradient(180deg, rgba(106,10,22,.30), rgba(67,4,14,.16));
       border:1px solid rgba(255,118,128,.30);
       clip-path:polygon(16px 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 16px 100%, 0 50%);
       box-shadow:
-        inset 0 0 0 1px rgba(255,176,182,.05),
-        inset 0 0 14px rgba(255,136,145,.08),
-        0 0 24px rgba(255,76,92,.20),
-        0 18px 36px rgba(0,0,0,.22);
-      animation:startBreath 2.8s ease-in-out infinite;
-    }
-
-    @keyframes startBreath{
-      0%,100%{ transform:scale(1); }
-      50%{ transform:scale(1.018); }
+        inset 0 0 0 1px rgba(255,176,182,.06),
+        0 0 24px rgba(255,76,92,.18);
     }
 
     .menu-node.bottom .node-shell::before{
-      background:linear-gradient(90deg, transparent 0%, rgba(255,124,134,.14) 12%, transparent 22%, transparent 78%, rgba(255,124,134,.14) 88%, transparent 100%);
+      background:linear-gradient(90deg, transparent 0%, rgba(255,124,134,.16) 12%, transparent 22%, transparent 78%, rgba(255,124,134,.16) 88%, transparent 100%);
     }
 
     .menu-node.bottom .node-shell::after{
-      border-color:rgba(255,130,138,.18);
+      border-color:rgba(255,130,138,.24);
       clip-path:polygon(16px 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 16px 100%, 0 50%);
     }
 
     .menu-node.bottom .node-title{
-      font-size:21px;
-      color:#fff7f7;
+      font-size:20px;
+      color:#fff3f4;
       text-shadow:
-        0 0 12px rgba(255,156,165,.60),
-        0 0 28px rgba(255,96,107,.18);
+        0 0 10px rgba(255,148,157,.64),
+        0 0 24px rgba(255,96,107,.22);
     }
 
     .menu-node.bottom .node-sub{
       font-size:8px;
       letter-spacing:2px;
-      color:rgba(255,226,230,.86);
+      color:rgba(255,214,218,.88);
     }
 
-    /* MENU LOWERED TO MIDDLE OF GLOBE */
-    .n1{ --x:31%; --y:39%; }
-    .n2{ --x:27%; --y:47%; }
-    .n3{ --x:25.5%; --y:55%; }
-    .n4{ --x:31%; --y:63%; }
+    .menu-node.bottom:hover .node-shell{
+      border-color:rgba(255,146,154,.38);
+      box-shadow:
+        inset 0 0 0 1px rgba(255,183,188,.08),
+        0 0 30px rgba(255,76,92,.24);
+    }
 
-    .n5{ --x:69%; --y:39%; }
-    .n6{ --x:73%; --y:47%; }
-    .n7{ --x:74.5%; --y:55%; }
-    .n8{ --x:69%; --y:63%; }
+    /* MENU POSITIONS - lowered and closer */
+    .n1{ --x:30%; --y:33%; }
+    .n2{ --x:27%; --y:42%; }
+    .n3{ --x:25%; --y:51%; }
+    .n4{ --x:31%; --y:60%; }
 
-    .n9{ --x:50%; --y:81%; }
+    .n5{ --x:70%; --y:33%; }
+    .n6{ --x:73%; --y:42%; }
+    .n7{ --x:75%; --y:51%; }
+    .n8{ --x:69%; --y:60%; }
+
+    .n9{ --x:50%; --y:78%; }
 
     .node-note{
       display:inline-flex;
@@ -1086,6 +1005,21 @@
       line-height:1.7;
     }
 
+    @keyframes dotPulse{
+      0%,100%{ transform:scale(1); opacity:1; }
+      50%{ transform:scale(1.12); opacity:.92; }
+    }
+
+    @keyframes centerGlow{
+      0%,100%{ transform:translate(-50%, -50%) scale(1); opacity:1; }
+      50%{ transform:translate(-50%, -50%) scale(1.02); opacity:.86; }
+    }
+
+    @keyframes globeRotate{
+      from{ transform:translate(-50%, -50%) rotate(0deg); }
+      to{ transform:translate(-50%, -50%) rotate(360deg); }
+    }
+
     @media (max-width:1120px){
       .tech-hero{
         width:min(96vw, 1020px);
@@ -1094,35 +1028,35 @@
       }
 
       .globe-wrap{
-        width:min(76vw, 680px);
-        height:min(76vw, 680px);
+        width:min(76vw, 660px);
+        height:min(76vw, 660px);
       }
 
       .logo-core{
-        width:min(27vw, 188px);
-        height:min(27vw, 188px);
+        width:min(28vw, 188px);
+        height:min(28vw, 188px);
       }
 
-      .hero-halo{ width:160px; height:160px; }
+      .center-glow{ width:108px; height:108px; }
 
-      .node-shell{ min-width:228px; min-height:52px; padding:10px 16px; }
-      .menu-node.bottom .node-shell{ min-width:290px; min-height:66px; }
+      .node-shell{ min-width:222px; min-height:52px; padding:10px 16px; }
+      .menu-node.bottom .node-shell{ min-width:278px; min-height:64px; }
 
       .node-title{ font-size:12px; }
       .node-sub{ font-size:7px; letter-spacing:1.5px; }
       .menu-node.bottom .node-title{ font-size:18px; }
 
-      .n1{ --x:31%; --y:40%; }
-      .n2{ --x:27.5%; --y:48%; }
-      .n3{ --x:26%; --y:56%; }
-      .n4{ --x:31%; --y:64%; }
+      .n1{ --x:30%; --y:33%; }
+      .n2{ --x:27%; --y:42%; }
+      .n3{ --x:25%; --y:51%; }
+      .n4{ --x:32%; --y:60%; }
 
-      .n5{ --x:69%; --y:40%; }
-      .n6{ --x:72.5%; --y:48%; }
-      .n7{ --x:74%; --y:56%; }
-      .n8{ --x:69%; --y:64%; }
+      .n5{ --x:70%; --y:33%; }
+      .n6{ --x:73%; --y:42%; }
+      .n7{ --x:75%; --y:51%; }
+      .n8{ --x:68%; --y:60%; }
 
-      .n9{ --x:50%; --y:81%; }
+      .n9{ --x:50%; --y:78%; }
 
       .popup-grid{ grid-template-columns:1fr; }
       .footer-main{ grid-template-columns:1fr; }
@@ -1156,8 +1090,8 @@
 
       .tech-hero{
         width:min(96vw, 430px);
-        height:770px;
-        min-height:770px;
+        height:720px;
+        min-height:720px;
         border-radius:28px;
       }
 
@@ -1167,15 +1101,8 @@
       }
 
       .globe-wrap{
-        width:min(90vw, 372px);
-        height:min(90vw, 372px);
-        top:42%;
-      }
-
-      .hero-halo{
-        width:100px;
-        height:100px;
-        top:42%;
+        width:min(88vw, 360px);
+        height:min(88vw, 360px);
       }
 
       .logo-core{
@@ -1183,8 +1110,10 @@
         height:min(42vw, 126px);
       }
 
-      .line-layer{ display:none; }
-      .line-layer-mobile{ display:block; }
+      .center-glow{
+        width:88px;
+        height:88px;
+      }
 
       .menu-node{ gap:8px; }
 
@@ -1201,14 +1130,14 @@
       }
 
       .node-shell{
-        min-width:150px;
-        min-height:42px;
+        min-width:138px;
+        min-height:40px;
         padding:8px 10px;
       }
 
       .menu-node.bottom .node-shell{
-        min-width:214px;
-        min-height:52px;
+        min-width:190px;
+        min-height:50px;
         padding:10px 12px;
       }
 
@@ -1220,7 +1149,7 @@
       }
 
       .node-sub{
-        font-size:5.6px;
+        font-size:5.4px;
         letter-spacing:.8px;
       }
 
@@ -1230,17 +1159,17 @@
         letter-spacing:1px;
       }
 
-      .n1{ --x:31.5%; --y:37%; }
-      .n2{ --x:26.5%; --y:44.5%; }
-      .n3{ --x:24.2%; --y:52.2%; }
-      .n4{ --x:31%; --y:60%; }
+      .n1{ --x:31%; --y:30%; }
+      .n2{ --x:26%; --y:39%; }
+      .n3{ --x:23%; --y:48%; }
+      .n4{ --x:31%; --y:57%; }
 
-      .n5{ --x:68.5%; --y:37%; }
-      .n6{ --x:73.5%; --y:44.5%; }
-      .n7{ --x:75.8%; --y:52.2%; }
-      .n8{ --x:69%; --y:60%; }
+      .n5{ --x:69%; --y:30%; }
+      .n6{ --x:74%; --y:39%; }
+      .n7{ --x:77%; --y:48%; }
+      .n8{ --x:69%; --y:57%; }
 
-      .n9{ --x:50%; --y:79%; }
+      .n9{ --x:50%; --y:76%; }
 
       .node-note{
         font-size:12px;
@@ -1347,200 +1276,49 @@
         <div class="hero-center">
           <div class="tech-hero open" id="techHero">
             <div class="hero-stars"></div>
-            <div class="hero-stars-2"></div>
 
             <div class="globe-wrap" aria-hidden="true">
-              <svg class="globe-outline-svg" viewBox="0 0 800 800" preserveAspectRatio="xMidYMid meet">
-                <!-- outer -->
-                <circle class="globe-outer" cx="400" cy="400" r="250"/>
+              <svg class="globe-svg" viewBox="0 0 800 800" preserveAspectRatio="xMidYMid meet">
+                <defs>
+                  <filter id="glowLine" x="-100%" y="-100%" width="300%" height="300%">
+                    <feGaussianBlur stdDeviation="2.2" result="blur"/>
+                    <feMerge>
+                      <feMergeNode in="blur"/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
+                </defs>
 
-                <!-- latitudes -->
-                <ellipse class="globe-grid-line soft" cx="400" cy="400" rx="250" ry="52"/>
-                <ellipse class="globe-grid-line" cx="400" cy="400" rx="250" ry="100"/>
-                <ellipse class="globe-grid-line" cx="400" cy="400" rx="250" ry="150"/>
-                <ellipse class="globe-grid-line soft" cx="400" cy="400" rx="250" ry="205"/>
+                <circle class="globe-core strong" cx="400" cy="400" r="250"/>
+                <ellipse class="globe-core" cx="400" cy="400" rx="250" ry="105"/>
+                <ellipse class="globe-core" cx="400" cy="400" rx="250" ry="175"/>
+                <ellipse class="globe-core soft" cx="400" cy="400" rx="250" ry="55"/>
 
-                <!-- longitudes -->
-                <ellipse class="globe-grid-line soft" cx="400" cy="400" rx="62" ry="250"/>
-                <ellipse class="globe-grid-line" cx="400" cy="400" rx="120" ry="250"/>
-                <ellipse class="globe-grid-line" cx="400" cy="400" rx="178" ry="250"/>
-                <ellipse class="globe-grid-line soft" cx="400" cy="400" rx="225" ry="250"/>
+                <ellipse class="globe-core" cx="400" cy="400" rx="82" ry="250"/>
+                <ellipse class="globe-core" cx="400" cy="400" rx="150" ry="250"/>
+                <ellipse class="globe-core soft" cx="400" cy="400" rx="210" ry="250"/>
 
-                <!-- extra rings -->
-                <circle class="globe-ring" cx="400" cy="400" r="284"/>
-                <circle class="globe-ring" cx="400" cy="400" r="318"/>
+                <path class="globe-laser-soft" d="M150 400 Q400 330 650 400"/>
+                <path class="globe-laser" d="M150 400 Q400 330 650 400"/>
 
-                <!-- continents outline -->
-                <path class="globe-continent"
-                  d="M266 220
-                     C240 220,221 232,205 250
-                     C186 272,184 301,197 318
-                     C210 336,230 344,245 360
-                     C256 371,261 389,258 406
-                     C255 421,261 436,275 446
-                     C287 455,302 455,316 445
-                     C330 435,337 421,336 403
-                     C335 384,342 372,356 360
-                     C369 348,375 332,370 319
-                     C364 305,349 296,344 283
-                     C338 268,346 252,343 240
-                     C338 226,319 216,300 215
-                     C287 214,276 216,266 220Z"/>
+                <path class="globe-laser-soft" d="M170 490 Q400 440 630 490"/>
+                <path class="globe-laser" d="M170 490 Q400 440 630 490"/>
 
-                <path class="globe-continent"
-                  d="M314 458
-                     C301 462,290 472,286 486
-                     C282 499,286 513,293 526
-                     C301 541,304 560,299 579
-                     C295 595,297 611,307 625
-                     C317 639,330 640,340 626
-                     C350 613,350 595,347 579
-                     C344 561,349 544,354 528
-                     C360 511,358 492,349 476
-                     C341 463,329 455,314 458Z"/>
+                <path class="globe-laser-soft" d="M176 312 Q400 360 624 312"/>
+                <path class="globe-laser" d="M176 312 Q400 360 624 312"/>
 
-                <path class="globe-continent"
-                  d="M416 228
-                     C396 234,382 249,381 267
-                     C380 286,390 299,404 311
-                     C418 323,433 329,438 346
-                     C442 360,436 373,427 384
-                     C419 395,418 409,428 421
-                     C438 434,450 439,465 438
-                     C481 437,494 427,500 412
-                     C507 396,507 379,501 362
-                     C494 342,489 327,496 311
-                     C504 292,518 278,524 260
-                     C529 245,522 230,506 221
-                     C489 212,470 211,451 215
-                     C438 217,426 221,416 228Z"/>
+                <path class="globe-laser-soft" d="M400 150 Q440 400 400 650"/>
+                <path class="globe-laser" d="M400 150 Q440 400 400 650"/>
 
-                <path class="globe-continent"
-                  d="M463 445
-                     C447 446,435 454,428 467
-                     C420 482,418 503,422 522
-                     C426 542,435 560,446 576
-                     C454 588,468 593,479 586
-                     C491 579,498 564,502 549
-                     C506 531,513 516,514 497
-                     C515 480,510 463,498 452
-                     C489 445,476 443,463 445Z"/>
+                <path class="globe-laser-soft" d="M305 170 Q360 400 305 630"/>
+                <path class="globe-laser" d="M305 170 Q360 400 305 630"/>
 
-                <path class="globe-continent"
-                  d="M503 238
-                     C527 226,557 224,586 229
-                     C614 234,639 247,651 264
-                     C663 280,665 296,656 308
-                     C648 319,633 324,619 327
-                     C603 331,590 338,582 349
-                     C573 362,562 370,547 371
-                     C530 372,516 367,506 354
-                     C495 340,493 324,492 307
-                     C490 289,489 271,494 255
-                     C497 247,499 242,503 238Z"/>
-
-                <path class="globe-continent"
-                  d="M578 379
-                     C587 379,594 384,598 391
-                     C601 400,597 409,589 415
-                     C582 420,575 418,570 411
-                     C565 404,564 396,567 388
-                     C570 383,573 380,578 379Z"/>
-
-                <path class="globe-continent"
-                  d="M590 539
-                     C606 529,625 527,644 531
-                     C662 535,676 545,680 557
-                     C684 570,678 581,665 586
-                     C651 591,635 591,620 587
-                     C606 583,593 574,589 563
-                     C585 554,585 545,590 539Z"/>
-
-                <!-- sweep -->
-                <circle class="globe-sweep" cx="400" cy="400" r="250"/>
+                <path class="globe-laser-soft" d="M495 170 Q440 400 495 630"/>
+                <path class="globe-laser" d="M495 170 Q440 400 495 630"/>
               </svg>
             </div>
 
-            <svg class="line-layer" viewBox="0 0 1220 860" preserveAspectRatio="none" aria-hidden="true">
-              <!-- left -->
-              <path class="line-glow" d="M610 410 Q542 390 390 336" />
-              <path class="line-main" d="M610 410 Q542 390 390 336" />
-              <path class="line-pulse" d="M610 410 Q542 390 390 336" />
-
-              <path class="line-glow" d="M610 420 Q534 420 340 404" />
-              <path class="line-main" d="M610 420 Q534 420 340 404" />
-              <path class="line-pulse" d="M610 420 Q534 420 340 404" />
-
-              <path class="line-glow" d="M610 432 Q530 450 318 470" />
-              <path class="line-main" d="M610 432 Q530 450 318 470" />
-              <path class="line-pulse" d="M610 432 Q530 450 318 470" />
-
-              <path class="line-glow" d="M610 446 Q536 486 388 540" />
-              <path class="line-main" d="M610 446 Q536 486 388 540" />
-              <path class="line-pulse" d="M610 446 Q536 486 388 540" />
-
-              <!-- right -->
-              <path class="line-glow" d="M610 410 Q678 390 830 336" />
-              <path class="line-main" d="M610 410 Q678 390 830 336" />
-              <path class="line-pulse" d="M610 410 Q678 390 830 336" />
-
-              <path class="line-glow" d="M610 420 Q686 420 880 404" />
-              <path class="line-main" d="M610 420 Q686 420 880 404" />
-              <path class="line-pulse" d="M610 420 Q686 420 880 404" />
-
-              <path class="line-glow" d="M610 432 Q690 450 902 470" />
-              <path class="line-main" d="M610 432 Q690 450 902 470" />
-              <path class="line-pulse" d="M610 432 Q690 450 902 470" />
-
-              <path class="line-glow" d="M610 446 Q684 486 832 540" />
-              <path class="line-main" d="M610 446 Q684 486 832 540" />
-              <path class="line-pulse" d="M610 446 Q684 486 832 540" />
-
-              <!-- bottom -->
-              <path class="line-glow" d="M610 450 Q610 555 610 665" />
-              <path class="line-main" d="M610 450 Q610 555 610 665" />
-              <path class="line-pulse" d="M610 450 Q610 555 610 665" />
-            </svg>
-
-            <svg class="line-layer-mobile" viewBox="0 0 430 770" preserveAspectRatio="none" aria-hidden="true">
-              <path class="line-glow" d="M215 320 Q176 310 136 265" />
-              <path class="line-main" d="M215 320 Q176 310 136 265" />
-              <path class="line-pulse" d="M215 320 Q176 310 136 265" />
-
-              <path class="line-glow" d="M215 328 Q169 336 114 320" />
-              <path class="line-main" d="M215 328 Q169 336 114 320" />
-              <path class="line-pulse" d="M215 328 Q169 336 114 320" />
-
-              <path class="line-glow" d="M215 338 Q165 356 104 378" />
-              <path class="line-main" d="M215 338 Q165 356 104 378" />
-              <path class="line-pulse" d="M215 338 Q165 356 104 378" />
-
-              <path class="line-glow" d="M215 352 Q176 392 134 442" />
-              <path class="line-main" d="M215 352 Q176 392 134 442" />
-              <path class="line-pulse" d="M215 352 Q176 392 134 442" />
-
-              <path class="line-glow" d="M215 320 Q254 310 294 265" />
-              <path class="line-main" d="M215 320 Q254 310 294 265" />
-              <path class="line-pulse" d="M215 320 Q254 310 294 265" />
-
-              <path class="line-glow" d="M215 328 Q261 336 316 320" />
-              <path class="line-main" d="M215 328 Q261 336 316 320" />
-              <path class="line-pulse" d="M215 328 Q261 336 316 320" />
-
-              <path class="line-glow" d="M215 338 Q265 356 326 378" />
-              <path class="line-main" d="M215 338 Q265 356 326 378" />
-              <path class="line-pulse" d="M215 338 Q265 356 326 378" />
-
-              <path class="line-glow" d="M215 352 Q254 392 296 442" />
-              <path class="line-main" d="M215 352 Q254 392 296 442" />
-              <path class="line-pulse" d="M215 352 Q254 392 296 442" />
-
-              <path class="line-glow" d="M215 358 Q215 480 215 598" />
-              <path class="line-main" d="M215 358 Q215 480 215 598" />
-              <path class="line-pulse" d="M215 358 Q215 480 215 598" />
-            </svg>
-
-            <div class="hero-halo"></div>
+            <div class="center-glow"></div>
 
             <button class="logo-core" id="logoMenuButton" type="button" aria-label="เปิดเมนู">
               <img src="images/logo.png" alt="Stealth Safety Bank Logo" />
@@ -1581,7 +1359,7 @@
                 <div class="node-shell">
                   <span class="node-text">
                     <span class="node-title en-font">ABOUT COMPANY</span>
-                    <span class="node-sub en-font">SIAM THAM PROFILE</span>
+                    <span class="node-sub en-font">SIAM TUM PROFILE</span>
                   </span>
                 </div>
                 <span class="node-dot"></span>
@@ -1622,7 +1400,7 @@
                 <div class="node-shell">
                   <span class="node-text">
                     <span class="node-title en-font">CONTACT</span>
-                    <span class="node-sub en-font">SIAM THAM COMPANY</span>
+                    <span class="node-sub en-font">SIAM TUM COMPANY</span>
                   </span>
                 </div>
               </button>
@@ -1639,7 +1417,7 @@
             </div>
           </div>
 
-          <div class="node-note th-font">คลิกที่โลโก้เพื่อเปิดหรือซ่อนเมนู</div>
+          <div class="node-note th-font">คลิกที่โลโก้เพื่อเปิดเมนู</div>
         </div>
       </section>
     </main>
@@ -1678,8 +1456,8 @@
         </div>
 
         <div class="footer-bottom th-font">
-          © Siam Tham Co., Ltd. • <span class="en-font">Stealth Safety Bank Mobile System</span><br>
-          By <span class="en-font">Mr.Tingly Marketing Online</span>
+          © Siam Tum Co., Ltd. • <span class="en-font">Stealth Safety Bank System</span><br>
+          เว็บไซต์นี้ทำโดย <span class="en-font">Mr.Tingly Marketing Online</span>
         </div>
       </div>
     </footer>
