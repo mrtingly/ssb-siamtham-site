@@ -1683,7 +1683,23 @@
       0%,100%{ box-shadow:0 14px 28px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.08), 0 0 18px rgba(96,203,255,.14); }
       50%{ box-shadow:0 16px 30px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.08), 0 0 26px rgba(96,203,255,.26); }
     }
-
+    
+      .theme-toggle{
+        width:42px;
+        height:42px;
+        border-radius:50%;
+        border:none;
+        cursor:pointer;
+        font-size:18px;
+        background:rgba(255,255,255,0.15);
+        backdrop-filter:blur(6px);
+        color:#fff;
+        transition:all .3s ease;
+      }
+      
+      .theme-toggle:hover{
+        transform:scale(1.1);
+      }
     /* RESPONSIVE */
     @media (max-width:1180px){
       .tech-hero{
@@ -2184,8 +2200,54 @@
         animation:none !important;
         transition:none !important;
         scroll-behavior:auto !important;
-      }
+      } 
     }
+    
+    /* ===== LIGHT MODE ===== */
+body.light-mode{
+  background:#f5f8ff;
+  color:#0b2a5b;
+}
+
+/* hero */
+body.light-mode .tech-hero{
+  background:linear-gradient(180deg,#f5f8ff 0%,#eaf1ff 100%);
+  box-shadow:none;
+}
+
+/* ซ่อน orbit ใน light */
+body.light-mode .orbit-system,
+body.light-mode .hero-bg{
+  display:none !important;
+}
+
+/* การ์ดเมนู */
+body.light-mode .node-shell{
+  background:#ffffff;
+  border:1px solid rgba(0,0,0,0.08);
+  box-shadow:0 6px 14px rgba(0,0,0,0.08);
+}
+
+body.light-mode .node-title{
+  color:#0b2a5b;
+}
+
+body.light-mode .node-sub{
+  color:#555;
+}
+
+/* ปุ่มจอง */
+body.light-mode .menu-node.bottom .node-shell{
+  background:linear-gradient(135deg,#4f7cff,#6ea8ff);
+  color:#fff;
+}
+
+/* ข้อความแนะนำ */
+body.light-mode .node-note{
+  background:#fff;
+  color:#0b2a5b;
+}
+    
   </style>
 </head>
 <body>
@@ -2225,6 +2287,7 @@
             </button>
           </div>
           <div id="google_translate_element"></div>
+          <button id="themeToggle" class="theme-toggle">☀️</button>
         </div>
       </div>
     </header>
@@ -3131,5 +3194,29 @@
   </script>
 
   <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  
+  <script>
+const btn = document.getElementById("themeToggle");
+
+// โหลดค่าที่เคยเลือกไว้
+if(localStorage.getItem("theme")==="light"){
+  document.body.classList.add("light-mode");
+  btn.innerText = "🌙";
+}
+
+// กดสลับธีม
+btn.addEventListener("click", ()=>{
+  document.body.classList.toggle("light-mode");
+
+  if(document.body.classList.contains("light-mode")){
+    localStorage.setItem("theme","light");
+    btn.innerText = "🌙";
+  }else{
+    localStorage.setItem("theme","dark");
+    btn.innerText = "☀️";
+  }
+});
+</script>
+  
 </body>
 </html>
