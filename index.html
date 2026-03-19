@@ -18,8 +18,6 @@
       --head-foot-2:#1b67cf;
       --head-foot-3:#0a3f84;
       --max:1320px;
-      --core-x:50%;
-      --core-y:50%;
     }
 
     *{ box-sizing:border-box; }
@@ -412,6 +410,128 @@
       opacity:.56;
     }
 
+    /* TITLE ABOVE LOGO */
+    .hero-system-title{
+      position:absolute;
+      left:50%;
+      top:15%;
+      transform:translate(-50%, -50%) scale(.94);
+      width:min(92%, 980px);
+      text-align:center;
+      pointer-events:none;
+      z-index:8;
+      opacity:0;
+      transition:
+        opacity .32s ease,
+        transform .38s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .tech-hero.open .hero-system-title{
+      opacity:1;
+      transform:translate(-50%, -50%) scale(1);
+    }
+
+    .hero-system-title::before{
+      content:"";
+      position:absolute;
+      inset:-14px -18px;
+      border-radius:999px;
+      background:
+        radial-gradient(circle at center, rgba(94,195,255,.08), transparent 64%);
+      filter:blur(10px);
+      z-index:0;
+    }
+
+    .hero-system-title::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:78%;
+      height:1px;
+      transform:translate(-50%,-50%);
+      background:linear-gradient(90deg, transparent 0%, rgba(133,223,255,.10) 18%, rgba(214,245,255,.42) 50%, rgba(133,223,255,.10) 82%, transparent 100%);
+      box-shadow:0 0 12px rgba(149,226,255,.22);
+      z-index:0;
+      opacity:.85;
+    }
+
+    .hero-system-title-inner{
+      position:relative;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:74px;
+      padding:16px 34px;
+      border-radius:999px;
+      border:1px solid rgba(116,214,255,.18);
+      background:
+        linear-gradient(180deg, rgba(12,38,96,.26), rgba(7,20,53,.12)),
+        linear-gradient(90deg, rgba(255,255,255,.05), rgba(255,255,255,0));
+      box-shadow:
+        inset 0 0 0 1px rgba(180,237,255,.04),
+        0 0 24px rgba(69,170,255,.10);
+      overflow:hidden;
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      z-index:1;
+    }
+
+    .hero-system-title-inner::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(90deg, transparent 0%, rgba(116,214,255,.04) 20%, rgba(116,214,255,.14) 50%, rgba(116,214,255,.04) 80%, transparent 100%);
+      transform:translateX(-100%);
+      animation:titleSweep 4.8s linear infinite;
+      pointer-events:none;
+    }
+
+    .hero-system-title-inner::after{
+      content:"";
+      position:absolute;
+      inset:1px;
+      border-radius:999px;
+      border:1px solid rgba(142,224,255,.12);
+      pointer-events:none;
+      opacity:.6;
+    }
+
+    .hero-system-title-text{
+      position:relative;
+      z-index:2;
+      display:block;
+      font-family:'Orbitron',sans-serif;
+      font-size:34px;
+      font-weight:900;
+      letter-spacing:1.6px;
+      line-height:1.06;
+      text-transform:uppercase;
+      color:#eaf9ff;
+      text-shadow:
+        0 0 10px rgba(141,222,255,.60),
+        0 0 20px rgba(141,222,255,.18),
+        0 0 34px rgba(141,222,255,.10);
+      white-space:nowrap;
+    }
+
+    .hero-system-title-sub{
+      position:absolute;
+      left:50%;
+      top:100%;
+      transform:translateX(-50%);
+      margin-top:10px;
+      font-family:'Orbitron',sans-serif;
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:4px;
+      text-transform:uppercase;
+      color:rgba(196,236,255,.74);
+      white-space:nowrap;
+      text-shadow:0 0 10px rgba(141,222,255,.18);
+    }
+
     .center-glow{
       position:absolute;
       left:50%;
@@ -723,7 +843,6 @@
         0 0 24px rgba(141,222,255,.22);
     }
 
-    /* ซ้ายชี้เข้าโลโก้ */
     .menu-node.left .node-shell{
       clip-path:polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%, 18px 50%);
     }
@@ -732,7 +851,6 @@
       clip-path:polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%, 18px 50%);
     }
 
-    /* ขวาชี้เข้าโลโก้ */
     .menu-node.right .node-shell{
       clip-path:polygon(18px 0, 100% 0, calc(100% - 18px) 50%, 100% 100%, 18px 100%, 0 50%);
     }
@@ -747,7 +865,6 @@
       margin-left:auto;
     }
 
-    /* START ORDER */
     .menu-node.bottom .node-dot{
       width:24px;
       height:24px;
@@ -802,7 +919,6 @@
         0 0 30px rgba(255,76,92,.24);
     }
 
-    /* POSITIONS */
     .n1{ --x:31%; --y:35%; }
     .n2{ --x:31%; --y:44%; }
     .n3{ --x:31%; --y:53%; }
@@ -834,7 +950,6 @@
       pointer-events:none;
     }
 
-    /* POPUP */
     .popup-backdrop{
       position:fixed;
       inset:0;
@@ -952,7 +1067,6 @@
       cursor:pointer;
     }
 
-    /* CHAT */
     .chat-widget{
       position:fixed;
       right:18px;
@@ -1068,7 +1182,6 @@
 
     .chat-widget.open .chat-caret{ transform:rotate(180deg); }
 
-    /* FOOTER */
     .ssb-footer{
       position:relative;
       z-index:1;
@@ -1179,7 +1292,6 @@
       line-height:1.7;
     }
 
-    /* ANIMATIONS */
     @keyframes dotPulse{
       0%,100%{ transform:scale(1); opacity:1; }
       50%{ transform:scale(1.12); opacity:.92; }
@@ -1215,12 +1327,8 @@
         transform:translate3d(0, 0, 0) scale(.8);
         opacity:0;
       }
-      10%{
-        opacity:var(--op, .45);
-      }
-      85%{
-        opacity:var(--op, .45);
-      }
+      10%{ opacity:var(--op, .45); }
+      85%{ opacity:var(--op, .45); }
       100%{
         transform:translate3d(var(--drift, 0px), -128vh, 0) scale(1.18);
         opacity:0;
@@ -1243,6 +1351,11 @@
       }
     }
 
+    @keyframes titleSweep{
+      from{ transform:translateX(-100%); }
+      to{ transform:translateX(100%); }
+    }
+
     @media (max-width:1120px){
       .tech-hero{
         width:min(96vw, 1020px);
@@ -1253,6 +1366,25 @@
       .logo-core{
         width:min(28vw, 182px);
         height:min(28vw, 182px);
+      }
+
+      .hero-system-title{
+        top:14%;
+        width:min(94%, 900px);
+      }
+
+      .hero-system-title-inner{
+        min-height:68px;
+        padding:14px 28px;
+      }
+
+      .hero-system-title-text{
+        font-size:28px;
+      }
+
+      .hero-system-title-sub{
+        font-size:9px;
+        letter-spacing:3px;
       }
 
       .center-glow{ width:112px; height:112px; }
@@ -1319,6 +1451,34 @@
       .tech-hero::after{
         inset:10px;
         border-radius:20px;
+      }
+
+      .hero-system-title{
+        top:13%;
+        width:min(92%, 380px);
+      }
+
+      .hero-system-title::after{
+        width:88%;
+      }
+
+      .hero-system-title-inner{
+        min-height:56px;
+        padding:12px 18px;
+      }
+
+      .hero-system-title-text{
+        font-size:14px;
+        letter-spacing:.9px;
+        white-space:normal;
+      }
+
+      .hero-system-title-sub{
+        margin-top:8px;
+        font-size:6px;
+        letter-spacing:2px;
+        white-space:normal;
+        width:100%;
       }
 
       .logo-core{
@@ -1551,6 +1711,13 @@
               <path class="energy-run delay-7" id="run7" d=""></path>
               <path class="energy-run delay-8" id="run8" d=""></path>
             </svg>
+
+            <div class="hero-system-title" aria-hidden="true">
+              <div class="hero-system-title-inner">
+                <span class="hero-system-title-text">Stealth Safety Bank Mobile System</span>
+              </div>
+              <span class="hero-system-title-sub">Advanced Secure Financial Protection Platform</span>
+            </div>
 
             <div class="center-glow"></div>
             <div class="center-pulse" id="centerPulse"></div>
@@ -1939,7 +2106,6 @@
 
     window.googleTranslateElementInit = googleTranslateElementInit;
 
-    /* SOUND */
     let audioCtx;
     function getAudioCtx(){
       if (!audioCtx){
@@ -1953,13 +2119,9 @@
     function playClickSound(type = "normal"){
       const ctx = getAudioCtx();
       if (!ctx) return;
-
-      if (ctx.state === "suspended") {
-        ctx.resume();
-      }
+      if (ctx.state === "suspended") ctx.resume();
 
       const now = ctx.currentTime;
-
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
       const filter = ctx.createBiquadFilter();
@@ -1997,12 +2159,10 @@
       el.addEventListener("click", () => playClickSound("normal"));
     });
 
-    /* ENERGY LINES */
     function buildEnergyLines(){
       const hero = document.getElementById("techHero");
-      const svg = document.getElementById("energySvg");
       const logo = document.getElementById("logoMenuButton");
-      if (!hero || !svg || !logo) return;
+      if (!hero || !logo) return;
 
       const heroRect = hero.getBoundingClientRect();
       const logoRect = logo.getBoundingClientRect();
@@ -2033,7 +2193,6 @@
     window.addEventListener("load", buildEnergyLines);
     window.addEventListener("resize", buildEnergyLines);
 
-    /* dynamic particles more */
     function createExtraParticles(){
       const field = document.getElementById("particleField");
       if (!field) return;
