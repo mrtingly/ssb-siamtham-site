@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stealth Safety Bank Mobile System (SSB)</title>
+  <title>Stealth Safety Bank System (SSB)</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,6 +17,17 @@
       --head-foot-1:#0b4ea2;
       --head-foot-2:#1b67cf;
       --head-foot-3:#0a3f84;
+      --cyan-1:#e8fbff;
+      --cyan-2:#c8f3ff;
+      --cyan-3:#87ddff;
+      --cyan-4:#3aaeff;
+      --cyan-5:#0f6bdb;
+      --deep-1:#010713;
+      --deep-2:#021127;
+      --deep-3:#04173b;
+      --red-1:#ff5063;
+      --red-2:#d81f33;
+      --glass:#0c214b;
       --max:1320px;
     }
 
@@ -31,7 +42,7 @@
       background:
         radial-gradient(circle at 50% 50%, rgba(32,118,255,.18) 0%, rgba(14,58,146,.10) 16%, transparent 36%),
         radial-gradient(circle at 50% 18%, rgba(102,186,255,.06) 0%, transparent 28%),
-        linear-gradient(180deg, #010713 0%, #021127 24%, #04173b 65%, #031129 100%);
+        linear-gradient(180deg, var(--deep-1) 0%, var(--deep-2) 24%, var(--deep-3) 65%, #031129 100%);
     }
 
     .th-font{ font-family:'Prompt',sans-serif; }
@@ -43,7 +54,7 @@
       inset:0;
       pointer-events:none;
       z-index:0;
-      opacity:.22;
+      opacity:.18;
       background-image:
         radial-gradient(circle at 14% 22%, rgba(255,255,255,.84) 0 1px, transparent 1.6px),
         radial-gradient(circle at 83% 18%, rgba(255,255,255,.68) 0 1px, transparent 1.6px),
@@ -265,7 +276,6 @@
         radial-gradient(circle at 7% 87%, rgba(255,255,255,.32) 0 1px, transparent 1.7px);
     }
 
-    /* BACKGROUND FX */
     .hero-bg{
       position:absolute;
       inset:0;
@@ -304,43 +314,13 @@
         inset 0 0 18px rgba(87,185,255,.04);
     }
 
-    .ring-1{
-      width:min(40vw, 360px);
-      height:min(40vw, 360px);
-      opacity:.9;
-      animation:spinSlow 22s linear infinite;
-    }
+    .ring-1{ width:min(40vw, 360px); height:min(40vw, 360px); opacity:.9; animation:spinSlow 22s linear infinite; }
+    .ring-2{ width:min(50vw, 450px); height:min(50vw, 450px); opacity:.6; animation:spinSlowReverse 32s linear infinite; }
+    .ring-3{ width:min(60vw, 540px); height:min(60vw, 540px); opacity:.36; animation:spinSlow 42s linear infinite; }
+    .ring-tilt-1{ transform:translate(-50%,-50%) rotateX(72deg); border-color:rgba(132,219,255,.12); }
+    .ring-tilt-2{ transform:translate(-50%,-50%) rotateY(72deg); border-color:rgba(132,219,255,.10); }
+    .ring-tilt-3{ transform:translate(-50%,-50%) rotate(55deg); border-color:rgba(132,219,255,.10); }
 
-    .ring-2{
-      width:min(50vw, 450px);
-      height:min(50vw, 450px);
-      opacity:.6;
-      animation:spinSlowReverse 32s linear infinite;
-    }
-
-    .ring-3{
-      width:min(60vw, 540px);
-      height:min(60vw, 540px);
-      opacity:.36;
-      animation:spinSlow 42s linear infinite;
-    }
-
-    .ring-tilt-1{
-      transform:translate(-50%,-50%) rotateX(72deg);
-      border-color:rgba(132,219,255,.12);
-    }
-
-    .ring-tilt-2{
-      transform:translate(-50%,-50%) rotateY(72deg);
-      border-color:rgba(132,219,255,.10);
-    }
-
-    .ring-tilt-3{
-      transform:translate(-50%,-50%) rotate(55deg);
-      border-color:rgba(132,219,255,.10);
-    }
-
-    /* ORBIT DOTS */
     .orbit-system{
       position:absolute;
       left:50%;
@@ -361,37 +341,11 @@
       pointer-events:none;
     }
 
-    .orbit-track.o1{
-      width:min(40vw, 360px);
-      height:min(40vw, 360px);
-      animation:orbitSpin 10s linear infinite;
-    }
-
-    .orbit-track.o2{
-      width:min(50vw, 450px);
-      height:min(50vw, 450px);
-      animation:orbitSpinReverse 15s linear infinite;
-    }
-
-    .orbit-track.o3{
-      width:min(60vw, 540px);
-      height:min(60vw, 540px);
-      animation:orbitSpin 21s linear infinite;
-    }
-
-    .orbit-track.o4{
-      width:min(48vw, 430px);
-      height:min(48vw, 430px);
-      transform:translate(-50%,-50%) rotate(58deg);
-      animation:orbitTiltA 14s linear infinite;
-    }
-
-    .orbit-track.o5{
-      width:min(56vw, 500px);
-      height:min(56vw, 500px);
-      transform:translate(-50%,-50%) rotate(-42deg);
-      animation:orbitTiltB 18s linear infinite;
-    }
+    .orbit-track.o1{ width:min(40vw, 360px); height:min(40vw, 360px); animation:orbitSpin 10s linear infinite; }
+    .orbit-track.o2{ width:min(50vw, 450px); height:min(50vw, 450px); animation:orbitSpinReverse 15s linear infinite; }
+    .orbit-track.o3{ width:min(60vw, 540px); height:min(60vw, 540px); animation:orbitSpin 21s linear infinite; }
+    .orbit-track.o4{ width:min(48vw, 430px); height:min(48vw, 430px); transform:translate(-50%,-50%) rotate(58deg); animation:orbitTiltA 14s linear infinite; }
+    .orbit-track.o5{ width:min(56vw, 500px); height:min(56vw, 500px); transform:translate(-50%,-50%) rotate(-42deg); animation:orbitTiltB 18s linear infinite; }
 
     .orbit-dot{
       position:absolute;
@@ -401,24 +355,15 @@
       height:9px;
       border-radius:50%;
       transform:translate(-50%,-50%);
-      background:
-        radial-gradient(circle, #ffffff 0%, #dff7ff 35%, #7dd4ff 72%, rgba(125,212,255,.15) 100%);
+      background:radial-gradient(circle, #ffffff 0%, #dff7ff 35%, #7dd4ff 72%, rgba(125,212,255,.15) 100%);
       box-shadow:
         0 0 8px rgba(255,255,255,.85),
         0 0 18px rgba(132,219,255,.58),
         0 0 28px rgba(132,219,255,.20);
     }
 
-    .orbit-dot.small{
-      width:6px;
-      height:6px;
-    }
-
-    .orbit-dot.large{
-      width:11px;
-      height:11px;
-    }
-
+    .orbit-dot.small{ width:6px; height:6px; }
+    .orbit-dot.large{ width:11px; height:11px; }
     .orbit-dot.d2{ top:14%; left:84%; }
     .orbit-dot.d3{ top:78%; left:18%; }
     .orbit-dot.d4{ top:50%; left:100%; }
@@ -453,14 +398,12 @@
       inset:-20%;
       z-index:1;
       opacity:.22;
-      background:
-        linear-gradient(90deg, transparent 0%, rgba(148,224,255,.02) 44%, rgba(148,224,255,.12) 50%, rgba(148,224,255,.02) 56%, transparent 100%);
+      background:linear-gradient(90deg, transparent 0%, rgba(148,224,255,.02) 44%, rgba(148,224,255,.12) 50%, rgba(148,224,255,.02) 56%, transparent 100%);
       transform:rotate(12deg);
       animation:scanMove 9s linear infinite;
       filter:blur(2px);
     }
 
-    /* PARTICLES INWARD */
     .particle-field{
       position:absolute;
       inset:0;
@@ -483,17 +426,9 @@
       animation-delay:var(--delay, 0s);
     }
 
-    .particle.sm{
-      width:2px;
-      height:2px;
-    }
+    .particle.sm{ width:2px; height:2px; }
+    .particle.lg{ width:4px; height:4px; }
 
-    .particle.lg{
-      width:4px;
-      height:4px;
-    }
-
-    /* TITLE */
     .hero-system-title{
       position:absolute;
       left:50%;
@@ -504,9 +439,7 @@
       pointer-events:none;
       z-index:8;
       opacity:0;
-      transition:
-        opacity .32s ease,
-        transform .38s cubic-bezier(.2,.8,.2,1);
+      transition:opacity .32s ease, transform .38s cubic-bezier(.2,.8,.2,1);
     }
 
     .tech-hero.open .hero-system-title{
@@ -645,9 +578,7 @@
       z-index:3;
     }
 
-    .center-pulse.active{
-      animation:pulseOut .72s ease-out;
-    }
+    .center-pulse.active{ animation:pulseOut .72s ease-out; }
 
     .logo-core{
       position:relative;
@@ -690,7 +621,6 @@
         drop-shadow(0 12px 22px rgba(0,0,0,.24));
     }
 
-    /* ENERGY LINES */
     .energy-svg{
       position:absolute;
       inset:0;
@@ -711,9 +641,7 @@
       transition:opacity .3s ease;
     }
 
-    .tech-hero.open .energy-line{
-      opacity:1;
-    }
+    .tech-hero.open .energy-line{ opacity:1; }
 
     .energy-run{
       fill:none;
@@ -727,9 +655,7 @@
       transition:opacity .3s ease;
     }
 
-    .tech-hero.open .energy-run{
-      opacity:.92;
-    }
+    .tech-hero.open .energy-run{ opacity:.92; }
 
     .delay-1{ animation-delay:.08s; }
     .delay-2{ animation-delay:.24s; }
@@ -740,7 +666,6 @@
     .delay-7{ animation-delay:.44s; }
     .delay-8{ animation-delay:.60s; }
 
-    /* MENU */
     .menu-layer{
       position:absolute;
       inset:0;
@@ -784,21 +709,9 @@
       text-align:left;
     }
 
-    .menu-node.left{
-      justify-content:flex-start;
-      gap:12px;
-    }
-
-    .menu-node.right{
-      justify-content:space-between;
-      gap:12px;
-    }
-
-    .menu-node.bottom{
-      flex-direction:column;
-      text-align:center;
-      gap:12px;
-    }
+    .menu-node.left{ justify-content:flex-start; gap:12px; }
+    .menu-node.right{ justify-content:space-between; gap:12px; }
+    .menu-node.bottom{ flex-direction:column; text-align:center; gap:12px; }
 
     .menu-node:hover{ filter:brightness(1.16); }
 
@@ -865,8 +778,7 @@
       content:"";
       position:absolute;
       inset:0;
-      background:
-        linear-gradient(90deg, transparent 0%, rgba(116,214,255,.12) 10%, transparent 20%, transparent 80%, rgba(116,214,255,.12) 90%, transparent 100%);
+      background:linear-gradient(90deg, transparent 0%, rgba(116,214,255,.12) 10%, transparent 20%, transparent 80%, rgba(116,214,255,.12) 90%, transparent 100%);
       pointer-events:none;
     }
 
@@ -938,10 +850,7 @@
     }
 
     .menu-node.right .node-shell{ order:1; }
-    .menu-node.right .node-dot{
-      order:2;
-      margin-left:auto;
-    }
+    .menu-node.right .node-dot{ order:2; margin-left:auto; }
 
     .menu-node.bottom .node-dot{
       width:24px;
@@ -1028,6 +937,7 @@
       pointer-events:none;
     }
 
+    /* POPUP REDESIGN */
     .popup-backdrop{
       position:fixed;
       inset:0;
@@ -1035,93 +945,303 @@
       display:none;
       align-items:center;
       justify-content:center;
-      padding:16px;
-      background:rgba(2,10,28,.68);
-      backdrop-filter:blur(10px);
-      -webkit-backdrop-filter:blur(10px);
+      padding:20px;
+      background:
+        radial-gradient(circle at center, rgba(21,74,170,.14), transparent 30%),
+        rgba(2,10,28,.78);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+      opacity:0;
+      transition:opacity .28s ease;
+    }
+
+    .popup-backdrop.show{
+      display:flex;
+      opacity:1;
     }
 
     .popup-card{
-      width:min(95vw, 980px);
-      max-height:90vh;
+      width:min(96vw, 1080px);
+      max-height:92vh;
       overflow:auto;
-      border-radius:26px;
+      border-radius:28px;
       padding:20px;
-      background:rgba(255,255,255,.96);
-      color:#14355f;
-      border:1px solid rgba(255,255,255,.55);
-      box-shadow:0 30px 80px rgba(0,0,0,.28);
+      background:
+        linear-gradient(180deg, rgba(9,28,66,.96), rgba(6,18,48,.98)),
+        linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,0));
+      color:#eaf7ff;
+      border:1px solid rgba(130,220,255,.16);
+      box-shadow:
+        0 32px 90px rgba(0,0,0,.42),
+        inset 0 0 0 1px rgba(180,237,255,.04),
+        0 0 26px rgba(48,154,255,.10);
+      position:relative;
+      transform:translateY(18px) scale(.96);
+      animation:popupIn .36s cubic-bezier(.2,.8,.2,1) forwards;
+      overflow-x:hidden;
     }
 
-    .popup-card.company{ width:min(92vw, 520px); }
+    .popup-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:
+        linear-gradient(rgba(120,195,255,.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(120,195,255,.028) 1px, transparent 1px),
+        radial-gradient(circle at 18% 14%, rgba(255,255,255,.08), transparent 18%),
+        radial-gradient(circle at 88% 10%, rgba(114,208,255,.08), transparent 18%);
+      background-size:30px 30px, 30px 30px, auto, auto;
+      opacity:.6;
+    }
+
+    .popup-card::after{
+      content:"";
+      position:absolute;
+      inset:10px;
+      border-radius:20px;
+      border:1px solid rgba(142,224,255,.10);
+      pointer-events:none;
+      box-shadow:inset 0 0 22px rgba(73,170,255,.04);
+    }
+
+    .popup-card.company{
+      width:min(92vw, 620px);
+    }
 
     .popup-head{
+      position:relative;
       display:flex;
+      align-items:flex-start;
       justify-content:space-between;
+      gap:14px;
+      margin-bottom:18px;
+      z-index:1;
+    }
+
+    .popup-head-main{
+      min-width:0;
+      flex:1;
+    }
+
+    .popup-kicker{
+      display:inline-flex;
       align-items:center;
-      gap:12px;
-      margin-bottom:14px;
+      gap:8px;
+      min-height:34px;
+      padding:6px 14px;
+      border-radius:999px;
+      border:1px solid rgba(138,223,255,.16);
+      background:rgba(255,255,255,.05);
+      color:rgba(219,245,255,.90);
+      font-size:12px;
+      font-weight:700;
+      margin-bottom:10px;
+      box-shadow:0 0 16px rgba(79,182,255,.08);
+    }
+
+    .popup-kicker::before{
+      content:"";
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:radial-gradient(circle, #fff 0%, #bff2ff 35%, #58bfff 100%);
+      box-shadow:0 0 10px rgba(88,191,255,.8);
+      flex:0 0 8px;
     }
 
     .popup-head h3{
       margin:0;
-      font-size:24px;
-      color:#0b4ea2;
-      line-height:1.2;
+      font-size:34px;
+      line-height:1.04;
+      color:#eefaff;
+      text-shadow:
+        0 0 10px rgba(137,219,255,.44),
+        0 0 24px rgba(137,219,255,.12);
+    }
+
+    .popup-subtitle{
+      margin-top:8px;
+      color:rgba(215,241,255,.78);
+      font-size:14px;
+      line-height:1.7;
+      max-width:760px;
     }
 
     .popup-x{
-      width:44px;
-      height:44px;
+      width:48px;
+      height:48px;
       border:none;
       border-radius:999px;
-      background:linear-gradient(135deg, #0b4ea2, #1d6bd4);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.02)),
+        linear-gradient(135deg, #0b4ea2, #1d6bd4);
       color:#fff;
       font-size:18px;
       font-weight:800;
       cursor:pointer;
-      flex:0 0 44px;
+      flex:0 0 48px;
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow:0 10px 26px rgba(0,0,0,.24);
+      transition:.22s ease;
+      position:relative;
+      z-index:1;
+    }
+
+    .popup-x:hover{
+      transform:translateY(-2px);
+      filter:brightness(1.08);
     }
 
     .popup-grid{
+      position:relative;
+      z-index:1;
       display:grid;
-      grid-template-columns:1.04fr .96fr;
-      gap:12px;
+      grid-template-columns:1.08fr .92fr;
+      gap:14px;
       align-items:start;
     }
 
-    .popup-text,
-    .company-detail,
-    .video-wrap{
-      background:#fff;
-      border:1px solid rgba(11,78,162,.10);
-      border-radius:20px;
-      padding:16px;
-      box-shadow:0 14px 28px rgba(11,78,162,.06);
+    .popup-left,
+    .popup-right{
+      display:grid;
+      gap:14px;
     }
 
-    .popup-text p,
-    .company-detail p{
-      margin:0 0 10px;
-      font-size:15px;
-      line-height:1.78;
-      color:#34506b;
+    .popup-panel{
+      position:relative;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)),
+        linear-gradient(135deg, rgba(255,255,255,.03), rgba(255,255,255,0));
+      border:1px solid rgba(130,220,255,.12);
+      border-radius:22px;
+      padding:18px;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.04),
+        0 14px 30px rgba(0,0,0,.16);
+      overflow:hidden;
     }
 
-    .popup-text p:last-child,
-    .company-detail p:last-child{ margin-bottom:0; }
+    .popup-panel::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(90deg, transparent 0%, rgba(116,214,255,.06) 20%, rgba(116,214,255,.11) 50%, rgba(116,214,255,.06) 80%, transparent 100%);
+      transform:translateX(-100%);
+      animation:panelSweep 5.5s linear infinite;
+      opacity:.55;
+    }
 
-    .company-detail strong{ color:#0b4ea2; }
+    .popup-section-title{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin:0 0 12px;
+      font-size:18px;
+      font-weight:800;
+      color:#eefaff;
+    }
 
-    .video-wrap{ padding:10px; }
+    .popup-section-title .dot{
+      width:9px;
+      height:9px;
+      border-radius:50%;
+      background:radial-gradient(circle, #fff 0%, #c8f3ff 35%, #4ab7ff 100%);
+      box-shadow:0 0 10px rgba(74,183,255,.8);
+      flex:0 0 9px;
+    }
+
+    .popup-lead{
+      margin:0 0 12px;
+      font-size:16px;
+      line-height:1.85;
+      color:#dcefff;
+    }
+
+    .feature-list{
+      display:grid;
+      gap:10px;
+      margin:0;
+      padding:0;
+      list-style:none;
+    }
+
+    .feature-list li{
+      position:relative;
+      min-height:52px;
+      padding:12px 14px 12px 46px;
+      border-radius:16px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(134,223,255,.08);
+      color:#e8f8ff;
+      font-size:14px;
+      line-height:1.7;
+    }
+
+    .feature-list li::before{
+      content:"";
+      position:absolute;
+      left:14px;
+      top:16px;
+      width:18px;
+      height:18px;
+      border-radius:50%;
+      background:
+        radial-gradient(circle, #fff 0%, #d7f7ff 28%, #63c7ff 62%, rgba(99,199,255,.18) 100%);
+      box-shadow:0 0 14px rgba(99,199,255,.44);
+    }
+
+    .impact-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:10px;
+    }
+
+    .impact-card{
+      min-height:110px;
+      border-radius:18px;
+      padding:14px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)),
+        radial-gradient(circle at top right, rgba(90,188,255,.10), transparent 48%);
+      border:1px solid rgba(135,223,255,.10);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+    }
+
+    .impact-value{
+      font-size:26px;
+      line-height:1;
+      font-weight:900;
+      color:#eefaff;
+      margin-bottom:10px;
+      text-shadow:0 0 10px rgba(137,219,255,.22);
+    }
+
+    .impact-label{
+      font-size:12px;
+      line-height:1.6;
+      color:rgba(221,245,255,.76);
+      font-weight:600;
+    }
+
+    .video-panel{
+      padding:12px;
+    }
 
     .video-frame{
       position:relative;
       width:100%;
       padding-top:56.25%;
       overflow:hidden;
-      border-radius:16px;
-      background:#dce7f7;
+      border-radius:18px;
+      background:
+        radial-gradient(circle at center, rgba(57,142,255,.14), rgba(10,32,79,.95) 62%),
+        #0a1b44;
+      border:1px solid rgba(130,220,255,.12);
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.03),
+        0 12px 24px rgba(0,0,0,.20);
     }
 
     .video-frame iframe{
@@ -1132,242 +1252,117 @@
       border:0;
     }
 
-    .popup-close{
-      margin-top:12px;
-      min-width:120px;
-      min-height:46px;
-      border:none;
-      border-radius:14px;
-      background:linear-gradient(135deg, #0b4ea2 0%, #1f69cd 60%, #d4af37 100%);
-      color:#fff;
-      font-size:15px;
-      font-weight:700;
-      cursor:pointer;
-    }
-
-    .chat-widget{
-      position:fixed;
-      right:18px;
-      bottom:18px;
-      z-index:9998;
+    .badge-row{
       display:flex;
-      flex-direction:column;
-      align-items:flex-end;
-      gap:12px;
+      flex-wrap:wrap;
+      gap:8px;
     }
 
-    .chat-menu{
-      display:flex;
-      flex-direction:column;
-      align-items:flex-end;
-      gap:10px;
-      opacity:0;
-      pointer-events:none;
-      transform:translateY(12px) scale(.96);
-      transition:.28s ease;
-    }
-
-    .chat-widget.open .chat-menu{
-      opacity:1;
-      pointer-events:auto;
-      transform:translateY(0) scale(1);
-    }
-
-    .chat-item{
-      min-width:220px;
-      height:54px;
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding:0 16px;
-      border-radius:999px;
-      color:#fff;
-      text-decoration:none;
-      font-size:14px;
-      font-weight:700;
-      border:1px solid rgba(255,255,255,.16);
-      box-shadow:0 14px 28px rgba(0,0,0,.18);
-      transition:.22s ease;
-    }
-
-    .chat-item:hover{ transform:translateY(-2px) scale(1.02); }
-
-    .chat-item.line{ background:linear-gradient(135deg, #10d95a 0%, #06c755 55%, #02a94b 100%); }
-    .chat-item.facebook{ background:linear-gradient(135deg, #2a86ff 0%, #1877f2 55%, #0f5fd3 100%); }
-    .chat-item.youtube{ background:linear-gradient(135deg, #ff2f2f 0%, #ff0000 55%, #c90000 100%); }
-    .chat-item.tiktok{ background:linear-gradient(135deg, #232323 0%, #111111 55%, #000000 100%); }
-
-    .chat-icon{
-      width:34px;
-      height:34px;
-      border-radius:999px;
-      background:rgba(255,255,255,.16);
+    .popup-badge{
       display:inline-flex;
       align-items:center;
-      justify-content:center;
-      flex:0 0 34px;
-      font-size:12px;
-      font-weight:800;
-    }
-
-    .chat-fab{
-      width:66px;
-      height:66px;
-      border:none;
+      gap:8px;
+      min-height:36px;
+      padding:8px 12px;
       border-radius:999px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.04)),
-        linear-gradient(135deg, #0b4ea2, #1f69cd);
-      color:#fff;
-      cursor:pointer;
-      box-shadow:0 18px 38px rgba(0,0,0,.28);
-      border:1px solid rgba(255,255,255,.18);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      position:relative;
-      transition:.22s ease;
-    }
-
-    .chat-fab:hover{ transform:translateY(-2px); }
-
-    .chat-fab-text{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(131,221,255,.10);
+      color:#ecfaff;
       font-size:12px;
-      font-weight:800;
-      line-height:1.04;
+      font-weight:700;
     }
 
-    .chat-caret{
-      position:absolute;
-      right:-2px;
-      top:-2px;
-      width:22px;
-      height:22px;
-      border-radius:999px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:#fff;
-      color:#0b4ea2;
-      font-size:10px;
-      box-shadow:0 6px 16px rgba(11,78,162,.18);
-      transition:.28s ease;
-    }
-
-    .chat-widget.open .chat-caret{ transform:rotate(180deg); }
-
-    .ssb-footer{
-      position:relative;
-      z-index:1;
-      margin-top:12px;
-      border-top:1px solid rgba(255,255,255,.12);
-      background:linear-gradient(135deg, var(--head-foot-3) 0%, var(--head-foot-1) 52%, var(--head-foot-2) 100%);
-      box-shadow:0 -12px 30px rgba(0,0,0,.22);
-    }
-
-    .ssb-footer::before{
+    .popup-badge::before{
       content:"";
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,0)),
-        radial-gradient(circle at 10% 20%, rgba(255,255,255,.10), transparent 24%),
-        radial-gradient(circle at 88% 16%, rgba(255,255,255,.08), transparent 20%);
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:radial-gradient(circle, #fff 0%, #c8f3ff 30%, #4ab7ff 100%);
+      box-shadow:0 0 8px rgba(74,183,255,.8);
+      flex:0 0 7px;
     }
 
-    .footer-inner{
-      width:min(var(--max), calc(100% - 20px));
-      margin:0 auto;
-      padding:16px 0 12px;
+    .popup-action-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:14px;
+    }
+
+    .popup-cta{
+      min-height:48px;
+      padding:12px 18px;
+      border:none;
+      border-radius:16px;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      color:#fff;
+      font-size:14px;
+      font-weight:800;
+      cursor:pointer;
+      transition:.22s ease;
+    }
+
+    .popup-cta.primary{
+      background:linear-gradient(135deg, #0b4ea2 0%, #1f69cd 60%, #5cc8ff 100%);
+      box-shadow:0 14px 28px rgba(31,105,205,.28);
+    }
+
+    .popup-cta.secondary{
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(130,220,255,.14);
+      color:#eefaff;
+    }
+
+    .popup-cta:hover{
+      transform:translateY(-2px);
+      filter:brightness(1.05);
+    }
+
+    .company-detail p{
+      margin:0 0 10px;
+      font-size:15px;
+      line-height:1.82;
+      color:#ddecff;
+    }
+
+    .company-detail strong{
+      color:#eefaff;
+    }
+
+    .popup-close{
+      margin-top:14px;
+      min-width:120px;
+      min-height:48px;
+      border:none;
+      border-radius:16px;
+      background:linear-gradient(135deg, #0b4ea2 0%, #1f69cd 60%, #56c3ff 100%);
+      color:#fff;
+      font-size:15px;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow:0 14px 28px rgba(31,105,205,.28);
+      transition:.22s ease;
       position:relative;
       z-index:1;
     }
 
-    .footer-card{
-      background:rgba(255,255,255,.10);
-      border:1px solid rgba(255,255,255,.14);
-      border-radius:20px;
-      padding:14px;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.10);
-      backdrop-filter:blur(10px);
-      -webkit-backdrop-filter:blur(10px);
+    .popup-close:hover{
+      transform:translateY(-2px);
+      filter:brightness(1.05);
     }
 
-    .footer-main{
-      display:grid;
-      grid-template-columns:1.15fr .95fr .95fr;
-      gap:12px;
-      align-items:center;
+    @keyframes popupIn{
+      from{ opacity:0; transform:translateY(18px) scale(.96); }
+      to{ opacity:1; transform:translateY(0) scale(1); }
     }
 
-    .footer-title{
-      margin:0 0 8px;
-      font-size:17px;
-      font-weight:800;
-      color:#fff;
-    }
-
-    .footer-text{
-      margin:0 0 6px;
-      color:rgba(255,255,255,.94);
-      font-size:13px;
-      line-height:1.65;
-      word-break:break-word;
-    }
-
-    .footer-link{
-      color:#fff;
-      text-decoration:none;
-      font-weight:700;
-    }
-
-    .footer-contact-center{ text-align:center; }
-
-    .footer-nav-wrap{
-      display:flex;
-      justify-content:flex-end;
-      align-items:center;
-    }
-
-    .footer-map-button{
-      min-height:56px;
-      padding:12px 20px;
-      border-radius:999px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:12px;
-      text-decoration:none;
-      color:#0b4ea2;
-      font-size:15px;
-      font-weight:800;
-      background:linear-gradient(135deg, #ffffff 0%, #edf5ff 100%);
-      box-shadow:0 12px 24px rgba(0,0,0,.16);
-      border:1px solid rgba(255,255,255,.24);
-      transition:.22s ease;
-    }
-
-    .footer-map-button:hover{ transform:translateY(-2px); }
-
-    .footer-pin{
-      width:34px;
-      height:34px;
-      flex:0 0 34px;
-    }
-
-    .footer-bottom{
-      margin-top:10px;
-      padding-top:10px;
-      border-top:1px solid rgba(255,255,255,.12);
-      text-align:center;
-      color:rgba(255,255,255,.92);
-      font-size:12px;
-      line-height:1.7;
+    @keyframes panelSweep{
+      from{ transform:translateX(-100%); }
+      to{ transform:translateX(100%); }
     }
 
     @keyframes dotPulse{
@@ -1421,16 +1416,9 @@
     }
 
     @keyframes moveToCore{
-      0%{
-        transform:translate(0,0) scale(1);
-        opacity:0;
-      }
-      8%{
-        opacity:var(--op, .44);
-      }
-      72%{
-        opacity:var(--op, .44);
-      }
+      0%{ transform:translate(0,0) scale(1); opacity:0; }
+      8%{ opacity:var(--op, .44); }
+      72%{ opacity:var(--op, .44); }
       100%{
         transform:translate(var(--tx, 0px), var(--ty, 0px)) scale(.45);
         opacity:0;
@@ -1443,14 +1431,8 @@
     }
 
     @keyframes pulseOut{
-      0%{
-        opacity:.8;
-        transform:translate(-50%,-50%) scale(.35);
-      }
-      100%{
-        opacity:0;
-        transform:translate(-50%,-50%) scale(1.15);
-      }
+      0%{ opacity:.8; transform:translate(-50%,-50%) scale(.35); }
+      100%{ opacity:0; transform:translate(-50%,-50%) scale(1.15); }
     }
 
     @keyframes titleSweep{
@@ -1475,11 +1457,7 @@
         width:min(94%, 900px);
       }
 
-      .hero-system-title-inner{
-        min-height:68px;
-        padding:14px 28px;
-      }
-
+      .hero-system-title-inner{ min-height:68px; padding:14px 28px; }
       .hero-system-title-text{ font-size:28px; }
       .hero-system-title-sub{ font-size:10px; }
 
@@ -1494,6 +1472,8 @@
       .node-title{ font-size:12px; }
       .node-sub{ font-size:9px; }
       .menu-node.bottom .node-title{ font-size:20px; }
+
+      .impact-grid{ grid-template-columns:1fr 1fr 1fr; }
 
       .n1{ --x:29%; --y:35%; }
       .n2{ --x:29%; --y:44%; }
@@ -1630,7 +1610,6 @@
       }
 
       .node-text{ gap:3px; }
-
       .node-title{ font-size:9px; }
       .node-sub{ font-size:6px; }
 
@@ -1656,21 +1635,20 @@
       }
 
       .popup-card{
-        width:min(96vw, 980px);
+        width:min(96vw, 1080px);
         padding:16px;
-        border-radius:20px;
+        border-radius:22px;
       }
 
-      .popup-head h3{ font-size:20px; }
+      .popup-head h3{ font-size:24px; }
+      .popup-subtitle{ font-size:13px; }
+      .popup-kicker{ font-size:11px; }
 
-      .popup-text,
-      .company-detail{ padding:14px; }
-
-      .popup-text p,
-      .company-detail p{
-        font-size:14px;
-        line-height:1.72;
-      }
+      .popup-panel{ padding:14px; }
+      .popup-lead{ font-size:14px; line-height:1.78; }
+      .feature-list li{ font-size:13px; padding-left:42px; }
+      .impact-grid{ grid-template-columns:1fr; }
+      .impact-card{ min-height:unset; }
 
       .footer-inner{
         width:min(100% - 14px, var(--max));
@@ -1825,7 +1803,7 @@
             </button>
 
             <div class="menu-layer">
-              <button class="menu-node left n1 energy-source" type="button" data-popup="ssbmobile" data-line="1">
+              <button class="menu-node left n1 energy-source sound-click" type="button" data-popup="ssbmobile" data-line="1">
                 <span class="node-dot"></span>
                 <div class="node-shell">
                   <span class="node-text">
@@ -1835,7 +1813,7 @@
                 </div>
               </button>
 
-              <button class="menu-node left n2 energy-source" type="button" data-popup="stealthbank" data-line="2">
+              <button class="menu-node left n2 energy-source sound-click" type="button" data-popup="stealthbank" data-line="2">
                 <span class="node-dot"></span>
                 <div class="node-shell">
                   <span class="node-text">
@@ -1845,7 +1823,7 @@
                 </div>
               </button>
 
-              <a class="menu-node left n3 energy-source" href="agent-login.html" data-line="3">
+              <a class="menu-node left n3 energy-source sound-click" href="agent-login.html" data-line="3">
                 <span class="node-dot"></span>
                 <div class="node-shell">
                   <span class="node-text">
@@ -1855,7 +1833,7 @@
                 </div>
               </a>
 
-              <a class="menu-node left n4 energy-source" href="about.html" data-line="4">
+              <a class="menu-node left n4 energy-source sound-click" href="about.html" data-line="4">
                 <span class="node-dot"></span>
                 <div class="node-shell">
                   <span class="node-text">
@@ -1865,7 +1843,7 @@
                 </div>
               </a>
 
-              <button class="menu-node right n5 energy-source" type="button" data-popup="stealthbank" data-line="5">
+              <button class="menu-node right n5 energy-source sound-click" type="button" data-popup="stealthbank" data-line="5">
                 <div class="node-shell">
                   <span class="node-text">
                     <span class="node-title th-font">ระบบปกป้องทางการเงิน</span>
@@ -1875,7 +1853,7 @@
                 <span class="node-dot"></span>
               </button>
 
-              <button class="menu-node right n6 energy-source" type="button" data-popup="safetybook" data-line="6">
+              <button class="menu-node right n6 energy-source sound-click" type="button" data-popup="safetybook" data-line="6">
                 <div class="node-shell">
                   <span class="node-text">
                     <span class="node-title th-font">Stealth Safety Book</span>
@@ -1885,17 +1863,17 @@
                 <span class="node-dot"></span>
               </button>
 
-              <button class="menu-node right n7 energy-source" type="button" data-popup="flare" data-line="7">
+              <button class="menu-node right n7 energy-source sound-click" type="button" data-popup="technology" data-line="7">
                 <div class="node-shell">
                   <span class="node-text">
-                    <span class="node-title th-font">Technology Overview</span>
-                    <span class="node-sub th-font">ระบบเตือนและเสริมความรอบคอบในการใช้งาน</span>
+                    <span class="node-title th-font">ภาพรวมเทคโนโลยี</span>
+                    <span class="node-sub th-font">อธิบายเทคโนโลยีที่ใช้ในการป้องกัน</span>
                   </span>
                 </div>
                 <span class="node-dot"></span>
               </button>
 
-              <button class="menu-node right n8 energy-source" type="button" id="contactButton" data-line="8">
+              <button class="menu-node right n8 energy-source sound-click" type="button" id="contactButton" data-line="8">
                 <div class="node-shell">
                   <span class="node-text">
                     <span class="node-title th-font">ติดต่อเรา</span>
@@ -1905,7 +1883,7 @@
                 <span class="node-dot"></span>
               </button>
 
-              <a class="menu-node bottom n9" href="book.html">
+              <a class="menu-node bottom n9 sound-click" href="book.html">
                 <span class="node-dot"></span>
                 <div class="node-shell">
                   <span class="node-text">
@@ -1939,7 +1917,7 @@
 
             <div class="footer-nav-wrap">
               <a
-                class="footer-map-button th-font"
+                class="footer-map-button th-font sound-click"
                 href="https://maps.app.goo.gl/Dz4B1kpqVbmWhkYX7"
                 target="_blank"
                 rel="noopener"
@@ -1956,50 +1934,97 @@
         </div>
 
         <div class="footer-bottom th-font">
-          © Siam Tham Co., Ltd. • <span class="en-font">Stealth Safety Bank Mobile System</span><br>
-          By <span class="en-font">Mr.Tingly Marketing Online</span>
+          © Siam Tum Co., Ltd. • <span class="en-font">Stealth Safety Bank System</span><br>
+          เว็บไซต์นี้ทำโดย <span class="en-font">Mr.Tingly Marketing Online</span>
         </div>
       </div>
     </footer>
   </div>
 
+  <!-- COMPANY POPUP -->
   <div id="companyPopup" class="popup-backdrop">
     <div class="popup-card company">
       <div class="popup-head">
-        <h3 class="th-font">บริษัท สยามทำ จำกัด</h3>
+        <div class="popup-head-main">
+          <div class="popup-kicker th-font">ข้อมูลบริษัท</div>
+          <h3 class="th-font">บริษัท สยามทำ จำกัด</h3>
+          <div class="popup-subtitle th-font">ข้อมูลติดต่อและที่ตั้งสำหรับการสอบถาม การประสานงาน และการเดินทางมายังบริษัท</div>
+        </div>
         <button class="popup-x sound-click" type="button" id="closeCompanyPopupTop">×</button>
       </div>
 
-      <div class="company-detail">
+      <div class="popup-panel company-detail">
+        <h4 class="popup-section-title th-font"><span class="dot"></span>ข้อมูลการติดต่อ</h4>
         <p class="th-font"><strong>ที่อยู่:</strong> 54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
         <p class="th-font"><strong>เลขทะเบียน:</strong> 0105566099954</p>
         <p class="th-font"><strong>โทร:</strong> 02-043-2988</p>
         <p class="th-font"><strong>มือถือ:</strong> 064-951-4888</p>
+        <p class="th-font"><strong>เว็บไซต์:</strong> www.siamtham.com</p>
+
+        <div class="popup-action-row">
+          <a class="popup-cta primary sound-click th-font" href="https://maps.app.goo.gl/Dz4B1kpqVbmWhkYX7" target="_blank" rel="noopener">เปิดแผนที่บริษัท</a>
+          <a class="popup-cta secondary sound-click th-font" href="tel:0649514888">โทรหาบริษัท</a>
+        </div>
       </div>
 
       <button class="popup-close th-font sound-click" type="button" id="closeCompanyPopupBottom">ปิด</button>
     </div>
   </div>
 
+  <!-- INFO POPUP -->
   <div id="infoPopup" class="popup-backdrop">
     <div class="popup-card">
       <div class="popup-head">
-        <h3 id="infoTitle" class="th-font">หัวข้อ</h3>
+        <div class="popup-head-main">
+          <div class="popup-kicker th-font" id="popupKicker">ระบบความปลอดภัย</div>
+          <h3 id="infoTitle" class="th-font">หัวข้อระบบ</h3>
+          <div class="popup-subtitle th-font" id="infoSubtitle">คำอธิบายสั้นของระบบจะอยู่ตรงนี้</div>
+        </div>
         <button class="popup-x sound-click" type="button" id="closeInfoPopupTop">×</button>
       </div>
 
       <div class="popup-grid">
-        <div class="popup-text th-font" id="infoText"></div>
+        <div class="popup-left">
+          <div class="popup-panel">
+            <h4 class="popup-section-title th-font"><span class="dot"></span>ภาพรวม</h4>
+            <p class="popup-lead th-font" id="infoLead"></p>
 
-        <div class="video-wrap">
-          <div class="video-frame">
-            <iframe
-              id="infoVideo"
-              src=""
-              title="YouTube video"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen
-            ></iframe>
+            <div class="badge-row" id="infoBadges"></div>
+          </div>
+
+          <div class="popup-panel">
+            <h4 class="popup-section-title th-font"><span class="dot"></span>จุดเด่นสำคัญ</h4>
+            <ul class="feature-list th-font" id="infoFeatures"></ul>
+          </div>
+
+          <div class="popup-panel">
+            <h4 class="popup-section-title th-font"><span class="dot"></span>ผลลัพธ์ที่ผู้ใช้ได้รับ</h4>
+            <div class="impact-grid" id="infoImpacts"></div>
+
+            <div class="popup-action-row">
+              <a class="popup-cta primary sound-click th-font" href="book.html">ไปยังหน้าสั่งจอง</a>
+              <button class="popup-cta secondary sound-click th-font" type="button" id="closeInfoPopupInline">ปิดหน้าต่างนี้</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="popup-right">
+          <div class="popup-panel video-panel">
+            <h4 class="popup-section-title th-font"><span class="dot"></span>วิดีโอแนะนำ</h4>
+            <div class="video-frame">
+              <iframe
+                id="infoVideo"
+                src=""
+                title="YouTube video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+
+          <div class="popup-panel">
+            <h4 class="popup-section-title th-font"><span class="dot"></span>การใช้งานที่เหมาะสม</h4>
+            <ul class="feature-list th-font" id="infoUseCases"></ul>
           </div>
         </div>
       </div>
@@ -2043,40 +2068,119 @@
   <script>
     const popupData = {
       ssbmobile: {
+        kicker: "ระบบอุปกรณ์เฉพาะทาง",
         title: "ระบบ SSB Mobile",
-        video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-        text: `
-          <p>SSB Mobile คือระบบการใช้งานอุปกรณ์สำหรับธุรกรรมการเงินที่แยกจากการใช้งานทั่วไป เพื่อลดความเสี่ยงจากแอปที่ไม่จำเป็น การหลอกลวง และการโจมตีทางไซเบอร์</p>
-          <p>แนวคิดสำคัญคือใช้งานเฉพาะสิ่งที่จำเป็นต่อการทำธุรกรรมให้ปลอดภัย เรียบง่าย และควบคุมได้มากขึ้น</p>
-          <p>เหมาะสำหรับผู้ที่ต้องการความมั่นใจสูงในการจัดการเงินผ่านมือถือ</p>
-        `
+        subtitle: "ระบบแยกอุปกรณ์สำหรับธุรกรรมทางการเงินโดยเฉพาะ เพื่อลดความเสี่ยงจากแอปและการใช้งานที่ไม่จำเป็น",
+        lead: "แนวคิดสำคัญของ SSB Mobile คือการจำกัดการใช้งานให้อยู่ในขอบเขตที่จำเป็นต่อการทำธุรกรรมทางการเงินเท่านั้น เพื่อให้ผู้ใช้สามารถควบคุมความเสี่ยงได้ชัดเจนขึ้นและลดโอกาสในการถูกโจมตีจากช่องทางอื่นที่ไม่เกี่ยวข้องกับธุรกรรมโดยตรง",
+        badges: [
+          "แยกเครื่องเฉพาะงานการเงิน",
+          "ลดแอปที่ไม่จำเป็น",
+          "เพิ่มวินัยในการใช้งาน",
+          "ลดความเสี่ยงจากการหลอกลวง"
+        ],
+        features: [
+          "แยกอุปกรณ์สำหรับทำธุรกรรมออกจากการใช้งานทั่วไป ช่วยลดโอกาสจากแอปหรือกิจกรรมที่ไม่เกี่ยวข้อง",
+          "สร้างรูปแบบการใช้งานที่เรียบง่ายและควบคุมได้ง่าย ลดความผิดพลาดที่เกิดจากการใช้งานหลายหน้าที่ในเครื่องเดียว",
+          "เหมาะกับผู้ใช้ที่ให้ความสำคัญกับความปลอดภัยทางการเงินและต้องการระบบที่ใช้งานอย่างมีวินัย"
+        ],
+        impacts: [
+          { value: "ชัดเจน", label: "ขอบเขตการใช้งานไม่ปะปนกับการใช้งานทั่วไป" },
+          { value: "ลดเสี่ยง", label: "ลดช่องทางที่ไม่จำเป็นต่อธุรกรรมการเงิน" },
+          { value: "มั่นใจ", label: "ทำธุรกรรมได้อย่างรอบคอบมากขึ้น" }
+        ],
+        useCases: [
+          "ผู้ใช้ที่ต้องการแยกมือถือธุรกรรมออกจากมือถือใช้งานทั่วไป",
+          "ผู้ที่มีความกังวลเรื่องแอปไม่จำเป็นหรือการเข้าถึงที่ไม่เกี่ยวข้อง",
+          "องค์กรหรือบุคคลที่ต้องการความปลอดภัยเชิงวินัยในการใช้งาน"
+        ],
+        video: "https://www.youtube.com/embed/dQw4w9WgXcQ"
       },
+
       stealthbank: {
+        kicker: "แนวคิดการป้องกันเชิงระบบ",
         title: "Stealth Safety Bank",
-        video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-        text: `
-          <p>Stealth Safety Bank คือแนวคิดการปกป้องการเงินด้วยการลดการเปิดเผยข้อมูล ลดช่องทางเสี่ยง และจัดระบบการใช้งานให้ปลอดภัยกว่ามือถือทั่วไป</p>
-          <p>จุดเด่นคือการผสานเทคนิคการอำพราง ความลับ และวินัยในการใช้งาน เพื่อให้เงินและข้อมูลสำคัญปลอดภัยยิ่งขึ้น</p>
-          <p>เหมาะกับบุคคล ครอบครัว และองค์กรที่ให้ความสำคัญกับความปลอดภัยระดับสูง</p>
-        `
+        subtitle: "แนวคิดการปกป้องทางการเงินด้วยการลดการเปิดเผยข้อมูล ลดช่องทางเสี่ยง และออกแบบการใช้งานให้รอบคอบยิ่งขึ้น",
+        lead: "Stealth Safety Bank เป็นแนวคิดที่เน้นการอำพราง การรักษาความลับ และการควบคุมพฤติกรรมการใช้งานร่วมกัน เพื่อยกระดับความปลอดภัยของเงินและข้อมูลสำคัญ โดยไม่พึ่งพาเพียงเทคโนโลยีอย่างเดียว แต่รวมถึงวิธีคิดและวิธีใช้งานด้วย",
+        badges: [
+          "อำพรางข้อมูล",
+          "ลดการเปิดเผย",
+          "วางระบบการใช้งาน",
+          "ยกระดับความปลอดภัย"
+        ],
+        features: [
+          "ลดการเปิดเผยข้อมูลสำคัญต่อบุคคลหรือสภาพแวดล้อมที่ไม่จำเป็น",
+          "ผสานการป้องกันเชิงเทคโนโลยีและเชิงพฤติกรรมเข้าด้วยกันเพื่อเพิ่มประสิทธิภาพโดยรวม",
+          "เหมาะสำหรับบุคคล ครอบครัว และองค์กรที่ให้ความสำคัญกับความปลอดภัยระดับสูง"
+        ],
+        impacts: [
+          { value: "อำพราง", label: "ลดการสังเกตและการเข้าถึงที่ไม่ควรเกิดขึ้น" },
+          { value: "เป็นระบบ", label: "เชื่อมโยงแนวคิดการป้องกันหลายชั้นเข้าด้วยกัน" },
+          { value: "ครอบคลุม", label: "ทั้งด้านข้อมูล อุปกรณ์ และพฤติกรรมการใช้งาน" }
+        ],
+        useCases: [
+          "ผู้ที่ต้องการวางระบบป้องกันทางการเงินในชีวิตประจำวัน",
+          "ผู้ที่ต้องการแนวคิดที่มากกว่าแค่การติดตั้งแอปหรืออุปกรณ์",
+          "ผู้ที่ต้องการสร้างความมั่นใจด้านความปลอดภัยให้กับครอบครัวหรือองค์กร"
+        ],
+        video: "https://www.youtube.com/embed/dQw4w9WgXcQ"
       },
+
       safetybook: {
+        kicker: "การจัดเก็บแบบอำพราง",
         title: "Stealth Safety Book",
-        video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-        text: `
-          <p>Stealth Safety Book คืออุปกรณ์จัดเก็บที่ออกแบบให้ดูเหมือนหนังสือ เพื่ออำพรางสิ่งสำคัญและเสริมความปลอดภัยในการเก็บอุปกรณ์หรือข้อมูลที่มีมูลค่าสูง</p>
-          <p>ภายนอกดูเรียบง่าย แต่ภายในมีบทบาทสำคัญในการช่วยลดการสังเกตและการเข้าถึงจากบุคคลอื่น</p>
-          <p>เหมาะสำหรับใช้งานร่วมกับระบบ Stealth Safety Bank เพื่อเพิ่มความปลอดภัยทั้งเชิงกายภาพและเชิงพฤติกรรม</p>
-        `
+        subtitle: "อุปกรณ์จัดเก็บที่ออกแบบให้ดูเหมือนหนังสือ เพื่อช่วยลดการสังเกตและเพิ่มความปลอดภัยทางกายภาพ",
+        lead: "Stealth Safety Book มีบทบาทสำคัญในการช่วยปกป้องสิ่งของสำคัญผ่านแนวคิดการอำพรางภายนอกให้ดูเหมือนของใช้ทั่วไป ช่วยลดความโดดเด่น ลดโอกาสในการถูกสังเกต และเพิ่มความปลอดภัยในการจัดเก็บอุปกรณ์หรือข้อมูลที่มีมูลค่าสูง",
+        badges: [
+          "อำพรางเหมือนหนังสือ",
+          "ลดการสังเกต",
+          "เสริมความปลอดภัยกายภาพ",
+          "ใช้งานร่วมกับระบบหลัก"
+        ],
+        features: [
+          "ภายนอกดูเป็นของทั่วไป ทำให้ไม่ดึงดูดความสนใจมากเกินไป",
+          "ช่วยเสริมบทบาทด้านการจัดเก็บอุปกรณ์หรือข้อมูลสำคัญให้ปลอดภัยยิ่งขึ้น",
+          "เหมาะสำหรับใช้ร่วมกับระบบ Stealth Safety Bank เพื่อเพิ่มความครบถ้วนในการป้องกัน"
+        ],
+        impacts: [
+          { value: "แนบเนียน", label: "ลดการถูกมองว่าเป็นจุดจัดเก็บสิ่งสำคัญ" },
+          { value: "เรียบร้อย", label: "ช่วยจัดเก็บสิ่งสำคัญให้เป็นสัดส่วน" },
+          { value: "เสริมระบบ", label: "ทำงานร่วมกับแนวคิด Stealth ได้อย่างลงตัว" }
+        ],
+        useCases: [
+          "ใช้เก็บอุปกรณ์เฉพาะทางที่ต้องการความเป็นส่วนตัว",
+          "ใช้จัดเก็บเอกสารหรือของสำคัญที่ไม่ต้องการให้สังเกตง่าย",
+          "ใช้เสริมระบบความปลอดภัยภายในบ้านหรือสำนักงาน"
+        ],
+        video: "https://www.youtube.com/embed/dQw4w9WgXcQ"
       },
-      flare: {
-        title: "Technology Overview",
-        video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-        text: `
-          <p>Technology Overview คือแนวคิดเสริมด้านความปลอดภัยที่ช่วยให้การใช้งานระบบมีความชัดเจน รอบคอบ และเตือนผู้ใช้ให้ไม่ตกเป็นเหยื่อของความเสี่ยงรูปแบบต่าง ๆ</p>
-          <p>เป็นการออกแบบประสบการณ์ใช้งานให้ปลอดภัย ทั้งในด้านพฤติกรรม การตัดสินใจ และการตอบสนองต่อเหตุการณ์ผิดปกติ</p>
-          <p>เมื่อนำมาใช้ร่วมกับระบบหลัก จะช่วยยกระดับความมั่นใจและความปลอดภัยโดยรวมได้มากขึ้น</p>
-        `
+
+      technology: {
+        kicker: "Technology Overview",
+        title: "ภาพรวมเทคโนโลยี",
+        subtitle: "อธิบายเทคโนโลยีที่นำมาใช้ร่วมกันเพื่อยกระดับการป้องกันเงิน ข้อมูล และพฤติกรรมการใช้งาน",
+        lead: "Technology Overview คือภาพรวมของเทคโนโลยีและแนวคิดที่ทำงานร่วมกันในระบบ ไม่ว่าจะเป็นการแยกอุปกรณ์ การอำพราง การเตือนสติ การลดช่องทางเสี่ยง และการออกแบบประสบการณ์ใช้งานให้รอบคอบขึ้น เพื่อให้เกิดระบบป้องกันที่มีความต่อเนื่องและครอบคลุมมากกว่าแนวทางแบบชิ้นเดียว",
+        badges: [
+          "แยกอุปกรณ์",
+          "อำพรางและลดการเปิดเผย",
+          "เตือนสติและลดความผิดพลาด",
+          "เชื่อมการป้องกันหลายชั้น"
+        ],
+        features: [
+          "ใช้หลายแนวคิดร่วมกัน ไม่พึ่งพาเพียงฟังก์ชันใดฟังก์ชันหนึ่ง",
+          "เน้นการป้องกันทั้งเชิงเทคโนโลยี เชิงกายภาพ และเชิงพฤติกรรม",
+          "ออกแบบเพื่อให้ผู้ใช้เข้าใจภาพรวมของระบบและเลือกใช้งานได้อย่างเหมาะสม"
+        ],
+        impacts: [
+          { value: "รอบด้าน", label: "มองทั้งระบบ ไม่แยกการป้องกันเป็นส่วนเล็ก ๆ" },
+          { value: "เชื่อมโยง", label: "เทคโนโลยีแต่ละส่วนทำงานหนุนกัน" },
+          { value: "เข้าใจง่าย", label: "ช่วยให้เห็นภาพรวมก่อนตัดสินใจใช้งานจริง" }
+        ],
+        useCases: [
+          "ผู้ที่ต้องการศึกษาว่าระบบป้องกันประกอบด้วยอะไรบ้าง",
+          "ผู้ที่ต้องการเข้าใจแนวทางป้องกันในภาพรวมก่อนเลือกใช้งาน",
+          "ผู้ที่ต้องการอธิบายระบบให้กับทีมงานหรือองค์กร"
+        ],
+        video: "https://www.youtube.com/embed/dQw4w9WgXcQ"
       }
     };
 
@@ -2086,8 +2190,14 @@
 
     const infoPopup = document.getElementById("infoPopup");
     const infoTitle = document.getElementById("infoTitle");
-    const infoText = document.getElementById("infoText");
     const infoVideo = document.getElementById("infoVideo");
+    const infoSubtitle = document.getElementById("infoSubtitle");
+    const infoLead = document.getElementById("infoLead");
+    const infoBadges = document.getElementById("infoBadges");
+    const infoFeatures = document.getElementById("infoFeatures");
+    const infoImpacts = document.getElementById("infoImpacts");
+    const infoUseCases = document.getElementById("infoUseCases");
+    const popupKicker = document.getElementById("popupKicker");
 
     const companyPopup = document.getElementById("companyPopup");
     const contactButton = document.getElementById("contactButton");
@@ -2099,28 +2209,61 @@
       centerPulse.classList.add("active");
     }
 
+    function renderBadges(items){
+      infoBadges.innerHTML = items.map(item => `<span class="popup-badge th-font">${item}</span>`).join("");
+    }
+
+    function renderFeatures(items, target){
+      target.innerHTML = items.map(item => `<li class="th-font">${item}</li>`).join("");
+    }
+
+    function renderImpacts(items){
+      infoImpacts.innerHTML = items.map(item => `
+        <div class="impact-card">
+          <div class="impact-value th-font">${item.value}</div>
+          <div class="impact-label th-font">${item.label}</div>
+        </div>
+      `).join("");
+    }
+
     function openInfoPopup(key){
       const data = popupData[key];
       if (!data) return;
+
+      popupKicker.textContent = data.kicker;
       infoTitle.textContent = data.title;
-      infoText.innerHTML = data.text;
+      infoSubtitle.textContent = data.subtitle;
+      infoLead.textContent = data.lead;
+      renderBadges(data.badges || []);
+      renderFeatures(data.features || [], infoFeatures);
+      renderImpacts(data.impacts || []);
+      renderFeatures(data.useCases || [], infoUseCases);
+
       infoVideo.src = data.video + "?rel=0&autoplay=0";
       infoPopup.style.display = "flex";
+      requestAnimationFrame(() => infoPopup.classList.add("show"));
       pulseCenter();
     }
 
     function closeInfoPopup(){
-      infoVideo.src = "";
-      infoPopup.style.display = "none";
+      infoPopup.classList.remove("show");
+      setTimeout(() => {
+        infoVideo.src = "";
+        infoPopup.style.display = "none";
+      }, 180);
     }
 
     function openCompanyPopup(){
       companyPopup.style.display = "flex";
+      requestAnimationFrame(() => companyPopup.classList.add("show"));
       pulseCenter();
     }
 
     function closeCompanyPopup(){
-      companyPopup.style.display = "none";
+      companyPopup.classList.remove("show");
+      setTimeout(() => {
+        companyPopup.style.display = "none";
+      }, 180);
     }
 
     if (logoMenuButton && techHero){
@@ -2155,6 +2298,7 @@
 
     document.getElementById("closeInfoPopupTop")?.addEventListener("click", closeInfoPopup);
     document.getElementById("closeInfoPopupBottom")?.addEventListener("click", closeInfoPopup);
+    document.getElementById("closeInfoPopupInline")?.addEventListener("click", closeInfoPopup);
     document.getElementById("closeCompanyPopupTop")?.addEventListener("click", closeCompanyPopup);
     document.getElementById("closeCompanyPopupBottom")?.addEventListener("click", closeCompanyPopup);
 
@@ -2169,7 +2313,6 @@
     document.addEventListener("click", function(event){
       const infoOpen = infoPopup && infoPopup.style.display === "flex";
       const companyOpen = companyPopup && companyPopup.style.display === "flex";
-
       if (!infoOpen && !companyOpen && techHero && !techHero.contains(event.target)){
         techHero.classList.remove("open");
       }
@@ -2251,10 +2394,6 @@
 
     document.querySelector('.menu-node.bottom[href="book.html"]')?.addEventListener("click", () => {
       playClickSound("confirm");
-    });
-
-    document.querySelectorAll(".menu-node[data-popup], #contactButton").forEach(el => {
-      el.addEventListener("click", () => playClickSound("normal"));
     });
 
     function buildEnergyLines(){
