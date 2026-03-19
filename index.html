@@ -18,19 +18,22 @@
       --head-foot-2:#1b67cf;
       --head-foot-3:#0a3f84;
 
+      --max:1320px;
+
       --bg-1:#010815;
       --bg-2:#031129;
-      --bg-3:#05183e;
+      --bg-3:#061b46;
 
-      --line:#7fd9ff;
-      --line-soft:rgba(127,217,255,.22);
-      --white:#ffffff;
+      --line:#8ddfff;
+      --line-soft:rgba(141,223,255,.18);
+      --line-soft-2:rgba(141,223,255,.10);
 
-      --red-1:#ffd9de;
-      --red-2:#ff7986;
-      --red-3:#e0182a;
+      --panel-1:rgba(13,43,102,.34);
+      --panel-2:rgba(7,22,58,.16);
 
-      --max:1320px;
+      --red-1:#ffe1e5;
+      --red-2:#ff7b88;
+      --red-3:#dc1730;
     }
 
     *{ box-sizing:border-box; }
@@ -40,9 +43,9 @@
       margin:0;
       color:#fff;
       background:
-        radial-gradient(circle at 50% 18%, rgba(39,129,255,.16), transparent 28%),
-        radial-gradient(circle at 50% 48%, rgba(31,126,255,.10), transparent 42%),
-        linear-gradient(180deg, #010611 0%, #021127 24%, #04173a 64%, #031129 100%);
+        radial-gradient(circle at 50% 16%, rgba(28,118,255,.16), transparent 30%),
+        radial-gradient(circle at 50% 48%, rgba(31,126,255,.10), transparent 44%),
+        linear-gradient(180deg, #010713 0%, #021127 26%, #04173b 68%, #031129 100%);
       overflow-x:hidden;
       font-family:'Prompt',sans-serif;
     }
@@ -56,15 +59,15 @@
       inset:0;
       pointer-events:none;
       z-index:0;
-      opacity:.24;
+      opacity:.22;
       background-image:
-        radial-gradient(circle at 14% 22%, rgba(255,255,255,.88) 0 1px, transparent 1.6px),
-        radial-gradient(circle at 83% 18%, rgba(255,255,255,.70) 0 1px, transparent 1.6px),
-        radial-gradient(circle at 74% 72%, rgba(255,255,255,.50) 0 1px, transparent 1.6px),
+        radial-gradient(circle at 14% 22%, rgba(255,255,255,.84) 0 1px, transparent 1.6px),
+        radial-gradient(circle at 83% 18%, rgba(255,255,255,.68) 0 1px, transparent 1.6px),
+        radial-gradient(circle at 74% 72%, rgba(255,255,255,.48) 0 1px, transparent 1.6px),
         radial-gradient(circle at 24% 74%, rgba(255,255,255,.54) 0 1px, transparent 1.6px),
         radial-gradient(circle at 34% 42%, rgba(255,255,255,.50) 0 1px, transparent 1.6px),
         radial-gradient(circle at 58% 24%, rgba(255,255,255,.42) 0 1px, transparent 1.6px),
-        radial-gradient(circle at 91% 62%, rgba(255,255,255,.36) 0 1px, transparent 1.6px);
+        radial-gradient(circle at 91% 62%, rgba(255,255,255,.38) 0 1px, transparent 1.6px);
     }
 
     body::after{
@@ -73,13 +76,13 @@
       inset:0;
       pointer-events:none;
       z-index:0;
-      opacity:.06;
+      opacity:.05;
       background-image:
-        linear-gradient(rgba(113,197,255,.16) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(113,197,255,.16) 1px, transparent 1px);
-      background-size:40px 40px;
-      mask-image:radial-gradient(circle at center, rgba(0,0,0,.95) 0%, rgba(0,0,0,.70) 48%, transparent 84%);
-      -webkit-mask-image:radial-gradient(circle at center, rgba(0,0,0,.95) 0%, rgba(0,0,0,.70) 48%, transparent 84%);
+        linear-gradient(rgba(113,197,255,.18) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(113,197,255,.18) 1px, transparent 1px);
+      background-size:42px 42px;
+      mask-image:radial-gradient(circle at center, rgba(0,0,0,.95) 0%, rgba(0,0,0,.72) 46%, transparent 84%);
+      -webkit-mask-image:radial-gradient(circle at center, rgba(0,0,0,.95) 0%, rgba(0,0,0,.72) 46%, transparent 84%);
     }
 
     .site-wrap{
@@ -193,6 +196,7 @@
       justify-content:center;
     }
 
+    /* MAIN */
     .main-content{
       flex:1;
       width:min(var(--max), calc(100% - 20px));
@@ -228,7 +232,7 @@
       justify-content:center;
       isolation:isolate;
       background:
-        radial-gradient(circle at 50% 50%, rgba(28,125,255,.07) 0%, rgba(18,81,180,.08) 18%, rgba(7,27,69,.95) 44%, rgba(3,13,34,.99) 76%, rgba(1,7,20,1) 100%);
+        radial-gradient(circle at 50% 50%, rgba(29,125,255,.07) 0%, rgba(18,81,180,.07) 16%, rgba(7,27,69,.94) 42%, rgba(3,13,34,.988) 78%, rgba(2,8,24,1) 100%);
       box-shadow:
         inset 0 0 0 1px rgba(122,216,255,.08),
         inset 0 0 70px rgba(58,151,255,.05),
@@ -240,10 +244,10 @@
       position:absolute;
       inset:0;
       background:
-        linear-gradient(rgba(120,195,255,.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(120,195,255,.03) 1px, transparent 1px);
+        linear-gradient(rgba(120,195,255,.032) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(120,195,255,.032) 1px, transparent 1px);
       background-size:38px 38px;
-      opacity:.42;
+      opacity:.45;
       pointer-events:none;
       z-index:0;
     }
@@ -264,7 +268,7 @@
       inset:0;
       pointer-events:none;
       z-index:0;
-      opacity:.18;
+      opacity:.20;
       background-image:
         radial-gradient(circle at 14% 20%, rgba(255,255,255,.78) 0 1px, transparent 1.7px),
         radial-gradient(circle at 85% 15%, rgba(255,255,255,.62) 0 1px, transparent 1.7px),
@@ -281,20 +285,20 @@
       position:absolute;
       left:50%;
       top:50%;
-      width:min(72vw, 780px);
-      height:min(72vw, 780px);
+      width:min(68vw, 660px);
+      height:min(68vw, 660px);
       transform:translate(-50%, -50%);
       z-index:1;
       pointer-events:none;
       filter:
-        drop-shadow(0 0 10px rgba(114,215,255,.16))
-        drop-shadow(0 0 28px rgba(70,165,255,.08));
+        drop-shadow(0 0 8px rgba(114,215,255,.14))
+        drop-shadow(0 0 20px rgba(70,165,255,.08));
     }
 
     .world-rotate{
       width:100%;
       height:100%;
-      animation:worldSpin 28s linear infinite;
+      animation:worldSpin 34s linear infinite;
       transform-origin:center;
     }
 
@@ -304,48 +308,40 @@
       display:block;
     }
 
-    .sphere{
+    .world-outline{
       fill:none;
-      stroke:rgba(130,220,255,.20);
-      stroke-width:1.15;
-    }
-
-    .sphere-strong{
-      fill:none;
-      stroke:rgba(160,235,255,.30);
+      stroke:rgba(150,228,255,.20);
       stroke-width:1.2;
     }
 
-    .sphere-soft{
+    .world-strong{
       fill:none;
-      stroke:rgba(130,220,255,.10);
+      stroke:rgba(165,234,255,.28);
+      stroke-width:1.2;
+    }
+
+    .world-soft{
+      fill:none;
+      stroke:rgba(150,228,255,.10);
       stroke-width:1;
     }
 
-    .orbit-glow{
+    .world-glow{
       fill:none;
-      stroke:rgba(108,214,255,.60);
-      stroke-width:1.3;
-      stroke-linecap:round;
+      stroke:rgba(111,214,255,.40);
+      stroke-width:1.25;
       filter:url(#worldGlow);
-    }
-
-    .orbit-soft{
-      fill:none;
-      stroke:rgba(108,214,255,.12);
-      stroke-width:3;
-      stroke-linecap:round;
     }
 
     .world-aura{
       position:absolute;
-      inset:18%;
+      inset:17%;
       border-radius:50%;
       background:
         radial-gradient(circle,
-          rgba(185,236,255,.10) 0%,
-          rgba(95,188,255,.06) 35%,
-          rgba(45,138,255,.03) 56%,
+          rgba(185,236,255,.08) 0%,
+          rgba(95,188,255,.05) 35%,
+          rgba(45,138,255,.02) 56%,
           transparent 72%);
       filter:blur(10px);
       animation:auraPulse 5s ease-in-out infinite;
@@ -355,26 +351,26 @@
       position:absolute;
       left:50%;
       top:50%;
-      width:126px;
-      height:126px;
+      width:118px;
+      height:118px;
       transform:translate(-50%, -50%);
-      z-index:3;
+      z-index:2;
       pointer-events:none;
       background:
         radial-gradient(circle,
-          rgba(228,248,255,.76) 0%,
-          rgba(169,228,255,.28) 34%,
-          rgba(90,188,255,.08) 56%,
-          transparent 74%);
+          rgba(228,248,255,.72) 0%,
+          rgba(169,228,255,.24) 34%,
+          rgba(90,188,255,.06) 56%,
+          transparent 72%);
       filter:blur(4px);
       animation:centerGlow 5s ease-in-out infinite;
     }
 
     .logo-core{
       position:relative;
-      z-index:10;
-      width:min(25vw, 210px);
-      height:min(25vw, 210px);
+      z-index:9;
+      width:min(25vw, 200px);
+      height:min(25vw, 200px);
       padding:0;
       border:none;
       background:transparent;
@@ -386,7 +382,7 @@
     }
 
     .logo-core:hover{
-      transform:scale(1.035);
+      transform:scale(1.03);
       filter:brightness(1.05);
     }
 
@@ -397,55 +393,14 @@
       display:block;
       filter:
         drop-shadow(0 0 8px rgba(120,212,255,.12))
-        drop-shadow(0 14px 24px rgba(0,0,0,.28));
+        drop-shadow(0 12px 22px rgba(0,0,0,.24));
     }
 
-    /* CONNECTION LINES */
-    .connection-layer{
-      position:absolute;
-      inset:0;
-      z-index:5;
-      pointer-events:none;
-    }
-
-    .connection-line{
-      position:absolute;
-      top:50%;
-      height:2px;
-      transform:translateY(-50%);
-      background:linear-gradient(90deg, transparent 0%, rgba(125,222,255,.85) 20%, rgba(125,222,255,.95) 50%, rgba(125,222,255,.85) 80%, transparent 100%);
-      box-shadow:0 0 10px rgba(125,222,255,.42), 0 0 26px rgba(125,222,255,.16);
-      opacity:.85;
-    }
-
-    .connection-line.left{
-      right:50%;
-      transform-origin:right center;
-    }
-
-    .connection-line.right{
-      left:50%;
-      transform-origin:left center;
-    }
-
-    .cl1,.cl5{ top:35%; width:17%; }
-    .cl2,.cl6{ top:44%; width:20%; }
-    .cl3,.cl7{ top:53%; width:22%; }
-    .cl4,.cl8{ top:62%; width:18%; }
-    .cl9{
-      top:75.5%;
-      left:50%;
-      width:2px;
-      height:10%;
-      transform:translateX(-50%);
-      background:linear-gradient(180deg, rgba(125,222,255,.78), rgba(255,77,92,.92));
-      box-shadow:0 0 14px rgba(125,222,255,.28), 0 0 26px rgba(255,77,92,.18);
-    }
-
+    /* MENU */
     .menu-layer{
       position:absolute;
       inset:0;
-      z-index:8;
+      z-index:7;
     }
 
     .menu-node{
@@ -479,14 +434,9 @@
       transform:translate(-50%, -50%) scale(1);
     }
 
-    .menu-node.left{
-      width:310px;
-      justify-content:flex-start;
-      text-align:left;
-    }
-
+    .menu-node.left,
     .menu-node.right{
-      width:310px;
+      width:286px;
       justify-content:flex-start;
       text-align:left;
     }
@@ -497,7 +447,7 @@
       gap:12px;
     }
 
-    .menu-node:hover{ filter:brightness(1.15); }
+    .menu-node:hover{ filter:brightness(1.16); }
 
     .node-dot{
       position:relative;
@@ -505,12 +455,12 @@
       height:18px;
       flex:0 0 18px;
       border-radius:50%;
-      background:radial-gradient(circle, #ffffff 0%, #dff7ff 20%, #77d3ff 50%, #198cff 100%);
+      background:radial-gradient(circle, #ffffff 0%, #dff7ff 20%, #77d3ff 52%, #198cff 100%);
       box-shadow:
         0 0 0 4px rgba(90,185,255,.08),
         0 0 14px rgba(77,180,255,.64),
         0 0 28px rgba(77,180,255,.24);
-      animation:dotPulse 2.1s ease-in-out infinite;
+      animation:dotPulse 2.2s ease-in-out infinite;
       transition:transform .22s ease, box-shadow .22s ease;
     }
 
@@ -540,29 +490,20 @@
 
     .node-shell{
       position:relative;
-      min-width:260px;
+      min-width:246px;
       min-height:56px;
       padding:10px 18px;
       display:flex;
       align-items:center;
       overflow:hidden;
-      border:1px solid rgba(110,209,255,.18);
+      border:1px solid rgba(110,209,255,.16);
       background:
-        linear-gradient(180deg, rgba(16,47,105,.34), rgba(8,22,57,.14)),
+        linear-gradient(180deg, var(--panel-1), var(--panel-2)),
         linear-gradient(90deg, rgba(255,255,255,.04), rgba(255,255,255,0));
       box-shadow:
         inset 0 0 0 1px rgba(162,228,255,.05),
-        0 0 18px rgba(69,170,255,.08);
+        0 0 16px rgba(69,170,255,.08);
       transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
-    }
-
-    .menu-node.left .node-shell{
-      justify-content:flex-start;
-      clip-path:polygon(18px 0, 100% 0, calc(100% - 18px) 50%, 100% 100%, 18px 100%, 0 50%);
-    }
-
-    .menu-node.right .node-shell{
-      justify-content:flex-start;
       clip-path:polygon(18px 0, 100% 0, calc(100% - 18px) 50%, 100% 100%, 18px 100%, 0 50%);
     }
 
@@ -571,7 +512,7 @@
       position:absolute;
       inset:0;
       background:
-        linear-gradient(90deg, transparent 0%, rgba(116,214,255,.14) 10%, transparent 20%, transparent 80%, rgba(116,214,255,.14) 90%, transparent 100%);
+        linear-gradient(90deg, transparent 0%, rgba(116,214,255,.12) 10%, transparent 20%, transparent 80%, rgba(116,214,255,.12) 90%, transparent 100%);
       pointer-events:none;
     }
 
@@ -581,15 +522,15 @@
       inset:1px;
       border:1px solid rgba(142,224,255,.16);
       pointer-events:none;
-      opacity:.55;
+      opacity:.5;
       clip-path:polygon(18px 0, 100% 0, calc(100% - 18px) 50%, 100% 100%, 18px 100%, 0 50%);
     }
 
     .menu-node:hover .node-shell{
-      border-color:rgba(145,226,255,.28);
+      border-color:rgba(145,226,255,.24);
       box-shadow:
         inset 0 0 0 1px rgba(184,239,255,.06),
-        0 0 24px rgba(82,186,255,.16);
+        0 0 22px rgba(82,186,255,.14);
     }
 
     .node-text{
@@ -619,7 +560,7 @@
       font-weight:600;
       letter-spacing:1.6px;
       text-transform:uppercase;
-      color:rgba(203,236,255,.74);
+      color:rgba(203,236,255,.72);
       white-space:nowrap;
     }
 
@@ -634,7 +575,7 @@
       width:24px;
       height:24px;
       flex:0 0 24px;
-      background:radial-gradient(circle, #fff 0%, #ffdfe4 20%, #ff7783 52%, #d91628 100%);
+      background:radial-gradient(circle, #fff 0%, #ffdfe4 18%, #ff7783 52%, #d91628 100%);
       box-shadow:
         0 0 0 5px rgba(255,93,105,.10),
         0 0 22px rgba(255,80,94,.86),
@@ -642,18 +583,20 @@
     }
 
     .menu-node.bottom .node-shell{
-      min-width:338px;
-      min-height:74px;
+      min-width:330px;
+      min-height:72px;
       padding:14px 24px;
       justify-content:center;
-      background:
-        linear-gradient(180deg, rgba(126,18,33,.34), rgba(72,5,15,.18)),
-        linear-gradient(90deg, rgba(255,255,255,.04), rgba(255,255,255,0));
-      border:1px solid rgba(255,118,128,.32);
-      clip-path:polygon(16px 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 16px 100%, 0 50%);
+      background:linear-gradient(180deg, rgba(106,10,22,.30), rgba(67,4,14,.16));
+      border:1px solid rgba(255,118,128,.30);
       box-shadow:
         inset 0 0 0 1px rgba(255,176,182,.06),
-        0 0 26px rgba(255,76,92,.18);
+        0 0 24px rgba(255,76,92,.18);
+      clip-path:polygon(16px 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 16px 100%, 0 50%);
+    }
+
+    .menu-node.bottom .node-shell::before{
+      background:linear-gradient(90deg, transparent 0%, rgba(255,124,134,.16) 12%, transparent 22%, transparent 78%, rgba(255,124,134,.16) 88%, transparent 100%);
     }
 
     .menu-node.bottom .node-shell::after{
@@ -662,8 +605,8 @@
     }
 
     .menu-node.bottom .node-title{
-      font-size:24px;
-      color:#fff4f5;
+      font-size:23px;
+      color:#fff3f4;
       text-shadow:
         0 0 10px rgba(255,148,157,.64),
         0 0 24px rgba(255,96,107,.22);
@@ -679,21 +622,21 @@
       border-color:rgba(255,146,154,.38);
       box-shadow:
         inset 0 0 0 1px rgba(255,183,188,.08),
-        0 0 34px rgba(255,76,92,.26);
+        0 0 30px rgba(255,76,92,.24);
     }
 
-    /* POSITIONS - perfect aligned left/right */
-    .n1{ --x:23%; --y:35%; }
-    .n2{ --x:23%; --y:44%; }
-    .n3{ --x:23%; --y:53%; }
-    .n4{ --x:23%; --y:62%; }
+    /* POSITIONS */
+    .n1{ --x:31%; --y:35%; }
+    .n2{ --x:31%; --y:44%; }
+    .n3{ --x:31%; --y:53%; }
+    .n4{ --x:31%; --y:62%; }
 
-    .n5{ --x:77%; --y:35%; }
-    .n6{ --x:77%; --y:44%; }
-    .n7{ --x:77%; --y:53%; }
-    .n8{ --x:77%; --y:62%; }
+    .n5{ --x:69%; --y:35%; }
+    .n6{ --x:69%; --y:44%; }
+    .n7{ --x:69%; --y:53%; }
+    .n8{ --x:69%; --y:62%; }
 
-    .n9{ --x:50%; --y:79.5%; }
+    .n9{ --x:50%; --y:79%; }
 
     .node-note{
       display:inline-flex;
@@ -1066,12 +1009,12 @@
 
     @keyframes centerGlow{
       0%,100%{ transform:translate(-50%, -50%) scale(1); opacity:1; }
-      50%{ transform:translate(-50%, -50%) scale(1.04); opacity:.84; }
+      50%{ transform:translate(-50%, -50%) scale(1.02); opacity:.86; }
     }
 
     @keyframes auraPulse{
       0%,100%{ transform:scale(1); opacity:.95; }
-      50%{ transform:scale(1.03); opacity:.78; }
+      50%{ transform:scale(1.03); opacity:.76; }
     }
 
     @keyframes worldSpin{
@@ -1087,43 +1030,38 @@
       }
 
       .world-wrap{
-        width:min(76vw, 660px);
-        height:min(76vw, 660px);
+        width:min(74vw, 560px);
+        height:min(74vw, 560px);
       }
 
       .logo-core{
-        width:min(28vw, 188px);
-        height:min(28vw, 188px);
+        width:min(28vw, 182px);
+        height:min(28vw, 182px);
       }
 
-      .center-glow{ width:108px; height:108px; }
+      .center-glow{ width:104px; height:104px; }
 
       .menu-node.left,
-      .menu-node.right{ width:268px; }
+      .menu-node.right{ width:252px; }
 
-      .node-shell{ min-width:232px; min-height:52px; padding:10px 16px; }
-      .menu-node.bottom .node-shell{ min-width:290px; min-height:66px; }
+      .node-shell{ min-width:218px; min-height:52px; padding:10px 16px; }
+      .menu-node.bottom .node-shell{ min-width:286px; min-height:66px; }
 
       .node-title{ font-size:12px; }
       .node-sub{ font-size:7px; letter-spacing:1.4px; }
       .menu-node.bottom .node-title{ font-size:20px; }
 
-      .n1{ --x:22%; --y:35%; }
-      .n2{ --x:22%; --y:44%; }
-      .n3{ --x:22%; --y:53%; }
-      .n4{ --x:22%; --y:62%; }
+      .n1{ --x:29%; --y:35%; }
+      .n2{ --x:29%; --y:44%; }
+      .n3{ --x:29%; --y:53%; }
+      .n4{ --x:29%; --y:62%; }
 
-      .n5{ --x:78%; --y:35%; }
-      .n6{ --x:78%; --y:44%; }
-      .n7{ --x:78%; --y:53%; }
-      .n8{ --x:78%; --y:62%; }
+      .n5{ --x:71%; --y:35%; }
+      .n6{ --x:71%; --y:44%; }
+      .n7{ --x:71%; --y:53%; }
+      .n8{ --x:71%; --y:62%; }
 
       .n9{ --x:50%; --y:80%; }
-
-      .cl1,.cl5{ width:14%; }
-      .cl2,.cl6{ width:17%; }
-      .cl3,.cl7{ width:19%; }
-      .cl4,.cl8{ width:15%; }
 
       .popup-grid{ grid-template-columns:1fr; }
       .footer-main{ grid-template-columns:1fr; }
@@ -1157,8 +1095,8 @@
 
       .tech-hero{
         width:min(96vw, 430px);
-        height:760px;
-        min-height:760px;
+        height:740px;
+        min-height:740px;
         border-radius:28px;
       }
 
@@ -1168,23 +1106,20 @@
       }
 
       .world-wrap{
-        width:min(88vw, 360px);
-        height:min(88vw, 360px);
-        top:43%;
+        width:min(88vw, 350px);
+        height:min(88vw, 350px);
+        top:42%;
       }
 
       .logo-core{
-        width:min(42vw, 126px);
-        height:min(42vw, 126px);
-        top:auto;
+        width:min(42vw, 120px);
+        height:min(42vw, 120px);
       }
 
       .center-glow{
-        width:88px;
-        height:88px;
+        width:84px;
+        height:84px;
       }
-
-      .connection-line{ display:none; }
 
       .menu-node{ gap:8px; }
 
@@ -1201,17 +1136,17 @@
       }
 
       .menu-node.left,
-      .menu-node.right{ width:182px; }
+      .menu-node.right{ width:176px; }
 
       .node-shell{
-        min-width:150px;
+        min-width:144px;
         min-height:40px;
         padding:8px 10px;
       }
 
       .menu-node.bottom .node-shell{
-        min-width:210px;
-        min-height:54px;
+        min-width:208px;
+        min-height:52px;
         padding:10px 12px;
       }
 
@@ -1233,17 +1168,17 @@
         letter-spacing:1px;
       }
 
-      .n1{ --x:27%; --y:34%; }
-      .n2{ --x:27%; --y:42%; }
-      .n3{ --x:27%; --y:50%; }
-      .n4{ --x:27%; --y:58%; }
+      .n1{ --x:31%; --y:34%; }
+      .n2{ --x:31%; --y:42%; }
+      .n3{ --x:31%; --y:50%; }
+      .n4{ --x:31%; --y:58%; }
 
-      .n5{ --x:73%; --y:34%; }
-      .n6{ --x:73%; --y:42%; }
-      .n7{ --x:73%; --y:50%; }
-      .n8{ --x:73%; --y:58%; }
+      .n5{ --x:69%; --y:34%; }
+      .n6{ --x:69%; --y:42%; }
+      .n7{ --x:69%; --y:50%; }
+      .n8{ --x:69%; --y:58%; }
 
-      .n9{ --x:50%; --y:77.5%; }
+      .n9{ --x:50%; --y:77%; }
 
       .node-note{
         font-size:12px;
@@ -1357,8 +1292,8 @@
               <div class="world-rotate">
                 <svg class="world-svg" viewBox="0 0 800 800" preserveAspectRatio="xMidYMid meet">
                   <defs>
-                    <filter id="worldGlow" x="-120%" y="-120%" width="340%" height="340%">
-                      <feGaussianBlur stdDeviation="2.6" result="blur"/>
+                    <filter id="worldGlow" x="-100%" y="-100%" width="300%" height="300%">
+                      <feGaussianBlur stdDeviation="2.2" result="blur"/>
                       <feMerge>
                         <feMergeNode in="blur"/>
                         <feMergeNode in="SourceGraphic"/>
@@ -1366,41 +1301,23 @@
                     </filter>
                   </defs>
 
-                  <!-- main sphere -->
-                  <circle class="sphere-strong" cx="400" cy="400" r="235"/>
+                  <circle class="world-strong" cx="400" cy="400" r="225"/>
 
                   <!-- latitude -->
-                  <ellipse class="sphere" cx="400" cy="400" rx="235" ry="185"/>
-                  <ellipse class="sphere" cx="400" cy="400" rx="235" ry="130"/>
-                  <ellipse class="sphere" cx="400" cy="400" rx="235" ry="72"/>
-                  <ellipse class="sphere-soft" cx="400" cy="400" rx="235" ry="28"/>
-
-                  <ellipse class="sphere" cx="400" cy="400" rx="235" ry="215"/>
+                  <ellipse class="world-outline" cx="400" cy="400" rx="225" ry="180"/>
+                  <ellipse class="world-outline" cx="400" cy="400" rx="225" ry="125"/>
+                  <ellipse class="world-outline" cx="400" cy="400" rx="225" ry="70"/>
+                  <ellipse class="world-soft" cx="400" cy="400" rx="225" ry="28"/>
 
                   <!-- longitude -->
-                  <ellipse class="sphere" cx="400" cy="400" rx="62" ry="235"/>
-                  <ellipse class="sphere" cx="400" cy="400" rx="118" ry="235"/>
-                  <ellipse class="sphere" cx="400" cy="400" rx="176" ry="235"/>
-                  <ellipse class="sphere-soft" cx="400" cy="400" rx="206" ry="235"/>
+                  <ellipse class="world-outline" cx="400" cy="400" rx="60" ry="225"/>
+                  <ellipse class="world-outline" cx="400" cy="400" rx="115" ry="225"/>
+                  <ellipse class="world-outline" cx="400" cy="400" rx="170" ry="225"/>
+                  <ellipse class="world-soft" cx="400" cy="400" rx="200" ry="225"/>
 
-                  <!-- dynamic orbit lines -->
-                  <path class="orbit-soft" d="M170 330 Q395 290 630 340"/>
-                  <path class="orbit-glow" d="M170 330 Q395 290 630 340"/>
-
-                  <path class="orbit-soft" d="M160 420 Q400 370 640 420"/>
-                  <path class="orbit-glow" d="M160 420 Q400 370 640 420"/>
-
-                  <path class="orbit-soft" d="M178 492 Q400 452 622 490"/>
-                  <path class="orbit-glow" d="M178 492 Q400 452 622 490"/>
-
-                  <path class="orbit-soft" d="M288 182 Q360 404 312 638"/>
-                  <path class="orbit-glow" d="M288 182 Q360 404 312 638"/>
-
-                  <path class="orbit-soft" d="M400 165 Q450 405 402 645"/>
-                  <path class="orbit-glow" d="M400 165 Q450 405 402 645"/>
-
-                  <path class="orbit-soft" d="M505 178 Q445 405 500 632"/>
-                  <path class="orbit-glow" d="M505 178 Q445 405 500 632"/>
+                  <!-- glow set -->
+                  <ellipse class="world-glow" cx="400" cy="400" rx="225" ry="125"/>
+                  <ellipse class="world-glow" cx="400" cy="400" rx="115" ry="225"/>
                 </svg>
               </div>
             </div>
@@ -1411,59 +1328,45 @@
               <img src="images/logo.png" alt="Stealth Safety Bank Logo" />
             </button>
 
-            <div class="connection-layer" aria-hidden="true">
-              <div class="connection-line left cl1"></div>
-              <div class="connection-line left cl2"></div>
-              <div class="connection-line left cl3"></div>
-              <div class="connection-line left cl4"></div>
-
-              <div class="connection-line right cl5"></div>
-              <div class="connection-line right cl6"></div>
-              <div class="connection-line right cl7"></div>
-              <div class="connection-line right cl8"></div>
-
-              <div class="connection-line cl9"></div>
-            </div>
-
             <div class="menu-layer">
               <button class="menu-node left n1" type="button" data-popup="ssbmobile">
+                <span class="node-dot"></span>
                 <div class="node-shell">
                   <span class="node-text">
                     <span class="node-title en-font">SSB MOBILE</span>
                     <span class="node-sub en-font">SECURE MOBILE ACCESS</span>
                   </span>
                 </div>
-                <span class="node-dot"></span>
               </button>
 
               <button class="menu-node left n2" type="button" data-popup="stealthbank">
+                <span class="node-dot"></span>
                 <div class="node-shell">
                   <span class="node-text">
                     <span class="node-title en-font">STEALTH SAFETY BANK</span>
                     <span class="node-sub en-font">PRIVATE BANKING SHIELD</span>
                   </span>
                 </div>
-                <span class="node-dot"></span>
               </button>
 
               <a class="menu-node left n3" href="agent-login.html">
+                <span class="node-dot"></span>
                 <div class="node-shell">
                   <span class="node-text">
                     <span class="node-title en-font">AGENT LOGIN</span>
                     <span class="node-sub en-font">DEALER MEMBER ACCESS</span>
                   </span>
                 </div>
-                <span class="node-dot"></span>
               </a>
 
               <a class="menu-node left n4" href="about.html">
+                <span class="node-dot"></span>
                 <div class="node-shell">
                   <span class="node-text">
                     <span class="node-title en-font">ABOUT COMPANY</span>
                     <span class="node-sub en-font">SIAM TUM PROFILE</span>
                   </span>
                 </div>
-                <span class="node-dot"></span>
               </a>
 
               <button class="menu-node right n5" type="button" data-popup="stealthbank">
