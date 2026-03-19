@@ -144,25 +144,35 @@
     }
 
     .topbar-inner{
-      position:relative;
-      z-index:1;
-      width:min(var(--max), calc(100% - 22px));
-      margin:0 auto;
-      min-height:90px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:18px;
-      padding:10px 0;
-    }
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  width:min(calc(100% - 20px, var(--max));
+  margin:0 auto;
+}
 
-    .brand-wrap{
-      min-width:0;
-      display:flex;
-      align-items:center;
-      gap:14px;
-    }
+.brand-wrap{
+  flex:1;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
 
+.theme-switch-wrap{
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+}
+
+.topbar-actions{
+  flex:1;
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap:12px;
+}
     .brand-logo{
       width:58px;
       height:58px;
@@ -2252,45 +2262,55 @@ body.light-mode .node-note{
 </head>
 <body>
   <div class="site-wrap">
-    <header class="ssb-topbar">
-      <div class="topbar-inner">
-        <div class="brand-wrap">
-          <div class="brand-logo">
-            <img src="images/logo.png" alt="Stealth Safety Bank Logo" />
-          </div>
+   <header class="ssb-topbar">
+  <div class="topbar-inner">
 
-          <div class="brand-text">
-            <div class="brand-line-1 th-font">บริษัท สยามทำ จำกัด</div>
-            <div class="brand-line-2 en-font">Siam Tham Co.,Ltd.</div>
-            <div class="brand-site en-font">
-              <a href="https://www.siamtham.com" target="_blank" rel="noopener">www.siamtham.com</a>
-            </div>
-          </div>
-        </div>
+    <div class="brand-wrap">
+      <div class="brand-logo">
+        <img src="images/logo.png" alt="Stealth Safety Bank Logo" />
+      </div>
 
-        <div class="topbar-actions">
-          <div class="lang-bar" aria-label="เลือกภาษา">
-            <button class="lang-btn sound-click active" type="button" data-lang="th" title="ไทย">
-              <img src="https://flagcdn.com/w40/th.png" alt="ไทย">
-            </button>
-            <button class="lang-btn sound-click" type="button" data-lang="en" title="English">
-              <img src="https://flagcdn.com/w40/us.png" alt="English">
-            </button>
-            <button class="lang-btn sound-click" type="button" data-lang="ja" title="日本語">
-              <img src="https://flagcdn.com/w40/jp.png" alt="日本語">
-            </button>
-            <button class="lang-btn sound-click" type="button" data-lang="zh-CN" title="中文">
-              <img src="https://flagcdn.com/w40/cn.png" alt="中文">
-            </button>
-            <button class="lang-btn sound-click" type="button" data-lang="vi" title="Tiếng Việt">
-              <img src="https://flagcdn.com/w40/vn.png" alt="Tiếng Việt">
-            </button>
-          </div>
-          <div id="google_translate_element"></div>
-          <button id="themeToggle" class="theme-toggle">☀️</button>
+      <div class="brand-text">
+        <div class="brand-line-1 th-font">บริษัท สยามทำ จำกัด</div>
+        <div class="brand-line-2 en-font">Siam Tham Co.,Ltd.</div>
+        <div class="brand-site en-font">
+          <a href="https://www.siamtham.com" target="_blank" rel="noopener">www.siamtham.com</a>
         </div>
       </div>
-    </header>
+    </div>
+
+    <div class="theme-switch-wrap">
+      <span class="mode-label">Night</span>
+      <button id="themeToggle" class="theme-switch" type="button" aria-label="Toggle theme">
+        <span class="switch-knob"></span>
+      </button>
+      <span class="mode-label">Bright</span>
+    </div>
+
+    <div class="topbar-actions">
+      <div class="lang-bar" aria-label="เลือกภาษา">
+        <button class="lang-btn sound-click active" type="button" data-lang="th" title="ไทย">
+          <img src="https://flagcdn.com/w40/th.png" alt="ไทย">
+        </button>
+        <button class="lang-btn sound-click" type="button" data-lang="en" title="English">
+          <img src="https://flagcdn.com/w40/us.png" alt="English">
+        </button>
+        <button class="lang-btn sound-click" type="button" data-lang="ja" title="日本語">
+          <img src="https://flagcdn.com/w40/jp.png" alt="日本語">
+        </button>
+        <button class="lang-btn sound-click" type="button" data-lang="zh-CN" title="中文">
+          <img src="https://flagcdn.com/w40/cn.png" alt="中文">
+        </button>
+        <button class="lang-btn sound-click" type="button" data-lang="vi" title="Tiếng Việt">
+          <img src="https://flagcdn.com/w40/vn.png" alt="Tiếng Việt">
+        </button>
+      </div>
+
+      <div id="google_translate_element"></div>
+    </div>
+
+  </div>
+</header>
 
     <main class="main-content">
       <section class="hero-stage">
