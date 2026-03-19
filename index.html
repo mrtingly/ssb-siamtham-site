@@ -13,31 +13,30 @@
     rel="stylesheet"
   />
 
-
   <style>
     :root{
-      --bg-1:#010713;
-      --bg-2:#03112a;
-      --bg-3:#04183f;
+      --bg-1:#020816;
+      --bg-2:#04122e;
+      --bg-3:#061b46;
 
-      --head-1:#0a3f84;
+      --head-1:#08397a;
       --head-2:#0b4ea2;
-      --head-3:#1b67cf;
+      --head-3:#2b7be6;
 
-      --line:#93e6ff;
-      --line-soft:rgba(147,230,255,.16);
-      --line-faint:rgba(147,230,255,.08);
+      --line:#98ecff;
+      --line-soft:rgba(152,236,255,.18);
+      --line-faint:rgba(152,236,255,.08);
 
       --text:#eefaff;
-      --text-soft:rgba(230,247,255,.82);
+      --text-soft:rgba(234,247,255,.84);
       --text-faint:rgba(214,239,255,.66);
 
       --glass-1:rgba(255,255,255,.08);
       --glass-2:rgba(255,255,255,.04);
-      --glass-border:rgba(156,227,255,.14);
+      --glass-border:rgba(156,227,255,.16);
 
-      --danger-1:#ff6b7b;
-      --danger-2:#d91f34;
+      --danger-1:#ff6c7d;
+      --danger-2:#de2038;
 
       --shadow:0 24px 70px rgba(0,0,0,.34);
       --max:1320px;
@@ -52,7 +51,7 @@
       color:var(--text);
       font-family:'Prompt',sans-serif;
       background:
-        radial-gradient(circle at 50% 42%, rgba(33,123,255,.16) 0%, rgba(15,66,166,.09) 18%, transparent 38%),
+        radial-gradient(circle at 50% 42%, rgba(33,123,255,.18) 0%, rgba(15,66,166,.09) 18%, transparent 38%),
         radial-gradient(circle at 18% 20%, rgba(91,197,255,.06) 0%, transparent 24%),
         radial-gradient(circle at 82% 18%, rgba(91,197,255,.05) 0%, transparent 24%),
         linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 30%, var(--bg-3) 70%, #021127 100%);
@@ -108,8 +107,8 @@
       z-index:1200;
       border-bottom:1px solid rgba(255,255,255,.12);
       background:linear-gradient(135deg, var(--head-1) 0%, var(--head-2) 50%, var(--head-3) 100%);
-      backdrop-filter:blur(14px);
-      -webkit-backdrop-filter:blur(14px);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
       box-shadow:0 10px 26px rgba(0,0,0,.24);
     }
 
@@ -119,7 +118,7 @@
       inset:0;
       pointer-events:none;
       background:
-        linear-gradient(180deg, rgba(255,255,255,.13), rgba(255,255,255,0)),
+        linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,0)),
         radial-gradient(circle at 12% 18%, rgba(255,255,255,.12), transparent 22%),
         radial-gradient(circle at 88% 14%, rgba(255,255,255,.10), transparent 22%);
     }
@@ -127,7 +126,7 @@
     .topbar-inner{
       width:min(var(--max), calc(100% - 20px));
       margin:0 auto;
-      min-height:84px;
+      min-height:88px;
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -165,17 +164,31 @@
       display:block;
     }
 
+    .brand-title-stack{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      line-height:1.1;
+    }
+
     .brand-name{
       font-size:20px;
       font-weight:800;
-      line-height:1.15;
       color:#fff;
       text-shadow:0 0 14px rgba(255,255,255,.14);
     }
 
+    .brand-subname{
+      margin-top:5px;
+      font-size:14px;
+      font-weight:800;
+      color:rgba(234,248,255,.96);
+      text-shadow:0 0 10px rgba(160,227,255,.24);
+    }
+
     .brand-site{
-      margin-top:4px;
-      font-size:13px;
+      margin-top:6px;
+      font-size:12px;
       font-weight:700;
       color:rgba(255,255,255,.92);
     }
@@ -192,7 +205,6 @@
       flex:0 0 auto;
     }
 
-    /* CUSTOM LANGUAGE BAR */
     .lang-bar{
       display:flex;
       align-items:center;
@@ -254,7 +266,6 @@
       box-shadow:0 0 0 2px rgba(156,227,255,.10), 0 0 18px rgba(114,215,255,.44);
     }
 
-    /* ซ่อนไว้แบบยังให้ Google Translate ทำงานได้ */
     #google_translate_element{
       position:fixed;
       right:0;
@@ -277,10 +288,7 @@
     .goog-te-gadget span{
       display:none !important;
     }
-
-    .goog-te-gadget{
-      font-size:0 !important;
-    }
+    .goog-te-gadget{ font-size:0 !important; }
 
     /* MAIN */
     .main-content{
@@ -318,7 +326,7 @@
       justify-content:center;
       isolation:isolate;
       background:
-        radial-gradient(circle at 50% 50%, rgba(25,120,255,.11) 0%, rgba(14,64,160,.10) 16%, rgba(7,27,69,.94) 42%, rgba(3,13,34,.988) 78%, rgba(2,8,24,1) 100%);
+        radial-gradient(circle at 50% 50%, rgba(25,120,255,.12) 0%, rgba(14,64,160,.10) 16%, rgba(7,27,69,.94) 42%, rgba(3,13,34,.988) 78%, rgba(2,8,24,1) 100%);
       box-shadow:
         inset 0 0 0 1px rgba(122,216,255,.08),
         inset 0 0 70px rgba(58,151,255,.05),
@@ -350,6 +358,59 @@
       z-index:0;
     }
 
+    /* เส้นกรอบไฟวิ่งรอบ */
+    .frame-energy{
+      position:absolute;
+      inset:10px;
+      z-index:4;
+      border-radius:30px;
+      pointer-events:none;
+      overflow:hidden;
+    }
+
+    .frame-energy::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:inherit;
+      border:1px solid rgba(150,229,255,.18);
+      box-shadow:
+        inset 0 0 20px rgba(109,206,255,.04),
+        0 0 20px rgba(109,206,255,.06);
+      opacity:.85;
+    }
+
+    .frame-energy svg{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      overflow:visible;
+    }
+
+    .frame-path{
+      fill:none;
+      stroke:rgba(136,226,255,.10);
+      stroke-width:1.4;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+      filter:drop-shadow(0 0 8px rgba(130,221,255,.12));
+    }
+
+    .frame-run{
+      fill:none;
+      stroke:rgba(224,250,255,.95);
+      stroke-width:2.6;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+      stroke-dasharray:26 420;
+      animation:frameRun 6.4s linear infinite;
+      filter:drop-shadow(0 0 10px rgba(184,242,255,.9)) drop-shadow(0 0 18px rgba(92,195,255,.35));
+    }
+
+    .frame-run.delay-a{ animation-delay:-1.4s; }
+    .frame-run.delay-b{ animation-delay:-3.2s; }
+
     .hero-stars{
       position:absolute;
       inset:0;
@@ -373,6 +434,20 @@
       pointer-events:none;
       z-index:1;
       perspective:1200px;
+    }
+
+    .world-map{
+      position:absolute;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+      opacity:.11;
+      mix-blend-mode:screen;
+      background:
+        url("images/world-map-line.png") center 48% / 88% auto no-repeat;
+      filter:drop-shadow(0 0 20px rgba(101,206,255,.12));
+      mask-image:radial-gradient(circle at 50% 48%, rgba(0,0,0,1) 0%, rgba(0,0,0,.84) 42%, rgba(0,0,0,.46) 68%, transparent 88%);
+      -webkit-mask-image:radial-gradient(circle at 50% 48%, rgba(0,0,0,1) 0%, rgba(0,0,0,.84) 42%, rgba(0,0,0,.46) 68%, transparent 88%);
     }
 
     .bg-core-glow{
@@ -1012,16 +1087,21 @@
     .n8{ --x:69%; --y:62%; }
     .n9{ --x:50%; --y:79%; }
 
+    /* ข้อความใต้ปุ่ม จัดให้ชิดใต้เริ่มสั่งจอง 15px */
     .node-note{
+      position:absolute;
+      left:50%;
+      top:calc(79% + 56px + 15px);
+      transform:translateX(-50%);
       display:inline-flex;
       align-items:center;
       justify-content:center;
       min-height:42px;
       padding:10px 18px;
       border-radius:999px;
-      background:rgba(255,255,255,.06);
+      background:rgba(255,255,255,.08);
       color:#dff5ff;
-      border:1px solid rgba(139,215,255,.12);
+      border:1px solid rgba(139,215,255,.14);
       box-shadow:0 10px 22px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.06);
       backdrop-filter:blur(14px);
       -webkit-backdrop-filter:blur(14px);
@@ -1029,6 +1109,15 @@
       font-weight:800;
       text-align:center;
       pointer-events:none;
+      z-index:8;
+      opacity:0;
+      transition:opacity .26s ease, transform .26s ease;
+      white-space:nowrap;
+    }
+
+    .tech-hero.open .node-note{
+      opacity:1;
+      transform:translateX(-50%) translateY(0);
     }
 
     /* POPUPS */
@@ -1557,10 +1646,12 @@
     .ssb-footer{
       position:relative;
       z-index:20;
-      margin-top:12px;
+      margin-top:18px;
       border-top:1px solid rgba(255,255,255,.12);
-      background:linear-gradient(135deg, var(--head-1) 0%, var(--head-2) 52%, var(--head-3) 100%);
+      background:
+        linear-gradient(135deg, rgba(7,46,96,.98) 0%, rgba(10,61,130,.98) 40%, rgba(29,105,205,.98) 100%);
       box-shadow:0 -12px 30px rgba(0,0,0,.22);
+      overflow:hidden;
     }
 
     .ssb-footer::before{
@@ -1574,44 +1665,91 @@
         radial-gradient(circle at 88% 16%, rgba(255,255,255,.08), transparent 20%);
     }
 
+    .ssb-footer::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 18% 40%, rgba(130,221,255,.10), transparent 28%),
+        radial-gradient(circle at 78% 28%, rgba(130,221,255,.08), transparent 26%);
+      mix-blend-mode:screen;
+    }
+
     .footer-inner{
       width:min(var(--max), calc(100% - 20px));
       margin:0 auto;
-      padding:16px 0 12px;
+      padding:20px 0 14px;
       position:relative;
       z-index:1;
     }
 
     .footer-card{
-      background:rgba(255,255,255,.10);
-      border:1px solid rgba(255,255,255,.14);
-      border-radius:20px;
-      padding:14px;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.10);
-      backdrop-filter:blur(10px);
-      -webkit-backdrop-filter:blur(10px);
+      position:relative;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.11), rgba(255,255,255,.06)),
+        linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,0));
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:24px;
+      padding:20px;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.12),
+        0 20px 48px rgba(0,0,0,.18);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+      overflow:hidden;
+    }
+
+    .footer-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(90deg, transparent 0%, rgba(255,255,255,.05) 24%, rgba(255,255,255,.10) 50%, rgba(255,255,255,.05) 76%, transparent 100%);
+      transform:translateX(-100%);
+      animation:footerSweep 9s linear infinite;
+      pointer-events:none;
+      opacity:.55;
     }
 
     .footer-main{
       display:grid;
-      grid-template-columns:1.15fr .95fr .95fr;
-      gap:12px;
-      align-items:center;
+      grid-template-columns:1.2fr .95fr .95fr;
+      gap:18px;
+      align-items:stretch;
+      position:relative;
+      z-index:1;
+    }
+
+    .footer-panel{
+      position:relative;
+      min-height:100%;
+      padding:18px;
+      border-radius:20px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04)),
+        radial-gradient(circle at top right, rgba(114,208,255,.10), transparent 40%);
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
     }
 
     .footer-title{
-      margin:0 0 8px;
-      font-size:17px;
+      margin:0 0 10px;
+      font-size:18px;
       font-weight:800;
       color:#fff;
     }
 
     .footer-text{
-      margin:0 0 6px;
+      margin:0 0 7px;
       color:rgba(255,255,255,.94);
       font-size:13px;
-      line-height:1.65;
+      line-height:1.7;
       word-break:break-word;
+    }
+
+    .footer-label{
+      color:#dff6ff;
+      font-weight:800;
     }
 
     .footer-link{
@@ -1620,18 +1758,46 @@
       font-weight:700;
     }
 
-    .footer-contact-center{ text-align:center; }
-
-    .footer-nav-wrap{
-      display:flex;
-      justify-content:flex-end;
-      align-items:center;
+    .footer-contact-list{
+      display:grid;
+      gap:10px;
+      margin-top:8px;
     }
 
-    .footer-map-button{
-      min-height:56px;
-      padding:12px 20px;
-      border-radius:999px;
+    .footer-contact-item{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      min-height:44px;
+      padding:10px 12px;
+      border-radius:14px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .footer-contact-dot{
+      width:12px;
+      height:12px;
+      margin-top:6px;
+      border-radius:50%;
+      background:radial-gradient(circle, #fff 0%, #c7f3ff 30%, #49bbff 100%);
+      box-shadow:0 0 10px rgba(73,187,255,.75);
+      flex:0 0 12px;
+    }
+
+    .footer-actions{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:12px;
+      height:100%;
+    }
+
+    .footer-map-button,
+    .footer-action-button{
+      min-height:58px;
+      padding:12px 18px;
+      border-radius:18px;
       display:inline-flex;
       align-items:center;
       justify-content:center;
@@ -1646,7 +1812,17 @@
       transition:.22s ease;
     }
 
-    .footer-map-button:hover{ transform:translateY(-2px); }
+    .footer-action-button{
+      color:#fff;
+      background:linear-gradient(135deg, rgba(255,255,255,.11), rgba(255,255,255,.06));
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 10px 20px rgba(0,0,0,.12);
+    }
+
+    .footer-map-button:hover,
+    .footer-action-button:hover{
+      transform:translateY(-2px);
+    }
 
     .footer-pin{
       width:34px;
@@ -1655,13 +1831,15 @@
     }
 
     .footer-bottom{
-      margin-top:10px;
-      padding-top:10px;
+      margin-top:12px;
+      padding-top:12px;
       border-top:1px solid rgba(255,255,255,.12);
       text-align:center;
       color:rgba(255,255,255,.92);
       font-size:12px;
-      line-height:1.7;
+      line-height:1.8;
+      position:relative;
+      z-index:1;
     }
 
     @keyframes popupIn{
@@ -1669,6 +1847,10 @@
       to{ opacity:1; transform:translateY(0) scale(1); }
     }
     @keyframes panelSweep{
+      from{ transform:translateX(-100%); }
+      to{ transform:translateX(100%); }
+    }
+    @keyframes footerSweep{
       from{ transform:translateX(-100%); }
       to{ transform:translateX(100%); }
     }
@@ -1711,6 +1893,10 @@
     @keyframes runEnergy{
       from{ stroke-dashoffset:0; }
       to{ stroke-dashoffset:-358; }
+    }
+    @keyframes frameRun{
+      from{ stroke-dashoffset:0; }
+      to{ stroke-dashoffset:-446; }
     }
     @keyframes moveToCore{
       0%{ transform:translate(0,0) scale(1); opacity:0; }
@@ -1776,10 +1962,12 @@
       .n8{ --x:71%; --y:62%; }
       .n9{ --x:50%; --y:80%; }
 
+      .node-note{
+        top:calc(80% + 54px + 15px);
+      }
+
       .popup-grid{ grid-template-columns:1fr; }
       .footer-main{ grid-template-columns:1fr; }
-      .footer-contact-center{ text-align:left; }
-      .footer-nav-wrap{ justify-content:flex-start; }
     }
 
     @media (max-width:760px){
@@ -1799,7 +1987,8 @@
       }
 
       .brand-name{ font-size:15px; }
-      .brand-site{ font-size:12px; }
+      .brand-subname{ font-size:11px; }
+      .brand-site{ font-size:11px; }
 
       .topbar-actions{
         width:100%;
@@ -1828,14 +2017,19 @@
 
       .tech-hero{
         width:min(96vw, 430px);
-        height:760px;
-        min-height:760px;
+        height:780px;
+        min-height:780px;
         border-radius:28px;
       }
 
       .tech-hero::after{
         inset:10px;
         border-radius:20px;
+      }
+
+      .frame-energy{
+        inset:8px;
+        border-radius:22px;
       }
 
       .hero-system-title{
@@ -1892,6 +2086,11 @@
       .orbit-dot.large{ width:14px; height:14px; }
       .orbit-dot.xl{ width:16px; height:16px; }
 
+      .world-map{
+        background-size:135% auto;
+        opacity:.09;
+      }
+
       .menu-node{ gap:8px; }
       .node-dot{ width:14px; height:14px; flex:0 0 14px; }
       .menu-node.bottom .node-dot{ width:18px; height:18px; flex:0 0 18px; }
@@ -1928,9 +2127,12 @@
       .n9{ --x:50%; --y:77%; }
 
       .node-note{
-        font-size:12px;
-        min-height:38px;
-        padding:8px 14px;
+        top:calc(77% + 44px + 15px);
+        font-size:11px;
+        min-height:36px;
+        padding:8px 12px;
+        white-space:normal;
+        width:min(78%, 240px);
       }
 
       .popup-card{
@@ -1954,14 +2156,20 @@
       }
 
       .footer-card{
-        padding:12px;
+        padding:14px;
+        border-radius:18px;
+      }
+
+      .footer-panel{
+        padding:14px;
         border-radius:16px;
       }
 
       .footer-title{ font-size:15px; }
       .footer-text{ font-size:12px; line-height:1.6; }
 
-      .footer-map-button{
+      .footer-map-button,
+      .footer-action-button{
         width:100%;
         min-height:52px;
         justify-content:flex-start;
@@ -1999,7 +2207,6 @@
         height:58px;
       }
     }
-    
   </style>
 </head>
 <body>
@@ -2010,8 +2217,10 @@
           <div class="brand-logo">
             <img src="images/logo.png" alt="Stealth Safety Bank Logo" />
           </div>
-          <div>
-            <div class="brand-name th-font">บริษัท สยามทำ จำกัด • <span class="en-font">Stealth Safety Bank Mobile System</span></div>
+
+          <div class="brand-title-stack">
+            <div class="brand-name th-font">บริษัท สยามทำ จำกัด</div>
+            <div class="brand-subname en-font">Stealth Safety Bank Mobile System</div>
             <div class="brand-site en-font">
               <a href="https://www.siamtham.com" target="_blank" rel="noopener">www.siamtham.com</a>
             </div>
@@ -2045,9 +2254,19 @@
       <section class="hero-stage">
         <div class="hero-center">
           <div class="tech-hero" id="techHero">
+            <div class="frame-energy" aria-hidden="true">
+              <svg viewBox="0 0 1000 700" preserveAspectRatio="none">
+                <path class="frame-path" d="M40 28 H960 Q980 28 980 48 V652 Q980 672 960 672 H40 Q20 672 20 652 V48 Q20 28 40 28 Z"></path>
+                <path class="frame-run" d="M40 28 H960 Q980 28 980 48 V652 Q980 672 960 672 H40 Q20 672 20 652 V48 Q20 28 40 28 Z"></path>
+                <path class="frame-run delay-a" d="M40 28 H960 Q980 28 980 48 V652 Q980 672 960 672 H40 Q20 672 20 652 V48 Q20 28 40 28 Z"></path>
+                <path class="frame-run delay-b" d="M40 28 H960 Q980 28 980 48 V652 Q980 672 960 672 H40 Q20 672 20 652 V48 Q20 28 40 28 Z"></path>
+              </svg>
+            </div>
+
             <div class="hero-stars"></div>
 
             <div class="hero-bg" aria-hidden="true">
+              <div class="world-map"></div>
               <div class="bg-core-glow"></div>
 
               <div class="bg-ring ring-1"></div>
@@ -2217,10 +2436,10 @@
                   </span>
                 </div>
               </a>
+
+              <div class="node-note th-font">คลิกที่โลโก้เพื่อเปิดเมนู</div>
             </div>
           </div>
-
-          <div class="node-note th-font">คลิกที่โลโก้เพื่อเปิดเมนู</div>
         </div>
       </section>
     </main>
@@ -2229,33 +2448,64 @@
       <div class="footer-inner">
         <div class="footer-card">
           <div class="footer-main">
-            <div>
+            <div class="footer-panel">
               <h3 class="footer-title th-font">บริษัท สยามทำ จำกัด</h3>
-              <p class="footer-text th-font"><strong>ที่อยู่:</strong> 54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
+              <p class="footer-text th-font">
+                ระบบและแนวคิด <span class="footer-label en-font">Stealth Safety Bank Mobile System</span>
+                ออกแบบเพื่อยกระดับความปลอดภัยทางการเงินด้วยแนวทางที่รอบคอบ เป็นระบบ และใช้งานจริงได้
+              </p>
+              <p class="footer-text th-font"><span class="footer-label">ที่อยู่:</span> 54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
+              <p class="footer-text th-font"><span class="footer-label">เลขทะเบียน:</span> 0105566099954</p>
             </div>
 
-            <div class="footer-contact-center">
-              <p class="footer-text th-font"><strong>โทร:</strong> <a class="footer-link" href="tel:020432988">02-043-2988</a></p>
-              <p class="footer-text th-font"><strong>มือถือ:</strong> <a class="footer-link" href="tel:0649514888">064-951-4888</a></p>
-              <p class="footer-text th-font"><strong>เว็บไซต์:</strong> <a class="footer-link en-font" href="https://www.siamtham.com" target="_blank" rel="noopener">www.siamtham.com</a></p>
+            <div class="footer-panel">
+              <h3 class="footer-title th-font">ช่องทางติดต่อ</h3>
+              <div class="footer-contact-list">
+                <div class="footer-contact-item">
+                  <span class="footer-contact-dot"></span>
+                  <div class="footer-text th-font"><span class="footer-label">โทร:</span> <a class="footer-link" href="tel:020432988">02-043-2988</a></div>
+                </div>
+
+                <div class="footer-contact-item">
+                  <span class="footer-contact-dot"></span>
+                  <div class="footer-text th-font"><span class="footer-label">มือถือ:</span> <a class="footer-link" href="tel:0649514888">064-951-4888</a></div>
+                </div>
+
+                <div class="footer-contact-item">
+                  <span class="footer-contact-dot"></span>
+                  <div class="footer-text th-font"><span class="footer-label">อีเมล:</span> <a class="footer-link" href="mailto:mysiamtham@gmail.com">mysiamtham@gmail.com</a></div>
+                </div>
+
+                <div class="footer-contact-item">
+                  <span class="footer-contact-dot"></span>
+                  <div class="footer-text th-font"><span class="footer-label">เว็บไซต์:</span> <a class="footer-link en-font" href="https://www.siamtham.com" target="_blank" rel="noopener">www.siamtham.com</a></div>
+                </div>
+              </div>
             </div>
 
-            <div class="footer-nav-wrap">
-              <a class="footer-map-button sound-click th-font" href="https://maps.app.goo.gl/Dz4B1kpqVbmWhkYX7" target="_blank" rel="noopener">
-                <svg class="footer-pin" viewBox="0 0 64 64" aria-hidden="true">
-                  <path fill="#ff2a2a" d="M32 4C20.4 4 11 13.4 11 25c0 16.3 18.8 34 20.1 35.2a1.3 1.3 0 0 0 1.8 0C34.2 59 53 41.3 53 25 53 13.4 43.6 4 32 4z"/>
-                  <circle cx="32" cy="25" r="10.5" fill="#ffffff"/>
-                  <circle cx="32" cy="25" r="5.3" fill="#ff2a2a"/>
-                </svg>
-                <span>คลิกเพื่อเดินทางไปบริษัท</span>
-              </a>
+            <div class="footer-panel">
+              <h3 class="footer-title th-font">การเดินทางและบริการ</h3>
+              <div class="footer-actions">
+                <a class="footer-map-button sound-click th-font" href="https://maps.app.goo.gl/Dz4B1kpqVbmWhkYX7" target="_blank" rel="noopener">
+                  <svg class="footer-pin" viewBox="0 0 64 64" aria-hidden="true">
+                    <path fill="#ff2a2a" d="M32 4C20.4 4 11 13.4 11 25c0 16.3 18.8 34 20.1 35.2a1.3 1.3 0 0 0 1.8 0C34.2 59 53 41.3 53 25 53 13.4 43.6 4 32 4z"/>
+                    <circle cx="32" cy="25" r="10.5" fill="#ffffff"/>
+                    <circle cx="32" cy="25" r="5.3" fill="#ff2a2a"/>
+                  </svg>
+                  <span>คลิกเพื่อเดินทางไปบริษัท</span>
+                </a>
+
+                <a class="footer-action-button sound-click th-font" href="book.html">
+                  <span>เข้าสู่หน้าสั่งจองสินค้าและบริการ</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
 
         <div class="footer-bottom th-font">
-          © Siam Tham Co., Ltd. • <span class="en-font">Stealth Safety Bank Mobile System</span><br>
-          By <span class="en-font">Mr.Tingly Marketing Online</span>
+          © Siam Tum Co., Ltd. • <span class="en-font">Stealth Safety Bank Mobile System</span><br>
+          เว็บไซต์นี้ทำโดย <span class="en-font">Mr.Tingly Marketing Online</span>
         </div>
       </div>
     </footer>
@@ -2807,8 +3057,6 @@
     }
 
     /* GOOGLE TRANSLATE */
-    let googleTranslateReady = false;
-
     function googleTranslateElementInit() {
       new google.translate.TranslateElement(
         {
@@ -2819,7 +3067,6 @@
         },
         "google_translate_element"
       );
-      googleTranslateReady = true;
       syncActiveLangFromCookie();
     }
     window.googleTranslateElementInit = googleTranslateElementInit;
