@@ -1731,234 +1731,382 @@
       .popup-grid{ grid-template-columns:1fr; }
     }
 
-    @media (max-width:760px){
-      .topbar-inner{
-        width:min(100% - 14px, var(--max));
-        min-height:unset;
-        flex-direction:column;
-        align-items:flex-start;
-        gap:10px;
-        padding:10px 0;
-      }
+@media (max-width:760px){
+  .topbar-inner{
+    width:min(100% - 14px, var(--max));
+    min-height:unset;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:10px;
+    padding:10px 0;
+  }
 
-      .brand-logo{
-        width:48px;
-        height:48px;
-        flex:0 0 48px;
-      }
+  .brand-logo{
+    width:48px;
+    height:48px;
+    flex:0 0 48px;
+  }
 
-      .brand-line-1{ font-size:15px; }
-      .brand-line-2{ font-size:11px; }
-      .brand-site{ font-size:11px; }
+  .brand-line-1{ font-size:15px; }
+  .brand-line-2{ font-size:11px; }
+  .brand-site{ font-size:11px; }
 
-      .topbar-actions{
-        width:100%;
-        justify-content:flex-start;
-      }
+  .topbar-actions{
+    width:100%;
+    justify-content:flex-start;
+  }
 
-      .lang-bar{ gap:6px; padding:7px 8px; }
-      .lang-btn{ width:36px; height:36px; }
-      .lang-btn img{ width:22px; height:22px; }
+  .lang-bar{
+    gap:6px;
+    padding:7px 8px;
+  }
 
-      .main-content{
-        width:min(100% - 14px, var(--max));
-        padding-top:10px;
-      }
+  .lang-btn{
+    width:36px;
+    height:36px;
+  }
 
-      .hero-stage{
-        min-height:auto;
-        padding:4px 0 18px;
-      }
+  .lang-btn img{
+    width:22px;
+    height:22px;
+  }
 
-      .tech-hero{
-        width:min(96vw, 430px);
-        height:830px;
-        min-height:830px;
-        border-radius:28px;
-      }
+  .main-content{
+    width:min(100% - 14px, var(--max));
+    padding-top:10px;
+  }
 
-      .tech-hero::after{
-        inset:10px;
-        border-radius:20px;
-      }
+  .hero-stage{
+    min-height:auto;
+    padding:4px 0 18px;
+  }
 
-      .hero-system-title{
-        top:11.8%;
-        width:min(92%, 380px);
-      }
+  .hero-center{
+    gap:14px;
+  }
 
-      .hero-system-title-inner{
-        min-height:56px;
-        padding:12px 16px;
-      }
+  .tech-hero{
+    width:min(96vw, 430px);
+    min-height:720px;
+    height:auto;
+    padding:24px 14px 22px;
+    border-radius:28px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+  }
 
-      .hero-system-title-text{
-        font-size:13px;
-        letter-spacing:.8px;
-        white-space:normal;
-      }
+  .tech-hero::after{
+    inset:10px;
+    border-radius:20px;
+  }
 
-      .logo-core{
-        width:min(44vw, 124px);
-        height:min(44vw, 124px);
-      }
+  /* ซ่อนข้อความบนในมือถือ */
+  .hero-system-title{
+    display:none !important;
+  }
 
-      .center-glow{
-        width:92px;
-        height:92px;
-      }
+  /* ลดเอฟเฟกต์หนักในมือถือ */
+  .hero-bg .bg-ring.ring-3,
+  .hero-bg .bg-ring.ring-4,
+  .hero-bg .ring-tilt-3,
+  .hero-bg .ring-tilt-4,
+  .hero-bg .orbit-track.o4,
+  .hero-bg .orbit-track.o5,
+  .scan-sweep,
+  .particle-field{
+    display:none !important;
+  }
 
-      .center-pulse{
-        width:180px;
-        height:180px;
-      }
+  .bg-core-glow{
+    width:220px;
+    height:220px;
+    opacity:.9;
+  }
 
-      .orbit-system{
-        width:min(88vw, 340px);
-        height:min(88vw, 340px);
-      }
+  .orbit-system{
+    width:260px;
+    height:260px;
+  }
 
-      .orbit-track.o1{ width:min(62vw, 220px); height:min(62vw, 220px); }
-      .orbit-track.o2{ width:min(72vw, 260px); height:min(72vw, 260px); }
-      .orbit-track.o3{ width:min(80vw, 300px); height:min(80vw, 300px); }
-      .orbit-track.o4{ width:min(88vw, 330px); height:min(88vw, 330px); }
-      .orbit-track.o5{ width:min(96vw, 360px); height:min(96vw, 360px); }
+  .orbit-track.o1{
+    width:170px;
+    height:170px;
+  }
 
-      .orbit-dot{ width:11px; height:11px; }
-      .orbit-dot.small{ width:8px; height:8px; }
-      .orbit-dot.large{ width:14px; height:14px; }
+  .orbit-track.o2{
+    width:215px;
+    height:215px;
+  }
 
-      .node-shell{
-        min-width:152px;
-        min-height:48px;
-        padding:8px 10px;
-        border-radius:14px;
-      }
+  .orbit-track.o3{
+    width:255px;
+    height:255px;
+  }
 
-      .node-shell::after{ border-radius:12px; }
+  .orbit-dot{
+    width:10px;
+    height:10px;
+  }
 
-      .menu-node.bottom .node-shell{
-        min-width:228px;
-        min-height:58px;
-        padding:10px 14px;
-      }
+  .orbit-dot.small{
+    width:7px;
+    height:7px;
+  }
 
-      .node-title{
-        font-size:9px;
-        white-space:normal;
-      }
+  .orbit-dot.large{
+    width:12px;
+    height:12px;
+  }
 
-      .node-sub{
-        font-size:6px;
-        white-space:normal;
-      }
+  .center-glow{
+    width:86px;
+    height:86px;
+  }
 
-      .menu-node.bottom .node-title{ font-size:15px; }
-      .menu-node.bottom .node-sub{ font-size:7px; }
+  .center-pulse{
+    width:170px;
+    height:170px;
+  }
 
-      .n1{ --x:30%; --y:34%; }
-      .n2{ --x:30%; --y:43%; }
-      .n3{ --x:30%; --y:52%; }
-      .n4{ --x:30%; --y:61%; }
+  .logo-core{
+    width:min(44vw, 128px);
+    height:min(44vw, 128px);
+    margin:0 auto;
+  }
 
-      .n5{ --x:70%; --y:34%; }
-      .n6{ --x:70%; --y:43%; }
-      .n7{ --x:70%; --y:52%; }
-      .n8{ --x:70%; --y:61%; }
+  /* ===== สถานะก่อนกด ===== */
+  .menu-layer{
+    position:static;
+    inset:auto;
+    width:100%;
+    margin-top:24px;
+    display:none;
+  }
 
-      .n9{ --x:50%; --y:79%; }
+  .tech-hero.open .menu-layer{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    align-items:stretch;
+  }
 
-      .node-note{
-        font-size:15px;
-        min-height:48px;
-        padding:10px 18px;
-        width:min(92vw, 360px);
-      }
+  .menu-node{
+    position:relative;
+    left:auto;
+    top:auto;
+    transform:none;
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+    width:100%;
+    display:none;
+  }
 
-      .popup-card{
-        width:min(96vw, 1080px);
-        padding:16px;
-        border-radius:22px;
-      }
+  .tech-hero.open .menu-node{
+    display:flex;
+    transform:none;
+  }
 
-      .popup-head h3{ font-size:24px; }
-      .popup-subtitle{ font-size:13px; }
-      .popup-kicker{ font-size:11px; }
-      .popup-panel{ padding:14px; }
-      .popup-lead{ font-size:14px; line-height:1.78; }
-      .feature-list li{ font-size:13px; padding-left:42px; }
-      .impact-grid{ grid-template-columns:1fr; }
+  .node-shell{
+    width:100%;
+    min-width:0;
+    min-height:72px;
+    padding:12px 10px;
+    border-radius:16px;
+  }
 
-      .footer-inner{
-        width:min(100% - 14px, var(--max));
-        padding:14px 0 12px;
-      }
+  .node-shell::after{
+    border-radius:14px;
+  }
 
-      .footer-card{
-        padding:12px;
-        border-radius:16px;
-      }
+  .node-text{
+    gap:6px;
+    width:100%;
+  }
 
-      .footer-main{
-        grid-template-columns:1fr;
-        gap:12px;
-      }
+  .node-title{
+    font-size:12px;
+    line-height:1.25;
+    white-space:normal;
+  }
 
-      .footer-item{
-        align-items:flex-start;
-      }
+  .node-sub{
+    font-size:9px;
+    line-height:1.35;
+    white-space:normal;
+  }
 
-      .footer-item.map-col{
-        justify-content:stretch;
-      }
+  /* ยกเลิกตำแหน่งวงโคจรเก่า */
+  .n1,.n2,.n3,.n4,.n5,.n6,.n7,.n8,.n9{
+    --x:auto;
+    --y:auto;
+  }
 
-      .footer-map-button{
-        width:100%;
-        min-height:52px;
-        font-size:13px;
-        white-space:normal;
-      }
+  /* ปุ่มล่างเต็มความกว้าง */
+  .menu-node.bottom{
+    grid-column:1 / -1;
+  }
 
-      .footer-icon-wrap{
-        width:44px;
-        height:44px;
-        flex:0 0 44px;
-      }
+  .menu-node.bottom .node-shell{
+    min-width:0;
+    min-height:64px;
+    padding:12px 14px;
+  }
 
-      .footer-item svg{
-        width:24px;
-        height:24px;
-      }
+  .menu-node.bottom .node-title{
+    font-size:17px;
+    line-height:1.15;
+  }
 
-      .footer-label{ font-size:11px; }
-      .footer-company-line,
-      .footer-value{ font-size:12px; }
+  .menu-node.bottom .node-sub{
+    font-size:9px;
+    line-height:1.3;
+  }
 
-      .footer-bottom{ font-size:11px; }
+  /* ข้อความแนะนำให้ชัด */
+  .node-note{
+    font-size:16px;
+    min-height:50px;
+    padding:12px 18px;
+    width:min(92vw, 360px);
+    line-height:1.35;
+  }
 
-      .chat-widget{
-        right:12px;
-        bottom:12px;
-      }
+  .node-note.hidden{
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(-6px);
+  }
 
-      .chat-item{
-        min-width:188px;
-        height:50px;
-        font-size:12px;
-      }
+  .popup-card{
+    width:min(96vw, 1080px);
+    padding:16px;
+    border-radius:22px;
+  }
 
-      .chat-icon{
-        width:30px;
-        height:30px;
-        flex:0 0 30px;
-        font-size:11px;
-      }
+  .popup-head{
+    gap:10px;
+  }
 
-      .chat-fab{
-        width:58px;
-        height:58px;
-      }
-    }
+  .popup-head h3{
+    font-size:24px;
+  }
+
+  .popup-subtitle{
+    font-size:13px;
+  }
+
+  .popup-kicker{
+    font-size:11px;
+  }
+
+  .popup-panel{
+    padding:14px;
+  }
+
+  .popup-grid{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+
+  .popup-lead{
+    font-size:14px;
+    line-height:1.78;
+  }
+
+  .feature-list li{
+    font-size:13px;
+    line-height:1.7;
+    padding-left:42px;
+  }
+
+  .impact-grid{
+    grid-template-columns:1fr;
+  }
+
+  .video-frame{
+    border-radius:16px;
+  }
+
+  .footer-inner{
+    width:min(100% - 14px, var(--max));
+    padding:14px 0 12px;
+  }
+
+  .footer-card{
+    padding:12px;
+    border-radius:16px;
+  }
+
+  .footer-main{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+
+  .footer-item{
+    align-items:flex-start;
+  }
+
+  .footer-item.map-col{
+    justify-content:stretch;
+  }
+
+  .footer-map-button{
+    width:100%;
+    min-height:52px;
+    font-size:13px;
+    white-space:normal;
+  }
+
+  .footer-icon-wrap{
+    width:44px;
+    height:44px;
+    flex:0 0 44px;
+  }
+
+  .footer-item svg{
+    width:24px;
+    height:24px;
+  }
+
+  .footer-label{
+    font-size:11px;
+  }
+
+  .footer-company-line,
+  .footer-value{
+    font-size:12px;
+  }
+
+  .footer-bottom{
+    font-size:11px;
+  }
+
+  .chat-widget{
+    right:12px;
+    bottom:12px;
+  }
+
+  .chat-item{
+    min-width:188px;
+    height:50px;
+    font-size:12px;
+  }
+
+  .chat-icon{
+    width:30px;
+    height:30px;
+    flex:0 0 30px;
+    font-size:11px;
+  }
+
+  .chat-fab{
+    width:58px;
+    height:58px;
+  }
+}
 
     @media (prefers-reduced-motion: reduce){
       *,
