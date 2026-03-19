@@ -18,6 +18,8 @@
       --head-foot-2:#1b67cf;
       --head-foot-3:#0a3f84;
       --max:1320px;
+      --core-x:50%;
+      --core-y:50%;
     }
 
     *{ box-sizing:border-box; }
@@ -29,8 +31,8 @@
       overflow-x:hidden;
       font-family:'Prompt',sans-serif;
       background:
-        radial-gradient(circle at 50% 45%, rgba(31,126,255,.22) 0%, rgba(17,78,180,.12) 18%, rgba(7,24,62,.08) 34%, transparent 54%),
-        radial-gradient(circle at 50% 50%, rgba(80,170,255,.10) 0%, transparent 42%),
+        radial-gradient(circle at 50% 50%, rgba(32,118,255,.18) 0%, rgba(14,58,146,.10) 16%, transparent 36%),
+        radial-gradient(circle at 50% 18%, rgba(102,186,255,.06) 0%, transparent 28%),
         linear-gradient(180deg, #010713 0%, #021127 24%, #04173b 65%, #031129 100%);
     }
 
@@ -60,7 +62,7 @@
       inset:0;
       pointer-events:none;
       z-index:0;
-      opacity:.055;
+      opacity:.048;
       background-image:
         linear-gradient(rgba(113,197,255,.18) 1px, transparent 1px),
         linear-gradient(90deg, rgba(113,197,255,.18) 1px, transparent 1px);
@@ -216,7 +218,7 @@
       justify-content:center;
       isolation:isolate;
       background:
-        radial-gradient(circle at 50% 50%, rgba(25,120,255,.10) 0%, rgba(14,64,160,.10) 16%, rgba(7,27,69,.94) 42%, rgba(3,13,34,.988) 78%, rgba(2,8,24,1) 100%);
+        radial-gradient(circle at 50% 50%, rgba(25,120,255,.11) 0%, rgba(14,64,160,.10) 16%, rgba(7,27,69,.94) 42%, rgba(3,13,34,.988) 78%, rgba(2,8,24,1) 100%);
       box-shadow:
         inset 0 0 0 1px rgba(122,216,255,.08),
         inset 0 0 70px rgba(58,151,255,.05),
@@ -228,9 +230,10 @@
       position:absolute;
       inset:0;
       background:
-        linear-gradient(rgba(120,195,255,.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(120,195,255,.03) 1px, transparent 1px);
-      background-size:38px 38px;
+        linear-gradient(rgba(120,195,255,.024) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(120,195,255,.024) 1px, transparent 1px),
+        radial-gradient(circle at 50% 50%, rgba(120,210,255,.05), transparent 44%);
+      background-size:38px 38px, 38px 38px, auto;
       opacity:.55;
       pointer-events:none;
       z-index:0;
@@ -282,7 +285,7 @@
       border-radius:50%;
       background:
         radial-gradient(circle,
-          rgba(201,238,255,.14) 0%,
+          rgba(201,238,255,.16) 0%,
           rgba(110,194,255,.12) 12%,
           rgba(46,140,255,.08) 26%,
           rgba(13,70,176,.05) 42%,
@@ -343,11 +346,13 @@
       position:absolute;
       inset:0;
       z-index:1;
-      opacity:.20;
+      opacity:.16;
       background:
-        linear-gradient(90deg, transparent 0%, transparent 47%, rgba(120,210,255,.18) 50%, transparent 53%, transparent 100%),
+        linear-gradient(90deg, transparent 0%, transparent 47%, rgba(120,210,255,.16) 50%, transparent 53%, transparent 100%),
         linear-gradient(180deg, transparent 0%, transparent 47%, rgba(120,210,255,.08) 50%, transparent 53%, transparent 100%);
       filter:blur(.3px);
+      mask-image:radial-gradient(circle at center, rgba(0,0,0,1) 0%, rgba(0,0,0,.72) 44%, transparent 80%);
+      -webkit-mask-image:radial-gradient(circle at center, rgba(0,0,0,1) 0%, rgba(0,0,0,.72) 44%, transparent 80%);
     }
 
     .bg-rays{
@@ -361,6 +366,52 @@
       -webkit-mask-image:radial-gradient(circle at center, rgba(0,0,0,1) 0%, rgba(0,0,0,.7) 34%, transparent 72%);
     }
 
+    .scan-sweep{
+      position:absolute;
+      inset:-20%;
+      z-index:1;
+      opacity:.22;
+      background:
+        linear-gradient(90deg, transparent 0%, rgba(148,224,255,.02) 44%, rgba(148,224,255,.12) 50%, rgba(148,224,255,.02) 56%, transparent 100%);
+      transform:rotate(12deg);
+      animation:scanMove 9s linear infinite;
+      filter:blur(2px);
+    }
+
+    .particle-field{
+      position:absolute;
+      inset:0;
+      z-index:1;
+      pointer-events:none;
+      overflow:hidden;
+    }
+
+    .particle{
+      position:absolute;
+      width:3px;
+      height:3px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(255,255,255,.95) 0%, rgba(143,223,255,.85) 38%, rgba(78,184,255,.22) 72%, transparent 100%);
+      box-shadow:0 0 8px rgba(112,208,255,.38);
+      opacity:.45;
+      animation:floatParticle var(--dur, 18s) linear infinite;
+      animation-delay:var(--delay, 0s);
+      left:var(--left, 50%);
+      top:110%;
+    }
+
+    .particle.sm{
+      width:2px;
+      height:2px;
+      opacity:.34;
+    }
+
+    .particle.lg{
+      width:4px;
+      height:4px;
+      opacity:.56;
+    }
+
     .center-glow{
       position:absolute;
       left:50%;
@@ -372,17 +423,35 @@
       pointer-events:none;
       background:
         radial-gradient(circle,
-          rgba(228,248,255,.74) 0%,
-          rgba(169,228,255,.24) 34%,
-          rgba(90,188,255,.05) 56%,
+          rgba(228,248,255,.76) 0%,
+          rgba(169,228,255,.26) 34%,
+          rgba(90,188,255,.06) 56%,
           transparent 72%);
       filter:blur(6px);
       animation:centerGlow 5s ease-in-out infinite;
     }
 
+    .center-pulse{
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:240px;
+      height:240px;
+      border-radius:50%;
+      transform:translate(-50%,-50%) scale(.92);
+      border:1px solid rgba(138,223,255,.10);
+      opacity:0;
+      pointer-events:none;
+      z-index:2;
+    }
+
+    .center-pulse.active{
+      animation:pulseOut .72s ease-out;
+    }
+
     .logo-core{
       position:relative;
-      z-index:9;
+      z-index:10;
       width:min(25vw, 200px);
       height:min(25vw, 200px);
       padding:0;
@@ -393,6 +462,17 @@
       justify-content:center;
       cursor:pointer;
       transition:transform .28s ease, filter .28s ease;
+    }
+
+    .logo-core::before{
+      content:"";
+      position:absolute;
+      inset:-12px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(128,214,255,.10), transparent 66%);
+      filter:blur(8px);
+      opacity:.8;
+      z-index:-1;
     }
 
     .logo-core:hover{
@@ -409,6 +489,56 @@
         drop-shadow(0 0 10px rgba(120,212,255,.18))
         drop-shadow(0 12px 22px rgba(0,0,0,.24));
     }
+
+    /* ENERGY LINES */
+    .energy-svg{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      z-index:6;
+      pointer-events:none;
+      overflow:visible;
+    }
+
+    .energy-line{
+      fill:none;
+      stroke:rgba(116,214,255,.14);
+      stroke-width:1.3;
+      stroke-linecap:round;
+      filter:drop-shadow(0 0 6px rgba(110,209,255,.22));
+      opacity:0;
+      transition:opacity .3s ease;
+    }
+
+    .tech-hero.open .energy-line{
+      opacity:1;
+    }
+
+    .energy-run{
+      fill:none;
+      stroke:rgba(199,244,255,.92);
+      stroke-width:2.2;
+      stroke-linecap:round;
+      filter:drop-shadow(0 0 8px rgba(170,236,255,.8));
+      stroke-dasharray:12 340;
+      animation:runEnergy 2.1s linear infinite;
+      opacity:0;
+      transition:opacity .3s ease;
+    }
+
+    .tech-hero.open .energy-run{
+      opacity:.92;
+    }
+
+    .delay-1{ animation-delay:.08s; }
+    .delay-2{ animation-delay:.24s; }
+    .delay-3{ animation-delay:.38s; }
+    .delay-4{ animation-delay:.54s; }
+    .delay-5{ animation-delay:.12s; }
+    .delay-6{ animation-delay:.28s; }
+    .delay-7{ animation-delay:.44s; }
+    .delay-8{ animation-delay:.60s; }
 
     /* MENU */
     .menu-layer{
@@ -527,6 +657,8 @@
         inset 0 0 0 1px rgba(162,228,255,.05),
         0 0 16px rgba(69,170,255,.08);
       transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
     }
 
     .node-shell::before{
@@ -591,7 +723,7 @@
         0 0 24px rgba(141,222,255,.22);
     }
 
-    /* ลูกศรเมนูซ้าย ให้ชี้เข้าโลโก้ */
+    /* ซ้ายชี้เข้าโลโก้ */
     .menu-node.left .node-shell{
       clip-path:polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%, 18px 50%);
     }
@@ -600,7 +732,7 @@
       clip-path:polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%, 18px 50%);
     }
 
-    /* เมนูขวา ให้ชี้เข้าโลโก้ */
+    /* ขวาชี้เข้าโลโก้ */
     .menu-node.right .node-shell{
       clip-path:polygon(18px 0, 100% 0, calc(100% - 18px) 50%, 100% 100%, 18px 100%, 0 50%);
     }
@@ -1047,6 +1179,7 @@
       line-height:1.7;
     }
 
+    /* ANIMATIONS */
     @keyframes dotPulse{
       0%,100%{ transform:scale(1); opacity:1; }
       50%{ transform:scale(1.12); opacity:.92; }
@@ -1070,6 +1203,44 @@
     @keyframes spinSlowReverse{
       from{ transform:translate(-50%,-50%) rotate(360deg); }
       to{ transform:translate(-50%,-50%) rotate(0deg); }
+    }
+
+    @keyframes runEnergy{
+      from{ stroke-dashoffset:0; }
+      to{ stroke-dashoffset:-352; }
+    }
+
+    @keyframes floatParticle{
+      0%{
+        transform:translate3d(0, 0, 0) scale(.8);
+        opacity:0;
+      }
+      10%{
+        opacity:var(--op, .45);
+      }
+      85%{
+        opacity:var(--op, .45);
+      }
+      100%{
+        transform:translate3d(var(--drift, 0px), -128vh, 0) scale(1.18);
+        opacity:0;
+      }
+    }
+
+    @keyframes scanMove{
+      from{ transform:translateX(-24%) rotate(12deg); }
+      to{ transform:translateX(24%) rotate(12deg); }
+    }
+
+    @keyframes pulseOut{
+      0%{
+        opacity:.8;
+        transform:translate(-50%,-50%) scale(.35);
+      }
+      100%{
+        opacity:0;
+        transform:translate(-50%,-50%) scale(1.15);
+      }
     }
 
     @media (max-width:1120px){
@@ -1158,6 +1329,11 @@
       .center-glow{
         width:86px;
         height:86px;
+      }
+
+      .center-pulse{
+        width:180px;
+        height:180px;
       }
 
       .menu-node{ gap:8px; }
@@ -1335,16 +1511,56 @@
               <div class="bg-ring ring-3 ring-tilt-3"></div>
               <div class="bg-lines"></div>
               <div class="bg-rays"></div>
+              <div class="scan-sweep"></div>
+
+              <div class="particle-field" id="particleField">
+                <span class="particle sm" style="--left:8%; --dur:19s; --delay:-3s; --drift:16px; --op:.28;"></span>
+                <span class="particle" style="--left:14%; --dur:15s; --delay:-8s; --drift:-12px; --op:.36;"></span>
+                <span class="particle lg" style="--left:19%; --dur:22s; --delay:-6s; --drift:24px; --op:.50;"></span>
+                <span class="particle sm" style="--left:26%; --dur:17s; --delay:-4s; --drift:-20px; --op:.26;"></span>
+                <span class="particle" style="--left:32%; --dur:20s; --delay:-12s; --drift:18px; --op:.34;"></span>
+                <span class="particle sm" style="--left:38%; --dur:14s; --delay:-10s; --drift:8px; --op:.24;"></span>
+                <span class="particle lg" style="--left:44%; --dur:24s; --delay:-5s; --drift:-14px; --op:.56;"></span>
+                <span class="particle sm" style="--left:49%; --dur:16s; --delay:-1s; --drift:10px; --op:.30;"></span>
+                <span class="particle" style="--left:54%; --dur:18s; --delay:-9s; --drift:-10px; --op:.34;"></span>
+                <span class="particle sm" style="--left:60%; --dur:22s; --delay:-7s; --drift:22px; --op:.26;"></span>
+                <span class="particle lg" style="--left:66%; --dur:20s; --delay:-11s; --drift:-18px; --op:.48;"></span>
+                <span class="particle" style="--left:72%; --dur:16s; --delay:-2s; --drift:14px; --op:.38;"></span>
+                <span class="particle sm" style="--left:78%; --dur:21s; --delay:-13s; --drift:-12px; --op:.28;"></span>
+                <span class="particle lg" style="--left:84%; --dur:19s; --delay:-6s; --drift:18px; --op:.50;"></span>
+                <span class="particle sm" style="--left:90%; --dur:23s; --delay:-15s; --drift:-16px; --op:.24;"></span>
+              </div>
             </div>
 
+            <svg class="energy-svg" id="energySvg" viewBox="0 0 1000 700" preserveAspectRatio="none" aria-hidden="true">
+              <path class="energy-line" id="line1" d=""></path>
+              <path class="energy-line" id="line2" d=""></path>
+              <path class="energy-line" id="line3" d=""></path>
+              <path class="energy-line" id="line4" d=""></path>
+              <path class="energy-line" id="line5" d=""></path>
+              <path class="energy-line" id="line6" d=""></path>
+              <path class="energy-line" id="line7" d=""></path>
+              <path class="energy-line" id="line8" d=""></path>
+
+              <path class="energy-run delay-1" id="run1" d=""></path>
+              <path class="energy-run delay-2" id="run2" d=""></path>
+              <path class="energy-run delay-3" id="run3" d=""></path>
+              <path class="energy-run delay-4" id="run4" d=""></path>
+              <path class="energy-run delay-5" id="run5" d=""></path>
+              <path class="energy-run delay-6" id="run6" d=""></path>
+              <path class="energy-run delay-7" id="run7" d=""></path>
+              <path class="energy-run delay-8" id="run8" d=""></path>
+            </svg>
+
             <div class="center-glow"></div>
+            <div class="center-pulse" id="centerPulse"></div>
 
             <button class="logo-core" id="logoMenuButton" type="button" aria-label="เปิดเมนู">
               <img src="images/logo.png" alt="Stealth Safety Bank Logo" />
             </button>
 
             <div class="menu-layer">
-              <button class="menu-node left n1" type="button" data-popup="ssbmobile">
+              <button class="menu-node left n1 energy-source" type="button" data-popup="ssbmobile" data-line="1">
                 <span class="node-dot"></span>
                 <div class="node-shell">
                   <span class="node-text">
@@ -1354,7 +1570,7 @@
                 </div>
               </button>
 
-              <button class="menu-node left n2" type="button" data-popup="stealthbank">
+              <button class="menu-node left n2 energy-source" type="button" data-popup="stealthbank" data-line="2">
                 <span class="node-dot"></span>
                 <div class="node-shell">
                   <span class="node-text">
@@ -1364,7 +1580,7 @@
                 </div>
               </button>
 
-              <a class="menu-node left n3" href="agent-login.html">
+              <a class="menu-node left n3 energy-source" href="agent-login.html" data-line="3">
                 <span class="node-dot"></span>
                 <div class="node-shell">
                   <span class="node-text">
@@ -1374,7 +1590,7 @@
                 </div>
               </a>
 
-              <a class="menu-node left n4" href="about.html">
+              <a class="menu-node left n4 energy-source" href="about.html" data-line="4">
                 <span class="node-dot"></span>
                 <div class="node-shell">
                   <span class="node-text">
@@ -1384,7 +1600,7 @@
                 </div>
               </a>
 
-              <button class="menu-node right n5" type="button" data-popup="stealthbank">
+              <button class="menu-node right n5 energy-source" type="button" data-popup="stealthbank" data-line="5">
                 <div class="node-shell">
                   <span class="node-text">
                     <span class="node-title en-font">STEALTH SAFETY BANK</span>
@@ -1394,7 +1610,7 @@
                 <span class="node-dot"></span>
               </button>
 
-              <button class="menu-node right n6" type="button" data-popup="safetybook">
+              <button class="menu-node right n6 energy-source" type="button" data-popup="safetybook" data-line="6">
                 <div class="node-shell">
                   <span class="node-text">
                     <span class="node-title en-font">STEALTH SAFETY BOOK</span>
@@ -1404,7 +1620,7 @@
                 <span class="node-dot"></span>
               </button>
 
-              <button class="menu-node right n7" type="button" data-popup="flare">
+              <button class="menu-node right n7 energy-source" type="button" data-popup="flare" data-line="7">
                 <div class="node-shell">
                   <span class="node-text">
                     <span class="node-title en-font">FLARE TECHNOLOGY</span>
@@ -1414,7 +1630,7 @@
                 <span class="node-dot"></span>
               </button>
 
-              <button class="menu-node right n8" type="button" id="contactButton">
+              <button class="menu-node right n8 energy-source" type="button" id="contactButton" data-line="8">
                 <div class="node-shell">
                   <span class="node-text">
                     <span class="node-title en-font">CONTACT</span>
@@ -1486,7 +1702,7 @@
     <div class="popup-card company">
       <div class="popup-head">
         <h3 class="th-font">บริษัท สยามทำ จำกัด</h3>
-        <button class="popup-x" type="button" id="closeCompanyPopupTop">×</button>
+        <button class="popup-x sound-click" type="button" id="closeCompanyPopupTop">×</button>
       </div>
 
       <div class="company-detail">
@@ -1496,7 +1712,7 @@
         <p class="th-font"><strong>มือถือ:</strong> 064-951-4888</p>
       </div>
 
-      <button class="popup-close th-font" type="button" id="closeCompanyPopupBottom">ปิด</button>
+      <button class="popup-close th-font sound-click" type="button" id="closeCompanyPopupBottom">ปิด</button>
     </div>
   </div>
 
@@ -1504,7 +1720,7 @@
     <div class="popup-card">
       <div class="popup-head">
         <h3 id="infoTitle" class="en-font">TITLE</h3>
-        <button class="popup-x" type="button" id="closeInfoPopupTop">×</button>
+        <button class="popup-x sound-click" type="button" id="closeInfoPopupTop">×</button>
       </div>
 
       <div class="popup-grid">
@@ -1523,34 +1739,34 @@
         </div>
       </div>
 
-      <button class="popup-close th-font" type="button" id="closeInfoPopupBottom">ปิด</button>
+      <button class="popup-close th-font sound-click" type="button" id="closeInfoPopupBottom">ปิด</button>
     </div>
   </div>
 
   <div class="chat-widget" id="chatWidget">
     <div class="chat-menu" id="chatMenu">
-      <a class="chat-item line" href="https://line.me/R/ti/p/@siamtham" target="_blank" rel="noopener">
+      <a class="chat-item line sound-click" href="https://line.me/R/ti/p/@siamtham" target="_blank" rel="noopener">
         <span class="chat-icon en-font">LINE</span>
         <span class="en-font">LINE OFFICIAL</span>
       </a>
 
-      <a class="chat-item facebook" href="https://www.facebook.com/profile.php?id=61556844339863" target="_blank" rel="noopener">
+      <a class="chat-item facebook sound-click" href="https://www.facebook.com/profile.php?id=61556844339863" target="_blank" rel="noopener">
         <span class="chat-icon en-font">FB</span>
         <span class="en-font">FACEBOOK</span>
       </a>
 
-      <a class="chat-item youtube" href="https://www.youtube.com/@siamtham" target="_blank" rel="noopener">
+      <a class="chat-item youtube sound-click" href="https://www.youtube.com/@siamtham" target="_blank" rel="noopener">
         <span class="chat-icon en-font">YT</span>
         <span class="en-font">YOUTUBE</span>
       </a>
 
-      <a class="chat-item tiktok" href="#" target="_blank" rel="noopener">
+      <a class="chat-item tiktok sound-click" href="#" target="_blank" rel="noopener">
         <span class="chat-icon en-font">TT</span>
         <span class="en-font">TIKTOK</span>
       </a>
     </div>
 
-    <button class="chat-fab" id="chatToggle" type="button" aria-label="เปิดเมนูแชท">
+    <button class="chat-fab sound-click" id="chatToggle" type="button" aria-label="เปิดเมนูแชท">
       <span class="chat-fab-text">
         <span class="en-font">Chat</span>
         <span class="en-font">Online</span>
@@ -1601,6 +1817,7 @@
 
     const techHero = document.getElementById("techHero");
     const logoMenuButton = document.getElementById("logoMenuButton");
+    const centerPulse = document.getElementById("centerPulse");
 
     const infoPopup = document.getElementById("infoPopup");
     const infoTitle = document.getElementById("infoTitle");
@@ -1608,6 +1825,14 @@
     const infoVideo = document.getElementById("infoVideo");
 
     const companyPopup = document.getElementById("companyPopup");
+    const contactButton = document.getElementById("contactButton");
+
+    function pulseCenter(){
+      if (!centerPulse) return;
+      centerPulse.classList.remove("active");
+      void centerPulse.offsetWidth;
+      centerPulse.classList.add("active");
+    }
 
     function openInfoPopup(key){
       const data = popupData[key];
@@ -1616,6 +1841,7 @@
       infoText.innerHTML = data.text;
       infoVideo.src = data.video + "?rel=0&autoplay=0";
       infoPopup.style.display = "flex";
+      pulseCenter();
     }
 
     function closeInfoPopup(){
@@ -1625,6 +1851,7 @@
 
     function openCompanyPopup(){
       companyPopup.style.display = "flex";
+      pulseCenter();
     }
 
     function closeCompanyPopup(){
@@ -1635,6 +1862,7 @@
       logoMenuButton.addEventListener("click", function(event){
         event.stopPropagation();
         techHero.classList.toggle("open");
+        pulseCenter();
       });
     }
 
@@ -1652,7 +1880,6 @@
         });
       });
 
-      const contactButton = document.getElementById("contactButton");
       if (contactButton){
         contactButton.addEventListener("click", function(event){
           event.stopPropagation();
@@ -1711,6 +1938,123 @@
     }
 
     window.googleTranslateElementInit = googleTranslateElementInit;
+
+    /* SOUND */
+    let audioCtx;
+    function getAudioCtx(){
+      if (!audioCtx){
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextClass) return null;
+        audioCtx = new AudioContextClass();
+      }
+      return audioCtx;
+    }
+
+    function playClickSound(type = "normal"){
+      const ctx = getAudioCtx();
+      if (!ctx) return;
+
+      if (ctx.state === "suspended") {
+        ctx.resume();
+      }
+
+      const now = ctx.currentTime;
+
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      const filter = ctx.createBiquadFilter();
+
+      osc.type = type === "confirm" ? "triangle" : "sine";
+      osc.frequency.setValueAtTime(type === "confirm" ? 520 : 680, now);
+      osc.frequency.exponentialRampToValueAtTime(type === "confirm" ? 260 : 340, now + 0.045);
+
+      filter.type = "lowpass";
+      filter.frequency.setValueAtTime(type === "confirm" ? 1800 : 2400, now);
+
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(type === "confirm" ? 0.06 : 0.035, now + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + (type === "confirm" ? 0.16 : 0.09));
+
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(now);
+      osc.stop(now + (type === "confirm" ? 0.18 : 0.1));
+    }
+
+    document.querySelectorAll(".sound-click").forEach(el => {
+      el.addEventListener("click", () => playClickSound("normal"));
+    });
+
+    logoMenuButton?.addEventListener("click", () => playClickSound("normal"));
+
+    document.querySelector('.menu-node.bottom[href="book.html"]')?.addEventListener("click", () => {
+      playClickSound("confirm");
+    });
+
+    document.querySelectorAll(".menu-node[data-popup], #contactButton").forEach(el => {
+      el.addEventListener("click", () => playClickSound("normal"));
+    });
+
+    /* ENERGY LINES */
+    function buildEnergyLines(){
+      const hero = document.getElementById("techHero");
+      const svg = document.getElementById("energySvg");
+      const logo = document.getElementById("logoMenuButton");
+      if (!hero || !svg || !logo) return;
+
+      const heroRect = hero.getBoundingClientRect();
+      const logoRect = logo.getBoundingClientRect();
+
+      const cx = ((logoRect.left + logoRect.width / 2) - heroRect.left) / heroRect.width * 1000;
+      const cy = ((logoRect.top + logoRect.height / 2) - heroRect.top) / heroRect.height * 700;
+
+      const sources = hero.querySelectorAll(".energy-source");
+
+      sources.forEach((el, index) => {
+        const rect = el.getBoundingClientRect();
+        const localX = ((rect.left + rect.width / 2) - heroRect.left) / heroRect.width * 1000;
+        const localY = ((rect.top + rect.height / 2) - heroRect.top) / heroRect.height * 700;
+
+        const bend = localX < cx ? 70 : -70;
+        const midX1 = localX + bend;
+        const midX2 = cx - bend * 0.55;
+        const d = `M ${localX} ${localY} C ${midX1} ${localY}, ${midX2} ${cy}, ${cx} ${cy}`;
+
+        const line = document.getElementById(`line${index + 1}`);
+        const run = document.getElementById(`run${index + 1}`);
+
+        if (line) line.setAttribute("d", d);
+        if (run) run.setAttribute("d", d);
+      });
+    }
+
+    window.addEventListener("load", buildEnergyLines);
+    window.addEventListener("resize", buildEnergyLines);
+
+    /* dynamic particles more */
+    function createExtraParticles(){
+      const field = document.getElementById("particleField");
+      if (!field) return;
+      const isMobile = window.innerWidth <= 760;
+      const count = isMobile ? 10 : 22;
+
+      for(let i = 0; i < count; i++){
+        const p = document.createElement("span");
+        p.className = "particle";
+        if (Math.random() > 0.7) p.classList.add("sm");
+        if (Math.random() > 0.8) p.classList.add("lg");
+        p.style.setProperty("--left", `${Math.random() * 100}%`);
+        p.style.setProperty("--dur", `${14 + Math.random() * 12}s`);
+        p.style.setProperty("--delay", `${-Math.random() * 20}s`);
+        p.style.setProperty("--drift", `${(-24 + Math.random() * 48).toFixed(0)}px`);
+        p.style.setProperty("--op", `${(0.18 + Math.random() * 0.32).toFixed(2)}`);
+        field.appendChild(p);
+      }
+    }
+
+    createExtraParticles();
   </script>
 
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
