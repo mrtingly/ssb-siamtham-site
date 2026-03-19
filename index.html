@@ -1791,8 +1791,53 @@ body.light-mode .mode-label{
     }
 
 @media (max-width:760px){
+  /* ===== FIX HEADER MOBILE ===== */
+
+.theme-switch-wrap{
+  position:static !important;
+  left:auto !important;
+  top:auto !important;
+  transform:none !important;
+  width:100%;
+  justify-content:center;
+  order:2;
+  margin:4px 0;
+}
+
+.brand-wrap{
+  width:100%;
+  order:1;
+}
+
+.topbar-actions{
+  width:100%;
+  justify-content:center;
+  order:3;
+}
+
+/* ปรับขนาดสวิตช์ */
+.mode-label{
+  font-size:13px;
+}
+
+.theme-switch{
+  width:58px;
+  height:28px;
+}
+
+.switch-knob{
+  width:22px;
+  height:22px;
+  top:2px;
+  left:3px;
+}
+
+body.light-mode .switch-knob{
+  left:33px;
+}
+  
   .topbar-inner{
-    width:min(100% - 14px, var(--max));
+    width:min(calc(100% - 14px, var(--max));
     min-height:unset;
     flex-direction:column;
     align-items:flex-start;
@@ -1831,7 +1876,7 @@ body.light-mode .mode-label{
   }
 
   .main-content{
-    width:min(100% - 14px, var(--max));
+    width:min(calc(100% - 14px, var(--max));
     padding-top:10px;
   }
 
