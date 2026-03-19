@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google" content="notranslate" />
   <title>Stealth Safety Bank Mobile System</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -17,13 +18,14 @@
       --bg-1:#010713;
       --bg-2:#03112a;
       --bg-3:#04183f;
+
       --head-1:#0a3f84;
       --head-2:#0b4ea2;
       --head-3:#1b67cf;
 
-      --line:#7fdcff;
-      --line-soft:rgba(127,220,255,.18);
-      --line-faint:rgba(127,220,255,.08);
+      --line:#93e6ff;
+      --line-soft:rgba(147,230,255,.16);
+      --line-faint:rgba(147,230,255,.08);
 
       --text:#eefaff;
       --text-soft:rgba(230,247,255,.82);
@@ -81,7 +83,7 @@
       inset:0;
       z-index:0;
       pointer-events:none;
-      opacity:.042;
+      opacity:.04;
       background-image:
         linear-gradient(rgba(113,197,255,.18) 1px, transparent 1px),
         linear-gradient(90deg, rgba(113,197,255,.18) 1px, transparent 1px);
@@ -248,19 +250,35 @@
     .lang-btn.active{
       background:rgba(255,255,255,.14);
       border-color:rgba(182,238,255,.30);
-      box-shadow:
-        0 0 0 2px rgba(156,227,255,.10),
-        0 0 18px rgba(114,215,255,.44);
+      box-shadow:0 0 0 2px rgba(156,227,255,.10), 0 0 18px rgba(114,215,255,.44);
     }
 
-    .lang-hidden{
-      position:absolute !important;
-      opacity:0 !important;
-      pointer-events:none !important;
-      width:1px !important;
-      height:1px !important;
-      overflow:hidden !important;
-      clip-path:inset(50%) !important;
+    /* ซ่อนไว้แบบยังให้ Google Translate ทำงานได้ */
+    #google_translate_element{
+      position:fixed;
+      right:0;
+      bottom:0;
+      width:1px;
+      height:1px;
+      opacity:.001;
+      overflow:hidden;
+      pointer-events:none;
+      z-index:-1;
+    }
+
+    .goog-te-banner-frame.skiptranslate,
+    iframe.skiptranslate{
+      display:none !important;
+    }
+
+    body{ top:0 !important; }
+    .goog-logo-link,
+    .goog-te-gadget span{
+      display:none !important;
+    }
+
+    .goog-te-gadget{
+      font-size:0 !important;
     }
 
     /* MAIN */
@@ -353,6 +371,7 @@
       inset:0;
       pointer-events:none;
       z-index:1;
+      perspective:1200px;
     }
 
     .bg-core-glow{
@@ -360,18 +379,18 @@
       left:50%;
       top:50%;
       transform:translate(-50%,-50%);
-      width:min(62vw, 560px);
-      height:min(62vw, 560px);
+      width:min(66vw, 620px);
+      height:min(66vw, 620px);
       border-radius:50%;
       background:
         radial-gradient(circle,
-          rgba(201,238,255,.16) 0%,
-          rgba(110,194,255,.12) 12%,
-          rgba(46,140,255,.08) 26%,
+          rgba(201,238,255,.18) 0%,
+          rgba(110,194,255,.13) 12%,
+          rgba(46,140,255,.09) 26%,
           rgba(13,70,176,.05) 42%,
           transparent 66%);
       filter:blur(10px);
-      animation:corePulse 5.5s ease-in-out infinite;
+      animation:corePulse 6s ease-in-out infinite;
     }
 
     .bg-ring{
@@ -386,19 +405,24 @@
         inset 0 0 18px rgba(87,185,255,.04);
     }
 
-    .ring-1{ width:min(40vw, 360px); height:min(40vw, 360px); opacity:.9; animation:spinSlow 22s linear infinite; }
-    .ring-2{ width:min(50vw, 450px); height:min(50vw, 450px); opacity:.6; animation:spinSlowReverse 32s linear infinite; }
-    .ring-3{ width:min(60vw, 540px); height:min(60vw, 540px); opacity:.36; animation:spinSlow 42s linear infinite; }
+    .ring-1{ width:min(38vw, 340px); height:min(38vw, 340px); opacity:.95; animation:spinSlow 18s linear infinite; }
+    .ring-2{ width:min(46vw, 420px); height:min(46vw, 420px); opacity:.75; animation:spinSlowReverse 26s linear infinite; }
+    .ring-3{ width:min(54vw, 500px); height:min(54vw, 500px); opacity:.52; animation:spinSlow 38s linear infinite; }
+    .ring-4{ width:min(62vw, 590px); height:min(62vw, 590px); opacity:.28; animation:spinSlowReverse 52s linear infinite; }
+    .ring-5{ width:min(70vw, 680px); height:min(70vw, 680px); opacity:.18; animation:spinSlow 64s linear infinite; }
+
     .ring-tilt-1{ transform:translate(-50%,-50%) rotateX(72deg); border-color:rgba(132,219,255,.12); }
     .ring-tilt-2{ transform:translate(-50%,-50%) rotateY(72deg); border-color:rgba(132,219,255,.10); }
     .ring-tilt-3{ transform:translate(-50%,-50%) rotate(55deg); border-color:rgba(132,219,255,.10); }
+    .ring-tilt-4{ transform:translate(-50%,-50%) rotate(-32deg); border-color:rgba(132,219,255,.08); border-style:dashed; }
+    .ring-tilt-5{ transform:translate(-50%,-50%) rotate(20deg); border-color:rgba(132,219,255,.08); border-style:dotted; }
 
     .orbit-system{
       position:absolute;
       left:50%;
       top:50%;
-      width:min(62vw, 560px);
-      height:min(62vw, 560px);
+      width:min(70vw, 640px);
+      height:min(70vw, 640px);
       transform:translate(-50%,-50%);
       z-index:2;
       pointer-events:none;
@@ -411,32 +435,55 @@
       transform:translate(-50%,-50%);
       border-radius:50%;
       pointer-events:none;
+      border:1px solid rgba(126,223,255,.12);
+      box-shadow:0 0 18px rgba(87,185,255,.05), inset 0 0 18px rgba(87,185,255,.03);
     }
 
-    .orbit-track.o1{ width:min(40vw, 360px); height:min(40vw, 360px); animation:orbitSpin 10s linear infinite; }
-    .orbit-track.o2{ width:min(50vw, 450px); height:min(50vw, 450px); animation:orbitSpinReverse 15s linear infinite; }
-    .orbit-track.o3{ width:min(60vw, 540px); height:min(60vw, 540px); animation:orbitSpin 21s linear infinite; }
-    .orbit-track.o4{ width:min(48vw, 430px); height:min(48vw, 430px); transform:translate(-50%,-50%) rotate(58deg); animation:orbitTiltA 14s linear infinite; }
-    .orbit-track.o5{ width:min(56vw, 500px); height:min(56vw, 500px); transform:translate(-50%,-50%) rotate(-42deg); animation:orbitTiltB 18s linear infinite; }
+    .orbit-track.o1{ width:min(38vw, 340px); height:min(38vw, 340px); animation:orbitSpin 9s linear infinite; }
+    .orbit-track.o2{ width:min(46vw, 420px); height:min(46vw, 420px); animation:orbitSpinReverse 13s linear infinite; }
+    .orbit-track.o3{ width:min(54vw, 500px); height:min(54vw, 500px); animation:orbitSpin 18s linear infinite; }
+    .orbit-track.o4{ width:min(62vw, 580px); height:min(62vw, 580px); transform:translate(-50%,-50%) rotate(58deg); animation:orbitTiltA 16s linear infinite; }
+    .orbit-track.o5{ width:min(68vw, 650px); height:min(68vw, 650px); transform:translate(-50%,-50%) rotate(-42deg); animation:orbitTiltB 22s linear infinite; }
+    .orbit-track.o6{ width:min(72vw, 700px); height:min(72vw, 700px); transform:translate(-50%,-50%) rotate(18deg); animation:orbitSpinReverse 30s linear infinite; border-style:dashed; opacity:.7; }
+    .orbit-track.o7{ width:min(76vw, 760px); height:min(76vw, 760px); transform:translate(-50%,-50%) rotate(-16deg); animation:orbitSpin 38s linear infinite; border-style:dotted; opacity:.5; }
 
     .orbit-dot{
       position:absolute;
       left:50%;
       top:0;
-      width:9px;
-      height:9px;
+      width:14px;
+      height:14px;
       border-radius:50%;
       transform:translate(-50%,-50%);
-      background:radial-gradient(circle, #ffffff 0%, #dff7ff 35%, #7dd4ff 72%, rgba(125,212,255,.15) 100%);
-      box-shadow:0 0 8px rgba(255,255,255,.85), 0 0 18px rgba(132,219,255,.58), 0 0 28px rgba(132,219,255,.20);
+      background:radial-gradient(circle, #ffffff 0%, #f0fbff 30%, #7dd4ff 72%, rgba(125,212,255,.12) 100%);
+      box-shadow:
+        0 0 10px rgba(255,255,255,.90),
+        0 0 22px rgba(132,219,255,.60),
+        0 0 36px rgba(132,219,255,.24);
     }
 
-    .orbit-dot.small{ width:6px; height:6px; }
-    .orbit-dot.large{ width:11px; height:11px; }
+    .orbit-dot::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:24px;
+      height:24px;
+      transform:translate(-50%,-50%);
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(174,236,255,.28), transparent 68%);
+      filter:blur(2px);
+    }
+
+    .orbit-dot.small{ width:10px; height:10px; }
+    .orbit-dot.large{ width:18px; height:18px; }
+    .orbit-dot.xl{ width:22px; height:22px; }
     .orbit-dot.d2{ top:14%; left:84%; }
     .orbit-dot.d3{ top:78%; left:18%; }
     .orbit-dot.d4{ top:50%; left:100%; }
     .orbit-dot.d5{ top:88%; left:68%; }
+    .orbit-dot.d6{ top:18%; left:22%; }
+    .orbit-dot.d7{ top:72%; left:86%; }
 
     .bg-lines{
       position:absolute;
@@ -483,8 +530,8 @@
 
     .particle{
       position:absolute;
-      width:3px;
-      height:3px;
+      width:4px;
+      height:4px;
       border-radius:50%;
       background:radial-gradient(circle, rgba(255,255,255,.96) 0%, rgba(143,223,255,.84) 40%, rgba(78,184,255,.16) 80%, transparent 100%);
       box-shadow:0 0 8px rgba(112,208,255,.34);
@@ -496,7 +543,7 @@
     }
 
     .particle.sm{ width:2px; height:2px; }
-    .particle.lg{ width:4px; height:4px; }
+    .particle.lg{ width:6px; height:6px; }
 
     .hero-system-title{
       position:absolute;
@@ -614,16 +661,16 @@
       position:absolute;
       left:50%;
       top:50%;
-      width:132px;
-      height:132px;
+      width:152px;
+      height:152px;
       transform:translate(-50%, -50%);
       z-index:3;
       pointer-events:none;
       background:
         radial-gradient(circle,
-          rgba(228,248,255,.76) 0%,
-          rgba(169,228,255,.26) 34%,
-          rgba(90,188,255,.06) 56%,
+          rgba(228,248,255,.80) 0%,
+          rgba(169,228,255,.28) 34%,
+          rgba(90,188,255,.08) 56%,
           transparent 72%);
       filter:blur(6px);
       animation:centerGlow 5s ease-in-out infinite;
@@ -633,8 +680,8 @@
       position:absolute;
       left:50%;
       top:50%;
-      width:240px;
-      height:240px;
+      width:260px;
+      height:260px;
       border-radius:50%;
       transform:translate(-50%,-50%) scale(.92);
       border:1px solid rgba(138,223,255,.10);
@@ -648,8 +695,8 @@
     .logo-core{
       position:relative;
       z-index:10;
-      width:min(25vw, 200px);
-      height:min(25vw, 200px);
+      width:min(25vw, 210px);
+      height:min(25vw, 210px);
       padding:0;
       border:none;
       background:transparent;
@@ -709,10 +756,10 @@
     .energy-run{
       fill:none;
       stroke:rgba(199,244,255,.92);
-      stroke-width:2.2;
+      stroke-width:2.4;
       stroke-linecap:round;
       filter:drop-shadow(0 0 8px rgba(170,236,255,.8));
-      stroke-dasharray:12 340;
+      stroke-dasharray:18 340;
       animation:runEnergy 2.1s linear infinite;
       opacity:0;
       transition:opacity .3s ease;
@@ -754,10 +801,7 @@
       align-items:center;
       gap:12px;
       cursor:pointer;
-      transition:
-        transform .34s cubic-bezier(.2,.8,.2,1),
-        opacity .26s ease,
-        filter .22s ease;
+      transition:transform .34s cubic-bezier(.2,.8,.2,1), opacity .26s ease, filter .22s ease;
     }
 
     .tech-hero.open .menu-node{
@@ -780,15 +824,15 @@
 
     .node-dot{
       position:relative;
-      width:18px;
-      height:18px;
-      flex:0 0 18px;
+      width:20px;
+      height:20px;
+      flex:0 0 20px;
       border-radius:50%;
       background:radial-gradient(circle, #ffffff 0%, #dff7ff 20%, #77d3ff 52%, #198cff 100%);
       box-shadow:
-        0 0 0 4px rgba(90,185,255,.08),
-        0 0 14px rgba(77,180,255,.64),
-        0 0 28px rgba(77,180,255,.24);
+        0 0 0 5px rgba(90,185,255,.08),
+        0 0 16px rgba(77,180,255,.70),
+        0 0 30px rgba(77,180,255,.26);
       animation:dotPulse 2.2s ease-in-out infinite;
       transition:transform .22s ease, box-shadow .22s ease;
     }
@@ -804,7 +848,7 @@
     .node-dot::after{
       content:"";
       position:absolute;
-      inset:-10px;
+      inset:-12px;
       border-radius:50%;
       border:1px solid rgba(139,215,255,.06);
     }
@@ -856,9 +900,7 @@
 
     .menu-node:hover .node-shell{
       border-color:rgba(145,226,255,.24);
-      box-shadow:
-        inset 0 0 0 1px rgba(184,239,255,.06),
-        0 0 22px rgba(82,186,255,.14);
+      box-shadow:inset 0 0 0 1px rgba(184,239,255,.06), 0 0 22px rgba(82,186,255,.14);
     }
 
     .node-text{
@@ -912,9 +954,9 @@
     .menu-node.right .node-dot{ order:2; margin-left:auto; }
 
     .menu-node.bottom .node-dot{
-      width:24px;
-      height:24px;
-      flex:0 0 24px;
+      width:26px;
+      height:26px;
+      flex:0 0 26px;
       background:radial-gradient(circle, #fff 0%, #ffdfe4 18%, #ff7783 52%, #d91628 100%);
       box-shadow:
         0 0 0 5px rgba(255,93,105,.10),
@@ -929,9 +971,7 @@
       justify-content:center;
       background:linear-gradient(180deg, rgba(106,10,22,.30), rgba(67,4,14,.16));
       border:1px solid rgba(255,118,128,.30);
-      box-shadow:
-        inset 0 0 0 1px rgba(255,176,182,.06),
-        0 0 24px rgba(255,76,92,.18);
+      box-shadow:inset 0 0 0 1px rgba(255,176,182,.06), 0 0 24px rgba(255,76,92,.18);
       clip-path:polygon(16px 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 16px 100%, 0 50%);
     }
 
@@ -958,9 +998,7 @@
 
     .menu-node.bottom:hover .node-shell{
       border-color:rgba(255,146,154,.38);
-      box-shadow:
-        inset 0 0 0 1px rgba(255,183,188,.08),
-        0 0 30px rgba(255,76,92,.24);
+      box-shadow:inset 0 0 0 1px rgba(255,183,188,.08), 0 0 30px rgba(255,76,92,.24);
     }
 
     .n1{ --x:31%; --y:35%; }
@@ -1060,7 +1098,7 @@
       box-shadow:inset 0 0 22px rgba(73,170,255,.04);
     }
 
-    .popup-card.company{ width:min(92vw, 620px); }
+    .popup-card.company{ width:min(92vw, 760px); }
 
     .popup-head{
       position:relative;
@@ -1639,11 +1677,11 @@
     }
     @keyframes centerGlow{
       0%,100%{ transform:translate(-50%, -50%) scale(1); opacity:1; }
-      50%{ transform:translate(-50%, -50%) scale(1.03); opacity:.88; }
+      50%{ transform:translate(-50%, -50%) scale(1.04); opacity:.88; }
     }
     @keyframes corePulse{
       0%,100%{ transform:translate(-50%,-50%) scale(1); opacity:1; }
-      50%{ transform:translate(-50%,-50%) scale(1.04); opacity:.84; }
+      50%{ transform:translate(-50%,-50%) scale(1.05); opacity:.84; }
     }
     @keyframes spinSlow{
       from{ transform:translate(-50%,-50%) rotate(0deg); }
@@ -1671,7 +1709,7 @@
     }
     @keyframes runEnergy{
       from{ stroke-dashoffset:0; }
-      to{ stroke-dashoffset:-352; }
+      to{ stroke-dashoffset:-358; }
     }
     @keyframes moveToCore{
       0%{ transform:translate(0,0) scale(1); opacity:0; }
@@ -1713,7 +1751,7 @@
       .hero-system-title-text{ font-size:28px; }
       .hero-system-title-sub{ font-size:10px; }
 
-      .center-glow{ width:112px; height:112px; }
+      .center-glow{ width:126px; height:126px; }
 
       .menu-node.left,
       .menu-node.right{ width:252px; }
@@ -1789,8 +1827,8 @@
 
       .tech-hero{
         width:min(96vw, 430px);
-        height:740px;
-        min-height:740px;
+        height:760px;
+        min-height:760px;
         border-radius:28px;
       }
 
@@ -1826,8 +1864,8 @@
       }
 
       .center-glow{
-        width:86px;
-        height:86px;
+        width:92px;
+        height:92px;
       }
 
       .center-pulse{
@@ -1836,18 +1874,25 @@
       }
 
       .orbit-system{
-        width:min(86vw, 320px);
-        height:min(86vw, 320px);
+        width:min(88vw, 340px);
+        height:min(88vw, 340px);
       }
 
-      .orbit-track.o1{ width:min(66vw, 220px); height:min(66vw, 220px); }
-      .orbit-track.o2{ width:min(74vw, 260px); height:min(74vw, 260px); }
-      .orbit-track.o3{ width:min(82vw, 300px); height:min(82vw, 300px); }
-      .orbit-track.o4{ width:min(72vw, 250px); height:min(72vw, 250px); }
-      .orbit-track.o5{ width:min(80vw, 290px); height:min(80vw, 290px); }
+      .orbit-track.o1{ width:min(62vw, 220px); height:min(62vw, 220px); }
+      .orbit-track.o2{ width:min(72vw, 260px); height:min(72vw, 260px); }
+      .orbit-track.o3{ width:min(80vw, 300px); height:min(80vw, 300px); }
+      .orbit-track.o4{ width:min(88vw, 330px); height:min(88vw, 330px); }
+      .orbit-track.o5{ width:min(96vw, 360px); height:min(96vw, 360px); }
+      .orbit-track.o6{ width:min(104vw, 390px); height:min(104vw, 390px); }
+      .orbit-track.o7{ width:min(112vw, 420px); height:min(112vw, 420px); }
+
+      .orbit-dot{ width:11px; height:11px; }
+      .orbit-dot.small{ width:8px; height:8px; }
+      .orbit-dot.large{ width:14px; height:14px; }
+      .orbit-dot.xl{ width:16px; height:16px; }
 
       .menu-node{ gap:8px; }
-      .node-dot{ width:12px; height:12px; flex:0 0 12px; }
+      .node-dot{ width:14px; height:14px; flex:0 0 14px; }
       .menu-node.bottom .node-dot{ width:18px; height:18px; flex:0 0 18px; }
 
       .menu-node.left,
@@ -1989,8 +2034,7 @@
               <img src="https://flagcdn.com/w40/vn.png" alt="Tiếng Việt">
             </button>
           </div>
-
-          <div id="google_translate_element" class="lang-hidden"></div>
+          <div id="google_translate_element"></div>
         </div>
       </div>
     </header>
@@ -2003,36 +2047,47 @@
 
             <div class="hero-bg" aria-hidden="true">
               <div class="bg-core-glow"></div>
+
               <div class="bg-ring ring-1"></div>
               <div class="bg-ring ring-2"></div>
               <div class="bg-ring ring-3"></div>
+              <div class="bg-ring ring-4"></div>
+              <div class="bg-ring ring-5"></div>
+
               <div class="bg-ring ring-1 ring-tilt-1"></div>
               <div class="bg-ring ring-2 ring-tilt-2"></div>
               <div class="bg-ring ring-3 ring-tilt-3"></div>
+              <div class="bg-ring ring-4 ring-tilt-4"></div>
+              <div class="bg-ring ring-5 ring-tilt-5"></div>
 
               <div class="orbit-system">
                 <div class="orbit-track o1">
-                  <span class="orbit-dot"></span>
+                  <span class="orbit-dot large"></span>
                   <span class="orbit-dot small d3"></span>
                 </div>
                 <div class="orbit-track o2">
                   <span class="orbit-dot d2"></span>
                 </div>
                 <div class="orbit-track o3">
-                  <span class="orbit-dot large d4"></span>
+                  <span class="orbit-dot xl d4"></span>
                 </div>
                 <div class="orbit-track o4">
-                  <span class="orbit-dot small d5"></span>
+                  <span class="orbit-dot large d5"></span>
                 </div>
                 <div class="orbit-track o5">
                   <span class="orbit-dot d3"></span>
+                </div>
+                <div class="orbit-track o6">
+                  <span class="orbit-dot large d6"></span>
+                </div>
+                <div class="orbit-track o7">
+                  <span class="orbit-dot xl d7"></span>
                 </div>
               </div>
 
               <div class="bg-lines"></div>
               <div class="bg-rays"></div>
               <div class="scan-sweep"></div>
-
               <div class="particle-field" id="particleField"></div>
             </div>
 
@@ -2101,15 +2156,15 @@
                 </div>
               </a>
 
-              <a class="menu-node left n4 energy-source sound-click" href="about.html">
+              <button class="menu-node left n4 energy-source sound-click" type="button" data-popup="aboutcompany">
                 <span class="node-dot"></span>
                 <div class="node-shell">
                   <span class="node-text">
                     <span class="node-title th-font">เกี่ยวกับบริษัท</span>
-                    <span class="node-sub th-font">ข้อมูลบริษัทและแนวคิดการพัฒนาระบบ</span>
+                    <span class="node-sub th-font">ประวัติ แนวคิด และทิศทางการพัฒนา</span>
                   </span>
                 </div>
-              </a>
+              </button>
 
               <button class="menu-node right n5 energy-source sound-click" type="button" data-popup="stealthbank">
                 <div class="node-shell">
@@ -2204,12 +2259,12 @@
     </footer>
   </div>
 
-  <!-- COMPANY POPUP -->
+  <!-- COMPANY CONTACT POPUP -->
   <div id="companyPopup" class="popup-backdrop">
     <div class="popup-card company">
       <div class="popup-head">
         <div class="popup-head-main">
-          <div class="popup-kicker th-font">ข้อมูลบริษัท</div>
+          <div class="popup-kicker th-font">ข้อมูลติดต่อ</div>
           <h3 class="th-font">บริษัท สยามทำ จำกัด</h3>
           <div class="popup-subtitle th-font">ข้อมูลติดต่อและที่ตั้งสำหรับการสอบถาม การประสานงาน และการเดินทางมายังบริษัท</div>
         </div>
@@ -2222,6 +2277,7 @@
         <p class="th-font"><strong>เลขทะเบียน:</strong> 0105566099954</p>
         <p class="th-font"><strong>โทร:</strong> 02-043-2988</p>
         <p class="th-font"><strong>มือถือ:</strong> 064-951-4888</p>
+        <p class="th-font"><strong>อีเมล:</strong> mysiamtham@gmail.com</p>
         <p class="th-font"><strong>เว็บไซต์:</strong> www.siamtham.com</p>
 
         <div class="popup-action-row">
@@ -2313,7 +2369,7 @@
         <span class="th-font">YouTube</span>
       </a>
 
-      <a class="chat-item tiktok sound-click" href="#" target="_blank" rel="noopener">
+      <a class="chat-item tiktok sound-click" href="https://www.tiktok.com/" target="_blank" rel="noopener">
         <span class="chat-icon en-font">TT</span>
         <span class="th-font">TikTok</span>
       </a>
@@ -2334,7 +2390,7 @@
         kicker: "ระบบอุปกรณ์เฉพาะทาง",
         title: "ระบบ SSB Mobile",
         subtitle: "ระบบแยกอุปกรณ์สำหรับธุรกรรมทางการเงินโดยเฉพาะ เพื่อลดความเสี่ยงจากแอปและการใช้งานที่ไม่จำเป็น",
-        lead: "แนวคิดสำคัญของ SSB Mobile คือการจำกัดการใช้งานให้อยู่ในขอบเขตที่จำเป็นต่อการทำธุรกรรมทางการเงินเท่านั้น เพื่อให้ผู้ใช้สามารถควบคุมความเสี่ยงได้ชัดเจนขึ้นและลดโอกาสในการถูกโจมตีจากช่องทางอื่นที่ไม่เกี่ยวข้องกับธุรกรรมโดยตรง",
+        lead: "แนวคิดสำคัญของ SSB Mobile คือการจำกัดการใช้งานให้อยู่ในขอบเขตที่จำเป็นต่อการทำธุรกรรมทางการเงินเท่านั้น เพื่อให้ผู้ใช้ควบคุมความเสี่ยงได้ชัดเจนขึ้นและลดโอกาสในการถูกโจมตีจากช่องทางอื่นที่ไม่เกี่ยวข้องกับธุรกรรมโดยตรง",
         badges: [
           "แยกเครื่องเฉพาะงานการเงิน",
           "ลดแอปที่ไม่จำเป็น",
@@ -2343,7 +2399,7 @@
         ],
         features: [
           "แยกอุปกรณ์สำหรับทำธุรกรรมออกจากการใช้งานทั่วไป ช่วยลดโอกาสจากแอปหรือกิจกรรมที่ไม่เกี่ยวข้อง",
-          "สร้างรูปแบบการใช้งานที่เรียบง่ายและควบคุมได้ง่าย ลดความผิดพลาดที่เกิดจากการใช้งานหลายหน้าที่ในเครื่องเดียว",
+          "สร้างรูปแบบการใช้งานที่เรียบง่ายและควบคุมได้ง่าย ลดความผิดพลาดจากการใช้หลายหน้าที่ในเครื่องเดียว",
           "เหมาะกับผู้ใช้ที่ให้ความสำคัญกับความปลอดภัยทางการเงินและต้องการระบบที่ใช้งานอย่างมีวินัย"
         ],
         impacts: [
@@ -2356,7 +2412,7 @@
           "ผู้ที่มีความกังวลเรื่องแอปไม่จำเป็นหรือการเข้าถึงที่ไม่เกี่ยวข้อง",
           "องค์กรหรือบุคคลที่ต้องการความปลอดภัยเชิงวินัยในการใช้งาน"
         ],
-        video: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+        video: "https://www.youtube.com/embed/mD9i39genW8"
       },
 
       stealthbank: {
@@ -2385,7 +2441,7 @@
           "ผู้ที่ต้องการแนวคิดที่มากกว่าแค่การติดตั้งแอปหรืออุปกรณ์",
           "ผู้ที่ต้องการสร้างความมั่นใจด้านความปลอดภัยให้กับครอบครัวหรือองค์กร"
         ],
-        video: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+        video: "https://www.youtube.com/embed/mD9i39genW8"
       },
 
       safetybook: {
@@ -2414,7 +2470,7 @@
           "ใช้จัดเก็บเอกสารหรือของสำคัญที่ไม่ต้องการให้สังเกตง่าย",
           "ใช้เสริมระบบความปลอดภัยภายในบ้านหรือสำนักงาน"
         ],
-        video: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+        video: "https://www.youtube.com/embed/mD9i39genW8"
       },
 
       technology: {
@@ -2443,7 +2499,36 @@
           "ผู้ที่ต้องการเข้าใจแนวทางป้องกันในภาพรวมก่อนเลือกใช้งาน",
           "ผู้ที่ต้องการอธิบายระบบให้กับทีมงานหรือองค์กร"
         ],
-        video: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+        video: "https://www.youtube.com/embed/mD9i39genW8"
+      },
+
+      aboutcompany: {
+        kicker: "ข้อมูลบริษัท",
+        title: "เกี่ยวกับบริษัท สยามทำ จำกัด",
+        subtitle: "บริษัทผู้พัฒนาแนวคิดและระบบ Stealth Safety Bank Mobile เพื่อยกระดับความปลอดภัยทางการเงิน",
+        lead: "บริษัท สยามทำ จำกัด มุ่งเน้นการพัฒนาแนวคิด องค์ความรู้ และรูปแบบการใช้งานที่ช่วยลดความเสี่ยงด้านการเงินและข้อมูลส่วนบุคคล โดยผสานมุมมองด้านเทคโนโลยี ความรอบคอบในการใช้งาน และการจัดเก็บเชิงอำพรางเข้าด้วยกัน",
+        badges: [
+          "บริษัทไทย",
+          "พัฒนาแนวคิดความปลอดภัย",
+          "เน้นการใช้งานจริง",
+          "ต่อยอดเป็นระบบ"
+        ],
+        features: [
+          "พัฒนาแนวคิดและองค์ความรู้เกี่ยวกับการป้องกันความเสี่ยงด้านการเงิน",
+          "ให้ความสำคัญกับการออกแบบระบบที่เข้าใจง่าย ใช้งานได้จริง และควบคุมได้",
+          "มุ่งเน้นการสร้างความมั่นใจให้กับผู้ใช้ ครอบครัว และองค์กร"
+        ],
+        impacts: [
+          { value: "พัฒนา", label: "พัฒนาระบบจากปัญหาความเสี่ยงจริง" },
+          { value: "ต่อยอด", label: "ต่อยอดแนวคิดเป็นเครื่องมือและรูปแบบใช้งาน" },
+          { value: "ชัดเจน", label: "สื่อสารแนวคิดการป้องกันให้เข้าใจง่าย" }
+        ],
+        useCases: [
+          "ผู้ที่ต้องการรู้จักบริษัทก่อนตัดสินใจใช้งาน",
+          "ผู้ที่ต้องการทราบแนวคิดและทิศทางการพัฒนาระบบ",
+          "ผู้ที่ต้องการข้อมูลเบื้องต้นเกี่ยวกับบริษัท สยามทำ จำกัด"
+        ],
+        video: "https://www.youtube.com/embed/mD9i39genW8"
       }
     };
 
@@ -2502,7 +2587,7 @@
       renderImpacts(data.impacts || []);
       renderFeatures(data.useCases || [], infoUseCases);
 
-      infoVideo.src = data.video + "?rel=0&autoplay=0";
+      infoVideo.src = (data.video || "") + "?rel=0&autoplay=0";
       infoPopup.style.display = "flex";
       requestAnimationFrame(() => infoPopup.classList.add("show"));
       pulseCenter();
@@ -2576,7 +2661,6 @@
     document.addEventListener("click", function(event){
       const infoOpen = infoPopup && infoPopup.style.display === "flex";
       const companyOpen = companyPopup && companyPopup.style.display === "flex";
-
       if (!infoOpen && !companyOpen && techHero && !techHero.contains(event.target)){
         techHero.classList.remove("open");
       }
@@ -2683,7 +2767,7 @@
 
       field.innerHTML = "";
       const isMobile = window.innerWidth <= 760;
-      const count = isMobile ? 26 : 54;
+      const count = isMobile ? 30 : 64;
 
       const rect = hero.getBoundingClientRect();
       const centerX = rect.width / 2;
@@ -2720,7 +2804,9 @@
       }
     }
 
-    /* GOOGLE TRANSLATE CUSTOM FLAGS */
+    /* GOOGLE TRANSLATE */
+    let googleTranslateReady = false;
+
     function googleTranslateElementInit() {
       new google.translate.TranslateElement(
         {
@@ -2731,6 +2817,8 @@
         },
         "google_translate_element"
       );
+      googleTranslateReady = true;
+      syncActiveLangFromCookie();
     }
     window.googleTranslateElementInit = googleTranslateElementInit;
 
@@ -2740,13 +2828,66 @@
       });
     }
 
-    function triggerTranslate(lang){
+    function getTranslateCookieLang(){
+      const match = document.cookie.match(/(?:^|;\s*)googtrans=\/th\/([^;]+)/);
+      return match ? decodeURIComponent(match[1]) : "th";
+    }
+
+    function setTranslateCookie(lang){
+      const value = lang === "th" ? "/th/th" : `/th/${lang}`;
+      const hostParts = location.hostname.split(".");
+      document.cookie = `googtrans=${value};path=/`;
+      if (hostParts.length >= 2) {
+        const rootDomain = "." + hostParts.slice(-2).join(".");
+        document.cookie = `googtrans=${value};path=/;domain=${rootDomain}`;
+      }
+    }
+
+    function clearTranslateCookie(){
+      const hostParts = location.hostname.split(".");
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      if (hostParts.length >= 2) {
+        const rootDomain = "." + hostParts.slice(-2).join(".");
+        document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${rootDomain};`;
+      }
+    }
+
+    function syncActiveLangFromCookie(){
+      const lang = getTranslateCookieLang();
+      if (["th","en","ja","zh-CN","vi"].includes(lang)) {
+        setActiveLang(lang);
+      } else {
+        setActiveLang("th");
+      }
+    }
+
+    function changeLanguage(lang){
       const combo = document.querySelector(".goog-te-combo");
-      if (!combo) return false;
-      combo.value = lang;
-      combo.dispatchEvent(new Event("change"));
+
+      if (lang === "th"){
+        clearTranslateCookie();
+        if (combo){
+          combo.value = "th";
+          combo.dispatchEvent(new Event("change"));
+        }
+        setActiveLang("th");
+        setTimeout(() => location.reload(), 120);
+        return;
+      }
+
+      setTranslateCookie(lang);
       setActiveLang(lang);
-      return true;
+
+      if (combo){
+        combo.value = lang;
+        combo.dispatchEvent(new Event("change"));
+        setTimeout(() => {
+          if (document.body.classList.contains("translated-ltr") || document.body.classList.contains("translated-rtl")) return;
+          location.reload();
+        }, 700);
+      } else {
+        location.reload();
+      }
     }
 
     function bindLanguageButtons(){
@@ -2754,24 +2895,7 @@
       buttons.forEach(btn => {
         btn.addEventListener("click", () => {
           playClickSound("normal");
-          const lang = btn.dataset.lang;
-
-          if (lang === "th"){
-            const combo = document.querySelector(".goog-te-combo");
-            if (combo){
-              combo.value = "";
-              combo.dispatchEvent(new Event("change"));
-            }
-            setActiveLang("th");
-            return;
-          }
-
-          let tries = 0;
-          const timer = setInterval(() => {
-            tries += 1;
-            const ok = triggerTranslate(lang);
-            if (ok || tries > 20) clearInterval(timer);
-          }, 300);
+          changeLanguage(btn.dataset.lang);
         });
       });
     }
@@ -2780,6 +2904,7 @@
       buildEnergyLines();
       createInwardParticles();
       bindLanguageButtons();
+      syncActiveLangFromCookie();
     });
 
     window.addEventListener("resize", () => {
@@ -2788,6 +2913,6 @@
     });
   </script>
 
-  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
