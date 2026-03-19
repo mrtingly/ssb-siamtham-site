@@ -264,63 +264,21 @@
         radial-gradient(circle at 7% 87%, rgba(255,255,255,.32) 0 1px, transparent 1.7px);
     }
 
-    /* WORLD */
-    .world-wrap{
+    /* THREE GLOBE */
+    .globe-holder{
       position:absolute;
       left:50%;
       top:50%;
-      width:min(68vw, 660px);
-      height:min(68vw, 660px);
+      width:min(62vw, 560px);
+      height:min(62vw, 560px);
       transform:translate(-50%, -50%);
       z-index:1;
       pointer-events:none;
-      filter:
-        drop-shadow(0 0 8px rgba(114,215,255,.14))
-        drop-shadow(0 0 20px rgba(70,165,255,.08));
-      perspective:1200px;
     }
 
-    .world-tilt{
-      width:100%;
-      height:100%;
-      transform-style:preserve-3d;
-      animation:worldSideSpin 14s linear infinite;
-    }
-
-    .world-svg{
-      width:100%;
-      height:100%;
-      display:block;
-    }
-
-    .world-outline{
-      fill:none;
-      stroke:rgba(150,228,255,.20);
-      stroke-width:1.2;
-    }
-
-    .world-strong{
-      fill:none;
-      stroke:rgba(165,234,255,.28);
-      stroke-width:1.2;
-    }
-
-    .world-soft{
-      fill:none;
-      stroke:rgba(150,228,255,.10);
-      stroke-width:1;
-    }
-
-    .world-glow{
-      fill:none;
-      stroke:rgba(111,214,255,.38);
-      stroke-width:1.15;
-      filter:url(#worldGlow);
-    }
-
-    .world-aura{
+    .globe-aura{
       position:absolute;
-      inset:17%;
+      inset:16%;
       border-radius:50%;
       background:
         radial-gradient(circle,
@@ -328,24 +286,36 @@
           rgba(95,188,255,.05) 35%,
           rgba(45,138,255,.02) 56%,
           transparent 72%);
-      filter:blur(10px);
+      filter:blur(12px);
       animation:auraPulse 5s ease-in-out infinite;
+      pointer-events:none;
+    }
+
+    #globeCanvas{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      display:block;
+      filter:
+        drop-shadow(0 0 10px rgba(114,215,255,.12))
+        drop-shadow(0 0 24px rgba(70,165,255,.08));
     }
 
     .center-glow{
       position:absolute;
       left:50%;
       top:50%;
-      width:118px;
-      height:118px;
+      width:116px;
+      height:116px;
       transform:translate(-50%, -50%);
       z-index:2;
       pointer-events:none;
       background:
         radial-gradient(circle,
-          rgba(228,248,255,.72) 0%,
-          rgba(169,228,255,.24) 34%,
-          rgba(90,188,255,.06) 56%,
+          rgba(228,248,255,.68) 0%,
+          rgba(169,228,255,.22) 34%,
+          rgba(90,188,255,.05) 56%,
           transparent 72%);
       filter:blur(4px);
       animation:centerGlow 5s ease-in-out infinite;
@@ -555,16 +525,12 @@
         0 0 24px rgba(141,222,255,.22);
     }
 
-    /* right side: put dot at far right */
     .menu-node.right{
       justify-content:space-between;
       gap:12px;
     }
 
-    .menu-node.right .node-shell{
-      order:1;
-    }
-
+    .menu-node.right .node-shell{ order:1; }
     .menu-node.right .node-dot{
       order:2;
       margin-left:auto;
@@ -1017,12 +983,6 @@
       50%{ transform:scale(1.03); opacity:.76; }
     }
 
-    /* rotate on center axis from left to right */
-    @keyframes worldSideSpin{
-      0%{ transform:rotateY(0deg); }
-      100%{ transform:rotateY(360deg); }
-    }
-
     @media (max-width:1120px){
       .tech-hero{
         width:min(96vw, 1020px);
@@ -1030,9 +990,9 @@
         min-height:680px;
       }
 
-      .world-wrap{
-        width:min(74vw, 560px);
-        height:min(74vw, 560px);
+      .globe-holder{
+        width:min(66vw, 500px);
+        height:min(66vw, 500px);
       }
 
       .logo-core{
@@ -1106,9 +1066,9 @@
         border-radius:20px;
       }
 
-      .world-wrap{
-        width:min(88vw, 350px);
-        height:min(88vw, 350px);
+      .globe-holder{
+        width:min(86vw, 320px);
+        height:min(86vw, 320px);
         top:42%;
       }
 
@@ -1287,46 +1247,9 @@
           <div class="tech-hero open" id="techHero">
             <div class="hero-stars"></div>
 
-            <div class="world-wrap" aria-hidden="true">
-              <div class="world-aura"></div>
-
-              <div class="world-tilt">
-                <svg class="world-svg" viewBox="0 0 800 800" preserveAspectRatio="xMidYMid meet">
-                  <defs>
-                    <filter id="worldGlow" x="-100%" y="-100%" width="300%" height="300%">
-                      <feGaussianBlur stdDeviation="2.2" result="blur"/>
-                      <feMerge>
-                        <feMergeNode in="blur"/>
-                        <feMergeNode in="SourceGraphic"/>
-                      </feMerge>
-                    </filter>
-                  </defs>
-
-                  <circle class="world-strong" cx="400" cy="400" r="225"/>
-
-                  <!-- latitude -->
-                  <ellipse class="world-outline" cx="400" cy="400" rx="225" ry="180"/>
-                  <ellipse class="world-outline" cx="400" cy="400" rx="225" ry="125"/>
-                  <ellipse class="world-outline" cx="400" cy="400" rx="225" ry="70"/>
-                  <ellipse class="world-soft" cx="400" cy="400" rx="225" ry="28"/>
-
-                  <!-- longitude -->
-                  <ellipse class="world-outline" cx="400" cy="400" rx="60" ry="225"/>
-                  <ellipse class="world-outline" cx="400" cy="400" rx="115" ry="225"/>
-                  <ellipse class="world-outline" cx="400" cy="400" rx="170" ry="225"/>
-                  <ellipse class="world-soft" cx="400" cy="400" rx="200" ry="225"/>
-
-                  <!-- front rings like background rings -->
-                  <ellipse class="world-outline" cx="400" cy="400" rx="205" ry="205" transform="rotate(32 400 400)"/>
-                  <ellipse class="world-outline" cx="400" cy="400" rx="205" ry="205" transform="rotate(-32 400 400)"/>
-
-                  <!-- glow -->
-                  <ellipse class="world-glow" cx="400" cy="400" rx="225" ry="125"/>
-                  <ellipse class="world-glow" cx="400" cy="400" rx="115" ry="225"/>
-                  <ellipse class="world-glow" cx="400" cy="400" rx="205" ry="205" transform="rotate(32 400 400)"/>
-                  <ellipse class="world-glow" cx="400" cy="400" rx="205" ry="205" transform="rotate(-32 400 400)"/>
-                </svg>
-              </div>
+            <div class="globe-holder" aria-hidden="true">
+              <div class="globe-aura"></div>
+              <canvas id="globeCanvas"></canvas>
             </div>
 
             <div class="center-glow"></div>
@@ -1703,8 +1626,147 @@
     }
 
     window.googleTranslateElementInit = googleTranslateElementInit;
+
+    /* Lightweight Three.js globe */
+    (function initGlobe(){
+      const canvas = document.getElementById("globeCanvas");
+      const holder = document.querySelector(".globe-holder");
+      if (!canvas || !holder) return;
+
+      let renderer, scene, camera, globeGroup, animationId;
+      let isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      function buildThree(){
+        if (typeof THREE === "undefined") return;
+
+        scene = new THREE.Scene();
+
+        const width = holder.clientWidth;
+        const height = holder.clientHeight;
+
+        camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 1000);
+        camera.position.set(0, 0, 9.5);
+
+        renderer = new THREE.WebGLRenderer({
+          canvas,
+          alpha:true,
+          antialias:true,
+          powerPreference:"low-power"
+        });
+
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.6));
+        renderer.setSize(width, height, false);
+
+        globeGroup = new THREE.Group();
+        scene.add(globeGroup);
+
+        const glowMaterial = new THREE.MeshBasicMaterial({
+          color:0x66cfff,
+          transparent:true,
+          opacity:0.06
+        });
+
+        const glowSphere = new THREE.Mesh(
+          new THREE.SphereGeometry(2.85, 32, 32),
+          glowMaterial
+        );
+        globeGroup.add(glowSphere);
+
+        const lineColor = new THREE.Color(0x87ddff);
+        const strongColor = new THREE.Color(0xb8efff);
+
+        function makeEllipse(rx, ry, rotationX=0, rotationY=0, rotationZ=0, opacity=0.24, color=lineColor){
+          const curve = new THREE.EllipseCurve(0, 0, rx, ry, 0, Math.PI * 2, false, 0);
+          const points2 = curve.getPoints(180);
+          const points3 = points2.map(p => new THREE.Vector3(p.x, p.y, 0));
+          const geometry = new THREE.BufferGeometry().setFromPoints(points3);
+          const material = new THREE.LineBasicMaterial({
+            color,
+            transparent:true,
+            opacity
+          });
+          const line = new THREE.LineLoop(geometry, material);
+          line.rotation.set(rotationX, rotationY, rotationZ);
+          globeGroup.add(line);
+          return line;
+        }
+
+        function makeSphereRing(radius, axis="x", opacity=0.20, color=lineColor){
+          const curve = new THREE.EllipseCurve(0, 0, radius, radius, 0, Math.PI * 2, false, 0);
+          const pts = curve.getPoints(220).map(p => new THREE.Vector3(p.x, p.y, 0));
+          const geo = new THREE.BufferGeometry().setFromPoints(pts);
+          const mat = new THREE.LineBasicMaterial({
+            color,
+            transparent:true,
+            opacity
+          });
+          const line = new THREE.LineLoop(geo, mat);
+          if (axis === "x") line.rotation.x = Math.PI / 2;
+          if (axis === "y") line.rotation.y = Math.PI / 2;
+          globeGroup.add(line);
+          return line;
+        }
+
+        // outer sphere rings
+        makeSphereRing(2.55, "x", 0.18, strongColor);
+        makeSphereRing(2.55, "y", 0.18, strongColor);
+
+        // latitude rings
+        makeEllipse(2.55, 2.05, 0, 0, 0, 0.14);
+        makeEllipse(2.55, 1.45, 0, 0, 0, 0.18);
+        makeEllipse(2.55, 0.82, 0, 0, 0, 0.22);
+        makeEllipse(2.55, 0.30, 0, 0, 0, 0.10);
+
+        // longitude rings
+        makeEllipse(0.62, 2.55, 0, 0, 0, 0.20);
+        makeEllipse(1.22, 2.55, 0, 0, 0, 0.20);
+        makeEllipse(1.82, 2.55, 0, 0, 0, 0.16);
+        makeEllipse(2.18, 2.55, 0, 0, 0, 0.10);
+
+        // diagonal orbit-like rings, still globe-like
+        makeSphereRing(2.55, "x", 0.12, lineColor).rotation.z = Math.PI / 4;
+        makeSphereRing(2.55, "x", 0.12, lineColor).rotation.z = -Math.PI / 4;
+
+        // slight tilt for more spherical look
+        globeGroup.rotation.x = 0.32;
+        globeGroup.rotation.z = 0.12;
+
+        animate();
+      }
+
+      function animate(){
+        if (!renderer || !scene || !camera || !globeGroup) return;
+
+        if (!isReduced){
+          globeGroup.rotation.y += 0.0042;
+        }
+
+        renderer.render(scene, camera);
+        animationId = requestAnimationFrame(animate);
+      }
+
+      function resize(){
+        if (!renderer || !camera) return;
+        const width = holder.clientWidth;
+        const height = holder.clientHeight;
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height, false);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.6));
+      }
+
+      function start(){
+        if (typeof THREE !== "undefined") {
+          buildThree();
+          window.addEventListener("resize", resize);
+        }
+      }
+
+      start();
+    })();
   </script>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r155/three.min.js"></script>
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
