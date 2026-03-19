@@ -26,12 +26,12 @@
     body{
       margin:0;
       color:#fff;
-      background:
-        radial-gradient(circle at 50% 16%, rgba(28,118,255,.16), transparent 30%),
-        radial-gradient(circle at 50% 48%, rgba(31,126,255,.10), transparent 44%),
-        linear-gradient(180deg, #010713 0%, #021127 26%, #04173b 68%, #031129 100%);
       overflow-x:hidden;
       font-family:'Prompt',sans-serif;
+      background:
+        radial-gradient(circle at 50% 45%, rgba(31,126,255,.22) 0%, rgba(17,78,180,.12) 18%, rgba(7,24,62,.08) 34%, transparent 54%),
+        radial-gradient(circle at 50% 50%, rgba(80,170,255,.10) 0%, transparent 42%),
+        linear-gradient(180deg, #010713 0%, #021127 24%, #04173b 65%, #031129 100%);
     }
 
     .th-font{ font-family:'Prompt',sans-serif; }
@@ -60,7 +60,7 @@
       inset:0;
       pointer-events:none;
       z-index:0;
-      opacity:.05;
+      opacity:.055;
       background-image:
         linear-gradient(rgba(113,197,255,.18) 1px, transparent 1px),
         linear-gradient(90deg, rgba(113,197,255,.18) 1px, transparent 1px);
@@ -216,7 +216,7 @@
       justify-content:center;
       isolation:isolate;
       background:
-        radial-gradient(circle at 50% 50%, rgba(29,125,255,.07) 0%, rgba(18,81,180,.07) 16%, rgba(7,27,69,.94) 42%, rgba(3,13,34,.988) 78%, rgba(2,8,24,1) 100%);
+        radial-gradient(circle at 50% 50%, rgba(25,120,255,.10) 0%, rgba(14,64,160,.10) 16%, rgba(7,27,69,.94) 42%, rgba(3,13,34,.988) 78%, rgba(2,8,24,1) 100%);
       box-shadow:
         inset 0 0 0 1px rgba(122,216,255,.08),
         inset 0 0 70px rgba(58,151,255,.05),
@@ -228,10 +228,10 @@
       position:absolute;
       inset:0;
       background:
-        linear-gradient(rgba(120,195,255,.032) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(120,195,255,.032) 1px, transparent 1px);
+        linear-gradient(rgba(120,195,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(120,195,255,.03) 1px, transparent 1px);
       background-size:38px 38px;
-      opacity:.45;
+      opacity:.55;
       pointer-events:none;
       z-index:0;
     }
@@ -252,7 +252,7 @@
       inset:0;
       pointer-events:none;
       z-index:0;
-      opacity:.20;
+      opacity:.22;
       background-image:
         radial-gradient(circle at 14% 20%, rgba(255,255,255,.78) 0 1px, transparent 1.7px),
         radial-gradient(circle at 85% 15%, rgba(255,255,255,.62) 0 1px, transparent 1.7px),
@@ -264,60 +264,119 @@
         radial-gradient(circle at 7% 87%, rgba(255,255,255,.32) 0 1px, transparent 1.7px);
     }
 
-    /* GLOBE */
-    .globe-holder{
+    /* BACKGROUND FX */
+    .hero-bg{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      z-index:1;
+    }
+
+    .bg-core-glow{
       position:absolute;
       left:50%;
       top:50%;
+      transform:translate(-50%,-50%);
       width:min(62vw, 560px);
       height:min(62vw, 560px);
-      transform:translate(-50%, -50%);
-      z-index:1;
-      pointer-events:none;
-    }
-
-    .globe-aura{
-      position:absolute;
-      inset:16%;
       border-radius:50%;
       background:
         radial-gradient(circle,
-          rgba(185,236,255,.08) 0%,
-          rgba(95,188,255,.05) 35%,
-          rgba(45,138,255,.02) 56%,
-          transparent 72%);
-      filter:blur(12px);
-      animation:auraPulse 5s ease-in-out infinite;
-      pointer-events:none;
+          rgba(201,238,255,.14) 0%,
+          rgba(110,194,255,.12) 12%,
+          rgba(46,140,255,.08) 26%,
+          rgba(13,70,176,.05) 42%,
+          transparent 66%);
+      filter:blur(10px);
+      animation:corePulse 5.5s ease-in-out infinite;
     }
 
-    #globeCanvas{
+    .bg-ring{
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
+      border-radius:50%;
+      border:1px solid rgba(117,206,255,.14);
+      box-shadow:
+        0 0 18px rgba(87,185,255,.08),
+        inset 0 0 18px rgba(87,185,255,.04);
+    }
+
+    .ring-1{
+      width:min(40vw, 360px);
+      height:min(40vw, 360px);
+      opacity:.9;
+      animation:spinSlow 22s linear infinite;
+    }
+
+    .ring-2{
+      width:min(50vw, 450px);
+      height:min(50vw, 450px);
+      opacity:.6;
+      animation:spinSlowReverse 32s linear infinite;
+    }
+
+    .ring-3{
+      width:min(60vw, 540px);
+      height:min(60vw, 540px);
+      opacity:.36;
+      animation:spinSlow 42s linear infinite;
+    }
+
+    .ring-tilt-1{
+      transform:translate(-50%,-50%) rotateX(72deg);
+      border-color:rgba(132,219,255,.12);
+    }
+
+    .ring-tilt-2{
+      transform:translate(-50%,-50%) rotateY(72deg);
+      border-color:rgba(132,219,255,.10);
+    }
+
+    .ring-tilt-3{
+      transform:translate(-50%,-50%) rotate(55deg);
+      border-color:rgba(132,219,255,.10);
+    }
+
+    .bg-lines{
       position:absolute;
       inset:0;
-      width:100%;
-      height:100%;
-      display:block;
-      filter:
-        drop-shadow(0 0 10px rgba(114,215,255,.12))
-        drop-shadow(0 0 24px rgba(70,165,255,.08));
+      z-index:1;
+      opacity:.20;
+      background:
+        linear-gradient(90deg, transparent 0%, transparent 47%, rgba(120,210,255,.18) 50%, transparent 53%, transparent 100%),
+        linear-gradient(180deg, transparent 0%, transparent 47%, rgba(120,210,255,.08) 50%, transparent 53%, transparent 100%);
+      filter:blur(.3px);
+    }
+
+    .bg-rays{
+      position:absolute;
+      inset:0;
+      z-index:1;
+      background:
+        linear-gradient(90deg, transparent 0%, rgba(120,210,255,.04) 50%, transparent 100%),
+        linear-gradient(180deg, transparent 0%, rgba(120,210,255,.03) 50%, transparent 100%);
+      mask-image:radial-gradient(circle at center, rgba(0,0,0,1) 0%, rgba(0,0,0,.7) 34%, transparent 72%);
+      -webkit-mask-image:radial-gradient(circle at center, rgba(0,0,0,1) 0%, rgba(0,0,0,.7) 34%, transparent 72%);
     }
 
     .center-glow{
       position:absolute;
       left:50%;
       top:50%;
-      width:116px;
-      height:116px;
+      width:132px;
+      height:132px;
       transform:translate(-50%, -50%);
       z-index:2;
       pointer-events:none;
       background:
         radial-gradient(circle,
-          rgba(228,248,255,.68) 0%,
-          rgba(169,228,255,.22) 34%,
+          rgba(228,248,255,.74) 0%,
+          rgba(169,228,255,.24) 34%,
           rgba(90,188,255,.05) 56%,
           transparent 72%);
-      filter:blur(4px);
+      filter:blur(6px);
       animation:centerGlow 5s ease-in-out infinite;
     }
 
@@ -337,8 +396,8 @@
     }
 
     .logo-core:hover{
-      transform:scale(1.03);
-      filter:brightness(1.05);
+      transform:scale(1.04);
+      filter:brightness(1.06);
     }
 
     .logo-core img{
@@ -347,7 +406,7 @@
       object-fit:contain;
       display:block;
       filter:
-        drop-shadow(0 0 8px rgba(120,212,255,.12))
+        drop-shadow(0 0 10px rgba(120,212,255,.18))
         drop-shadow(0 12px 22px rgba(0,0,0,.24));
     }
 
@@ -364,7 +423,7 @@
       position:absolute;
       left:var(--x);
       top:var(--y);
-      transform:translate(-50%, -50%) scale(.92);
+      transform:translate(-50%, -50%) scale(.9);
       opacity:0;
       pointer-events:none;
       border:none;
@@ -379,7 +438,7 @@
       cursor:pointer;
       transition:
         transform .34s cubic-bezier(.2,.8,.2,1),
-        opacity .3s ease,
+        opacity .26s ease,
         filter .22s ease;
     }
 
@@ -392,8 +451,17 @@
     .menu-node.left,
     .menu-node.right{
       width:286px;
-      justify-content:flex-start;
       text-align:left;
+    }
+
+    .menu-node.left{
+      justify-content:flex-start;
+      gap:12px;
+    }
+
+    .menu-node.right{
+      justify-content:space-between;
+      gap:12px;
     }
 
     .menu-node.bottom{
@@ -459,7 +527,6 @@
         inset 0 0 0 1px rgba(162,228,255,.05),
         0 0 16px rgba(69,170,255,.08);
       transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
-      clip-path:polygon(18px 0, 100% 0, calc(100% - 18px) 50%, 100% 100%, 18px 100%, 0 50%);
     }
 
     .node-shell::before{
@@ -478,7 +545,6 @@
       border:1px solid rgba(142,224,255,.16);
       pointer-events:none;
       opacity:.5;
-      clip-path:polygon(18px 0, 100% 0, calc(100% - 18px) 50%, 100% 100%, 18px 100%, 0 50%);
     }
 
     .menu-node:hover .node-shell{
@@ -525,9 +591,22 @@
         0 0 24px rgba(141,222,255,.22);
     }
 
-    .menu-node.right{
-      justify-content:space-between;
-      gap:12px;
+    /* ลูกศรเมนูซ้าย ให้ชี้เข้าโลโก้ */
+    .menu-node.left .node-shell{
+      clip-path:polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%, 18px 50%);
+    }
+
+    .menu-node.left .node-shell::after{
+      clip-path:polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%, 18px 50%);
+    }
+
+    /* เมนูขวา ให้ชี้เข้าโลโก้ */
+    .menu-node.right .node-shell{
+      clip-path:polygon(18px 0, 100% 0, calc(100% - 18px) 50%, 100% 100%, 18px 100%, 0 50%);
+    }
+
+    .menu-node.right .node-shell::after{
+      clip-path:polygon(18px 0, 100% 0, calc(100% - 18px) 50%, 100% 100%, 18px 100%, 0 50%);
     }
 
     .menu-node.right .node-shell{ order:1; }
@@ -975,12 +1054,22 @@
 
     @keyframes centerGlow{
       0%,100%{ transform:translate(-50%, -50%) scale(1); opacity:1; }
-      50%{ transform:translate(-50%, -50%) scale(1.02); opacity:.86; }
+      50%{ transform:translate(-50%, -50%) scale(1.03); opacity:.88; }
     }
 
-    @keyframes auraPulse{
-      0%,100%{ transform:scale(1); opacity:.95; }
-      50%{ transform:scale(1.03); opacity:.76; }
+    @keyframes corePulse{
+      0%,100%{ transform:translate(-50%,-50%) scale(1); opacity:1; }
+      50%{ transform:translate(-50%,-50%) scale(1.04); opacity:.84; }
+    }
+
+    @keyframes spinSlow{
+      from{ transform:translate(-50%,-50%) rotate(0deg); }
+      to{ transform:translate(-50%,-50%) rotate(360deg); }
+    }
+
+    @keyframes spinSlowReverse{
+      from{ transform:translate(-50%,-50%) rotate(360deg); }
+      to{ transform:translate(-50%,-50%) rotate(0deg); }
     }
 
     @media (max-width:1120px){
@@ -990,17 +1079,12 @@
         min-height:680px;
       }
 
-      .globe-holder{
-        width:min(66vw, 500px);
-        height:min(66vw, 500px);
-      }
-
       .logo-core{
         width:min(28vw, 182px);
         height:min(28vw, 182px);
       }
 
-      .center-glow{ width:104px; height:104px; }
+      .center-glow{ width:112px; height:112px; }
 
       .menu-node.left,
       .menu-node.right{ width:252px; }
@@ -1066,20 +1150,14 @@
         border-radius:20px;
       }
 
-      .globe-holder{
-        width:min(86vw, 320px);
-        height:min(86vw, 320px);
-        top:42%;
-      }
-
       .logo-core{
         width:min(42vw, 120px);
         height:min(42vw, 120px);
       }
 
       .center-glow{
-        width:84px;
-        height:84px;
+        width:86px;
+        height:86px;
       }
 
       .menu-node{ gap:8px; }
@@ -1244,12 +1322,19 @@
     <main class="main-content">
       <section class="hero-stage">
         <div class="hero-center">
-          <div class="tech-hero open" id="techHero">
+          <div class="tech-hero" id="techHero">
             <div class="hero-stars"></div>
 
-            <div class="globe-holder" aria-hidden="true">
-              <div class="globe-aura"></div>
-              <canvas id="globeCanvas"></canvas>
+            <div class="hero-bg" aria-hidden="true">
+              <div class="bg-core-glow"></div>
+              <div class="bg-ring ring-1"></div>
+              <div class="bg-ring ring-2"></div>
+              <div class="bg-ring ring-3"></div>
+              <div class="bg-ring ring-1 ring-tilt-1"></div>
+              <div class="bg-ring ring-2 ring-tilt-2"></div>
+              <div class="bg-ring ring-3 ring-tilt-3"></div>
+              <div class="bg-lines"></div>
+              <div class="bg-rays"></div>
             </div>
 
             <div class="center-glow"></div>
@@ -1474,8 +1559,6 @@
     </button>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r155/three.min.js"></script>
-
   <script>
     const popupData = {
       ssbmobile: {
@@ -1628,125 +1711,6 @@
     }
 
     window.googleTranslateElementInit = googleTranslateElementInit;
-
-    function initGlobe(){
-      const canvas = document.getElementById("globeCanvas");
-      const holder = document.querySelector(".globe-holder");
-      if (!canvas || !holder || typeof THREE === "undefined") return;
-
-      let renderer, scene, camera, globeGroup;
-      const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-      scene = new THREE.Scene();
-
-      const width = holder.clientWidth;
-      const height = holder.clientHeight;
-
-      camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 1000);
-      camera.position.set(0, 0, 9.5);
-
-      renderer = new THREE.WebGLRenderer({
-        canvas,
-        alpha:true,
-        antialias:true,
-        powerPreference:"low-power"
-      });
-
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
-      renderer.setSize(width, height, false);
-
-      globeGroup = new THREE.Group();
-      scene.add(globeGroup);
-
-      const glowSphere = new THREE.Mesh(
-        new THREE.SphereGeometry(2.82, 28, 28),
-        new THREE.MeshBasicMaterial({
-          color:0x66cfff,
-          transparent:true,
-          opacity:0.05
-        })
-      );
-      globeGroup.add(glowSphere);
-
-      const lineColor = new THREE.Color(0x8adfff);
-      const strongColor = new THREE.Color(0xc5f2ff);
-
-      function makeEllipse(rx, ry, rotationX=0, rotationY=0, rotationZ=0, opacity=0.24, color=lineColor){
-        const curve = new THREE.EllipseCurve(0, 0, rx, ry, 0, Math.PI * 2, false, 0);
-        const points2 = curve.getPoints(180);
-        const points3 = points2.map(p => new THREE.Vector3(p.x, p.y, 0));
-        const geometry = new THREE.BufferGeometry().setFromPoints(points3);
-        const material = new THREE.LineBasicMaterial({
-          color,
-          transparent:true,
-          opacity
-        });
-        const line = new THREE.LineLoop(geometry, material);
-        line.rotation.set(rotationX, rotationY, rotationZ);
-        globeGroup.add(line);
-        return line;
-      }
-
-      function makeCircle3D(radius, axis="x", opacity=0.18, color=lineColor){
-        const curve = new THREE.EllipseCurve(0, 0, radius, radius, 0, Math.PI * 2, false, 0);
-        const pts = curve.getPoints(220).map(p => new THREE.Vector3(p.x, p.y, 0));
-        const geo = new THREE.BufferGeometry().setFromPoints(pts);
-        const mat = new THREE.LineBasicMaterial({
-          color,
-          transparent:true,
-          opacity
-        });
-        const line = new THREE.LineLoop(geo, mat);
-        if (axis === "x") line.rotation.x = Math.PI / 2;
-        if (axis === "y") line.rotation.y = Math.PI / 2;
-        globeGroup.add(line);
-        return line;
-      }
-
-      makeCircle3D(2.55, "x", 0.16, strongColor);
-      makeCircle3D(2.55, "y", 0.16, strongColor);
-
-      makeEllipse(2.55, 2.02, 0, 0, 0, 0.12);
-      makeEllipse(2.55, 1.42, 0, 0, 0, 0.18);
-      makeEllipse(2.55, 0.80, 0, 0, 0, 0.22);
-      makeEllipse(2.55, 0.28, 0, 0, 0, 0.10);
-
-      makeEllipse(0.62, 2.55, 0, 0, 0, 0.20);
-      makeEllipse(1.22, 2.55, 0, 0, 0, 0.20);
-      makeEllipse(1.82, 2.55, 0, 0, 0, 0.16);
-      makeEllipse(2.16, 2.55, 0, 0, 0, 0.09);
-
-      const ring1 = makeCircle3D(2.55, "x", 0.11, lineColor);
-      ring1.rotation.z = Math.PI / 4;
-
-      const ring2 = makeCircle3D(2.55, "x", 0.11, lineColor);
-      ring2.rotation.z = -Math.PI / 4;
-
-      globeGroup.rotation.x = 0.34;
-      globeGroup.rotation.z = 0.10;
-
-      function animate(){
-        if (!isReduced){
-          globeGroup.rotation.y += 0.0045;
-        }
-        renderer.render(scene, camera);
-        requestAnimationFrame(animate);
-      }
-
-      function resize(){
-        const w = holder.clientWidth;
-        const h = holder.clientHeight;
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
-        renderer.setSize(w, h, false);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
-      }
-
-      window.addEventListener("resize", resize);
-      animate();
-    }
-
-    window.addEventListener("load", initGlobe);
   </script>
 
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
