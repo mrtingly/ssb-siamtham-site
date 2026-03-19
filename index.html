@@ -60,7 +60,7 @@
       inset:0;
       pointer-events:none;
       z-index:0;
-      opacity:.048;
+      opacity:.045;
       background-image:
         linear-gradient(rgba(113,197,255,.18) 1px, transparent 1px),
         linear-gradient(90deg, rgba(113,197,255,.18) 1px, transparent 1px);
@@ -228,8 +228,8 @@
       position:absolute;
       inset:0;
       background:
-        linear-gradient(rgba(120,195,255,.024) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(120,195,255,.024) 1px, transparent 1px),
+        linear-gradient(rgba(120,195,255,.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(120,195,255,.022) 1px, transparent 1px),
         radial-gradient(circle at 50% 50%, rgba(120,210,255,.05), transparent 44%);
       background-size:38px 38px, 38px 38px, auto;
       opacity:.55;
@@ -340,6 +340,90 @@
       border-color:rgba(132,219,255,.10);
     }
 
+    /* ORBIT DOTS */
+    .orbit-system{
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:min(62vw, 560px);
+      height:min(62vw, 560px);
+      transform:translate(-50%,-50%);
+      z-index:2;
+      pointer-events:none;
+    }
+
+    .orbit-track{
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
+      border-radius:50%;
+      pointer-events:none;
+    }
+
+    .orbit-track.o1{
+      width:min(40vw, 360px);
+      height:min(40vw, 360px);
+      animation:orbitSpin 10s linear infinite;
+    }
+
+    .orbit-track.o2{
+      width:min(50vw, 450px);
+      height:min(50vw, 450px);
+      animation:orbitSpinReverse 15s linear infinite;
+    }
+
+    .orbit-track.o3{
+      width:min(60vw, 540px);
+      height:min(60vw, 540px);
+      animation:orbitSpin 21s linear infinite;
+    }
+
+    .orbit-track.o4{
+      width:min(48vw, 430px);
+      height:min(48vw, 430px);
+      transform:translate(-50%,-50%) rotate(58deg);
+      animation:orbitTiltA 14s linear infinite;
+    }
+
+    .orbit-track.o5{
+      width:min(56vw, 500px);
+      height:min(56vw, 500px);
+      transform:translate(-50%,-50%) rotate(-42deg);
+      animation:orbitTiltB 18s linear infinite;
+    }
+
+    .orbit-dot{
+      position:absolute;
+      left:50%;
+      top:0;
+      width:9px;
+      height:9px;
+      border-radius:50%;
+      transform:translate(-50%,-50%);
+      background:
+        radial-gradient(circle, #ffffff 0%, #dff7ff 35%, #7dd4ff 72%, rgba(125,212,255,.15) 100%);
+      box-shadow:
+        0 0 8px rgba(255,255,255,.85),
+        0 0 18px rgba(132,219,255,.58),
+        0 0 28px rgba(132,219,255,.20);
+    }
+
+    .orbit-dot.small{
+      width:6px;
+      height:6px;
+    }
+
+    .orbit-dot.large{
+      width:11px;
+      height:11px;
+    }
+
+    .orbit-dot.d2{ top:14%; left:84%; }
+    .orbit-dot.d3{ top:78%; left:18%; }
+    .orbit-dot.d4{ top:50%; left:100%; }
+    .orbit-dot.d5{ top:88%; left:68%; }
+
     .bg-lines{
       position:absolute;
       inset:0;
@@ -376,6 +460,7 @@
       filter:blur(2px);
     }
 
+    /* PARTICLES INWARD */
     .particle-field{
       position:absolute;
       inset:0;
@@ -389,28 +474,26 @@
       width:3px;
       height:3px;
       border-radius:50%;
-      background:radial-gradient(circle, rgba(255,255,255,.95) 0%, rgba(143,223,255,.85) 38%, rgba(78,184,255,.22) 72%, transparent 100%);
-      box-shadow:0 0 8px rgba(112,208,255,.38);
-      opacity:.45;
-      animation:floatParticle var(--dur, 18s) linear infinite;
+      background:radial-gradient(circle, rgba(255,255,255,.96) 0%, rgba(143,223,255,.84) 40%, rgba(78,184,255,.16) 80%, transparent 100%);
+      box-shadow:0 0 8px rgba(112,208,255,.34);
+      opacity:0;
+      left:var(--sx, 50%);
+      top:var(--sy, 50%);
+      animation:moveToCore var(--dur, 10s) linear infinite;
       animation-delay:var(--delay, 0s);
-      left:var(--left, 50%);
-      top:110%;
     }
 
     .particle.sm{
       width:2px;
       height:2px;
-      opacity:.34;
     }
 
     .particle.lg{
       width:4px;
       height:4px;
-      opacity:.56;
     }
 
-    /* TITLE ABOVE LOGO */
+    /* TITLE */
     .hero-system-title{
       position:absolute;
       left:50%;
@@ -436,8 +519,7 @@
       position:absolute;
       inset:-14px -18px;
       border-radius:999px;
-      background:
-        radial-gradient(circle at center, rgba(94,195,255,.08), transparent 64%);
+      background:radial-gradient(circle at center, rgba(94,195,255,.08), transparent 64%);
       filter:blur(10px);
       z-index:0;
     }
@@ -481,8 +563,7 @@
       content:"";
       position:absolute;
       inset:0;
-      background:
-        linear-gradient(90deg, transparent 0%, rgba(116,214,255,.04) 20%, rgba(116,214,255,.14) 50%, rgba(116,214,255,.04) 80%, transparent 100%);
+      background:linear-gradient(90deg, transparent 0%, rgba(116,214,255,.04) 20%, rgba(116,214,255,.14) 50%, rgba(116,214,255,.04) 80%, transparent 100%);
       transform:translateX(-100%);
       animation:titleSweep 4.8s linear infinite;
       pointer-events:none;
@@ -522,12 +603,11 @@
       top:100%;
       transform:translateX(-50%);
       margin-top:10px;
-      font-family:'Orbitron',sans-serif;
-      font-size:10px;
+      font-family:'Prompt',sans-serif;
+      font-size:12px;
       font-weight:700;
-      letter-spacing:4px;
-      text-transform:uppercase;
-      color:rgba(196,236,255,.74);
+      letter-spacing:.8px;
+      color:rgba(210,240,255,.80);
       white-space:nowrap;
       text-shadow:0 0 10px rgba(141,222,255,.18);
     }
@@ -539,7 +619,7 @@
       width:132px;
       height:132px;
       transform:translate(-50%, -50%);
-      z-index:2;
+      z-index:3;
       pointer-events:none;
       background:
         radial-gradient(circle,
@@ -562,7 +642,7 @@
       border:1px solid rgba(138,223,255,.10);
       opacity:0;
       pointer-events:none;
-      z-index:2;
+      z-index:3;
     }
 
     .center-pulse.active{
@@ -812,14 +892,13 @@
       line-height:1;
       position:relative;
       z-index:1;
-      gap:4px;
+      gap:5px;
     }
 
     .node-title{
       font-size:14px;
       font-weight:900;
-      letter-spacing:.7px;
-      text-transform:uppercase;
+      letter-spacing:.3px;
       color:#eefaff;
       text-shadow:
         0 0 8px rgba(141,222,255,.52),
@@ -829,11 +908,10 @@
     }
 
     .node-sub{
-      font-size:8px;
+      font-size:10px;
       font-weight:600;
-      letter-spacing:1.6px;
-      text-transform:uppercase;
-      color:rgba(203,236,255,.72);
+      letter-spacing:.2px;
+      color:rgba(215,241,255,.78);
       white-space:nowrap;
     }
 
@@ -907,9 +985,9 @@
     }
 
     .menu-node.bottom .node-sub{
-      font-size:8px;
-      letter-spacing:2px;
-      color:rgba(255,214,218,.88);
+      font-size:10px;
+      color:rgba(255,218,221,.88);
+      letter-spacing:.3px;
     }
 
     .menu-node.bottom:hover .node-shell{
@@ -1317,20 +1395,44 @@
       to{ transform:translate(-50%,-50%) rotate(0deg); }
     }
 
+    @keyframes orbitSpin{
+      from{ transform:translate(-50%,-50%) rotate(0deg); }
+      to{ transform:translate(-50%,-50%) rotate(360deg); }
+    }
+
+    @keyframes orbitSpinReverse{
+      from{ transform:translate(-50%,-50%) rotate(360deg); }
+      to{ transform:translate(-50%,-50%) rotate(0deg); }
+    }
+
+    @keyframes orbitTiltA{
+      from{ transform:translate(-50%,-50%) rotate(58deg) rotate(0deg); }
+      to{ transform:translate(-50%,-50%) rotate(58deg) rotate(360deg); }
+    }
+
+    @keyframes orbitTiltB{
+      from{ transform:translate(-50%,-50%) rotate(-42deg) rotate(360deg); }
+      to{ transform:translate(-50%,-50%) rotate(-42deg) rotate(0deg); }
+    }
+
     @keyframes runEnergy{
       from{ stroke-dashoffset:0; }
       to{ stroke-dashoffset:-352; }
     }
 
-    @keyframes floatParticle{
+    @keyframes moveToCore{
       0%{
-        transform:translate3d(0, 0, 0) scale(.8);
+        transform:translate(0,0) scale(1);
         opacity:0;
       }
-      10%{ opacity:var(--op, .45); }
-      85%{ opacity:var(--op, .45); }
+      8%{
+        opacity:var(--op, .44);
+      }
+      72%{
+        opacity:var(--op, .44);
+      }
       100%{
-        transform:translate3d(var(--drift, 0px), -128vh, 0) scale(1.18);
+        transform:translate(var(--tx, 0px), var(--ty, 0px)) scale(.45);
         opacity:0;
       }
     }
@@ -1378,14 +1480,8 @@
         padding:14px 28px;
       }
 
-      .hero-system-title-text{
-        font-size:28px;
-      }
-
-      .hero-system-title-sub{
-        font-size:9px;
-        letter-spacing:3px;
-      }
+      .hero-system-title-text{ font-size:28px; }
+      .hero-system-title-sub{ font-size:10px; }
 
       .center-glow{ width:112px; height:112px; }
 
@@ -1396,7 +1492,7 @@
       .menu-node.bottom .node-shell{ min-width:286px; min-height:66px; }
 
       .node-title{ font-size:12px; }
-      .node-sub{ font-size:7px; letter-spacing:1.4px; }
+      .node-sub{ font-size:9px; }
       .menu-node.bottom .node-title{ font-size:20px; }
 
       .n1{ --x:29%; --y:35%; }
@@ -1458,9 +1554,7 @@
         width:min(92%, 380px);
       }
 
-      .hero-system-title::after{
-        width:88%;
-      }
+      .hero-system-title::after{ width:88%; }
 
       .hero-system-title-inner{
         min-height:56px;
@@ -1475,10 +1569,9 @@
 
       .hero-system-title-sub{
         margin-top:8px;
-        font-size:6px;
-        letter-spacing:2px;
-        white-space:normal;
+        font-size:8px;
         width:100%;
+        white-space:normal;
       }
 
       .logo-core{
@@ -1495,6 +1588,17 @@
         width:180px;
         height:180px;
       }
+
+      .orbit-system{
+        width:min(86vw, 320px);
+        height:min(86vw, 320px);
+      }
+
+      .orbit-track.o1{ width:min(66vw, 220px); height:min(66vw, 220px); }
+      .orbit-track.o2{ width:min(74vw, 260px); height:min(74vw, 260px); }
+      .orbit-track.o3{ width:min(82vw, 300px); height:min(82vw, 300px); }
+      .orbit-track.o4{ width:min(72vw, 250px); height:min(72vw, 250px); }
+      .orbit-track.o5{ width:min(80vw, 290px); height:min(80vw, 290px); }
 
       .menu-node{ gap:8px; }
 
@@ -1527,21 +1631,11 @@
 
       .node-text{ gap:3px; }
 
-      .node-title{
-        font-size:9px;
-        letter-spacing:.4px;
-      }
-
-      .node-sub{
-        font-size:5.4px;
-        letter-spacing:.8px;
-      }
+      .node-title{ font-size:9px; }
+      .node-sub{ font-size:6px; }
 
       .menu-node.bottom .node-title{ font-size:14px; }
-      .menu-node.bottom .node-sub{
-        font-size:6px;
-        letter-spacing:1px;
-      }
+      .menu-node.bottom .node-sub{ font-size:7px; }
 
       .n1{ --x:31%; --y:34%; }
       .n2{ --x:31%; --y:42%; }
@@ -1669,27 +1763,31 @@
               <div class="bg-ring ring-1 ring-tilt-1"></div>
               <div class="bg-ring ring-2 ring-tilt-2"></div>
               <div class="bg-ring ring-3 ring-tilt-3"></div>
+
+              <div class="orbit-system">
+                <div class="orbit-track o1">
+                  <span class="orbit-dot"></span>
+                  <span class="orbit-dot small d3"></span>
+                </div>
+                <div class="orbit-track o2">
+                  <span class="orbit-dot d2"></span>
+                </div>
+                <div class="orbit-track o3">
+                  <span class="orbit-dot large d4"></span>
+                </div>
+                <div class="orbit-track o4">
+                  <span class="orbit-dot small d5"></span>
+                </div>
+                <div class="orbit-track o5">
+                  <span class="orbit-dot d3"></span>
+                </div>
+              </div>
+
               <div class="bg-lines"></div>
               <div class="bg-rays"></div>
               <div class="scan-sweep"></div>
 
-              <div class="particle-field" id="particleField">
-                <span class="particle sm" style="--left:8%; --dur:19s; --delay:-3s; --drift:16px; --op:.28;"></span>
-                <span class="particle" style="--left:14%; --dur:15s; --delay:-8s; --drift:-12px; --op:.36;"></span>
-                <span class="particle lg" style="--left:19%; --dur:22s; --delay:-6s; --drift:24px; --op:.50;"></span>
-                <span class="particle sm" style="--left:26%; --dur:17s; --delay:-4s; --drift:-20px; --op:.26;"></span>
-                <span class="particle" style="--left:32%; --dur:20s; --delay:-12s; --drift:18px; --op:.34;"></span>
-                <span class="particle sm" style="--left:38%; --dur:14s; --delay:-10s; --drift:8px; --op:.24;"></span>
-                <span class="particle lg" style="--left:44%; --dur:24s; --delay:-5s; --drift:-14px; --op:.56;"></span>
-                <span class="particle sm" style="--left:49%; --dur:16s; --delay:-1s; --drift:10px; --op:.30;"></span>
-                <span class="particle" style="--left:54%; --dur:18s; --delay:-9s; --drift:-10px; --op:.34;"></span>
-                <span class="particle sm" style="--left:60%; --dur:22s; --delay:-7s; --drift:22px; --op:.26;"></span>
-                <span class="particle lg" style="--left:66%; --dur:20s; --delay:-11s; --drift:-18px; --op:.48;"></span>
-                <span class="particle" style="--left:72%; --dur:16s; --delay:-2s; --drift:14px; --op:.38;"></span>
-                <span class="particle sm" style="--left:78%; --dur:21s; --delay:-13s; --drift:-12px; --op:.28;"></span>
-                <span class="particle lg" style="--left:84%; --dur:19s; --delay:-6s; --drift:18px; --op:.50;"></span>
-                <span class="particle sm" style="--left:90%; --dur:23s; --delay:-15s; --drift:-16px; --op:.24;"></span>
-              </div>
+              <div class="particle-field" id="particleField"></div>
             </div>
 
             <svg class="energy-svg" id="energySvg" viewBox="0 0 1000 700" preserveAspectRatio="none" aria-hidden="true">
@@ -1716,7 +1814,7 @@
               <div class="hero-system-title-inner">
                 <span class="hero-system-title-text">Stealth Safety Bank Mobile System</span>
               </div>
-              <span class="hero-system-title-sub">Advanced Secure Financial Protection Platform</span>
+              <span class="hero-system-title-sub">ระบบความปลอดภัยทางการเงินสำหรับการใช้งานเฉพาะด้าน</span>
             </div>
 
             <div class="center-glow"></div>
@@ -1731,8 +1829,8 @@
                 <span class="node-dot"></span>
                 <div class="node-shell">
                   <span class="node-text">
-                    <span class="node-title en-font">SSB MOBILE</span>
-                    <span class="node-sub en-font">SECURE MOBILE ACCESS</span>
+                    <span class="node-title th-font">ระบบ SSB Mobile</span>
+                    <span class="node-sub th-font">การใช้งานแยกเฉพาะเพื่อความปลอดภัยทางการเงิน</span>
                   </span>
                 </div>
               </button>
@@ -1741,8 +1839,8 @@
                 <span class="node-dot"></span>
                 <div class="node-shell">
                   <span class="node-text">
-                    <span class="node-title en-font">STEALTH SAFETY BANK</span>
-                    <span class="node-sub en-font">PRIVATE BANKING SHIELD</span>
+                    <span class="node-title th-font">Stealth Safety Bank</span>
+                    <span class="node-sub th-font">แนวคิดป้องกันข้อมูลและเงินอย่างเป็นระบบ</span>
                   </span>
                 </div>
               </button>
@@ -1751,8 +1849,8 @@
                 <span class="node-dot"></span>
                 <div class="node-shell">
                   <span class="node-text">
-                    <span class="node-title en-font">AGENT LOGIN</span>
-                    <span class="node-sub en-font">DEALER MEMBER ACCESS</span>
+                    <span class="node-title th-font">เข้าสู่ระบบตัวแทน</span>
+                    <span class="node-sub th-font">สำหรับสมาชิกและตัวแทนจำหน่ายของบริษัท</span>
                   </span>
                 </div>
               </a>
@@ -1761,8 +1859,8 @@
                 <span class="node-dot"></span>
                 <div class="node-shell">
                   <span class="node-text">
-                    <span class="node-title en-font">ABOUT COMPANY</span>
-                    <span class="node-sub en-font">SIAM TUM PROFILE</span>
+                    <span class="node-title th-font">เกี่ยวกับบริษัท</span>
+                    <span class="node-sub th-font">ข้อมูลบริษัทและแนวคิดการพัฒนาระบบ</span>
                   </span>
                 </div>
               </a>
@@ -1770,8 +1868,8 @@
               <button class="menu-node right n5 energy-source" type="button" data-popup="stealthbank" data-line="5">
                 <div class="node-shell">
                   <span class="node-text">
-                    <span class="node-title en-font">STEALTH SAFETY BANK</span>
-                    <span class="node-sub en-font">PRIVATE BANKING SHIELD</span>
+                    <span class="node-title th-font">ระบบปกป้องทางการเงิน</span>
+                    <span class="node-sub th-font">ลดความเสี่ยงจากการเข้าถึงโดยไม่ได้รับอนุญาต</span>
                   </span>
                 </div>
                 <span class="node-dot"></span>
@@ -1780,8 +1878,8 @@
               <button class="menu-node right n6 energy-source" type="button" data-popup="safetybook" data-line="6">
                 <div class="node-shell">
                   <span class="node-text">
-                    <span class="node-title en-font">STEALTH SAFETY BOOK</span>
-                    <span class="node-sub en-font">DISCREET STORAGE SYSTEM</span>
+                    <span class="node-title th-font">Stealth Safety Book</span>
+                    <span class="node-sub th-font">อุปกรณ์จัดเก็บแบบอำพรางเพื่อความปลอดภัย</span>
                   </span>
                 </div>
                 <span class="node-dot"></span>
@@ -1790,8 +1888,8 @@
               <button class="menu-node right n7 energy-source" type="button" data-popup="flare" data-line="7">
                 <div class="node-shell">
                   <span class="node-text">
-                    <span class="node-title en-font">FLARE TECHNOLOGY</span>
-                    <span class="node-sub en-font">AWARENESS PROTECTION MODE</span>
+                    <span class="node-title th-font">Flare Technology</span>
+                    <span class="node-sub th-font">ระบบเตือนและเสริมความรอบคอบในการใช้งาน</span>
                   </span>
                 </div>
                 <span class="node-dot"></span>
@@ -1800,8 +1898,8 @@
               <button class="menu-node right n8 energy-source" type="button" id="contactButton" data-line="8">
                 <div class="node-shell">
                   <span class="node-text">
-                    <span class="node-title en-font">CONTACT</span>
-                    <span class="node-sub en-font">SIAM TUM COMPANY</span>
+                    <span class="node-title th-font">ติดต่อเรา</span>
+                    <span class="node-sub th-font">ช่องทางติดต่อและข้อมูลที่ตั้งของบริษัท</span>
                   </span>
                 </div>
                 <span class="node-dot"></span>
@@ -1811,8 +1909,8 @@
                 <span class="node-dot"></span>
                 <div class="node-shell">
                   <span class="node-text">
-                    <span class="node-title en-font">START ORDER</span>
-                    <span class="node-sub en-font">GO TO PRODUCT BOOKING</span>
+                    <span class="node-title th-font">เริ่มสั่งจอง</span>
+                    <span class="node-sub th-font">ไปยังหน้าระบบจองสินค้าและบริการ</span>
                   </span>
                 </div>
               </a>
@@ -1886,7 +1984,7 @@
   <div id="infoPopup" class="popup-backdrop">
     <div class="popup-card">
       <div class="popup-head">
-        <h3 id="infoTitle" class="en-font">TITLE</h3>
+        <h3 id="infoTitle" class="th-font">หัวข้อ</h3>
         <button class="popup-x sound-click" type="button" id="closeInfoPopupTop">×</button>
       </div>
 
@@ -1914,22 +2012,22 @@
     <div class="chat-menu" id="chatMenu">
       <a class="chat-item line sound-click" href="https://line.me/R/ti/p/@siamtham" target="_blank" rel="noopener">
         <span class="chat-icon en-font">LINE</span>
-        <span class="en-font">LINE OFFICIAL</span>
+        <span class="th-font">LINE Official</span>
       </a>
 
       <a class="chat-item facebook sound-click" href="https://www.facebook.com/profile.php?id=61556844339863" target="_blank" rel="noopener">
         <span class="chat-icon en-font">FB</span>
-        <span class="en-font">FACEBOOK</span>
+        <span class="th-font">Facebook</span>
       </a>
 
       <a class="chat-item youtube sound-click" href="https://www.youtube.com/@siamtham" target="_blank" rel="noopener">
         <span class="chat-icon en-font">YT</span>
-        <span class="en-font">YOUTUBE</span>
+        <span class="th-font">YouTube</span>
       </a>
 
       <a class="chat-item tiktok sound-click" href="#" target="_blank" rel="noopener">
         <span class="chat-icon en-font">TT</span>
-        <span class="en-font">TIKTOK</span>
+        <span class="th-font">TikTok</span>
       </a>
     </div>
 
@@ -1945,7 +2043,7 @@
   <script>
     const popupData = {
       ssbmobile: {
-        title: "SSB MOBILE",
+        title: "ระบบ SSB Mobile",
         video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
         text: `
           <p>SSB Mobile คือระบบการใช้งานอุปกรณ์สำหรับธุรกรรมการเงินที่แยกจากการใช้งานทั่วไป เพื่อลดความเสี่ยงจากแอปที่ไม่จำเป็น การหลอกลวง และการโจมตีทางไซเบอร์</p>
@@ -1954,7 +2052,7 @@
         `
       },
       stealthbank: {
-        title: "STEALTH SAFETY BANK",
+        title: "Stealth Safety Bank",
         video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
         text: `
           <p>Stealth Safety Bank คือแนวคิดการปกป้องการเงินด้วยการลดการเปิดเผยข้อมูล ลดช่องทางเสี่ยง และจัดระบบการใช้งานให้ปลอดภัยกว่ามือถือทั่วไป</p>
@@ -1963,7 +2061,7 @@
         `
       },
       safetybook: {
-        title: "STEALTH SAFETY BOOK",
+        title: "Stealth Safety Book",
         video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
         text: `
           <p>Stealth Safety Book คืออุปกรณ์จัดเก็บที่ออกแบบให้ดูเหมือนหนังสือ เพื่ออำพรางสิ่งสำคัญและเสริมความปลอดภัยในการเก็บอุปกรณ์หรือข้อมูลที่มีมูลค่าสูง</p>
@@ -1972,7 +2070,7 @@
         `
       },
       flare: {
-        title: "FLARE TECHNOLOGY",
+        title: "Flare Technology",
         video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
         text: `
           <p>Flare Technology คือแนวคิดเสริมด้านความปลอดภัยที่ช่วยให้การใช้งานระบบมีความชัดเจน รอบคอบ และเตือนผู้ใช้ให้ไม่ตกเป็นเหยื่อของความเสี่ยงรูปแบบต่าง ๆ</p>
@@ -2190,30 +2288,59 @@
       });
     }
 
-    window.addEventListener("load", buildEnergyLines);
-    window.addEventListener("resize", buildEnergyLines);
-
-    function createExtraParticles(){
+    function createInwardParticles(){
       const field = document.getElementById("particleField");
-      if (!field) return;
+      const hero = document.getElementById("techHero");
+      if (!field || !hero) return;
+
+      field.innerHTML = "";
       const isMobile = window.innerWidth <= 760;
-      const count = isMobile ? 10 : 22;
+      const count = isMobile ? 26 : 54;
+
+      const rect = hero.getBoundingClientRect();
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
 
       for(let i = 0; i < count; i++){
         const p = document.createElement("span");
         p.className = "particle";
-        if (Math.random() > 0.7) p.classList.add("sm");
-        if (Math.random() > 0.8) p.classList.add("lg");
-        p.style.setProperty("--left", `${Math.random() * 100}%`);
-        p.style.setProperty("--dur", `${14 + Math.random() * 12}s`);
-        p.style.setProperty("--delay", `${-Math.random() * 20}s`);
-        p.style.setProperty("--drift", `${(-24 + Math.random() * 48).toFixed(0)}px`);
-        p.style.setProperty("--op", `${(0.18 + Math.random() * 0.32).toFixed(2)}`);
+
+        const r = Math.random();
+        if (r > 0.72) p.classList.add("sm");
+        if (r > 0.90) p.classList.add("lg");
+
+        const side = Math.floor(Math.random() * 4);
+        let sx, sy;
+
+        if (side === 0) { sx = Math.random() * rect.width; sy = -20 - Math.random() * 60; }
+        if (side === 1) { sx = rect.width + 20 + Math.random() * 60; sy = Math.random() * rect.height; }
+        if (side === 2) { sx = Math.random() * rect.width; sy = rect.height + 20 + Math.random() * 60; }
+        if (side === 3) { sx = -20 - Math.random() * 60; sy = Math.random() * rect.height; }
+
+        const tx = centerX - sx + (Math.random() * 60 - 30);
+        const ty = centerY - sy + (Math.random() * 60 - 30);
+
+        p.style.setProperty("--sx", `${sx}px`);
+        p.style.setProperty("--sy", `${sy}px`);
+        p.style.setProperty("--tx", `${tx}px`);
+        p.style.setProperty("--ty", `${ty}px`);
+        p.style.setProperty("--dur", `${5.5 + Math.random() * 5.5}s`);
+        p.style.setProperty("--delay", `${-Math.random() * 9}s`);
+        p.style.setProperty("--op", `${(0.18 + Math.random() * 0.34).toFixed(2)}`);
+
         field.appendChild(p);
       }
     }
 
-    createExtraParticles();
+    window.addEventListener("load", () => {
+      buildEnergyLines();
+      createInwardParticles();
+    });
+
+    window.addEventListener("resize", () => {
+      buildEnergyLines();
+      createInwardParticles();
+    });
   </script>
 
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
