@@ -184,6 +184,7 @@
   cursor:pointer;
   position:relative;
   transition:.3s ease;
+  box-shadow:0 6px 18px rgba(0,0,0,0.25);
 }
 
 .switch-knob{
@@ -195,6 +196,7 @@
   top:2px;
   left:3px;
   transition:.3s ease;
+  box-shadow:0 4px 10px rgba(0,0,0,0.25);
 }
 
 body.light-mode .switch-knob{
@@ -2289,6 +2291,22 @@ body.light-mode .node-note{
   color:#0b2a5b;
 }
     
+    body{
+  transition:background .4s ease, color .4s ease;
+}
+
+.tech-hero{
+  transition:background .4s ease, box-shadow .4s ease;
+}
+
+.node-shell{
+  transition:background .3s ease, box-shadow .3s ease, transform .2s ease;
+}
+
+.mode-label{
+  transition:color .3s ease;
+}
+    
   </style>
 </head>
 <body>
@@ -2311,11 +2329,11 @@ body.light-mode .node-note{
     </div>
 
     <div class="theme-switch-wrap">
-      <span class="mode-label">Night</span>
+      <span class="mode-label">Dark</span>
       <button id="themeToggle" class="theme-switch" type="button" aria-label="Toggle theme">
         <span class="switch-knob"></span>
       </button>
-      <span class="mode-label">Bright</span>
+      <span class="mode-label">Light</span>
     </div>
 
     <div class="topbar-actions">
