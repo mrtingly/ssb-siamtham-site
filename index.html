@@ -60,38 +60,6 @@
     .th-font{ font-family:'Prompt',sans-serif; }
     .en-font{ font-family:'Orbitron',sans-serif; }
 
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      z-index:0;
-      pointer-events:none;
-      opacity:.16;
-      background-image:
-        radial-gradient(circle at 14% 22%, rgba(255,255,255,.85) 0 1px, transparent 1.8px),
-        radial-gradient(circle at 83% 18%, rgba(255,255,255,.70) 0 1px, transparent 1.8px),
-        radial-gradient(circle at 74% 72%, rgba(255,255,255,.48) 0 1px, transparent 1.8px),
-        radial-gradient(circle at 24% 74%, rgba(255,255,255,.54) 0 1px, transparent 1.8px),
-        radial-gradient(circle at 34% 42%, rgba(255,255,255,.50) 0 1px, transparent 1.8px),
-        radial-gradient(circle at 58% 24%, rgba(255,255,255,.42) 0 1px, transparent 1.8px),
-        radial-gradient(circle at 91% 62%, rgba(255,255,255,.38) 0 1px, transparent 1.8px);
-    }
-
-    body::after{
-      content:"";
-      position:fixed;
-      inset:0;
-      z-index:0;
-      pointer-events:none;
-      opacity:.04;
-      background-image:
-        linear-gradient(rgba(113,197,255,.18) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(113,197,255,.18) 1px, transparent 1px);
-      background-size:40px 40px;
-      mask-image:radial-gradient(circle at center, rgba(0,0,0,.92) 0%, rgba(0,0,0,.72) 46%, transparent 84%);
-      -webkit-mask-image:radial-gradient(circle at center, rgba(0,0,0,.92) 0%, rgba(0,0,0,.72) 46%, transparent 84%);
-    }
-
     .site-wrap{
       position:relative;
       z-index:1;
