@@ -2107,7 +2107,76 @@
     height:58px;
   }
 }
+@media (max-width:760px){
 
+  /* ===== พื้นหลังให้สว่างขึ้น ===== */
+  .tech-hero{
+    background:linear-gradient(180deg,#f5f8ff 0%,#eaf1ff 100%);
+    box-shadow:none;
+  }
+
+  .tech-hero::after{
+    background:rgba(255,255,255,0.6);
+    border:1px solid rgba(0,0,0,0.05);
+  }
+
+  /* ===== โลโก้ชัดขึ้น ===== */
+  .logo-core{
+    filter:drop-shadow(0 6px 14px rgba(0,0,0,0.15));
+  }
+
+  /* ===== ข้อความแนะนำ (สำคัญมาก) ===== */
+  .node-note{
+    font-size:18px;
+    font-weight:700;
+    color:#0b2a5b;
+    background:#ffffff;
+    border:1px solid rgba(0,0,0,0.08);
+    box-shadow:0 6px 18px rgba(0,0,0,0.08);
+  }
+
+  /* ===== การ์ดเมนู ===== */
+  .node-shell{
+    background:#ffffff;
+    border:1px solid rgba(0,0,0,0.08);
+    box-shadow:0 6px 14px rgba(0,0,0,0.08);
+  }
+
+  .node-title{
+    font-size:14px;
+    font-weight:700;
+    color:#0b2a5b;
+  }
+
+  .node-sub{
+    font-size:11px;
+    color:#555;
+  }
+
+  /* ===== ปุ่มสั่งจอง ===== */
+  .menu-node.bottom .node-shell{
+    background:linear-gradient(135deg,#4f7cff,#6ea8ff);
+    color:#fff;
+    box-shadow:0 10px 24px rgba(79,124,255,0.4);
+  }
+
+  .menu-node.bottom .node-title{
+    font-size:20px;
+    color:#fff;
+  }
+
+  /* ===== ลดความหน่วง ===== */
+  .hero-bg,
+  .orbit-system,
+  .bg-ring,
+  .orbit-track,
+  .orbit-dot,
+  .center-pulse,
+  .scan-sweep,
+  .particle-field{
+    display:none !important;
+  }
+}
     @media (prefers-reduced-motion: reduce){
       *,
       *::before,
