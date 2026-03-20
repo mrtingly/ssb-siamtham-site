@@ -2171,8 +2171,9 @@ body.light-mode .company-detail strong{ color:#173b69; }
     transition:none !important;
     scroll-behavior:auto !important;
   }
+}
 
-  /* ===== FIX HEADER + SEARCH ===== */
+/* ===== FIX HEADER + SEARCH ===== */
 
 body{
   padding-top:0 !important;
@@ -2188,5 +2189,19 @@ body{
 
 .topbar-inner{
   align-items:center !important;
+}
+
+.main-content{
+  margin-top:20px !important;
+}
+
+  /* ===== FIX HEADER OVERLAY ===== */
+
+.ssb-topbar{
+  position:relative !important;
+}
+
+.main-content{
+  margin-top:20px !important;
 }
 }
