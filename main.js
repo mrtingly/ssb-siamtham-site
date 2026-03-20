@@ -159,70 +159,75 @@ const agentMockData = [
   { name: "Agent Eastern Secure", area: "Chonburi", code: "AG-CBI-002" }
 ];
 
+const $ = (selector, root = document) => root.querySelector(selector);
+const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
+
 const body = document.body;
-const techHero = document.getElementById("techHero");
-const logoMenuButton = document.getElementById("logoMenuButton");
-const centerPulse = document.getElementById("centerPulse");
-const nodeNote = document.getElementById("nodeNote");
-const themeToggle = document.getElementById("themeToggle");
+const techHero = $("#techHero");
+const logoMenuButton = $("#logoMenuButton");
+const centerPulse = $("#centerPulse");
+const nodeNote = $("#nodeNote");
+const themeToggle = $("#themeToggle");
 
-const infoPopup = document.getElementById("infoPopup");
-const infoTitle = document.getElementById("infoTitle");
-const infoVideo = document.getElementById("infoVideo");
-const infoSubtitle = document.getElementById("infoSubtitle");
-const infoLead = document.getElementById("infoLead");
-const infoBadges = document.getElementById("infoBadges");
-const infoFeatures = document.getElementById("infoFeatures");
-const infoImpacts = document.getElementById("infoImpacts");
-const infoUseCases = document.getElementById("infoUseCases");
-const popupKicker = document.getElementById("popupKicker");
-const videoNote = document.getElementById("videoNote");
+const infoPopup = $("#infoPopup");
+const infoTitle = $("#infoTitle");
+const infoVideo = $("#infoVideo");
+const infoSubtitle = $("#infoSubtitle");
+const infoLead = $("#infoLead");
+const infoBadges = $("#infoBadges");
+const infoFeatures = $("#infoFeatures");
+const infoImpacts = $("#infoImpacts");
+const infoUseCases = $("#infoUseCases");
+const popupKicker = $("#popupKicker");
+const videoNote = $("#videoNote");
 
-const companyPopup = document.getElementById("companyPopup");
-const contactButton = document.getElementById("contactButton");
+const companyPopup = $("#companyPopup");
+const contactButton = $("#contactButton");
 
-const agentSearchForm = document.getElementById("agentSearchForm");
-const agentSearchInput = document.getElementById("agentSearchInput");
-const agentDropdown = document.getElementById("agentDropdown");
-const agentResults = document.getElementById("agentResults");
+const agentSearchForm = $("#agentSearchForm");
+const agentSearchInput = $("#agentSearchInput");
+const agentDropdown = $("#agentDropdown");
+const agentResults = $("#agentResults");
 
-const chatWidget = document.getElementById("chatWidget");
-const chatToggle = document.getElementById("chatToggle");
+const chatWidget = $("#chatWidget");
+const chatToggle = $("#chatToggle");
 
 let lastFocusedElement = null;
-let audioCtx;
-let googleTranslateReady = false;
-let resizeTimer;
+let audioCtx = null;
+let resizeTimer = null;
 
-function isMobileView(){
+function isMobileView() {
   return window.innerWidth <= 760;
 }
 
-function pulseCenter(){
+function pulseCenter() {
   if (!centerPulse || isMobileView()) return;
   centerPulse.classList.remove("active");
   void centerPulse.offsetWidth;
   centerPulse.classList.add("active");
 }
 
-function syncHeroLabels(){
+function syncHeroLabels() {
   const isOpen = techHero?.classList.contains("open");
   nodeNote?.classList.toggle("hidden", !!isOpen);
 }
 
-function lockBodyScroll(lock){
+function lockBodyScroll(lock) {
   body.style.overflow = lock ? "hidden" : "";
 }
 
-function renderBadges(items){
+function renderBadges(items = []) {
+  if (!infoBadges) return;
   infoBadges.innerHTML = items.map(item => `<span class="popup-badge th-font">${item}</span>`).join("");
 }
 
-function renderFeatures(items, target){
+function renderFeatures(items = [], target) {
+  if (!target) return;
   target.innerHTML = items.map(item => `<li class="th-font">${item}</li>`).join("");
 }
 
-function renderImpacts(items){
+function renderImpacts(items = []) {
+  if (!infoImpacts) return;
   infoImpacts.innerHTML = items.map(item => `
     <div class="impact-card">
       <div class="impact-value th-font">${item.value}</div>
@@ -231,31 +236,33 @@ function renderImpacts(items){
   `).join("");
 }
 
-function getFocusableElements(container){
-  return Array.from(
-    container.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
-  ).filter(el => !el.hasAttribute("disabled"));
+function getFocusableElements(container) {
+  if (!container) return [];
+  return $$('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])', container)
+    .filter(el => !el.hasAttribute("disabled"));
 }
 
-function trapFocus(event, container){
+function trapFocus(event, container) {
   if (event.key !== "Tab") return;
+
   const focusables = getFocusableElements(container);
   if (!focusables.length) return;
 
   const first = focusables[0];
   const last = focusables[focusables.length - 1];
 
-  if (event.shiftKey && document.activeElement === first){
+  if (event.shiftKey && document.activeElement === first) {
     event.preventDefault();
     last.focus();
-  } else if (!event.shiftKey && document.activeElement === last){
+  } else if (!event.shiftKey && document.activeElement === last) {
     event.preventDefault();
     first.focus();
   }
 }
 
-function openPopup(el){
+function openPopup(el) {
   if (!el) return;
+
   lastFocusedElement = document.activeElement;
   el.style.display = "flex";
   el.setAttribute("aria-hidden", "false");
@@ -270,8 +277,9 @@ function openPopup(el){
   }
 }
 
-function closePopup(el, onAfterClose){
+function closePopup(el, onAfterClose) {
   if (!el) return;
+
   el.classList.remove("show");
   el.setAttribute("aria-hidden", "true");
 
@@ -282,7 +290,10 @@ function closePopup(el, onAfterClose){
       onAfterClose();
     }
 
-    if (infoPopup.style.display !== "flex" && companyPopup.style.display !== "flex") {
+    const infoOpen = infoPopup?.style.display === "flex";
+    const companyOpen = companyPopup?.style.display === "flex";
+
+    if (!infoOpen && !companyOpen) {
       lockBodyScroll(false);
     }
 
@@ -292,61 +303,61 @@ function closePopup(el, onAfterClose){
   }, 180);
 }
 
-function openInfoPopup(key){
+function openInfoPopup(key) {
   const data = popupData[key];
   if (!data) return;
 
-  popupKicker.textContent = data.kicker;
-  infoTitle.textContent = data.title;
-  infoSubtitle.textContent = data.subtitle;
-  infoLead.textContent = data.lead;
-  renderBadges(data.badges || []);
-  renderFeatures(data.features || [], infoFeatures);
-  renderImpacts(data.impacts || []);
-  renderFeatures(data.useCases || [], infoUseCases);
-  videoNote.textContent = data.videoNote || "";
+  if (popupKicker) popupKicker.textContent = data.kicker;
+  if (infoTitle) infoTitle.textContent = data.title;
+  if (infoSubtitle) infoSubtitle.textContent = data.subtitle;
+  if (infoLead) infoLead.textContent = data.lead;
+  if (videoNote) videoNote.textContent = data.videoNote || "";
 
-  const params = new URLSearchParams({
-    rel: "0",
-    autoplay: "0",
-    mute: "0",
-    controls: "1",
-    modestbranding: "1",
-    playsinline: "1"
-  });
+  renderBadges(data.badges);
+  renderFeatures(data.features, infoFeatures);
+  renderImpacts(data.impacts);
+  renderFeatures(data.useCases, infoUseCases);
 
-  infoVideo.src = `${data.video}?${params.toString()}`;
+  if (infoVideo) {
+    const params = new URLSearchParams({
+      rel: "0",
+      autoplay: "0",
+      mute: "0",
+      controls: "1",
+      modestbranding: "1",
+      playsinline: "1"
+    });
+
+    infoVideo.src = `${data.video}?${params.toString()}`;
+  }
+
   openPopup(infoPopup);
 }
 
-function closeInfoPopup(){
+function closeInfoPopup() {
   closePopup(infoPopup, () => {
-    infoVideo.src = "";
+    if (infoVideo) infoVideo.src = "";
   });
 }
 
-function openCompanyPopup(){
+function openCompanyPopup() {
   openPopup(companyPopup);
 }
 
-function closeCompanyPopup(){
+function closeCompanyPopup() {
   closePopup(companyPopup);
 }
 
-function buildEnergyLines(){
-  if (isMobileView()) return;
+function buildEnergyLines() {
+  if (isMobileView() || !techHero || !logoMenuButton) return;
 
-  const hero = document.getElementById("techHero");
-  const logo = document.getElementById("logoMenuButton");
-  if (!hero || !logo) return;
-
-  const heroRect = hero.getBoundingClientRect();
-  const logoRect = logo.getBoundingClientRect();
+  const heroRect = techHero.getBoundingClientRect();
+  const logoRect = logoMenuButton.getBoundingClientRect();
 
   const cx = ((logoRect.left + logoRect.width / 2) - heroRect.left) / heroRect.width * 1000;
   const cy = ((logoRect.top + logoRect.height / 2) - heroRect.top) / heroRect.height * 700;
 
-  const sources = hero.querySelectorAll(".energy-source");
+  const sources = $$(".energy-source", techHero);
 
   sources.forEach((el, index) => {
     const rect = el.getBoundingClientRect();
@@ -358,15 +369,17 @@ function buildEnergyLines(){
     const midX2 = cx - bend * 0.55;
     const d = `M ${localX} ${localY} C ${midX1} ${localY}, ${midX2} ${cy}, ${cx} ${cy}`;
 
-    const line = document.getElementById(`line${index + 1}`);
-    const run = document.getElementById(`run${index + 1}`);
+    const line = $(`#line${index + 1}`);
+    const run = $(`#run${index + 1}`);
 
     if (line) line.setAttribute("d", d);
     if (run) run.setAttribute("d", d);
   });
 }
 
-function renderAgentResults(keyword = ""){
+function renderAgentResults(keyword = "") {
+  if (!agentResults) return;
+
   const q = keyword.trim().toLowerCase();
   const matches = agentMockData.filter(item => {
     if (!q) return true;
@@ -377,7 +390,7 @@ function renderAgentResults(keyword = ""){
     );
   });
 
-  if (!matches.length){
+  if (!matches.length) {
     agentResults.innerHTML = `<div class="agent-empty th-font">ไม่พบตัวแทนที่ค้นหา</div>`;
     return;
   }
@@ -389,7 +402,7 @@ function renderAgentResults(keyword = ""){
     </button>
   `).join("");
 
-  agentResults.querySelectorAll(".agent-item").forEach(btn => {
+  $$(".agent-item", agentResults).forEach(btn => {
     btn.addEventListener("click", () => {
       const agent = btn.getAttribute("data-agent") || "";
       window.location.href = `agent-profile.html?agent=${encodeURIComponent(agent)}`;
@@ -397,15 +410,15 @@ function renderAgentResults(keyword = ""){
   });
 }
 
-function openAgentDropdown(){
-  agentDropdown.classList.add("open");
+function openAgentDropdown() {
+  agentDropdown?.classList.add("open");
 }
 
-function closeAgentDropdown(){
-  agentDropdown.classList.remove("open");
+function closeAgentDropdown() {
+  agentDropdown?.classList.remove("open");
 }
 
-function toggleHeroOpen(force){
+function toggleHeroOpen(force) {
   if (!techHero) return;
 
   if (typeof force === "boolean") {
@@ -418,8 +431,8 @@ function toggleHeroOpen(force){
   pulseCenter();
 }
 
-function getAudioCtx(){
-  if (!audioCtx){
+function getAudioCtx() {
+  if (!audioCtx) {
     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
     if (!AudioContextClass) return null;
     audioCtx = new AudioContextClass();
@@ -427,10 +440,13 @@ function getAudioCtx(){
   return audioCtx;
 }
 
-function playClickSound(type = "normal"){
+function playClickSound(type = "normal") {
   const ctx = getAudioCtx();
   if (!ctx) return;
-  if (ctx.state === "suspended") ctx.resume();
+
+  if (ctx.state === "suspended") {
+    ctx.resume();
+  }
 
   const now = ctx.currentTime;
   const osc = ctx.createOscillator();
@@ -463,14 +479,12 @@ function applyThemeByViewport() {
   }
 
   const savedTheme = localStorage.getItem("theme");
-  if (savedTheme === "light") {
-    body.classList.add("light-mode");
-  } else {
-    body.classList.remove("light-mode");
-  }
+  body.classList.toggle("light-mode", savedTheme === "light");
 }
 
 function googleTranslateElementInit() {
+  if (!window.google?.translate?.TranslateElement) return;
+
   new google.translate.TranslateElement(
     {
       pageLanguage: "th",
@@ -481,24 +495,23 @@ function googleTranslateElementInit() {
     "google_translate_element"
   );
 
-  googleTranslateReady = true;
   syncActiveLangFromCookie();
 }
 
 window.googleTranslateElementInit = googleTranslateElementInit;
 
-function setActiveLang(lang){
-  document.querySelectorAll(".lang-btn").forEach(btn => {
+function setActiveLang(lang) {
+  $$(".lang-btn").forEach(btn => {
     btn.classList.toggle("active", btn.dataset.lang === lang);
   });
 }
 
-function getTranslateCookieLang(){
+function getTranslateCookieLang() {
   const match = document.cookie.match(/(?:^|;\s*)googtrans=\/th\/([^;]+)/);
   return match ? decodeURIComponent(match[1]) : "th";
 }
 
-function setTranslateCookie(lang){
+function setTranslateCookie(lang) {
   const value = lang === "th" ? "/th/th" : `/th/${lang}`;
   const hostParts = location.hostname.split(".");
 
@@ -510,7 +523,7 @@ function setTranslateCookie(lang){
   }
 }
 
-function clearTranslateCookie(){
+function clearTranslateCookie() {
   const hostParts = location.hostname.split(".");
 
   document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
@@ -521,22 +534,18 @@ function clearTranslateCookie(){
   }
 }
 
-function syncActiveLangFromCookie(){
+function syncActiveLangFromCookie() {
   const lang = getTranslateCookieLang();
-  if (["th","en"].includes(lang)) {
-    setActiveLang(lang);
-  } else {
-    setActiveLang("th");
-  }
+  setActiveLang(["th", "en"].includes(lang) ? lang : "th");
 }
 
-function changeLanguage(lang){
-  const combo = document.querySelector(".goog-te-combo");
+function changeLanguage(lang) {
+  const combo = $(".goog-te-combo");
 
-  if (lang === "th"){
+  if (lang === "th") {
     clearTranslateCookie();
 
-    if (combo){
+    if (combo) {
       combo.value = "th";
       combo.dispatchEvent(new Event("change"));
     }
@@ -549,12 +558,16 @@ function changeLanguage(lang){
   setTranslateCookie(lang);
   setActiveLang(lang);
 
-  if (combo){
+  if (combo) {
     combo.value = lang;
     combo.dispatchEvent(new Event("change"));
 
     setTimeout(() => {
-      if (document.body.classList.contains("translated-ltr") || document.body.classList.contains("translated-rtl")) return;
+      if (
+        document.body.classList.contains("translated-ltr") ||
+        document.body.classList.contains("translated-rtl")
+      ) return;
+
       location.reload();
     }, 700);
   } else {
@@ -562,8 +575,8 @@ function changeLanguage(lang){
   }
 }
 
-function bindLanguageButtons(){
-  document.querySelectorAll(".lang-btn").forEach(btn => {
+function bindLanguageButtons() {
+  $$(".lang-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       changeLanguage(btn.dataset.lang);
     });
@@ -579,7 +592,9 @@ function handleResize() {
   }, 120);
 }
 
-if (agentSearchInput){
+function bindAgentSearch() {
+  if (!agentSearchInput || !agentSearchForm) return;
+
   agentSearchInput.addEventListener("focus", () => {
     renderAgentResults(agentSearchInput.value);
     openAgentDropdown();
@@ -590,20 +605,18 @@ if (agentSearchInput){
     openAgentDropdown();
   });
 
-  agentSearchInput.addEventListener("keydown", (event) => {
-    if (event.key === "Escape"){
+  agentSearchInput.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
       closeAgentDropdown();
       agentSearchInput.blur();
     }
   });
-}
 
-if (agentSearchForm){
-  agentSearchForm.addEventListener("submit", (event) => {
+  agentSearchForm.addEventListener("submit", event => {
     event.preventDefault();
     const keyword = agentSearchInput.value.trim();
 
-    if (!keyword){
+    if (!keyword) {
       renderAgentResults("");
       openAgentDropdown();
       return;
@@ -613,73 +626,83 @@ if (agentSearchForm){
   });
 }
 
-if (logoMenuButton && techHero){
-  logoMenuButton.addEventListener("click", (event) => {
-    event.stopPropagation();
-    toggleHeroOpen();
-  });
-}
+function bindHeroMenu() {
+  if (logoMenuButton && techHero) {
+    logoMenuButton.addEventListener("click", event => {
+      event.stopPropagation();
+      toggleHeroOpen();
+    });
+  }
 
-if (techHero){
-  techHero.addEventListener("click", (event) => {
+  if (!techHero) return;
+
+  techHero.addEventListener("click", event => {
     event.stopPropagation();
   });
 
-  const popupButtons = techHero.querySelectorAll("[data-popup]");
-  popupButtons.forEach(btn => {
-    btn.addEventListener("click", (event) => {
+  $$("[data-popup]", techHero).forEach(btn => {
+    btn.addEventListener("click", event => {
       event.stopPropagation();
       const key = btn.getAttribute("data-popup");
       openInfoPopup(key);
     });
   });
 
-  if (contactButton){
-    contactButton.addEventListener("click", (event) => {
+  if (contactButton) {
+    contactButton.addEventListener("click", event => {
       event.stopPropagation();
       openCompanyPopup();
     });
   }
 }
 
-document.getElementById("closeInfoPopupTop")?.addEventListener("click", closeInfoPopup);
-document.getElementById("closeInfoPopupBottom")?.addEventListener("click", closeInfoPopup);
-document.getElementById("closeInfoPopupInline")?.addEventListener("click", closeInfoPopup);
-document.getElementById("closeCompanyPopupTop")?.addEventListener("click", closeCompanyPopup);
-document.getElementById("closeCompanyPopupBottom")?.addEventListener("click", closeCompanyPopup);
+function bindPopups() {
+  $("#closeInfoPopupTop")?.addEventListener("click", closeInfoPopup);
+  $("#closeInfoPopupBottom")?.addEventListener("click", closeInfoPopup);
+  $("#closeInfoPopupInline")?.addEventListener("click", closeInfoPopup);
 
-infoPopup?.addEventListener("click", (event) => {
-  if (event.target === infoPopup) closeInfoPopup();
-});
+  $("#closeCompanyPopupTop")?.addEventListener("click", closeCompanyPopup);
+  $("#closeCompanyPopupBottom")?.addEventListener("click", closeCompanyPopup);
 
-companyPopup?.addEventListener("click", (event) => {
-  if (event.target === companyPopup) closeCompanyPopup();
-});
+  infoPopup?.addEventListener("click", event => {
+    if (event.target === infoPopup) closeInfoPopup();
+  });
 
-infoPopup?.addEventListener("keydown", (event) => {
-  trapFocus(event, infoPopup);
-});
+  companyPopup?.addEventListener("click", event => {
+    if (event.target === companyPopup) closeCompanyPopup();
+  });
 
-companyPopup?.addEventListener("keydown", (event) => {
-  trapFocus(event, companyPopup);
-});
+  infoPopup?.addEventListener("keydown", event => {
+    trapFocus(event, infoPopup);
+  });
 
-if (chatWidget && chatToggle){
-  chatToggle.addEventListener("click", (event) => {
+  companyPopup?.addEventListener("keydown", event => {
+    trapFocus(event, companyPopup);
+  });
+}
+
+function bindChatWidget() {
+  if (!chatWidget || !chatToggle) return;
+
+  chatToggle.addEventListener("click", event => {
     event.stopPropagation();
     chatWidget.classList.toggle("open");
   });
 }
 
-document.querySelectorAll(".sound-click").forEach(el => {
-  el.addEventListener("click", () => playClickSound("normal"));
-});
+function bindSounds() {
+  $$(".sound-click").forEach(el => {
+    el.addEventListener("click", () => playClickSound("normal"));
+  });
 
-document.querySelector('.menu-node.bottom[href="book.html"]')?.addEventListener("click", () => {
-  playClickSound("confirm");
-});
+  $('.menu-node.bottom[href="book.html"]')?.addEventListener("click", () => {
+    playClickSound("confirm");
+  });
+}
 
-if (themeToggle) {
+function bindThemeToggle() {
+  if (!themeToggle) return;
+
   themeToggle.addEventListener("click", () => {
     if (isMobileView()) return;
 
@@ -688,41 +711,47 @@ if (themeToggle) {
   });
 }
 
-document.addEventListener("pointerdown", (event) => {
-  const target = event.target;
+function bindGlobalEvents() {
+  document.addEventListener("pointerdown", event => {
+    const target = event.target;
 
-  if (agentDropdown && agentSearchForm) {
-    const clickedSearchZone = agentDropdown.contains(target) || agentSearchForm.contains(target);
-    if (!clickedSearchZone) closeAgentDropdown();
-  }
+    if (agentDropdown && agentSearchForm) {
+      const clickedSearchZone =
+        agentDropdown.contains(target) || agentSearchForm.contains(target);
 
-  if (chatWidget && !chatWidget.contains(target)) {
-    chatWidget.classList.remove("open");
-  }
+      if (!clickedSearchZone) {
+        closeAgentDropdown();
+      }
+    }
 
-  if (
-    techHero &&
-    !techHero.contains(target) &&
-    infoPopup.style.display !== "flex" &&
-    companyPopup.style.display !== "flex"
-  ) {
-    toggleHeroOpen(false);
-  }
-});
+    if (chatWidget && !chatWidget.contains(target)) {
+      chatWidget.classList.remove("open");
+    }
 
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape"){
-    if (infoPopup.classList.contains("show")) {
+    if (
+      techHero &&
+      !techHero.contains(target) &&
+      infoPopup?.style.display !== "flex" &&
+      companyPopup?.style.display !== "flex"
+    ) {
+      toggleHeroOpen(false);
+    }
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key !== "Escape") return;
+
+    if (infoPopup?.classList.contains("show")) {
       closeInfoPopup();
       return;
     }
 
-    if (companyPopup.classList.contains("show")) {
+    if (companyPopup?.classList.contains("show")) {
       closeCompanyPopup();
       return;
     }
 
-    if (agentDropdown.classList.contains("open")) {
+    if (agentDropdown?.classList.contains("open")) {
       closeAgentDropdown();
     }
 
@@ -733,8 +762,10 @@ document.addEventListener("keydown", (event) => {
     if (chatWidget?.classList.contains("open")) {
       chatWidget.classList.remove("open");
     }
-  }
-});
+  });
+
+  window.addEventListener("resize", handleResize);
+}
 
 window.addEventListener("load", () => {
   applyThemeByViewport();
@@ -745,9 +776,16 @@ window.addEventListener("load", () => {
 
   syncHeroLabels();
   buildEnergyLines();
-  bindLanguageButtons();
-  syncActiveLangFromCookie();
   renderAgentResults("");
-});
 
-window.addEventListener("resize", handleResize);
+  bindLanguageButtons();
+  bindAgentSearch();
+  bindHeroMenu();
+  bindPopups();
+  bindChatWidget();
+  bindSounds();
+  bindThemeToggle();
+  bindGlobalEvents();
+
+  syncActiveLangFromCookie();
+});
