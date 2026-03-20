@@ -2255,53 +2255,6 @@
         scroll-behavior:auto !important;
       }
     }
-    .popup-card{
-  scroll-behavior:smooth;
-}
-
-.popup-lead{
-  text-align:left;
-}
-
-.feature-list li{
-  text-align:left;
-}
-
-.impact-card{
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-start;
-}
-
-.video-note{
-  font-size:14px;
-}
-
-@media (max-width:760px){
-  .popup-card{
-    max-height:94vh;
-  }
-
-  .popup-head h3{
-    font-size:26px;
-  }
-
-  .popup-subtitle{
-    font-size:14px;
-    line-height:1.75;
-  }
-
-  .popup-lead{
-    font-size:15px;
-    line-height:1.9;
-  }
-
-  .feature-list li{
-    font-size:14px;
-    line-height:1.85;
-  }
-}
-    
   </style>
 </head>
 <body>
@@ -2422,81 +2375,82 @@
             </button>
 
             <div class="menu-layer">
-  <button class="menu-node n1 energy-source sound-click" type="button" data-popup="ssbsystem">
-    <div class="node-shell">
-      <span class="node-text">
-        <span class="node-title th-font">Stealth Safety Bank Mobile System</span>
-      </span>
-    </div>
-  </button>
+              <button class="menu-node n1 energy-source sound-click" type="button" data-popup="stealthbank">
+                <div class="node-shell">
+                  <span class="node-text">
+                    <span class="node-title th-font">Stealth Safety Bank</span>
+                  </span>
+                </div>
+              </button>
 
-  <button class="menu-node n2 energy-source sound-click" type="button" data-popup="stealthbank">
-    <div class="node-shell">
-      <span class="node-text">
-        <span class="node-title th-font">Stealth Safety Bank</span>
-      </span>
-    </div>
-  </button>
+              <button class="menu-node n2 energy-source sound-click" type="button" data-popup="safetybook">
+                <div class="node-shell">
+                  <span class="node-text">
+                    <span class="node-title th-font">Stealth Safety Book</span>
+                  </span>
+                </div>
+              </button>
 
-  <button class="menu-node n3 energy-source sound-click" type="button" data-popup="safetybook">
-    <div class="node-shell">
-      <span class="node-text">
-        <span class="node-title th-font">Stealth Safety Book</span>
-      </span>
-    </div>
-  </button>
+              <button class="menu-node n3 energy-source sound-click" type="button" data-popup="ssbmobile">
+                <div class="node-shell">
+                  <span class="node-text">
+                    <span class="node-title th-font">SSB Mobile System</span>
+                  </span>
+                </div>
+              </button>
 
-  <button class="menu-node n4 energy-source sound-click" type="button" data-popup="flare">
-    <div class="node-shell">
-      <span class="node-text">
-        <span class="node-title th-font">Flare</span>
-      </span>
-    </div>
-  </button>
+              <button class="menu-node n4 energy-source sound-click" type="button" data-popup="technology">
+                <div class="node-shell">
+                  <span class="node-text">
+                    <span class="node-title th-font">Technology Overview</span>
+                  </span>
+                </div>
+              </button>
 
-  <button class="menu-node n5 energy-source sound-click" type="button" data-popup="usage">
-    <div class="node-shell">
-      <span class="node-text">
-        <span class="node-title th-font">วิธีการใช้งาน</span>
-      </span>
-    </div>
-  </button>
+              <a class="menu-node n5 energy-source sound-click" href="agent-login.html">
+                <div class="node-shell">
+                  <span class="node-text">
+                    <span class="node-title th-font">Agent Login</span>
+                  </span>
+                </div>
+              </a>
 
-  <a class="menu-node n6 energy-source sound-click" href="agent-login.html">
-    <div class="node-shell">
-      <span class="node-text">
-        <span class="node-title th-font">Agent Login</span>
-      </span>
-    </div>
-  </a>
+              <a class="menu-node n6 energy-source sound-click" href="join-agent.html">
+                <div class="node-shell">
+                  <span class="node-text">
+                    <span class="node-title th-font">Join Our Agent</span>
+                  </span>
+                </div>
+              </a>
 
-  <a class="menu-node n7 energy-source sound-click" href="join-agent.html">
-    <div class="node-shell">
-      <span class="node-text">
-        <span class="node-title th-font">Join Our Agent</span>
-      </span>
-    </div>
-  </a>
+              <button class="menu-node n7 energy-source sound-click" type="button" data-popup="aboutcompany">
+                <div class="node-shell">
+                  <span class="node-text">
+                    <span class="node-title th-font">About Us</span>
+                  </span>
+                </div>
+              </button>
 
-  <button class="menu-node n8 energy-source sound-click" type="button" id="contactButton">
-    <div class="node-shell">
-      <span class="node-text">
-        <span class="node-title th-font">Contact Us</span>
-      </span>
-    </div>
-  </button>
+              <button class="menu-node n8 energy-source sound-click" type="button" id="contactButton">
+                <div class="node-shell">
+                  <span class="node-text">
+                    <span class="node-title th-font">Contact Us</span>
+                  </span>
+                </div>
+              </button>
 
-  <a class="menu-node bottom n9 sound-click" href="book.html">
-    <div class="node-shell">
-      <span class="node-text">
-        <span class="node-title th-font">เริ่มสั่งจอง</span>
-      </span>
-    </div>
-  </a>
-</div>
-
-          <div class="node-note th-font" id="nodeNote">คลิกที่โลโก้เพื่อเข้าสู่รายละเอียดระบบ
+              <a class="menu-node bottom n9 sound-click" href="book.html">
+                <div class="node-shell">
+                  <span class="node-text">
+                    <span class="node-title th-font">เริ่มสั่งจอง</span>
+                  </span>
+                </div>
+              </a>
+            </div>
           </div>
+
+          <div class="node-note th-font" id="nodeNote">คลิกที่โลโก้เพื่อเปิดเมนู</div>
+        </div>
       </section>
     </main>
 
@@ -2617,29 +2571,29 @@
         </div>
 
         <div class="popup-panel">
-          <h4 class="popup-section-title th-font"><span class="dot"></span>ภาพรวมของเมนูนี้</h4>
+          <h4 class="popup-section-title th-font"><span class="dot"></span>ภาพรวม</h4>
           <p class="popup-lead th-font" id="infoLead"></p>
           <div class="badge-row" id="infoBadges"></div>
         </div>
 
         <div class="popup-grid">
           <div class="popup-panel">
-            <h4 class="popup-section-title th-font"><span class="dot"></span>จุดเด่นสำคัญรายละเอียดสำคัญ</h4>
+            <h4 class="popup-section-title th-font"><span class="dot"></span>จุดเด่นสำคัญ</h4>
             <ul class="feature-list th-font" id="infoFeatures"></ul>
           </div>
 
           <div class="popup-panel">
-            <h4 class="popup-section-title th-font"><span class="dot"></span>เหมาะกับใคร</h4>
+            <h4 class="popup-section-title th-font"><span class="dot"></span>เหมาะกับใคร / การใช้งาน</h4>
             <ul class="feature-list th-font" id="infoUseCases"></ul>
           </div>
         </div>
 
         <div class="popup-panel">
-          <h4 class="popup-section-title th-font"><span class="dot"></span>สิ่งที่ผู้ใช้จะได้รับ</h4>
+          <h4 class="popup-section-title th-font"><span class="dot"></span>ผลลัพธ์ที่ผู้ใช้ได้รับ</h4>
           <div class="impact-grid" id="infoImpacts"></div>
 
           <div class="popup-action-row">
-            <a class="popup-cta primary sound-click th-font" href="book.html">เริ่มสั่งจอง</a>
+            <a class="popup-cta primary sound-click th-font" href="book.html">ไปยังหน้าสั่งจอง</a>
             <button class="popup-cta secondary sound-click th-font" type="button" id="closeInfoPopupInline">ปิดหน้าต่างนี้</button>
           </div>
         </div>
@@ -2683,164 +2637,156 @@
   </div>
 
   <script>
-  const popupData = {
-  ssbsystem: {
-    kicker: "Integrated Security System",
-    title: "Stealth Safety Bank Mobile System",
-    subtitle: "ระบบความปลอดภัยทางการเงินแบบองค์รวม ที่ออกแบบให้ของสำคัญไม่ถูกใช้งานผิดที่ ไม่ถูกเปิดเผยเกินจำเป็น และไม่ถูกพาเข้าไปอยู่ในพื้นที่เสี่ยงของชีวิตประจำวัน",
-    lead: "Stealth Safety Bank Mobile System คือระบบความปลอดภัยทางการเงินที่ไม่ได้พึ่งอุปกรณ์ชิ้นเดียว แต่เกิดจากการทำงานร่วมกันของ Stealth Safety Bank, Stealth Safety Book, Flare, วิธีการใช้งาน และการออกแบบให้ไม่พกพาสะดวกและไม่โดดเด่น เพื่อทำให้ของจริงไม่อยู่ในพื้นที่เสี่ยงตั้งแต่ต้นทาง",
-    badges: [
-      "ระบบความปลอดภัยแบบองค์รวม",
-      "แยกของจริงออกจากชีวิตประจำวัน",
-      "มีเครื่องล่อและระบบจัดเก็บ",
-      "ขาดสิ่งใดสิ่งหนึ่งไม่ได้"
-    ],
-    features: [
-      "Stealth Safety Bank ทำหน้าที่เป็นเครื่องเก็บเงินที่ตั้งค่าความปลอดภัยแล้ว และไม่ถูกใช้เหมือนมือถือทั่วไป",
-      "Stealth Safety Book ทำหน้าที่เป็นกล่องกันสัญญาณสำหรับเก็บเครื่อง Stealth Safety Bank เมื่อไม่ได้ใช้งาน",
-      "Flare ทำหน้าที่เป็นเครื่องล่อเป้าและเครื่องใช้งานจริงในชีวิตประจำวัน เพื่อไม่ให้ของจริงถูกเปิดเผยเกินจำเป็น",
-      "วิธีการใช้งานคือกฎสำคัญที่ทำให้ทุกองค์ประกอบทำงานร่วมกันอย่างถูกต้อง",
-      "ระบบถูกออกแบบให้ไม่พกพาสะดวกและไม่ให้ดูเป็นสิ่งสำคัญ เพื่อลดความเสี่ยงทั้งเชิงดิจิทัลและเชิงกายภาพ"
-    ],
-    impacts: [
-      { value: "แยกชัด", label: "แยกของจริงออกจากเครื่องใช้งานในชีวิตประจำวันอย่างเป็นระบบ" },
-      { value: "ลดเสี่ยง", label: "ลดโอกาสการโจมตีจากการใช้งานปะปน การเปิดเผย และการเข้าถึงที่ไม่จำเป็น" },
-      { value: "รอบด้าน", label: "ครอบคลุมทั้งอุปกรณ์ การจัดเก็บ การล่อเป้า และพฤติกรรมผู้ใช้งาน" }
-    ],
-    useCases: [
-      "ผู้ที่ต้องการยกระดับความปลอดภัยของเงินและข้อมูลทางการเงินมากกว่าการใช้มือถือทั่วไป",
-      "ผู้ที่ไม่ต้องการให้เครื่องเก็บเงินจริงอยู่ในโลกเดียวกับเครื่องใช้งานประจำวัน",
-      "ผู้ที่เข้าใจว่าความปลอดภัยต้องเกิดจากโครงสร้างทั้งระบบ ไม่ใช่จากอุปกรณ์ชิ้นเดียว"
-    ],
-    video: "https://www.youtube-nocookie.com/embed/mD9i39genW8",
-    videoNote: "วิดีโอด้านบนใช้เพื่อช่วยให้ผู้ชมเห็นภาพรวมของระบบ ก่อนอ่านรายละเอียดเชิงแนวคิดด้านล่าง"
-  },
+    const popupData = {
+      ssbmobile: {
+        kicker: "Stealth Security Architecture",
+        title: "Stealth Safety Bank Mobile System",
+        subtitle: "ระบบปกป้องเงินและข้อมูลระดับสูง ที่ออกแบบมาเพื่อตัดความเสี่ยงตั้งแต่ต้นทาง และแยกอุปกรณ์ธุรกรรมออกจากการใช้งานทั่วไปอย่างชัดเจน",
+        lead: "Stealth Safety Bank Mobile System ไม่ใช่เพียงอุปกรณ์ แต่คือแนวคิดใหม่ของความปลอดภัยทางการเงินเชิงโครงสร้าง โดยเน้นการลดพื้นผิวการโจมตี แยกเครื่องสำหรับธุรกรรมโดยเฉพาะ และควบคุมการใช้งานให้อยู่ในขอบเขตที่จำเป็นจริง เพื่อทำให้ความเสี่ยงจาก phishing, malware, remote access และพฤติกรรมใช้งานปะปนลดลงอย่างมีนัยสำคัญ",
+        badges: [
+          "แยกเครื่องธุรกรรมโดยเฉพาะ",
+          "ไม่มี browser / social / app store",
+          "ลด Attack Surface",
+          "ใช้งานเฉพาะเมื่อจำเป็น"
+        ],
+        features: [
+          "ตัดช่องทางที่ไม่จำเป็นต่อธุรกรรมออกตั้งแต่ต้น ทำให้เครื่องไม่ถูกใช้ปะปนกับการท่องเว็บ โซเชียล หรือกิจกรรมที่เพิ่มความเสี่ยง",
+          "ยกระดับความปลอดภัยด้วยการใช้งานแบบมีวินัย เปิดเฉพาะตอนทำธุรกรรม และปิดเมื่อไม่ใช้งาน เพื่อลดโอกาสการเข้าถึงโดยไม่ได้รับอนุญาต",
+          "เปลี่ยนความปลอดภัยจากการพึ่งพาแอปเพียงอย่างเดียว ไปสู่การออกแบบโครงสร้างการใช้งานที่ลดความเสี่ยงทั้งระบบ"
+        ],
+        impacts: [
+          { value: "ลดเสี่ยง", label: "จาก phishing, malware และการเข้าถึงระยะไกลที่ไม่เกี่ยวข้องกับธุรกรรม" },
+          { value: "ชัดเจน", label: "แยกมือถือธุรกรรมออกจากมือถือใช้งานทั่วไปอย่างเป็นระบบ" },
+          { value: "มั่นใจ", label: "ทำธุรกรรมได้ภายใต้กรอบการใช้งานที่ควบคุมง่ายและตรวจสอบได้" }
+        ],
+        useCases: [
+          "ผู้ที่ต้องการความปลอดภัยสูงในการถือครองเงินและทำ Mobile Banking",
+          "นักลงทุน เจ้าของธุรกิจ และผู้ที่ต้องดูแลหลายบัญชีหรือยอดเงินจำนวนมาก",
+          "ผู้ที่เคยมีประสบการณ์หรือมีความกังวลเรื่องคอลเซ็นเตอร์ ฟิชชิง หรือการถูกหลอกให้ติดตั้งแอป"
+        ],
+        video: "https://www.youtube-nocookie.com/embed/mD9i39genW8",
+        videoNote: "วิดีโอตัวอย่างจากช่อง @siamtham แสดงแนวคิดระบบในรูปแบบที่น่าเชื่อถือและไม่เปิดเสียงรบกวนอัตโนมัติ"
+      },
 
-  stealthbank: {
-    kicker: "Primary Money Device",
-    title: "Stealth Safety Bank",
-    subtitle: "เครื่องเก็บเงินที่ตั้งค่าความปลอดภัยแล้ว เพื่อทำหน้าที่เฉพาะทางด้านการเงินภายใต้ระบบที่ควบคุมแล้ว",
-    lead: "Stealth Safety Bank คืออุปกรณ์ที่ทำหน้าที่เป็นเครื่องเก็บเงินของระบบ ใช้เพื่อเก็บเงินและโอนไปยัง Flare เท่านั้น ไม่ใช่มือถือใช้งานทั่วไป ไม่ใช่เครื่องใช้ชีวิตประจำวัน และไม่ใช่เครื่องสำหรับโอนให้ผู้อื่นหรือใช้จ่ายโดยตรง",
-    badges: [
-      "เครื่องเก็บเงิน",
-      "ตั้งค่าความปลอดภัยแล้ว",
-      "ไม่ใช่มือถือใช้งานทั่วไป",
-      "เปิดเมื่อจำเป็นเท่านั้น"
-    ],
-    features: [
-      "ทำหน้าที่เป็นตัวจริงของระบบ และต้องไม่ถูกใช้งานผิดบทบาท",
-      "ถูกกำหนดให้ใช้ในกรอบของธุรกรรมทางการเงินเท่านั้น",
-      "ไม่ใช้จ่ายโดยตรง ไม่โอนให้บุคคลอื่น และไม่ใช้แทนเครื่องใช้งานประจำวัน",
-      "เมื่อใช้งานเสร็จ ต้องปิดเครื่องและนำกลับเข้าสู่ Stealth Safety Book"
-    ],
-    impacts: [
-      { value: "คุมบทบาท", label: "ทำให้เครื่องเก็บเงินจริงไม่ถูกดึงไปใช้งานเหมือนมือถือทั่วไป" },
-      { value: "ลดเปิดเผย", label: "ลดโอกาสที่ของจริงจะถูกมองเห็น ถูกถือ หรือถูกใช้งานเกินจำเป็น" },
-      { value: "ปลอดภัยกว่า", label: "รักษาสถานะของเครื่องเก็บเงินให้แยกจากชีวิตประจำวันอย่างชัดเจน" }
-    ],
-    useCases: [
-      "ผู้ที่ต้องการแยกเงินออกจากเครื่องใช้งานทั่วไป",
-      "ผู้ที่ต้องการมีอุปกรณ์เฉพาะทางสำหรับเก็บและจัดการเงินภายใต้ระบบที่ควบคุมแล้ว",
-      "ผู้ที่เข้าใจว่ามือถือเก็บเงินไม่ควรถูกใช้เหมือนมือถือส่วนตัว"
-    ],
-    video: "https://www.youtube-nocookie.com/embed/mD9i39genW8",
-    videoNote: "Stealth Safety Bank คือเครื่องเก็บเงินจริงของระบบ และต้องทำหน้าที่เฉพาะของมันอย่างเคร่งครัด"
-  },
+      stealthbank: {
+        kicker: "Integrated Protection Concept",
+        title: "Stealth Safety Bank",
+        subtitle: "แนวคิดการป้องกันทางการเงินที่เน้นความลับ การอำพราง การลดการเปิดเผยข้อมูล และการออกแบบวิธีใช้งานให้ปลอดภัยกว่าการพึ่งพาเครื่องมือเพียงชิ้นเดียว",
+        lead: "Stealth Safety Bank คือกรอบแนวคิดที่รวมการป้องกันเชิงพฤติกรรม เชิงกายภาพ และเชิงเทคโนโลยีเข้าไว้ด้วยกัน เพื่อสร้างระบบความปลอดภัยที่รอบด้านมากกว่าแนวทางทั่วไป โดยมุ่งลดโอกาสการโจมตีตั้งแต่ต้นทาง ไม่ใช่รอป้องกันเมื่อปัญหาเกิดขึ้นแล้ว",
+        badges: [
+          "ลดการเปิดเผยข้อมูล",
+          "อำพรางการจัดเก็บ",
+          "ป้องกันหลายชั้น",
+          "ยึดความรอบคอบเป็นหลัก"
+        ],
+        features: [
+          "ไม่มองความปลอดภัยเป็นแค่เรื่องซอฟต์แวร์ แต่เชื่อมโยงวิธีคิด วิธีเก็บ และวิธีใช้งานเข้าด้วยกัน",
+          "ลดความโดดเด่นของทรัพย์สินหรืออุปกรณ์สำคัญ เพื่อทำให้เป้าหมายถูกสังเกตเห็นยากขึ้น",
+          "เน้นการสร้างความปลอดภัยเชิงโครงสร้างที่ต่อเนื่องและนำไปใช้ได้จริงในชีวิตประจำวัน"
+        ],
+        impacts: [
+          { value: "รอบด้าน", label: "ครอบคลุมข้อมูล อุปกรณ์ และพฤติกรรมการใช้งานภายใต้ระบบเดียวกัน" },
+          { value: "อำพราง", label: "ลดการสังเกต ลดการดึงดูดความสนใจ และลดโอกาสการเข้าถึง" },
+          { value: "เป็นระบบ", label: "ยกระดับจากการป้องกันเฉพาะจุด ไปสู่แนวทางที่เชื่อมโยงทั้งกระบวนการ" }
+        ],
+        useCases: [
+          "บุคคลหรือครอบครัวที่ต้องการวางระบบป้องกันเงินและข้อมูลอย่างรอบคอบ",
+          "ผู้ที่ต้องการแนวคิดความปลอดภัยที่มากกว่าการติดตั้งแอปหรือซื้ออุปกรณ์ทั่วไป",
+          "องค์กรที่ต้องการแนวทางการใช้งานที่สร้างวินัยและลดความผิดพลาดจากคน"
+        ],
+        video: "https://www.youtube-nocookie.com/embed/mD9i39genW8",
+        videoNote: "วิดีโออ้างอิงจากช่อง @siamtham เพื่อให้เห็นภาพแนวคิด Stealth ในบริบทการใช้งานจริง"
+      },
 
-  safetybook: {
-    kicker: "Protected Storage",
-    title: "Stealth Safety Book",
-    subtitle: "กล่องกันสัญญาณสำหรับเก็บเครื่อง Stealth Safety Bank เพื่อปกป้องเมื่อไม่ใช้งาน และลดการมองเห็นสิ่งสำคัญในโลกภายนอก",
-    lead: "Stealth Safety Book คือระบบจัดเก็บสำหรับเครื่อง Stealth Safety Bank มีหน้าที่ช่วยกันสัญญาณ แยกเครื่องออกจากสภาพแวดล้อมภายนอก และลดการเปิดเผยว่ามีสิ่งสำคัญถูกเก็บอยู่ภายใน ทำให้ช่วงเวลาที่ไม่ใช้งานยังคงอยู่ภายใต้โครงสร้างความปลอดภัยของระบบ",
-    badges: [
-      "กล่องกันสัญญาณ",
-      "ปกป้องตอนเก็บ",
-      "ลดการมองเห็น",
-      "รองรับเครื่อง Stealth Safety Bank"
-    ],
-    features: [
-      "ใช้เก็บ Stealth Safety Bank เมื่อไม่ใช้งาน เพื่อไม่ให้เครื่องอยู่ในสภาพเปิดหรือถูกวางไว้ทั่วไป",
-      "ช่วยแยกอุปกรณ์ออกจากภายนอกและลดโอกาสการเข้าถึงที่ไม่จำเป็น",
-      "เสริมแนวคิดของระบบว่า ของจริงต้องถูกเก็บในที่ของมันอย่างปลอดภัย",
-      "ช่วยให้อุปกรณ์สำคัญไม่ดูโดดเด่นหรือเปิดเผยเกินจำเป็น"
-    ],
-    impacts: [
-      { value: "เก็บจริง", label: "ทำให้การปิดเครื่องมีระบบรองรับ ไม่ใช่แค่วางไว้เฉย ๆ" },
-      { value: "แนบเนียน", label: "ลดการสังเกตและลดการเปิดเผยว่ามีสิ่งสำคัญถูกเก็บอยู่" },
-      { value: "เสริมชั้นป้องกัน", label: "ทำให้ช่วงเวลาที่ไม่ได้ใช้งานยังคงอยู่ในโครงสร้างความปลอดภัย" }
-    ],
-    useCases: [
-      "ผู้ที่ต้องการเก็บเครื่อง Stealth Safety Bank ให้ถูกวิธีทุกครั้งหลังใช้งาน",
-      "ผู้ที่ต้องการระบบจัดเก็บที่ช่วยลดความเสี่ยงเมื่ออุปกรณ์ไม่ได้ถูกใช้งาน",
-      "ผู้ที่เข้าใจว่าความปลอดภัยต้องครอบคลุมทั้งตอนใช้และตอนเก็บ"
-    ],
-    video: "https://www.youtube-nocookie.com/embed/mD9i39genW8",
-    videoNote: "Stealth Safety Book ปกป้องตอนจัดเก็บ และเป็นส่วนสำคัญที่ทำให้ระบบสมบูรณ์"
-  },
+      safetybook: {
+        kicker: "Physical Stealth Storage",
+        title: "Stealth Safety Book",
+        subtitle: "อุปกรณ์จัดเก็บเชิงอำพรางที่ออกแบบให้ดูกลมกลืนเหมือนหนังสือทั่วไป เพื่อลดการสังเกตและเสริมความปลอดภัยทางกายภาพให้กับอุปกรณ์หรือของสำคัญ",
+        lead: "Stealth Safety Book มีบทบาทสำคัญในการปกป้องอุปกรณ์และสิ่งของสำคัญผ่านแนวคิดการอำพรางภายนอกให้ดูธรรมดา ลดโอกาสการถูกสังเกตหรือระบุว่าเป็นจุดเก็บทรัพย์สิน โดยทำงานเสริมกับระบบ Stealth Safety Bank เพื่อสร้างความปลอดภัยทั้งเชิงกายภาพและเชิงพฤติกรรม",
+        badges: [
+          "อำพรางเหมือนหนังสือ",
+          "ลดการถูกสังเกต",
+          "เก็บอุปกรณ์สำคัญได้เป็นสัดส่วน",
+          "เสริมระบบ Stealth"
+        ],
+        features: [
+          "ช่วยทำให้จุดจัดเก็บไม่โดดเด่นและไม่สะดุดสายตาเหมือนกล่องเซฟทั่วไป",
+          "เสริมความปลอดภัยทางกายภาพให้กับอุปกรณ์ธุรกรรม เอกสาร หรือสิ่งของที่ต้องการความเป็นส่วนตัว",
+          "เหมาะกับผู้ที่ต้องการเก็บของสำคัญอย่างเรียบร้อย แนบเนียน และใช้งานคู่กับระบบหลัก"
+        ],
+        impacts: [
+          { value: "แนบเนียน", label: "ภายนอกดูเป็นของใช้ทั่วไป ลดการตั้งข้อสังเกตจากบุคคลรอบข้าง" },
+          { value: "เป็นระเบียบ", label: "ช่วยจัดเก็บอุปกรณ์และของสำคัญให้พร้อมใช้งานอย่างมีวินัย" },
+          { value: "เสริมชั้นป้องกัน", label: "ทำงานร่วมกับระบบความปลอดภัยหลักเพื่อเพิ่มความครบถ้วน" }
+        ],
+        useCases: [
+          "ใช้เก็บอุปกรณ์สำหรับธุรกรรมที่ต้องการความเป็นส่วนตัว",
+          "ใช้เก็บเอกสารหรือของมีค่าที่ไม่ต้องการให้ถูกพบง่าย",
+          "ใช้ในบ้านหรือสำนักงานที่ต้องการความปลอดภัยแบบไม่ดึงดูดความสนใจ"
+        ],
+        video: "https://www.youtube-nocookie.com/embed/mD9i39genW8",
+        videoNote: "วิดีโอตัวอย่างจากช่อง @siamtham ใช้เป็น reference สำหรับรูปแบบการนำเสนอและพฤติกรรมการเล่นวิดีโอ"
+      },
 
-  flare: {
-    kicker: "Decoy & Daily Use Device",
-    title: "Flare",
-    subtitle: "เครื่องล่อเป้าและเครื่องใช้งานจริง ที่รับภาระการใช้งานในชีวิตประจำวันแทนของจริง",
-    lead: "Flare คือเครื่องใช้งานจริงในชีวิตประจำวัน และในเวลาเดียวกันก็ทำหน้าที่เป็นตัวล่อเป้าของระบบ โดยรับเงินจาก Stealth Safety Bank ไปใช้ต่อ ทำหน้าที่ใช้จ่าย โอนต่อ ติดต่อ และอยู่ในพื้นที่ที่โลกภายนอกมองเห็น เพื่อให้ของจริงไม่ต้องออกมารับภาระเหล่านั้นโดยตรง",
-    badges: [
-      "เครื่องล่อเป้า",
-      "เครื่องใช้งานจริง",
-      "รับเงินจาก SSB",
-      "ลดการเปิดเผยของจริง"
-    ],
-    features: [
-      "รับบทเป็นอุปกรณ์ที่ใช้งานจริงในชีวิตประจำวันแทน Stealth Safety Bank",
-      "ใช้สำหรับการใช้จ่าย การโอนต่อ และกิจกรรมที่จำเป็นต้องเกิดขึ้นในโลกภายนอก",
-      "ช่วยให้ของจริงไม่ถูกนำออกมาใช้งานผิดบทบาท",
-      "ทำให้สิ่งที่โลกภายนอกมองเห็น ไม่ใช่สิ่งที่มีมูลค่าทางระบบจริง"
-    ],
-    impacts: [
-      { value: "ล่อเป้า", label: "ช่วยดึงการรับรู้ของโลกภายนอกออกจากเครื่องเก็บเงินจริง" },
-      { value: "ใช้งานแทน", label: "รับภาระการใช้จ่ายและกิจกรรมในชีวิตประจำวันแทน SSB" },
-      { value: "รักษาระบบ", label: "ทำให้ Stealth Safety Bank ยังคงเป็นเครื่องเก็บเงินจริง ไม่กลายเป็นเครื่องใช้ชีวิต" }
-    ],
-    useCases: [
-      "ผู้ที่ต้องการแยกการเก็บเงินออกจากการใช้งานจริงอย่างชัดเจน",
-      "ผู้ที่ต้องการให้การใช้จ่าย การโอนต่อ และกิจกรรมประจำวันไปเกิดบนอีกเครื่องหนึ่ง",
-      "ผู้ที่เข้าใจว่าความปลอดภัยต้องมีทั้งการซ่อนและการล่อเป้า"
-    ],
-    video: "https://www.youtube-nocookie.com/embed/mD9i39genW8",
-    videoNote: "Flare ไม่ใช่ของรอง แต่เป็นส่วนสำคัญที่ทำให้ของจริงไม่ต้องออกมาอยู่ในพื้นที่เสี่ยง"
-  },
+      technology: {
+        kicker: "Technology Overview",
+        title: "Technology Overview",
+        subtitle: "ภาพรวมของเทคโนโลยีและแนวคิดที่ทำงานร่วมกันเพื่อยกระดับการปกป้องเงิน ข้อมูล และการใช้งานในชีวิตจริงให้ปลอดภัยขึ้นอย่างเป็นระบบ",
+        lead: "Technology Overview คือภาพรวมขององค์ประกอบทั้งหมดในระบบ ไม่ว่าจะเป็นการแยกอุปกรณ์ การลดช่องทางเสี่ยง การอำพรางการจัดเก็บ การเตือนสติ และการออกแบบพฤติกรรมการใช้งานให้รอบคอบขึ้น เพื่อให้แต่ละส่วนสนับสนุนกันและสร้างความปลอดภัยที่ต่อเนื่อง ไม่ใช่แยกกันทำงานแบบกระจัดกระจาย",
+        badges: [
+          "Multiple Layer Protection",
+          "Device Separation",
+          "Behavior Design",
+          "Stealth + Discipline"
+        ],
+        features: [
+          "เชื่อมการป้องกันหลายชั้นเข้าด้วยกัน ทั้งเชิงเทคโนโลยี เชิงกายภาพ และเชิงพฤติกรรม",
+          "ทำให้ผู้ใช้มองเห็นภาพรวมว่าทำไมการลดแอป การแยกเครื่อง และการอำพรางจึงช่วยลดความเสี่ยงได้จริง",
+          "ออกแบบให้เข้าใจง่ายขึ้นสำหรับการอธิบายต่อยอดไปยังครอบครัว ทีมงาน หรือองค์กร"
+        ],
+        impacts: [
+          { value: "เชื่อมโยง", label: "องค์ประกอบแต่ละส่วนทำงานหนุนกัน ไม่ใช่แยกเป็นชิ้น ๆ" },
+          { value: "รอบคอบ", label: "ช่วยให้ตัดสินใจใช้งานภายใต้หลักการที่ชัดเจนและตรวจสอบได้" },
+          { value: "เข้าใจง่าย", label: "อธิบายระบบที่ซับซ้อนให้อยู่ในรูปแบบที่ผู้ใช้จับต้องได้" }
+        ],
+        useCases: [
+          "ผู้ที่ต้องการศึกษาว่าระบบป้องกันประกอบด้วยอะไรบ้างและทำงานอย่างไร",
+          "ผู้ที่ต้องการอธิบายระบบให้ทีมขาย ทีมงาน หรือผู้เกี่ยวข้องเข้าใจง่ายขึ้น",
+          "ผู้ที่ต้องการประเมินแนวทางก่อนตัดสินใจใช้งานจริง"
+        ],
+        video: "https://www.youtube-nocookie.com/embed/mD9i39genW8",
+        videoNote: "วิดีโอตัวอย่างจากช่อง @siamtham ใช้เพื่อแสดงภาพรวมเทคโนโลยีและแนวทางการสื่อสาร"
+      },
 
-  usage: {
-    kicker: "Usage Protocol",
-    title: "วิธีการใช้งาน",
-    subtitle: "ระบบจะปลอดภัย เมื่อใช้อย่างถูกต้อง และรักษาบทบาทของแต่ละส่วนอย่างเคร่งครัด",
-    lead: "Stealth Safety Bank Mobile System จะสมบูรณ์ได้ก็ต่อเมื่อแต่ละองค์ประกอบถูกใช้งานตรงหน้าที่ของมัน Stealth Safety Bank ต้องทำหน้าที่เป็นเครื่องเก็บเงิน Stealth Safety Book ต้องทำหน้าที่เป็นระบบจัดเก็บ Flare ต้องทำหน้าที่เป็นเครื่องใช้งานจริง และผู้ใช้ต้องไม่ทำให้บทบาทเหล่านี้ปะปนกัน",
-    badges: [
-      "SSB เก็บและโอนไปที่ Flare เท่านั้น",
-      "ทุกการใช้จ่ายผ่าน Flare",
-      "ปิดและเก็บทุกครั้ง",
-      "ห้ามปะปนบทบาท"
-    ],
-    features: [
-      "เมื่อต้องใช้งาน ให้นำ Stealth Safety Bank ออกจาก Stealth Safety Book เปิดใช้งานเฉพาะช่วงเวลาที่จำเป็น และเมื่อเสร็จแล้วให้ปิดเครื่องและเก็บกลับทันที",
-      "Stealth Safety Bank ใช้เพื่อเก็บเงินและโอนไปที่ Flare เท่านั้น ไม่ใช้โอนให้บุคคลอื่น และไม่ใช้จ่ายโดยตรงทุกกรณี",
-      "บุคคลอื่นรวมถึงคนในครอบครัว และคนที่รู้จัก ทุกการโอนหรือการใช้จ่ายต้องผ่าน Flare ก่อนเสมอ",
-      "Flare เป็นอุปกรณ์สำหรับการใช้งานและการใช้จ่ายในชีวิตประจำวัน และเป็นผู้โอนต่อหรือใช้จ่ายต่อไปยังปลายทางอื่น",
-      "ห้ามปะปนการใช้งานระหว่าง Stealth Safety Bank และ Flare อย่างเด็ดขาด เพราะเมื่อบทบาทเริ่มปะปน ความปลอดภัยของทั้งระบบจะเริ่มอ่อนลงทันที"
-    ],
-    impacts: [
-      { value: "คุมวินัย", label: "ทำให้ทุกส่วนของระบบทำงานตรงหน้าที่และไม่ปะปนกัน" },
-      { value: "ลดผิดพลาด", label: "ลดความเสี่ยงจากพฤติกรรมผู้ใช้ที่อาจทำลายโครงสร้างความปลอดภัยเอง" },
-      { value: "รักษาความได้เปรียบ", label: "ทำให้ของจริงยังคงเป็นของจริง และเครื่องใช้งานยังคงเป็นเครื่องใช้งาน" }
-    ],
-    useCases: [
-      "ผู้ที่ต้องการใช้งานระบบอย่างถูกต้องและรักษาความปลอดภัยของทั้งโครงสร้าง",
-      "ผู้ที่ต้องการเข้าใจเส้นแบ่งที่ชัดเจนระหว่างเครื่องเก็บเงินจริงกับเครื่องใช้งานจริง",
-      "ผู้ที่พร้อมใช้งานระบบด้วยวินัย ไม่กลับไปใช้แบบมือถือทั่วไป"
-    ],
-    video: "https://www.youtube-nocookie.com/embed/mD9i39genW8",
-    videoNote: "วิธีการใช้งานคือหัวใจของระบบ เพราะต่อให้มีอุปกรณ์ครบ แต่หากใช้ผิด ระบบก็จะสูญเสียความได้เปรียบทันที"
-  }
-};
+      aboutcompany: {
+        kicker: "Company Overview",
+        title: "About Us",
+        subtitle: "บริษัทผู้พัฒนาแนวคิดและระบบ Stealth Safety Bank Mobile เพื่อยกระดับความปลอดภัยทางการเงินจากประสบการณ์ปัญหาจริง และต่อยอดเป็นโซลูชันที่ใช้งานได้จริง",
+        lead: "บริษัท สยามทำ จำกัด มุ่งเน้นการพัฒนาแนวคิด องค์ความรู้ และรูปแบบการใช้งานที่ช่วยลดความเสี่ยงด้านการเงินและข้อมูลส่วนบุคคล โดยผสานมุมมองด้านเทคโนโลยี ความรอบคอบในการใช้งาน และการจัดเก็บเชิงอำพรางเข้าด้วยกัน เพื่อทำให้ความปลอดภัยไม่ใช่แค่คำโฆษณา แต่เป็นระบบที่นำไปใช้ได้จริง",
+        badges: [
+          "บริษัทไทย",
+          "พัฒนาแนวคิดจากปัญหาจริง",
+          "เน้นใช้งานได้จริง",
+          "มุ่งสู่โซลูชันระดับมืออาชีพ"
+        ],
+        features: [
+          "พัฒนาองค์ความรู้ด้านการป้องกันความเสี่ยงทางการเงินด้วยแนวคิดที่ชัดเจนและต่อยอดได้",
+          "ให้ความสำคัญกับทั้งความเข้าใจง่าย ความรอบคอบ และความน่าเชื่อถือของระบบ",
+          "มุ่งพัฒนาระบบให้เป็นทางเลือกสำหรับผู้ใช้ที่ต้องการความปลอดภัยมากกว่ามาตรฐานทั่วไป"
+        ],
+        impacts: [
+          { value: "พัฒนา", label: "นำประสบการณ์และปัญหาจริงมาสร้างเป็นระบบที่มีทิศทางชัดเจน" },
+          { value: "ต่อยอด", label: "ต่อยอดแนวคิดเป็นองค์ความรู้ อุปกรณ์ และรูปแบบการใช้งานที่จับต้องได้" },
+          { value: "น่าเชื่อถือ", label: "สร้างภาพลักษณ์มืออาชีพและชัดเจนสำหรับการสื่อสารกับลูกค้าและพาร์ตเนอร์" }
+        ],
+        useCases: [
+          "ผู้ที่ต้องการรู้จักบริษัทก่อนตัดสินใจใช้งานหรือร่วมงาน",
+          "ผู้ที่ต้องการเข้าใจทิศทาง แนวคิด และที่มาของระบบ Stealth Safety Bank",
+          "ผู้ที่ต้องการข้อมูลเบื้องต้นเกี่ยวกับบริษัท สยามทำ จำกัด"
+        ],
+        video: "https://www.youtube-nocookie.com/embed/mD9i39genW8",
+        videoNote: "วิดีโอตัวอย่างจากช่อง @siamtham ใช้เป็นภาพสะท้อนแนวทางการนำเสนอแบรนด์และระบบ"
+      }
     };
 
     const agentMockData = [
