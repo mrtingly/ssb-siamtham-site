@@ -115,7 +115,7 @@ button,input,textarea,select{ font:inherit; }
   border-bottom:1px solid rgba(255,255,255,.12);
   background:linear-gradient(90deg, #1a5dbd 0%, #2f7fe3 52%, #5aa7ff 100%);
   box-shadow:0 12px 28px rgba(18,50,99,.20);
-  overflow:hidden;
+  overflow:visible;
 }
 
 .ssb-topbar::before{
@@ -2204,4 +2204,55 @@ body{
 .main-content{
   margin-top:20px !important;
 }
+}
+
+/* ===== FIX SEARCH BAR POSITION ===== */
+
+.ssb-topbar{
+  overflow: visible !important;
+}
+
+.topbar-inner{
+  display: grid !important;
+  grid-template-columns: minmax(240px, 1.2fr) minmax(300px, 1.5fr) auto !important;
+  align-items: center !important;
+  gap: 16px !important;
+}
+
+.header-search-wrap{
+  position: relative !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  z-index: 20 !important;
+}
+
+.header-search{
+  width: min(100%, 560px) !important;
+  margin: 0 auto !important;
+  position: relative !important;
+  z-index: 21 !important;
+}
+
+@media (max-width: 920px){
+  .topbar-inner{
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    grid-template-areas:
+      "brand actions"
+      "search search" !important;
+  }
+
+  .brand-wrap{ grid-area: brand !important; }
+  .topbar-actions{ grid-area: actions !important; }
+  .header-search-wrap{
+    grid-area: search !important;
+    width: 100% !important;
+    margin-top: 8px !important;
+  }
+
+  .header-search{
+    width: 100% !important;
+    max-width: 100% !important;
+  }
 }
