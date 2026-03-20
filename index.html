@@ -1,44 +1,3372 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google" content="notranslate" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-<title>Stealth Safety Bank Mobile System</title>
+  <title>Stealth Safety Bank Mobile System | Siam Tham Co.,Ltd.</title>
+  <meta
+    name="description"
+    content="Stealth Safety Bank Mobile System โดย บริษัท สยามทำ จำกัด ระบบความปลอดภัยทางการเงินเชิงโครงสร้าง การแยกอุปกรณ์ธุรกรรม การอำพรางการจัดเก็บ และแนวคิดลดความเสี่ยงจากการโจมตีตั้งแต่ต้นทาง"
+  />
+  <meta
+    name="keywords"
+    content="Stealth Safety Bank, Stealth Safety Bank Mobile System, Stealth Safety Book, Siam Tham, บริษัท สยามทำ จำกัด, ความปลอดภัยทางการเงิน, mobile banking security, anti phishing, anti hacking"
+  />
+  <meta name="author" content="Siam Tham Co.,Ltd." />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="theme-color" content="#1b63c7" />
+  <link rel="canonical" href="https://www.siamtham.com/" />
 
-<link rel="stylesheet" href="css/main.css">
-<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Siam Tham Co.,Ltd." />
+  <meta property="og:title" content="Stealth Safety Bank Mobile System | Siam Tham Co.,Ltd." />
+  <meta
+    property="og:description"
+    content="ระบบความปลอดภัยทางการเงินเชิงโครงสร้าง ลดความเสี่ยงจากแอปไม่จำเป็น การใช้งานปะปน และช่องทางโจมตีที่ไม่เกี่ยวข้องกับธุรกรรม"
+  />
+  <meta property="og:url" content="https://www.siamtham.com/" />
+  <meta property="og:image" content="https://www.siamtham.com/images/logo.png" />
+  <meta property="og:locale" content="th_TH" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Stealth Safety Bank Mobile System | Siam Tham Co.,Ltd." />
+  <meta
+    name="twitter:description"
+    content="ระบบความปลอดภัยทางการเงินเชิงโครงสร้าง ลดความเสี่ยงตั้งแต่ต้นทาง และยกระดับการใช้งานอย่างรอบคอบ"
+  />
+  <meta name="twitter:image" content="https://www.siamtham.com/images/logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&family=Orbitron:wght@500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"Siam Tham Co.,Ltd.",
+    "alternateName":"บริษัท สยามทำ จำกัด",
+    "url":"https://www.siamtham.com/",
+    "logo":"https://www.siamtham.com/images/logo.png",
+    "email":"mailto:mysiamtham@gmail.com",
+    "telephone":"+66-2-043-2988",
+    "sameAs":[
+      "https://www.facebook.com/profile.php?id=61556844339863",
+      "https://www.youtube.com/@siamtham",
+      "https://line.me/R/ti/p/@siamtham"
+    ],
+    "address":{
+      "@type":"PostalAddress",
+      "streetAddress":"54 Soi 53, Phutthamonthon Sai 1 Road, Chimphli",
+      "addressLocality":"Taling Chan",
+      "addressRegion":"Bangkok",
+      "postalCode":"10170",
+      "addressCountry":"TH"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "name":"Siam Tham Co.,Ltd.",
+    "url":"https://www.siamtham.com/"
+  }
+  </script>
+
+  <style>
+    :root{
+      --header-h: 96px;
+      --max: 1360px;
+      --hero-max: 1240px;
+
+      --radius-xl: 36px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --radius-sm: 14px;
+      --radius-pill: 999px;
+
+      --shadow-xl: 0 28px 80px rgba(0,0,0,.30);
+      --shadow-lg: 0 18px 42px rgba(0,0,0,.18);
+      --shadow-md: 0 10px 24px rgba(0,0,0,.12);
+
+      --head-1:#1d64ca;
+      --head-2:#2c7ce2;
+      --head-3:#5aa7ff;
+
+      --bg-dark-1:#020816;
+      --bg-dark-2:#04112a;
+      --bg-dark-3:#08204a;
+      --bg-dark-4:#031127;
+
+      --text-dark:#f3fbff;
+      --text-dark-soft:rgba(243,251,255,.84);
+      --text-dark-faint:rgba(243,251,255,.64);
+
+      --panel-dark:rgba(255,255,255,.07);
+      --panel-dark-2:rgba(255,255,255,.11);
+      --border-dark:rgba(169,227,255,.14);
+      --border-dark-2:rgba(169,227,255,.24);
+
+      --bg-light:#f4f8ff;
+      --bg-light-2:#eaf1ff;
+      --bg-light-3:#ffffff;
+      --text-light:#143764;
+      --text-light-soft:#3d5f8d;
+      --text-light-faint:#62789b;
+
+      --panel-light:#ffffff;
+      --panel-light-2:#f7faff;
+      --border-light:rgba(20,55,100,.08);
+      --border-light-2:rgba(20,55,100,.14);
+
+      --accent:#58b7ff;
+      --accent-2:#6ea8ff;
+      --danger:#eb415b;
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      min-height:100vh;
+      padding-top:var(--header-h);
+      overflow-x:hidden;
+      font-family:'Prompt',sans-serif;
+      color:var(--text-dark);
+      background:
+        radial-gradient(circle at 50% 16%, rgba(90,165,255,.16), transparent 18%),
+        radial-gradient(circle at 12% 18%, rgba(115,220,255,.06), transparent 18%),
+        radial-gradient(circle at 88% 12%, rgba(115,220,255,.06), transparent 18%),
+        linear-gradient(180deg, var(--bg-dark-1) 0%, var(--bg-dark-2) 34%, var(--bg-dark-3) 78%, var(--bg-dark-4) 100%);
+      transition:background .32s ease, color .32s ease;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+      opacity:.32;
+      background-image:
+        radial-gradient(circle at 8% 16%, rgba(255,255,255,.84) 0 .8px, transparent 2px),
+        radial-gradient(circle at 16% 28%, rgba(255,255,255,.58) 0 .7px, transparent 1.8px),
+        radial-gradient(circle at 28% 22%, rgba(255,255,255,.74) 0 .8px, transparent 1.8px),
+        radial-gradient(circle at 46% 18%, rgba(255,255,255,.64) 0 .7px, transparent 1.8px),
+        radial-gradient(circle at 62% 68%, rgba(255,255,255,.58) 0 .7px, transparent 1.8px),
+        radial-gradient(circle at 78% 24%, rgba(255,255,255,.82) 0 .8px, transparent 1.8px),
+        radial-gradient(circle at 90% 14%, rgba(255,255,255,.60) 0 .7px, transparent 1.8px);
+    }
+
+    body.light-mode{
+      color:var(--text-light);
+      background:
+        radial-gradient(circle at 50% 10%, rgba(111,155,255,.10), transparent 16%),
+        linear-gradient(180deg, var(--bg-light) 0%, var(--bg-light-2) 100%);
+    }
+
+    body.light-mode::before{ opacity:.12; }
+
+    .th-font{ font-family:'Prompt',sans-serif; }
+    .en-font{ font-family:'Orbitron',sans-serif; }
+    img{ max-width:100%; display:block; }
+    button,input,textarea,select{ font:inherit; }
+
+    .site-wrap{
+      position:relative;
+      z-index:1;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+    }
+
+    /* HEADER */
+    .ssb-topbar{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      height:var(--header-h);
+      z-index:4000;
+      border-bottom:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(90deg, #1a5dbd 0%, #2f7fe3 52%, #5aa7ff 100%);
+      box-shadow:0 12px 28px rgba(18,50,99,.20);
+      overflow:visible;
+    }
+
+    .ssb-topbar::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,0)),
+        radial-gradient(circle at 10% 18%, rgba(255,255,255,.08), transparent 20%),
+        radial-gradient(circle at 88% 16%, rgba(255,255,255,.06), transparent 18%);
+    }
+
+    .topbar-inner{
+      position:relative;
+      z-index:1;
+      width:min(var(--max), calc(100% - 26px));
+      height:100%;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:minmax(240px, 1.2fr) minmax(300px, 1.5fr) auto;
+      align-items:center;
+      gap:16px;
+    }
+
+    .brand-wrap{
+      min-width:0;
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .brand-logo{
+      width:58px;
+      height:58px;
+      flex:0 0 58px;
+      border-radius:18px;
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.10);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.12), 0 0 18px rgba(255,255,255,.08);
+    }
+
+    .brand-text{
+      min-width:0;
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+    }
+
+    .brand-line-1{
+      font-size:23px;
+      line-height:1.02;
+      font-weight:800;
+      color:#fff;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      letter-spacing:.1px;
+    }
+
+    .brand-line-2{
+      font-size:14px;
+      line-height:1.1;
+      font-weight:800;
+      color:#eef8ff;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      letter-spacing:.2px;
+    }
+
+    .brand-site{
+      font-size:12px;
+      line-height:1.1;
+      font-weight:700;
+      color:rgba(255,255,255,.94);
+    }
+
+    .brand-site a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .header-search-wrap{
+      position:relative;
+      min-width:0;
+      display:flex;
+      justify-content:center;
+    }
+
+    .header-search{
+      position:relative;
+      width:min(100%, 560px);
+      height:54px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.10);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.10), 0 10px 22px rgba(0,0,0,.12);
+      display:flex;
+      align-items:center;
+      padding:0 14px 0 18px;
+      gap:12px;
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      transition:background .22s ease, border-color .22s ease, box-shadow .22s ease;
+    }
+
+    body.light-mode .header-search{
+      background:rgba(255,255,255,.86);
+      border-color:rgba(20,55,100,.10);
+      box-shadow:0 10px 22px rgba(31,74,140,.10);
+    }
+
+    .header-search:focus-within{
+      border-color:rgba(165,230,255,.40);
+      box-shadow:0 0 0 3px rgba(102,187,255,.16), 0 16px 28px rgba(0,0,0,.16);
+      background:rgba(255,255,255,.14);
+    }
+
+    body.light-mode .header-search:focus-within{
+      border-color:rgba(79,124,255,.26);
+      box-shadow:0 0 0 3px rgba(79,124,255,.10), 0 14px 28px rgba(31,74,140,.12);
+      background:#fff;
+    }
+
+    .header-search-icon{
+      width:18px;
+      height:18px;
+      flex:0 0 18px;
+      color:#fff;
+      opacity:.9;
+    }
+
+    body.light-mode .header-search-icon{
+      color:#27507f;
+      opacity:.92;
+    }
+
+    .header-search-input{
+      flex:1;
+      min-width:0;
+      height:100%;
+      border:none;
+      outline:none;
+      background:transparent;
+      color:#fff;
+      font-size:15px;
+      font-weight:600;
+      font-family:'Prompt',sans-serif;
+    }
+
+    body.light-mode .header-search-input{
+      color:#153865;
+    }
+
+    .header-search-input::placeholder{
+      color:rgba(255,255,255,.78);
+      font-weight:500;
+    }
+
+    body.light-mode .header-search-input::placeholder{
+      color:#6b84a3;
+    }
+
+    .header-search-btn{
+      height:38px;
+      padding:0 16px;
+      border:none;
+      border-radius:999px;
+      background:rgba(255,255,255,.16);
+      color:#fff;
+      font-size:13px;
+      font-weight:800;
+      cursor:pointer;
+      transition:.18s ease;
+      white-space:nowrap;
+      font-family:'Prompt',sans-serif;
+    }
+
+    body.light-mode .header-search-btn{
+      background:linear-gradient(135deg,#2e78df,#5aa7ff);
+      color:#fff;
+      box-shadow:0 8px 18px rgba(47,127,227,.18);
+    }
+
+    .header-search-btn:hover{
+      transform:translateY(-1px);
+      background:rgba(255,255,255,.22);
+    }
+
+    body.light-mode .header-search-btn:hover{
+      background:linear-gradient(135deg,#1e69d0,#4d9cf8);
+    }
+
+    .agent-dropdown{
+      position:absolute;
+      top:calc(100% + 10px);
+      left:50%;
+      transform:translateX(-50%) translateY(-6px);
+      width:min(100%, 560px);
+      opacity:0;
+      pointer-events:none;
+      visibility:hidden;
+      transition:.18s ease;
+      z-index:4500;
+    }
+
+    .agent-dropdown.open{
+      opacity:1;
+      pointer-events:auto;
+      visibility:visible;
+      transform:translateX(-50%) translateY(0);
+    }
+
+    .agent-dropdown-card{
+      border-radius:24px;
+      border:1px solid rgba(173,233,255,.18);
+      background:linear-gradient(180deg, rgba(9,30,70,.98), rgba(5,18,48,.98));
+      box-shadow:0 22px 48px rgba(0,0,0,.28);
+      overflow:hidden;
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+    }
+
+    body.light-mode .agent-dropdown-card{
+      background:linear-gradient(180deg, #ffffff, #f7faff);
+      border-color:rgba(20,55,100,.10);
+      box-shadow:0 18px 36px rgba(31,74,140,.14);
+    }
+
+    .agent-dropdown-head{
+      padding:15px 18px 11px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      color:#eefaff;
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+
+    body.light-mode .agent-dropdown-head{
+      color:#1c4374;
+      border-bottom-color:rgba(20,55,100,.08);
+    }
+
+    .agent-results{
+      max-height:340px;
+      overflow:auto;
+      display:grid;
+      gap:0;
+    }
+
+    .agent-item{
+      width:100%;
+      border:none;
+      background:transparent;
+      text-align:left;
+      padding:15px 18px;
+      cursor:pointer;
+      color:#eaf7ff;
+      border-bottom:1px solid rgba(255,255,255,.06);
+      transition:.16s ease;
+      font-family:'Prompt',sans-serif;
+    }
+
+    body.light-mode .agent-item{
+      color:#1b426f;
+      border-bottom-color:rgba(20,55,100,.06);
+    }
+
+    .agent-item:last-child{ border-bottom:none; }
+
+    .agent-item:hover{
+      background:rgba(255,255,255,.05);
+    }
+
+    body.light-mode .agent-item:hover{
+      background:#f4f8ff;
+    }
+
+    .agent-name{
+      font-size:15px;
+      font-weight:800;
+      line-height:1.35;
+      margin-bottom:3px;
+    }
+
+    .agent-meta{
+      font-size:12px;
+      line-height:1.55;
+      color:rgba(226,246,255,.76);
+      font-weight:600;
+    }
+
+    body.light-mode .agent-meta{
+      color:#6b84a3;
+    }
+
+    .agent-empty{
+      padding:18px 16px;
+      color:rgba(226,246,255,.78);
+      font-size:14px;
+      font-weight:700;
+    }
+
+    body.light-mode .agent-empty{
+      color:#6b84a3;
+    }
+
+    .topbar-actions{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:12px;
+      flex:0 0 auto;
+      min-width:0;
+    }
+
+    .theme-switch-wrap{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.10);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 8px 18px rgba(0,0,0,.12);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+    }
+
+    .mode-label{
+      font-size:13px;
+      font-weight:800;
+      color:#fff;
+      white-space:nowrap;
+      user-select:none;
+    }
+
+    .theme-switch{
+      width:62px;
+      height:32px;
+      border:none;
+      border-radius:999px;
+      background:rgba(255,255,255,.18);
+      border:1px solid rgba(255,255,255,.16);
+      cursor:pointer;
+      position:relative;
+      transition:.22s ease;
+      box-shadow:0 6px 14px rgba(0,0,0,.16);
+      padding:0;
+    }
+
+    .switch-knob{
+      position:absolute;
+      top:3px;
+      left:3px;
+      width:24px;
+      height:24px;
+      border-radius:50%;
+      background:#fff;
+      box-shadow:0 4px 10px rgba(0,0,0,.20);
+      transition:left .24s ease;
+    }
+
+    body.light-mode .switch-knob{ left:33px; }
+
+    .lang-bar{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.10);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 8px 18px rgba(0,0,0,.12);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+    }
+
+    .lang-btn{
+      width:40px;
+      height:40px;
+      border:none;
+      border-radius:50%;
+      padding:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      cursor:pointer;
+      transition:.18s ease;
+      overflow:hidden;
+      position:relative;
+    }
+
+    .lang-btn img{
+      width:24px;
+      height:24px;
+      object-fit:cover;
+      border-radius:50%;
+      box-shadow:0 0 0 1px rgba(255,255,255,.14);
+    }
+
+    .lang-btn:hover{
+      transform:translateY(-1px) scale(1.04);
+      background:rgba(255,255,255,.12);
+    }
+
+    .lang-btn.active{
+      background:rgba(255,255,255,.16);
+      box-shadow:0 0 0 2px rgba(255,255,255,.08), 0 0 18px rgba(114,215,255,.28);
+    }
+
+    #google_translate_element{
+      position:fixed;
+      right:0;
+      bottom:0;
+      width:1px;
+      height:1px;
+      opacity:.001;
+      overflow:hidden;
+      pointer-events:none;
+      z-index:-1;
+    }
+
+    .goog-te-banner-frame.skiptranslate,
+    iframe.skiptranslate{ display:none !important; }
+    .goog-logo-link,
+    .goog-te-gadget span{ display:none !important; }
+    .goog-te-gadget{ font-size:0 !important; }
+    body{ top:0 !important; }
+
+    /* MAIN */
+    .main-content{
+      flex:1;
+      width:min(var(--max), calc(100% - 26px));
+      margin:0 auto;
+      padding:24px 0 32px;
+    }
+
+    .hero-stage{
+      min-height:calc(100vh - var(--header-h) - 54px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 0 24px;
+    }
+
+    .hero-center{
+      width:100%;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:16px;
+    }
+
+    .tech-hero{
+      position:relative;
+      width:min(96vw, var(--hero-max));
+      min-height:780px;
+      height:min(86vh, 860px);
+      overflow:hidden;
+      border-radius:40px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      isolation:isolate;
+      background:
+        radial-gradient(circle at 50% 48%, rgba(35,125,255,.15) 0%, rgba(20,82,190,.10) 18%, rgba(7,28,72,.96) 46%, rgba(3,13,35,1) 82%, rgba(2,8,24,1) 100%);
+      box-shadow:
+        inset 0 0 0 1px rgba(122,216,255,.08),
+        inset 0 0 60px rgba(58,151,255,.04),
+        var(--shadow-xl);
+      transition:background .28s ease, box-shadow .28s ease;
+    }
+
+    .tech-hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      z-index:0;
+      background:
+        linear-gradient(rgba(120,195,255,.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(120,195,255,.015) 1px, transparent 1px);
+      background-size:42px 42px;
+      opacity:.45;
+    }
+
+    .tech-hero::after{
+      content:"";
+      position:absolute;
+      inset:14px;
+      border-radius:30px;
+      border:1px solid rgba(126,204,255,.08);
+      pointer-events:none;
+      z-index:0;
+    }
+
+    body.light-mode .tech-hero{
+      background:linear-gradient(180deg, #f8fbff 0%, #edf4ff 100%);
+      box-shadow:0 20px 54px rgba(31,74,140,.10);
+    }
+
+    body.light-mode .tech-hero::before{
+      opacity:.20;
+      background:
+        linear-gradient(rgba(70,110,180,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(70,110,180,.05) 1px, transparent 1px);
+      background-size:42px 42px;
+    }
+
+    body.light-mode .tech-hero::after{ border-color:rgba(20,55,100,.08); }
+
+    .hero-stars{
+      position:absolute;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+      opacity:.48;
+      background-image:
+        radial-gradient(circle at 10% 18%, rgba(255,255,255,.80) 0 .9px, transparent 2px),
+        radial-gradient(circle at 18% 32%, rgba(255,255,255,.58) 0 .7px, transparent 1.8px),
+        radial-gradient(circle at 30% 22%, rgba(255,255,255,.72) 0 .8px, transparent 1.8px),
+        radial-gradient(circle at 46% 16%, rgba(255,255,255,.58) 0 .7px, transparent 1.8px),
+        radial-gradient(circle at 66% 72%, rgba(255,255,255,.54) 0 .7px, transparent 1.8px),
+        radial-gradient(circle at 82% 24%, rgba(255,255,255,.78) 0 .8px, transparent 1.8px),
+        radial-gradient(circle at 92% 14%, rgba(255,255,255,.60) 0 .7px, transparent 1.8px);
+      animation:slowFloat 8s ease-in-out infinite;
+    }
+
+    body.light-mode .hero-stars{ opacity:.14; }
+
+    .hero-bg{
+      position:absolute;
+      inset:0;
+      z-index:1;
+      pointer-events:none;
+    }
+
+    .bg-core-glow{
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
+      width:min(58vw, 540px);
+      height:min(58vw, 540px);
+      border-radius:50%;
+      background:
+        radial-gradient(circle, rgba(201,238,255,.20) 0%, rgba(110,194,255,.12) 18%, rgba(46,140,255,.06) 30%, transparent 64%);
+      filter:blur(14px);
+      animation:corePulse 6s ease-in-out infinite;
+    }
+
+    body.light-mode .bg-core-glow{
+      background:
+        radial-gradient(circle, rgba(79,124,255,.13) 0%, rgba(111,155,255,.08) 24%, transparent 68%);
+    }
+
+    .bg-ring{
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
+      border-radius:50%;
+      border:1px solid rgba(117,206,255,.12);
+      opacity:.85;
+    }
+
+    .ring-1{ width:min(34vw, 320px); height:min(34vw, 320px); animation:spinSlow 22s linear infinite; }
+    .ring-2{ width:min(44vw, 410px); height:min(44vw, 410px); animation:spinSlowReverse 30s linear infinite; }
+    .ring-3{ width:min(54vw, 520px); height:min(54vw, 520px); opacity:.45; animation:spinSlow 44s linear infinite; }
+
+    .ring-tilt-1{ transform:translate(-50%,-50%) rotateX(72deg); opacity:.60; }
+    .ring-tilt-2{ transform:translate(-50%,-50%) rotateY(72deg); opacity:.46; }
+
+    body.light-mode .bg-ring{ border-color:rgba(79,124,255,.12); }
+
+    .hero-system-title{
+      position:absolute;
+      left:50%;
+      top:13.6%;
+      transform:translate(-50%, -50%) scale(.94);
+      width:min(92%, 980px);
+      text-align:center;
+      z-index:8;
+      opacity:0;
+      visibility:hidden;
+      transition:opacity .24s ease, transform .24s ease;
+      pointer-events:none;
+    }
+
+    .tech-hero.open .hero-system-title{
+      opacity:1;
+      visibility:visible;
+      transform:translate(-50%, -50%) scale(1);
+    }
+
+    .hero-system-title-inner{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:76px;
+      padding:18px 36px;
+      border-radius:999px;
+      border:1px solid rgba(116,214,255,.16);
+      background:
+        linear-gradient(180deg, rgba(12,38,96,.28), rgba(7,20,53,.12)),
+        linear-gradient(90deg, rgba(255,255,255,.05), rgba(255,255,255,0));
+      box-shadow:0 0 20px rgba(69,170,255,.08);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+    }
+
+    body.light-mode .hero-system-title-inner{
+      background:#ffffff;
+      border-color:rgba(20,55,100,.08);
+      box-shadow:0 14px 30px rgba(31,74,140,.10);
+    }
+
+    .hero-system-title-text{
+      font-family:'Orbitron',sans-serif;
+      font-size:34px;
+      line-height:1.04;
+      font-weight:900;
+      letter-spacing:1.2px;
+      text-transform:uppercase;
+      color:#eaf9ff;
+      white-space:nowrap;
+      text-shadow:0 0 10px rgba(141,222,255,.40);
+    }
+
+    body.light-mode .hero-system-title-text{
+      color:#21497e;
+      text-shadow:none;
+    }
+
+    .center-glow{
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:164px;
+      height:164px;
+      transform:translate(-50%, -50%);
+      z-index:3;
+      pointer-events:none;
+      background:radial-gradient(circle, rgba(228,248,255,.72) 0%, rgba(169,228,255,.20) 34%, rgba(90,188,255,.05) 56%, transparent 72%);
+      filter:blur(8px);
+      animation:centerGlow 5s ease-in-out infinite;
+    }
+
+    body.light-mode .center-glow{
+      background:radial-gradient(circle, rgba(111,155,255,.18) 0%, rgba(111,155,255,.08) 44%, transparent 74%);
+    }
+
+    .center-pulse{
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:260px;
+      height:260px;
+      border-radius:50%;
+      transform:translate(-50%,-50%) scale(.92);
+      border:1px solid rgba(138,223,255,.10);
+      opacity:0;
+      pointer-events:none;
+      z-index:3;
+    }
+
+    body.light-mode .center-pulse{ border-color:rgba(79,124,255,.16); }
+    .center-pulse.active{ animation:pulseOut .72s ease-out; }
+
+    .logo-core{
+      position:relative;
+      z-index:10;
+      width:min(24vw, 200px);
+      height:min(24vw, 200px);
+      border:none;
+      background:transparent;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      transition:transform .20s ease, filter .20s ease;
+      padding:0;
+    }
+
+    .logo-core::before{
+      content:"";
+      position:absolute;
+      inset:-16px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(128,214,255,.10), transparent 70%);
+      filter:blur(8px);
+      z-index:-1;
+    }
+
+    .logo-core:hover{
+      transform:scale(1.04);
+      filter:brightness(1.04);
+    }
+
+    .logo-core img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      filter:drop-shadow(0 0 10px rgba(120,212,255,.14)) drop-shadow(0 14px 22px rgba(0,0,0,.18));
+    }
+
+    body.light-mode .logo-core img{
+      filter:drop-shadow(0 12px 24px rgba(31,74,140,.14));
+    }
+
+    .energy-svg{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      z-index:6;
+      pointer-events:none;
+      overflow:visible;
+    }
+
+    .energy-line{
+      fill:none;
+      stroke:rgba(116,214,255,.10);
+      stroke-width:1.2;
+      stroke-linecap:round;
+      opacity:0;
+      transition:opacity .24s ease;
+    }
+
+    .energy-run{
+      fill:none;
+      stroke:rgba(199,244,255,.84);
+      stroke-width:1.9;
+      stroke-linecap:round;
+      stroke-dasharray:18 340;
+      animation:runEnergy 2.2s linear infinite;
+      opacity:0;
+      transition:opacity .24s ease;
+    }
+
+    body.light-mode .energy-line{ stroke:rgba(79,124,255,.16); }
+    body.light-mode .energy-run{ stroke:rgba(79,124,255,.56); }
+
+    .tech-hero.open .energy-line,
+    .tech-hero.open .energy-run{ opacity:.84; }
+
+    .delay-1{ animation-delay:.08s; }
+    .delay-2{ animation-delay:.18s; }
+    .delay-3{ animation-delay:.28s; }
+    .delay-4{ animation-delay:.38s; }
+    .delay-5{ animation-delay:.12s; }
+    .delay-6{ animation-delay:.22s; }
+    .delay-7{ animation-delay:.32s; }
+    .delay-8{ animation-delay:.42s; }
+
+    /* MENU */
+    .menu-layer{
+      position:absolute;
+      inset:0;
+      z-index:7;
+    }
+
+    .menu-node{
+      --x:50%;
+      --y:50%;
+      --delay:0s;
+      position:absolute;
+      left:var(--x);
+      top:var(--y);
+      transform:translate(-50%, -50%) scale(.92);
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+      border:none;
+      background:none;
+      padding:0;
+      margin:0;
+      color:#fff;
+      text-decoration:none;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      transition:
+        transform .34s cubic-bezier(.2,.8,.2,1),
+        opacity .22s ease,
+        filter .18s ease,
+        visibility .22s ease;
+      transition-delay:var(--delay);
+    }
+
+    .tech-hero.open .menu-node{
+      opacity:1;
+      visibility:visible;
+      pointer-events:auto;
+      transform:translate(-50%, -50%) scale(1);
+    }
+
+    .menu-node:hover{ filter:brightness(1.06); }
+
+    .node-shell{
+      position:relative;
+      min-width:292px;
+      min-height:74px;
+      padding:14px 22px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      overflow:hidden;
+      border:1px solid rgba(110,209,255,.18);
+      border-radius:20px;
+      background:
+        linear-gradient(180deg, rgba(13,43,102,.34), rgba(7,22,58,.16)),
+        linear-gradient(90deg, rgba(255,255,255,.04), rgba(255,255,255,0));
+      box-shadow:0 14px 28px rgba(0,0,0,.16);
+      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
+    }
+
+    .menu-node:hover .node-shell{
+      transform:translateY(-2px) scale(1.02);
+      border-color:rgba(145,226,255,.26);
+      box-shadow:0 18px 34px rgba(0,0,0,.18);
+    }
+
+    .node-text{
+      display:block;
+      line-height:1.15;
+      position:relative;
+      z-index:1;
+      width:100%;
+    }
+
+    .node-title{
+      font-size:22px;
+      font-weight:800;
+      letter-spacing:.2px;
+      color:#eefaff;
+      white-space:nowrap;
+    }
+
+    body.light-mode .node-shell{
+      background:#ffffff;
+      border-color:rgba(20,55,100,.08);
+      box-shadow:0 12px 26px rgba(31,74,140,.10);
+    }
+
+    body.light-mode .node-title{ color:#163866; }
+
+    .menu-node.bottom .node-shell{
+      min-width:360px;
+      min-height:80px;
+      padding:15px 28px;
+      background:linear-gradient(180deg, rgba(106,10,22,.30), rgba(67,4,14,.16));
+      border:1px solid rgba(255,118,128,.28);
+      box-shadow:0 18px 36px rgba(0,0,0,.20), 0 0 18px rgba(255,76,92,.12);
+    }
+
+    .menu-node.bottom .node-title{
+      font-size:29px;
+      color:#fff3f4;
+    }
+
+    body.light-mode .menu-node.bottom .node-shell{
+      background:linear-gradient(135deg,#4f7cff,#6ea8ff);
+      border-color:rgba(79,124,255,.18);
+      box-shadow:0 16px 32px rgba(79,124,255,.22);
+    }
+
+    body.light-mode .menu-node.bottom .node-title{ color:#fff; }
+
+    .n1{ --x:27%; --y:33%; --delay:.04s; }
+    .n2{ --x:27%; --y:44%; --delay:.10s; }
+    .n3{ --x:27%; --y:55%; --delay:.16s; }
+    .n4{ --x:27%; --y:66%; --delay:.22s; }
+    .n5{ --x:73%; --y:33%; --delay:.04s; }
+    .n6{ --x:73%; --y:44%; --delay:.10s; }
+    .n7{ --x:73%; --y:55%; --delay:.16s; }
+    .n8{ --x:73%; --y:66%; --delay:.22s; }
+    .n9{ --x:50%; --y:84%; --delay:.28s; }
+
+    .node-note{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:58px;
+      padding:12px 28px;
+      border-radius:999px;
+      background:rgba(255,255,255,.10);
+      color:#f2fbff;
+      border:1px solid rgba(139,215,255,.22);
+      box-shadow:0 14px 28px rgba(0,0,0,.18);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+      font-size:18px;
+      font-weight:800;
+      text-align:center;
+      pointer-events:none;
+      transition:opacity .22s ease, transform .22s ease, visibility .22s ease;
+    }
+
+    body.light-mode .node-note{
+      background:#ffffff;
+      color:#163866;
+      border-color:rgba(20,55,100,.08);
+      box-shadow:0 12px 24px rgba(31,74,140,.10);
+    }
+
+    .node-note.hidden{
+      opacity:0;
+      visibility:hidden;
+      transform:translateY(-6px);
+    }
+
+    /* POPUPS */
+    .popup-backdrop{
+      position:fixed;
+      inset:0;
+      z-index:5000;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:22px;
+      background:rgba(2,10,28,.72);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+      opacity:0;
+      transition:opacity .22s ease;
+    }
+
+    .popup-backdrop.show{
+      display:flex;
+      opacity:1;
+    }
+
+    .popup-card{
+      position:relative;
+      width:min(96vw, 1120px);
+      max-height:92vh;
+      overflow:auto;
+      overflow-x:hidden;
+      border-radius:32px;
+      padding:22px;
+      background:
+        linear-gradient(180deg, rgba(9,28,66,.96), rgba(6,18,48,.98)),
+        linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,0));
+      color:#eaf7ff;
+      border:1px solid rgba(130,220,255,.16);
+      box-shadow:0 30px 80px rgba(0,0,0,.34);
+      transform:translateY(18px) scale(.96);
+      animation:popupIn .28s cubic-bezier(.2,.8,.2,1) forwards;
+    }
+
+    body.light-mode .popup-backdrop{ background:rgba(43,78,126,.22); }
+
+    body.light-mode .popup-card{
+      background:linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+      color:#173b69;
+      border-color:rgba(20,55,100,.10);
+      box-shadow:0 24px 60px rgba(31,74,140,.14);
+    }
+
+    .popup-card.company{
+      width:min(92vw, 780px);
+    }
+
+    .popup-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:20px;
+    }
+
+    .popup-head-main{
+      min-width:0;
+      flex:1;
+    }
+
+    .popup-kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      min-height:36px;
+      padding:7px 14px;
+      border-radius:999px;
+      border:1px solid rgba(138,223,255,.16);
+      background:rgba(255,255,255,.05);
+      color:rgba(219,245,255,.90);
+      font-size:12px;
+      font-weight:700;
+      margin-bottom:12px;
+      letter-spacing:.2px;
+      text-transform:uppercase;
+    }
+
+    .popup-kicker::before{
+      content:"";
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:radial-gradient(circle, #fff 0%, #bff2ff 35%, #58bfff 100%);
+      box-shadow:0 0 10px rgba(88,191,255,.8);
+      flex:0 0 8px;
+    }
+
+    body.light-mode .popup-kicker{
+      background:rgba(79,124,255,.06);
+      border-color:rgba(20,55,100,.10);
+      color:#2a568d;
+    }
+
+    .popup-head h3{
+      margin:0;
+      font-size:42px;
+      line-height:1.05;
+      color:#eefaff;
+      font-weight:800;
+      letter-spacing:-.4px;
+    }
+
+    body.light-mode .popup-head h3{ color:#173b69; }
+
+    .popup-subtitle{
+      margin-top:10px;
+      color:rgba(215,241,255,.82);
+      font-size:17px;
+      line-height:1.8;
+      max-width:820px;
+      font-weight:500;
+    }
+
+    body.light-mode .popup-subtitle{ color:#557198; }
+
+    .popup-x{
+      width:50px;
+      height:50px;
+      border:none;
+      border-radius:999px;
+      background:linear-gradient(135deg, #0b4ea2, #1d6bd4);
+      color:#fff;
+      font-size:18px;
+      font-weight:800;
+      cursor:pointer;
+      flex:0 0 50px;
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow:0 10px 22px rgba(0,0,0,.18);
+      transition:.18s ease;
+    }
+
+    .popup-x:hover{ transform:translateY(-2px); }
+    body.light-mode .popup-x{ box-shadow:0 10px 22px rgba(31,74,140,.14); }
+
+    .popup-body{
+      display:grid;
+      gap:16px;
+    }
+
+    .popup-panel{
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)),
+        linear-gradient(135deg, rgba(255,255,255,.03), rgba(255,255,255,0));
+      border:1px solid rgba(130,220,255,.12);
+      border-radius:24px;
+      padding:22px;
+      box-shadow:0 12px 24px rgba(0,0,0,.12);
+    }
+
+    body.light-mode .popup-panel{
+      background:#ffffff;
+      border-color:rgba(20,55,100,.08);
+      box-shadow:0 12px 24px rgba(31,74,140,.08);
+    }
+
+    .video-panel{
+      padding:14px;
+      overflow:hidden;
+    }
+
+    .video-frame{
+      position:relative;
+      width:100%;
+      padding-top:56.25%;
+      overflow:hidden;
+      border-radius:22px;
+      background:
+        radial-gradient(circle at center, rgba(57,142,255,.14), rgba(10,32,79,.95) 62%),
+        #0a1b44;
+      border:1px solid rgba(130,220,255,.12);
+      box-shadow:0 12px 24px rgba(0,0,0,.16);
+    }
+
+    body.light-mode .video-frame{
+      background:#eef4ff;
+      border-color:rgba(20,55,100,.08);
+      box-shadow:0 10px 22px rgba(31,74,140,.08);
+    }
+
+    .video-frame iframe{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      border:0;
+    }
+
+    .video-note{
+      margin-top:10px;
+      font-size:13px;
+      line-height:1.7;
+      color:rgba(216,242,255,.72);
+      font-weight:600;
+    }
+
+    body.light-mode .video-note{
+      color:#6b84a3;
+    }
+
+    .popup-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+
+    .popup-section-title{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin:0 0 14px;
+      font-size:22px;
+      font-weight:800;
+      color:#eefaff;
+      letter-spacing:-.2px;
+    }
+
+    .popup-section-title .dot{
+      width:9px;
+      height:9px;
+      border-radius:50%;
+      background:radial-gradient(circle, #fff 0%, #c8f3ff 35%, #4ab7ff 100%);
+      box-shadow:0 0 10px rgba(74,183,255,.8);
+      flex:0 0 9px;
+    }
+
+    body.light-mode .popup-section-title{ color:#173b69; }
+
+    .popup-lead{
+      margin:0;
+      font-size:17px;
+      line-height:1.95;
+      color:#dcefff;
+      font-weight:500;
+    }
+
+    body.light-mode .popup-lead{ color:#557198; }
+
+    .badge-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:16px;
+    }
+
+    .popup-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      min-height:38px;
+      padding:8px 13px;
+      border-radius:999px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(131,221,255,.10);
+      color:#ecfaff;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.1px;
+    }
+
+    .popup-badge::before{
+      content:"";
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:radial-gradient(circle, #fff 0%, #c8f3ff 30%, #4ab7ff 100%);
+      box-shadow:0 0 8px rgba(74,183,255,.8);
+      flex:0 0 7px;
+    }
+
+    body.light-mode .popup-badge{
+      background:rgba(79,124,255,.06);
+      border-color:rgba(20,55,100,.08);
+      color:#315789;
+    }
+
+    .feature-list{
+      display:grid;
+      gap:12px;
+      margin:0;
+      padding:0;
+      list-style:none;
+    }
+
+    .feature-list li{
+      position:relative;
+      min-height:62px;
+      padding:14px 16px 14px 48px;
+      border-radius:18px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(134,223,255,.08);
+      color:#e8f8ff;
+      font-size:16px;
+      line-height:1.86;
+      font-weight:500;
+    }
+
+    .feature-list li::before{
+      content:"";
+      position:absolute;
+      left:15px;
+      top:20px;
+      width:18px;
+      height:18px;
+      border-radius:50%;
+      background:radial-gradient(circle, #fff 0%, #d7f7ff 28%, #63c7ff 62%, rgba(99,199,255,.18) 100%);
+      box-shadow:0 0 14px rgba(99,199,255,.44);
+    }
+
+    body.light-mode .feature-list li{
+      background:#f9fbff;
+      border-color:rgba(20,55,100,.06);
+      color:#406184;
+    }
+
+    .impact-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:12px;
+    }
+
+    .impact-card{
+      min-height:126px;
+      border-radius:20px;
+      padding:16px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)),
+        radial-gradient(circle at top right, rgba(90,188,255,.10), transparent 48%);
+      border:1px solid rgba(135,223,255,.10);
+    }
+
+    body.light-mode .impact-card{
+      background:#f9fbff;
+      border-color:rgba(20,55,100,.06);
+    }
+
+    .impact-value{
+      font-size:31px;
+      line-height:1;
+      font-weight:900;
+      color:#eefaff;
+      margin-bottom:12px;
+    }
+
+    .impact-label{
+      font-size:14px;
+      line-height:1.8;
+      color:rgba(221,245,255,.76);
+      font-weight:600;
+    }
+
+    body.light-mode .impact-value{ color:#21497e; }
+    body.light-mode .impact-label{ color:#5a7598; }
+
+    .popup-action-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:16px;
+    }
+
+    .popup-cta{
+      min-height:52px;
+      padding:12px 18px;
+      border:none;
+      border-radius:16px;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      color:#fff;
+      font-size:14px;
+      font-weight:800;
+      cursor:pointer;
+      transition:.18s ease;
+      font-family:'Prompt',sans-serif;
+    }
+
+    .popup-cta.primary{
+      background:linear-gradient(135deg, #0b4ea2 0%, #1f69cd 60%, #5cc8ff 100%);
+      box-shadow:0 12px 24px rgba(31,105,205,.22);
+    }
+
+    .popup-cta.secondary{
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(130,220,255,.14);
+      color:#eefaff;
+    }
+
+    body.light-mode .popup-cta.secondary{
+      background:#f4f8ff;
+      border-color:rgba(20,55,100,.08);
+      color:#21497e;
+    }
+
+    .popup-cta:hover{ transform:translateY(-2px); }
+
+    .company-detail p{
+      margin:0 0 12px;
+      font-size:17px;
+      line-height:1.95;
+      color:#ddecff;
+      font-weight:500;
+    }
+
+    .company-detail strong{ color:#eefaff; }
+    body.light-mode .company-detail p{ color:#557198; }
+    body.light-mode .company-detail strong{ color:#173b69; }
+
+    .popup-close{
+      margin-top:16px;
+      min-width:120px;
+      min-height:48px;
+      border:none;
+      border-radius:16px;
+      background:linear-gradient(135deg, #0b4ea2 0%, #1f69cd 60%, #56c3ff 100%);
+      color:#fff;
+      font-size:15px;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow:0 12px 24px rgba(31,105,205,.22);
+      transition:.18s ease;
+      font-family:'Prompt',sans-serif;
+    }
+
+    .popup-close:hover{ transform:translateY(-2px); }
+
+    /* CHAT */
+    .chat-widget{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:3000;
+      display:flex;
+      flex-direction:column;
+      align-items:flex-end;
+      gap:12px;
+    }
+
+    .chat-menu{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-end;
+      gap:10px;
+      opacity:0;
+      pointer-events:none;
+      transform:translateY(12px) scale(.96);
+      transition:.20s ease;
+    }
+
+    .chat-widget.open .chat-menu{
+      opacity:1;
+      pointer-events:auto;
+      transform:translateY(0) scale(1);
+    }
+
+    .chat-item{
+      min-width:224px;
+      height:54px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:0 16px;
+      border-radius:999px;
+      color:#fff;
+      text-decoration:none;
+      font-size:14px;
+      font-weight:700;
+      border:1px solid rgba(255,255,255,.16);
+      box-shadow:0 14px 28px rgba(0,0,0,.16);
+      transition:.18s ease;
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+    }
+
+    .chat-item:hover{ transform:translateY(-2px) scale(1.02); }
+    .chat-item.line{ background:linear-gradient(135deg, #10d95a 0%, #06c755 55%, #02a94b 100%); }
+    .chat-item.facebook{ background:linear-gradient(135deg, #2a86ff 0%, #1877f2 55%, #0f5fd3 100%); }
+    .chat-item.youtube{ background:linear-gradient(135deg, #ff2f2f 0%, #ff0000 55%, #c90000 100%); }
+    .chat-item.tiktok{ background:linear-gradient(135deg, #232323 0%, #111111 55%, #000000 100%); }
+
+    .chat-icon{
+      width:34px;
+      height:34px;
+      border-radius:999px;
+      background:rgba(255,255,255,.16);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 34px;
+      font-size:12px;
+      font-weight:800;
+    }
+
+    .chat-fab{
+      width:66px;
+      height:66px;
+      border:none;
+      border-radius:999px;
+      background:linear-gradient(135deg, #0b4ea2, #1f69cd);
+      color:#fff;
+      cursor:pointer;
+      box-shadow:0 18px 36px rgba(0,0,0,.22);
+      border:1px solid rgba(255,255,255,.18);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      transition:.18s ease;
+    }
+
+    .chat-fab:hover{ transform:translateY(-2px); }
+
+    .chat-fab-text{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      font-size:12px;
+      font-weight:800;
+      line-height:1.04;
+    }
+
+    .chat-caret{
+      position:absolute;
+      right:-2px;
+      top:-2px;
+      width:22px;
+      height:22px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#fff;
+      color:#0b4ea2;
+      font-size:10px;
+      box-shadow:0 6px 16px rgba(11,78,162,.16);
+      transition:.20s ease;
+    }
+
+    .chat-widget.open .chat-caret{ transform:rotate(180deg); }
+
+    /* FOOTER */
+    .ssb-footer{
+      position:relative;
+      z-index:20;
+      margin-top:10px;
+      border-top:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(135deg, #1a5dbd 0%, #2f7fe3 52%, #5aa7ff 100%);
+      box-shadow:0 -10px 24px rgba(0,0,0,.16);
+    }
+
+    .ssb-footer::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,0)),
+        radial-gradient(circle at 10% 20%, rgba(255,255,255,.08), transparent 24%),
+        radial-gradient(circle at 88% 16%, rgba(255,255,255,.06), transparent 20%);
+    }
+
+    .footer-inner{
+      position:relative;
+      z-index:1;
+      width:min(var(--max), calc(100% - 26px));
+      margin:0 auto;
+      padding:14px 0 12px;
+    }
+
+    .footer-card{
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:20px;
+      padding:16px 18px;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.10), 0 12px 24px rgba(0,0,0,.10);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+    }
+
+    .footer-main{
+      display:grid;
+      grid-template-columns:minmax(0, 1.7fr) minmax(220px, .9fr) minmax(260px, .95fr);
+      gap:16px;
+      align-items:center;
+    }
+
+    .footer-item{
+      min-width:0;
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .footer-item.map-col{ justify-content:flex-end; }
+
+    .footer-icon-wrap{
+      width:52px;
+      height:52px;
+      flex:0 0 52px;
+      border-radius:16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow:0 8px 18px rgba(0,0,0,.12);
+    }
+
+    .footer-item svg{
+      width:26px;
+      height:26px;
+      display:block;
+    }
+
+    .footer-content{ min-width:0; }
+
+    .footer-label{
+      font-size:12px;
+      font-weight:700;
+      color:rgba(255,255,255,.76);
+      margin-bottom:2px;
+      white-space:nowrap;
+    }
+
+    .footer-value{
+      font-size:14px;
+      font-weight:800;
+      color:#fff;
+      line-height:1.55;
+      word-break:break-word;
+    }
+
+    .footer-company-line{
+      margin-bottom:2px;
+      font-size:15px;
+      font-weight:800;
+      color:#fff;
+      line-height:1.35;
+    }
+
+    .footer-link{
+      color:#fff;
+      text-decoration:none;
+    }
+
+    .footer-map-button{
+      min-height:58px;
+      padding:12px 20px;
+      border-radius:999px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:12px;
+      text-decoration:none;
+      color:#0b4ea2;
+      font-size:15px;
+      font-weight:800;
+      background:linear-gradient(135deg, #ffffff 0%, #edf5ff 100%);
+      box-shadow:0 12px 24px rgba(0,0,0,.14);
+      border:1px solid rgba(255,255,255,.24);
+      transition:.18s ease;
+      white-space:nowrap;
+    }
+
+    .footer-map-button:hover{ transform:translateY(-2px); }
+
+    .footer-bottom{
+      margin-top:10px;
+      padding-top:10px;
+      border-top:1px solid rgba(255,255,255,.12);
+      text-align:center;
+      color:rgba(255,255,255,.92);
+      font-size:12px;
+      line-height:1.7;
+    }
+
+    /* ANIMATION */
+    @keyframes popupIn{
+      from{ opacity:0; transform:translateY(18px) scale(.96); }
+      to{ opacity:1; transform:translateY(0) scale(1); }
+    }
+
+    @keyframes slowFloat{
+      0%,100%{ transform:translateY(0); }
+      50%{ transform:translateY(-8px); }
+    }
+
+    @keyframes corePulse{
+      0%,100%{ transform:translate(-50%,-50%) scale(1); opacity:1; }
+      50%{ transform:translate(-50%,-50%) scale(1.04); opacity:.86; }
+    }
+
+    @keyframes centerGlow{
+      0%,100%{ transform:translate(-50%, -50%) scale(1); opacity:1; }
+      50%{ transform:translate(-50%, -50%) scale(1.04); opacity:.88; }
+    }
+
+    @keyframes spinSlow{
+      from{ transform:translate(-50%,-50%) rotate(0deg); }
+      to{ transform:translate(-50%,-50%) rotate(360deg); }
+    }
+
+    @keyframes spinSlowReverse{
+      from{ transform:translate(-50%,-50%) rotate(360deg); }
+      to{ transform:translate(-50%,-50%) rotate(0deg); }
+    }
+
+    @keyframes runEnergy{
+      from{ stroke-dashoffset:0; }
+      to{ stroke-dashoffset:-358; }
+    }
+
+    @keyframes pulseOut{
+      0%{ opacity:.8; transform:translate(-50%,-50%) scale(.35); }
+      100%{ opacity:0; transform:translate(-50%,-50%) scale(1.15); }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width:1180px){
+      :root{ --header-h: 100px; }
+      .topbar-inner{
+        grid-template-columns:minmax(220px, 1fr) minmax(260px, 1.2fr) auto;
+        gap:12px;
+      }
+      .brand-line-1{ font-size:20px; }
+      .node-title{ font-size:19px; }
+      .menu-node.bottom .node-title{ font-size:24px; }
+      .popup-grid{ grid-template-columns:1fr; }
+      .footer-main{
+        grid-template-columns:minmax(0, 1.6fr) minmax(200px, .9fr) minmax(220px, 1fr);
+      }
+    }
+
+    @media (max-width:920px){
+      :root{ --header-h: 106px; }
+
+      .topbar-inner{
+        grid-template-columns:minmax(0, 1fr) auto;
+        grid-template-areas:
+          "brand actions"
+          "search search";
+        gap:12px;
+        padding:10px 0;
+      }
+
+      .brand-wrap{ grid-area:brand; }
+      .topbar-actions{ grid-area:actions; }
+      .header-search-wrap{ grid-area:search; }
+      .topbar-actions{ gap:10px; }
+      .header-search{ width:100%; }
+      .agent-dropdown{ width:100%; }
+      .tech-hero{
+        min-height:740px;
+        height:auto;
+        padding:26px 0;
+      }
+      .hero-system-title{ top:12.8%; }
+      .hero-system-title-text{ font-size:28px; }
+      .node-shell{
+        min-width:248px;
+        min-height:66px;
+        padding:12px 16px;
+      }
+      .menu-node.bottom .node-shell{
+        min-width:300px;
+        min-height:70px;
+      }
+      .impact-grid{ grid-template-columns:1fr; }
+      .popup-head h3{ font-size:36px; }
+      .popup-subtitle{ font-size:16px; }
+      .popup-lead{ font-size:16px; }
+      .feature-list li{ font-size:15px; }
+    }
+
+    @media (max-width:760px){
+      :root{ --header-h: 114px; }
+
+      body{
+        padding-top:var(--header-h);
+      }
+
+      body,
+      body.light-mode{
+        color:#143764;
+        background:linear-gradient(180deg,#f4f8ff 0%,#eaf1ff 100%);
+      }
+
+      body::before,
+      body.light-mode::before{
+        opacity:.10;
+      }
+
+      .ssb-topbar{ box-shadow:0 10px 24px rgba(31,74,140,.12); }
+
+      .topbar-inner{
+        width:min(calc(100% - 14px), var(--max));
+        height:100%;
+        grid-template-columns:minmax(0, 1fr) auto;
+        grid-template-areas:
+          "brand actions"
+          "search search";
+        align-items:center;
+        gap:10px;
+        padding:8px 0;
+      }
+
+      .brand-wrap{
+        min-width:0;
+        gap:10px;
+      }
+
+      .brand-logo{
+        width:46px;
+        height:46px;
+        flex:0 0 46px;
+        border-radius:14px;
+      }
+
+      .brand-line-1{ font-size:16px; }
+      .brand-line-2{ font-size:11px; }
+      .brand-site{ font-size:10px; }
+      .topbar-actions{ gap:8px; }
+      .theme-switch-wrap{ display:none !important; }
+
+      .lang-bar{
+        gap:6px;
+        padding:6px 8px;
+      }
+
+      .lang-btn{
+        width:34px;
+        height:34px;
+      }
+
+      .lang-btn img{
+        width:20px;
+        height:20px;
+      }
+
+      .header-search{
+        height:46px;
+        padding:0 10px 0 14px;
+      }
+
+      .header-search-input{ font-size:14px; }
+      .header-search-btn{
+        height:34px;
+        padding:0 12px;
+        font-size:12px;
+      }
+
+      .agent-dropdown{ top:calc(100% + 8px); }
+
+      .main-content{
+        width:min(calc(100% - 14px), var(--max));
+        padding:14px 0 28px;
+      }
+
+      .hero-stage{
+        min-height:auto;
+        padding:4px 0 18px;
+      }
+
+      .hero-center{ gap:14px; }
+
+      .tech-hero,
+      body.light-mode .tech-hero{
+        width:100%;
+        min-height:unset;
+        height:auto;
+        padding:24px 14px 22px;
+        border-radius:28px;
+        display:flex;
+        flex-direction:column;
+        justify-content:flex-start;
+        align-items:center;
+        background:linear-gradient(180deg,#f8fbff 0%,#eef4ff 100%);
+        box-shadow:0 16px 36px rgba(31,74,140,.10);
+      }
+
+      .tech-hero::before{
+        opacity:.18;
+        background:
+          linear-gradient(rgba(70,110,180,.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(70,110,180,.05) 1px, transparent 1px);
+        background-size:36px 36px;
+      }
+
+      .tech-hero::after{
+        inset:10px;
+        border-radius:20px;
+        border-color:rgba(20,55,100,.08);
+      }
+
+      .hero-stars,
+      .hero-bg,
+      .energy-svg,
+      .hero-system-title,
+      .center-pulse{ display:none !important; }
+
+      .center-glow{
+        width:92px;
+        height:92px;
+        background:radial-gradient(circle, rgba(111,155,255,.16) 0%, rgba(111,155,255,.08) 44%, transparent 74%);
+      }
+
+      .logo-core{
+        width:min(42vw, 126px);
+        height:min(42vw, 126px);
+        margin:0 auto;
+      }
+
+      .logo-core img{
+        filter:drop-shadow(0 8px 18px rgba(31,74,140,.14));
+      }
+
+      .menu-layer{
+        position:static;
+        inset:auto;
+        width:100%;
+        margin-top:24px;
+        display:none;
+      }
+
+      .tech-hero.open .menu-layer{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:12px;
+        align-items:stretch;
+      }
+
+      .menu-node{
+        position:relative;
+        left:auto;
+        top:auto;
+        transform:none !important;
+        opacity:1;
+        visibility:visible;
+        pointer-events:auto;
+        width:100%;
+        display:none;
+      }
+
+      .tech-hero.open .menu-node{ display:flex; }
+
+      .n1,.n2,.n3,.n4,.n5,.n6,.n7,.n8,.n9{
+        --x:auto;
+        --y:auto;
+      }
+
+      .node-shell,
+      body.light-mode .node-shell{
+        width:100%;
+        min-width:0;
+        min-height:72px;
+        padding:12px 10px;
+        border-radius:16px;
+        background:#ffffff;
+        border:1px solid rgba(20,55,100,.08);
+        box-shadow:0 10px 20px rgba(31,74,140,.10);
+      }
+
+      .node-title,
+      body.light-mode .node-title{
+        font-size:16px;
+        line-height:1.2;
+        white-space:normal;
+        color:#163866;
+      }
+
+      .menu-node.bottom{ grid-column:1 / -1; }
+
+      .menu-node.bottom .node-shell,
+      body.light-mode .menu-node.bottom .node-shell{
+        min-width:0;
+        min-height:66px;
+        padding:12px 14px;
+        background:linear-gradient(135deg,#4f7cff,#6ea8ff);
+        border-color:rgba(79,124,255,.18);
+        box-shadow:0 12px 24px rgba(79,124,255,.22);
+      }
+
+      .menu-node.bottom .node-title{
+        font-size:20px;
+        color:#fff !important;
+      }
+
+      .node-note,
+      body.light-mode .node-note{
+        font-size:16px;
+        min-height:50px;
+        padding:12px 18px;
+        width:min(92vw, 360px);
+        line-height:1.35;
+        background:#ffffff;
+        color:#163866;
+        border:1px solid rgba(20,55,100,.08);
+        box-shadow:0 10px 20px rgba(31,74,140,.10);
+      }
+
+      .popup-backdrop{ padding:14px; }
+
+      .popup-card{
+        width:min(96vw, 1080px);
+        padding:16px;
+        border-radius:22px;
+      }
+
+      .popup-head{
+        gap:10px;
+        margin-bottom:16px;
+      }
+
+      .popup-head h3{
+        font-size:28px;
+        line-height:1.1;
+      }
+
+      .popup-subtitle{
+        font-size:14px;
+        line-height:1.8;
+      }
+
+      .popup-kicker{ font-size:11px; }
+
+      .popup-panel{
+        padding:15px;
+        border-radius:18px;
+      }
+
+      .popup-grid{
+        grid-template-columns:1fr;
+        gap:12px;
+      }
+
+      .popup-section-title{ font-size:19px; }
+      .popup-lead{
+        font-size:15px;
+        line-height:1.88;
+      }
+
+      .feature-list li{
+        font-size:14px;
+        line-height:1.8;
+        padding-left:42px;
+      }
+
+      .impact-value{ font-size:26px; }
+      .impact-label{ font-size:13px; }
+
+      .footer-inner{
+        width:min(calc(100% - 14px), var(--max));
+        padding:14px 0 12px;
+      }
+
+      .footer-card{
+        padding:12px;
+        border-radius:16px;
+      }
+
+      .footer-main{
+        grid-template-columns:1fr;
+        gap:12px;
+      }
+
+      .footer-item{ align-items:flex-start; }
+      .footer-item.map-col{ justify-content:stretch; }
+
+      .footer-map-button{
+        width:100%;
+        min-height:52px;
+        font-size:13px;
+        white-space:normal;
+      }
+
+      .footer-icon-wrap{
+        width:44px;
+        height:44px;
+        flex:0 0 44px;
+      }
+
+      .footer-item svg{
+        width:24px;
+        height:24px;
+      }
+
+      .footer-label{ font-size:11px; }
+      .footer-company-line,
+      .footer-value{ font-size:12px; }
+      .footer-bottom{ font-size:11px; }
+
+      .chat-widget{
+        right:12px;
+        bottom:12px;
+      }
+
+      .chat-item{
+        min-width:188px;
+        height:50px;
+        font-size:12px;
+      }
+
+      .chat-icon{
+        width:30px;
+        height:30px;
+        flex:0 0 30px;
+        font-size:11px;
+      }
+
+      .chat-fab{
+        width:58px;
+        height:58px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *,
+      *::before,
+      *::after{
+        animation:none !important;
+        transition:none !important;
+        scroll-behavior:auto !important;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="site-wrap">
+    <header class="ssb-topbar" role="banner">
+      <div class="topbar-inner">
+        <div class="brand-wrap">
+          <div class="brand-logo">
+            <img src="images/logo.png" alt="Stealth Safety Bank Logo" width="58" height="58" />
+          </div>
 
-<div class="site-wrap">
+          <div class="brand-text">
+            <div class="brand-line-1 th-font">บริษัท สยามทำ จำกัด</div>
+            <div class="brand-line-2 en-font">Siam Tham Co.,Ltd.</div>
+            <div class="brand-site en-font">
+              <a href="https://www.siamtham.com" target="_blank" rel="noopener">www.siamtham.com</a>
+            </div>
+          </div>
+        </div>
 
-  <header class="header">
-    <img src="images/logo.png" class="logo">
-  </header>
+        <div class="header-search-wrap">
+          <form class="header-search" id="agentSearchForm" autocomplete="off" role="search" aria-label="ค้นหาตัวแทน">
+            <svg class="header-search-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="2"></circle>
+              <path d="M16 16L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+            </svg>
 
-  <main class="hero">
-    <button id="openPopup">เปิดระบบ</button>
-  </main>
+            <input
+              id="agentSearchInput"
+              class="header-search-input"
+              type="text"
+              placeholder="ค้นหาตัวแทน / Search agent"
+              aria-label="ค้นหาตัวแทน"
+            />
 
-</div>
+            <button class="header-search-btn sound-click" type="submit">ค้นหา</button>
+          </form>
 
-<!-- POPUP -->
-<div id="popup" class="popup hidden">
-  <div class="popup-box">
+          <div class="agent-dropdown" id="agentDropdown" aria-live="polite">
+            <div class="agent-dropdown-card">
+              <div class="agent-dropdown-head th-font">ผลการค้นหาตัวแทน</div>
+              <div class="agent-results" id="agentResults"></div>
+            </div>
+          </div>
+        </div>
 
-    <button id="closePopup">✕</button>
+        <div class="topbar-actions">
+          <div class="theme-switch-wrap" id="desktopThemeSwitch">
+            <span class="mode-label">Dark</span>
+            <button id="themeToggle" class="theme-switch" type="button" aria-label="Toggle theme">
+              <span class="switch-knob"></span>
+            </button>
+            <span class="mode-label">Light</span>
+          </div>
 
-    <iframe id="video" src="" allowfullscreen></iframe>
+          <div class="lang-bar" aria-label="เลือกภาษา">
+            <button class="lang-btn sound-click active" type="button" data-lang="th" title="ไทย">
+              <img src="https://flagcdn.com/w40/th.png" alt="ไทย">
+            </button>
+            <button class="lang-btn sound-click" type="button" data-lang="en" title="English">
+              <img src="https://flagcdn.com/w40/us.png" alt="English">
+            </button>
+          </div>
 
-    <div id="content"></div>
+          <div id="google_translate_element"></div>
+        </div>
+      </div>
+    </header>
 
-    <button class="cta">เริ่มใช้งาน</button>
+    <main class="main-content">
+      <section class="hero-stage">
+        <div class="hero-center">
+          <div class="tech-hero" id="techHero">
+            <div class="hero-stars"></div>
 
+            <div class="hero-bg" aria-hidden="true">
+              <div class="bg-core-glow"></div>
+
+              <div class="bg-ring ring-1"></div>
+              <div class="bg-ring ring-2"></div>
+              <div class="bg-ring ring-3"></div>
+
+              <div class="bg-ring ring-1 ring-tilt-1"></div>
+              <div class="bg-ring ring-2 ring-tilt-2"></div>
+            </div>
+
+            <svg class="energy-svg" id="energySvg" viewBox="0 0 1000 700" preserveAspectRatio="none" aria-hidden="true">
+              <path class="energy-line" id="line1"></path>
+              <path class="energy-line" id="line2"></path>
+              <path class="energy-line" id="line3"></path>
+              <path class="energy-line" id="line4"></path>
+              <path class="energy-line" id="line5"></path>
+              <path class="energy-line" id="line6"></path>
+              <path class="energy-line" id="line7"></path>
+              <path class="energy-line" id="line8"></path>
+
+              <path class="energy-run delay-1" id="run1"></path>
+              <path class="energy-run delay-2" id="run2"></path>
+              <path class="energy-run delay-3" id="run3"></path>
+              <path class="energy-run delay-4" id="run4"></path>
+              <path class="energy-run delay-5" id="run5"></path>
+              <path class="energy-run delay-6" id="run6"></path>
+              <path class="energy-run delay-7" id="run7"></path>
+              <path class="energy-run delay-8" id="run8"></path>
+            </svg>
+
+            <div class="hero-system-title" id="heroSystemTitle" aria-hidden="true">
+              <div class="hero-system-title-inner">
+                <span class="hero-system-title-text">Stealth Safety Bank Mobile System</span>
+              </div>
+            </div>
+
+            <div class="center-glow"></div>
+            <div class="center-pulse" id="centerPulse"></div>
+
+            <button class="logo-core sound-click" id="logoMenuButton" type="button" aria-label="เปิดเมนูหลัก">
+              <img src="images/logo.png" alt="Stealth Safety Bank Logo" />
+            </button>
+
+            <div class="menu-layer">
+              <button class="menu-node n1 energy-source sound-click" type="button" data-popup="stealthbank">
+                <div class="node-shell">
+                  <span class="node-text">
+                    <span class="node-title th-font">Stealth Safety Bank</span>
+                  </span>
+                </div>
+              </button>
+
+              <button class="menu-node n2 energy-source sound-click" type="button" data-popup="safetybook">
+                <div class="node-shell">
+                  <span class="node-text">
+                    <span class="node-title th-font">Stealth Safety Book</span>
+                  </span>
+                </div>
+              </button>
+
+              <button class="menu-node n3 energy-source sound-click" type="button" data-popup="ssbmobile">
+                <div class="node-shell">
+                  <span class="node-text">
+                    <span class="node-title th-font">SSB Mobile System</span>
+                  </span>
+                </div>
+              </button>
+
+              <button class="menu-node n4 energy-source sound-click" type="button" data-popup="technology">
+                <div class="node-shell">
+                  <span class="node-text">
+                    <span class="node-title th-font">Technology Overview</span>
+                  </span>
+                </div>
+              </button>
+
+              <a class="menu-node n5 energy-source sound-click" href="agent-login.html">
+                <div class="node-shell">
+                  <span class="node-text">
+                    <span class="node-title th-font">Agent Login</span>
+                  </span>
+                </div>
+              </a>
+
+              <a class="menu-node n6 energy-source sound-click" href="join-agent.html">
+                <div class="node-shell">
+                  <span class="node-text">
+                    <span class="node-title th-font">Join Our Agent</span>
+                  </span>
+                </div>
+              </a>
+
+              <button class="menu-node n7 energy-source sound-click" type="button" data-popup="aboutcompany">
+                <div class="node-shell">
+                  <span class="node-text">
+                    <span class="node-title th-font">About Us</span>
+                  </span>
+                </div>
+              </button>
+
+              <button class="menu-node n8 energy-source sound-click" type="button" id="contactButton">
+                <div class="node-shell">
+                  <span class="node-text">
+                    <span class="node-title th-font">Contact Us</span>
+                  </span>
+                </div>
+              </button>
+
+              <a class="menu-node bottom n9 sound-click" href="book.html">
+                <div class="node-shell">
+                  <span class="node-text">
+                    <span class="node-title th-font">เริ่มสั่งจอง</span>
+                  </span>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="node-note th-font" id="nodeNote">คลิกที่โลโก้เพื่อเปิดเมนู</div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="ssb-footer">
+      <div class="footer-inner">
+        <div class="footer-card">
+          <div class="footer-main">
+            <div class="footer-item">
+              <div class="footer-icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10Z" stroke="#ffffff" stroke-width="1.7"/>
+                  <circle cx="12" cy="11" r="2.5" fill="#ffffff"/>
+                </svg>
+              </div>
+              <div class="footer-content">
+                <div class="footer-label th-font">เลขทะเบียน 0105566099954</div>
+                <div class="footer-company-line th-font">บริษัท สยามทำ จำกัด</div>
+                <div class="footer-company-line en-font">Siam Tham Co.,Ltd.</div>
+                <div class="footer-value th-font">54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</div>
+              </div>
+            </div>
+
+            <div class="footer-item">
+              <div class="footer-icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M6.6 10.8c1.6 3.1 3.5 5 6.6 6.6l2.2-2.2c.28-.28.7-.37 1.07-.24 1.2.4 2.5.62 3.83.62.4 0 .72.32.72.72V20c0 .4-.32.72-.72.72C10.87 20.72 3.28 13.13 3.28 3.72c0-.4.32-.72.72-.72H7.6c.4 0 .72.32.72.72 0 1.33.21 2.63.62 3.83.12.37.03.79-.25 1.07L6.6 10.8Z" stroke="#ffffff" stroke-width="1.6"/>
+                </svg>
+              </div>
+              <div class="footer-content">
+                <div class="footer-label th-font">โทรศัพท์</div>
+                <div class="footer-value th-font">
+                  <a class="footer-link" href="tel:020432988">02-043-2988</a><br>
+                  <a class="footer-link" href="tel:0649514888">064-951-4888</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="footer-item map-col">
+              <a class="footer-map-button sound-click th-font" href="https://maps.app.goo.gl/Dz4B1kpqVbmWhkYX7" target="_blank" rel="noopener">
+                <svg viewBox="0 0 64 64" aria-hidden="true" style="width:34px;height:34px;flex:0 0 34px;">
+                  <path fill="#ff2a2a" d="M32 4C20.4 4 11 13.4 11 25c0 16.3 18.8 34 20.1 35.2a1.3 1.3 0 0 0 1.8 0C34.2 59 53 41.3 53 25 53 13.4 43.6 4 32 4z"/>
+                  <circle cx="32" cy="25" r="10.5" fill="#ffffff"/>
+                  <circle cx="32" cy="25" r="5.3" fill="#ff2a2a"/>
+                </svg>
+                <span>คลิกเพื่อเดินทางไปบริษัท</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom th-font">
+          © Siam Tham Co.,Ltd. • <span class="en-font">Stealth Safety Bank Mobile System</span><br>
+          By <span class="en-font">Mr.Tingly Marketing Online</span>
+        </div>
+      </div>
+    </footer>
   </div>
-</div>
 
-<script src="js/app.js"></script>
+  <!-- COMPANY POPUP -->
+  <div id="companyPopup" class="popup-backdrop" aria-hidden="true">
+    <div class="popup-card company" role="dialog" aria-modal="true" aria-labelledby="companyTitle">
+      <div class="popup-head">
+        <div class="popup-head-main">
+          <div class="popup-kicker th-font">ข้อมูลติดต่อ</div>
+          <h3 class="th-font" id="companyTitle">บริษัท สยามทำ จำกัด</h3>
+          <div class="popup-subtitle th-font">ข้อมูลติดต่อและที่ตั้งสำหรับการสอบถาม การประสานงาน และการเดินทางมายังบริษัท</div>
+        </div>
+        <button class="popup-x sound-click" type="button" id="closeCompanyPopupTop" aria-label="ปิด">×</button>
+      </div>
+
+      <div class="popup-body">
+        <div class="popup-panel company-detail">
+          <h4 class="popup-section-title th-font"><span class="dot"></span>ข้อมูลการติดต่อ</h4>
+          <p class="th-font"><strong>ชื่อภาษาอังกฤษ:</strong> Siam Tham Co.,Ltd.</p>
+          <p class="th-font"><strong>ที่อยู่:</strong> 54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
+          <p class="th-font"><strong>เลขทะเบียน:</strong> 0105566099954</p>
+          <p class="th-font"><strong>โทร:</strong> 02-043-2988</p>
+          <p class="th-font"><strong>มือถือ:</strong> 064-951-4888</p>
+          <p class="th-font"><strong>อีเมล:</strong> mysiamtham@gmail.com</p>
+          <p class="th-font"><strong>เว็บไซต์:</strong> www.siamtham.com</p>
+
+          <div class="popup-action-row">
+            <a class="popup-cta primary sound-click th-font" href="https://maps.app.goo.gl/Dz4B1kpqVbmWhkYX7" target="_blank" rel="noopener">เปิดแผนที่บริษัท</a>
+            <a class="popup-cta secondary sound-click th-font" href="tel:0649514888">โทรหาบริษัท</a>
+          </div>
+        </div>
+      </div>
+
+      <button class="popup-close th-font sound-click" type="button" id="closeCompanyPopupBottom">ปิด</button>
+    </div>
+  </div>
+
+  <!-- INFO POPUP -->
+  <div id="infoPopup" class="popup-backdrop" aria-hidden="true">
+    <div class="popup-card" role="dialog" aria-modal="true" aria-labelledby="infoTitle">
+      <div class="popup-head">
+        <div class="popup-head-main">
+          <div class="popup-kicker th-font" id="popupKicker">ระบบความปลอดภัย</div>
+          <h3 id="infoTitle" class="th-font">หัวข้อระบบ</h3>
+          <div class="popup-subtitle th-font" id="infoSubtitle">คำอธิบายสั้นของระบบจะอยู่ตรงนี้</div>
+        </div>
+        <button class="popup-x sound-click" type="button" id="closeInfoPopupTop" aria-label="ปิด">×</button>
+      </div>
+
+      <div class="popup-body">
+        <div class="popup-panel video-panel">
+          <div class="video-frame">
+            <iframe
+              id="infoVideo"
+              src=""
+              title="YouTube video"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="video-note th-font" id="videoNote">ตัวอย่างวิดีโอจากช่อง @siamtham แบบไม่เปิดเสียงอัตโนมัติ เพื่อให้ผู้ชมควบคุมการรับชมได้เอง</div>
+        </div>
+
+        <div class="popup-panel">
+          <h4 class="popup-section-title th-font"><span class="dot"></span>ภาพรวม</h4>
+          <p class="popup-lead th-font" id="infoLead"></p>
+          <div class="badge-row" id="infoBadges"></div>
+        </div>
+
+        <div class="popup-grid">
+          <div class="popup-panel">
+            <h4 class="popup-section-title th-font"><span class="dot"></span>จุดเด่นสำคัญ</h4>
+            <ul class="feature-list th-font" id="infoFeatures"></ul>
+          </div>
+
+          <div class="popup-panel">
+            <h4 class="popup-section-title th-font"><span class="dot"></span>เหมาะกับใคร / การใช้งาน</h4>
+            <ul class="feature-list th-font" id="infoUseCases"></ul>
+          </div>
+        </div>
+
+        <div class="popup-panel">
+          <h4 class="popup-section-title th-font"><span class="dot"></span>ผลลัพธ์ที่ผู้ใช้ได้รับ</h4>
+          <div class="impact-grid" id="infoImpacts"></div>
+
+          <div class="popup-action-row">
+            <a class="popup-cta primary sound-click th-font" href="book.html">ไปยังหน้าสั่งจอง</a>
+            <button class="popup-cta secondary sound-click th-font" type="button" id="closeInfoPopupInline">ปิดหน้าต่างนี้</button>
+          </div>
+        </div>
+      </div>
+
+      <button class="popup-close th-font sound-click" type="button" id="closeInfoPopupBottom">ปิด</button>
+    </div>
+  </div>
+
+  <!-- CHAT -->
+  <div class="chat-widget" id="chatWidget">
+    <div class="chat-menu" id="chatMenu">
+      <a class="chat-item line sound-click" href="https://line.me/R/ti/p/@siamtham" target="_blank" rel="noopener">
+        <span class="chat-icon en-font">LINE</span>
+        <span class="th-font">LINE Official</span>
+      </a>
+
+      <a class="chat-item facebook sound-click" href="https://www.facebook.com/profile.php?id=61556844339863" target="_blank" rel="noopener">
+        <span class="chat-icon en-font">FB</span>
+        <span class="th-font">Facebook</span>
+      </a>
+
+      <a class="chat-item youtube sound-click" href="https://www.youtube.com/@siamtham" target="_blank" rel="noopener">
+        <span class="chat-icon en-font">YT</span>
+        <span class="th-font">YouTube</span>
+      </a>
+
+      <a class="chat-item tiktok sound-click" href="https://www.tiktok.com/" target="_blank" rel="noopener">
+        <span class="chat-icon en-font">TT</span>
+        <span class="th-font">TikTok</span>
+      </a>
+    </div>
+
+    <button class="chat-fab sound-click" id="chatToggle" type="button" aria-label="เปิดเมนูแชท">
+      <span class="chat-fab-text">
+        <span class="en-font">Chat</span>
+        <span class="en-font">Online</span>
+      </span>
+      <span class="chat-caret">⌃</span>
+    </button>
+  </div>
+
+  <script>
+    const popupData = {
+      ssbmobile: {
+        kicker: "Stealth Security Architecture",
+        title: "Stealth Safety Bank Mobile System",
+        subtitle: "ระบบปกป้องเงินและข้อมูลระดับสูง ที่ออกแบบมาเพื่อตัดความเสี่ยงตั้งแต่ต้นทาง และแยกอุปกรณ์ธุรกรรมออกจากการใช้งานทั่วไปอย่างชัดเจน",
+        lead: "Stealth Safety Bank Mobile System ไม่ใช่เพียงอุปกรณ์ แต่คือแนวคิดใหม่ของความปลอดภัยทางการเงินเชิงโครงสร้าง โดยเน้นการลดพื้นผิวการโจมตี แยกเครื่องสำหรับธุรกรรมโดยเฉพาะ และควบคุมการใช้งานให้อยู่ในขอบเขตที่จำเป็นจริง เพื่อทำให้ความเสี่ยงจาก phishing, malware, remote access และพฤติกรรมใช้งานปะปนลดลงอย่างมีนัยสำคัญ",
+        badges: [
+          "แยกเครื่องธุรกรรมโดยเฉพาะ",
+          "ไม่มี browser / social / app store",
+          "ลด Attack Surface",
+          "ใช้งานเฉพาะเมื่อจำเป็น"
+        ],
+        features: [
+          "ตัดช่องทางที่ไม่จำเป็นต่อธุรกรรมออกตั้งแต่ต้น ทำให้เครื่องไม่ถูกใช้ปะปนกับการท่องเว็บ โซเชียล หรือกิจกรรมที่เพิ่มความเสี่ยง",
+          "ยกระดับความปลอดภัยด้วยการใช้งานแบบมีวินัย เปิดเฉพาะตอนทำธุรกรรม และปิดเมื่อไม่ใช้งาน เพื่อลดโอกาสการเข้าถึงโดยไม่ได้รับอนุญาต",
+          "เปลี่ยนความปลอดภัยจากการพึ่งพาแอปเพียงอย่างเดียว ไปสู่การออกแบบโครงสร้างการใช้งานที่ลดความเสี่ยงทั้งระบบ"
+        ],
+        impacts: [
+          { value: "ลดเสี่ยง", label: "จาก phishing, malware และการเข้าถึงระยะไกลที่ไม่เกี่ยวข้องกับธุรกรรม" },
+          { value: "ชัดเจน", label: "แยกมือถือธุรกรรมออกจากมือถือใช้งานทั่วไปอย่างเป็นระบบ" },
+          { value: "มั่นใจ", label: "ทำธุรกรรมได้ภายใต้กรอบการใช้งานที่ควบคุมง่ายและตรวจสอบได้" }
+        ],
+        useCases: [
+          "ผู้ที่ต้องการความปลอดภัยสูงในการถือครองเงินและทำ Mobile Banking",
+          "นักลงทุน เจ้าของธุรกิจ และผู้ที่ต้องดูแลหลายบัญชีหรือยอดเงินจำนวนมาก",
+          "ผู้ที่เคยมีประสบการณ์หรือมีความกังวลเรื่องคอลเซ็นเตอร์ ฟิชชิง หรือการถูกหลอกให้ติดตั้งแอป"
+        ],
+        video: "https://www.youtube-nocookie.com/embed/mD9i39genW8",
+        videoNote: "วิดีโอตัวอย่างจากช่อง @siamtham แสดงแนวคิดระบบในรูปแบบที่น่าเชื่อถือและไม่เปิดเสียงรบกวนอัตโนมัติ"
+      },
+
+      stealthbank: {
+        kicker: "Integrated Protection Concept",
+        title: "Stealth Safety Bank",
+        subtitle: "แนวคิดการป้องกันทางการเงินที่เน้นความลับ การอำพราง การลดการเปิดเผยข้อมูล และการออกแบบวิธีใช้งานให้ปลอดภัยกว่าการพึ่งพาเครื่องมือเพียงชิ้นเดียว",
+        lead: "Stealth Safety Bank คือกรอบแนวคิดที่รวมการป้องกันเชิงพฤติกรรม เชิงกายภาพ และเชิงเทคโนโลยีเข้าไว้ด้วยกัน เพื่อสร้างระบบความปลอดภัยที่รอบด้านมากกว่าแนวทางทั่วไป โดยมุ่งลดโอกาสการโจมตีตั้งแต่ต้นทาง ไม่ใช่รอป้องกันเมื่อปัญหาเกิดขึ้นแล้ว",
+        badges: [
+          "ลดการเปิดเผยข้อมูล",
+          "อำพรางการจัดเก็บ",
+          "ป้องกันหลายชั้น",
+          "ยึดความรอบคอบเป็นหลัก"
+        ],
+        features: [
+          "ไม่มองความปลอดภัยเป็นแค่เรื่องซอฟต์แวร์ แต่เชื่อมโยงวิธีคิด วิธีเก็บ และวิธีใช้งานเข้าด้วยกัน",
+          "ลดความโดดเด่นของทรัพย์สินหรืออุปกรณ์สำคัญ เพื่อทำให้เป้าหมายถูกสังเกตเห็นยากขึ้น",
+          "เน้นการสร้างความปลอดภัยเชิงโครงสร้างที่ต่อเนื่องและนำไปใช้ได้จริงในชีวิตประจำวัน"
+        ],
+        impacts: [
+          { value: "รอบด้าน", label: "ครอบคลุมข้อมูล อุปกรณ์ และพฤติกรรมการใช้งานภายใต้ระบบเดียวกัน" },
+          { value: "อำพราง", label: "ลดการสังเกต ลดการดึงดูดความสนใจ และลดโอกาสการเข้าถึง" },
+          { value: "เป็นระบบ", label: "ยกระดับจากการป้องกันเฉพาะจุด ไปสู่แนวทางที่เชื่อมโยงทั้งกระบวนการ" }
+        ],
+        useCases: [
+          "บุคคลหรือครอบครัวที่ต้องการวางระบบป้องกันเงินและข้อมูลอย่างรอบคอบ",
+          "ผู้ที่ต้องการแนวคิดความปลอดภัยที่มากกว่าการติดตั้งแอปหรือซื้ออุปกรณ์ทั่วไป",
+          "องค์กรที่ต้องการแนวทางการใช้งานที่สร้างวินัยและลดความผิดพลาดจากคน"
+        ],
+        video: "https://www.youtube-nocookie.com/embed/mD9i39genW8",
+        videoNote: "วิดีโออ้างอิงจากช่อง @siamtham เพื่อให้เห็นภาพแนวคิด Stealth ในบริบทการใช้งานจริง"
+      },
+
+      safetybook: {
+        kicker: "Physical Stealth Storage",
+        title: "Stealth Safety Book",
+        subtitle: "อุปกรณ์จัดเก็บเชิงอำพรางที่ออกแบบให้ดูกลมกลืนเหมือนหนังสือทั่วไป เพื่อลดการสังเกตและเสริมความปลอดภัยทางกายภาพให้กับอุปกรณ์หรือของสำคัญ",
+        lead: "Stealth Safety Book มีบทบาทสำคัญในการปกป้องอุปกรณ์และสิ่งของสำคัญผ่านแนวคิดการอำพรางภายนอกให้ดูธรรมดา ลดโอกาสการถูกสังเกตหรือระบุว่าเป็นจุดเก็บทรัพย์สิน โดยทำงานเสริมกับระบบ Stealth Safety Bank เพื่อสร้างความปลอดภัยทั้งเชิงกายภาพและเชิงพฤติกรรม",
+        badges: [
+          "อำพรางเหมือนหนังสือ",
+          "ลดการถูกสังเกต",
+          "เก็บอุปกรณ์สำคัญได้เป็นสัดส่วน",
+          "เสริมระบบ Stealth"
+        ],
+        features: [
+          "ช่วยทำให้จุดจัดเก็บไม่โดดเด่นและไม่สะดุดสายตาเหมือนกล่องเซฟทั่วไป",
+          "เสริมความปลอดภัยทางกายภาพให้กับอุปกรณ์ธุรกรรม เอกสาร หรือสิ่งของที่ต้องการความเป็นส่วนตัว",
+          "เหมาะกับผู้ที่ต้องการเก็บของสำคัญอย่างเรียบร้อย แนบเนียน และใช้งานคู่กับระบบหลัก"
+        ],
+        impacts: [
+          { value: "แนบเนียน", label: "ภายนอกดูเป็นของใช้ทั่วไป ลดการตั้งข้อสังเกตจากบุคคลรอบข้าง" },
+          { value: "เป็นระเบียบ", label: "ช่วยจัดเก็บอุปกรณ์และของสำคัญให้พร้อมใช้งานอย่างมีวินัย" },
+          { value: "เสริมชั้นป้องกัน", label: "ทำงานร่วมกับระบบความปลอดภัยหลักเพื่อเพิ่มความครบถ้วน" }
+        ],
+        useCases: [
+          "ใช้เก็บอุปกรณ์สำหรับธุรกรรมที่ต้องการความเป็นส่วนตัว",
+          "ใช้เก็บเอกสารหรือของมีค่าที่ไม่ต้องการให้ถูกพบง่าย",
+          "ใช้ในบ้านหรือสำนักงานที่ต้องการความปลอดภัยแบบไม่ดึงดูดความสนใจ"
+        ],
+        video: "https://www.youtube-nocookie.com/embed/mD9i39genW8",
+        videoNote: "วิดีโอตัวอย่างจากช่อง @siamtham ใช้เป็น reference สำหรับรูปแบบการนำเสนอและพฤติกรรมการเล่นวิดีโอ"
+      },
+
+      technology: {
+        kicker: "Technology Overview",
+        title: "Technology Overview",
+        subtitle: "ภาพรวมของเทคโนโลยีและแนวคิดที่ทำงานร่วมกันเพื่อยกระดับการปกป้องเงิน ข้อมูล และการใช้งานในชีวิตจริงให้ปลอดภัยขึ้นอย่างเป็นระบบ",
+        lead: "Technology Overview คือภาพรวมขององค์ประกอบทั้งหมดในระบบ ไม่ว่าจะเป็นการแยกอุปกรณ์ การลดช่องทางเสี่ยง การอำพรางการจัดเก็บ การเตือนสติ และการออกแบบพฤติกรรมการใช้งานให้รอบคอบขึ้น เพื่อให้แต่ละส่วนสนับสนุนกันและสร้างความปลอดภัยที่ต่อเนื่อง ไม่ใช่แยกกันทำงานแบบกระจัดกระจาย",
+        badges: [
+          "Multiple Layer Protection",
+          "Device Separation",
+          "Behavior Design",
+          "Stealth + Discipline"
+        ],
+        features: [
+          "เชื่อมการป้องกันหลายชั้นเข้าด้วยกัน ทั้งเชิงเทคโนโลยี เชิงกายภาพ และเชิงพฤติกรรม",
+          "ทำให้ผู้ใช้มองเห็นภาพรวมว่าทำไมการลดแอป การแยกเครื่อง และการอำพรางจึงช่วยลดความเสี่ยงได้จริง",
+          "ออกแบบให้เข้าใจง่ายขึ้นสำหรับการอธิบายต่อยอดไปยังครอบครัว ทีมงาน หรือองค์กร"
+        ],
+        impacts: [
+          { value: "เชื่อมโยง", label: "องค์ประกอบแต่ละส่วนทำงานหนุนกัน ไม่ใช่แยกเป็นชิ้น ๆ" },
+          { value: "รอบคอบ", label: "ช่วยให้ตัดสินใจใช้งานภายใต้หลักการที่ชัดเจนและตรวจสอบได้" },
+          { value: "เข้าใจง่าย", label: "อธิบายระบบที่ซับซ้อนให้อยู่ในรูปแบบที่ผู้ใช้จับต้องได้" }
+        ],
+        useCases: [
+          "ผู้ที่ต้องการศึกษาว่าระบบป้องกันประกอบด้วยอะไรบ้างและทำงานอย่างไร",
+          "ผู้ที่ต้องการอธิบายระบบให้ทีมขาย ทีมงาน หรือผู้เกี่ยวข้องเข้าใจง่ายขึ้น",
+          "ผู้ที่ต้องการประเมินแนวทางก่อนตัดสินใจใช้งานจริง"
+        ],
+        video: "https://www.youtube-nocookie.com/embed/mD9i39genW8",
+        videoNote: "วิดีโอตัวอย่างจากช่อง @siamtham ใช้เพื่อแสดงภาพรวมเทคโนโลยีและแนวทางการสื่อสาร"
+      },
+
+      aboutcompany: {
+        kicker: "Company Overview",
+        title: "About Us",
+        subtitle: "บริษัทผู้พัฒนาแนวคิดและระบบ Stealth Safety Bank Mobile เพื่อยกระดับความปลอดภัยทางการเงินจากประสบการณ์ปัญหาจริง และต่อยอดเป็นโซลูชันที่ใช้งานได้จริง",
+        lead: "บริษัท สยามทำ จำกัด มุ่งเน้นการพัฒนาแนวคิด องค์ความรู้ และรูปแบบการใช้งานที่ช่วยลดความเสี่ยงด้านการเงินและข้อมูลส่วนบุคคล โดยผสานมุมมองด้านเทคโนโลยี ความรอบคอบในการใช้งาน และการจัดเก็บเชิงอำพรางเข้าด้วยกัน เพื่อทำให้ความปลอดภัยไม่ใช่แค่คำโฆษณา แต่เป็นระบบที่นำไปใช้ได้จริง",
+        badges: [
+          "บริษัทไทย",
+          "พัฒนาแนวคิดจากปัญหาจริง",
+          "เน้นใช้งานได้จริง",
+          "มุ่งสู่โซลูชันระดับมืออาชีพ"
+        ],
+        features: [
+          "พัฒนาองค์ความรู้ด้านการป้องกันความเสี่ยงทางการเงินด้วยแนวคิดที่ชัดเจนและต่อยอดได้",
+          "ให้ความสำคัญกับทั้งความเข้าใจง่าย ความรอบคอบ และความน่าเชื่อถือของระบบ",
+          "มุ่งพัฒนาระบบให้เป็นทางเลือกสำหรับผู้ใช้ที่ต้องการความปลอดภัยมากกว่ามาตรฐานทั่วไป"
+        ],
+        impacts: [
+          { value: "พัฒนา", label: "นำประสบการณ์และปัญหาจริงมาสร้างเป็นระบบที่มีทิศทางชัดเจน" },
+          { value: "ต่อยอด", label: "ต่อยอดแนวคิดเป็นองค์ความรู้ อุปกรณ์ และรูปแบบการใช้งานที่จับต้องได้" },
+          { value: "น่าเชื่อถือ", label: "สร้างภาพลักษณ์มืออาชีพและชัดเจนสำหรับการสื่อสารกับลูกค้าและพาร์ตเนอร์" }
+        ],
+        useCases: [
+          "ผู้ที่ต้องการรู้จักบริษัทก่อนตัดสินใจใช้งานหรือร่วมงาน",
+          "ผู้ที่ต้องการเข้าใจทิศทาง แนวคิด และที่มาของระบบ Stealth Safety Bank",
+          "ผู้ที่ต้องการข้อมูลเบื้องต้นเกี่ยวกับบริษัท สยามทำ จำกัด"
+        ],
+        video: "https://www.youtube-nocookie.com/embed/mD9i39genW8",
+        videoNote: "วิดีโอตัวอย่างจากช่อง @siamtham ใช้เป็นภาพสะท้อนแนวทางการนำเสนอแบรนด์และระบบ"
+      }
+    };
+
+    const agentMockData = [
+      { name: "Agent Premium Bangkok", area: "Bangkok", code: "AG-BKK-001" },
+      { name: "Somchai SSB", area: "Nonthaburi", code: "AG-NB-014" },
+      { name: "Siam Safety Agent", area: "Bangkok", code: "AG-BKK-022" },
+      { name: "Agent Taling Chan", area: "Bangkok", code: "AG-BKK-031" },
+      { name: "SSB North Team", area: "Chiang Mai", code: "AG-CNX-004" },
+      { name: "Agent Eastern Secure", area: "Chonburi", code: "AG-CBI-002" }
+    ];
+
+    const body = document.body;
+    const techHero = document.getElementById("techHero");
+    const logoMenuButton = document.getElementById("logoMenuButton");
+    const centerPulse = document.getElementById("centerPulse");
+    const nodeNote = document.getElementById("nodeNote");
+    const themeToggle = document.getElementById("themeToggle");
+
+    const infoPopup = document.getElementById("infoPopup");
+    const infoTitle = document.getElementById("infoTitle");
+    const infoVideo = document.getElementById("infoVideo");
+    const infoSubtitle = document.getElementById("infoSubtitle");
+    const infoLead = document.getElementById("infoLead");
+    const infoBadges = document.getElementById("infoBadges");
+    const infoFeatures = document.getElementById("infoFeatures");
+    const infoImpacts = document.getElementById("infoImpacts");
+    const infoUseCases = document.getElementById("infoUseCases");
+    const popupKicker = document.getElementById("popupKicker");
+    const videoNote = document.getElementById("videoNote");
+
+    const companyPopup = document.getElementById("companyPopup");
+    const contactButton = document.getElementById("contactButton");
+
+    const agentSearchForm = document.getElementById("agentSearchForm");
+    const agentSearchInput = document.getElementById("agentSearchInput");
+    const agentDropdown = document.getElementById("agentDropdown");
+    const agentResults = document.getElementById("agentResults");
+
+    const chatWidget = document.getElementById("chatWidget");
+    const chatToggle = document.getElementById("chatToggle");
+
+    let lastFocusedElement = null;
+
+    function isMobileView(){
+      return window.innerWidth <= 760;
+    }
+
+    function pulseCenter(){
+      if (!centerPulse || isMobileView()) return;
+      centerPulse.classList.remove("active");
+      void centerPulse.offsetWidth;
+      centerPulse.classList.add("active");
+    }
+
+    function syncHeroLabels(){
+      const isOpen = techHero?.classList.contains("open");
+      nodeNote?.classList.toggle("hidden", !!isOpen);
+    }
+
+    function lockBodyScroll(lock){
+      body.style.overflow = lock ? "hidden" : "";
+    }
+
+    function renderBadges(items){
+      infoBadges.innerHTML = items.map(item => `<span class="popup-badge th-font">${item}</span>`).join("");
+    }
+
+    function renderFeatures(items, target){
+      target.innerHTML = items.map(item => `<li class="th-font">${item}</li>`).join("");
+    }
+
+    function renderImpacts(items){
+      infoImpacts.innerHTML = items.map(item => `
+        <div class="impact-card">
+          <div class="impact-value th-font">${item.value}</div>
+          <div class="impact-label th-font">${item.label}</div>
+        </div>
+      `).join("");
+    }
+
+    function getFocusableElements(container){
+      return Array.from(
+        container.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
+      ).filter(el => !el.hasAttribute("disabled"));
+    }
+
+    function trapFocus(event, container){
+      if (event.key !== "Tab") return;
+      const focusables = getFocusableElements(container);
+      if (!focusables.length) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      if (event.shiftKey && document.activeElement === first){
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last){
+        event.preventDefault();
+        first.focus();
+      }
+    }
+
+    function openPopup(el){
+      if (!el) return;
+      lastFocusedElement = document.activeElement;
+      el.style.display = "flex";
+      el.setAttribute("aria-hidden", "false");
+      requestAnimationFrame(() => el.classList.add("show"));
+      lockBodyScroll(true);
+      pulseCenter();
+
+      const focusables = getFocusableElements(el);
+      if (focusables.length) {
+        setTimeout(() => focusables[0].focus(), 50);
+      }
+    }
+
+    function closePopup(el, onAfterClose){
+      if (!el) return;
+      el.classList.remove("show");
+      el.setAttribute("aria-hidden", "true");
+      setTimeout(() => {
+        el.style.display = "none";
+        if (typeof onAfterClose === "function") onAfterClose();
+        if (infoPopup.style.display !== "flex" && companyPopup.style.display !== "flex") {
+          lockBodyScroll(false);
+        }
+        if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
+          lastFocusedElement.focus();
+        }
+      }, 180);
+    }
+
+    function openInfoPopup(key){
+      const data = popupData[key];
+      if (!data) return;
+
+      popupKicker.textContent = data.kicker;
+      infoTitle.textContent = data.title;
+      infoSubtitle.textContent = data.subtitle;
+      infoLead.textContent = data.lead;
+      renderBadges(data.badges || []);
+      renderFeatures(data.features || [], infoFeatures);
+      renderImpacts(data.impacts || []);
+      renderFeatures(data.useCases || [], infoUseCases);
+      videoNote.textContent = data.videoNote || "";
+
+      const params = new URLSearchParams({
+        rel: "0",
+        autoplay: "0",
+        mute: "0",
+        controls: "1",
+        modestbranding: "1",
+        playsinline: "1"
+      });
+
+      infoVideo.src = `${data.video}?${params.toString()}`;
+      openPopup(infoPopup);
+    }
+
+    function closeInfoPopup(){
+      closePopup(infoPopup, () => {
+        infoVideo.src = "";
+      });
+    }
+
+    function openCompanyPopup(){
+      openPopup(companyPopup);
+    }
+
+    function closeCompanyPopup(){
+      closePopup(companyPopup);
+    }
+
+    function buildEnergyLines(){
+      if (isMobileView()) return;
+
+      const hero = document.getElementById("techHero");
+      const logo = document.getElementById("logoMenuButton");
+      if (!hero || !logo) return;
+
+      const heroRect = hero.getBoundingClientRect();
+      const logoRect = logo.getBoundingClientRect();
+
+      const cx = ((logoRect.left + logoRect.width / 2) - heroRect.left) / heroRect.width * 1000;
+      const cy = ((logoRect.top + logoRect.height / 2) - heroRect.top) / heroRect.height * 700;
+
+      const sources = hero.querySelectorAll(".energy-source");
+
+      sources.forEach((el, index) => {
+        const rect = el.getBoundingClientRect();
+        const localX = ((rect.left + rect.width / 2) - heroRect.left) / heroRect.width * 1000;
+        const localY = ((rect.top + rect.height / 2) - heroRect.top) / heroRect.height * 700;
+
+        const bend = localX < cx ? 72 : -72;
+        const midX1 = localX + bend;
+        const midX2 = cx - bend * 0.55;
+        const d = `M ${localX} ${localY} C ${midX1} ${localY}, ${midX2} ${cy}, ${cx} ${cy}`;
+
+        const line = document.getElementById(`line${index + 1}`);
+        const run = document.getElementById(`run${index + 1}`);
+
+        if (line) line.setAttribute("d", d);
+        if (run) run.setAttribute("d", d);
+      });
+    }
+
+    function renderAgentResults(keyword = ""){
+      const q = keyword.trim().toLowerCase();
+      const matches = agentMockData.filter(item => {
+        if (!q) return true;
+        return (
+          item.name.toLowerCase().includes(q) ||
+          item.area.toLowerCase().includes(q) ||
+          item.code.toLowerCase().includes(q)
+        );
+      });
+
+      if (!matches.length){
+        agentResults.innerHTML = `<div class="agent-empty th-font">ไม่พบตัวแทนที่ค้นหา</div>`;
+        return;
+      }
+
+      agentResults.innerHTML = matches.map(item => `
+        <button class="agent-item sound-click" type="button" data-agent="${item.name}">
+          <div class="agent-name th-font">${item.name}</div>
+          <div class="agent-meta th-font">${item.area} • ${item.code}</div>
+        </button>
+      `).join("");
+
+      agentResults.querySelectorAll(".agent-item").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const agent = btn.getAttribute("data-agent") || "";
+          window.location.href = `agent-profile.html?agent=${encodeURIComponent(agent)}`;
+        });
+      });
+    }
+
+    function openAgentDropdown(){
+      agentDropdown.classList.add("open");
+    }
+
+    function closeAgentDropdown(){
+      agentDropdown.classList.remove("open");
+    }
+
+    function toggleHeroOpen(force){
+      if (!techHero) return;
+      if (typeof force === "boolean") {
+        techHero.classList.toggle("open", force);
+      } else {
+        techHero.classList.toggle("open");
+      }
+      syncHeroLabels();
+      pulseCenter();
+    }
+
+    if (agentSearchInput){
+      agentSearchInput.addEventListener("focus", () => {
+        renderAgentResults(agentSearchInput.value);
+        openAgentDropdown();
+      });
+
+      agentSearchInput.addEventListener("input", () => {
+        renderAgentResults(agentSearchInput.value);
+        openAgentDropdown();
+      });
+
+      agentSearchInput.addEventListener("keydown", (event) => {
+        if (event.key === "Escape"){
+          closeAgentDropdown();
+          agentSearchInput.blur();
+        }
+      });
+    }
+
+    if (agentSearchForm){
+      agentSearchForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const keyword = agentSearchInput.value.trim();
+        if (!keyword){
+          renderAgentResults("");
+          openAgentDropdown();
+          return;
+        }
+        window.location.href = `agent-profile.html?search=${encodeURIComponent(keyword)}`;
+      });
+    }
+
+    if (logoMenuButton && techHero){
+      logoMenuButton.addEventListener("click", function(event){
+        event.stopPropagation();
+        toggleHeroOpen();
+      });
+    }
+
+    if (techHero){
+      techHero.addEventListener("click", function(event){
+        event.stopPropagation();
+      });
+
+      const popupButtons = techHero.querySelectorAll("[data-popup]");
+      popupButtons.forEach(btn => {
+        btn.addEventListener("click", function(event){
+          event.stopPropagation();
+          const key = btn.getAttribute("data-popup");
+          openInfoPopup(key);
+        });
+      });
+
+      if (contactButton){
+        contactButton.addEventListener("click", function(event){
+          event.stopPropagation();
+          openCompanyPopup();
+        });
+      }
+    }
+
+    document.getElementById("closeInfoPopupTop")?.addEventListener("click", closeInfoPopup);
+    document.getElementById("closeInfoPopupBottom")?.addEventListener("click", closeInfoPopup);
+    document.getElementById("closeInfoPopupInline")?.addEventListener("click", closeInfoPopup);
+    document.getElementById("closeCompanyPopupTop")?.addEventListener("click", closeCompanyPopup);
+    document.getElementById("closeCompanyPopupBottom")?.addEventListener("click", closeCompanyPopup);
+
+    infoPopup?.addEventListener("click", function(event){
+      if (event.target === infoPopup) closeInfoPopup();
+    });
+
+    companyPopup?.addEventListener("click", function(event){
+      if (event.target === companyPopup) closeCompanyPopup();
+    });
+
+    infoPopup?.addEventListener("keydown", function(event){
+      trapFocus(event, infoPopup);
+    });
+
+    companyPopup?.addEventListener("keydown", function(event){
+      trapFocus(event, companyPopup);
+    });
+
+    if (chatWidget && chatToggle){
+      chatToggle.addEventListener("click", function(event){
+        event.stopPropagation();
+        chatWidget.classList.toggle("open");
+      });
+    }
+
+    let audioCtx;
+    function getAudioCtx(){
+      if (!audioCtx){
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextClass) return null;
+        audioCtx = new AudioContextClass();
+      }
+      return audioCtx;
+    }
+
+    function playClickSound(type = "normal"){
+      const ctx = getAudioCtx();
+      if (!ctx) return;
+      if (ctx.state === "suspended") ctx.resume();
+
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      const filter = ctx.createBiquadFilter();
+
+      osc.type = type === "confirm" ? "triangle" : "sine";
+      osc.frequency.setValueAtTime(type === "confirm" ? 520 : 680, now);
+      osc.frequency.exponentialRampToValueAtTime(type === "confirm" ? 260 : 340, now + 0.045);
+
+      filter.type = "lowpass";
+      filter.frequency.setValueAtTime(type === "confirm" ? 1800 : 2400, now);
+
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(type === "confirm" ? 0.06 : 0.035, now + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + (type === "confirm" ? 0.16 : 0.09));
+
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(now);
+      osc.stop(now + (type === "confirm" ? 0.18 : 0.1));
+    }
+
+    document.querySelectorAll(".sound-click").forEach(el => {
+      el.addEventListener("click", () => playClickSound("normal"));
+    });
+
+    document.querySelector('.menu-node.bottom[href="book.html"]')?.addEventListener("click", () => {
+      playClickSound("confirm");
+    });
+
+    function applyThemeByViewport() {
+      if (isMobileView()) {
+        body.classList.add("light-mode");
+        return;
+      }
+
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "light") {
+        body.classList.add("light-mode");
+      } else {
+        body.classList.remove("light-mode");
+      }
+    }
+
+    if (themeToggle) {
+      themeToggle.addEventListener("click", () => {
+        if (isMobileView()) return;
+        body.classList.toggle("light-mode");
+        localStorage.setItem("theme", body.classList.contains("light-mode") ? "light" : "dark");
+      });
+    }
+
+    let googleTranslateReady = false;
+
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement(
+        {
+          pageLanguage: "th",
+          includedLanguages: "th,en",
+          autoDisplay: false,
+          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        },
+        "google_translate_element"
+      );
+      googleTranslateReady = true;
+      syncActiveLangFromCookie();
+    }
+    window.googleTranslateElementInit = googleTranslateElementInit;
+
+    function setActiveLang(lang){
+      document.querySelectorAll(".lang-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.lang === lang);
+      });
+    }
+
+    function getTranslateCookieLang(){
+      const match = document.cookie.match(/(?:^|;\s*)googtrans=\/th\/([^;]+)/);
+      return match ? decodeURIComponent(match[1]) : "th";
+    }
+
+    function setTranslateCookie(lang){
+      const value = lang === "th" ? "/th/th" : `/th/${lang}`;
+      const hostParts = location.hostname.split(".");
+      document.cookie = `googtrans=${value};path=/`;
+      if (hostParts.length >= 2) {
+        const rootDomain = "." + hostParts.slice(-2).join(".");
+        document.cookie = `googtrans=${value};path=/;domain=${rootDomain}`;
+      }
+    }
+
+    function clearTranslateCookie(){
+      const hostParts = location.hostname.split(".");
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      if (hostParts.length >= 2) {
+        const rootDomain = "." + hostParts.slice(-2).join(".");
+        document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${rootDomain};`;
+      }
+    }
+
+    function syncActiveLangFromCookie(){
+      const lang = getTranslateCookieLang();
+      if (["th","en"].includes(lang)) {
+        setActiveLang(lang);
+      } else {
+        setActiveLang("th");
+      }
+    }
+
+    function changeLanguage(lang){
+      const combo = document.querySelector(".goog-te-combo");
+
+      if (lang === "th"){
+        clearTranslateCookie();
+        if (combo){
+          combo.value = "th";
+          combo.dispatchEvent(new Event("change"));
+        }
+        setActiveLang("th");
+        setTimeout(() => location.reload(), 120);
+        return;
+      }
+
+      setTranslateCookie(lang);
+      setActiveLang(lang);
+
+      if (combo){
+        combo.value = lang;
+        combo.dispatchEvent(new Event("change"));
+        setTimeout(() => {
+          if (document.body.classList.contains("translated-ltr") || document.body.classList.contains("translated-rtl")) return;
+          location.reload();
+        }, 700);
+      } else {
+        location.reload();
+      }
+    }
+
+    function bindLanguageButtons(){
+      document.querySelectorAll(".lang-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          changeLanguage(btn.dataset.lang);
+        });
+      });
+    }
+
+    let resizeTimer;
+    function handleResize() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        applyThemeByViewport();
+        buildEnergyLines();
+        syncHeroLabels();
+      }, 120);
+    }
+
+    document.addEventListener("pointerdown", (event) => {
+      const target = event.target;
+
+      if (agentDropdown && agentSearchForm) {
+        const clickedSearchZone = agentDropdown.contains(target) || agentSearchForm.contains(target);
+        if (!clickedSearchZone) closeAgentDropdown();
+      }
+
+      if (chatWidget && !chatWidget.contains(target)) {
+        chatWidget.classList.remove("open");
+      }
+
+      if (
+        techHero &&
+        !techHero.contains(target) &&
+        infoPopup.style.display !== "flex" &&
+        companyPopup.style.display !== "flex"
+      ) {
+        toggleHeroOpen(false);
+      }
+    });
+
+    document.addEventListener("keydown", function(event){
+      if (event.key === "Escape"){
+        if (infoPopup.classList.contains("show")) {
+          closeInfoPopup();
+          return;
+        }
+
+        if (companyPopup.classList.contains("show")) {
+          closeCompanyPopup();
+          return;
+        }
+
+        if (agentDropdown.classList.contains("open")) {
+          closeAgentDropdown();
+        }
+
+        if (techHero?.classList.contains("open")) {
+          toggleHeroOpen(false);
+        }
+
+        if (chatWidget?.classList.contains("open")) {
+          chatWidget.classList.remove("open");
+        }
+      }
+    });
+
+    window.addEventListener("load", () => {
+      applyThemeByViewport();
+      if (techHero) techHero.classList.remove("open");
+      syncHeroLabels();
+      buildEnergyLines();
+      bindLanguageButtons();
+      syncActiveLangFromCookie();
+      renderAgentResults("");
+    });
+
+    window.addEventListener("resize", handleResize);
+  </script>
+
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
