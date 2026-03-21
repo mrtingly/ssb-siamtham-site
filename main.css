@@ -3072,5 +3072,69 @@ body.light-mode .popup-nav button.active{
   background:linear-gradient(135deg,#2e78df,#5aa7ff);
   color:#fff;
 }
+
+  /* ===== POPUP PRO NAV (FINAL FIX) ===== */
+
+.popup-pro-nav{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  margin-top:12px;
+  padding:6px;
+}
+
+/* ปุ่ม */
+.popup-pro-nav-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:6px 12px;
+  border-radius:999px;
+  border:1px solid rgba(130,220,255,.18);
+  background:rgba(255,255,255,.06);
+  color:#eaf7ff;
+  font-size:11px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.2s ease;
+  white-space:nowrap;
+}
+
+/* hover */
+.popup-pro-nav-btn:hover{
+  transform:translateY(-2px);
+  background:rgba(255,255,255,.12);
+}
+
+/* active */
+.popup-pro-nav-btn.active{
+  background:linear-gradient(135deg,#2e78df,#5aa7ff);
+  color:#fff;
+  border-color:transparent;
+  box-shadow:0 6px 16px rgba(47,127,227,.25);
+}
+
+/* ปุ่มสั่งซื้อ */
+.popup-pro-nav-order{
+  background:linear-gradient(135deg,#ff6a00,#ff9d2f);
+  color:#fff !important;
+  border:none;
+  box-shadow:0 6px 16px rgba(255,120,0,.25);
+}
+
+/* LIGHT MODE */
+body.light-mode .popup-pro-nav-btn{
+  background:#f4f8ff;
+  color:#21497e;
+  border-color:rgba(20,55,100,.08);
+}
+
+body.light-mode .popup-pro-nav-btn.active{
+  background:linear-gradient(135deg,#2e78df,#5aa7ff);
+  color:#fff;
+}
+  
 }
 
