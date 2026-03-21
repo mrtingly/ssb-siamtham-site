@@ -318,6 +318,37 @@ function openInfoPopup(key) {
   renderImpacts(data.impacts);
   renderFeatures(data.useCases, infoUseCases);
 
+  const rulePanel = document.getElementById("popupRulePanel");
+  const rule1 = document.getElementById("popupRule1");
+  const rule2 = document.getElementById("popupRule2");
+  const rule3 = document.getElementById("popupRule3");
+
+  if (rulePanel && rule1 && rule2 && rule3) {
+    rulePanel.style.display = "block";
+
+    if (key === "aboutcompany") {
+      rule1.textContent = "SSB ใช้เพื่อเก็บเงินและโอนเข้า Flare เท่านั้น";
+      rule2.textContent = "ห้ามโอนจาก SSB ให้บุคคลอื่นโดยตรง";
+      rule3.textContent = "หากต้องใช้งานภายนอก ให้โอนเข้า Flare ก่อนทุกครั้ง";
+    } else if (key === "stealthbank") {
+      rule1.textContent = "SSB ไม่ใช่เครื่องใช้งานทั่วไป";
+      rule2.textContent = "SSB มีหน้าที่เก็บเงินและโอนเข้า Flare เท่านั้น";
+      rule3.textContent = "ห้ามใช้ SSB โอนให้บุคคลอื่นโดยตรง";
+    } else if (key === "technology") {
+      rule1.textContent = "Flare ใช้เป็นเครื่องทำธุรกรรมจริง";
+      rule2.textContent = "Flare รับความเสี่ยงแทน SSB";
+      rule3.textContent = "หากเกิดความเสียหาย ต้องจำกัดให้อยู่ที่ Flare";
+    } else if (key === "safetybook") {
+      rule1.textContent = "SB ใช้เก็บ SSB เมื่อไม่ใช้งาน";
+      rule2.textContent = "ลดการถูกสังเกต และลดการเข้าถึงจากภายนอก";
+      rule3.textContent = "ของมีค่า ไม่ควรดูเหมือนของมีค่า";
+    } else {
+      rule1.textContent = "แยกหน้าที่ของอุปกรณ์ = ลดความเสี่ยง";
+      rule2.textContent = "SSB ไม่ควรปะปนกับการใช้งานทั่วไป";
+      rule3.textContent = "ทุกการใช้งานภายนอกควรผ่าน Flare ก่อน";
+    }
+  }
+
   if (infoVideo) {
     const params = new URLSearchParams({
       rel: "0",
