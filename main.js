@@ -900,7 +900,7 @@ window.addEventListener("load", () => {
   bindThemeToggle();
   bindGlobalEvents();
 
-  if (popupNav) {
+if (popupNav) {
   popupNav.querySelectorAll("[data-step]").forEach(btn => {
     btn.addEventListener("click", () => {
       popupNav.querySelectorAll(".popup-pro-nav-btn").forEach(item => {
@@ -911,7 +911,7 @@ window.addEventListener("load", () => {
     });
   });
 }
-
+  
   if (popupNav) {
     popupNav.querySelectorAll("[data-step]").forEach(btn => {
       btn.addEventListener("click", () => {
