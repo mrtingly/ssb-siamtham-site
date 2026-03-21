@@ -1782,6 +1782,23 @@ body.light-mode .company-detail strong{ color:#173b69; }
   .footer-main{
     grid-template-columns:minmax(0, 1.6fr) minmax(200px, .9fr) minmax(220px, 1fr);
   }
+
+  .popup-pro-card{
+  height:92vh;
+  max-height:92vh;
+}
+
+.popup-pro-shell{
+  grid-template-columns:1fr;
+  height:100%;
+}
+
+.popup-pro-content{
+  height:auto;
+  max-height:none;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+}
 }
 
 @media (max-width:920px){
@@ -1809,7 +1826,7 @@ body.light-mode .company-detail strong{ color:#173b69; }
     width:100%;
     max-width:100%;
   }
-
+  
   .agent-dropdown{ width:100%; }
 
   .tech-hero{
@@ -1842,6 +1859,23 @@ body.light-mode .company-detail strong{ color:#173b69; }
 @media (max-width:760px){
   :root{ --header-h:114px; }
 
+  .popup-pro-card{
+  height:92vh;
+  max-height:92vh;
+}
+
+.popup-pro-shell{
+  grid-template-columns:1fr;
+  height:100%;
+}
+
+.popup-pro-content{
+  height:auto;
+  max-height:none;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+}
+  
   body,
   body.light-mode{
     color:#143764;
@@ -2371,7 +2405,8 @@ body.light-mode .popup-pro-backdrop{
 
 .popup-pro-card{
   width:min(96vw, 1240px);
-  height:92vh;
+  height:min(92vh, 860px);
+  max-height:92vh;
   padding:0;
   overflow:hidden;
   border-radius:30px;
@@ -2410,7 +2445,8 @@ body.light-mode .popup-pro-card{
   z-index:1;
   display:grid;
   grid-template-columns:minmax(340px, 430px) minmax(0, 1fr);
-  height:92vh;
+  height:100%;
+  min-height:0;
 }
 
 .popup-pro-media{
@@ -2447,9 +2483,11 @@ body.light-mode .popup-pro-video-frame{
 }
 
 .popup-pro-content{
-  height:92vh;
+  height:100%;
+  min-height:0;
   overflow-y:auto;
   overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
   padding:24px 24px 20px;
 }
 
@@ -2484,6 +2522,7 @@ body.light-mode .popup-pro-head h3{
 .popup-pro-body{
   display:grid;
   gap:16px;
+  min-height:0;
 }
 
 .popup-pro-intro{
@@ -2670,4 +2709,12 @@ body.light-mode .popup-pro-rule-line{
   .popup-pro-card .impact-card{
     min-height:unset;
   }
+}
+
+.popup-card,
+.popup-pro-card,
+.popup-pro-shell,
+.popup-pro-content,
+.popup-pro-body{
+  min-height:0;
 }
