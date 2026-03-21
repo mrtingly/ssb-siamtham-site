@@ -901,6 +901,18 @@ window.addEventListener("load", () => {
   bindGlobalEvents();
 
   if (popupNav) {
+  popupNav.querySelectorAll("[data-step]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      popupNav.querySelectorAll(".popup-pro-nav-btn").forEach(item => {
+        item.classList.remove("active");
+      });
+      btn.classList.add("active");
+      renderPopupStep(btn.dataset.step);
+    });
+  });
+}
+
+  if (popupNav) {
     popupNav.querySelectorAll("[data-step]").forEach(btn => {
       btn.addEventListener("click", () => {
         renderPopupStep(btn.dataset.step);
