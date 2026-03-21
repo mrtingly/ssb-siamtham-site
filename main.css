@@ -3020,7 +3020,8 @@ body.light-mode .popup-pro-rule-line{
   .popup-pro-card .impact-card{
     min-height:unset;
   }
-
+}
+  
   /* ===== POPUP MENU NAV (HI-TECH STYLE) ===== */
 
 .popup-nav{
@@ -3135,6 +3136,3 @@ body.light-mode .popup-pro-nav-btn.active{
   background:linear-gradient(135deg,#2e78df,#5aa7ff);
   color:#fff;
 }
-  
-}
-
