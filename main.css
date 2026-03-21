@@ -2746,44 +2746,6 @@ body.light-mode .popup-pro-video-frame{
   box-shadow:0 14px 28px rgba(31,74,140,.10);
 }
 
-.popup-pro-nav{
-  display:grid;
-  gap:8px;
-  margin-top:16px;
-}
-
-.popup-pro-nav-btn{
-  min-height:42px;
-  padding:10px 12px;
-  border-radius:14px;
-  border:1px solid rgba(125,220,255,.12);
-  background:rgba(255,255,255,.05);
-  color:#eaf7ff;
-  text-decoration:none;
-  text-align:left;
-  font-size:13px;
-  font-weight:800;
-  cursor:pointer;
-  transition:.18s ease;
-}
-
-.popup-pro-nav-btn:hover{
-  transform:translateX(2px);
-  background:rgba(255,255,255,.08);
-}
-
-.popup-pro-nav-btn.active{
-  background:linear-gradient(135deg,#0b4ea2,#1f69cd,#5cc8ff);
-  border-color:transparent;
-  color:#fff;
-  box-shadow:0 10px 20px rgba(31,105,205,.24);
-}
-
-.popup-pro-nav-order{
-  justify-content:center;
-  text-align:center;
-}
-
 body.light-mode .popup-pro-nav-btn{
   background:#ffffff;
   color:#173b69;
@@ -3102,4 +3064,61 @@ body.light-mode nav.popup-pro-nav > .popup-pro-nav-btn.active{
     font-size:10px !important;
     padding:7px 8px !important;
   }
+}
+  .popup-pro-nav{
+  display:flex !important;
+  flex-direction:column !important;
+  gap:8px !important;
+  margin-top:12px !important;
+  padding:0 !important;
+  width:100% !important;
+}
+
+.popup-pro-nav-btn{
+  width:100% !important;
+  min-height:40px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  padding:10px 14px !important;
+  border-radius:14px !important;
+  border:1px solid rgba(130,220,255,.18) !important;
+  background:rgba(255,255,255,.06) !important;
+  color:#eaf7ff !important;
+  font-size:12px !important;
+  font-weight:700 !important;
+  text-align:left !important;
+  text-decoration:none !important;
+  cursor:pointer !important;
+  transition:.18s ease !important;
+  box-sizing:border-box !important;
+}
+
+.popup-pro-nav-btn:hover{
+  transform:translateY(-1px) !important;
+  background:rgba(255,255,255,.12) !important;
+}
+
+.popup-pro-nav-btn.active{
+  background:linear-gradient(135deg,#2e78df,#5aa7ff) !important;
+  color:#fff !important;
+  border-color:transparent !important;
+  box-shadow:0 6px 16px rgba(47,127,227,.25) !important;
+}
+
+.popup-pro-nav-order{
+  background:linear-gradient(135deg,#ff6a00,#ff9d2f) !important;
+  color:#fff !important;
+  border:none !important;
+}
+
+body.light-mode .popup-pro-nav-btn{
+  background:#f4f8ff !important;
+  color:#21497e !important;
+  border-color:rgba(20,55,100,.08) !important;
+}
+
+body.light-mode .popup-pro-nav-btn.active{
+  background:linear-gradient(135deg,#2e78df,#5aa7ff) !important;
+  color:#fff !important;
 }
