@@ -1799,6 +1799,11 @@ body.light-mode .company-detail strong{ color:#173b69; }
   overflow-y:auto;
   -webkit-overflow-scrolling:touch;
 }
+  
+  .popup-pro-video-panel{
+  position:relative;
+  top:auto;
+}
 }
 
 @media (max-width:920px){
