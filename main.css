@@ -3022,59 +3022,7 @@ body.light-mode .popup-pro-rule-line{
   }
 }
   
-  /* ===== POPUP MENU NAV (HI-TECH STYLE) ===== */
-
-.popup-nav{
-  display:flex !important;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:10px;
-  margin-top:14px;
-  padding:6px 4px;
-}
-
-.popup-nav button{
-  flex:0 0 auto;
-  padding:8px 14px;
-  border-radius:999px;
-  border:1px solid rgba(130,220,255,.18);
-  background:rgba(255,255,255,.06);
-  color:#eaf7ff;
-  font-size:12px;
-  font-weight:700;
-  cursor:pointer;
-  transition:.18s ease;
-  backdrop-filter:blur(6px);
-}
-
-/* hover */
-.popup-nav button:hover{
-  transform:translateY(-2px);
-  background:rgba(255,255,255,.12);
-  border-color:rgba(160,230,255,.28);
-}
-
-/* active */
-.popup-nav button.active{
-  background:linear-gradient(135deg,#2e78df,#5aa7ff);
-  color:#fff;
-  border-color:transparent;
-  box-shadow:0 6px 16px rgba(47,127,227,.25);
-}
-
-/* LIGHT MODE */
-body.light-mode .popup-nav button{
-  background:#f4f8ff;
-  color:#21497e;
-  border-color:rgba(20,55,100,.08);
-}
-
-body.light-mode .popup-nav button.active{
-  background:linear-gradient(135deg,#2e78df,#5aa7ff);
-  color:#fff;
-}
-
-  /* ===== POPUP PRO NAV (FINAL FIX) ===== */
+  /* ===== POPUP PRO NAV CLEAN ===== */
 
 .popup-pro-nav{
   display:flex !important;
@@ -3083,24 +3031,37 @@ body.light-mode .popup-nav button.active{
   align-items:center !important;
   gap:8px !important;
   margin-top:12px !important;
-  padding:6px !important;
+  padding:6px 0 !important;
 }
 
 .popup-pro-nav-btn{
+  flex:0 0 auto !important;
+  width:auto !important;
+  max-width:none !important;
+  min-width:auto !important;
+  min-height:36px !important;
   display:inline-flex !important;
   align-items:center !important;
   justify-content:center !important;
-  padding:6px 12px !important;
+  padding:7px 12px !important;
   border-radius:999px !important;
   border:1px solid rgba(130,220,255,.18) !important;
   background:rgba(255,255,255,.06) !important;
   color:#eaf7ff !important;
   font-size:11px !important;
   font-weight:700 !important;
+  line-height:1.2 !important;
   cursor:pointer !important;
   transition:.2s ease !important;
   white-space:nowrap !important;
   text-decoration:none !important;
+  margin:0 !important;
+}
+
+.popup-pro-nav-btn:hover{
+  transform:translateY(-2px) !important;
+  background:rgba(255,255,255,.12) !important;
+  border-color:rgba(160,230,255,.28) !important;
 }
 
 .popup-pro-nav-btn.active{
@@ -3114,4 +3075,29 @@ body.light-mode .popup-nav button.active{
   background:linear-gradient(135deg,#ff6a00,#ff9d2f) !important;
   color:#fff !important;
   border:none !important;
+  box-shadow:0 6px 16px rgba(255,120,0,.22) !important;
 }
+
+body.light-mode .popup-pro-nav-btn{
+  background:#f4f8ff !important;
+  color:#21497e !important;
+  border-color:rgba(20,55,100,.08) !important;
+}
+
+body.light-mode .popup-pro-nav-btn.active{
+  background:linear-gradient(135deg,#2e78df,#5aa7ff) !important;
+  color:#fff !important;
+}
+
+@media (max-width:760px){
+  .popup-pro-nav{
+    gap:6px !important;
+  }
+
+  .popup-pro-nav-btn{
+    font-size:10px !important;
+    padding:6px 10px !important;
+    min-height:32px !important;
+  }
+}
+
