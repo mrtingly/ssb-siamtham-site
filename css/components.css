@@ -1,1 +1,116 @@
+/* CHAT */
+.chat-widget{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  z-index:3000;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:12px;
+}
+
+.chat-menu{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:10px;
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(12px) scale(.96);
+  transition:.20s ease;
+}
+
+.chat-widget.open .chat-menu{
+  opacity:1;
+  pointer-events:auto;
+  transform:translateY(0) scale(1);
+}
+
+.chat-item{
+  min-width:224px;
+  height:54px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:0 16px;
+  border-radius:999px;
+  color:#fff;
+  text-decoration:none;
+  font-size:14px;
+  font-weight:700;
+  border:1px solid rgba(255,255,255,.16);
+  box-shadow:0 14px 28px rgba(0,0,0,.16);
+  transition:.18s ease;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+
+.chat-item:hover{ transform:translateY(-2px) scale(1.02); }
+.chat-item.line{ background:linear-gradient(135deg, #10d95a 0%, #06c755 55%, #02a94b 100%); }
+.chat-item.facebook{ background:linear-gradient(135deg, #2a86ff 0%, #1877f2 55%, #0f5fd3 100%); }
+.chat-item.youtube{ background:linear-gradient(135deg, #ff2f2f 0%, #ff0000 55%, #c90000 100%); }
+.chat-item.tiktok{ background:linear-gradient(135deg, #232323 0%, #111111 55%, #000000 100%); }
+
+.chat-icon{
+  width:34px;
+  height:34px;
+  border-radius:999px;
+  background:rgba(255,255,255,.16);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 34px;
+  font-size:12px;
+  font-weight:800;
+}
+
+.chat-fab{
+  width:66px;
+  height:66px;
+  border:none;
+  border-radius:999px;
+  background:linear-gradient(135deg, #0b4ea2, #1f69cd);
+  color:#fff;
+  cursor:pointer;
+  box-shadow:0 18px 36px rgba(0,0,0,.22);
+  border:1px solid rgba(255,255,255,.18);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  transition:.18s ease;
+}
+
+.chat-fab:hover{ transform:translateY(-2px); }
+
+.chat-fab-text{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  font-weight:800;
+  line-height:1.04;
+}
+
+.chat-caret{
+  position:absolute;
+  right:-2px;
+  top:-2px;
+  width:22px;
+  height:22px;
+  border-radius:999px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+  color:#0b4ea2;
+  font-size:10px;
+  box-shadow:0 6px 16px rgba(11,78,162,.16);
+  transition:.20s ease;
+}
+
+.chat-widget.open .chat-caret{ transform:rotate(180deg); }
+
 
