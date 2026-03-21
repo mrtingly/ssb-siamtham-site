@@ -3077,62 +3077,41 @@ body.light-mode .popup-nav button.active{
   /* ===== POPUP PRO NAV (FINAL FIX) ===== */
 
 .popup-pro-nav{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  align-items:center;
-  gap:8px;
-  margin-top:12px;
-  padding:6px;
+  display:flex !important;
+  flex-wrap:wrap !important;
+  justify-content:center !important;
+  align-items:center !important;
+  gap:8px !important;
+  margin-top:12px !important;
+  padding:6px !important;
 }
 
-/* ปุ่ม */
 .popup-pro-nav-btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:6px 12px;
-  border-radius:999px;
-  border:1px solid rgba(130,220,255,.18);
-  background:rgba(255,255,255,.06);
-  color:#eaf7ff;
-  font-size:11px;
-  font-weight:700;
-  cursor:pointer;
-  transition:.2s ease;
-  white-space:nowrap;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  padding:6px 12px !important;
+  border-radius:999px !important;
+  border:1px solid rgba(130,220,255,.18) !important;
+  background:rgba(255,255,255,.06) !important;
+  color:#eaf7ff !important;
+  font-size:11px !important;
+  font-weight:700 !important;
+  cursor:pointer !important;
+  transition:.2s ease !important;
+  white-space:nowrap !important;
+  text-decoration:none !important;
 }
 
-/* hover */
-.popup-pro-nav-btn:hover{
-  transform:translateY(-2px);
-  background:rgba(255,255,255,.12);
-}
-
-/* active */
 .popup-pro-nav-btn.active{
-  background:linear-gradient(135deg,#2e78df,#5aa7ff);
-  color:#fff;
-  border-color:transparent;
-  box-shadow:0 6px 16px rgba(47,127,227,.25);
-}
-
-/* ปุ่มสั่งซื้อ */
-.popup-pro-nav-order{
-  background:linear-gradient(135deg,#ff6a00,#ff9d2f);
+  background:linear-gradient(135deg,#2e78df,#5aa7ff) !important;
   color:#fff !important;
-  border:none;
-  box-shadow:0 6px 16px rgba(255,120,0,.25);
+  border-color:transparent !important;
+  box-shadow:0 6px 16px rgba(47,127,227,.25) !important;
 }
 
-/* LIGHT MODE */
-body.light-mode .popup-pro-nav-btn{
-  background:#f4f8ff;
-  color:#21497e;
-  border-color:rgba(20,55,100,.08);
-}
-
-body.light-mode .popup-pro-nav-btn.active{
-  background:linear-gradient(135deg,#2e78df,#5aa7ff);
-  color:#fff;
+.popup-pro-nav-order{
+  background:linear-gradient(135deg,#ff6a00,#ff9d2f) !important;
+  color:#fff !important;
+  border:none !important;
 }
