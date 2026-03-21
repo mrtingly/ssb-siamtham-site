@@ -370,14 +370,14 @@
   </div>
 
  <!-- INFO POPUP -->
-<div id="infoPopup" class="popup-backdrop popup-pro-backdrop" aria-hidden="true">
+<div id="infoPopup" class="popup-backdrop popup-pro-backdrop notranslate" aria-hidden="true">
   <div class="popup-card popup-pro-card" role="dialog" aria-modal="true" aria-labelledby="infoTitle">
     <button class="popup-x popup-pro-x sound-click" type="button" id="closeInfoPopupTop" aria-label="ปิด">×</button>
 
     <div class="popup-pro-shell">
-      <div class="popup-pro-media">
-        <div class="popup-panel video-panel popup-pro-video-panel">
-          <div class="popup-kicker th-font" id="popupKicker">ระบบความปลอดภัย</div>
+      <aside class="popup-pro-media">
+        <div class="popup-pro-video-sticky">
+          <div class="popup-kicker th-font notranslate" id="popupKicker">SSB Mobile System</div>
 
           <div class="video-frame popup-pro-video-frame">
             <iframe
@@ -390,65 +390,77 @@
             ></iframe>
           </div>
 
-          <div class="video-note th-font" id="videoNote">
-            ตัวอย่างวิดีโอจากช่อง @siamtham แบบไม่เปิดเสียงอัตโนมัติ เพื่อให้ผู้ชมควบคุมการรับชมได้เอง
+          <div class="video-note th-font notranslate" id="videoNote">
+            ระบบความปลอดภัยทางการเงินเชิงโครงสร้าง
           </div>
-        </div>
-      </div>
 
-      <div class="popup-pro-content">
+          <nav class="popup-pro-nav notranslate" id="popupNav">
+            <button type="button" class="popup-pro-nav-btn active" data-step="ssbmobile">1. SSB Mobile System</button>
+            <button type="button" class="popup-pro-nav-btn" data-step="ssb">2. SSB</button>
+            <button type="button" class="popup-pro-nav-btn" data-step="sb">3. SB</button>
+            <button type="button" class="popup-pro-nav-btn" data-step="flare">4. Flare</button>
+            <button type="button" class="popup-pro-nav-btn" data-step="usage">5. วิธีการใช้งาน</button>
+            <button type="button" class="popup-pro-nav-btn" data-step="sbpremium">6. SB Premium</button>
+            <button type="button" class="popup-pro-nav-btn" data-step="custom">7. Custom System</button>
+            <a href="book.html" class="popup-pro-nav-btn popup-pro-nav-order sound-click">8. เริ่มสั่งจอง</a>
+          </nav>
+        </div>
+      </aside>
+
+      <section class="popup-pro-content">
         <div class="popup-head popup-pro-head">
           <div class="popup-head-main">
-            <h3 id="infoTitle" class="th-font">หัวข้อระบบ</h3>
-            <div class="popup-subtitle th-font" id="infoSubtitle">คำอธิบายสั้นของระบบจะอยู่ตรงนี้</div>
+            <h3 id="infoTitle" class="th-font notranslate">SSB Mobile System</h3>
+            <div class="popup-subtitle th-font notranslate" id="infoSubtitle">ระบบความปลอดภัยทางการเงินที่ออกแบบทั้งโครงสร้าง</div>
           </div>
         </div>
 
         <div class="popup-body popup-pro-body">
           <div class="popup-panel popup-pro-intro">
             <h4 class="popup-section-title th-font"><span class="dot"></span>ภาพรวม</h4>
-            <p class="popup-lead th-font" id="infoLead"></p>
-            <div class="badge-row" id="infoBadges"></div>
+            <p class="popup-lead th-font notranslate" id="infoLead"></p>
+            <div class="badge-row notranslate" id="infoBadges"></div>
           </div>
 
           <div class="popup-grid popup-pro-grid">
             <div class="popup-panel">
               <h4 class="popup-section-title th-font"><span class="dot"></span>จุดเด่นสำคัญ</h4>
-              <ul class="feature-list th-font" id="infoFeatures"></ul>
+              <ul class="feature-list th-font notranslate" id="infoFeatures"></ul>
             </div>
 
             <div class="popup-panel">
               <h4 class="popup-section-title th-font"><span class="dot"></span>เหมาะกับใคร / การใช้งาน</h4>
-              <ul class="feature-list th-font" id="infoUseCases"></ul>
+              <ul class="feature-list th-font notranslate" id="infoUseCases"></ul>
             </div>
           </div>
 
           <div class="popup-panel popup-pro-rule-panel" id="popupRulePanel">
-            <div class="popup-pro-rule-title th-font">Key System</div>
+            <div class="popup-pro-rule-title th-font notranslate">Key System</div>
             <div class="popup-pro-rule-box">
-              <div class="popup-pro-rule-line th-font" id="popupRule1">แยกหน้าที่ของอุปกรณ์ = ลดความเสี่ยง</div>
-              <div class="popup-pro-rule-line th-font" id="popupRule2">SSB ไม่ควรปะปนกับการใช้งานทั่วไป</div>
-              <div class="popup-pro-rule-line th-font" id="popupRule3">ทุกการใช้งานภายนอกควรผ่าน Flare ก่อน</div>
+              <div class="popup-pro-rule-line th-font notranslate" id="popupRule1"></div>
+              <div class="popup-pro-rule-line th-font notranslate" id="popupRule2"></div>
+              <div class="popup-pro-rule-line th-font notranslate" id="popupRule3"></div>
             </div>
           </div>
 
           <div class="popup-panel">
             <h4 class="popup-section-title th-font"><span class="dot"></span>ผลลัพธ์ที่ผู้ใช้ได้รับ</h4>
-            <div class="impact-grid" id="infoImpacts"></div>
+            <div class="impact-grid notranslate" id="infoImpacts"></div>
 
             <div class="popup-action-row">
-              <a class="popup-cta primary sound-click th-font" href="book.html">ไปยังหน้าสั่งจอง</a>
+              <button class="popup-cta primary sound-click th-font notranslate" type="button" id="popupNextStep">ไปขั้นถัดไป</button>
+              <a class="popup-cta primary sound-click th-font notranslate" href="book.html">เริ่มสั่งจอง</a>
               <button class="popup-cta secondary sound-click th-font" type="button" id="closeInfoPopupInline">ปิดหน้าต่างนี้</button>
             </div>
           </div>
         </div>
 
         <button class="popup-close th-font sound-click" type="button" id="closeInfoPopupBottom">ปิด</button>
-      </div>
+      </section>
     </div>
   </div>
 </div>
-
+  
   <!-- CHAT -->
   <div class="chat-widget" id="chatWidget">
     <div class="chat-menu" id="chatMenu">
