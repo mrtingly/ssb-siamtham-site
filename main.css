@@ -3020,5 +3020,57 @@ body.light-mode .popup-pro-rule-line{
   .popup-pro-card .impact-card{
     min-height:unset;
   }
+
+  /* ===== POPUP MENU NAV (HI-TECH STYLE) ===== */
+
+.popup-nav{
+  display:flex !important;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:10px;
+  margin-top:14px;
+  padding:6px 4px;
+}
+
+.popup-nav button{
+  flex:0 0 auto;
+  padding:8px 14px;
+  border-radius:999px;
+  border:1px solid rgba(130,220,255,.18);
+  background:rgba(255,255,255,.06);
+  color:#eaf7ff;
+  font-size:12px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.18s ease;
+  backdrop-filter:blur(6px);
+}
+
+/* hover */
+.popup-nav button:hover{
+  transform:translateY(-2px);
+  background:rgba(255,255,255,.12);
+  border-color:rgba(160,230,255,.28);
+}
+
+/* active */
+.popup-nav button.active{
+  background:linear-gradient(135deg,#2e78df,#5aa7ff);
+  color:#fff;
+  border-color:transparent;
+  box-shadow:0 6px 16px rgba(47,127,227,.25);
+}
+
+/* LIGHT MODE */
+body.light-mode .popup-nav button{
+  background:#f4f8ff;
+  color:#21497e;
+  border-color:rgba(20,55,100,.08);
+}
+
+body.light-mode .popup-nav button.active{
+  background:linear-gradient(135deg,#2e78df,#5aa7ff);
+  color:#fff;
+}
 }
 
