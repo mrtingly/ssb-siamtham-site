@@ -2371,7 +2371,7 @@ body.light-mode .popup-pro-backdrop{
 
 .popup-pro-card{
   width:min(96vw, 1240px);
-  max-height:92vh;
+  height:92vh;
   padding:0;
   overflow:hidden;
   border-radius:30px;
@@ -2387,6 +2387,7 @@ body.light-mode .popup-pro-backdrop{
 .popup-pro-card::before{
   content:"";
   position:absolute;
+
   inset:0;
   pointer-events:none;
   background:
@@ -2409,7 +2410,7 @@ body.light-mode .popup-pro-card{
   z-index:1;
   display:grid;
   grid-template-columns:minmax(340px, 430px) minmax(0, 1fr);
-  max-height:92vh;
+  height:92vh;
 }
 
 .popup-pro-media{
@@ -2446,8 +2447,9 @@ body.light-mode .popup-pro-video-frame{
 }
 
 .popup-pro-content{
-  max-height:92vh;
-  overflow:auto;
+  height:92vh;
+  overflow-y:auto;
+  overflow-x:hidden;
   padding:24px 24px 20px;
 }
 
@@ -2617,9 +2619,11 @@ body.light-mode .popup-pro-rule-line{
     position:relative;
   }
 
-  .popup-pro-content{
-    max-height:none;
-  }
+ .popup-pro-content{
+  height:auto;
+  max-height:none;
+  overflow:visible;
+}
 }
 
 @media (max-width:760px){
