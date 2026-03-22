@@ -288,6 +288,7 @@ const clickedInsideSubmenu = target.closest(".submenu-panel");
 const clickedMenuGroup = target.closest(".menu-group");
 const clickedMainMenu = target.closest(".menu-node");
 
+// ปิดทั้งระบบเฉพาะคลิกนอก hero จริงๆ
 if (
   techHero &&
   !techHero.contains(target) &&
@@ -297,12 +298,18 @@ if (
   toggleHeroOpen(false);
 }
 
-if (techHero && techHero.contains(target)) {
-  if (!clickedInsideSubmenu && !clickedMenuGroup && !clickedMainMenu) {
-    $$(".menu-group", techHero).forEach(group => {
-      group.classList.remove("open");
-    });
-  }
+// ปิดเฉพาะ submenu เมื่อคลิกนอกเมนู
+if (
+  techHero &&
+  techHero.contains(target) &&
+  !clickedInsideSubmenu &&
+  !clickedMenuGroup &&
+  !clickedMainMenu
+) {
+  $$(".menu-group", techHero).forEach(group => {
+    group.classList.remove("open");
+  });
+}
 }
 
   document.addEventListener("keydown", event => {
