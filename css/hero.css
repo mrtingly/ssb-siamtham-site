@@ -419,6 +419,10 @@ body.light-mode .menu-node.bottom .node-shell{
 body.light-mode .menu-node.bottom .node-title{ color:#fff; }
 
 .node-note{
+  position:absolute;
+  left:50%;
+  top:68%;
+  transform:translateX(-50%);
   display:inline-flex;
   align-items:center;
   justify-content:center;
@@ -436,6 +440,7 @@ body.light-mode .menu-node.bottom .node-title{ color:#fff; }
   text-align:center;
   pointer-events:none;
   transition:opacity .22s ease, transform .22s ease, visibility .22s ease;
+  z-index:8;
 }
 
 body.light-mode .node-note{
