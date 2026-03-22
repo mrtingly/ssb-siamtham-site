@@ -215,7 +215,7 @@ function bindGlobalEvents() {
 }
 
 function bindHeroMenu() {
-  if (!techHero) return;
+  if (!techHero || !logoMenuButton) return;
 
   function closeAllSubmenus() {
     $$(".menu-group", techHero).forEach(group => {
@@ -227,7 +227,6 @@ function bindHeroMenu() {
     if (!group) return;
 
     const isOpen = group.classList.contains("open");
-
     closeAllSubmenus();
 
     if (!isOpen) {
@@ -235,20 +234,17 @@ function bindHeroMenu() {
     }
   }
 
-  if (logoMenuButton) {
-  logoMenuButton.addEventListener("click", function (event) {
+  logoMenuButton.addEventListener("click", event => {
     event.preventDefault();
     event.stopPropagation();
 
-    techHero.classList.toggle("open");
+    const willOpen = !techHero.classList.contains("open");
+    techHero.classList.toggle("open", willOpen);
 
-    if (!techHero.classList.contains("open")) {
-      document.querySelectorAll(".menu-group").forEach(group => {
-        group.classList.remove("open");
-      });
+    if (!willOpen) {
+      closeAllSubmenus();
     }
   });
-}
 
   techHero.addEventListener("click", event => {
     event.stopPropagation();
@@ -275,7 +271,7 @@ function bindHeroMenu() {
     openCompanyPopup();
   });
 
-    $$("[data-popup]", techHero).forEach(btn => {
+  $$("[data-popup]", techHero).forEach(btn => {
     btn.addEventListener("click", event => {
       event.preventDefault();
       event.stopPropagation();
@@ -286,7 +282,7 @@ function bindHeroMenu() {
     });
   });
 
-   $$("[data-link]", techHero).forEach(btn => {
+  $$("[data-link]", techHero).forEach(btn => {
     btn.addEventListener("click", event => {
       event.preventDefault();
       event.stopPropagation();
