@@ -189,19 +189,27 @@ function bindHeroMenu() {
     });
   });
 
-  $$("[data-menu]", techHero).forEach(btn => {
-    btn.addEventListener("click", event => {
-      event.stopPropagation();
-      const group = btn.closest(".menu-group");
-      const isOpen = group?.classList.contains("open");
+ $$("[data-menu]", techHero).forEach(btn => {
+  btn.addEventListener("click", event => {
+    event.stopPropagation();
+    event.preventDefault();
 
-      closeAllSubmenus();
+    const group = btn.closest(".menu-group");
+    const isOpen = group?.classList.contains("open");
 
-      if (!isOpen && group) {
-        group.classList.add("open");
-      }
-    });
+    closeAllSubmenus();
+
+    if (!isOpen && group) {
+      group.classList.add("open");
+    }
   });
+});
+
+$$(".submenu-panel", techHero).forEach(panel => {
+  panel.addEventListener("click", event => {
+    event.stopPropagation();
+  });
+});
 }
 
 function bindPopups() {
@@ -276,15 +284,26 @@ function bindGlobalEvents() {
       chatWidget.classList.remove("open");
     }
 
-    if (
-      techHero &&
-      !techHero.contains(target) &&
-      infoPopup?.style.display !== "flex" &&
-      companyPopup?.style.display !== "flex"
-    ) {
-      toggleHeroOpen(false);
-    }
-  });
+const clickedInsideSubmenu = target.closest(".submenu-panel");
+const clickedMenuGroup = target.closest(".menu-group");
+const clickedMainMenu = target.closest(".menu-node");
+
+if (
+  techHero &&
+  !techHero.contains(target) &&
+  infoPopup?.style.display !== "flex" &&
+  companyPopup?.style.display !== "flex"
+) {
+  toggleHeroOpen(false);
+}
+
+if (techHero && techHero.contains(target)) {
+  if (!clickedInsideSubmenu && !clickedMenuGroup && !clickedMainMenu) {
+    $$(".menu-group", techHero).forEach(group => {
+      group.classList.remove("open");
+    });
+  }
+}
 
   document.addEventListener("keydown", event => {
     if (event.key !== "Escape") return;
