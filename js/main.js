@@ -289,33 +289,27 @@ function bindGlobalEvents() {
       chatWidget.classList.remove("open");
     }
 
-const clickedInsideSubmenu = target.closest(".submenu-panel");
-const clickedMenuGroup = target.closest(".menu-group");
-const clickedMainMenu = target.closest(".menu-node");
+    if (
+      techHero &&
+      !techHero.contains(target) &&
+      infoPopup?.style.display !== "flex" &&
+      companyPopup?.style.display !== "flex"
+    ) {
+      toggleHeroOpen(false);
+    }
 
-// ปิดทั้งระบบเฉพาะคลิกนอก hero จริงๆ
-if (
-  techHero &&
-  !techHero.contains(target) &&
-  infoPopup?.style.display !== "flex" &&
-  companyPopup?.style.display !== "flex"
-) {
-  toggleHeroOpen(false);
-}
-
-// ปิดเฉพาะ submenu เมื่อคลิกนอกเมนู
-if (
-  techHero &&
-  techHero.contains(target) &&
-  !clickedInsideSubmenu &&
-  !clickedMenuGroup &&
-  !clickedMainMenu
-) {
-  $$(".menu-group", techHero).forEach(group => {
-    group.classList.remove("open");
+    if (
+      techHero &&
+      techHero.contains(target) &&
+      !target.closest(".menu-group") &&
+      !target.closest(".submenu-panel") &&
+      !target.closest(".menu-node")
+    ) {
+      $$(".menu-group", techHero).forEach(group => {
+        group.classList.remove("open");
+      });
+    }
   });
-}
-}
 
   document.addEventListener("keydown", event => {
     if (event.key !== "Escape") return;
