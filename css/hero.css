@@ -549,6 +549,7 @@ body.light-mode .node-note{
 .menu-group{
   position:absolute;
   z-index:9;
+  padding-bottom: 20px;
 }
 
 .g-company{
@@ -586,6 +587,7 @@ body.light-mode .node-note{
   top:calc(100% + 14px);
   transform:translateX(-50%) translateY(-6px);
   min-width:280px;
+  padding-top: 12px;
   display:grid;
   gap:10px;
   opacity:0;
