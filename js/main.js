@@ -169,12 +169,11 @@ function bindGlobalEvents() {
       return;
     }
 
-    if (
+      if (
       techHero &&
       techHero.contains(target) &&
       !target.closest(".menu-group") &&
       !target.closest(".submenu-panel") &&
-      !target.closest(".menu-node") &&
       !target.closest("#logoMenuButton")
     ) {
       $$(".menu-group", techHero).forEach(group => {
