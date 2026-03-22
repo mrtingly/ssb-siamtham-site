@@ -299,15 +299,6 @@
     display:none;
   }
 
-  .tech-hero.open .menu-layer,
-  .tech-hero.open .menu-layer-v2{
-    display:flex;
-    flex-direction:column;
-    width:100%;
-    min-height:320px;
-    gap:12px;
-  }
-
   .menu-node{
     position:relative;
     left:auto;
@@ -317,7 +308,7 @@
     visibility:visible;
     pointer-events:auto;
     width:100%;
-    display:none;
+
   }
 
   .menu-group{
@@ -336,7 +327,7 @@
     top:auto;
     transform:none !important;
     width:100%;
-    display:none;
+    
   }
 
   .tech-hero.open .menu-node,
