@@ -521,6 +521,7 @@ body.light-mode .node-note{
 }
 
 .m1{ --x:26%; --y:34%; --delay:.04s; }
+.m5{ --x:50%; --y:76%; --delay:.28s; }
 
 .main-node .node-shell{
   min-width:280px;
@@ -671,10 +672,4 @@ body.light-mode .submenu-btn{
 
 .menu-group.open .has-submenu .node-shell::after{
   transform:translateY(-50%) rotate(-135deg);
-}
-
-.menu-node.m5{
-  left:50% !important;
-  top:78% !important;
-  transform:translate(-50%, -50%) scale(1) !important;
 }
