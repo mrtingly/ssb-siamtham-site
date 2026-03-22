@@ -539,6 +539,7 @@ body.light-mode .node-note{
 .m5 .node-shell{
   min-width:340px;
   min-height:82px;
+  margin:0 auto;
 }
 
 .m5 .node-title{
