@@ -159,7 +159,6 @@ function bindGlobalEvents() {
       chatWidget.classList.remove("open");
     }
 
-    // ปิด hero เฉพาะคลิกนอกจริงๆ
     if (
       techHero &&
       !techHero.contains(target) &&
@@ -170,22 +169,19 @@ function bindGlobalEvents() {
       return;
     }
 
-    // ปิด submenu เฉพาะคลิกที่ไม่ใช่เมนู
- if (
-  techHero &&
-  techHero.contains(target) &&
-  !target.closest(".submenu-panel") &&
-  !target.closest(".submenu-btn")
-) {
-  const clickedGroup = target.closest(".menu-group");
-  const clickedMenu = target.closest("[data-menu]");
-
-  if (!clickedGroup && !clickedMenu) {
-    $$(".menu-group", techHero).forEach(group => {
-      group.classList.remove("open");
-    });
-  }
-}
+    if (
+      techHero &&
+      techHero.contains(target) &&
+      !target.closest(".menu-group") &&
+      !target.closest(".submenu-panel") &&
+      !target.closest(".menu-node") &&
+      !target.closest("#logoMenuButton")
+    ) {
+      $$(".menu-group", techHero).forEach(group => {
+        group.classList.remove("open");
+      });
+    }
+  });
 
   document.addEventListener("keydown", event => {
     if (event.key !== "Escape") return;
