@@ -331,20 +331,24 @@ function closePopupV4(){
   popupVideo.src = "";
 }
 
-closeBtn.addEventListener("click", closePopupV4);
+if (closeBtn) {
+  closeBtn.addEventListener("click", closePopupV4);
+}
 
 // 🔘 MODE SWITCH
-modeBtns.forEach(btn=>{
-  btn.addEventListener("click", ()=>{
-    modeBtns.forEach(b=>b.classList.remove("active"));
-    btn.classList.add("active");
+if (modeBtns.length) {
+  modeBtns.forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      modeBtns.forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
 
-    if(btn.dataset.mode === "short"){
-      popupShort.classList.remove("hidden");
-      popupFull.classList.add("hidden");
-    }else{
-      popupShort.classList.add("hidden");
-      popupFull.classList.remove("hidden");
-    }
+      if(btn.dataset.mode === "short"){
+        popupShort.classList.remove("hidden");
+        popupFull.classList.add("hidden");
+      }else{
+        popupShort.classList.add("hidden");
+        popupFull.classList.remove("hidden");
+      }
+    });
   });
-});
+}
