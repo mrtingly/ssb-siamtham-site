@@ -674,3 +674,9 @@ body.light-mode .submenu-btn{
 .menu-group.open .has-submenu .node-shell::after{
   transform:translateY(-50%) rotate(-135deg);
 }
+
+.m5{
+  --x:50%;
+  --y:76%;
+  --delay:.28s;
+}
