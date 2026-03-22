@@ -275,7 +275,7 @@ function bindHeroMenu() {
     openCompanyPopup();
   });
 
-  $$("[data-popup]", techHero).forEach(btn => {
+    $$("[data-popup]", techHero).forEach(btn => {
     btn.addEventListener("click", event => {
       event.preventDefault();
       event.stopPropagation();
@@ -283,6 +283,19 @@ function bindHeroMenu() {
 
       const key = btn.getAttribute("data-popup");
       if (key) openInfoPopup(key);
+    });
+  });
+
+   $$("[data-link]", techHero).forEach(btn => {
+    btn.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopPropagation();
+      closeAllSubmenus();
+
+      const url = btn.getAttribute("data-link");
+      if (url) {
+        window.location.href = url;
+      }
     });
   });
 
