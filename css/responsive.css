@@ -98,6 +98,13 @@
 @media (max-width:760px){
   :root{ --header-h:114px; }
 
+  .menu-node,
+  .menu-group .main-node,
+  .submenu-btn{
+    -webkit-tap-highlight-color:transparent;
+    touch-action:manipulation;
+  }
+  
   body,
   body.light-mode{
     color:#143764;
@@ -348,6 +355,7 @@
     width:100%;
     min-width:0;
     min-height:72px;
+    pointer-events:none;
     padding:14px 14px;
     border-radius:18px;
     background:
@@ -370,6 +378,7 @@
 
   .node-title,
   body.light-mode .node-title{
+    pointer-events:none;
     font-size:16px;
     line-height:1.22;
     white-space:normal;
