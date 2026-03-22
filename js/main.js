@@ -142,79 +142,74 @@ function bindAgentSearch() {
   });
 }
 
-function bindHeroMenu() {
-  if (logoMenuButton && techHero) {
-    logoMenuButton.addEventListener("click", event => {
-      event.stopPropagation();
-      toggleHeroOpen();
-    });
-  }
+function bindGlobalEvents() {
+  document.addEventListener("pointerdown", event => {
+    const target = event.target;
 
-  if (!techHero) return;
+    if (agentDropdown && agentSearchForm) {
+      const clickedSearchZone =
+        agentDropdown.contains(target) || agentSearchForm.contains(target);
 
-  techHero.addEventListener("click", event => {
-    event.stopPropagation();
-  });
-
-  function closeAllSubmenus() {
-    $$(".menu-group", techHero).forEach(group => {
-      group.classList.remove("open");
-    });
-  }
-
-  $('[data-action="ssb-system"]', techHero)?.addEventListener("click", event => {
-    event.stopPropagation();
-    closeAllSubmenus();
-    openInfoPopup("ssbmobile");
-  });
-
-  $('[data-action="company-about"]', techHero)?.addEventListener("click", event => {
-    event.stopPropagation();
-    closeAllSubmenus();
-    openCompanyPopup();
-  });
-
-  $('[data-action="company-contact"]', techHero)?.addEventListener("click", event => {
-    event.stopPropagation();
-    closeAllSubmenus();
-    openCompanyPopup();
-  });
-
-  $$("[data-popup]", techHero).forEach(btn => {
-    btn.addEventListener("click", event => {
-      event.stopPropagation();
-      closeAllSubmenus();
-      const key = btn.getAttribute("data-popup");
-      openInfoPopup(key);
-    });
-  });
-
-  $$("[data-menu]", techHero).forEach(btn => {
-    btn.addEventListener("click", event => {
-      event.preventDefault();
-      event.stopPropagation();
-
-      const group = btn.closest(".menu-group");
-      if (!group) return;
-
-      const isOpen = group.classList.contains("open");
-      closeAllSubmenus();
-
-      if (!isOpen) {
-        group.classList.add("open");
+      if (!clickedSearchZone) {
+        closeAgentDropdown();
       }
-    });
+    }
+
+    if (chatWidget && !chatWidget.contains(target)) {
+      chatWidget.classList.remove("open");
+    }
+
+    if (
+      techHero &&
+      !techHero.contains(target) &&
+      infoPopup?.style.display !== "flex" &&
+      companyPopup?.style.display !== "flex"
+    ) {
+      toggleHeroOpen(false);
+      return;
+    }
+
+    if (
+      techHero &&
+      techHero.contains(target) &&
+      !target.closest(".menu-group") &&
+      !target.closest(".submenu-panel") &&
+      !target.closest(".menu-node") &&
+      !target.closest("#logoMenuButton")
+    ) {
+      $$(".menu-group", techHero).forEach(group => {
+        group.classList.remove("open");
+      });
+    }
   });
 
-  $$(".submenu-panel", techHero).forEach(panel => {
-    panel.addEventListener("pointerdown", event => {
-      event.stopPropagation();
-    });
+  document.addEventListener("keydown", event => {
+    if (event.key !== "Escape") return;
 
-    panel.addEventListener("click", event => {
-      event.stopPropagation();
-    });
+    if (infoPopup?.classList.contains("show")) {
+      closeInfoPopup();
+      return;
+    }
+
+    if (companyPopup?.classList.contains("show")) {
+      closeCompanyPopup();
+      return;
+    }
+
+    if (agentDropdown?.classList.contains("open")) {
+      closeAgentDropdown();
+    }
+
+    if (techHero?.classList.contains("open")) {
+      toggleHeroOpen(false);
+    }
+
+    if (chatWidget?.classList.contains("open")) {
+      chatWidget.classList.remove("open");
+    }
   });
+
+  window.addEventListener("resize", handleResize);
 }
 
 function bindPopups() {
