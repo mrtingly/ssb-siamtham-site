@@ -236,18 +236,19 @@ function bindHeroMenu() {
   }
 
   if (logoMenuButton) {
-    logoMenuButton.addEventListener("click", event => {
-      event.preventDefault();
-      event.stopPropagation();
+  logoMenuButton.addEventListener("click", function (event) {
+    event.preventDefault();
+    event.stopPropagation();
 
-      const willOpen = !techHero.classList.contains("open");
-      toggleHeroOpen();
+    techHero.classList.toggle("open");
 
-      if (!willOpen) {
-        closeAllSubmenus();
-      }
-    });
-  }
+    if (!techHero.classList.contains("open")) {
+      document.querySelectorAll(".menu-group").forEach(group => {
+        group.classList.remove("open");
+      });
+    }
+  });
+}
 
   techHero.addEventListener("click", event => {
     event.stopPropagation();
