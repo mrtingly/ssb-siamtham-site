@@ -223,25 +223,45 @@ function bindHeroMenu() {
     });
   }
 
-  // เปิด/ปิดเมนูหลักจากโลโก้
   if (logoMenuButton) {
     logoMenuButton.addEventListener("click", event => {
+      event.preventDefault();
       event.stopPropagation();
       toggleHeroOpen();
     });
   }
 
-  // เปิด popup ต่างๆ
+  techHero.addEventListener("click", event => {
+    event.stopPropagation();
+  });
+
+  $('[data-action="ssb-system"]', techHero)?.addEventListener("click", event => {
+    event.stopPropagation();
+    closeAllSubmenus();
+    openInfoPopup("ssbmobile");
+  });
+
+  $('[data-action="company-about"]', techHero)?.addEventListener("click", event => {
+    event.stopPropagation();
+    closeAllSubmenus();
+    openCompanyPopup();
+  });
+
+  $('[data-action="company-contact"]', techHero)?.addEventListener("click", event => {
+    event.stopPropagation();
+    closeAllSubmenus();
+    openCompanyPopup();
+  });
+
   $$("[data-popup]", techHero).forEach(btn => {
     btn.addEventListener("click", event => {
       event.stopPropagation();
       closeAllSubmenus();
       const key = btn.getAttribute("data-popup");
-      openInfoPopup(key);
+      if (key) openInfoPopup(key);
     });
   });
 
-  // เปิด submenu (สำคัญ)
   $$("[data-menu]", techHero).forEach(btn => {
     btn.addEventListener("click", event => {
       event.preventDefault();
@@ -250,19 +270,19 @@ function bindHeroMenu() {
       const group = btn.closest(".menu-group");
       if (!group) return;
 
-      // ปิดตัวอื่น
       $$(".menu-group", techHero).forEach(item => {
         if (item !== group) item.classList.remove("open");
       });
 
-      // เปิดตัวเอง (ไม่ toggle = ไม่หุบ)
       group.classList.add("open");
     });
   });
 
-  // กัน click ใน submenu ไม่ให้หุบ
   $$(".submenu-panel", techHero).forEach(panel => {
     panel.addEventListener("pointerdown", event => {
+      event.stopPropagation();
+    });
+    panel.addEventListener("click", event => {
       event.stopPropagation();
     });
   });
