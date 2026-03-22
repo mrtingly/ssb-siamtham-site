@@ -478,29 +478,55 @@ body.light-mode .node-note{
   border-radius:22px;
 }
 
+.m5 .node-shell{
+  min-width:340px;
+  min-height:82px;
+}
+
 .main-node .node-title{
   font-size:22px;
   font-weight:800;
   white-space:nowrap;
 }
 
+.m5 .node-title{
+  font-size:28px;
+}
+
 .menu-group{
   position:absolute;
   z-index:9;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:opacity .22s ease, visibility .22s ease;
+}
+
+.tech-hero.open .menu-group{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
 }
 
 .menu-group .main-node{
   position:relative;
   left:auto;
   top:auto;
-  transform:none;
-  opacity:1;
-  visibility:visible;
-  pointer-events:auto;
+  transform:scale(.92);
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:
+    transform .34s cubic-bezier(.2,.8,.2,1),
+    opacity .22s ease,
+    visibility .22s ease;
 }
 
 .tech-hero.open .menu-group .main-node{
-  transform:none;
+  transform:scale(1);
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
 }
 
 .g-company{ left:74%; top:34%; transform:translate(-50%,-50%); }
