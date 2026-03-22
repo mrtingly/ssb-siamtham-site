@@ -159,6 +159,7 @@ function bindGlobalEvents() {
       chatWidget.classList.remove("open");
     }
 
+    // ปิด hero เฉพาะคลิกนอกจริงๆ
     if (
       techHero &&
       !techHero.contains(target) &&
@@ -169,6 +170,7 @@ function bindGlobalEvents() {
       return;
     }
 
+    // ปิด submenu เฉพาะคลิกที่ไม่ใช่เมนู
     if (
       techHero &&
       techHero.contains(target) &&
@@ -210,6 +212,60 @@ function bindGlobalEvents() {
   });
 
   window.addEventListener("resize", handleResize);
+}
+
+function bindHeroMenu() {
+  if (!techHero) return;
+
+  function closeAllSubmenus() {
+    $$(".menu-group", techHero).forEach(group => {
+      group.classList.remove("open");
+    });
+  }
+
+  // เปิด/ปิดเมนูหลักจากโลโก้
+  if (logoMenuButton) {
+    logoMenuButton.addEventListener("click", event => {
+      event.stopPropagation();
+      toggleHeroOpen();
+    });
+  }
+
+  // เปิด popup ต่างๆ
+  $$("[data-popup]", techHero).forEach(btn => {
+    btn.addEventListener("click", event => {
+      event.stopPropagation();
+      closeAllSubmenus();
+      const key = btn.getAttribute("data-popup");
+      openInfoPopup(key);
+    });
+  });
+
+  // เปิด submenu (สำคัญ)
+  $$("[data-menu]", techHero).forEach(btn => {
+    btn.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const group = btn.closest(".menu-group");
+      if (!group) return;
+
+      // ปิดตัวอื่น
+      $$(".menu-group", techHero).forEach(item => {
+        if (item !== group) item.classList.remove("open");
+      });
+
+      // เปิดตัวเอง (ไม่ toggle = ไม่หุบ)
+      group.classList.add("open");
+    });
+  });
+
+  // กัน click ใน submenu ไม่ให้หุบ
+  $$(".submenu-panel", techHero).forEach(panel => {
+    panel.addEventListener("pointerdown", event => {
+      event.stopPropagation();
+    });
+  });
 }
 
 function bindPopups() {
@@ -265,74 +321,6 @@ function bindThemeToggle() {
     body.classList.toggle("light-mode");
     localStorage.setItem("theme", body.classList.contains("light-mode") ? "light" : "dark");
   });
-}
-
-function bindGlobalEvents() {
-  document.addEventListener("pointerdown", event => {
-    const target = event.target;
-
-    if (agentDropdown && agentSearchForm) {
-      const clickedSearchZone =
-        agentDropdown.contains(target) || agentSearchForm.contains(target);
-
-      if (!clickedSearchZone) {
-        closeAgentDropdown();
-      }
-    }
-
-    if (chatWidget && !chatWidget.contains(target)) {
-      chatWidget.classList.remove("open");
-    }
-
-    if (
-      techHero &&
-      !techHero.contains(target) &&
-      infoPopup?.style.display !== "flex" &&
-      companyPopup?.style.display !== "flex"
-    ) {
-      toggleHeroOpen(false);
-    }
-
-    if (
-      techHero &&
-      techHero.contains(target) &&
-      !target.closest(".menu-group") &&
-      !target.closest(".submenu-panel") &&
-      !target.closest(".menu-node")
-    ) {
-      $$(".menu-group", techHero).forEach(group => {
-        group.classList.remove("open");
-      });
-    }
-  });
-
-  document.addEventListener("keydown", event => {
-    if (event.key !== "Escape") return;
-
-    if (infoPopup?.classList.contains("show")) {
-      closeInfoPopup();
-      return;
-    }
-
-    if (companyPopup?.classList.contains("show")) {
-      closeCompanyPopup();
-      return;
-    }
-
-    if (agentDropdown?.classList.contains("open")) {
-      closeAgentDropdown();
-    }
-
-    if (techHero?.classList.contains("open")) {
-      toggleHeroOpen(false);
-    }
-
-    if (chatWidget?.classList.contains("open")) {
-      chatWidget.classList.remove("open");
-    }
-  });
-
-  window.addEventListener("resize", handleResize);
 }
 
 window.addEventListener("load", () => {
