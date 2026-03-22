@@ -189,27 +189,32 @@ function bindHeroMenu() {
     });
   });
 
- $$("[data-menu]", techHero).forEach(btn => {
-  btn.addEventListener("click", event => {
-    event.stopPropagation();
-    event.preventDefault();
+  $$("[data-menu]", techHero).forEach(btn => {
+    btn.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopPropagation();
 
-    const group = btn.closest(".menu-group");
-    const isOpen = group?.classList.contains("open");
+      const group = btn.closest(".menu-group");
+      if (!group) return;
 
-    closeAllSubmenus();
+      const isOpen = group.classList.contains("open");
+      closeAllSubmenus();
 
-    if (!isOpen && group) {
-      group.classList.add("open");
-    }
+      if (!isOpen) {
+        group.classList.add("open");
+      }
+    });
   });
-});
 
-$$(".submenu-panel", techHero).forEach(panel => {
-  panel.addEventListener("click", event => {
-    event.stopPropagation();
+  $$(".submenu-panel", techHero).forEach(panel => {
+    panel.addEventListener("pointerdown", event => {
+      event.stopPropagation();
+    });
+
+    panel.addEventListener("click", event => {
+      event.stopPropagation();
+    });
   });
-});
 }
 
 function bindPopups() {
