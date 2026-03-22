@@ -469,9 +469,6 @@ body.light-mode .node-note{
 }
 
 .m1{ --x:26%; --y:34%; --delay:.04s; }
-.m2{ --x:74%; --y:34%; --delay:.10s; }
-.m3{ --x:26%; --y:66%; --delay:.16s; }
-.m4{ --x:74%; --y:66%; --delay:.22s; }
 .m5{ --x:50%; --y:86%; --delay:.28s; }
 
 .main-node .node-shell{
@@ -489,6 +486,21 @@ body.light-mode .node-note{
 
 .menu-group{
   position:absolute;
+  z-index:9;
+}
+
+.menu-group .main-node{
+  position:relative;
+  left:auto;
+  top:auto;
+  transform:none;
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+}
+
+.tech-hero.open .menu-group .main-node{
+  transform:none;
 }
 
 .g-company{ left:74%; top:34%; transform:translate(-50%,-50%); }
@@ -503,10 +515,25 @@ body.light-mode .node-note{
   min-width:280px;
   display:grid;
   gap:10px;
+
   opacity:0;
   visibility:hidden;
   pointer-events:none;
+
+  z-index:50; /* 🔥 เพิ่ม */
   transition:opacity .22s ease, transform .22s ease, visibility .22s ease;
+}
+
+.menu-group{
+  z-index:40;
+}
+
+.menu-layer{
+  z-index:30;
+}
+
+.tech-hero{
+  overflow:visible; /* 🔥 สำคัญมาก */
 }
 
 .menu-group.open .submenu-panel{
@@ -538,6 +565,9 @@ body.light-mode .node-note{
   box-shadow:0 12px 24px rgba(0,0,0,.14);
   cursor:pointer;
   transition:.18s ease;
+
+  position:relative;
+  z-index:60;
 }
 
 .submenu-btn:hover{
