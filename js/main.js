@@ -262,30 +262,27 @@ function bindHeroMenu() {
     });
   });
 
-  $$("[data-menu]", techHero).forEach(btn => {
-    btn.addEventListener("click", event => {
-      event.preventDefault();
-      event.stopPropagation();
+ $$("[data-menu]", techHero).forEach(btn => {
+  btn.addEventListener("click", event => {
+    event.preventDefault();
+    event.stopPropagation();
 
-      const group = btn.closest(".menu-group");
-      if (!group) return;
+    const group = btn.closest(".menu-group");
+    if (!group) return;
 
-      $$(".menu-group", techHero).forEach(item => {
-        if (item !== group) item.classList.remove("open");
-      });
-
-      group.classList.add("open");
+    // ปิดเมนูอื่น แต่ไม่ปิดตัวที่กด
+    $$(".menu-group", techHero).forEach(item => {
+      if (item !== group) item.classList.remove("open");
     });
+
+    // บังคับให้ตัวเองเปิดค้างไว้เสมอ
+    group.classList.add("open");
   });
 
-  $$(".submenu-panel", techHero).forEach(panel => {
-    panel.addEventListener("pointerdown", event => {
-      event.stopPropagation();
-    });
-    panel.addEventListener("click", event => {
-      event.stopPropagation();
-    });
+  btn.addEventListener("pointerdown", event => {
+    event.stopPropagation();
   });
+});
 }
 
 function bindPopups() {
