@@ -349,6 +349,7 @@ body.light-mode .energy-run{
   position:absolute;
   left:var(--x);
   top:var(--y);
+  width:280px;
   transform:translate(-50%, -50%) scale(.92);
   opacity:0;
   visibility:hidden;
@@ -387,6 +388,8 @@ body.light-mode .energy-run{
   min-width:260px;
   min-height:60px;
   padding:10px 26px;
+  width:100%;
+  height:100%;
 
   display:flex;
   align-items:center;
