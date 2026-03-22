@@ -521,10 +521,11 @@ body.light-mode .node-note{
 }
 
 .m1{ --x:26%; --y:34%; --delay:.04s; }
-.m5{
-  left:50%;
-  top:76%;
-  transform:translate(-50%, -50%);
+
+.menu-node.main-node.m5.bottom{
+  left:50% !important;
+  top:76% !important;
+  transform:translate(-50%, -50%) scale(1) !important;
 }
 
 .main-node .node-shell{
