@@ -156,20 +156,52 @@ function bindHeroMenu() {
     event.stopPropagation();
   });
 
+  function closeAllSubmenus() {
+    $$(".menu-group", techHero).forEach(group => {
+      group.classList.remove("open");
+    });
+  }
+
+  $('[data-action="ssb-system"]', techHero)?.addEventListener("click", event => {
+    event.stopPropagation();
+    closeAllSubmenus();
+    openInfoPopup("ssbmobile");
+  });
+
+  $('[data-action="company-about"]', techHero)?.addEventListener("click", event => {
+    event.stopPropagation();
+    closeAllSubmenus();
+    openCompanyPopup();
+  });
+
+  $('[data-action="company-contact"]', techHero)?.addEventListener("click", event => {
+    event.stopPropagation();
+    closeAllSubmenus();
+    openCompanyPopup();
+  });
+
   $$("[data-popup]", techHero).forEach(btn => {
     btn.addEventListener("click", event => {
       event.stopPropagation();
+      closeAllSubmenus();
       const key = btn.getAttribute("data-popup");
       openInfoPopup(key);
     });
   });
 
-  if (contactButton) {
-    contactButton.addEventListener("click", event => {
+  $$("[data-menu]", techHero).forEach(btn => {
+    btn.addEventListener("click", event => {
       event.stopPropagation();
-      openCompanyPopup();
+      const group = btn.closest(".menu-group");
+      const isOpen = group?.classList.contains("open");
+
+      closeAllSubmenus();
+
+      if (!isOpen && group) {
+        group.classList.add("open");
+      }
     });
-  }
+  });
 }
 
 function bindPopups() {
@@ -314,14 +346,6 @@ if (popupNav) {
     });
   });
 }
-  
-  if (popupNav) {
-    popupNav.querySelectorAll("[data-step]").forEach(btn => {
-      btn.addEventListener("click", () => {
-        renderPopupStep(btn.dataset.step);
-      });
-    });
-  }
 
   if (popupNextStep) {
     popupNextStep.addEventListener("click", () => {
