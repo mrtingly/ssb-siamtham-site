@@ -171,19 +171,21 @@ function bindGlobalEvents() {
     }
 
     // ปิด submenu เฉพาะคลิกที่ไม่ใช่เมนู
-    if (
-      techHero &&
-      techHero.contains(target) &&
-      !target.closest(".menu-group") &&
-      !target.closest(".submenu-panel") &&
-      !target.closest(".menu-node") &&
-      !target.closest("#logoMenuButton")
-    ) {
-      $$(".menu-group", techHero).forEach(group => {
-        group.classList.remove("open");
-      });
-    }
-  });
+ if (
+  techHero &&
+  techHero.contains(target) &&
+  !target.closest(".submenu-panel") &&
+  !target.closest(".submenu-btn")
+) {
+  const clickedGroup = target.closest(".menu-group");
+  const clickedMenu = target.closest("[data-menu]");
+
+  if (!clickedGroup && !clickedMenu) {
+    $$(".menu-group", techHero).forEach(group => {
+      group.classList.remove("open");
+    });
+  }
+}
 
   document.addEventListener("keydown", event => {
     if (event.key !== "Escape") return;
@@ -262,27 +264,21 @@ function bindHeroMenu() {
     });
   });
 
- $$("[data-menu]", techHero).forEach(btn => {
-  btn.addEventListener("click", event => {
-    event.preventDefault();
-    event.stopPropagation();
+  $$("[data-menu]", techHero).forEach(btn => {
+    btn.addEventListener("pointerdown", event => {
+      event.preventDefault();
+      event.stopPropagation();
 
-    const group = btn.closest(".menu-group");
-    if (!group) return;
+      const group = btn.closest(".menu-group");
+      if (!group) return;
 
-    // ปิดเมนูอื่น แต่ไม่ปิดตัวที่กด
-    $$(".menu-group", techHero).forEach(item => {
-      if (item !== group) item.classList.remove("open");
+      $$(".menu-group", techHero).forEach(item => {
+        if (item !== group) item.classList.remove("open");
+      });
+
+      group.classList.add("open");
     });
-
-    // บังคับให้ตัวเองเปิดค้างไว้เสมอ
-    group.classList.add("open");
   });
-
-  btn.addEventListener("pointerdown", event => {
-    event.stopPropagation();
-  });
-});
 }
 
 function bindPopups() {
