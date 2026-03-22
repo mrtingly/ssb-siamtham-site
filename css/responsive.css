@@ -274,17 +274,21 @@
   }
 
   .node-shell,
-  body.light-mode .node-shell{
-    width:100%;
-    min-width:0;
-    min-height:72px;
-    padding:12px 10px;
-    border-radius:16px;
-    background:#ffffff;
-    border:1px solid rgba(20,55,100,.08);
-    box-shadow:0 10px 20px rgba(31,74,140,.10);
-  }
+body.light-mode .node-shell{
+  width:100%;
+  min-width:0;
+  min-height:72px;
+  padding:12px 10px;
+  border-radius:16px;
 
+  background:linear-gradient(145deg,#0f1c3a,#1a2d5c);
+  border:1px solid rgba(120,180,255,.25);
+
+  box-shadow:
+    0 10px 20px rgba(0,0,0,.25),
+    0 0 12px rgba(120,180,255,.15);
+}
+  
   .node-title,
   body.light-mode .node-title{
     font-size:16px;
