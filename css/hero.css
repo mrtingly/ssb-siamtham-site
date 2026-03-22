@@ -644,15 +644,23 @@ body.light-mode .submenu-btn{
 }
 
 .has-submenu .node-shell::after{
-  content:"▾";
+  content:"";
   position:absolute;
   right:16px;
   top:50%;
   transform:translateY(-50%);
-  font-size:14px;
-  opacity:.85;
+  
+  width:10px;
+  height:10px;
+
+  border-right:2px solid rgba(200,240,255,.9);
+  border-bottom:2px solid rgba(200,240,255,.9);
+
+  transform:translateY(-50%) rotate(45deg);
+
+  opacity:.9;
 }
 
 .menu-group.open .has-submenu .node-shell::after{
-  content:"▴";
+  transform:translateY(-50%) rotate(-135deg);
 }
