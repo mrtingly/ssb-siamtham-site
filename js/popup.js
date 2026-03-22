@@ -167,28 +167,30 @@ function closeCompanyPopup() {
 }
 
 function buildEnergyLines() {
-  if (isMobileView() || !techHero || !logoMenuButton) return;
+  if (!techHero || !logoMenuButton) return;
 
-  const heroRect = techHero.getBoundingClientRect();
-  const logoRect = logoMenuButton.getBoundingClientRect();
+  const cx = 500; // center fixed
+  const cy = 350;
 
-  const cx = ((logoRect.left + logoRect.width / 2) - heroRect.left) / heroRect.width * 1000;
-  const cy = ((logoRect.top + logoRect.height / 2) - heroRect.top) / heroRect.height * 700;
+  const positions = [
+    { x: 260, y: 240 },
+    { x: 740, y: 240 },
+    { x: 260, y: 460 },
+    { x: 740, y: 460 }
+  ];
 
-  const sources = $$(".main-node:not(.bottom)", techHero).slice(0, 4);
+  positions.forEach((pos, index) => {
+    const bend = pos.x < cx ? 120 : -120;
 
-  sources.forEach((el, index) => {
-    const rect = el.getBoundingClientRect();
-    const localX = ((rect.left + rect.width / 2) - heroRect.left) / heroRect.width * 1000;
-    const localY = ((rect.top + rect.height / 2) - heroRect.top) / heroRect.height * 700;
+    const d = `
+      M ${pos.x} ${pos.y}
+      C ${pos.x + bend} ${pos.y},
+        ${cx - bend} ${cy},
+        ${cx} ${cy}
+    `;
 
-    const bend = localX < cx ? 72 : -72;
-    const midX1 = localX + bend;
-    const midX2 = cx - bend * 0.55;
-    const d = `M ${localX} ${localY} C ${midX1} ${localY}, ${midX2} ${cy}, ${cx} ${cy}`;
-
-    const line = $(`#line${index + 1}`);
-    const run = $(`#run${index + 1}`);
+    const line = document.getElementById(`line${index + 1}`);
+    const run = document.getElementById(`run${index + 1}`);
 
     if (line) line.setAttribute("d", d);
     if (run) run.setAttribute("d", d);
