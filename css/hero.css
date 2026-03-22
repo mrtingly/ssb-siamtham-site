@@ -111,10 +111,9 @@ body.light-mode .bg-core-glow{
   border:1px solid rgba(117,206,255,.12);
   opacity:.85;
 }
-
-.ring-1{ width:min(34vw, 320px); height:min(34vw, 320px); animation:spinSlow 22s linear infinite; }
-.ring-2{ width:min(44vw, 410px); height:min(44vw, 410px); animation:spinSlowReverse 30s linear infinite; }
-.ring-3{ width:min(54vw, 520px); height:min(54vw, 520px); opacity:.45; animation:spinSlow 44s linear infinite; }
+.ring-1{ width:min(32vw, 300px); height:min(32vw, 300px); animation:spinSlow 24s linear infinite; }
+.ring-2{ width:min(42vw, 390px); height:min(42vw, 390px); animation:spinSlowReverse 32s linear infinite; }
+.ring-3{ display:none; }
 
 .ring-tilt-1{ transform:translate(-50%,-50%) rotateX(72deg); opacity:.60; }
 .ring-tilt-2{ transform:translate(-50%,-50%) rotateY(72deg); opacity:.46; }
@@ -419,16 +418,6 @@ body.light-mode .menu-node.bottom .node-shell{
 
 body.light-mode .menu-node.bottom .node-title{ color:#fff; }
 
-.n1{ --x:27%; --y:33%; --delay:.04s; }
-.n2{ --x:27%; --y:44%; --delay:.10s; }
-.n3{ --x:27%; --y:55%; --delay:.16s; }
-.n4{ --x:27%; --y:66%; --delay:.22s; }
-.n5{ --x:73%; --y:33%; --delay:.04s; }
-.n6{ --x:73%; --y:44%; --delay:.10s; }
-.n7{ --x:73%; --y:55%; --delay:.16s; }
-.n8{ --x:73%; --y:66%; --delay:.22s; }
-.n9{ --x:50%; --y:84%; --delay:.28s; }
-
 .node-note{
   display:inline-flex;
   align-items:center;
@@ -462,3 +451,134 @@ body.light-mode .node-note{
   transform:translateY(-6px);
 }
 
+/* ===== HERO MENU V2 ===== */
+
+.menu-layer-v2{
+  position:absolute;
+  inset:0;
+  z-index:7;
+}
+
+.main-node{
+  --x:50%;
+  --y:50%;
+  --delay:0s;
+  position:absolute;
+  left:var(--x);
+  top:var(--y);
+}
+
+.m1{ --x:26%; --y:34%; --delay:.04s; }
+.m2{ --x:74%; --y:34%; --delay:.10s; }
+.m3{ --x:26%; --y:66%; --delay:.16s; }
+.m4{ --x:74%; --y:66%; --delay:.22s; }
+.m5{ --x:50%; --y:86%; --delay:.28s; }
+
+.main-node .node-shell{
+  min-width:280px;
+  min-height:76px;
+  padding:14px 22px;
+  border-radius:22px;
+}
+
+.main-node .node-title{
+  font-size:22px;
+  font-weight:800;
+  white-space:nowrap;
+}
+
+.menu-group{
+  position:absolute;
+}
+
+.g-company{ left:74%; top:34%; transform:translate(-50%,-50%); }
+.g-product{ left:26%; top:66%; transform:translate(-50%,-50%); }
+.g-agent{ left:74%; top:66%; transform:translate(-50%,-50%); }
+
+.submenu-panel{
+  position:absolute;
+  left:50%;
+  top:calc(100% + 14px);
+  transform:translateX(-50%) translateY(-6px);
+  min-width:280px;
+  display:grid;
+  gap:10px;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:opacity .22s ease, transform .22s ease, visibility .22s ease;
+}
+
+.menu-group.open .submenu-panel{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transform:translateX(-50%) translateY(0);
+}
+
+.submenu-btn{
+  min-height:50px;
+  padding:12px 16px;
+  border:none;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  text-decoration:none;
+  font-family:'Prompt',sans-serif;
+  font-size:14px;
+  font-weight:800;
+  line-height:1.45;
+  color:#eefaff;
+  background:
+    linear-gradient(180deg, rgba(13,43,102,.42), rgba(7,22,58,.22)),
+    linear-gradient(90deg, rgba(255,255,255,.04), rgba(255,255,255,0));
+  border:1px solid rgba(110,209,255,.16);
+  box-shadow:0 12px 24px rgba(0,0,0,.14);
+  cursor:pointer;
+  transition:.18s ease;
+}
+
+.submenu-btn:hover{
+  transform:translateY(-2px);
+  border-color:rgba(145,226,255,.24);
+  background:
+    linear-gradient(180deg, rgba(18,56,126,.52), rgba(8,26,66,.28)),
+    linear-gradient(90deg, rgba(255,255,255,.04), rgba(255,255,255,0));
+}
+
+body.light-mode .submenu-btn{
+  color:#163866;
+  background:#ffffff;
+  border-color:rgba(20,55,100,.08);
+  box-shadow:0 12px 26px rgba(31,74,140,.10);
+}
+
+.has-submenu .node-shell::after{
+  content:"▾";
+  position:absolute;
+  right:16px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:14px;
+  opacity:.85;
+}
+
+.menu-group.open .has-submenu .node-shell::after{
+  content:"▴";
+}
+
+.menu-node.bottom .node-shell{
+  min-width:360px;
+  min-height:82px;
+}
+
+.hero-system-title{
+  top:14%;
+}
+
+.logo-core{
+  width:min(22vw, 190px);
+  height:min(22vw, 190px);
+}
