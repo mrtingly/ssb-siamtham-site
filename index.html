@@ -178,19 +178,11 @@
               <path class="energy-line" id="line2"></path>
               <path class="energy-line" id="line3"></path>
               <path class="energy-line" id="line4"></path>
-              <path class="energy-line" id="line5"></path>
-              <path class="energy-line" id="line6"></path>
-              <path class="energy-line" id="line7"></path>
-              <path class="energy-line" id="line8"></path>
-
+            
               <path class="energy-run delay-1" id="run1"></path>
               <path class="energy-run delay-2" id="run2"></path>
               <path class="energy-run delay-3" id="run3"></path>
               <path class="energy-run delay-4" id="run4"></path>
-              <path class="energy-run delay-5" id="run5"></path>
-              <path class="energy-run delay-6" id="run6"></path>
-              <path class="energy-run delay-7" id="run7"></path>
-              <path class="energy-run delay-8" id="run8"></path>
             </svg>
 
             <div class="hero-system-title" id="heroSystemTitle" aria-hidden="true">
@@ -206,80 +198,68 @@
               <img src="images/logo.png" alt="Stealth Safety Bank Logo" loading="lazy" />
             </button>
 
-            <div class="menu-layer">
-              <button class="menu-node n1 energy-source sound-click" type="button" data-popup="stealthbank">
-                <div class="node-shell">
-                  <span class="node-text">
-                    <span class="node-title th-font">Stealth Safety Bank</span>
-                  </span>
-                </div>
-              </button>
+           <div class="menu-layer menu-layer-v2">
+  <button class="menu-node main-node m1 sound-click" type="button" data-action="ssb-system">
+    <div class="node-shell">
+      <span class="node-text">
+        <span class="node-title th-font">SSB MOBILE SYSTEM</span>
+      </span>
+    </div>
+  </button>
 
-              <button class="menu-node n2 energy-source sound-click" type="button" data-popup="safetybook">
-                <div class="node-shell">
-                  <span class="node-text">
-                    <span class="node-title th-font">Stealth Safety Book</span>
-                  </span>
-                </div>
-              </button>
+  <div class="menu-group g-company">
+    <button class="menu-node main-node m2 sound-click has-submenu" type="button" data-menu="company">
+      <div class="node-shell">
+        <span class="node-text">
+          <span class="node-title th-font">เกี่ยวกับบริษัท</span>
+        </span>
+      </div>
+    </button>
 
-              <button class="menu-node n3 energy-source sound-click" type="button" data-popup="ssbmobile">
-                <div class="node-shell">
-                  <span class="node-text">
-                    <span class="node-title th-font">SSB Mobile System</span>
-                  </span>
-                </div>
-              </button>
+    <div class="submenu-panel submenu-company">
+      <button class="submenu-btn sound-click" type="button" data-action="company-about">เกี่ยวกับบริษัท</button>
+      <button class="submenu-btn sound-click" type="button" data-action="company-contact">ติดต่อเรา</button>
+    </div>
+  </div>
 
-              <button class="menu-node n4 energy-source sound-click" type="button" data-popup="technology">
-                <div class="node-shell">
-                  <span class="node-text">
-                    <span class="node-title th-font">Technology Overview</span>
-                  </span>
-                </div>
-              </button>
+  <div class="menu-group g-product">
+    <button class="menu-node main-node m3 sound-click has-submenu" type="button" data-menu="product">
+      <div class="node-shell">
+        <span class="node-text">
+          <span class="node-title en-font">Our Product</span>
+        </span>
+      </div>
+    </button>
 
-              <a class="menu-node n5 energy-source sound-click" href="agent-login.html">
-                <div class="node-shell">
-                  <span class="node-text">
-                    <span class="node-title th-font">Agent Login</span>
-                  </span>
-                </div>
-              </a>
+    <div class="submenu-panel submenu-product">
+      <button class="submenu-btn sound-click" type="button" data-popup="sbpremium">SB Premium</button>
+      <button class="submenu-btn sound-click" type="button" data-popup="custom">Custom Stealth Safety Bank System</button>
+    </div>
+  </div>
 
-              <a class="menu-node n6 energy-source sound-click" href="join-agent.html">
-                <div class="node-shell">
-                  <span class="node-text">
-                    <span class="node-title th-font">Join Our Agent</span>
-                  </span>
-                </div>
-              </a>
+  <div class="menu-group g-agent">
+    <button class="menu-node main-node m4 sound-click has-submenu" type="button" data-menu="agent">
+      <div class="node-shell">
+        <span class="node-text">
+          <span class="node-title en-font">Agent</span>
+        </span>
+      </div>
+    </button>
 
-              <button class="menu-node n7 energy-source sound-click" type="button" data-popup="aboutcompany">
-                <div class="node-shell">
-                  <span class="node-text">
-                    <span class="node-title th-font">About Us</span>
-                  </span>
-                </div>
-              </button>
+    <div class="submenu-panel submenu-agent">
+      <a class="submenu-btn sound-click" href="join-agent.html">สมัครเป็นตัวแทน</a>
+      <a class="submenu-btn sound-click" href="agent-login.html">Login Agent</a>
+    </div>
+  </div>
 
-              <button class="menu-node n8 energy-source sound-click" type="button" id="contactButton">
-                <div class="node-shell">
-                  <span class="node-text">
-                    <span class="node-title th-font">Contact Us</span>
-                  </span>
-                </div>
-              </button>
-
-              <a class="menu-node bottom n9 sound-click" href="book.html">
-                <div class="node-shell">
-                  <span class="node-text">
-                    <span class="node-title th-font">เริ่มสั่งจอง</span>
-                  </span>
-                </div>
-              </a>
-            </div>
-          </div>
+  <a class="menu-node main-node m5 bottom sound-click" href="book.html">
+    <div class="node-shell">
+      <span class="node-text">
+        <span class="node-title th-font">สั่งซื้อสินค้า</span>
+      </span>
+    </div>
+  </a>
+</div>
 
           <div class="node-note th-font" id="nodeNote">คลิกที่โลโก้เพื่อเปิดเมนู</div>
         </div>
