@@ -113,4 +113,47 @@
 
 .chat-widget.open .chat-caret{ transform:rotate(180deg); }
 
+/* ANIMATION */
+@keyframes popupIn{
+  from{ opacity:0; transform:translateY(18px) scale(.96); }
+  to{ opacity:1; transform:translateY(0) scale(1); }
+}
+
+@keyframes slowFloat{
+  0%,100%{ transform:translateY(0); }
+  50%{ transform:translateY(-8px); }
+}
+
+@keyframes corePulse{
+  0%,100%{ transform:translate(-50%,-50%) scale(1); opacity:1; }
+  50%{ transform:translate(-50%,-50%) scale(1.04); opacity:.86; }
+}
+
+@keyframes centerGlow{
+  0%,100%{ transform:translate(-50%, -50%) scale(1); opacity:1; }
+  50%{ transform:translate(-50%, -50%) scale(1.04); opacity:.88; }
+}
+
+@keyframes spinSlow{
+  from{ transform:translate(-50%,-50%) rotate(0deg); }
+  to{ transform:translate(-50%,-50%) rotate(360deg); }
+}
+
+@keyframes spinSlowReverse{
+  from{ transform:translate(-50%,-50%) rotate(360deg); }
+  to{ transform:translate(-50%,-50%) rotate(0deg); }
+}
+
+@keyframes runEnergy{
+  from{ stroke-dashoffset:0; }
+  to{ stroke-dashoffset:-358; }
+}
+
+@keyframes pulseOut{
+  0%{ opacity:.8; transform:translate(-50%,-50%) scale(.35); }
+  100%{ opacity:0; transform:translate(-50%,-50%) scale(1.15); }
+}
+
+
+
 
