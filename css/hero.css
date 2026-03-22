@@ -655,17 +655,17 @@ body.light-mode .submenu-btn{
   position:absolute;
   right:16px;
   top:50%;
-  transform:translateY(-50%);
-  
-  width:10px;
-  height:10px;
-
-  border-right:2px solid rgba(200,240,255,.9);
-  border-bottom:2px solid rgba(200,240,255,.9);
-
+  width:12px;
+  height:12px;
+  border-right:2.5px solid rgba(200,240,255,.95);
+  border-bottom:2.5px solid rgba(200,240,255,.95);
   transform:translateY(-50%) rotate(45deg);
+  opacity:.95;
+  pointer-events:none;
+}
 
-  opacity:.9;
+.menu-group.open .has-submenu .node-shell::after{
+  transform:translateY(-50%) rotate(-135deg);
 }
 
 .menu-group.open .has-submenu .node-shell::after{
