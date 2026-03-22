@@ -143,7 +143,7 @@ function bindAgentSearch() {
 }
 
 function bindGlobalEvents() {
-  document.addEventListener("pointerdown", event => {
+  document.addEventListener("click", event => {
     const target = event.target;
 
     if (agentDropdown && agentSearchForm) {
@@ -201,6 +201,9 @@ function bindGlobalEvents() {
     }
 
     if (techHero?.classList.contains("open")) {
+      $$(".menu-group", techHero).forEach(group => {
+        group.classList.remove("open");
+      });
       toggleHeroOpen(false);
     }
 
@@ -221,11 +224,29 @@ function bindHeroMenu() {
     });
   }
 
+  function toggleSubmenu(group) {
+    if (!group) return;
+
+    const isOpen = group.classList.contains("open");
+
+    closeAllSubmenus();
+
+    if (!isOpen) {
+      group.classList.add("open");
+    }
+  }
+
   if (logoMenuButton) {
     logoMenuButton.addEventListener("click", event => {
       event.preventDefault();
       event.stopPropagation();
+
+      const willOpen = !techHero.classList.contains("open");
       toggleHeroOpen();
+
+      if (!willOpen) {
+        closeAllSubmenus();
+      }
     });
   }
 
@@ -234,18 +255,21 @@ function bindHeroMenu() {
   });
 
   $('[data-action="ssb-system"]', techHero)?.addEventListener("click", event => {
+    event.preventDefault();
     event.stopPropagation();
     closeAllSubmenus();
     openInfoPopup("ssbmobile");
   });
 
   $('[data-action="company-about"]', techHero)?.addEventListener("click", event => {
+    event.preventDefault();
     event.stopPropagation();
     closeAllSubmenus();
     openCompanyPopup();
   });
 
   $('[data-action="company-contact"]', techHero)?.addEventListener("click", event => {
+    event.preventDefault();
     event.stopPropagation();
     closeAllSubmenus();
     openCompanyPopup();
@@ -253,26 +277,24 @@ function bindHeroMenu() {
 
   $$("[data-popup]", techHero).forEach(btn => {
     btn.addEventListener("click", event => {
+      event.preventDefault();
       event.stopPropagation();
       closeAllSubmenus();
+
       const key = btn.getAttribute("data-popup");
       if (key) openInfoPopup(key);
     });
   });
 
   $$("[data-menu]", techHero).forEach(btn => {
-    btn.addEventListener("pointerdown", event => {
+    btn.addEventListener("click", event => {
       event.preventDefault();
       event.stopPropagation();
 
+      if (!techHero.classList.contains("open")) return;
+
       const group = btn.closest(".menu-group");
-      if (!group) return;
-
-      $$(".menu-group", techHero).forEach(item => {
-        if (item !== group) item.classList.remove("open");
-      });
-
-      group.classList.add("open");
+      toggleSubmenu(group);
     });
   });
 }
