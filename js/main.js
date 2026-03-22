@@ -285,4 +285,51 @@ function bindGlobalEvents() {
 
 window.addEventListener("load", () => {
   applyThemeByViewport();
-    
+
+  if (techHero) {
+    techHero.classList.remove("open");
+  }
+
+  syncHeroLabels();
+  buildEnergyLines();
+  renderAgentResults("");
+
+  bindLanguageButtons();
+  bindAgentSearch();
+  bindHeroMenu();
+  bindPopups();
+  bindChatWidget();
+  bindSounds();
+  bindThemeToggle();
+  bindGlobalEvents();
+
+if (popupNav) {
+  popupNav.querySelectorAll("[data-step]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      popupNav.querySelectorAll(".popup-pro-nav-btn").forEach(item => {
+        item.classList.remove("active");
+      });
+      btn.classList.add("active");
+      renderPopupStep(btn.dataset.step);
+    });
+  });
+}
+  
+  if (popupNav) {
+    popupNav.querySelectorAll("[data-step]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        renderPopupStep(btn.dataset.step);
+      });
+    });
+  }
+
+  if (popupNextStep) {
+    popupNextStep.addEventListener("click", () => {
+      const next = popupNextStep.dataset.next;
+      if (next) renderPopupStep(next);
+    });
+  }
+
+  syncActiveLangFromCookie();
+});
+
