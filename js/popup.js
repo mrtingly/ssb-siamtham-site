@@ -175,7 +175,7 @@ function buildEnergyLines() {
   const cx = ((logoRect.left + logoRect.width / 2) - heroRect.left) / heroRect.width * 1000;
   const cy = ((logoRect.top + logoRect.height / 2) - heroRect.top) / heroRect.height * 700;
 
-  const sources = $$(".energy-source", techHero);
+  const sources = $$(".main-node:not(.bottom)", techHero).slice(0, 4);
 
   sources.forEach((el, index) => {
     const rect = el.getBoundingClientRect();
