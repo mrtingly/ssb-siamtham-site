@@ -441,15 +441,6 @@ body.light-mode .node-title{
   transition:.3s;
 }
 
-.menu-node:hover .node-shell{
-  transform:translateY(-2px) scale(1.03);
-
-  box-shadow:
-    0 16px 32px rgba(0,0,0,.4),
-    0 0 20px rgba(120,200,255,.35),
-    inset 0 0 12px rgba(120,200,255,.15);
-}
-
 .menu-node:hover .node-shell::after{
   opacity:1;
 }
@@ -541,11 +532,6 @@ body.light-mode .menu-node.bottom .node-shell{
 }
 
 /* GROUP MENUS */
-.menu-group{
-  position:absolute;
-  z-index:9;
-  padding-bottom: 20px;
-}
 
 .g-company{
   left:74%;
@@ -669,8 +655,3 @@ body.light-mode .submenu-btn{
   transform:translateY(-50%) rotate(-135deg);
 }
 
-.m5{
-  --x:50%;
-  --y:76%;
-  --delay:.28s;
-}
