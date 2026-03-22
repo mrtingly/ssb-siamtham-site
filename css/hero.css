@@ -449,7 +449,6 @@ body.light-mode .node-title{
 .menu-node.bottom .node-shell{
   background:linear-gradient(135deg,#ff2a2a,#ff5a5a);
   border:1px solid rgba(255,80,80,.45);
-
   box-shadow:
     0 14px 28px rgba(0,0,0,.3),
     0 0 18px rgba(255,60,60,.45),
@@ -460,17 +459,14 @@ body.light-mode .menu-node.bottom .node-shell{
   background:linear-gradient(135deg,#ff2a2a,#ff5a5a);
 }
 
-/* BUY TEXT */
 .menu-node.bottom .node-title{
   font-size:22px;
   color:#fff;
   text-shadow:0 0 10px rgba(255,255,255,.18);
 }
 
-/* BUY HOVER */
 .menu-node.bottom:hover .node-shell{
   transform:translateY(-2px) scale(1.05);
-
   box-shadow:
     0 20px 40px rgba(0,0,0,.35),
     0 0 26px rgba(255,50,50,.7),
@@ -478,33 +474,6 @@ body.light-mode .menu-node.bottom .node-shell{
 }
 
 /* ===== POSITION ===== */
-.m1{ --x:26%; --y:34%; }
-.m5{ --x:50%; --y:76%; }
-
-/* ===== GROUP ===== */
-.menu-group{
-  position:absolute;
-  z-index:9;
-}
-
-.g-company{
-  left:74%;
-  top:34%;
-  transform:translate(-50%,-50%);
-}
-
-.g-product{
-  left:26%;
-  top:66%;
-  transform:translate(-50%,-50%);
-}
-
-.g-agent{
-  left:74%;
-  top:66%;
-  transform:translate(-50%,-50%);
-}
-
 .m1{ --x:26%; --y:34%; --delay:.04s; }
 .m5{ --x:50%; --y:76%; --delay:.28s; }
 
@@ -531,7 +500,11 @@ body.light-mode .menu-node.bottom .node-shell{
   font-size:28px;
 }
 
-/* GROUP MENUS */
+/* ===== GROUP MENUS ===== */
+.menu-group{
+  position:absolute;
+  z-index:9;
+}
 
 .g-company{
   left:74%;
@@ -561,14 +534,14 @@ body.light-mode .menu-node.bottom .node-shell{
   transform:scale(1);
 }
 
-/* SUB MENU */
+/* ===== SUB MENU ===== */
 .submenu-panel{
   position:absolute;
   left:50%;
   top:calc(100% + 14px);
   transform:translateX(-50%) translateY(-6px);
   min-width:280px;
-  padding-top: 12px;
+  padding-top:12px;
   display:grid;
   gap:10px;
   opacity:0;
@@ -650,8 +623,3 @@ body.light-mode .submenu-btn{
 .menu-group.open .has-submenu .node-shell::after{
   transform:translateY(-50%) rotate(-135deg);
 }
-
-.menu-group.open .has-submenu .node-shell::after{
-  transform:translateY(-50%) rotate(-135deg);
-}
-
