@@ -302,6 +302,8 @@
     justify-self:center;
     width:100%;
     max-width:420px;
+    margin-top:12px;
+    margin-bottom:4px;
   }
 
  .menu-node.bottom .node-shell{
@@ -373,7 +375,7 @@ body.light-mode .menu-node.bottom .node-shell{
   }
 
   .node-note,
-    body.light-mode .node-note{
+    display:none !important;
     position:static;
     transform:none;
     margin:2px auto 0;
