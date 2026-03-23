@@ -300,7 +300,7 @@ function bindHeroMenu() {
       event.preventDefault();
       event.stopPropagation();
 
-      if (!techHero.classList.contains("open")) return;
+      if (!techHero.classList.contains("open") && window.innerWidth > 760) return;
 
       const group = btn.closest(".menu-group");
       toggleSubmenu(group);
