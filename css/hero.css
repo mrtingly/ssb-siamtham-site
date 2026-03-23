@@ -430,26 +430,13 @@ body.light-mode .node-title{
   position:absolute;
   left:50%;
   bottom:18px;
-  top:auto;
   transform:translateX(-50%);
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:42px;
-  padding:8px 18px;
-  border-radius:999px;
-  background:rgba(255,255,255,.06);
-  color:rgba(242,251,255,.72);
-  border:1px solid rgba(139,215,255,.10);
-  box-shadow:none;
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
   font-size:13px;
-  font-weight:600;
-  text-align:center;
-  pointer-events:none;
-  transition:opacity .22s ease, transform .22s ease, visibility .22s ease;
-  z-index:6;
+  opacity:.5;
+}
+
+.tech-hero.open .node-note{
+  opacity:.12;
 }
 
 body.light-mode .node-note{
@@ -668,11 +655,20 @@ body.light-mode .has-submenu .node-shell::before{
   /* ===== NEW MENU SYSTEM (SSB ULTRA) ===== */
 
 .menu-node{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%, -50%) scale(0);
   opacity:0;
   visibility:hidden;
   pointer-events:none;
-  transform:translate(-50%,-50%) scale(0);
   transition:all .35s cubic-bezier(.2,.8,.2,1);
+}
+
+  .tech-hero.open .menu-node{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
 }
 
 /* ตอนเปิด */
