@@ -537,10 +537,14 @@ body.light-mode .node-note{
 }
 
 .tech-hero.open .m1{
+  left:31%;
+  top:33%;
   transform:translate(-50%, -50%) scale(1);
 }
 
 .tech-hero.open .m5{
+  left:50%;
+  top:78%;
   transform:translate(-50%, -50%) scale(1);
 }
 
@@ -622,21 +626,21 @@ body.light-mode .menu-node.bottom .node-shell{
   opacity:1;
   visibility:visible;
   pointer-events:auto;
-  transform:translate(95%, -150%) scale(1);
+  transform:translate(36%, -138%) scale(1);
 }
 
 .tech-hero.open .g-product{
   opacity:1;
   visibility:visible;
   pointer-events:auto;
-  transform:translate(-195%, 55%) scale(1);
+  transform:translate(-138%, 48%) scale(1);
 }
 
 .tech-hero.open .g-agent{
   opacity:1;
   visibility:visible;
   pointer-events:auto;
-  transform:translate(95%, 55%) scale(1);
+  transform:translate(36%, 48%) scale(1);
 }
 
 .menu-group .main-node{
