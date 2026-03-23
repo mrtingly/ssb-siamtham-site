@@ -537,7 +537,7 @@ body.light-mode .node-note{
 }
 
 .tech-hero.open .m1{
-  left:24%;
+  left:22%;
   top:32%;
   transform:translate(-50%, -50%) scale(1);
 }
@@ -633,7 +633,7 @@ body.light-mode .menu-node.bottom .node-shell{
   opacity:1;
   visibility:visible;
   pointer-events:auto;
-  transform:translate(-182%, 24%) scale(1);
+  transform:translate(-82%, 26%) scale(1);
 }
 
 .tech-hero.open .g-agent{
