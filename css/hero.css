@@ -537,9 +537,9 @@ body.light-mode .node-note{
 }
 
 .tech-hero.open .m1{
-  left:20%;
-  top:38%;
-  transform:translate(-50%, -50%) scale(1);
+  left:50%;
+  top:50%;
+  transform:translate(-82%, -122%) scale(1);
 }
 
 .tech-hero.open .m5{
