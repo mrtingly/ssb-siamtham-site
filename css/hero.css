@@ -701,3 +701,80 @@ body.light-mode .has-submenu .node-shell::before{
 .menu-group.open .has-submenu .node-shell::before{
   transform:translateY(-50%) rotate(-135deg);
 }
+
+  /* ===== NEW MENU SYSTEM (SSB ULTRA) ===== */
+
+.menu-node{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transform:translate(-50%,-50%) scale(0);
+  transition:all .35s cubic-bezier(.2,.8,.2,1);
+}
+
+/* ตอนเปิด */
+.tech-hero.open .menu-node{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+}
+
+/* ===== POSITION FROM LOGO ===== */
+/* ทุกตัว “พุ่งออกจากกลาง” */
+
+.tech-hero.open .m1{
+  transform:translate(-180%, -140%) scale(1);
+}
+
+.tech-hero.open .m2{
+  transform:translate(160%, -140%) scale(1);
+}
+
+.tech-hero.open .m3{
+  transform:translate(-180%, 120%) scale(1);
+}
+
+.tech-hero.open .m4{
+  transform:translate(160%, 120%) scale(1);
+}
+
+.tech-hero.open .m5{
+  transform:translate(-50%, 220%) scale(1.1);
+}
+
+/* ===== DELAY (ดูแพงขึ้น) ===== */
+.m1{ transition-delay:.05s; }
+.m2{ transition-delay:.1s; }
+.m3{ transition-delay:.15s; }
+.m4{ transition-delay:.2s; }
+.m5{ transition-delay:.25s; }
+
+/* ===== CLOSE (เด้งกลับ) ===== */
+.tech-hero:not(.open) .menu-node{
+  transform:translate(-50%,-50%) scale(0);
+}
+
+/* ===== SUBMENU SMOOTH ===== */
+.submenu-panel{
+  opacity:0;
+  transform:translateX(-50%) translateY(-10px) scale(.95);
+  transition:all .25s ease;
+}
+
+.menu-group.open .submenu-panel{
+  opacity:1;
+  transform:translateX(-50%) translateY(0) scale(1);
+}
+
+/* ===== ULTRA PREMIUM TOUCH ===== */
+.node-shell{
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+
+.menu-node:hover .node-shell{
+  transform:translateY(-3px) scale(1.05);
+  box-shadow:
+    0 20px 40px rgba(0,0,0,.45),
+    0 0 30px rgba(120,200,255,.35);
+}
