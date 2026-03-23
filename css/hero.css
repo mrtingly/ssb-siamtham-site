@@ -523,13 +523,13 @@ body.light-mode .node-note{
 
 /* ซ้ายบน */
 .m1{
-  left:24%;
-  top:43%;
+  left:22%;
+  top:44%;
 }
 
 /* ปุ่มสั่งซื้อ — กลางล่างค่อนไปขวานิดเดียว */
 .m5{
-  left:59%;
+  left:50%;
   top:84%;
 }
 
@@ -595,19 +595,19 @@ body.light-mode .m5 .node-shell{
 
 /* ขวาบน */
 .g-company{
-  left:76%;
-  top:43%;
+  left:78%;
+  top:44%;
 }
 
 /* ซ้ายล่าง */
 .g-product{
-  left:24%;
+  left:22%;
   top:62%;
 }
 
 /* ขวาล่าง */
 .g-agent{
-  left:76%;
+  left:78%;
   top:62%;
 }
 
