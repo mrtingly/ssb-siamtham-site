@@ -342,6 +342,38 @@ body.light-mode .energy-run{
   z-index:7;
 }
 
+.menu-node{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:280px;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transform:translate(-50%, -50%) scale(0);
+  border:none;
+  background:none;
+  padding:0;
+  margin:0;
+  color:#fff;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:
+    transform .34s cubic-bezier(.2,.8,.2,1),
+    opacity .22s ease,
+    filter .18s ease,
+    visibility .22s ease;
+}
+
+.tech-hero.open .menu-node{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+}
+
 .menu-node:hover{
   filter:brightness(1.06);
 }
@@ -368,6 +400,8 @@ body.light-mode .energy-run{
     box-shadow .18s ease,
     border-color .18s ease,
     filter .18s ease;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
 }
 
 .node-shell::after{
@@ -385,11 +419,11 @@ body.light-mode .energy-run{
 }
 
 .menu-node:hover .node-shell{
-  transform:translateY(-2px) scale(1.03);
+  transform:translateY(-3px) scale(1.05);
   border-color:rgba(145,226,255,.35);
   box-shadow:
-    0 16px 32px rgba(0,0,0,.4),
-    0 0 20px rgba(120,200,255,.35),
+    0 20px 40px rgba(0,0,0,.45),
+    0 0 30px rgba(120,200,255,.35),
     inset 0 0 12px rgba(120,200,255,.15);
 }
 
@@ -431,12 +465,24 @@ body.light-mode .node-title{
   left:50%;
   bottom:18px;
   transform:translateX(-50%);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:40px;
+  padding:8px 18px;
+  border-radius:999px;
+  background:rgba(255,255,255,.06);
+  color:rgba(242,251,255,.70);
+  border:1px solid rgba(139,215,255,.10);
+  box-shadow:none;
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
   font-size:13px;
-  opacity:.5;
-}
-
-.tech-hero.open .node-note{
-  opacity:.12;
+  font-weight:600;
+  text-align:center;
+  pointer-events:none;
+  z-index:6;
+  transition:opacity .22s ease, transform .22s ease, visibility .22s ease;
 }
 
 body.light-mode .node-note{
@@ -444,6 +490,10 @@ body.light-mode .node-note{
   color:#163866;
   border-color:rgba(20,55,100,.08);
   box-shadow:0 12px 24px rgba(31,74,140,.10);
+}
+
+.tech-hero.open .node-note{
+  opacity:.14;
 }
 
 .node-note.hidden{
@@ -454,9 +504,10 @@ body.light-mode .node-note{
 
 /* HERO MENU V2 */
 .main-node{
-  --x:50%;
-  --y:50%;
-  --delay:0s;
+  position:relative;
+  left:auto;
+  top:auto;
+  transform:none;
 }
 
 .main-node .node-shell{
@@ -470,6 +521,27 @@ body.light-mode .node-note{
   font-size:22px;
   font-weight:800;
   white-space:nowrap;
+}
+
+/* ตำแหน่งปุ่มเดี่ยว */
+.m1{
+  left:26%;
+  top:34%;
+  transform:translate(-50%, -50%) scale(0);
+}
+
+.m5{
+  left:50%;
+  top:76%;
+  transform:translate(-50%, -50%) scale(0);
+}
+
+.tech-hero.open .m1{
+  transform:translate(-50%, -50%) scale(1);
+}
+
+.tech-hero.open .m5{
+  transform:translate(-50%, -50%) scale(1);
 }
 
 .m5 .node-shell{
@@ -486,27 +558,24 @@ body.light-mode .node-note{
 
 /* BUY BUTTON */
 .menu-node.bottom .node-shell{
- background:
-  linear-gradient(145deg,#5a0000,#b30000 60%,#ff2a2a);
-
+  background:linear-gradient(145deg,#5a0000,#b30000 60%,#ff2a2a);
   border:1px solid rgba(255,80,80,.5);
-
   box-shadow:
     0 14px 30px rgba(0,0,0,.4),
     0 0 18px rgba(255,40,40,.35),
     inset 0 2px 6px rgba(255,255,255,.15),
-    inset 0 -4px 10px rgba(0,0,0,.4);  
-  }
+    inset 0 -4px 10px rgba(0,0,0,.4);
+}
 
 body.light-mode .menu-node.bottom .node-shell{
- background:linear-gradient(135deg,#3b82ff,#6ea8ff);
-border:1px solid rgba(80,140,255,.45);
+  background:linear-gradient(135deg,#3b82ff,#6ea8ff);
+  border:1px solid rgba(80,140,255,.45);
+  box-shadow:
+    0 14px 28px rgba(60,120,255,.25),
+    0 0 18px rgba(100,160,255,.35),
+    inset 0 0 10px rgba(255,255,255,.25);
+}
 
-box-shadow:
-  0 14px 28px rgba(60,120,255,.25),
-  0 0 18px rgba(100,160,255,.35),
-  inset 0 0 10px rgba(255,255,255,.25);
-  
 .menu-node.bottom .node-title{
   color:#fff;
   text-shadow:0 0 10px rgba(255,255,255,.18);
@@ -524,36 +593,60 @@ box-shadow:
 /* GROUP MENUS */
 .menu-group{
   position:absolute;
+  left:50%;
+  top:50%;
   z-index:9;
   padding-bottom:20px;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:
+    transform .34s cubic-bezier(.2,.8,.2,1),
+    opacity .22s ease,
+    visibility .22s ease;
 }
 
 .g-company{
-  left:74%;
-  top:34%;
-  transform:translate(-50%,-50%);
+  transform:translate(-50%, -50%) scale(0);
 }
 
 .g-product{
-  left:26%;
-  top:66%;
-  transform:translate(-50%,-50%);
+  transform:translate(-50%, -50%) scale(0);
 }
 
 .g-agent{
-  left:74%;
-  top:66%;
-  transform:translate(-50%,-50%);
+  transform:translate(-50%, -50%) scale(0);
+}
+
+.tech-hero.open .g-company{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transform:translate(95%, -150%) scale(1);
+}
+
+.tech-hero.open .g-product{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transform:translate(-195%, 55%) scale(1);
+}
+
+.tech-hero.open .g-agent{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transform:translate(95%, 55%) scale(1);
 }
 
 .menu-group .main-node{
-  position:relative;
-  left:auto;
-  top:auto;
+  width:280px;
 }
 
 .tech-hero.open .menu-group .main-node{
-  transform:scale(1);
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
 }
 
 /* SUB MENU */
@@ -561,7 +654,7 @@ box-shadow:
   position:absolute;
   left:50%;
   top:calc(100% + 14px);
-  transform:translateX(-50%) translateY(-6px);
+  transform:translateX(-50%) translateY(-10px) scale(.95);
   min-width:280px;
   padding-top:12px;
   display:grid;
@@ -570,14 +663,14 @@ box-shadow:
   visibility:hidden;
   pointer-events:none;
   z-index:50;
-  transition:opacity .22s ease, transform .22s ease, visibility .22s ease;
+  transition:all .25s ease;
 }
 
 .menu-group.open .submenu-panel{
   opacity:1;
   visibility:visible;
   pointer-events:auto;
-  transform:translateX(-50%) translateY(0);
+  transform:translateX(-50%) translateY(0) scale(1);
 }
 
 .submenu-btn{
@@ -606,7 +699,6 @@ box-shadow:
   transition:.18s ease;
   position:relative;
   z-index:60;
-  pointer-events:auto;
 }
 
 .submenu-panel > *{
@@ -650,102 +742,4 @@ body.light-mode .has-submenu .node-shell::before{
 
 .menu-group.open .has-submenu .node-shell::before{
   transform:translateY(-50%) rotate(-135deg);
-}
-
-  /* ===== NEW MENU SYSTEM (SSB ULTRA) ===== */
-
-.menu-node{
-  position:absolute;
-  left:50%;
-  top:50%;
-  transform:translate(-50%, -50%) scale(0);
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
-  transition:all .35s cubic-bezier(.2,.8,.2,1);
-}
-
-  .tech-hero.open .menu-node{
-  opacity:1;
-  visibility:visible;
-  pointer-events:auto;
-}
-
-/* ตอนเปิด */
-.tech-hero.open .menu-node{
-  opacity:1;
-  visibility:visible;
-  pointer-events:auto;
-}
-
-/* ===== POSITION FROM LOGO ===== */
-/* ทุกตัว “พุ่งออกจากกลาง” */
-.tech-hero.open .m1{
-  left:26%;
-  top:34%;
-  transform:translate(-50%, -50%) scale(1);
-}
-
-.tech-hero.open .m2{
-  left:74%;
-  top:34%;
-  transform:translate(-50%, -50%) scale(1);
-}
-
-.tech-hero.open .m3{
-  left:26%;
-  top:66%;
-  transform:translate(-50%, -50%) scale(1);
-}
-
-.tech-hero.open .m4{
-  left:74%;
-  top:66%;
-  transform:translate(-50%, -50%) scale(1);
-}
-
-.tech-hero.open .m5{
-  left:50%;
-  top:76%;
-  transform:translate(-50%, -50%) scale(1);
-}
-/* ===== DELAY (ดูแพงขึ้น) ===== */
-.m1{ transition-delay:.05s; }
-.m2{ transition-delay:.1s; }
-.m3{ transition-delay:.15s; }
-.m4{ transition-delay:.2s; }
-.m5{ transition-delay:.25s; }
-
-/* ===== CLOSE (เด้งกลับ) ===== */
-.tech-hero:not(.open) .menu-node{
-  transform:translate(-50%,-50%) scale(0);
-}
-
-/* ===== SUBMENU SMOOTH ===== */
-.submenu-panel{
-  opacity:0;
-  transform:translateX(-50%) translateY(-10px) scale(.95);
-  transition:all .25s ease;
-}
-
-.menu-group.open .submenu-panel{
-  opacity:1;
-  transform:translateX(-50%) translateY(0) scale(1);
-}
-
-/* ===== ULTRA PREMIUM TOUCH ===== */
-.node-shell{
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-}
-
-.menu-node:hover .node-shell{
-  transform:translateY(-3px) scale(1.05);
-  box-shadow:
-    0 20px 40px rgba(0,0,0,.45),
-    0 0 30px rgba(120,200,255,.35);
-}
-
-.tech-hero.open .node-note{
-  opacity:.14;
 }
