@@ -234,18 +234,24 @@ function bindHeroMenu() {
     }
   }
 
-  logoMenuButton.addEventListener("click", event => {
-    event.preventDefault();
-    event.stopPropagation();
+ logoMenuButton.addEventListener("click", event => {
+  event.preventDefault();
+  event.stopPropagation();
 
-    const willOpen = !techHero.classList.contains("open");
-    techHero.classList.toggle("open", willOpen);
+  const isOpen = techHero.classList.contains("open");
 
-    if (!willOpen) {
-      closeAllSubmenus();
-    }
-  });
+  if (isOpen) {
+    techHero.classList.remove("open");
 
+    // ปิด submenu ทุกอัน
+    document.querySelectorAll(".menu-group").forEach(g=>{
+      g.classList.remove("open");
+    });
+
+  } else {
+    techHero.classList.add("open");
+  }
+});
   techHero.addEventListener("click", event => {
     event.stopPropagation();
   });
