@@ -630,10 +630,12 @@ body.light-mode .menu-node.bottom .node-shell{
 }
 
 .tech-hero.open .g-product{
+  left:22%;
+  top:62%;
+  transform:translate(-50%, -50%) scale(1);
   opacity:1;
   visibility:visible;
   pointer-events:auto;
-  transform:translate(-82%, 26%) scale(1);
 }
 
 .tech-hero.open .g-agent{
