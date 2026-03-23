@@ -537,14 +537,14 @@ body.light-mode .node-note{
 }
 
 .tech-hero.open .m1{
-  left:31%;
-  top:33%;
+  left:24%;
+  top:32%;
   transform:translate(-50%, -50%) scale(1);
 }
 
 .tech-hero.open .m5{
   left:50%;
-  top:78%;
+  top:80%;
   transform:translate(-50%, -50%) scale(1);
 }
 
@@ -626,24 +626,30 @@ body.light-mode .menu-node.bottom .node-shell{
   opacity:1;
   visibility:visible;
   pointer-events:auto;
-  transform:translate(36%, -138%) scale(1);
+  transform:translate(82%, -122%) scale(1);
 }
 
 .tech-hero.open .g-product{
   opacity:1;
   visibility:visible;
   pointer-events:auto;
-  transform:translate(-138%, 48%) scale(1);
+  transform:translate(-182%, 24%) scale(1);
 }
 
 .tech-hero.open .g-agent{
   opacity:1;
   visibility:visible;
   pointer-events:auto;
-  transform:translate(36%, 48%) scale(1);
+  transform:translate(82%, 26%) scale(1);
 }
 
 .menu-group .main-node{
+  width:280px;
+}
+
+.g-product .main-node,
+.g-company .main-node,
+.g-agent .main-node{
   width:280px;
 }
 
@@ -657,12 +663,12 @@ body.light-mode .menu-node.bottom .node-shell{
 .submenu-panel{
   position:absolute;
   left:50%;
-  top:calc(100% + 14px);
-  transform:translateX(-50%) translateY(-10px) scale(.95);
+  top:calc(100% + 10px);
+  transform:translateX(-50%) translateY(-6px) scale(.95);
   min-width:280px;
-  padding-top:12px;
+  padding-top:0;
   display:grid;
-  gap:10px;
+  gap:8px;
   opacity:0;
   visibility:hidden;
   pointer-events:none;
@@ -670,10 +676,37 @@ body.light-mode .menu-node.bottom .node-shell{
   transition:all .25s ease;
 }
 
+/* ซ้ายล่าง: Our Product ลงล่าง แต่ไม่ชนปุ่มสั่งซื้อ */
+.g-product .submenu-panel{
+  top:calc(100% + 8px);
+  left:50%;
+  transform:translateX(-50%) translateY(-6px) scale(.95);
+}
+
+/* ขวาบน: เกี่ยวกับบริษัท ให้เมนูย่อยเด้งขึ้นบน */
+.g-company .submenu-panel{
+  top:auto;
+  bottom:calc(100% + 8px);
+  left:50%;
+  transform:translateX(-50%) translateY(6px) scale(.95);
+}
+
+/* ขวาล่าง: Agent ให้เมนูย่อยลงล่าง */
+.g-agent .submenu-panel{
+  top:calc(100% + 8px);
+  bottom:auto;
+  left:50%;
+  transform:translateX(-50%) translateY(-6px) scale(.95);
+}
+
 .menu-group.open .submenu-panel{
   opacity:1;
   visibility:visible;
   pointer-events:auto;
+  transform:translateX(-50%) translateY(0) scale(1);
+}
+
+.menu-group.open.g-company .submenu-panel{
   transform:translateX(-50%) translateY(0) scale(1);
 }
 
