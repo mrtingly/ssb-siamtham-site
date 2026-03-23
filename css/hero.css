@@ -429,26 +429,27 @@ body.light-mode .node-title{
 .node-note{
   position:absolute;
   left:50%;
-  top:68%;
+  bottom:18px;
+  top:auto;
   transform:translateX(-50%);
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  min-height:58px;
-  padding:12px 28px;
+  min-height:42px;
+  padding:8px 18px;
   border-radius:999px;
-  background:rgba(255,255,255,.10);
-  color:#f2fbff;
-  border:1px solid rgba(139,215,255,.22);
-  box-shadow:0 14px 28px rgba(0,0,0,.18);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-  font-size:18px;
-  font-weight:800;
+  background:rgba(255,255,255,.06);
+  color:rgba(242,251,255,.72);
+  border:1px solid rgba(139,215,255,.10);
+  box-shadow:none;
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  font-size:13px;
+  font-weight:600;
   text-align:center;
   pointer-events:none;
   transition:opacity .22s ease, transform .22s ease, visibility .22s ease;
-  z-index:8;
+  z-index:6;
 }
 
 body.light-mode .node-note{
@@ -459,9 +460,9 @@ body.light-mode .node-note{
 }
 
 .node-note.hidden{
-  opacity:0;
-  visibility:hidden;
-  transform:translate(-50%, -6px);
+  opacity:.18;
+  visibility:visible;
+  transform:translateX(-50%);
 }
 
 /* HERO MENU V2 */
@@ -485,7 +486,9 @@ body.light-mode .node-note{
 }
 
 .m5 .node-shell{
+  width:340px;
   min-width:340px;
+  max-width:340px;
   min-height:82px;
   margin:0 auto;
 }
@@ -681,27 +684,35 @@ body.light-mode .has-submenu .node-shell::before{
 
 /* ===== POSITION FROM LOGO ===== */
 /* ทุกตัว “พุ่งออกจากกลาง” */
-
 .tech-hero.open .m1{
-  transform:translate(-180%, -140%) scale(1);
+  left:26%;
+  top:34%;
+  transform:translate(-50%, -50%) scale(1);
 }
 
 .tech-hero.open .m2{
-  transform:translate(160%, -140%) scale(1);
+  left:74%;
+  top:34%;
+  transform:translate(-50%, -50%) scale(1);
 }
 
 .tech-hero.open .m3{
-  transform:translate(-180%, 120%) scale(1);
+  left:26%;
+  top:66%;
+  transform:translate(-50%, -50%) scale(1);
 }
 
 .tech-hero.open .m4{
-  transform:translate(160%, 120%) scale(1);
+  left:74%;
+  top:66%;
+  transform:translate(-50%, -50%) scale(1);
 }
 
 .tech-hero.open .m5{
-  transform:translate(-50%, 220%) scale(1.1);
+  left:50%;
+  top:76%;
+  transform:translate(-50%, -50%) scale(1);
 }
-
 /* ===== DELAY (ดูแพงขึ้น) ===== */
 .m1{ transition-delay:.05s; }
 .m2{ transition-delay:.1s; }
@@ -737,4 +748,8 @@ body.light-mode .has-submenu .node-shell::before{
   box-shadow:
     0 20px 40px rgba(0,0,0,.45),
     0 0 30px rgba(120,200,255,.35);
+}
+
+.tech-hero.open .node-note{
+  opacity:.14;
 }
