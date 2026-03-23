@@ -164,7 +164,9 @@
     padding:0 10px 0 14px;
   }
 
-  .header-search-input{ font-size:14px; }
+  .header-search-input{ 
+    font-size:14px; 
+  }
 
   .header-search-btn{
     height:34px;
@@ -269,6 +271,38 @@
     display:none;
   }
 
+    .menu-group{
+    position:relative;
+    left:auto;
+    top:auto;
+    transform:none;
+    width:100%;
+    z-index:9;
+    padding-bottom:0;
+  }
+  
+    .menu-group .main-node{
+    position:relative;
+    left:auto;
+    top:auto;
+    transform:none !important;
+    width:100%;
+    display:none;
+  }
+    
+   .tech-hero.open .menu-node,
+    .tech-hero.open .menu-group .main-node{
+    display:flex;
+    }
+    
+    .g-company,
+    .g-product,
+    .g-agent{
+      left:auto;
+      top:auto;
+      transform:none;
+    }
+
   .tech-hero.open .menu-node{ display:flex; }
 
   .n1,.n2,.n3,.n4,.n5,.n6,.n7,.n8,.n9{
@@ -353,22 +387,56 @@ body.light-mode .menu-node.bottom .node-shell{
     touch-action:manipulation;
   }
 
-  .submenu-panel{
-    position:static;
-    left:auto;
-    top:auto;
-    transform:none;
-    min-width:0;
-    width:100%;
-    margin-top:8px;
-    padding-top:0;
-    display:none;
-    gap:8px;
-    opacity:1;
-    visibility:visible;
-    pointer-events:auto;
-    z-index:auto;
-  }
+  .submenu-btn{
+  width:100%;
+  min-height:48px;
+  padding:12px 14px;
+  border:none;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-family:'Prompt',sans-serif;
+  font-size:14px;
+  font-weight:800;
+  line-height:1.4;
+  color:#163866;
+  background:linear-gradient(180deg,#ffffff 0%, #f3f8ff 100%);
+  border:1px solid rgba(98,145,220,.14);
+  box-shadow:0 10px 20px rgba(31,74,140,.08);
+  cursor:pointer;
+  transition:.18s ease;
+  box-sizing:border-box;
+}
+
+.submenu-btn:hover{
+  transform:translateY(-1px);
+}
+
+body.light-mode .submenu-btn{
+  color:#163866;
+  background:linear-gradient(180deg,#ffffff 0%, #f3f8ff 100%);
+  border:1px solid rgba(98,145,220,.14);
+  box-shadow:0 10px 20px rgba(31,74,140,.08);
+}
+
+ .submenu-panel{
+  position:static;
+  left:auto;
+  top:auto;
+  transform:none;
+  min-width:0;
+  width:100%;
+  margin-top:8px;
+  padding-top:0;
+  display:none;
+  gap:8px;
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  z-index:auto;
+}
 
     .menu-group.open .submenu-panel{
     display:grid;
