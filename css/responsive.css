@@ -283,16 +283,21 @@
     width:100%;
     z-index:9;
     padding-bottom:0;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
   }
   
-    .menu-group .main-node{
-    position:relative;
-    left:auto;
-    top:auto;
-    transform:none !important;
-    width:100%;
-    display:none;
-  }
+   .menu-group .main-node{
+  position:relative;
+  left:auto;
+  top:auto;
+  transform:none !important;
+  width:100%;
+  display:flex;
+  min-height:72px;
+  z-index:3;
+}
     
    .tech-hero.open .menu-node,
     .tech-hero.open .menu-group .main-node{
@@ -438,8 +443,8 @@ body.light-mode .submenu-btn{
   gap:8px;
   opacity:1;
   visibility:visible;
-  pointer-events:auto;
-  z-index:auto;
+  position:relative;
+  z-index:1;
 }
 
     .menu-group.open .submenu-panel{
@@ -447,11 +452,11 @@ body.light-mode .submenu-btn{
     grid-template-columns:1fr;
     transform:none;
   }
-  
-.node-note,
-body.light-mode .node-note{
-  display:none !important;
-}
+    
+  .node-note,
+  body.light-mode .node-note{
+    display:none !important;
+  }
   
   .popup-backdrop{ padding:14px; }
 
