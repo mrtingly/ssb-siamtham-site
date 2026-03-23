@@ -471,10 +471,10 @@ body.light-mode .node-title{
   min-height:40px;
   padding:8px 18px;
   border-radius:999px;
-  background:rgba(255,255,255,.06);
-  color:rgba(242,251,255,.70);
-  border:1px solid rgba(139,215,255,.10);
-  box-shadow:none;
+  background:rgba(255,255,255,.12);
+  color:rgba(242,251,255,.96);
+  border:1px solid rgba(139,215,255,.22);
+  box-shadow:0 8px 20px rgba(0,0,0,.16);
   backdrop-filter:blur(8px);
   -webkit-backdrop-filter:blur(8px);
   font-size:13px;
@@ -493,7 +493,7 @@ body.light-mode .node-note{
 }
 
 .tech-hero.open .node-note{
-  opacity:.14;
+  opacity:.10;
 }
 
 .node-note.hidden{
