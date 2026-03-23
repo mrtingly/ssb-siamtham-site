@@ -241,14 +241,18 @@
     filter:drop-shadow(0 8px 18px rgba(31,74,140,.14));
   }
 
-  .menu-layer,
-  .menu-layer-v2{
-    position:static;
-    inset:auto;
-    width:100%;
-    margin-top:24px;
-    display:none;
-  }
+ .menu-layer,
+.menu-layer-v2{
+  position:static;
+  inset:auto;
+  width:100%;
+  margin-top:24px;
+  display:grid !important;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  align-items:stretch;
+  justify-items:center;
+}
 
   .tech-hero.open .menu-layer,
   .tech-hero.open .menu-layer-v2{
