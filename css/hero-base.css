@@ -664,7 +664,8 @@ body.light-mode .logo-core img{
 @media (max-width: 1023px){
   .hero-stars,
   .bg-ring,
-  .energy-svg{
+  .energy-svg,
+  .logo-ring-fixed{
     display:none !important;
   }
 }
@@ -674,7 +675,7 @@ body.light-mode .logo-core img{
 .energy-line{
   fill:none;
   stroke:rgba(90,167,255,0.15);
-  stroke-width:2;
+  stroke-width: 0.7;
 }
 
 .energy-run{
@@ -687,7 +688,7 @@ body.light-mode .logo-core img{
   stroke-dashoffset:0;
 
   animation: energyFlow 4s linear infinite;
-  filter: drop-shadow(0 0 6px #5aa7ff);
+  filter: drop-shadow(0 0 4px #5aa7ff);
 }
 
 @keyframes energyFlow{
