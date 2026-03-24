@@ -1,1 +1,16 @@
+.tech-hero{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
 
+.menu-layer,
+.menu-layer-v2{
+  position:static !important;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  width:100%;
+  max-width:1200px;
+  margin:0 auto;
+}
