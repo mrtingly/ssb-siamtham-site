@@ -53,3 +53,30 @@
   justify-self:center;
   margin-top:200px;
 }
+
+.menu-node .node-shell{
+  width:240px !important;
+  min-height:68px !important;
+  border-radius:18px !important;
+}
+
+.node-title{
+  font-size:18px !important;
+}
+
+/* ระยะรวมทั้งระบบ */
+.tech-hero{
+  padding:60px 80px;
+}
+
+/* ดันซ้าย-ขวาให้บาลานซ์ขึ้น */
+.m1{ margin-right:80px; }
+.g-product{ margin-right:80px; }
+
+.g-company{ margin-left:80px; }
+.g-agent{ margin-left:80px; }
+
+/* ปุ่มล่างให้ลอยนิดๆ */
+.m5{
+  margin-top:160px;
+}
