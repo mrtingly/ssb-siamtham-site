@@ -160,112 +160,121 @@
     </header>
 
     <main class="main-content">
-      <section class="hero-stage">
-        <div class="hero-center">
-          <div class="tech-hero" id="techHero">
-            <div class="hero-stars"></div>
+      
+     <section class="hero-stage">
+  <div class="hero-center">
+    <div class="tech-hero" id="techHero">
 
-            <div class="hero-bg" aria-hidden="true">
-              <div class="bg-core-glow"></div>
-
-              <div class="bg-ring ring-1"></div>
-              <div class="bg-ring ring-2"></div>
-              <div class="bg-ring ring-3"></div>
-
-              <div class="bg-ring ring-1 ring-tilt-1"></div>
-              <div class="bg-ring ring-2 ring-tilt-2"></div>
-            </div>
-
-            <svg class="energy-svg" id="energySvg" viewBox="0 0 1000 700" preserveAspectRatio="none" aria-hidden="true">
-              <path class="energy-line" id="line1"></path>
-              <path class="energy-line" id="line2"></path>
-              <path class="energy-line" id="line3"></path>
-              <path class="energy-line" id="line4"></path>
-            
-              <path class="energy-run delay-1" id="run1"></path>
-              <path class="energy-run delay-2" id="run2"></path>
-              <path class="energy-run delay-3" id="run3"></path>
-              <path class="energy-run delay-4" id="run4"></path>
-            </svg>
-
-            <div class="hero-system-title" id="heroSystemTitle" aria-hidden="true">
-              <div class="hero-system-title-inner">
-                <span class="hero-system-title-text">Stealth Safety Bank Mobile System</span>
-              </div>
-            </div>
-
-            <div class="center-glow"></div>
-            <div class="center-pulse" id="centerPulse"></div>
-
-            <button class="logo-core sound-click" id="logoMenuButton" type="button" aria-label="เปิดเมนูหลัก">
-              <img src="images/logo.png" alt="Stealth Safety Bank Logo" loading="lazy" />
-            </button>
-
-           <div class="menu-layer menu-layer-v2">
-  <button class="menu-node main-node m1 sound-click" type="button" data-action="ssb-system">
-    <div class="node-shell">
-      <span class="node-text">
-        <span class="node-title th-font">SSB MOBILE SYSTEM</span>
-      </span>
-    </div>
-  </button>
-
-  <div class="menu-group g-company">
-    <button class="menu-node main-node m2 sound-click has-submenu" type="button" data-menu="company">
-      <div class="node-shell">
-        <span class="node-text">
-          <span class="node-title th-font">เกี่ยวกับบริษัท</span>
-        </span>
+      <div class="hero-bg" aria-hidden="true">
+        <div class="bg-core-glow"></div>
       </div>
-    </button>
 
-    <div class="submenu-panel submenu-company">
-      <button class="submenu-btn sound-click" type="button" data-action="company-about">เกี่ยวกับบริษัท</button>
-      <button class="submenu-btn sound-click" type="button" data-action="company-contact">ติดต่อเรา</button>
-    </div>
-  </div>
+      <!-- legacy svg ซ่อนไว้กัน js พัง -->
+      <svg class="energy-svg energy-svg-legacy" id="energySvg" viewBox="0 0 1000 700" preserveAspectRatio="none" aria-hidden="true">
+        <path class="energy-line" id="line1"></path>
+        <path class="energy-line" id="line2"></path>
+        <path class="energy-line" id="line3"></path>
+        <path class="energy-line" id="line4"></path>
+        <path class="energy-run delay-1" id="run1"></path>
+        <path class="energy-run delay-2" id="run2"></path>
+        <path class="energy-run delay-3" id="run3"></path>
+        <path class="energy-run delay-4" id="run4"></path>
+      </svg>
 
-  <div class="menu-group g-product">
-    <button class="menu-node main-node m3 sound-click has-submenu" type="button" data-menu="product">
-      <div class="node-shell">
-        <span class="node-text">
-          <span class="node-title en-font">Our Product</span>
-        </span>
-      </div>
-    </button>
-
-    <div class="submenu-panel submenu-product">
-      <button class="submenu-btn sound-click" type="button" data-popup="sbpremium">SB Premium</button>
-      <button class="submenu-btn sound-click" type="button" data-popup="custom">Custom Stealth Safety Bank System</button>
-    </div>
-  </div>
-
-<div class="menu-group g-agent">
-  <button class="menu-node main-node m4 sound-click has-submenu" type="button" data-menu="agent">
-    <div class="node-shell">
-      <span class="node-text">
-        <span class="node-title en-font">Agent</span>
-      </span>
-    </div>
-  </button>
-
-  <div class="submenu-panel submenu-agent">
-    <button class="submenu-btn sound-click" type="button" data-link="join-agent.html">สมัครเป็นตัวแทน</button>
-    <button class="submenu-btn sound-click" type="button" data-link="agent-login.html">Login Agent</button>
-  </div>
-</div>
-
-<a class="menu-node main-node m5 bottom sound-click" href="book.html">
-  <div class="node-shell">
-    <span class="node-text">
-      <span class="node-title th-font">สั่งซื้อสินค้า</span>
-    </span>
-  </div>
-</a>
-
-          <div class="node-note th-font" id="nodeNote">คลิกที่โลโก้เพื่อเปิดเมนู</div>
+      <div class="hero-system-title" id="heroSystemTitle" aria-hidden="true">
+        <div class="hero-system-title-inner">
+          <span class="hero-system-title-text">Stealth Safety Bank Mobile System</span>
         </div>
-      </section>
+      </div>
+
+      <div class="center-glow"></div>
+      <div class="center-pulse" id="centerPulse"></div>
+
+      <div class="hero-energy-system" aria-hidden="true">
+        <span class="hero-core-ring"></span>
+        <span class="hero-core-ring-glow"></span>
+
+        <span class="hero-orbit-track orbit-track-1"></span>
+        <span class="hero-orbit-track orbit-track-2"></span>
+
+        <span class="hero-link hero-link-1"></span>
+        <span class="hero-link hero-link-2"></span>
+        <span class="hero-link hero-link-3"></span>
+        <span class="hero-link hero-link-4"></span>
+      </div>
+
+      <button class="logo-core sound-click" id="logoMenuButton" type="button" aria-label="เปิดเมนูหลัก">
+        <img src="images/logo.png" alt="Stealth Safety Bank Logo" loading="lazy" />
+      </button>
+
+      <div class="menu-layer menu-layer-v2">
+        <button class="menu-node main-node m1 sound-click" type="button" data-action="ssb-system">
+          <div class="node-shell">
+            <span class="node-text">
+              <span class="node-title th-font">SSB MOBILE SYSTEM</span>
+            </span>
+          </div>
+        </button>
+
+        <div class="menu-group g-company">
+          <button class="menu-node main-node m2 sound-click has-submenu" type="button" data-menu="company">
+            <div class="node-shell">
+              <span class="node-text">
+                <span class="node-title th-font">เกี่ยวกับบริษัท</span>
+              </span>
+            </div>
+          </button>
+
+          <div class="submenu-panel submenu-company">
+            <button class="submenu-btn sound-click" type="button" data-action="company-about">เกี่ยวกับบริษัท</button>
+            <button class="submenu-btn sound-click" type="button" data-action="company-contact">ติดต่อเรา</button>
+          </div>
+        </div>
+
+        <div class="menu-group g-product">
+          <button class="menu-node main-node m3 sound-click has-submenu" type="button" data-menu="product">
+            <div class="node-shell">
+              <span class="node-text">
+                <span class="node-title en-font">Our Product</span>
+              </span>
+            </div>
+          </button>
+
+          <div class="submenu-panel submenu-product">
+            <button class="submenu-btn sound-click" type="button" data-popup="sbpremium">SB Premium</button>
+            <button class="submenu-btn sound-click" type="button" data-popup="custom">Custom Stealth Safety Bank System</button>
+          </div>
+        </div>
+
+        <div class="menu-group g-agent">
+          <button class="menu-node main-node m4 sound-click has-submenu" type="button" data-menu="agent">
+            <div class="node-shell">
+              <span class="node-text">
+                <span class="node-title en-font">Agent</span>
+              </span>
+            </div>
+          </button>
+
+          <div class="submenu-panel submenu-agent">
+            <button class="submenu-btn sound-click" type="button" data-link="join-agent.html">สมัครเป็นตัวแทน</button>
+            <button class="submenu-btn sound-click" type="button" data-link="agent-login.html">Login Agent</button>
+          </div>
+        </div>
+
+        <a class="menu-node main-node m5 bottom sound-click" href="book.html">
+          <div class="node-shell">
+            <span class="node-text">
+              <span class="node-title th-font">สั่งซื้อสินค้า</span>
+            </span>
+          </div>
+        </a>
+
+        <div class="node-note th-font" id="nodeNote">คลิกที่โลโก้เพื่อเปิดเมนู</div>
+      </div>
+
+    </div>
+  </div>
+</section>
     </main>
 
     <footer class="ssb-footer">
