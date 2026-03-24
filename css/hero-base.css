@@ -714,33 +714,23 @@ body.light-mode .logo-core img{
   stroke-linecap:round;
 }
 
-.energy-dot{
-  fill:#7fd0ff;
-  opacity:0;
-  offset-rotate:0deg;
+.energy-run{
+  fill:none;
+  stroke:#7fd0ff;
+  stroke-width:1;
+  stroke-linecap:round;
+  stroke-dasharray:40 120;
+  animation:energyFlow 3s linear infinite;
+  opacity:.7;
 }
 
-.tech-hero.open .energy-dot{
-  opacity:.9;
-  animation:dotFlow 4.8s linear infinite;
-}
+.delay-1{ animation-delay:0s; }
+.delay-2{ animation-delay:1s; }
+.delay-3{ animation-delay:2s; }
 
-.dot-1{ animation-delay:0s; }
-.dot-2{ animation-delay:1.2s; }
-.dot-3{ animation-delay:2.4s; }
-.dot-4{ animation-delay:3.6s; }
-
-.energy-dot.dot-1{
-  offset-path:path("M250 300 Q340 300 500 350");
-}
-.energy-dot.dot-2{
-  offset-path:path("M250 420 Q340 390 500 350");
-}
-.energy-dot.dot-3{
-  offset-path:path("M750 300 Q660 300 500 350");
-}
-.energy-dot.dot-4{
-  offset-path:path("M750 420 Q660 390 500 350");
+@keyframes energyFlow{
+  from{ stroke-dashoffset:0; }
+  to{ stroke-dashoffset:-160; }
 }
 
 @keyframes dotFlow{
