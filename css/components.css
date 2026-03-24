@@ -154,6 +154,18 @@
   100%{ opacity:0; transform:translate(-50%,-50%) scale(1.15); }
 }
 
+/* FIX LOGO HEADER */
+.brand-logo{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
 
+.brand-logo img{
+  width:42px;
+  height:auto;
+  object-fit:contain;
+  display:block;
+}
 
 
