@@ -24,9 +24,7 @@
     grid-template-columns:1fr 1fr;
     grid-template-areas:
       "logo logo"
-      "m1 company"
-      "product agent"
-      "order order";
+      "menu menu";
     align-items:start;
     gap:12px;
     overflow:hidden;
@@ -102,10 +100,10 @@
 
   .menu-layer,
   .menu-layer-v2{
-    position:static !important;
+    position:relative !important;
     inset:auto !important;
+    grid-area:menu;
     width:100%;
-    grid-column:1 / -1;
     display:grid !important;
     grid-template-columns:1fr 1fr;
     grid-template-areas:
@@ -118,6 +116,7 @@
     pointer-events:auto;
     z-index:3;
     margin-top:0;
+    height:auto;
   }
 
   .menu-node,
