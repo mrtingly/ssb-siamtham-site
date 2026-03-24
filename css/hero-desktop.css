@@ -298,4 +298,31 @@
   body.light-mode .submenu-btn{
     background: #ffffff;
   }
+
+  /* ===== FIX ALIGN + COMPANY MENU ===== */
+
+/* ดันเมนูลง */
+.m1,
+.g-company,
+.g-product,
+.g-agent{
+  margin-top: 22px;
+}
+
+/* company submenu ขึ้นบน */
+.g-company{
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+}
+
+.g-company .submenu-panel{
+  order: -1;
+  margin-bottom: 10px;
+}
+
+.g-company .main-node{
+  order: 2;
+}
+  
 }
