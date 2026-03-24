@@ -19,10 +19,10 @@
     padding: 120px 88px 110px;
     display: grid !important;
     grid-template-columns: 1fr 280px 1fr;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto 260px 260px auto;
     align-items: center;
     justify-items: center;
-    row-gap: 8px;
+    row-gap: 0;
     overflow: hidden;
   }
 
@@ -58,11 +58,12 @@
     top: auto !important;
     transform: none !important;
     grid-column: 2;
-    grid-row: 2;
+    grid-row: 2 / span 2;
     margin: 0 auto;
     width: 170px;
     height: 170px;
     z-index: 12;
+    align-self: center;
   }
 
   .center-glow{
@@ -86,7 +87,7 @@
     grid-row: 1 / -1;
     display: grid !important;
     grid-template-columns: 1fr 280px 1fr;
-    grid-template-rows: 1fr 1fr auto;
+    grid-template-rows: auto 260px 260px auto;
     align-items: center;
     justify-items: center;
     pointer-events: none;
@@ -110,6 +111,7 @@
     left: auto !important;
     top: auto !important;
     transform: none !important;
+    margin: 0 !important;
     margin-bottom: 0 !important;
   }
 
@@ -136,20 +138,18 @@
   /* ===== Place each block ===== */
   .m1{
     grid-column: 1;
-    grid-row: 1;
+    grid-row: 2;
     justify-self: end;
-    align-self: end;
-    margin-right: 22px !important;
-    margin-top: 24px !important;
+    align-self: center;
+    margin-right: 34px !important;
   }
 
   .g-company{
     grid-column: 3;
-    grid-row: 1;
+    grid-row: 2;
     justify-self: start;
-    align-self: end;
-    margin-left: 22px !important;
-    margin-top: 24px !important;
+    align-self: center;
+    margin-left: 34px !important;
     display: flex;
     flex-direction: column-reverse;
     align-items: flex-start;
@@ -157,11 +157,10 @@
 
   .g-product{
     grid-column: 1;
-    grid-row: 2;
+    grid-row: 3;
     justify-self: end;
-    align-self: start;
-    margin-right: 22px !important;
-    margin-top: -18px !important;
+    align-self: center;
+    margin-right: 34px !important;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -169,11 +168,10 @@
 
   .g-agent{
     grid-column: 3;
-    grid-row: 2;
+    grid-row: 3;
     justify-self: start;
-    align-self: start;
-    margin-left: 22px !important;
-    margin-top: -18px !important;
+    align-self: center;
+    margin-left: 34px !important;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -181,17 +179,15 @@
 
   .m5{
     grid-column: 2;
-    grid-row: 3;
+    grid-row: 4;
     justify-self: center;
     align-self: start;
-    margin-top: -8px !important;
+    margin-top: 8px !important;
   }
 
   /* ===== Group behavior ===== */
-   .menu-group{
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
+  .menu-group{
+    gap: 12px;
     z-index: 15;
   }
 
@@ -291,12 +287,14 @@
   @media (min-width: 1280px){
     .tech-hero{
       grid-template-columns: 1fr 300px 1fr;
+      grid-template-rows: auto 280px 280px auto;
       padding: 124px 96px 112px;
     }
 
     .menu-layer,
     .menu-layer-v2{
       grid-template-columns: 1fr 300px 1fr;
+      grid-template-rows: auto 280px 280px auto;
     }
 
     .logo-core{
@@ -312,22 +310,10 @@
       width: 272px !important;
     }
 
-    .m1{ 
-      margin-right: 30px !important; 
-    }
-    
-    .g-product{
-      margin-top: 6px !important;
-    }
-    
-    .g-company{ 
-      margin-left: 30px !important; 
-    }
-    
-    .g-agent{
-      margin-top: 6px !important;
-  }
-    
+    .m1{ margin-right: 44px !important; }
+    .g-product{ margin-right: 44px !important; }
+    .g-company{ margin-left: 44px !important; }
+    .g-agent{ margin-left: 44px !important; }
   }
 
   /* ===== Light mode polish ===== */
