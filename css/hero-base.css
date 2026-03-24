@@ -670,7 +670,7 @@ body.light-mode .logo-core img{
   }
 }
 
-/* ===== HERO ENERGY : LIGHT / STABLE / OPEN ONLY ===== */
+/* ===== HERO ENERGY : ULTRA LIGHT MODE ===== */
 
 .energy-svg{
   position:absolute;
@@ -679,92 +679,100 @@ body.light-mode .logo-core img{
   height:100%;
   z-index:2;
   pointer-events:none;
+
   opacity:0;
   visibility:hidden;
-  transition:opacity .22s ease, visibility .22s ease;
+  transition:opacity .2s ease;
 }
 
 .tech-hero.open .energy-svg{
-  opacity:1;
+  opacity:.9;
   visibility:visible;
 }
 
+/* เส้นพื้น (แทบไม่กินเครื่อง) */
 .energy-line{
   fill:none;
-  stroke:rgba(90,167,255,0.10);
-  stroke-width:.2 !important;
-  stroke-linecap:round;
-  opacity:.9;
+  stroke:rgba(120,190,255,0.08);
+  stroke-width:.3;
 }
 
+/* เส้นวิ่ง (เบาสุด) */
 .energy-run{
   fill:none;
-  stroke:#6fc8ff;
-  stroke-width:0.5 !important;
+  stroke:#7fd0ff;
+  stroke-width:.4;
   stroke-linecap:round;
-  stroke-dasharray:42 260;
-  stroke-dashoffset:0;
-  opacity:.88;
-  animation:energyFlow 6.5s linear infinite;
-  filter:drop-shadow(0 0 2px rgba(95,190,255,.55));
+
+  stroke-dasharray:24 240;
+  animation:energyFlow 7s linear infinite;
+
+  /* ❌ ตัด glow ออกหมด = เบาขึ้นเยอะ */
+  filter:none;
 }
 
+/* animation เบา + ช้า */
 @keyframes energyFlow{
   from{ stroke-dashoffset:0; }
-  to{ stroke-dashoffset:-302; }
+  to{ stroke-dashoffset:-264; }
 }
 
+/* delay */
 .delay-1{ animation-delay:0s; }
-.delay-2{ animation-delay:1.3s; }
-.delay-3{ animation-delay:2.6s; }
-.delay-4{ animation-delay:3.9s; }
+.delay-2{ animation-delay:1.8s; }
+.delay-3{ animation-delay:3.6s; }
+.delay-4{ animation-delay:5.4s; }
 
+/* วงโลโก้ (เบามาก) */
 .logo-ring-fixed{
   position:absolute;
   left:50%;
   top:50%;
-  width:170px;
-  height:170px;
+  width:150px;
+  height:150px;
   transform:translate(-50%,-50%);
   pointer-events:none;
   z-index:-1;
+
   opacity:0;
   visibility:hidden;
-  transition:opacity .22s ease, visibility .22s ease;
 }
 
 .tech-hero.open .logo-ring-fixed{
-  opacity:1;
+  opacity:.8;
   visibility:visible;
 }
 
 .ring-line{
   fill:none;
-  stroke:rgba(90,167,255,0.10);
-  stroke-width:.9;
+  stroke:rgba(120,190,255,0.08);
+  stroke-width:.4;
 }
 
 .ring-run{
   fill:none;
-  stroke:#6fc8ff;
-  stroke-width:1.1;
+  stroke:#7fd0ff;
+  stroke-width:.5;
   stroke-linecap:round;
-  stroke-dasharray:34 280;
-  animation:ringFlow 2s linear infinite;
-  filter:drop-shadow(0 0 2px rgba(95,190,255,.55));
+
+  stroke-dasharray:20 260;
+  animation:ringFlow 10s linear infinite;
+
+  /* ❌ no glow */
+  filter:none;
 }
 
 @keyframes ringFlow{
   from{ stroke-dashoffset:0; }
-  to{ stroke-dashoffset:-314; }
+  to{ stroke-dashoffset:-280; }
 }
 
+/* มือถือปิดหมด */
 @media (max-width: 1023px){
-  .hero-stars,
-  .bg-ring,
   .energy-svg,
   .logo-ring-fixed{
     display:none !important;
   }
+}
 }
 }
