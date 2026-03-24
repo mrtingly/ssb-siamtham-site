@@ -692,7 +692,7 @@ body.light-mode .logo-core img{
 .energy-line{
   fill:none;
   stroke:rgba(90,167,255,0.10);
-  stroke-width:.8 !important;
+  stroke-width:.2 !important;
   stroke-linecap:round;
   opacity:.9;
 }
@@ -700,7 +700,7 @@ body.light-mode .logo-core img{
 .energy-run{
   fill:none;
   stroke:#6fc8ff;
-  stroke-width:1 !important;
+  stroke-width:0.5 !important;
   stroke-linecap:round;
   stroke-dasharray:42 260;
   stroke-dashoffset:0;
@@ -750,7 +750,7 @@ body.light-mode .logo-core img{
   stroke-width:1.1;
   stroke-linecap:round;
   stroke-dasharray:34 280;
-  animation:ringFlow 9s linear infinite;
+  animation:ringFlow 2s linear infinite;
   filter:drop-shadow(0 0 2px rgba(95,190,255,.55));
 }
 
