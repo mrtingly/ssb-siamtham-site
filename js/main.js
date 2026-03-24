@@ -103,7 +103,6 @@ function handleResize() {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(() => {
     applyThemeByViewport();
-    buildEnergyLines();
     syncHeroLabels();
   }, 120);
 }
@@ -377,7 +376,6 @@ window.addEventListener("load", () => {
   }
 
   syncHeroLabels();
-  buildEnergyLines();
   renderAgentResults("");
 
   bindLanguageButtons();
