@@ -682,7 +682,7 @@ body.light-mode .logo-core img{
 
   opacity:0;
   visibility:hidden;
-  transition:opacity .2s ease;
+  transition:opacity .3s ease;
 }
 
 .tech-hero.open .energy-svg{
@@ -708,20 +708,20 @@ body.light-mode .logo-core img{
 }
 
 .energy-line{
-  fill:none;
-  stroke:rgba(120,190,255,.10);
-  stroke-width:.45;
-  stroke-linecap:round;
+  stroke: rgba(80,160,255,.25);
+  stroke-width: 0.6;
+  fill: none;
 }
 
 .energy-run{
-  fill:none;
-  stroke:#7fd0ff;
-  stroke-width:1;
-  stroke-linecap:round;
-  stroke-dasharray:40 120;
-  animation:energyFlow 3s linear infinite;
-  opacity:.7;
+  stroke: #4da6ff;
+  stroke-width: 0.8;
+  fill: none;
+
+  stroke-dasharray: 40 200;
+  stroke-dashoffset: 0;
+
+  animation: energyFlow 2.8s linear infinite;
 }
 
 .delay-1{ animation-delay:0s; }
@@ -730,7 +730,7 @@ body.light-mode .logo-core img{
 
 @keyframes energyFlow{
   from{ stroke-dashoffset:0; }
-  to{ stroke-dashoffset:-160; }
+  to{ stroke-dashoffset:-240; }
 }
 
 @keyframes dotFlow{
@@ -763,5 +763,4 @@ body.light-mode .logo-core img{
     display:none !important;
   }
 }
-}
-}
+
