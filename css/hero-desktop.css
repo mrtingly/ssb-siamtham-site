@@ -64,6 +64,7 @@
     height: 170px;
     z-index: 12;
     align-self: center;
+    margin-top: -24px;
   }
 
   .center-glow{
