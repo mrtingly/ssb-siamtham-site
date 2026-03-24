@@ -690,76 +690,75 @@ body.light-mode .logo-core img{
   visibility:visible;
 }
 
-/* เส้นพื้น (แทบไม่กินเครื่อง) */
-.energy-line{
-  fill:none;
-  stroke:rgba(120,190,255,0.08);
-  stroke-width:.3;
-}
-
-/* เส้นวิ่ง (เบาสุด) */
-.energy-run{
-  fill:none;
-  stroke:#7fd0ff;
-  stroke-width:.4;
-  stroke-linecap:round;
-
-  stroke-dasharray:24 240;
-  animation:energyFlow 7s linear infinite;
-
-  /* ❌ ตัด glow ออกหมด = เบาขึ้นเยอะ */
-  filter:none;
-}
-
-/* animation เบา + ช้า */
-@keyframes energyFlow{
-  from{ stroke-dashoffset:0; }
-  to{ stroke-dashoffset:-264; }
-}
-
-/* delay */
-.delay-1{ animation-delay:0s; }
-.delay-2{ animation-delay:1.8s; }
-.delay-3{ animation-delay:3.6s; }
-.delay-4{ animation-delay:5.4s; }
-
-/* วงโลโก้ (เบามาก) */
-.logo-ring-fixed{
+.energy-svg{
   position:absolute;
-  left:50%;
-  top:50%;
-  width:150px;
-  height:150px;
-  transform:translate(-50%,-50%);
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:2;
   pointer-events:none;
-  z-index:-1;
-
   opacity:0;
   visibility:hidden;
+  transition:opacity .2s ease, visibility .2s ease;
 }
 
-.tech-hero.open .logo-ring-fixed{
-  opacity:.8;
+.tech-hero.open .energy-svg{
+  opacity:1;
   visibility:visible;
 }
 
-.ring-line{
+.energy-line{
   fill:none;
-  stroke:rgba(120,190,255,0.08);
-  stroke-width:.4;
+  stroke:rgba(120,190,255,.10);
+  stroke-width:.45;
+  stroke-linecap:round;
 }
 
+.energy-dot{
+  fill:#7fd0ff;
+  opacity:0;
+  offset-rotate:0deg;
+}
+
+.tech-hero.open .energy-dot{
+  opacity:.9;
+  animation:dotFlow 4.8s linear infinite;
+}
+
+.dot-1{ animation-delay:0s; }
+.dot-2{ animation-delay:1.2s; }
+.dot-3{ animation-delay:2.4s; }
+.dot-4{ animation-delay:3.6s; }
+
+.energy-dot.dot-1{
+  offset-path:path("M250 300 Q340 300 500 350");
+}
+.energy-dot.dot-2{
+  offset-path:path("M250 420 Q340 390 500 350");
+}
+.energy-dot.dot-3{
+  offset-path:path("M750 300 Q660 300 500 350");
+}
+.energy-dot.dot-4{
+  offset-path:path("M750 420 Q660 390 500 350");
+}
+
+@keyframes dotFlow{
+  from{ offset-distance:0%; }
+  to{ offset-distance:100%; }
+}
+
+.logo-ring-fixed,
+.ring-line,
 .ring-run{
-  fill:none;
-  stroke:#7fd0ff;
-  stroke-width:.5;
-  stroke-linecap:round;
+  display:none !important;
+}
 
-  stroke-dasharray:20 260;
-  animation:ringFlow 10s linear infinite;
-
-  /* ❌ no glow */
-  filter:none;
+@media (max-width:1023px){
+  .energy-svg,
+  .logo-ring-fixed{
+    display:none !important;
+  }
 }
 
 @keyframes ringFlow{
