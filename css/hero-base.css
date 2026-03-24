@@ -706,8 +706,9 @@ body.light-mode .logo-core img{
   height:220px;
   pointer-events:none;
   z-index:2;
-  top:50%;
-  left:50%;
+
+  left:65%;
+  top:55%;
   transform:translate(-50%,-50%);
 }
 
