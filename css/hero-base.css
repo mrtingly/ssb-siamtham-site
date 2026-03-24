@@ -232,7 +232,7 @@ body.light-mode .logo-core img{
   filter:drop-shadow(0 12px 24px rgba(31,74,140,.14));
 }
 
-/* ===== NEW ENERGY SYSTEM ===== */
+/* ===== NEW ENERGY SYSTEM V2 ===== */
 .hero-energy-system{
   position:absolute;
   inset:0;
@@ -240,45 +240,47 @@ body.light-mode .logo-core img{
   pointer-events:none;
 }
 
+/* วงกลางใหม่ */
 .hero-core-ring{
   position:absolute;
   left:50%;
   top:50%;
-  width:220px;
-  height:220px;
+  width:232px;
+  height:232px;
   transform:translate(-50%, -50%);
   border-radius:50%;
-  border:1px solid rgba(110,210,255,.28);
+  border:1px solid rgba(118,216,255,.34);
   box-shadow:
-    0 0 0 1px rgba(110,210,255,.04) inset,
-    0 0 18px rgba(88,194,255,.12),
-    0 0 40px rgba(88,194,255,.08);
-  opacity:.95;
+    0 0 0 1px rgba(118,216,255,.05) inset,
+    0 0 16px rgba(80,190,255,.14),
+    0 0 36px rgba(80,190,255,.10);
+  opacity:.98;
 }
 
 .hero-core-ring-glow{
   position:absolute;
   left:50%;
   top:50%;
-  width:246px;
-  height:246px;
+  width:258px;
+  height:258px;
   transform:translate(-50%, -50%);
   border-radius:50%;
   background:
     radial-gradient(circle,
-      rgba(92,195,255,.12) 0%,
-      rgba(92,195,255,.06) 48%,
+      rgba(92,195,255,.14) 0%,
+      rgba(92,195,255,.07) 48%,
       rgba(92,195,255,0) 74%);
-  filter:blur(6px);
-  opacity:.95;
+  filter:blur(7px);
+  opacity:.96;
 }
 
+/* วงวิ่งรอบวง */
 .hero-orbit-track{
   position:absolute;
   left:50%;
   top:50%;
-  width:220px;
-  height:220px;
+  width:232px;
+  height:232px;
   transform:translate(-50%, -50%);
   border-radius:50%;
   opacity:0;
@@ -294,14 +296,15 @@ body.light-mode .logo-core img{
     conic-gradient(
       from 0deg,
       rgba(90,190,255,0) 0deg,
-      rgba(90,190,255,0) 282deg,
-      rgba(170,235,255,.15) 304deg,
-      rgba(210,248,255,.95) 326deg,
+      rgba(90,190,255,0) 286deg,
+      rgba(175,236,255,.18) 308deg,
+      rgba(220,250,255,.98) 324deg,
+      rgba(120,215,255,.54) 336deg,
       rgba(90,190,255,0) 360deg
     );
   -webkit-mask:radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
           mask:radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
-  filter:drop-shadow(0 0 8px rgba(110,215,255,.28));
+  filter:drop-shadow(0 0 9px rgba(118,220,255,.30));
 }
 
 .tech-hero.open .hero-orbit-track{
@@ -309,14 +312,15 @@ body.light-mode .logo-core img{
 }
 
 .orbit-track-1::before{
-  animation:orbitSpin 4.8s linear infinite, orbitPulse 2.6s ease-in-out infinite;
+  animation:orbitSpin 4.8s linear infinite, orbitPulse 2.4s ease-in-out infinite;
 }
 
 .orbit-track-2::before{
-  animation:orbitSpinReverse 7.2s linear infinite, orbitPulse 3.2s ease-in-out infinite .5s;
-  opacity:.62;
+  animation:orbitSpinReverse 7.2s linear infinite, orbitPulse 3s ease-in-out infinite .5s;
+  opacity:.54;
 }
 
+/* เส้นเข้าขอบวง */
 .hero-link{
   position:absolute;
   height:1px;
@@ -327,10 +331,10 @@ body.light-mode .logo-core img{
   background:
     linear-gradient(90deg,
       rgba(90,185,255,0) 0%,
-      rgba(90,185,255,.18) 24%,
-      rgba(130,220,255,.32) 58%,
+      rgba(90,185,255,.16) 30%,
+      rgba(130,220,255,.30) 62%,
       rgba(170,240,255,.08) 100%);
-  box-shadow:0 0 10px rgba(80,190,255,.10);
+  box-shadow:0 0 8px rgba(80,190,255,.08);
 }
 
 .tech-hero.open .hero-link{
@@ -341,85 +345,115 @@ body.light-mode .logo-core img{
   content:"";
   position:absolute;
   top:50%;
-  left:-64px;
-  width:58px;
+  left:-58px;
+  width:52px;
   height:3px;
   transform:translateY(-50%);
   border-radius:999px;
   background:
     linear-gradient(90deg,
       rgba(255,255,255,0) 0%,
-      rgba(218,248,255,.94) 45%,
-      rgba(120,220,255,1) 72%,
+      rgba(220,248,255,.92) 45%,
+      rgba(120,220,255,.96) 72%,
       rgba(255,255,255,0) 100%);
   box-shadow:
-    0 0 10px rgba(120,220,255,.78),
-    0 0 22px rgba(90,190,255,.24);
+    0 0 8px rgba(120,220,255,.64),
+    0 0 18px rgba(90,190,255,.20);
 }
 
+/* ซ้ายบน */
 .hero-link-1{
-  width:198px;
-  left:24.2%;
-  top:43.5%;
+  width:112px;
+  left:31.2%;
+  top:45.4%;
   transform:rotate(18deg);
 }
 .hero-link-1::before{
-  animation:heroFlow 3.2s ease-in-out infinite;
+  animation:heroFlow 2.8s ease-in-out infinite;
 }
 
+/* ขวาบน */
 .hero-link-2{
-  width:198px;
-  right:24.2%;
-  top:43.5%;
+  width:112px;
+  right:31.2%;
+  top:45.4%;
   transform:rotate(-18deg);
 }
 .hero-link-2::before{
-  animation:heroFlow 3.2s ease-in-out infinite .55s;
+  animation:heroFlow 2.8s ease-in-out infinite .55s;
 }
 
+/* ซ้ายล่าง */
 .hero-link-3{
-  width:190px;
-  left:25.8%;
-  top:60.2%;
+  width:116px;
+  left:31.3%;
+  top:58.4%;
   transform:rotate(-18deg);
 }
 .hero-link-3::before{
-  animation:heroFlow 3.2s ease-in-out infinite 1.05s;
+  animation:heroFlow 2.8s ease-in-out infinite 1.05s;
 }
 
+/* ขวาล่าง */
 .hero-link-4{
-  width:190px;
-  right:25.8%;
-  top:60.2%;
+  width:116px;
+  right:31.3%;
+  top:58.4%;
   transform:rotate(18deg);
 }
 .hero-link-4::before{
-  animation:heroFlow 3.2s ease-in-out infinite 1.55s;
+  animation:heroFlow 2.8s ease-in-out infinite 1.55s;
 }
 
-/* ซ่อนของเก่าทั้งหมด */
-.hero-stars,
-.bg-ring,
-.ring-1,
-.ring-2,
-.ring-3,
-.ring-tilt-1,
-.ring-tilt-2{
-  display:none !important;
+body.light-mode .hero-core-ring{
+  border-color:rgba(84,145,255,.26);
+  box-shadow:
+    0 0 0 1px rgba(84,145,255,.04) inset,
+    0 0 14px rgba(84,145,255,.08),
+    0 0 30px rgba(84,145,255,.06);
 }
 
-.energy-svg-legacy,
-.energy-svg,
-.energy-line,
-.energy-run,
-.delay-1,
-.delay-2,
-.delay-3,
-.delay-4{
-  display:none !important;
-  opacity:0 !important;
-  visibility:hidden !important;
-  pointer-events:none !important;
+body.light-mode .hero-core-ring-glow{
+  background:
+    radial-gradient(circle,
+      rgba(84,145,255,.11) 0%,
+      rgba(84,145,255,.05) 48%,
+      rgba(84,145,255,0) 74%);
+}
+
+body.light-mode .hero-link{
+  background:
+    linear-gradient(90deg,
+      rgba(84,145,255,0) 0%,
+      rgba(84,145,255,.10) 30%,
+      rgba(84,145,255,.20) 62%,
+      rgba(84,145,255,.03) 100%);
+}
+
+body.light-mode .hero-link::before{
+  background:
+    linear-gradient(90deg,
+      rgba(255,255,255,0) 0%,
+      rgba(180,215,255,.92) 45%,
+      rgba(84,145,255,.98) 72%,
+      rgba(255,255,255,0) 100%);
+  box-shadow:
+    0 0 8px rgba(84,145,255,.38),
+    0 0 18px rgba(84,145,255,.14);
+}
+
+body.light-mode .hero-orbit-track::before{
+  background:
+    conic-gradient(
+      from 0deg,
+      rgba(84,145,255,0) 0deg,
+      rgba(84,145,255,0) 286deg,
+      rgba(84,145,255,.12) 308deg,
+      rgba(84,145,255,.62) 324deg,
+      rgba(84,145,255,.20) 336deg,
+      rgba(84,145,255,0) 360deg
+    );
+  filter:drop-shadow(0 0 6px rgba(84,145,255,.16));
 }
 
 body.light-mode .hero-core-ring{
