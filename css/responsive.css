@@ -46,25 +46,8 @@
 
   .agent-dropdown{ width:100%; }
 
-  .tech-hero{
-    min-height:740px;
-    height:auto;
-    padding:26px 0;
-  }
-
   .hero-system-title{ top:12.8%; }
   .hero-system-title-text{ font-size:28px; }
-
-  .node-shell{
-    min-width:248px;
-    min-height:66px;
-    padding:12px 16px;
-  }
-
-  .menu-node.bottom .node-shell{
-    min-width:300px;
-    min-height:70px;
-  }
 
   .impact-grid{ grid-template-columns:1fr; }
   .popup-head h3{ font-size:36px; }
