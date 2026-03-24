@@ -705,10 +705,10 @@ body.light-mode .logo-core img{
   width:220px;
   height:220px;
   pointer-events:none;
-  z-index:2;
+  z-index:9;
 
-  left:72%;
-  top:52%;
+  left:50%;
+  top:50%;
   transform:translate(-50%,-50%);
 }
 
