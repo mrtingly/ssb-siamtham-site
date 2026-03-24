@@ -19,7 +19,7 @@
     padding: 120px 88px 110px;
     display: grid !important;
     grid-template-columns: 1fr 280px 1fr;
-    grid-template-rows: auto 260px 260px auto;
+    grid-template-rows: auto 210px 210px auto;
     align-items: center;
     justify-items: center;
     row-gap: 0;
