@@ -1,16 +1,20 @@
 .tech-hero{
-  display:flex;
+  display:grid !important;
+  grid-template-columns: 1fr auto 1fr;
   align-items:center;
-  justify-content:center;
+}
+
+.logo-core{
+  position:relative !important;
+  left:auto !important;
+  top:auto !important;
+  transform:none !important;
+  margin:0 auto;
+  grid-column:2;
 }
 
 .menu-layer,
 .menu-layer-v2{
-  position:static !important;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  width:100%;
-  max-width:1200px;
-  margin:0 auto;
+  grid-column:1 / -1;
+  display:contents;
 }
