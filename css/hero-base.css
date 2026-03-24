@@ -224,7 +224,6 @@ body.light-mode .center-pulse{
 }
 
 .logo-core:hover{
-  transform:scale(1.04);
   filter:brightness(1.04);
 }
 
