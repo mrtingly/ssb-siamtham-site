@@ -1,6 +1,6 @@
 @media (min-width: 1024px){
 
-  /* ===== Desktop Hero Layout Override ===== */
+  /* ===== Desktop Hero Layout ===== */
   .hero-stage{
     padding: 24px 24px 40px;
   }
@@ -22,7 +22,7 @@
     grid-template-rows: auto 1fr auto;
     align-items: center;
     justify-items: center;
-    row-gap: 18px;
+    row-gap: 8px;
     overflow: hidden;
   }
 
@@ -98,7 +98,7 @@
     pointer-events: auto;
   }
 
-  /* ===== Reset floating positions from base ===== */
+  /* ===== Reset layout from base ===== */
   .menu-node,
   .menu-group,
   .m1,
@@ -110,15 +110,10 @@
     left: auto !important;
     top: auto !important;
     transform: none !important;
-    margin: 0 !important;
+    margin-bottom: 0 !important;
   }
 
   /* ===== Base button sizing ===== */
-  .menu-node{
-    align-self: center;
-    justify-self: center;
-  }
-
   .menu-node .node-shell{
     width: 260px !important;
     min-height: 74px !important;
@@ -139,50 +134,62 @@
   }
 
   /* ===== Place each block ===== */
-   .m1{
+  .m1{
     grid-column: 1;
     grid-row: 1;
     justify-self: end;
-    margin-right: 28px !important;
+    align-self: end;
+    margin-right: 22px !important;
+    margin-top: 24px !important;
   }
-  
+
   .g-company{
     grid-column: 3;
     grid-row: 1;
     justify-self: start;
-    margin-left: 28px !important;
+    align-self: end;
+    margin-left: 22px !important;
+    margin-top: 24px !important;
     display: flex;
     flex-direction: column-reverse;
+    align-items: flex-start;
   }
-  
+
   .g-product{
     grid-column: 1;
     grid-row: 2;
     justify-self: end;
-    margin-right: 28px !important;
+    align-self: start;
+    margin-right: 22px !important;
+    margin-top: -18px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
   }
-  
+
   .g-agent{
     grid-column: 3;
     grid-row: 2;
     justify-self: start;
-    margin-left: 28px !important;
+    align-self: start;
+    margin-left: 22px !important;
+    margin-top: -18px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
-  
-    .m5{
+
+  .m5{
     grid-column: 2;
     grid-row: 3;
     justify-self: center;
     align-self: start;
-    margin-top: 2px !important;
+    margin-top: -8px !important;
   }
 
   /* ===== Group behavior ===== */
   .menu-group{
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
+    gap: 10px;
     z-index: 15;
   }
 
@@ -203,8 +210,7 @@
   }
 
   /* ===== Submenu Panels ===== */
-  
-    .submenu-panel{
+  .submenu-panel{
     position: static !important;
     left: auto !important;
     top: auto !important;
@@ -225,11 +231,23 @@
       max-height .22s ease;
   }
 
+  /* ขวาบน: เปิดขึ้นบน */
   .g-company .submenu-panel{
-  order: -1;
-  margin-bottom: 10px;
+    order: -1;
+    margin-bottom: 10px;
   }
-  
+
+  .g-company .main-node{
+    order: 2;
+  }
+
+  /* ตัวอื่น: เปิดลงล่าง */
+  .g-product .submenu-panel,
+  .g-agent .submenu-panel{
+    order: 2;
+    margin-top: 10px;
+  }
+
   .menu-group.open .submenu-panel{
     opacity: 1;
     visibility: visible;
@@ -292,10 +310,10 @@
       width: 272px !important;
     }
 
-    .m1{ margin-right: 96px !important; }
-    .g-product{ margin-right: 96px !important; }
-    .g-company{ margin-left: 96px !important; }
-    .g-agent{ margin-left: 96px !important; }
+    .m1{ margin-right: 30px !important; }
+    .g-product{ margin-right: 30px !important; }
+    .g-company{ margin-left: 30px !important; }
+    .g-agent{ margin-left: 30px !important; }
   }
 
   /* ===== Light mode polish ===== */
@@ -306,31 +324,4 @@
   body.light-mode .submenu-btn{
     background: #ffffff;
   }
-
-  /* ===== FIX ALIGN + COMPANY MENU ===== */
-
-/* ดันเมนูลง */
-.m1,
-.g-company,
-.g-product,
-.g-agent{
-  margin-top: 22px;
-}
-
-/* company submenu ขึ้นบน */
-.g-company{
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: flex-start;
-}
-
-.g-company .submenu-panel{
-  order: -1;
-  margin-bottom: 10px;
-}
-
-.g-company .main-node{
-  order: 2;
-}
-  
 }
