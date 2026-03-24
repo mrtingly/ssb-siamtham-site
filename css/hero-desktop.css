@@ -19,7 +19,7 @@
     padding: 120px 88px 110px;
     display: grid !important;
     grid-template-columns: 1fr 280px 1fr;
-    grid-template-rows: auto 210px 210px auto;
+    grid-template-rows: auto 195px 195px auto;
     align-items: center;
     justify-items: center;
     row-gap: 0;
@@ -88,7 +88,7 @@
     grid-row: 1 / -1;
     display: grid !important;
     grid-template-columns: 1fr 280px 1fr;
-    grid-template-rows: auto 260px 260px auto;
+    grid-template-rows: auto 195px 195px auto;
     align-items: center;
     justify-items: center;
     pointer-events: none;
@@ -288,14 +288,14 @@
   @media (min-width: 1280px){
     .tech-hero{
       grid-template-columns: 1fr 300px 1fr;
-      grid-template-rows: auto 280px 280px auto;
+      grid-template-rows: auto 195px 195px auto;
       padding: 124px 96px 112px;
     }
 
     .menu-layer,
     .menu-layer-v2{
       grid-template-columns: 1fr 300px 1fr;
-      grid-template-rows: auto 280px 280px auto;
+      grid-template-rows: auto 195px 195px auto;
     }
 
     .logo-core{
