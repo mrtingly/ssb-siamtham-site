@@ -22,7 +22,7 @@
     grid-template-rows: auto 1fr auto;
     align-items: center;
     justify-items: center;
-    row-gap: 34px;
+    row-gap: 18px;
     overflow: hidden;
   }
 
@@ -139,40 +139,42 @@
   }
 
   /* ===== Place each block ===== */
-  .m1{
+   .m1{
     grid-column: 1;
     grid-row: 1;
     justify-self: end;
-    margin-right: 80px !important;
+    margin-right: 28px !important;
   }
-
+  
   .g-company{
     grid-column: 3;
     grid-row: 1;
     justify-self: start;
-    margin-left: 80px !important;
+    margin-left: 28px !important;
+    display: flex;
+    flex-direction: column-reverse;
   }
-
+  
   .g-product{
     grid-column: 1;
     grid-row: 2;
     justify-self: end;
-    margin-right: 80px !important;
+    margin-right: 28px !important;
   }
-
+  
   .g-agent{
     grid-column: 3;
     grid-row: 2;
     justify-self: start;
-    margin-left: 80px !important;
+    margin-left: 28px !important;
   }
-
-  .m5{
+  
+    .m5{
     grid-column: 2;
     grid-row: 3;
     justify-self: center;
-    align-self: end;
-    margin-top: 10px !important;
+    align-self: start;
+    margin-top: 2px !important;
   }
 
   /* ===== Group behavior ===== */
@@ -201,7 +203,8 @@
   }
 
   /* ===== Submenu Panels ===== */
-  .submenu-panel{
+  
+    .submenu-panel{
     position: static !important;
     left: auto !important;
     top: auto !important;
@@ -222,6 +225,11 @@
       max-height .22s ease;
   }
 
+  .g-company .submenu-panel{
+  order: -1;
+  margin-bottom: 10px;
+  }
+  
   .menu-group.open .submenu-panel{
     opacity: 1;
     visibility: visible;
