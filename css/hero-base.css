@@ -666,17 +666,36 @@ body.light-mode .logo-core img{
 }
 
 /* animation */
-@keyframes ringPulse{
-  0%,100%{ opacity:.6; transform:translate(-50%,-50%) scale(1); }
-  50%{ opacity:1; transform:translate(-50%,-50%) scale(1.04); }
+
+.energy-line{
+  fill:none;
+  stroke:rgba(90,167,255,0.15);
+  stroke-width:2;
 }
 
-@keyframes orbitSpin{
-  from{ transform:translate(-50%,-50%) rotate(0deg); }
-  to{ transform:translate(-50%,-50%) rotate(360deg); }
+.energy-run{
+  fill:none;
+  stroke:#5aa7ff;
+  stroke-width:3;
+  stroke-linecap:round;
+
+  stroke-dasharray:120 400;
+  stroke-dashoffset:0;
+
+  animation: energyFlow 4s linear infinite;
+  filter: drop-shadow(0 0 6px #5aa7ff);
 }
 
-@keyframes flowPulse{
-  0%,100%{ opacity:.3; }
-  50%{ opacity:.9; }
+@keyframes energyFlow{
+  from{
+    stroke-dashoffset:0;
+  }
+  to{
+    stroke-dashoffset:-520;
+  }
 }
+
+.delay-1{ animation-delay:0s; }
+.delay-2{ animation-delay:1s; }
+.delay-3{ animation-delay:2s; }
+.delay-4{ animation-delay:3s; }
