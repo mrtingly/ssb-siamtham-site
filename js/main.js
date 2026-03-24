@@ -409,3 +409,9 @@ if (popupNav) {
   syncActiveLangFromCookie();
 });
 
+document.querySelectorAll('.menu-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const parent = btn.closest('.menu-item');
+    parent.classList.toggle('open');
+  });
+});
