@@ -188,8 +188,10 @@
   }
 
   /* ===== Group behavior ===== */
-  .menu-group{
-    gap: 10px;
+   .menu-group{
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
     z-index: 15;
   }
 
@@ -310,10 +312,22 @@
       width: 272px !important;
     }
 
-    .m1{ margin-right: 30px !important; }
-    .g-product{ margin-right: 30px !important; }
-    .g-company{ margin-left: 30px !important; }
-    .g-agent{ margin-left: 30px !important; }
+    .m1{ 
+      margin-right: 30px !important; 
+    }
+    
+    .g-product{
+      margin-top: 6px !important;
+    }
+    
+    .g-company{ 
+      margin-left: 30px !important; 
+    }
+    
+    .g-agent{
+      margin-top: 6px !important;
+  }
+    
   }
 
   /* ===== Light mode polish ===== */
