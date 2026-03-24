@@ -675,15 +675,14 @@ body.light-mode .logo-core img{
 .energy-line{
   fill:none;
   stroke:rgba(90,167,255,0.15);
-  stroke-width: 0.7;
+  stroke-width: 1 !important;
 }
 
 .energy-run{
   fill:none;
   stroke:#5aa7ff;
-  stroke-width:3;
+  stroke-width: 1 !important;
   stroke-linecap:round;
-
   stroke-dasharray:120 400;
   stroke-dashoffset:0;
 
