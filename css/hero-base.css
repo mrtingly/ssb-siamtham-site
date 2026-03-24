@@ -59,6 +59,31 @@ body.light-mode .tech-hero::after{
   border-color:rgba(20,55,100,.08);
 }
 
+/* ตัดจุดขาวและวงเก่าออกให้หมด */
+.hero-stars,
+.bg-ring,
+.ring-1,
+.ring-2,
+.ring-3,
+.ring-tilt-1,
+.ring-tilt-2{
+  display:none !important;
+}
+
+/* ซ่อนเส้น SVG เก่า แต่ยังเก็บ element ไว้กัน js พัง */
+.energy-svg,
+.energy-line,
+.energy-run,
+.delay-1,
+.delay-2,
+.delay-3,
+.delay-4{
+  display:none !important;
+  opacity:0 !important;
+  visibility:hidden !important;
+  pointer-events:none !important;
+}
+
 .hero-bg{
   position:absolute;
   inset:0;
@@ -75,21 +100,14 @@ body.light-mode .tech-hero::after{
   height:min(58vw, 540px);
   border-radius:50%;
   background:
-    radial-gradient(circle,
-      rgba(201,238,255,.20) 0%,
-      rgba(110,194,255,.12) 18%,
-      rgba(46,140,255,.06) 30%,
-      transparent 64%);
-  filter:blur(14px);
+    radial-gradient(circle, rgba(201,238,255,.16) 0%, rgba(110,194,255,.10) 18%, rgba(46,140,255,.05) 30%, transparent 64%);
+  filter:blur(16px);
   animation:corePulse 6s ease-in-out infinite;
 }
 
 body.light-mode .bg-core-glow{
   background:
-    radial-gradient(circle,
-      rgba(79,124,255,.13) 0%,
-      rgba(111,155,255,.08) 24%,
-      transparent 68%);
+    radial-gradient(circle, rgba(79,124,255,.10) 0%, rgba(111,155,255,.06) 24%, transparent 68%);
 }
 
 .hero-system-title{
@@ -155,36 +173,36 @@ body.light-mode .hero-system-title-text{
   position:absolute;
   left:50%;
   top:50%;
-  width:164px;
-  height:164px;
+  width:170px;
+  height:170px;
   transform:translate(-50%, -50%);
   z-index:3;
   pointer-events:none;
-  background:radial-gradient(circle, rgba(228,248,255,.72) 0%, rgba(169,228,255,.20) 34%, rgba(90,188,255,.05) 56%, transparent 72%);
-  filter:blur(8px);
+  background:radial-gradient(circle, rgba(228,248,255,.65) 0%, rgba(169,228,255,.18) 34%, rgba(90,188,255,.04) 56%, transparent 72%);
+  filter:blur(10px);
   animation:centerGlow 5s ease-in-out infinite;
 }
 
 body.light-mode .center-glow{
-  background:radial-gradient(circle, rgba(111,155,255,.18) 0%, rgba(111,155,255,.08) 44%, transparent 74%);
+  background:radial-gradient(circle, rgba(111,155,255,.14) 0%, rgba(111,155,255,.06) 44%, transparent 74%);
 }
 
 .center-pulse{
   position:absolute;
   left:50%;
   top:50%;
-  width:260px;
-  height:260px;
+  width:250px;
+  height:250px;
   border-radius:50%;
   transform:translate(-50%,-50%) scale(.92);
-  border:1px solid rgba(138,223,255,.10);
+  border:1px solid rgba(138,223,255,.14);
   opacity:0;
   pointer-events:none;
   z-index:3;
 }
 
 body.light-mode .center-pulse{
-  border-color:rgba(79,124,255,.16);
+  border-color:rgba(79,124,255,.14);
 }
 
 .center-pulse.active{
@@ -232,290 +250,13 @@ body.light-mode .logo-core img{
   filter:drop-shadow(0 12px 24px rgba(31,74,140,.14));
 }
 
-/* ===== NEW ENERGY SYSTEM V2 ===== */
-.hero-energy-system{
-  position:absolute;
-  inset:0;
-  z-index:6;
-  pointer-events:none;
-}
-
-/* วงกลางใหม่ */
-.hero-core-ring{
-  position:absolute;
-  left:50%;
-  top:50%;
-  width:232px;
-  height:232px;
-  transform:translate(-50%, -50%);
-  border-radius:50%;
-  border:1px solid rgba(118,216,255,.34);
-  box-shadow:
-    0 0 0 1px rgba(118,216,255,.05) inset,
-    0 0 16px rgba(80,190,255,.14),
-    0 0 36px rgba(80,190,255,.10);
-  opacity:.98;
-}
-
-.hero-core-ring-glow{
-  position:absolute;
-  left:50%;
-  top:50%;
-  width:258px;
-  height:258px;
-  transform:translate(-50%, -50%);
-  border-radius:50%;
-  background:
-    radial-gradient(circle,
-      rgba(92,195,255,.14) 0%,
-      rgba(92,195,255,.07) 48%,
-      rgba(92,195,255,0) 74%);
-  filter:blur(10px);
-  opacity:.55;
-}
-
-/* วงวิ่งรอบวง */
-.hero-orbit-track{
-  position:absolute;
-  left:50%;
-  top:50%;
-  width:232px;
-  height:232px;
-  transform:translate(-50%, -50%);
-  border-radius:50%;
-  opacity:0;
-  transition:opacity .28s ease;
-}
-
-.hero-orbit-track::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:50%;
-  background:
-  animation: orbitSpin 6s linear infinite;
-    conic-gradient(
-      from 0deg,
-      rgba(90,190,255,0) 0deg,
-      rgba(90,190,255,0) 286deg,
-      rgba(175,236,255,.18) 308deg,
-      rgba(220,250,255,.98) 324deg,
-      rgba(120,215,255,.54) 336deg,
-      rgba(90,190,255,0) 360deg
-    );
-  -webkit-mask:radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
-          mask:radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
-  filter:drop-shadow(0 0 9px rgba(118,220,255,.30));
-}
-
-.tech-hero.open .hero-orbit-track{
-  opacity:1;
-}
-
-.orbit-track-1::before{
-  animation:orbitSpin 4.8s linear infinite, orbitPulse 2.4s ease-in-out infinite;
-}
-
-.orbit-track-2::before{
-  animation:orbitSpinReverse 7.2s linear infinite, orbitPulse 3s ease-in-out infinite .5s;
-  opacity:.54;
-}
-
-/* เส้นเข้าขอบวง */
-.hero-link{
-  position:absolute;
-  height:1px;
-  border-radius:999px;
-  overflow:hidden;
-  opacity:0;
-  transition:opacity .28s ease;
-  background:
-    linear-gradient(90deg,
-      rgba(90,185,255,0) 0%,
-      rgba(90,185,255,.16) 30%,
-      rgba(130,220,255,.30) 62%,
-      rgba(170,240,255,.08) 100%);
-  box-shadow:0 0 8px rgba(80,190,255,.08);
-  mask: linear-gradient(to right, transparent 0%, #000 35%, #000 100%);
-  -webkit-mask: linear-gradient(to right, transparent 0%, #000 35%, #000 100%);
-}
-
-.tech-hero.open .hero-link{
-  opacity:1;
-}
-
-.hero-link::before{
-  content:"";
-  position:absolute;
-  top:50%;
-  left:-58px;
-  width:52px;
-  height:3px;
-  transform:translateY(-50%);
-  border-radius:999px;
- background:
-  radial-gradient(circle,
-    rgba(140,230,255,.95) 0%,
-    rgba(90,190,255,.85) 40%,
-    rgba(0,0,0,0) 70%);
-  box-shadow:
-    0 0 8px rgba(120,220,255,.64),
-    0 0 18px rgba(90,190,255,.20);
-}
-
-/* ซ้ายบน */
-.hero-link-1{
-  width:112px;
-  left:31.2%;
-  top:45.4%;
-  transform:rotate(18deg);
-}
-.hero-link-1::before{
-  animation:heroFlow 2.8s ease-in-out infinite;
-}
-
-/* ขวาบน */
-.hero-link-2{
-  width:112px;
-  right:31.2%;
-  top:45.4%;
-  transform:rotate(-18deg);
-}
-.hero-link-2::before{
-  animation:heroFlow 2.8s ease-in-out infinite .55s;
-}
-
-/* ซ้ายล่าง */
-.hero-link-3{
-  width:116px;
-  left:31.3%;
-  top:58.4%;
-  transform:rotate(-18deg);
-}
-.hero-link-3::before{
-  animation:heroFlow 2.8s ease-in-out infinite 1.05s;
-}
-
-/* ขวาล่าง */
-.hero-link-4{
-  width:116px;
-  right:31.3%;
-  top:58.4%;
-  transform:rotate(18deg);
-}
-.hero-link-4::before{
-  animation:heroFlow 2.8s ease-in-out infinite 1.55s;
-}
-
-body.light-mode .hero-core-ring{
-  border-color:rgba(84,145,255,.26);
-  box-shadow:
-    0 0 0 1px rgba(84,145,255,.04) inset,
-    0 0 14px rgba(84,145,255,.08),
-    0 0 30px rgba(84,145,255,.06);
-}
-
-body.light-mode .hero-core-ring-glow{
-  background:
-    radial-gradient(circle,
-      rgba(84,145,255,.11) 0%,
-      rgba(84,145,255,.05) 48%,
-      rgba(84,145,255,0) 74%);
-}
-
-body.light-mode .hero-link{
-  background:
-    linear-gradient(90deg,
-      rgba(84,145,255,0) 0%,
-      rgba(84,145,255,.10) 30%,
-      rgba(84,145,255,.20) 62%,
-      rgba(84,145,255,.03) 100%);
-}
-
-body.light-mode .hero-link::before{
-  background:
-    linear-gradient(90deg,
-      rgba(255,255,255,0) 0%,
-      rgba(180,215,255,.92) 45%,
-      rgba(84,145,255,.98) 72%,
-      rgba(255,255,255,0) 100%);
-  box-shadow:
-    0 0 8px rgba(84,145,255,.38),
-    0 0 18px rgba(84,145,255,.14);
-}
-
-body.light-mode .hero-orbit-track::before{
-  background:
-    conic-gradient(
-      from 0deg,
-      rgba(84,145,255,0) 0deg,
-      rgba(84,145,255,0) 286deg,
-      rgba(84,145,255,.12) 308deg,
-      rgba(84,145,255,.62) 324deg,
-      rgba(84,145,255,.20) 336deg,
-      rgba(84,145,255,0) 360deg
-    );
-  filter:drop-shadow(0 0 6px rgba(84,145,255,.16));
-}
-
-body.light-mode .hero-core-ring{
-  border-color:rgba(84,145,255,.24);
-  box-shadow:
-    0 0 0 1px rgba(84,145,255,.03) inset,
-    0 0 14px rgba(84,145,255,.07),
-    0 0 30px rgba(84,145,255,.05);
-}
-
-body.light-mode .hero-core-ring-glow{
-  background:
-    radial-gradient(circle,
-      rgba(84,145,255,.10) 0%,
-      rgba(84,145,255,.05) 48%,
-      rgba(84,145,255,0) 74%);
-}
-
-body.light-mode .hero-link{
-  background:
-    linear-gradient(90deg,
-      rgba(84,145,255,0) 0%,
-      rgba(84,145,255,.10) 24%,
-      rgba(84,145,255,.20) 58%,
-      rgba(84,145,255,.03) 100%);
-  box-shadow:0 0 8px rgba(84,145,255,.08);
-}
-
-body.light-mode .hero-link::before{
-  background:
-    linear-gradient(90deg,
-      rgba(255,255,255,0) 0%,
-      rgba(180,215,255,.92) 45%,
-      rgba(84,145,255,.98) 72%,
-      rgba(255,255,255,0) 100%);
-  box-shadow:
-    0 0 8px rgba(84,145,255,.38),
-    0 0 18px rgba(84,145,255,.14);
-}
-
-body.light-mode .hero-orbit-track::before{
-  background:
-    conic-gradient(
-      from 0deg,
-      rgba(84,145,255,0) 0deg,
-      rgba(84,145,255,0) 282deg,
-      rgba(84,145,255,.10) 304deg,
-      rgba(84,145,255,.58) 326deg,
-      rgba(84,145,255,0) 360deg
-    );
-  filter:drop-shadow(0 0 6px rgba(84,145,255,.16));
-}
-
 @keyframes corePulse{
   0%,100%{
     transform:translate(-50%,-50%) scale(1);
     opacity:.92;
   }
   50%{
-    transform:translate(-50%,-50%) scale(1.04);
+    transform:translate(-50%,-50%) scale(1.03);
     opacity:1;
   }
 }
@@ -526,7 +267,7 @@ body.light-mode .hero-orbit-track::before{
     opacity:.92;
   }
   50%{
-    transform:translate(-50%,-50%) scale(1.05);
+    transform:translate(-50%,-50%) scale(1.04);
     opacity:1;
   }
 }
@@ -537,44 +278,8 @@ body.light-mode .hero-orbit-track::before{
     opacity:.88;
   }
   100%{
-    transform:translate(-50%,-50%) scale(1.10);
+    transform:translate(-50%,-50%) scale(1.08);
     opacity:0;
-  }
-}
-
-@keyframes heroFlow{
-  0%{
-    left:-64px;
-    opacity:0;
-  }
-  10%{
-    opacity:1;
-  }
-  68%{
-    opacity:1;
-  }
-  100%{
-    left:calc(100% - 6px);
-    opacity:0;
-  }
-}
-
-@keyframes orbitSpin{
-  from{ transform:translate(-50%, -50%) rotate(0deg); }
-  to{ transform:translate(-50%, -50%) rotate(360deg); }
-}
-
-@keyframes orbitSpinReverse{
-  from{ transform:translate(-50%, -50%) rotate(360deg); }
-  to{ transform:translate(-50%, -50%) rotate(0deg); }
-}
-
-@keyframes orbitPulse{
-  0%,100%{
-    opacity:.42;
-  }
-  50%{
-    opacity:1;
   }
 }
 
@@ -766,26 +471,26 @@ body.light-mode .hero-orbit-track::before{
     min-height:74px;
     border-radius:22px;
     background:
-      linear-gradient(145deg,#135dff,#2f86ff 56%,#6cb6ff);
-    border:1px solid rgba(110,185,255,.36);
+      linear-gradient(145deg,#7b0000,#c20000 56%,#ff2b2b);
+    border:1px solid rgba(255,90,90,.48);
     box-shadow:
-      0 18px 34px rgba(0,0,0,.28),
-      0 0 20px rgba(80,160,255,.20),
+      0 18px 34px rgba(0,0,0,.34),
+      0 0 20px rgba(255,50,50,.28),
       inset 0 0 12px rgba(255,255,255,.10);
   }
 
   .m5 .node-title{
     font-size:22px;
     color:#fff;
-    text-shadow:0 0 10px rgba(255,255,255,.10);
+    text-shadow:0 0 10px rgba(255,255,255,.14);
   }
 
   .menu-node.bottom:hover .node-shell{
     transform:translateY(-2px);
     filter:brightness(1.03);
     box-shadow:
-      0 20px 40px rgba(0,0,0,.32),
-      0 0 24px rgba(80,160,255,.28),
+      0 20px 40px rgba(0,0,0,.35),
+      0 0 24px rgba(255,50,50,.38),
       inset 0 0 12px rgba(255,255,255,.14);
   }
 
@@ -967,7 +672,9 @@ body.light-mode .hero-orbit-track::before{
 }
 
 @media (max-width: 1023px){
-  .hero-energy-system{
-    display:none;
+  .hero-stars,
+  .bg-ring,
+  .energy-svg{
+    display:none !important;
   }
 }
