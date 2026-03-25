@@ -212,5 +212,11 @@
 .video-note{
   order:4 !important;
 }
+
+  .popup-subtitle{
+  font-size:13px !important;
+  line-height:1.6 !important;
+  opacity:0.85;
+}
   
 }
