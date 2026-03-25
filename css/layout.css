@@ -452,11 +452,11 @@ iframe.skiptranslate{ display:none !important; }
 }
 
 .hero-stage{
-  min-height:auto;
+  min-height:auto !important;
   display:flex;
-  align-items:flex-start;
+  align-items:flex-start !important;
   justify-content:center;
-  padding:0 0 16px;
+  padding:0 !important;
 }
 
 .hero-center{
