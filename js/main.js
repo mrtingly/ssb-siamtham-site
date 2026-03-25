@@ -409,10 +409,20 @@ if (popupNav) {
   syncActiveLangFromCookie();
 });
 
-document.querySelectorAll('.menu-btn').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
+document.querySelectorAll('.menu-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
     const parent = btn.closest('.menu-item');
-    parent.classList.toggle('open');
+    if (!parent) return;
+
+    const isOpen = parent.classList.contains('open');
+
+    document.querySelectorAll('.mobile-menu-v2 .menu-item').forEach(item => {
+      item.classList.remove('open');
+    });
+
+    if (!isOpen) {
+      parent.classList.add('open');
+    }
   });
 });
 
