@@ -411,6 +411,8 @@ if (popupNav) {
 
 document.querySelectorAll('.menu-btn').forEach(btn => {
   btn.addEventListener('click', () => {
+    if (btn.classList.contains('no-submenu')) return;
+
     const parent = btn.closest('.menu-item');
     if (!parent) return;
 
