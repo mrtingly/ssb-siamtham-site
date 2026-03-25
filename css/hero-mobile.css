@@ -201,5 +201,9 @@
       font-size:18px;
     }
   }
-
+  
+.menu-btn.no-arrow::after{
+  display:none;
+}
+  
 }
