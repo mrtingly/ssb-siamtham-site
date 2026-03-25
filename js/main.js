@@ -259,7 +259,7 @@ function bindHeroMenu() {
     event.preventDefault();
     event.stopPropagation();
     closeAllSubmenus();
-    openInfoPopup("ssbmobile");
+    openInfoPopup("ssb");
   });
 
   $('[data-action="company-about"]', techHero)?.addEventListener("click", event => {
