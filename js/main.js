@@ -415,3 +415,9 @@ document.querySelectorAll('.menu-btn').forEach(btn=>{
     parent.classList.toggle('open');
   });
 });
+
+document.querySelectorAll('.mobile-menu-v2 [data-action="ssb-system"]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (typeof openInfoPopupStep === 'function') openInfoPopupStep('ssbmobile');
+  });
+});
