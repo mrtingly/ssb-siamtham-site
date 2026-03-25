@@ -32,7 +32,9 @@
   .popup-pro-video-sticky{
     position:relative;
     top:auto;
-    padding:14px 14px 10px;
+    display:flex !important;
+    flex-direction:column !important;
+    padding:10px 14px 10px;
   }
 
   .popup-kicker{
@@ -40,25 +42,14 @@
     margin-bottom:8px;
   }
 
-  .popup-pro-video-frame{
-    border-radius:18px;
-    overflow:hidden;
-    box-shadow:0 12px 24px rgba(31,74,140,.10);
-  }
-
-  .video-note{
-    font-size:12px;
-    line-height:1.7;
-    margin-top:8px;
-    color:#6e84a3;
-  }
-
   .popup-pro-nav{
+    order:2 !important;
     display:flex !important;
     flex-direction:row !important;
     flex-wrap:nowrap !important;
     gap:8px !important;
-    margin-top:12px !important;
+    margin-top:0 !important;
+    margin-bottom:12px !important;
     padding:2px 0 8px !important;
     width:100% !important;
     overflow-x:auto !important;
@@ -110,6 +101,21 @@
     box-shadow:0 10px 20px rgba(60,120,255,.18) !important;
   }
 
+  .popup-pro-video-frame{
+    order:3 !important;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 12px 24px rgba(31,74,140,.10);
+  }
+
+  .video-note{
+    order:4 !important;
+    font-size:12px;
+    line-height:1.7;
+    margin-top:8px;
+    color:#6e84a3;
+  }
+
   .popup-pro-content{
     flex:1;
     min-height:0;
@@ -130,9 +136,10 @@
   }
 
   .popup-subtitle{
-    font-size:14px;
-    line-height:1.75;
+    font-size:13px !important;
+    line-height:1.6 !important;
     color:#6f86a8;
+    opacity:.85;
   }
 
   .popup-pro-body{
@@ -193,38 +200,4 @@
     top:12px;
     right:12px;
   }
-
-  .popup-pro-video-sticky{
-  display:flex !important;
-  flex-direction:column !important;
-}
-
-.popup-pro-nav{
-  order:2 !important;
-  margin-top:0 !important;
-  margin-bottom:12px !important;
-}
-
-.popup-pro-video-frame{
-  order:3 !important;
-}
-
-.video-note{
-  order:4 !important;
-}
-
-  .popup-subtitle{
-  font-size:13px !important;
-  line-height:1.6 !important;
-  opacity:0.85;
-}
-  .hero{
-  padding-top:12px !important;
-}
-
-  .hero-logo{
-  width:64px !important;
-  margin-bottom:10px !important;
-}
-  
 }
