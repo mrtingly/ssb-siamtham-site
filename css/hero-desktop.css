@@ -249,25 +249,25 @@
 
  .menu-group .main-node{
   position:relative;
-  opacity:1;
-  visibility:visible;
-  pointer-events:auto;
+  opacity:1 !important;
+  visibility:visible !important;
+  pointer-events:auto !important;
   display:block !important;
 }
-
-  .submenu-panel{
+  
+    .submenu-panel{
     width:260px;
     min-width:260px;
-
+  
     display:grid;
     gap:10px;
-
+  
     opacity:0;
     visibility:hidden;
     pointer-events:none;
     max-height:0;
     overflow:hidden;
-
+  
     transition:
       opacity .22s ease,
       visibility .22s ease,
