@@ -160,10 +160,10 @@
   .agent-dropdown{ top:calc(100% + 8px); }
 
   .main-content{
-    width:min(calc(100% - 14px), var(--max));
-    margin:10px auto 0;
-    padding:14px 0 28px;
-  }
+  width:min(calc(100% - 14px), var(--max));
+  margin:2px auto 0;
+  padding:4px 0 20px;
+}
 
   .popup-backdrop{ padding:14px; }
 
