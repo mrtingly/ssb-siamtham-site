@@ -39,20 +39,14 @@
   padding:6px 16px 90px;
 }
 
-   .mobile-hero{
-    text-align:center;
-    margin-top:-6px;
-    margin-bottom:18px;
-  }
-
-    .mobile-hero-logo{
-    width:116px;
-    height:auto;
-    display:block;
-    margin:0 auto 10px;
-    object-fit:contain;
-    filter:drop-shadow(0 10px 18px rgba(31,74,140,.12));
-  }
+   .mobile-hero-logo{
+  width:116px;
+  height:auto;
+  display:block;
+  margin:0 auto 10px;
+  object-fit:contain;
+  filter:drop-shadow(0 10px 18px rgba(31,74,140,.12));
+}
   
   .mobile-hero-title{
     font-family:'Orbitron',sans-serif;
