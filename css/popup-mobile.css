@@ -218,5 +218,13 @@
   line-height:1.6 !important;
   opacity:0.85;
 }
+  .hero{
+  padding-top:12px !important;
+}
+
+  .hero-logo{
+  width:64px !important;
+  margin-bottom:10px !important;
+}
   
 }
