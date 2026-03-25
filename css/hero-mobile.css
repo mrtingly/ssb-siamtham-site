@@ -34,12 +34,13 @@
     z-index:0;
   }
 
-  .mobile-menu-v2{
-    position:relative;
-    z-index:2;
-    padding:0 16px 90px;
-  }
-
+.mobile-menu-v2{
+  position:relative;
+  z-index:10;
+  padding:0 16px 60px;
+  box-sizing:border-box;
+}
+  
   .mobile-hero{
     text-align:center;
     margin-top:8px;
@@ -242,10 +243,12 @@
     50%{ transform:translateY(-4px); }
   }
 
-  @media (max-width: 760px){
-    .mobile-menu-v2{
-      padding:0 12px 84px;
-    }
+@media (max-width: 760px){
+  .mobile-menu-v2{
+    padding:0 12px 60px;
+    box-sizing:border-box;
+  }
+}
 
     .mobile-hero{
       margin-top:6px;
