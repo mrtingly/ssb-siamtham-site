@@ -203,4 +203,31 @@
     top:12px;
     right:12px;
   }
+
+  .popup-pro-media{
+  padding-top:0 !important;
+}
+
+  .popup-pro-video-sticky{
+    padding-top:2px !important;
+    padding-bottom:8px !important;
+  }
+  
+  .popup-kicker{
+    margin-bottom:4px !important;
+  }
+  
+  .popup-pro-nav{
+    margin-bottom:8px !important;
+    padding-top:0 !important;
+    padding-bottom:4px !important;
+  }
+  
+  .popup-pro-video-frame{
+    margin-top:0 !important;
+  }
+  
+  .popup-pro-content{
+    padding-top:10px !important;
+  }
 }
