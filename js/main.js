@@ -419,10 +419,12 @@ document.querySelectorAll('.menu-btn').forEach(btn => {
     const isOpen = parent.classList.contains('open');
 
     document.querySelectorAll('.mobile-menu-v2 .menu-item').forEach(item => {
-      item.classList.remove('open');
+      if (item !== parent) item.classList.remove('open');
     });
 
-    if (!isOpen) {
+    if (isOpen) {
+      parent.classList.remove('open');
+    } else {
       parent.classList.add('open');
     }
   });
