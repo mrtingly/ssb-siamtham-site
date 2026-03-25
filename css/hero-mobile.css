@@ -39,8 +39,8 @@
   padding:6px 16px 90px;
 }
 
- .mobile-hero-logo{
-  width:98px;
+.mobile-hero-logo{
+  width:102px;
   height:auto;
   display:block;
   margin:8px auto 10px;
@@ -219,5 +219,101 @@
   .mobile-hero-logo{
     width:120px !important;
     margin:0 auto 8px !important;
+  }
+}
+
+@media (max-width: 1023px){
+
+  .menu-item{
+    transition:
+      transform .22s ease,
+      box-shadow .22s ease,
+      border-color .22s ease;
+  }
+
+  .menu-item:active{
+    transform:scale(.985);
+  }
+
+  .menu-btn{
+    transition:
+      background .22s ease,
+      color .22s ease,
+      letter-spacing .22s ease;
+  }
+
+  .menu-item.open{
+    box-shadow:
+      0 16px 34px rgba(31,74,140,.10),
+      inset 0 1px 0 rgba(255,255,255,.86);
+    border-color:rgba(70,120,220,.10);
+  }
+
+  .menu-item.open .menu-btn{
+    background:linear-gradient(180deg, rgba(248,251,255,.96), rgba(242,247,255,.96));
+    color:#17427a;
+    letter-spacing:.1px;
+  }
+
+  .submenu{
+    opacity:0;
+    transform:translateY(-6px);
+    transition:
+      max-height .30s ease,
+      opacity .22s ease,
+      transform .22s ease;
+  }
+
+  .menu-item.open .submenu{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  .submenu button,
+  .submenu-link{
+    transition:
+      background .18s ease,
+      color .18s ease,
+      padding-left .18s ease;
+  }
+
+  .submenu button:active,
+  .submenu-link:active{
+    background:rgba(80,130,255,.08);
+  }
+
+  .submenu button:hover,
+  .submenu-link:hover{
+    background:rgba(80,130,255,.06);
+    color:#17427a;
+    padding-left:22px;
+  }
+
+  .mobile-cta{
+    transition:
+      transform .20s ease,
+      box-shadow .20s ease,
+      filter .20s ease;
+  }
+
+  .mobile-cta:hover{
+    transform:translateY(-1px);
+    box-shadow:
+      0 18px 34px rgba(60,120,255,.24),
+      0 0 18px rgba(120,180,255,.16),
+      inset 0 0 10px rgba(255,255,255,.18);
+  }
+
+  .mobile-cta:active{
+    transform:scale(.985);
+  }
+
+  .mobile-hero-logo{
+    animation:heroFloat 4.6s ease-in-out infinite;
+  }
+
+  @keyframes heroFloat{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-4px); }
   }
 }
