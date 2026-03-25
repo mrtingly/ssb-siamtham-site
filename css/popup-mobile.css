@@ -1,0 +1,196 @@
+@media (max-width: 760px){
+
+  .popup-backdrop.popup-pro-backdrop{
+    padding:10px;
+    align-items:flex-start;
+  }
+
+  .popup-pro-card{
+    width:100%;
+    height:calc(100vh - 20px);
+    max-height:calc(100vh - 20px);
+    border-radius:24px;
+    overflow:hidden;
+  }
+
+  .popup-pro-shell{
+    display:flex;
+    flex-direction:column;
+    height:100%;
+    min-height:0;
+  }
+
+  .popup-pro-media{
+    width:100%;
+    min-width:0;
+    max-width:none;
+    border-right:none;
+    border-bottom:1px solid rgba(20,55,100,.08);
+    background:linear-gradient(180deg, rgba(248,251,255,.98), rgba(242,247,255,.98));
+  }
+
+  .popup-pro-video-sticky{
+    position:relative;
+    top:auto;
+    padding:14px 14px 10px;
+  }
+
+  .popup-kicker{
+    font-size:11px;
+    margin-bottom:8px;
+  }
+
+  .popup-pro-video-frame{
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 12px 24px rgba(31,74,140,.10);
+  }
+
+  .video-note{
+    font-size:12px;
+    line-height:1.7;
+    margin-top:8px;
+    color:#6e84a3;
+  }
+
+  .popup-pro-nav{
+    display:flex !important;
+    flex-direction:row !important;
+    flex-wrap:nowrap !important;
+    gap:8px !important;
+    margin-top:12px !important;
+    padding:2px 0 8px !important;
+    width:100% !important;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    -webkit-overflow-scrolling:touch !important;
+    scrollbar-width:none;
+  }
+
+  .popup-pro-nav::-webkit-scrollbar{
+    display:none;
+  }
+
+  .popup-pro-nav-btn{
+    width:auto !important;
+    min-width:max-content !important;
+    min-height:40px !important;
+    flex:0 0 auto !important;
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    padding:10px 14px !important;
+    border-radius:999px !important;
+    border:1px solid rgba(20,55,100,.08) !important;
+    background:#ffffff !important;
+    color:#21497e !important;
+    font-size:12px !important;
+    font-weight:800 !important;
+    line-height:1.2 !important;
+    text-align:center !important;
+    white-space:nowrap !important;
+    box-shadow:0 8px 18px rgba(31,74,140,.06) !important;
+  }
+
+  .popup-pro-nav-btn:hover{
+    transform:none !important;
+  }
+
+  .popup-pro-nav-btn.active{
+    background:linear-gradient(135deg,#2e78df,#5aa7ff) !important;
+    color:#fff !important;
+    border-color:transparent !important;
+    box-shadow:0 10px 20px rgba(47,127,227,.22) !important;
+  }
+
+  .popup-pro-nav-order{
+    background:linear-gradient(135deg,#3f86ff,#6eb2ff) !important;
+    color:#fff !important;
+    border:none !important;
+    box-shadow:0 10px 20px rgba(60,120,255,.18) !important;
+  }
+
+  .popup-pro-content{
+    flex:1;
+    min-height:0;
+    overflow-y:auto;
+    padding:16px 14px 18px;
+  }
+
+  .popup-pro-head{
+    margin-bottom:12px;
+  }
+
+  .popup-pro-head h3{
+    font-size:24px;
+    line-height:1.08;
+    letter-spacing:.2px;
+    text-transform:none;
+    color:#17427a;
+  }
+
+  .popup-subtitle{
+    font-size:14px;
+    line-height:1.75;
+    color:#6f86a8;
+  }
+
+  .popup-pro-body{
+    display:grid;
+    gap:12px;
+  }
+
+  .popup-panel{
+    padding:15px;
+    border-radius:18px;
+    background:linear-gradient(180deg,#ffffff 0%, #f8fbff 100%);
+    border:1px solid rgba(20,55,100,.06);
+    box-shadow:0 10px 22px rgba(31,74,140,.06);
+  }
+
+  .popup-pro-grid{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+
+  .popup-section-title{
+    font-size:18px;
+  }
+
+  .popup-lead,
+  .popup-pro-card .popup-lead{
+    font-size:15px;
+    line-height:1.85;
+    color:#35557f;
+  }
+
+  .feature-list li,
+  .popup-pro-card .feature-list li{
+    font-size:14px;
+    line-height:1.8;
+  }
+
+  .popup-pro-rule-line{
+    min-height:54px;
+    padding:12px 14px;
+    font-size:14px;
+    line-height:1.75;
+  }
+
+  .impact-grid{
+    grid-template-columns:1fr;
+  }
+
+  .popup-pro-card .impact-card{
+    min-height:unset;
+  }
+
+  .popup-close{
+    margin-top:12px;
+  }
+
+  .popup-pro-x{
+    top:12px;
+    right:12px;
+  }
+}
