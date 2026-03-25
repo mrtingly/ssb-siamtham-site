@@ -418,8 +418,8 @@ document.querySelectorAll('.menu-btn').forEach(btn=>{
 
 document.querySelectorAll('.mobile-menu-v2 [data-action="ssb-system"]').forEach(btn => {
   btn.addEventListener('click', () => {
-    if (typeof openInfoPopupStep === 'function') {
-      openInfoPopupStep('ssb');
+    if (typeof openInfoPopup === 'function') {
+      openInfoPopup('ssbmobile');
     }
   });
 });
