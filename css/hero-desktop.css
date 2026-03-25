@@ -120,6 +120,10 @@
 
     pointer-events:auto;
     z-index:11;
+
+    opacity:1 !important;
+    visibility:visible !important;
+    pointer-events:auto !important;
   }
 
   .menu-node,
