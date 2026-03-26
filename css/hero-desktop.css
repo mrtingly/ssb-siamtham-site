@@ -87,8 +87,10 @@
     left:50%;
     top:50%;
     transform:translate(-50%,-50%);
-    width:200px;
-    height:200px;
+    width:260px;
+    height:260px;
+    opacity:0.9;
+    filter:blur(40px);
     z-index:4;
     pointer-events:none;
   }
@@ -98,8 +100,9 @@
     left:50%;
     top:50%;
     transform:translate(-50%,-50%);
-    width:280px;
-    height:280px;
+    width:340px;
+    height:340px;
+    opacity:0.5;
     z-index:3;
     pointer-events:none;
   }
@@ -184,11 +187,12 @@
   }
 
   .m1{
-    grid-column:1;
-    grid-row:2;
-    justify-self:end;
-    align-self:center;
-  }
+  grid-column:1;
+  grid-row:2;
+  justify-self:end;
+  align-self:center;
+  margin-right:-40px; /* เพิ่ม */
+}
 
   .g-company{
     grid-column:3;
@@ -201,6 +205,7 @@
     align-items:flex-start;
     gap:12px;
     z-index:15;
+    margin-left:-40px;
   }
 
   .g-product{
@@ -214,6 +219,7 @@
     align-items:flex-end;
     gap:12px;
     z-index:15;
+    margin-right:-40px;
   }
 
   .g-agent{
@@ -227,16 +233,17 @@
     align-items:flex-start;
     gap:12px;
     z-index:15;
+    margin-left:-40px;
   }
 
-  .m5{
+    .m5{
     grid-column:2;
     grid-row:4;
     justify-self:center;
     align-self:start;
-    margin-top:8px;
+    margin-top:-10px; /* เดิม +8 → ดันขึ้น */
   }
-
+  
   .m5 .node-shell{
     width:290px;
     min-height:76px;
@@ -339,8 +346,8 @@
     }
 
     .logo-core{
-      width:182px;
-      height:182px;
+      width:190px;
+      height:190px;
     }
 
     .node-shell,
