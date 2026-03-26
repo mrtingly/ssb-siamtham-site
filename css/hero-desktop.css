@@ -31,16 +31,26 @@
     display:none !important;
   }
 
-  .hero-system-title{
-    position:absolute;
-    left:50%;
-    top:56px;
-    transform:translateX(-50%) scale(.96);
-    width:calc(100% - 160px);
-    max-width:1100px;
-    z-index:9;
-  }
+ .hero-system-title{
+  position:absolute;
+  left:50%;
+  top:56px;
+  transform:translateX(-50%) scale(1) !important;
+  width:calc(100% - 160px);
+  max-width:1100px;
+  z-index:20;
+  opacity:1 !important;
+  visibility:visible !important;
+  pointer-events:none;
+}
 
+  .hero-system-title,
+  .hero-system-title-inner,
+  .hero-system-title-text{
+    opacity:1 !important;
+    visibility:visible !important;
+  }
+  
   .tech-hero.open .hero-system-title{
     transform:translateX(-50%) scale(1);
   }
