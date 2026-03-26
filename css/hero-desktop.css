@@ -421,12 +421,13 @@
     stroke-width:1.4;
   }
   
-    .orbit-runner{
-    fill:#9ed1ff;
-    filter:drop-shadow(0 0 8px rgba(120,190,255,.9));
-    transform-origin:600px 450px;
-    animation:orbitSpin 4.5s linear infinite;
-  }
+   .orbit-runner{
+  fill:#9ed1ff;
+  filter:drop-shadow(0 0 8px rgba(120,190,255,.9));
+  animation:orbitSpin 4.5s linear infinite;
+  transform-box:fill-box;
+  transform-origin:center;
+}
 
   .energy-line{
     fill:none;
@@ -526,19 +527,16 @@
     to{ transform:rotate(360deg) translateY(-168px) rotate(-360deg); }
   }
 
-  @keyframes energyPulse{
-    0%{
-      opacity:0;
-      stroke-dashoffset:220;
-    }
-    20%{
-      opacity:1;
-    }
-    100%{
-      opacity:0;
-      stroke-dashoffset:0;
-    }
+ @keyframes orbitSpin{
+  from{
+    transform:rotate(0deg);
+    transform-origin:600px 450px;
   }
+  to{
+    transform:rotate(360deg);
+    transform-origin:600px 450px;
+  }
+}
 
   @keyframes ctaPulse{
     0%{ box-shadow:0 14px 32px rgba(255,0,0,.28); }
