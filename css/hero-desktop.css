@@ -422,11 +422,11 @@
   }
   
     .orbit-runner{
-      fill:#9ed1ff;
-      filter:drop-shadow(0 0 8px rgba(120,190,255,.9));
-      transform-origin:600px 450px;
-      animation:orbitSpin 4.5s linear infinite;
-    }
+    fill:#9ed1ff;
+    filter:drop-shadow(0 0 8px rgba(120,190,255,.9));
+    transform-origin:600px 450px;
+    animation:orbitSpin 4.5s linear infinite;
+  }
 
   .energy-line{
     fill:none;
