@@ -173,7 +173,7 @@ function bindGlobalEvents() {
       techHero.contains(target) &&
       !target.closest(".menu-group") &&
       !target.closest(".submenu-panel") &&
-      !target.closest("#logoMenuButton")
+      !target.closest("#logoToggle")
     ) {
       $$(".menu-group", techHero).forEach(group => {
         group.classList.remove("open");
@@ -214,7 +214,8 @@ function bindGlobalEvents() {
 }
 
 function bindHeroMenu() {
-  if (!techHero || !logoMenuButton) return;
+  const logoToggle = $("#logoToggle");
+  if (!techHero || !logoToggle) return;
 
   function closeAllSubmenus() {
     $$(".menu-group", techHero).forEach(group => {
@@ -233,24 +234,20 @@ function bindHeroMenu() {
     }
   }
 
- logoMenuButton.addEventListener("click", event => {
-  event.preventDefault();
-  event.stopPropagation();
+  logoToggle.addEventListener("click", event => {
+    event.preventDefault();
+    event.stopPropagation();
 
-  const isOpen = techHero.classList.contains("open");
+    const isOpen = techHero.classList.contains("open");
 
-  if (isOpen) {
-    techHero.classList.remove("open");
+    if (isOpen) {
+      techHero.classList.remove("open");
+      closeAllSubmenus();
+    } else {
+      techHero.classList.add("open");
+    }
+  });
 
-    // ปิด submenu ทุกอัน
-    document.querySelectorAll(".menu-group").forEach(g=>{
-      g.classList.remove("open");
-    });
-
-  } else {
-    techHero.classList.add("open");
-  }
-});
   techHero.addEventListener("click", event => {
     event.stopPropagation();
   });
