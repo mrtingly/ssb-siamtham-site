@@ -167,7 +167,7 @@
       
      <section class="hero-stage">
   <div class="hero-center">
-    <div class="tech-hero open" id="techHero">
+    <div class="tech-hero" id="techHero">
 
       <div class="hero-bg" aria-hidden="true">
         <div class="bg-core-glow"></div>
@@ -182,10 +182,22 @@
       <div class="center-glow"></div>
       <div class="center-pulse" id="centerPulse"></div>
 
+          <svg class="hero-energy-svg" viewBox="0 0 1200 900" preserveAspectRatio="none" aria-hidden="true">
+      <!-- วงกลมรอบโลโก้ -->
+      <circle class="orbit-ring" cx="600" cy="450" r="168"></circle>
+      <circle class="orbit-runner" cx="600" cy="282" r="6"></circle>
+    
+      <!-- เส้นจากเมนูเข้าโลโก้ -->
+      <path class="energy-line energy-m1" d="M305 383 Q 420 390 520 430"></path>
+      <path class="energy-line energy-company" d="M895 383 Q 780 390 680 430"></path>
+      <path class="energy-line energy-product" d="M305 595 Q 425 560 520 500"></path>
+      <path class="energy-line energy-agent" d="M895 595 Q 775 560 680 500"></path>
+    </svg>
+
       <!-- DESKTOP HERO -->
-      <div class="logo-core">
+           <button class="logo-core logo-toggle sound-click" id="logoToggle" type="button" aria-label="Open menu">
         <img src="images/logo.png" alt="Stealth Safety Bank Logo" loading="lazy">
-      </div>
+      </button>
 
       <div class="menu-layer-v2">
 
@@ -239,6 +251,8 @@
             <span class="node-title">สั่งซื้อสินค้า</span>
           </a>
         </div>
+
+        <div class="hero-menu-hint" id="heroMenuHint">คลิกโลโก้เพื่อเปิดเมนู</div>
       </div>
 
       <!-- MOBILE HERO -->
