@@ -36,10 +36,10 @@
   .hero-system-title{
     position:absolute;
     left:50%;
-    top:56px;
+    top:68px;
     transform:translateX(-50%) scale(1) !important;
-    width:calc(100% - 160px);
-    max-width:1100px;
+    width:calc(100% - 220px);
+    max-width:980px;
     z-index:30;
     opacity:1 !important;
     visibility:visible !important;
@@ -61,8 +61,8 @@
   }
 
   .hero-system-title-text{
-    font-size:30px;
-    letter-spacing:1px;
+    font-size:26px;
+    letter-spacing:8px;
   }
 
   /* center */
@@ -72,8 +72,8 @@
     grid-row:2 / span 2;
     align-self:center;
     justify-self:center;
-    width:190px;
-    height:190px;
+    width:210px;
+    height:210px;
     margin:0;
     margin-top:-8px;
     z-index:20;
@@ -195,7 +195,7 @@
     grid-row:2;
     justify-self:end;
     align-self:center;
-    margin-right:-40px;
+    margin-right:-70px;
   }
 
   .g-company{
@@ -208,7 +208,7 @@
     align-items:flex-start;
     gap:12px;
     z-index:15;
-    margin-left:-40px;
+    margin-left:-70px;
   }
 
   .g-product{
@@ -221,7 +221,7 @@
     align-items:flex-end;
     gap:12px;
     z-index:15;
-    margin-right:-40px;
+    margin-right:-70px;
   }
 
   .g-agent{
@@ -234,7 +234,7 @@
     align-items:flex-start;
     gap:12px;
     z-index:15;
-    margin-left:-40px;
+    margin-left:-70px;
   }
 
   .m5{
@@ -245,10 +245,24 @@
     margin-top:-10px;
   }
 
-  .m5 .node-shell{
-    width:290px;
-    min-height:76px;
-    border-radius:22px;
+    .m5 .node-shell{
+    width:300px;
+    min-height:78px;
+    border-radius:24px;
+    background:linear-gradient(180deg, #ff2b2b 0%, #d80000 100%);
+    border:1px solid rgba(255,255,255,.16);
+    box-shadow:
+      0 14px 32px rgba(255,0,0,.28),
+      0 0 18px rgba(255,60,60,.18),
+      inset 0 1px 0 rgba(255,255,255,.20);
+  }
+
+    .m5 .node-shell:hover{
+    transform:translateY(-2px);
+    box-shadow:
+      0 18px 38px rgba(255,0,0,.34),
+      0 0 24px rgba(255,70,70,.24),
+      inset 0 1px 0 rgba(255,255,255,.22);
   }
 
   .m5 .node-title{
