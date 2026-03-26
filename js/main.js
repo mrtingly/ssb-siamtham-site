@@ -432,68 +432,6 @@ document.querySelectorAll('.mobile-menu-v2 [data-action="ssb-system"]').forEach(
   });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  const hero = document.getElementById("techHero");
-  const logoToggle = document.getElementById("logoToggle");
-  const menuHint = document.getElementById("heroMenuHint");
-
-  if (!hero || !logoToggle) return;
-
-  const groups = Array.from(hero.querySelectorAll(".menu-group"));
-  const submenuButtons = Array.from(hero.querySelectorAll(".submenu-btn"));
-
-  const closeAllSubmenus = () => {
-    groups.forEach(group => group.classList.remove("open"));
-  };
-
-  const pulseLogo = () => {
-    logoToggle.classList.remove("logo-hit");
-    void logoToggle.offsetWidth;
-    logoToggle.classList.add("logo-hit");
-    setTimeout(() => logoToggle.classList.remove("logo-hit"), 700);
-  };
-
-  const runFlow = (type) => {
-    hero.classList.remove("flow-m1", "flow-company", "flow-product", "flow-agent");
-
-    if (type) {
-      void hero.offsetWidth;
-      hero.classList.add(type);
-      setTimeout(() => {
-        hero.classList.remove(type);
-      }, 900);
-    }
-
-    pulseLogo();
-  };
-
-  const flashNode = (node) => {
-    if (!node) return;
-    node.classList.remove("menu-hit");
-    void node.offsetWidth;
-    node.classList.add("menu-hit");
-    setTimeout(() => node.classList.remove("menu-hit"), 700);
-  };
-
-  const openHeroMenu = () => {
-    hero.classList.add("open");
-    if (menuHint) menuHint.style.display = "none";
-  };
-
-  const closeHeroMenu = () => {
-    hero.classList.remove("open");
-    closeAllSubmenus();
-    if (menuHint) menuHint.style.display = "";
-  };
-
-  const toggleHeroMenu = () => {
-    if (hero.classList.contains("open")) {
-      closeHeroMenu();
-    } else {
-      openHeroMenu();
-    }
-  };
-
   logoToggle.addEventListener("click", (e) => {
     e.preventDefault();
     e.stopPropagation();
