@@ -400,7 +400,7 @@
     z-index:14;
   }
 
-  .tech-hero.open .hero-menu-hint{
+  ..open .hero-menu-hint{
     opacity:0;
     transform:translateY(10px);
   }
@@ -440,10 +440,10 @@
     opacity:0;
   }
 
-  .tech-hero.flow-m1 .energy-m1,
-  .tech-hero.flow-company .energy-company,
-  .tech-hero.flow-product .energy-product,
-  .tech-hero.flow-agent .energy-agent{
+  ..flow-m1 .energy-m1,
+  ..flow-company .energy-company,
+  ..flow-product .energy-product,
+  ..flow-agent .energy-agent{
     animation:energyPulse .85s ease-out 1;
   }
 
