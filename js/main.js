@@ -164,20 +164,8 @@ function bindGlobalEvents() {
       infoPopup?.style.display !== "flex" &&
       companyPopup?.style.display !== "flex"
     ) {
-      toggleHeroOpen(false);
-      return;
-    }
-
-      if (
-      techHero &&
-      techHero.contains(target) &&
-      !target.closest(".menu-group") &&
-      !target.closest(".submenu-panel") &&
-      !target.closest("#logoToggle")
-    ) {
-      $$(".menu-group", techHero).forEach(group => {
-        group.classList.remove("open");
-      });
+      $$(".menu-group", techHero).forEach(group => group.classList.remove("open"));
+      techHero.classList.remove("open");
     }
   });
 
@@ -199,10 +187,8 @@ function bindGlobalEvents() {
     }
 
     if (techHero?.classList.contains("open")) {
-      $$(".menu-group", techHero).forEach(group => {
-        group.classList.remove("open");
-      });
-      toggleHeroOpen(false);
+      $$(".menu-group", techHero).forEach(group => group.classList.remove("open"));
+      techHero.classList.remove("open");
     }
 
     if (chatWidget?.classList.contains("open")) {
