@@ -200,13 +200,27 @@ function bindGlobalEvents() {
 }
 
 function bindHeroMenu() {
+  const hero = $("#techHero");
   const logoToggle = $("#logoToggle");
-  if (!techHero || !logoToggle) return;
+  const hint = $("#heroMenuHint");
+
+  if (!hero || !logoToggle) return;
 
   function closeAllSubmenus() {
-    $$(".menu-group", techHero).forEach(group => {
+    $$(".menu-group", hero).forEach(group => {
       group.classList.remove("open");
     });
+  }
+
+  function openHeroMenu() {
+    hero.classList.add("open");
+    if (hint) hint.style.display = "none";
+  }
+
+  function closeHeroMenu() {
+    hero.classList.remove("open");
+    closeAllSubmenus();
+    if (hint) hint.style.display = "";
   }
 
   function toggleSubmenu(group) {
@@ -224,42 +238,40 @@ function bindHeroMenu() {
     event.preventDefault();
     event.stopPropagation();
 
-    const isOpen = techHero.classList.contains("open");
-
-    if (isOpen) {
-      techHero.classList.remove("open");
-      closeAllSubmenus();
+    if (hero.classList.contains("open")) {
+      closeHeroMenu();
     } else {
-      techHero.classList.add("open");
+      openHeroMenu();
     }
   });
 
-  techHero.addEventListener("click", event => {
+  hero.addEventListener("click", event => {
     event.stopPropagation();
   });
 
-  $('[data-action="ssb-system"]', techHero)?.addEventListener("click", event => {
+  $('[data-action="ssb-system"]', hero)?.addEventListener("click", event => {
     event.preventDefault();
     event.stopPropagation();
+    openHeroMenu();
     closeAllSubmenus();
     openInfoPopup("ssb");
   });
 
-  $('[data-action="company-about"]', techHero)?.addEventListener("click", event => {
+  $('[data-action="company-about"]', hero)?.addEventListener("click", event => {
     event.preventDefault();
     event.stopPropagation();
     closeAllSubmenus();
     openCompanyPopup();
   });
 
-  $('[data-action="company-contact"]', techHero)?.addEventListener("click", event => {
+  $('[data-action="company-contact"]', hero)?.addEventListener("click", event => {
     event.preventDefault();
     event.stopPropagation();
     closeAllSubmenus();
     openCompanyPopup();
   });
 
-  $$("[data-popup]", techHero).forEach(btn => {
+  $$("[data-popup]", hero).forEach(btn => {
     btn.addEventListener("click", event => {
       event.preventDefault();
       event.stopPropagation();
@@ -270,32 +282,31 @@ function bindHeroMenu() {
     });
   });
 
-  $$("[data-link]", techHero).forEach(btn => {
+  $$("[data-link]", hero).forEach(btn => {
     btn.addEventListener("click", event => {
       event.preventDefault();
       event.stopPropagation();
       closeAllSubmenus();
 
       const url = btn.getAttribute("data-link");
-      if (url) {
-        window.location.href = url;
-      }
+      if (url) window.location.href = url;
     });
   });
 
-  $$("[data-menu]", techHero).forEach(btn => {
+  $$("[data-menu]", hero).forEach(btn => {
     btn.addEventListener("click", event => {
       event.preventDefault();
       event.stopPropagation();
 
-      if (!techHero.classList.contains("open") && window.innerWidth > 760) return;
+      if (!hero.classList.contains("open")) return;
 
       const group = btn.closest(".menu-group");
       toggleSubmenu(group);
     });
   });
-}
 
+  closeHeroMenu();
+}
 function bindPopups() {
   $("#closeInfoPopupTop")?.addEventListener("click", closeInfoPopup);
   $("#closeInfoPopupBottom")?.addEventListener("click", closeInfoPopup);
