@@ -419,8 +419,9 @@ document.querySelectorAll('.mobile-menu-v2 [data-action="ssb-system"]').forEach(
       openInfoPopup('ssbmobile');
     }
   });
+});
 
-  document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
   const hero = document.getElementById("techHero");
   const logoToggle = document.getElementById("logoToggle");
   const menuHint = document.getElementById("heroMenuHint");
@@ -428,7 +429,6 @@ document.querySelectorAll('.mobile-menu-v2 [data-action="ssb-system"]').forEach(
   if (!hero || !logoToggle) return;
 
   const groups = Array.from(hero.querySelectorAll(".menu-group"));
-  const clickableShells = Array.from(hero.querySelectorAll(".node-shell"));
   const submenuButtons = Array.from(hero.querySelectorAll(".submenu-btn"));
 
   const closeAllSubmenus = () => {
@@ -464,31 +464,41 @@ document.querySelectorAll('.mobile-menu-v2 [data-action="ssb-system"]').forEach(
     setTimeout(() => node.classList.remove("menu-hit"), 700);
   };
 
+  const openHeroMenu = () => {
+    hero.classList.add("open");
+    if (menuHint) menuHint.style.display = "none";
+  };
+
+  const closeHeroMenu = () => {
+    hero.classList.remove("open");
+    closeAllSubmenus();
+    if (menuHint) menuHint.style.display = "";
+  };
+
   const toggleHeroMenu = () => {
-    const isOpen = hero.classList.toggle("open");
-
-    if (!isOpen) {
-      closeAllSubmenus();
-    }
-
-    if (menuHint) {
-      menuHint.style.display = isOpen ? "none" : "";
+    if (hero.classList.contains("open")) {
+      closeHeroMenu();
+    } else {
+      openHeroMenu();
     }
   };
 
-  logoToggle.addEventListener("click", toggleHeroMenu);
+  logoToggle.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleHeroMenu();
+  });
 
-  // ปุ่ม menu หลัก
   groups.forEach(group => {
     const mainBtn = group.querySelector(".main-node .node-shell");
     if (!mainBtn) return;
 
     mainBtn.addEventListener("click", (e) => {
       e.preventDefault();
+      e.stopPropagation();
 
       if (!hero.classList.contains("open")) {
-        hero.classList.add("open");
-        if (menuHint) menuHint.style.display = "none";
+        openHeroMenu();
       }
 
       const wasOpen = group.classList.contains("open");
@@ -503,47 +513,40 @@ document.querySelectorAll('.mobile-menu-v2 [data-action="ssb-system"]').forEach(
     });
   });
 
-  // ปุ่ม SSB ด้านซ้ายบน
   const m1Button = hero.querySelector(".m1 .node-shell");
   if (m1Button) {
-    m1Button.addEventListener("click", () => {
+    m1Button.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
       flashNode(m1Button);
       runFlow("flow-m1");
     });
   }
 
-  // submenu
   submenuButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
       flashNode(btn);
-      const parentGroup = btn.closest(".menu-group");
 
+      const parentGroup = btn.closest(".menu-group");
       if (parentGroup?.classList.contains("g-company")) runFlow("flow-company");
       if (parentGroup?.classList.contains("g-product")) runFlow("flow-product");
       if (parentGroup?.classList.contains("g-agent")) runFlow("flow-agent");
     });
   });
 
-  // ปุ่ม order
   const orderBtn = hero.querySelector(".m5 .node-shell");
   if (orderBtn) {
     orderBtn.addEventListener("click", () => {
-      flashNode(orderBtn);
       pulseLogo();
     });
   }
 
-  // คลิกนอก hero submenu ปิด แต่เมนูหลักยังอยู่
   document.addEventListener("click", (e) => {
     if (!hero.contains(e.target)) {
       closeAllSubmenus();
     }
   });
 
-  // เริ่มต้นให้เมนูปิด
-  hero.classList.remove("open");
-  closeAllSubmenus();
-  if (menuHint) menuHint.style.display = "";
-});
-  
+  closeHeroMenu();
 });
