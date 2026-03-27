@@ -170,6 +170,7 @@
     justify-content:center;
 
     pointer-events:auto !important;
+    transform:translateX(-30px);
   }
 
   .logo-toggle{
@@ -325,7 +326,7 @@
   .g-company{
     grid-column:3;
     grid-row:2;
-    justify-self:start;
+    justify-self:center;
     align-self:center;
 
     display:flex;
@@ -338,7 +339,7 @@
   .g-product{
     grid-column:1;
     grid-row:3;
-    justify-self:end;
+    justify-self:center;
     align-self:center;
 
     display:flex;
@@ -351,7 +352,7 @@
   .g-agent{
     grid-column:3;
     grid-row:3;
-    justify-self:start;
+    justify-self:center;
     align-self:center;
 
     display:flex;
@@ -366,7 +367,7 @@
     grid-row:4;
     justify-self:center;
     align-self:start;
-    margin-top:-24px;
+    margin-top:-60px;
   }
 
   .m5 .node-shell{
