@@ -316,7 +316,7 @@
   .g-company{
     grid-column:3;
     grid-row:2;
-    justify-self:start;
+    justify-self:center;
     align-self:center;
 
     display:flex;
@@ -342,7 +342,7 @@
   .g-agent{
     grid-column:3;
     grid-row:3;
-    justify-self:start;
+    justify-self:center;
     align-self:center;
 
     display:flex;
