@@ -314,64 +314,70 @@
     border-color:rgba(145,210,255,.55);
   }
 
-  /* ========= POSITION ========= */
-  .m1{
-    grid-column:1;
-    grid-row:2;
-    justify-self:end;
-    align-self:center;
-    transform:translateX(-200px); /* ← เพิ่ม */
-  }
+/* ========= POSITION FIX ========= */
 
-  .g-company{
-    grid-column:3;
-    grid-row:2;
-    justify-self:start;
-    align-self:center;
-    transform:translateX(-200px); /* ← เพิ่ม */
+/* ซ้ายบน */
+.m1{
+  grid-column:1;
+  grid-row:2;
+  justify-self:end;
+  align-self:center;
+  transform:translateX(-80px);
+}
 
-    display:flex;
-    flex-direction:column-reverse;
-    align-items:flex-start;
-    gap:12px;
-    z-index:15;
-  }
+/* ขวาบน */
+.g-company{
+  grid-column:3;
+  grid-row:2;
+  justify-self:start;
+  align-self:center;
+  transform:translateX(80px); /* ← ต้องเป็น + */
 
-  .g-product{
-    grid-column:1;
-    grid-row:3;
-    justify-self:end;
-    align-self:center;
-    transform:translateX(-400px); /* ← เพิ่ม */
+  display:flex;
+  flex-direction:column-reverse;
+  align-items:flex-start;
+  gap:12px;
+  z-index:15;
+}
 
-    display:flex;
-    flex-direction:column;
-    align-items:flex-end;
-    gap:12px;
-    z-index:15;
-  }
+/* ซ้ายล่าง */
+.g-product{
+  grid-column:1;
+  grid-row:3;
+  justify-self:end;
+  align-self:center;
+  transform:translateX(-80px);
 
-  .g-agent{
-    grid-column:3;
-    grid-row:3;
-    justify-self:start;
-    align-self:center;
-    transform:translateX(-400px); /* ← เพิ่ม */
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:12px;
+  z-index:15;
+}
 
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-    gap:12px;
-    z-index:15;
-  }
+/* ขวาล่าง */
+.g-agent{
+  grid-column:3;
+  grid-row:3;
+  justify-self:start;
+  align-self:center;
+  transform:translateX(80px); /* ← ต้องเป็น + */
 
-  .m5{
-    grid-column:2;
-    grid-row:4;
-    justify-self:center;
-    align-self:start;
-    margin-top:-200px;
-  }
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:12px;
+  z-index:15;
+}
+
+/* ปุ่มแดง */
+.m5{
+  grid-column:2;
+  grid-row:4;
+  justify-self:center;
+  align-self:start;
+  margin-top:-60px;
+}
 
   .m5 .node-shell{
     width:300px;
