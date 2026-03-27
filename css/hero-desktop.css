@@ -218,7 +218,7 @@
     visibility:visible;
     pointer-events:none !important;
     z-index:15;
-    overflow:hidden;
+    overflow:visible;
   }
 
   .menu-node,
