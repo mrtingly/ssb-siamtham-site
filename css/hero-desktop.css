@@ -218,6 +218,7 @@
     visibility:visible;
     pointer-events:none !important;
     z-index:15;
+    overflow:hidden;
   }
 
   .menu-node,
@@ -316,7 +317,7 @@
   .g-company{
     grid-column:3;
     grid-row:2;
-    justify-self:center;
+    justify-self:end;
     align-self:center;
 
     display:flex;
@@ -324,6 +325,7 @@
     align-items:flex-start;
     gap:12px;
     z-index:15;
+    margin-right:40px
   }
 
   .g-product{
@@ -342,7 +344,7 @@
   .g-agent{
     grid-column:3;
     grid-row:3;
-    justify-self:center;
+    justify-self:end;
     align-self:center;
 
     display:flex;
@@ -350,6 +352,7 @@
     align-items:flex-start;
     gap:12px;
     z-index:15;
+    margin-right:40px;
   }
 
   .m5{
