@@ -21,7 +21,7 @@
     overflow:hidden;
 
     display:grid !important;
-    grid-template-columns:minmax(320px, 1fr) 300px minmax(320px, 1fr);
+     grid-template-columns: 1fr 260px 1fr;
     grid-template-rows:auto 195px 195px auto;
     align-items:center;
     justify-items:center;
@@ -170,7 +170,7 @@
     justify-content:center;
 
     pointer-events:auto !important;
-    transform:translateX(-30px);
+    
   }
 
   .logo-toggle{
@@ -210,7 +210,7 @@
     height:100%;
 
     display:grid !important;
-    grid-template-columns:minmax(320px, 1fr) 300px minmax(320px, 1fr);
+    grid-template-columns: 1fr 260px 1fr;
     grid-template-rows:auto 195px 195px auto;
     align-items:center;
     justify-items:center;
@@ -233,7 +233,7 @@
     opacity:1;
     visibility:visible;
     transition:
-      transform .52s cubic-bezier(.22,.8,.22,1),
+      transform:none !important;
       opacity .28s ease,
       visibility .28s ease;
   }
