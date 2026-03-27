@@ -320,7 +320,7 @@
     grid-row:2;
     justify-self:end;
     align-self:center;
-    transform:translateX(200px); /* ← เพิ่ม */
+    transform:translateX(-200px); /* ← เพิ่ม */
   }
 
   .g-company{
@@ -328,7 +328,7 @@
     grid-row:2;
     justify-self:start;
     align-self:center;
-    transform:translateX(200px); /* ← เพิ่ม */
+    transform:translateX(-200px); /* ← เพิ่ม */
 
     display:flex;
     flex-direction:column-reverse;
@@ -342,7 +342,7 @@
     grid-row:3;
     justify-self:end;
     align-self:center;
-    transform:translateX(400px); /* ← เพิ่ม */
+    transform:translateX(-400px); /* ← เพิ่ม */
 
     display:flex;
     flex-direction:column;
@@ -356,7 +356,7 @@
     grid-row:3;
     justify-self:start;
     align-self:center;
-    transform:translateX(400px); /* ← เพิ่ม */
+    transform:translateX(-400px); /* ← เพิ่ม */
 
     display:flex;
     flex-direction:column;
@@ -370,7 +370,7 @@
     grid-row:4;
     justify-self:center;
     align-self:start;
-    margin-top:90px;
+    margin-top:-200px;
   }
 
   .m5 .node-shell{
