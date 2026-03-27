@@ -21,7 +21,7 @@
     overflow:hidden;
 
     display:grid !important;
-    grid-template-columns: 1fr 420px 1fr;
+    grid-template-columns:minmax(320px, 1fr) 300px minmax(320px, 1fr);
     grid-template-rows:auto 195px 195px auto;
     align-items:center;
     justify-items:center;
@@ -209,7 +209,7 @@
     height:100%;
 
     display:grid !important;
-    grid-template-columns:minmax(260px, 1fr) 300px minmax(260px, 1fr);
+    grid-template-columns:minmax(320px, 1fr) 300px minmax(320px, 1fr);
     grid-template-rows:auto 195px 195px auto;
     align-items:center;
     justify-items:center;
@@ -314,70 +314,60 @@
     border-color:rgba(145,210,255,.55);
   }
 
-/* ========= POSITION FIX ========= */
+  /* ========= POSITION ========= */
+  .m1{
+    grid-column:1;
+    grid-row:2;
+    justify-self:end;
+    align-self:center;
+  }
 
-/* ซ้ายบน */
-.m1{
-  grid-column:1;
-  grid-row:2;
-  justify-self:end;
-  align-self:center;
-  transform:translateX(-60px);
-}
+  .g-company{
+    grid-column:3;
+    grid-row:2;
+    justify-self:start;
+    align-self:center;
 
-/* ขวาบน */
-.g-company{
-  grid-column:3;
-  grid-row:2;
-  justify-self:start;
-  align-self:center;
-  transform:translateX(60px); /* ← ต้องเป็น + */
+    display:flex;
+    flex-direction:column-reverse;
+    align-items:flex-start;
+    gap:12px;
+    z-index:15;
+  }
 
-  display:flex;
-  flex-direction:column-reverse;
-  align-items:flex-start;
-  gap:12px;
-  z-index:15;
-}
+  .g-product{
+    grid-column:1;
+    grid-row:3;
+    justify-self:end;
+    align-self:center;
 
-/* ซ้ายล่าง */
-.g-product{
-  grid-column:1;
-  grid-row:3;
-  justify-self:end;
-  align-self:center;
-  transform:translateX(-60px);
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    gap:12px;
+    z-index:15;
+  }
 
-  display:flex;
-  flex-direction:column;
-  align-items:flex-end;
-  gap:12px;
-  z-index:15;
-}
+  .g-agent{
+    grid-column:3;
+    grid-row:3;
+    justify-self:start;
+    align-self:center;
 
-/* ขวาล่าง */
-.g-agent{
-  grid-column:3;
-  grid-row:3;
-  justify-self:start;
-  align-self:center;
-  transform:translateX(60px); /* ← ต้องเป็น + */
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:12px;
+    z-index:15;
+  }
 
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  gap:12px;
-  z-index:15;
-}
-
-/* ปุ่มแดง */
-.m5{
-  grid-column:2;
-  grid-row:4;
-  justify-self:center;
-  align-self:start;
-  margin-top:-60px;
-}
+  .m5{
+    grid-column:2;
+    grid-row:4;
+    justify-self:center;
+    align-self:start;
+    margin-top:-24px;
+  }
 
   .m5 .node-shell{
     width:300px;
@@ -522,23 +512,23 @@
   }
 
   .tech-hero:not(.open) .m1{
-    transform:translate(280px, 70px) scale(.82);
+    transform:translate(220px, 60px) scale(.82);
   }
 
   .tech-hero:not(.open) .g-company{
-    transform:translate(-280px, 70px) scale(.82);
+    transform:translate(-220px, 60px) scale(.82);
   }
 
   .tech-hero:not(.open) .g-product{
-    transform:translate(280px, -70px) scale(.82);
+    transform:translate(220px, -60px) scale(.82);
   }
 
   .tech-hero:not(.open) .g-agent{
-    transform:translate(-280px, -70px) scale(.82);
+    transform:translate(-220px, -60px) scale(.82);
   }
 
   .tech-hero:not(.open) .m5{
-    transform:translateY(-110px) scale(.85);
+    transform:translateY(-90px) scale(.85);
   }
 
   .tech-hero.open .m1,
@@ -548,7 +538,7 @@
   .tech-hero.open .m5{
     opacity:1 !important;
     visibility:visible !important;
-    transform:none;
+    transform:none !important;
   }
 
   /* ========= LIGHT MODE ========= */
