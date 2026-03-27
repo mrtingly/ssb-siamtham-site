@@ -79,7 +79,7 @@
     width:210px;
     height:210px;
     margin:0;
-    margin-top:-8px;
+    margin-top:80px;
     z-index:20;
 
     display:flex;
@@ -209,7 +209,6 @@
     grid-row:2;
     justify-self:end;
     align-self:center;
-    margin-right:-90px;
   }
 
   .g-company{
@@ -223,7 +222,6 @@
     align-items:flex-start;
     gap:12px;
     z-index:15;
-    margin-left:-90px;
   }
 
   .g-product{
@@ -237,7 +235,6 @@
     align-items:flex-end;
     gap:12px;
     z-index:15;
-    margin-right:-90px;
   }
 
   .g-agent{
