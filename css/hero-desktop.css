@@ -218,7 +218,7 @@
     justify-items:start;
     row-gap:0;
     column-gap:30px;
-    transform:translateY(-10px, 50px);
+    transform:translateY(-20px, -10px);
 
     opacity:1;
     visibility:visible;
