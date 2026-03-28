@@ -1,6 +1,8 @@
 @media (min-width: 1024px){
 
-  /* ========= HERO WRAP ========= */
+  /* =========================
+     HERO OUTER
+     ========================= */
   .hero-stage{
     padding:24px 24px 40px;
   }
@@ -15,19 +17,20 @@
     position:relative;
     width:min(96vw, 1380px);
     max-width:1380px;
-    min-height:820px;
-    height:min(88vh, 920px);
-    padding:120px 72px 110px;
+    min-height:760px;
+    height:auto;
+    padding:110px 72px 110px;
     overflow:hidden;
 
     display:grid !important;
-    grid-template-columns:minmax(300px,1fr) 280px minmax(300px,1fr);
-    grid-template-rows:auto 190px 190px auto;
+    grid-template-columns:minmax(280px, 1fr) 260px minmax(280px, 1fr);
+    grid-template-rows:1fr 170px 170px 1fr;
     align-items:center;
     justify-items:center;
     row-gap:0;
 
     isolation:isolate;
+    box-sizing:border-box;
   }
 
   /* desktop only */
@@ -35,11 +38,13 @@
     display:none !important;
   }
 
-  /* ========= TITLE ========= */
+  /* =========================
+     TITLE
+     ========================= */
   .hero-system-title{
     position:absolute;
     left:50%;
-    top:60px;
+    top:34px;
     transform:translateX(-50%);
     width:calc(100% - 220px);
     max-width:980px;
@@ -71,7 +76,9 @@
       0 0 18px rgba(80,140,255,.25);
   }
 
-  /* ========= BG / FX ========= */
+  /* =========================
+     BG / FX
+     ========================= */
   .hero-bg,
   .bg-core-glow,
   .center-glow,
@@ -111,7 +118,9 @@
     display:none !important;
   }
 
-  /* ========= ENERGY SVG ========= */
+  /* =========================
+     ENERGY SVG
+     ========================= */
   .hero-energy-svg{
     position:absolute;
     inset:0;
@@ -153,7 +162,9 @@
     animation:energyPulse .85s ease-out 1;
   }
 
-  /* ========= CENTER LOGO ========= */
+  /* =========================
+     CENTER LOGO
+     ========================= */
   .logo-core{
     position:relative;
     grid-column:2;
@@ -201,7 +212,9 @@
       drop-shadow(0 10px 26px rgba(0,0,0,.28));
   }
 
-  /* ========= MENU GRID ========= */
+  /* =========================
+     MENU GRID
+     ========================= */
   .menu-layer-v2{
     position:absolute;
     inset:0;
@@ -209,8 +222,8 @@
     height:100%;
 
     display:grid !important;
-    grid-template-columns:minmax(300px,1fr) 280px minmax(300px,1fr);
-    grid-template-rows:auto 190px 190px auto;
+    grid-template-columns:minmax(280px, 1fr) 260px minmax(280px, 1fr);
+    grid-template-rows:1fr 170px 170px 1fr;
     align-items:center;
     justify-items:center;
 
@@ -218,6 +231,7 @@
     visibility:visible;
     pointer-events:none !important;
     z-index:15;
+    box-sizing:border-box;
   }
 
   .menu-node,
@@ -243,7 +257,9 @@
     pointer-events:auto !important;
   }
 
-  /* ========= MAIN BUTTON ========= */
+  /* =========================
+     MAIN BUTTON
+     ========================= */
   .node-shell{
     width:272px;
     min-height:74px;
@@ -305,19 +321,23 @@
     border-color:rgba(145,210,255,.55);
   }
 
-  /* ========= POSITION ========= */
+  /* =========================
+     POSITION
+     ========================= */
   .m1{
     grid-column:1;
     grid-row:2;
-    justify-self:center;
+    justify-self:end;
     align-self:center;
+    margin-right:12px;
   }
 
   .g-company{
     grid-column:3;
     grid-row:2;
-    justify-self:center;
+    justify-self:start;
     align-self:center;
+    margin-left:12px;
 
     display:flex;
     flex-direction:column-reverse;
@@ -329,8 +349,9 @@
   .g-product{
     grid-column:1;
     grid-row:3;
-    justify-self:center;
+    justify-self:end;
     align-self:center;
+    margin-right:12px;
 
     display:flex;
     flex-direction:column;
@@ -342,8 +363,9 @@
   .g-agent{
     grid-column:3;
     grid-row:3;
-    justify-self:center;
+    justify-self:start;
     align-self:center;
+    margin-left:12px;
 
     display:flex;
     flex-direction:column;
@@ -356,8 +378,8 @@
     grid-column:2;
     grid-row:4;
     justify-self:center;
-    align-self:start;
-    margin-top:-10px;
+    align-self:end;
+    margin:0 0 8px;
   }
 
   .m5 .node-shell{
@@ -385,7 +407,9 @@
     font-size:22px;
   }
 
-  /* ========= SUBMENU ========= */
+  /* =========================
+     SUBMENU
+     ========================= */
   .menu-group .main-node{
     position:relative;
     display:block !important;
@@ -467,13 +491,15 @@
     border-color:rgba(255,255,255,.24);
   }
 
-  /* ========= HINT ========= */
+  /* =========================
+     HINT
+     ========================= */
   .hero-menu-hint{
     grid-column:2;
     grid-row:4;
     justify-self:center;
     align-self:end;
-    margin-top:90px;
+    margin-bottom:96px;
     font-size:15px;
     font-weight:600;
     letter-spacing:.2px;
@@ -491,7 +517,9 @@
     transform:translateY(10px);
   }
 
-  /* ========= MENU COLLAPSE STATE ========= */
+  /* =========================
+     MENU COLLAPSE STATE
+     ========================= */
   .tech-hero:not(.open) .m1,
   .tech-hero:not(.open) .g-company,
   .tech-hero:not(.open) .g-product,
@@ -503,23 +531,23 @@
   }
 
   .tech-hero:not(.open) .m1{
-    transform:translate(190px, 55px) scale(.82);
+    transform:translate(150px, 36px) scale(.84);
   }
 
   .tech-hero:not(.open) .g-company{
-    transform:translate(-190px, 55px) scale(.82);
+    transform:translate(-150px, 36px) scale(.84);
   }
 
   .tech-hero:not(.open) .g-product{
-    transform:translate(190px, -55px) scale(.82);
+    transform:translate(150px, -36px) scale(.84);
   }
 
   .tech-hero:not(.open) .g-agent{
-    transform:translate(-190px, -55px) scale(.82);
+    transform:translate(-150px, -36px) scale(.84);
   }
 
   .tech-hero:not(.open) .m5{
-    transform:translateY(-85px) scale(.85);
+    transform:translateY(-70px) scale(.86);
   }
 
   .tech-hero.open .m1,
@@ -532,7 +560,9 @@
     transform:none !important;
   }
 
-  /* ========= LIGHT MODE ========= */
+  /* =========================
+     LIGHT MODE
+     ========================= */
   body.light-mode .hero-system-title-text{
     color:#21497e;
   }
@@ -553,26 +583,18 @@
     text-shadow:0 0 10px rgba(70,120,200,.10);
   }
 
-  /* ========= KEYFRAMES ========= */
+  /* =========================
+     KEYFRAMES
+     ========================= */
   @keyframes orbitSpin{
-    from{
-      transform:rotate(0deg);
-    }
-    to{
-      transform:rotate(360deg);
-    }
+    from{ transform:rotate(0deg); }
+    to{ transform:rotate(360deg); }
   }
 
   @keyframes ctaPulse{
-    0%{
-      box-shadow:0 14px 32px rgba(255,0,0,.28);
-    }
-    50%{
-      box-shadow:0 20px 44px rgba(255,0,0,.45);
-    }
-    100%{
-      box-shadow:0 14px 32px rgba(255,0,0,.28);
-    }
+    0%{ box-shadow:0 14px 32px rgba(255,0,0,.28); }
+    50%{ box-shadow:0 20px 44px rgba(255,0,0,.45); }
+    100%{ box-shadow:0 14px 32px rgba(255,0,0,.28); }
   }
 
   @keyframes energyPulse{
