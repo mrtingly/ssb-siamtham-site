@@ -218,6 +218,7 @@
     justify-items:center;
     row-gap:0;
     column-gap:30px;
+    transform:translateY(8px);
 
     opacity:1;
     visibility:visible;
