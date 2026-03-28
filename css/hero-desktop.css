@@ -219,9 +219,9 @@
     justify-content:center;
     align-items:center;
     justify-items:center;
-    row-gap:60px;
+    row-gap:20px;
     column-gap:52px;
-    transform: translate(-50px, 300px); !important; 
+    transform: translate(-50px, 200px); !important; 
 
     opacity:1;
     visibility:visible;
