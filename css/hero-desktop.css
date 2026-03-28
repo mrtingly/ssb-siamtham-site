@@ -28,6 +28,7 @@
     isolation:isolate;
     box-sizing:border-box;
     border-radius:34px;
+    contain:layout paint;
   }
 
   .mobile-menu-v2{
@@ -128,16 +129,49 @@
 
   .hero-system-title{
     position:absolute;
-    left:50%;
-    top:28px;
-    transform:translateX(-50%);
+    top:26px;
+    left:0;
+    right:0;
     width:min(980px, calc(100% - 220px));
-    z-index:40;
+    margin:0 auto;
+    transform:none !important;
+    z-index:50;
     opacity:1;
     visibility:visible;
     pointer-events:none;
+    will-change:auto;
+    backface-visibility:hidden;
   }
-
+  
+  .hero-system-title-inner{
+    min-height:76px;
+    padding:17px 36px;
+    border-radius:999px;
+    border:1px solid rgba(150,215,255,.18);
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
+      linear-gradient(90deg, rgba(70,140,255,.10), rgba(255,255,255,0) 18%, rgba(255,255,255,0) 82%, rgba(70,140,255,.10));
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.10),
+      0 0 24px rgba(70,140,255,.10),
+      0 8px 28px rgba(0,0,0,.16);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+  }
+  
+  .hero-system-title-text{
+    text-align:center;
+    font-size:29px;
+    line-height:1.2;
+    font-weight:800;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:#f7fbff;
+    text-shadow:
+      0 0 10px rgba(140,210,255,.34),
+      0 0 22px rgba(120,190,255,.18);
+  }
+  
   .hero-system-title,
   .hero-system-title-inner,
   .hero-system-title-text{
@@ -351,6 +385,10 @@
 
   .node-shell:active{
     transform:scale(.98);
+    box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.12),
+    0 14px 26px rgba(0,0,0,.20),
+    0 0 28px rgba(90,150,255,.10);
   }
 
   .node-title{
@@ -370,6 +408,7 @@
       0 0 18px rgba(110,180,255,.22),
       0 16px 28px rgba(0,0,0,.22);
   }
+    
 
   /* =========================
      POSITION
