@@ -219,7 +219,7 @@
     row-gap:0;
     column-gap:22px;
   
-    transform:translate(-100px, -2px);
+    transform:translate(-100px, 100px);
   
     opacity:1;
     visibility:visible;
