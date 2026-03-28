@@ -162,7 +162,7 @@
     align-self:center;
     justify-self:center;
     width:180px;
-    height:500px;
+    height:300px;
     margin:0;
     z-index:20;
     tranform:translateY(1500px, 600px);
@@ -218,7 +218,7 @@
     justify-items:center;
     row-gap:0;
     column-gap:30px;
-    transform:translateY(-15px);
+    transform:translateY(90px);
 
     opacity:1;
     visibility:visible;
