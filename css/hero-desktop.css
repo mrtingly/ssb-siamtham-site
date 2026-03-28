@@ -165,7 +165,7 @@
     height:180px;
     margin:0;
     z-index:20;
-    tranform:translateY(-102px, -60px);
+    tranform:translateY(-500px, -600px);
 
     display:flex;
     align-items:center;
@@ -218,7 +218,7 @@
     justify-items:center;
     row-gap:0;
     column-gap:30px;
-    transform:translateY(-12px);
+    transform:translateY(-120px);
 
     opacity:1;
     visibility:visible;
