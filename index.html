@@ -565,53 +565,6 @@
   </div>
 
 </div>
-
-<script>
-document.addEventListener("DOMContentLoaded", function(){
-
-  const logo = document.querySelector(".logo-core");
-  const pulse = document.querySelector(".center-pulse");
-
-  if(logo && pulse){
-    logo.addEventListener("click", function(){
-
-      pulse.classList.remove("active");
-      void pulse.offsetWidth;
-      pulse.classList.add("active");
-
-    });
-  }
-
-});
-</script>
-  
-<script>
-function activateLine(targetClass){
-  document.querySelectorAll('.energy-line').forEach(el=>{
-    el.classList.remove('active','dim');
-  });
-
-  document.querySelectorAll('.energy-line').forEach(el=>{
-    if(!el.classList.contains(targetClass)){
-      el.classList.add('dim');
-    }
-  });
-
-  const target = document.querySelector('.'+targetClass);
-  if(target){
-    target.classList.add('active');
-  }
-}
-
-const menus = document.querySelectorAll('.menu-btn');
-
-/* ไล่ตามลำดับปุ่ม */
-menus[0]?.addEventListener('click',()=>activateLine('energy-m1'));
-menus[1]?.addEventListener('click',()=>activateLine('energy-company'));
-menus[2]?.addEventListener('click',()=>activateLine('energy-product'));
-menus[3]?.addEventListener('click',()=>activateLine('energy-agent'));
-  
-</script>
   
 </body>
 </html>
