@@ -213,12 +213,12 @@
     display:grid !important;
     grid-template-columns:260px 220px 260px;
     grid-template-rows:110px 195px 195px 140px;
-    justify-content:center;
+    justify-content:start;
     align-items:center;
-    justify-items:center;
+    justify-items:start;
     row-gap:0;
     column-gap:30px;
-    transform:translateY(-900px, -90px);
+    transform:translateY(-80px);
 
     opacity:1;
     visibility:visible;
