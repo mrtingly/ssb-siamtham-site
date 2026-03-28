@@ -464,4 +464,30 @@
         0 18px 32px rgba(120,0,0,.30);
     }
   }
+  
+  /* ===== COMPANY MENU (MAGNET NODE) ===== */
+
+.menu-item.company{
+  transform: scale(1.08);
+  z-index: 5;
+
+  box-shadow: 0 10px 30px rgba(0, 102, 255, 0.25);
+
+  transition: all 0.3s ease;
+}
+
+.menu-item.company:hover{
+  transform: scale(1.12) translateY(-4px);
+
+  box-shadow: 0 15px 40px rgba(0, 102, 255, 0.35);
+}
+
+/* ทำให้ปุ่มอื่นดรอปลง */
+.menu-layer-v2:hover .menu-item{
+  opacity: 0.6;
+}
+
+.menu-layer-v2 .menu-item.company:hover{
+  opacity: 1;
+}
 }
