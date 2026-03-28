@@ -17,7 +17,7 @@
     max-width:1320px;
     min-height:760px;
     height:min(84vh, 840px);
-    padding:108px 80px 118px;
+    padding:108px 50px 100px;
     overflow:hidden;
 
     display:grid !important;
