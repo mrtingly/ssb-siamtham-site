@@ -168,7 +168,7 @@
     height:140px;
     margin:0;
     z-index:20;
-    transform:translateY(0);
+    transform:translate(100, -150px);
 
     display:flex;
     align-items:center;
@@ -221,6 +221,7 @@
     justify-items:center;
     row-gap:0;
     column-gap:22px;
+    transform: translate(100, +200px);
 
     opacity:1;
     visibility:visible;
@@ -502,7 +503,7 @@
     color:rgba(190,220,255,.92);
     text-shadow:0 0 12px rgba(110,170,255,.18);
     opacity:1;
-    transform:translateY(0);
+    transform:translate(0, 0px);
     transition:opacity .25s ease, transform .25s ease;
     pointer-events:none !important;
     z-index:14;
