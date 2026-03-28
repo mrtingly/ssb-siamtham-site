@@ -17,7 +17,7 @@
     max-width:1380px;
     min-height:760px;
     height:min(86vh, 860px);
-    padding:108px 72px 118px;
+    padding:110px 72px 120px;
     overflow:hidden;
 
     display:grid !important;
@@ -40,7 +40,7 @@
   .hero-system-title{
     position:absolute;
     left:50%;
-    top:38px;
+    top:36px;
     transform:translateX(-50%);
     width:calc(100% - 260px);
     max-width:980px;
@@ -363,7 +363,7 @@
     grid-row:4;
     justify-self:center;
     align-self:end;
-    margin:0 0 6px;
+    margin:0 0 8px;
   }
 
   .m5 .node-shell{
@@ -479,8 +479,7 @@
     grid-row:4;
     justify-self:center;
     align-self:center;
-    margin-top:0;
-    margin-bottom:70px;
+    margin:0 0 68px;
     font-size:15px;
     font-weight:600;
     letter-spacing:.2px;
@@ -526,7 +525,7 @@
   }
 
   .tech-hero:not(.open) .m5{
-    transform:translateY(-52px) scale(.86);
+    transform:translateY(-54px) scale(.86);
   }
 
   .tech-hero.open .m1,
