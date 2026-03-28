@@ -161,11 +161,11 @@
     grid-row:2 / span 2;
     align-self:center;
     justify-self:center;
-    width:270px;
+    width:220px;
     height:360px;
     margin:0;
     z-index:20;
-    tranform:translateY(-400px);
+    tranform:translateY(-200px);
 
     display:flex;
     align-items:center;
