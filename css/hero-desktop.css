@@ -221,7 +221,7 @@
     justify-items:center;
     row-gap:0;
     column-gap:22px;
-    transform: translate(50, 1000px); !important; 
+    transform: translate(50px, 1000px); !important; 
 
     opacity:1;
     visibility:visible;
