@@ -212,7 +212,7 @@
   
     display:grid !important;
     grid-template-columns:230px 220px 230px;
-    grid-template-rows:90px 145px 145px 115px;
+    grid-template-rows:90px 170px 170px 115px;
     justify-content:center;
     align-items:center;
     justify-items:center;
