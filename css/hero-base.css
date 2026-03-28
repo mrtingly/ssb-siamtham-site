@@ -291,4 +291,21 @@ body.light-mode .logo-core img{
     opacity:0;
     stroke-dashoffset:0;
   }
+
+   .energy-line{
+  opacity:0.4;
+  transition: all 0.35s ease;
 }
+
+   /* เส้นที่ถูกเลือก */
+   .energy-line.active{
+     opacity:1;
+     stroke-width:2.5;
+     filter: drop-shadow(0 0 8px #00eaff);
+   }
+   
+   /* เส้นอื่นตอนมีตัวถูกเลือก */
+   .energy-line.dim{
+     opacity:0.1;
+   }
+
