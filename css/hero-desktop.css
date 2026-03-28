@@ -19,6 +19,7 @@
     height:min(84vh, 840px);
     padding:110px 80px 120px;
     overflow:hidden;
+    contain:layout;
   
     display:grid !important;
     grid-template-columns:230px 220px 230px;
@@ -48,6 +49,7 @@
     opacity:1;
     visibility:visible;
     pointer-events:none;
+    will-change:transform;
   }
 
   .hero-system-title,
@@ -219,8 +221,6 @@
     row-gap:0;
     column-gap:22px;
   
-    transform:translate(-115px, 100px);
-  
     opacity:1;
     visibility:visible;
     pointer-events:none !important;
@@ -319,6 +319,7 @@
     grid-row:2;
     justify-self:center;
     align-self:center;
+    transform:translate(-115px, 100px);
   }
 
   .g-company{
@@ -332,6 +333,7 @@
     align-items:center;
     gap:12px;
     z-index:15;
+    transform:translate(-115px, 100px);
   }
 
   .g-product{
@@ -345,6 +347,7 @@
     align-items:center;
     gap:12px;
     z-index:15;
+    transform:translate(-115px, 100px);
   }
 
   .g-agent{
@@ -358,6 +361,7 @@
     align-items:center;
     gap:12px;
     z-index:15;
+    transform:translate(-115px, 100px);
   }
 
   .m5{
@@ -366,6 +370,7 @@
     justify-self:center;
     align-self:end;
     margin:0 0 20px;
+    transform:translate(-115px, 100px);
   }
 
   .m5 .node-shell{
