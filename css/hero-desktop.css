@@ -27,7 +27,7 @@
     align-items:center;
     justify-items:center;
     row-gap:0;
-    column-gap:30px;
+    column-gap:20px;
 
     isolation:isolate;
     box-sizing:border-box;
@@ -165,6 +165,7 @@
     height:180px;
     margin:0;
     z-index:20;
+    tranform:translateY(8px);
 
     display:flex;
     align-items:center;
@@ -362,7 +363,7 @@
     grid-row:4;
     justify-self:center;
     align-self:end;
-    margin:0 0 8px;
+    margin:0 0 20px;
   }
 
   .m5 .node-shell{
