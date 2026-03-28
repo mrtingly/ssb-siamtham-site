@@ -212,14 +212,14 @@
   
     display:grid !important;
     grid-template-columns:230px 220px 230px;
-    grid-template-rows:100px 200px 30px 100px;
+    grid-template-rows:100px 200px 130px 100px;
     justify-content:center;
     align-items:center;
     justify-items:center;
     row-gap:0;
     column-gap:22px;
   
-    transform:translate(-130px, 100px);
+    transform:translate(-115px, 100px);
   
     opacity:1;
     visibility:visible;
