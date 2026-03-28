@@ -17,21 +17,22 @@
     max-width:1320px;
     min-height:760px;
     height:min(84vh, 840px);
-    padding:110px 90px 120px;
+    padding:110px 80px 120px;
     overflow:hidden;
 
     display:grid !important;
-    grid-template-columns:minmax(260px,1fr) 260px minmax(260px,1fr);
+    grid-template-columns:260px 220px 260px;
     grid-template-rows:110px 195px 195px 140px;
+    justify-content:center;
     align-items:center;
     justify-items:center;
     row-gap:0;
+    column-gap:30px;
 
     isolation:isolate;
     box-sizing:border-box;
   }
 
-  /* desktop only */
   .mobile-menu-v2{
     display:none !important;
   }
@@ -42,8 +43,7 @@
     left:50%;
     top:36px;
     transform:translateX(-50%);
-    width:calc(100% - 300px);
-    max-width:920px;
+    width:min(920px, calc(100% - 280px));
     z-index:30;
     opacity:1;
     visibility:visible;
@@ -161,8 +161,8 @@
     grid-row:2 / span 2;
     align-self:center;
     justify-self:center;
-    width:190px;
-    height:190px;
+    width:180px;
+    height:180px;
     margin:0;
     z-index:20;
 
@@ -210,10 +210,13 @@
     height:100%;
 
     display:grid !important;
-    grid-template-columns:minmax(260px,1fr) 260px minmax(260px,1fr);
+    grid-template-columns:260px 220px 260px;
     grid-template-rows:110px 195px 195px 140px;
+    justify-content:center;
     align-items:center;
     justify-items:center;
+    row-gap:0;
+    column-gap:30px;
 
     opacity:1;
     visibility:visible;
@@ -247,10 +250,10 @@
 
   /* ========= MAIN BUTTON ========= */
   .node-shell{
-    width:200px;
-    min-height:66px;
-    padding:14px 18px;
-    border-radius:20px;
+    width:185px;
+    min-height:62px;
+    padding:14px 16px;
+    border-radius:18px;
 
     display:flex;
     align-items:center;
@@ -290,7 +293,7 @@
   }
 
   .node-title{
-    font-size:17px;
+    font-size:16px;
     font-weight:700;
     line-height:1.2;
     color:#ffffff;
@@ -311,17 +314,15 @@
   .m1{
     grid-column:1;
     grid-row:2;
-    justify-self:end;
+    justify-self:center;
     align-self:center;
-    margin-right:-6px;
   }
 
   .g-company{
     grid-column:3;
     grid-row:2;
-    justify-self:start;
+    justify-self:center;
     align-self:center;
-    margin-left:-6px;
 
     display:flex;
     flex-direction:column-reverse;
@@ -333,9 +334,8 @@
   .g-product{
     grid-column:1;
     grid-row:3;
-    justify-self:end;
+    justify-self:center;
     align-self:center;
-    margin-right:-6px;
 
     display:flex;
     flex-direction:column;
@@ -347,9 +347,8 @@
   .g-agent{
     grid-column:3;
     grid-row:3;
-    justify-self:start;
+    justify-self:center;
     align-self:center;
-    margin-left:-6px;
 
     display:flex;
     flex-direction:column;
@@ -400,8 +399,8 @@
   }
 
   .submenu-panel{
-    width:200px;
-    min-width:200px;
+    width:185px;
+    min-width:185px;
     display:grid;
     gap:10px;
 
@@ -444,7 +443,7 @@
 
   .submenu-btn{
     width:100%;
-    min-height:46px;
+    min-height:44px;
     padding:12px 14px;
     border-radius:15px;
     font-size:13px;
@@ -509,19 +508,19 @@
   }
 
   .tech-hero:not(.open) .m1{
-    transform:translate(104px, 24px) scale(.84);
+    transform:translate(96px, 22px) scale(.84);
   }
 
   .tech-hero:not(.open) .g-company{
-    transform:translate(-104px, 24px) scale(.84);
+    transform:translate(-96px, 22px) scale(.84);
   }
 
   .tech-hero:not(.open) .g-product{
-    transform:translate(104px, -24px) scale(.84);
+    transform:translate(96px, -22px) scale(.84);
   }
 
   .tech-hero:not(.open) .g-agent{
-    transform:translate(-104px, -24px) scale(.84);
+    transform:translate(-96px, -22px) scale(.84);
   }
 
   .tech-hero:not(.open) .m5{
