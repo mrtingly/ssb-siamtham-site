@@ -240,18 +240,74 @@
   }
 
   .m5 .node-shell{
-    width:clamp(290px, 21vw, 350px);
-    min-height:clamp(66px, 5vw, 78px);
-    border-radius:24px;
-    border:1px solid rgba(255,140,140,.26);
-    
-    background:linear-gradient(135deg,#0066ff,#00c2ff);
+  width:clamp(290px, 21vw, 350px);
+  min-height:clamp(66px, 5vw, 78px);
+  border-radius:24px;
+  border:1px solid rgba(120,220,255,.42);
+  background:linear-gradient(135deg,#0a1633 0%, #123b7a 35%, #1a68ff 70%, #6ee7ff 100%);
+  background-size:200% 200%;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.14),
+    inset 0 0 18px rgba(120,220,255,.10),
+    0 0 18px rgba(70,150,255,.28),
+    0 0 34px rgba(80,220,255,.18),
+    0 18px 36px rgba(8,30,80,.32);
+  animation:ctaNeonFlow 4s ease-in-out infinite;
+  position:relative;
+  overflow:hidden;
+}
+
+  .m5 .node-shell::before{
+  content:"";
+  position:absolute;
+  top:-30%;
+  left:-35%;
+  width:38%;
+  height:160%;
+  background:linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,.00) 10%,
+    rgba(180,240,255,.18) 45%,
+    rgba(255,255,255,.55) 50%,
+    rgba(180,240,255,.18) 55%,
+    rgba(255,255,255,.00) 90%,
+    transparent 100%
+  );
+  transform:rotate(18deg);
+  animation:ctaLightSweep 2.8s linear infinite;
+  pointer-events:none;
+}
+
+  .m5 .node-shell:hover{
     box-shadow:
-      0 0 18px rgba(0,150,255,.5),
-      0 0 40px rgba(0,180,255,.35),
-      0 20px 40px rgba(0,80,200,.35);
-    border:1px solid rgba(120,200,255,.6);
-    animation:ctaPulse 2.6s ease-in-out infinite;
+      inset 0 1px 0 rgba(255,255,255,.18),
+      inset 0 0 22px rgba(130,230,255,.14),
+      0 0 22px rgba(70,150,255,.34),
+      0 0 44px rgba(80,220,255,.24),
+      0 20px 42px rgba(8,30,80,.38);
+  }
+
+  .m5 .node-title{
+    font-size:clamp(20px, 1.55vw, 26px);
+    letter-spacing:.2px;
+    color:#f4fbff;
+    text-shadow:
+      0 0 8px rgba(170,235,255,.24),
+      0 0 18px rgba(90,190,255,.20);
+  }
+  
+  @keyframes ctaNeonFlow{
+    0%{ background-position:0% 50%; }
+    50%{ background-position:100% 50%; }
+    100%{ background-position:0% 50%; }
+  }
+  
+  @keyframes ctaLightSweep{
+    0%{ left:-35%; opacity:0; }
+    10%{ opacity:1; }
+    50%{ opacity:1; }
+    100%{ left:120%; opacity:0; }
   }
 
   .m5 .node-title{
