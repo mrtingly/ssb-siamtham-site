@@ -115,9 +115,9 @@
 
   .node-shell{
     position:relative;
-    width:clamp(240px, 18vw, 310px);
-    min-height:clamp(64px, 4.8vw, 78px);
-    padding:14px 22px;
+    width:clamp(190px, 14vw, 240px);
+    min-height:clamp(58px, 4.2vw, 70px);
+    padding:12px 18px;
     border-radius:22px;
     display:flex;
     align-items:center;
