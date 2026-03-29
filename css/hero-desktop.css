@@ -594,14 +594,14 @@ body:not(.light-mode) .m5 .node-title{
 
 /* โหมดสว่าง = ฟ้านีออน */
 body.light-mode .m5 .node-shell{
-  background:linear-gradient(135deg,#0a1633 0%, #123b7a 35%, #1a68ff 70%, #6ee7ff 100%);
-  border:1px solid rgba(120,220,255,.42);
+  background:linear-gradient(135deg,#eef7ff 0%, #d8ecff 35%, #84c5ff 72%, #dff8ff 100%);
+  border:1px solid rgba(145,210,255,.55);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.14),
-    inset 0 0 18px rgba(120,220,255,.10),
-    0 0 18px rgba(70,150,255,.28),
-    0 0 34px rgba(80,220,255,.18),
-    0 18px 36px rgba(8,30,80,.32);
+    inset 0 1px 0 rgba(255,255,255,.82),
+    inset 0 0 16px rgba(255,255,255,.22),
+    0 0 18px rgba(92,170,255,.24),
+    0 0 32px rgba(120,220,255,.14),
+    0 16px 30px rgba(70,130,220,.18);
 }
 
 body.light-mode .m5 .node-shell:hover{
@@ -614,15 +614,25 @@ body.light-mode .m5 .node-shell:hover{
 }
 
 body.light-mode .m5 .node-title{
-  color:#f4fbff;
+  color:#0f4d8f;
   text-shadow:
-    0 0 8px rgba(170,235,255,.24),
-    0 0 18px rgba(90,190,255,.20);
+    0 0 8px rgba(255,255,255,.35),
+    0 0 14px rgba(120,190,255,.16);
 }
 
 /* โลโก้มีแสงตอนเมนูเปิด */
+.logo-core{
+  background:transparent !important;
+  border-radius:50%;
+}
+
 .tech-hero.open .logo-core{
-  box-shadow:
-    0 0 22px rgba(80,170,255,.28),
-    0 0 48px rgba(80,170,255,.18);
+  box-shadow:none !important;
+}
+
+.tech-hero.open .logo-core img{
+  filter:
+    drop-shadow(0 0 12px rgba(120,210,255,.22))
+    drop-shadow(0 0 28px rgba(120,210,255,.14))
+    drop-shadow(0 16px 24px rgba(0,0,0,.20));
 }
