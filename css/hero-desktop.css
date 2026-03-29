@@ -447,29 +447,30 @@
       inset 0 0 10px rgba(255,255,255,.18);
   }
 
-  @keyframes ctaPulse{
-    0%{
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.16),
-        inset 0 0 16px rgba(255,150,150,.10),
-        0 0 20px rgba(255,90,90,.16),
-        0 18px 32px rgba(120,0,0,.30);
-    }
-    50%{
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.20),
-        inset 0 0 18px rgba(255,165,165,.12),
-        0 0 30px rgba(255,95,95,.26),
-        0 22px 38px rgba(120,0,0,.36);
-    }
-    100%{
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.16),
-        inset 0 0 16px rgba(255,150,150,.10),
-        0 0 20px rgba(255,90,90,.16),
-        0 18px 32px rgba(120,0,0,.30);
-    }
+@keyframes ctaPulse{
+  0%{
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.16),
+      inset 0 0 16px rgba(120,180,255,.10),
+      0 0 20px rgba(80,140,255,.18),
+      0 18px 32px rgba(30,80,180,.22);
   }
+  50%{
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.20),
+      inset 0 0 18px rgba(140,200,255,.14),
+      0 0 34px rgba(90,160,255,.28),
+      0 22px 38px rgba(40,90,200,.28);
+  }
+  100%{
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.16),
+      inset 0 0 16px rgba(120,180,255,.10),
+      0 0 20px rgba(80,140,255,.18),
+      0 18px 32px rgba(30,80,180,.22);
+  }
+}
+  
   /* glow ตอนกด */
 .node-shell:active{
   transform:scale(0.98);
