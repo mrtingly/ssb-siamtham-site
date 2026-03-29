@@ -366,14 +366,14 @@
 
   .m1{
     left:22%;
-    top:40%;
-    transform:translate(-50%, -50%);
+    top:39%;
+    transform:translate(-60%, -50%);
   }
 
   .g-company{
     left:78%;
     top:36%;
-    transform:translate(-50%, -50%);
+    transform:translate(-40%, -50%);
     display:flex;
     flex-direction:column;
     align-items:flex-end;
