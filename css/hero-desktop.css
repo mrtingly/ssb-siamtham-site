@@ -58,7 +58,7 @@
   }
 
   .hero-system-title-text{
-    font-size:clamp(26px, 2vw, 36px);
+    font-size:clamp(20px, 1.6vw, 28px);
     line-height:1.1;
     letter-spacing:1px;
   }
@@ -288,7 +288,7 @@
 
   .g-company .submenu-panel{
     order:-1;
-    margin-bottom:12px;
+    margin-bottom:18px;
   }
 
   .g-company .main-node{
