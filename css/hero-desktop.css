@@ -365,13 +365,13 @@
      ========================= */
 
   .m1{
-    left:18%;
+    left:19.50%;
     top:37.50%;
     transform:translate(-60%, -50%);
   }
 
   .g-company{
-    left:82%;
+    left:79%;
     top:36%;
     transform:translate(-40%, -50%);
     display:flex;
