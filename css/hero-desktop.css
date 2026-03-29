@@ -372,7 +372,7 @@
 
   .g-company{
     left:80%;
-    top:36%;
+    top:35.50%;
     transform:translate(-40%, -50%);
     display:flex;
     flex-direction:column;
@@ -569,7 +569,7 @@
     opacity:1;
     visibility:visible;
     pointer-events:auto;
-    max-height:120px;
+    max-height:200px;
     transform:translateY(0);
   }
 
