@@ -560,5 +560,23 @@
     opacity:0;
     transform:scale(1.3);
   }
+
+  body.dark .m5 .node-shell{
+  background:linear-gradient(135deg,#0a0000 0%, #3a0000 35%, #b30000 70%, #ff4d4d 100%);
+  border:1px solid rgba(255,80,80,.45);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    inset 0 0 18px rgba(255,80,80,.15),
+    0 0 18px rgba(255,80,80,.35),
+    0 0 34px rgba(255,60,60,.22),
+    0 18px 36px rgba(60,0,0,.35);
 }
+
+body.dark .m5 .node-title{
+  color:#fff5f5;
+  text-shadow:
+    0 0 10px rgba(255,120,120,.35),
+    0 0 18px rgba(255,60,60,.25);
+}
+
 
