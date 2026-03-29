@@ -366,13 +366,13 @@
 
   .m1{
     left:22%;
-    top:38%;
+    top:40%;
     transform:translate(-50%, -50%);
   }
 
   .g-company{
     left:78%;
-    top:38%;
+    top:40%;
     transform:translate(-50%, -50%);
     display:flex;
     flex-direction:column;
@@ -569,7 +569,7 @@
     opacity:1;
     visibility:visible;
     pointer-events:auto;
-    max-height:260px;
+    max-height:220px;
     transform:translateY(0);
   }
 
@@ -585,7 +585,7 @@
   .g-product .submenu-panel,
   .g-agent .submenu-panel{
     order:2;
-    margin-top:14px;
+    margin-top:8px;
   }
 
   .submenu-btn{
