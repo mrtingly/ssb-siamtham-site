@@ -569,13 +569,13 @@
     opacity:1;
     visibility:visible;
     pointer-events:auto;
-    max-height:220px;
+    max-height:260px;
     transform:translateY(0);
   }
 
   .g-company .submenu-panel{
     order:1;
-    margin-bottom:16px;
+    margin-bottom:22px;
   }
 
   .g-company .main-node{
@@ -585,7 +585,7 @@
   .g-product .submenu-panel,
   .g-agent .submenu-panel{
     order:2;
-    margin-top:10px;
+    margin-top:14px;
   }
 
   .submenu-btn{
