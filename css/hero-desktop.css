@@ -80,6 +80,8 @@
     width:clamp(138px, 11vw, 190px);
     height:clamp(138px, 11vw, 190px);
     top:50%;
+    z-index:30;
+    pointer-events:auto;
   }
 
   /* ===== MENU LAYER ===== */
