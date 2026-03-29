@@ -255,6 +255,7 @@
   animation:ctaNeonFlow 4s ease-in-out infinite;
   position:relative;
   overflow:hidden;
+  
 }
 
   .m5 .node-shell::before{
@@ -550,7 +551,7 @@
   opacity:0;
   animation:menuPulse .5s ease;
 }
-
+  
 @keyframes menuPulse{
   0%{
     opacity:1;
@@ -560,9 +561,12 @@
     opacity:0;
     transform:scale(1.3);
   }
+}
 
-  body.dark .m5 .node-shell{
-  background:linear-gradient(135deg,#0a0000 0%, #3a0000 35%, #b30000 70%, #ff4d4d 100%);
+/* ===== CTA THEME FIX ===== */
+/* โหมดมืด = แดงนีออน */
+body:not(.light-mode) .m5 .node-shell{
+  background:linear-gradient(135deg,#140000 0%, #3a0000 35%, #b30000 70%, #ff4d4d 100%);
   border:1px solid rgba(255,80,80,.45);
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.08),
@@ -572,11 +576,53 @@
     0 18px 36px rgba(60,0,0,.35);
 }
 
-body.dark .m5 .node-title{
+body:not(.light-mode) .m5 .node-shell:hover{
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.10),
+    inset 0 0 22px rgba(255,90,90,.18),
+    0 0 22px rgba(255,80,80,.40),
+    0 0 44px rgba(255,60,60,.28),
+    0 20px 42px rgba(60,0,0,.40);
+}
+
+body:not(.light-mode) .m5 .node-title{
   color:#fff5f5;
   text-shadow:
     0 0 10px rgba(255,120,120,.35),
     0 0 18px rgba(255,60,60,.25);
 }
 
+/* โหมดสว่าง = ฟ้านีออน */
+body.light-mode .m5 .node-shell{
+  background:linear-gradient(135deg,#0a1633 0%, #123b7a 35%, #1a68ff 70%, #6ee7ff 100%);
+  border:1px solid rgba(120,220,255,.42);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.14),
+    inset 0 0 18px rgba(120,220,255,.10),
+    0 0 18px rgba(70,150,255,.28),
+    0 0 34px rgba(80,220,255,.18),
+    0 18px 36px rgba(8,30,80,.32);
+}
 
+body.light-mode .m5 .node-shell:hover{
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.18),
+    inset 0 0 22px rgba(130,230,255,.14),
+    0 0 22px rgba(70,150,255,.34),
+    0 0 44px rgba(80,220,255,.24),
+    0 20px 42px rgba(8,30,80,.38);
+}
+
+body.light-mode .m5 .node-title{
+  color:#f4fbff;
+  text-shadow:
+    0 0 8px rgba(170,235,255,.24),
+    0 0 18px rgba(90,190,255,.20);
+}
+
+/* โลโก้มีแสงตอนเมนูเปิด */
+.tech-hero.open .logo-core{
+  box-shadow:
+    0 0 22px rgba(80,170,255,.28),
+    0 0 48px rgba(80,170,255,.18);
+}
