@@ -227,12 +227,12 @@
 
   .m5{
     left:50%;
-    bottom:11.5%;
+    bottom:9%;
     transform:translateX(-50%);
   }
 
   .m5 .node-shell{
-    width:clamp(300px, 22vw, 390px);
+    width:clamp(260px, 20vw, 340px);
     min-height:clamp(74px, 5.6vw, 92px);
     border-radius:28px;
     border:1px solid rgba(255,140,140,.26);
