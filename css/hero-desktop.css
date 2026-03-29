@@ -206,8 +206,8 @@
   }
 
   .g-product{
-    left:16%;
-    top:55%;
+    left:10%;
+    top:40%;
     transform:translate(-50%, -50%);
     display:flex;
     flex-direction:column;
