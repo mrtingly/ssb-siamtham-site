@@ -43,25 +43,63 @@
     z-index:20;
   }
 
-  .hero-system-title-inner{
-    min-height:74px;
-    padding:16px 34px;
-    border-radius:999px;
-    border:1px solid rgba(160,225,255,.18);
-    background:
-      linear-gradient(180deg, rgba(255,255,255,.11), rgba(255,255,255,.03)),
-      linear-gradient(90deg, rgba(70,145,255,.14), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 80%, rgba(70,145,255,.14));
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.14),
-      0 0 28px rgba(70,145,255,.12),
-      0 10px 22px rgba(0,0,0,.14);
-  }
+ .hero-system-title-inner{
+  position:relative;
+  min-height:72px;
+  padding:14px 34px;
+  border-radius:999px;
+  border:1px solid rgba(255,215,120,.22);
+  background:linear-gradient(180deg, rgba(8,12,22,.94), rgba(5,8,16,.96));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.06),
+    inset 0 -12px 24px rgba(255,215,120,.05),
+    0 0 18px rgba(255,215,120,.08),
+    0 10px 24px rgba(0,0,0,.24);
+  overflow:hidden;
+}
 
-  .hero-system-title-text{
-    font-size:clamp(20px, 1.55vw, 28px);
-    line-height:1.1;
-    letter-spacing:.6px;
-  }
+  .hero-system-title-inner::before{
+  content:"";
+  position:absolute;
+  left:10%;
+  right:10%;
+  bottom:-16px;
+  height:34px;
+  border-radius:999px;
+  background:radial-gradient(circle, rgba(255,215,120,.42) 0%, rgba(255,215,120,.14) 42%, transparent 76%);
+  filter:blur(14px);
+  opacity:.9;
+  pointer-events:none;
+}
+
+.hero-system-title-inner::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  background:linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255,255,255,.03) 35%,
+    rgba(255,230,160,.10) 50%,
+    rgba(255,255,255,.03) 65%,
+    transparent 100%
+  );
+  pointer-events:none;
+}
+
+ .hero-system-title-text{
+  position:relative;
+  z-index:2;
+  font-size:clamp(21px, 1.65vw, 30px);
+  line-height:1.1;
+  letter-spacing:.9px;
+  font-weight:900;
+  color:#fff7d6;
+  text-shadow:
+    0 0 8px rgba(255,240,180,.10),
+    0 0 18px rgba(255,215,120,.08);
+}
 
   /* ===== CENTER ===== */
 
