@@ -195,13 +195,13 @@
 
       .m1{
       left:22%;
-      top:44%;
+      top:42%;
       transform:translate(-50%, -50%);
     }
     
     .g-company{
       left:78%;
-      top:41%;
+      top:39%;
       transform:translate(-50%, -50%);
       display:flex;
       flex-direction:column;
@@ -211,7 +211,7 @@
     
     .g-product{
       left:20%;
-      top:61.5%;
+      top:65%;
       transform:translate(-50%, -50%);
       display:flex;
       flex-direction:column;
@@ -221,7 +221,7 @@
     
     .g-agent{
       left:80%;
-      top:61.5%;
+      top:65%;
       transform:translate(-50%, -50%);
       display:flex;
       flex-direction:column;
