@@ -534,10 +534,17 @@
   0%{
     opacity:1;
     transform:scale(1);
+    
   }
   100%{
     opacity:0;
     transform:scale(1.4);
   }
+  
+  .tech-hero.open .logo-core{
+  box-shadow:
+    0 0 25px rgba(0,150,255,.6),
+    0 0 60px rgba(0,180,255,.35);
+}
 }
 
