@@ -61,17 +61,17 @@
   .hero-system-title-inner::before{
   content:"";
   position:absolute;
-  left:10%;
-  right:10%;
-  bottom:-16px;
-  height:34px;
+  left:12%;
+  right:12%;
+  bottom:-18px;
+  height:40px;
   border-radius:999px;
-  background:radial-gradient(circle, rgba(255,215,120,.42) 0%, rgba(255,215,120,.14) 42%, transparent 76%);
-  filter:blur(14px);
+  background:radial-gradient(circle, rgba(0,200,255,.55) 0%, rgba(0,200,255,.18) 40%, transparent 75%);
+  filter:blur(16px);
   opacity:.9;
   pointer-events:none;
 }
-
+  
 .hero-system-title-inner::after{
   content:"";
   position:absolute;
@@ -80,12 +80,21 @@
   background:linear-gradient(
     120deg,
     transparent 0%,
-    rgba(255,255,255,.03) 35%,
-    rgba(255,230,160,.10) 50%,
-    rgba(255,255,255,.03) 65%,
+    rgba(120,220,255,.08) 40%,
+    rgba(255,255,255,.18) 50%,
+    rgba(120,220,255,.08) 60%,
     transparent 100%
   );
+  transform:translateX(-120%);
+  animation:titleNeonSweep 4s linear infinite;
   pointer-events:none;
+}
+
+@keyframes titleNeonSweep{
+  0%{ transform:translateX(-120%); opacity:0; }
+  10%{ opacity:1; }
+  50%{ opacity:1; }
+  100%{ transform:translateX(120%); opacity:0; }
 }
 
  .hero-system-title-text{
