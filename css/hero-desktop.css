@@ -709,3 +709,30 @@ body.light-mode .m5 .node-title{
   65%{ transform:translate(-50%,-50%) scale(.98); }
   100%{ transform:translate(-50%,-50%) scale(1); }
 }
+
+    /* ===== FIX MENU HIDE TIMING ===== */
+  .menu-node,
+  .menu-group,
+  .m1,
+  .g-company,
+  .g-product,
+  .g-agent,
+  .m5{
+    transition:
+      opacity .32s ease !important,
+      transform .32s cubic-bezier(.22,.8,.22,1) !important,
+      visibility 0s linear .32s !important;
+  }
+  
+  .tech-hero.open .menu-node,
+  .tech-hero.open .menu-group,
+  .tech-hero.open .m1,
+  .tech-hero.open .g-company,
+  .tech-hero.open .g-product,
+  .tech-hero.open .g-agent,
+  .tech-hero.open .m5{
+    transition:
+      opacity .32s ease !important,
+      transform .32s cubic-bezier(.22,.8,.22,1) !important,
+      visibility 0s linear 0s !important;
+  }
