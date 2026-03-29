@@ -636,3 +636,66 @@ body.light-mode .m5 .node-title{
     drop-shadow(0 0 28px rgba(120,210,255,.14))
     drop-shadow(0 16px 24px rgba(0,0,0,.20));
 }
+
+  /* ===== LOGO LIFE EFFECT ===== */
+
+.logo-core{
+  position:relative;
+  transition:transform .25s ease;
+}
+
+/* idle pulse */
+.logo-core::before{
+  content:"";
+  position:absolute;
+  inset:-18px;
+  border-radius:50%;
+  border:1px solid rgba(120,200,255,.25);
+  opacity:.4;
+  animation:logoPulse 3.2s ease-in-out infinite;
+  pointer-events:none;
+}
+
+/* hover ring */
+.logo-core:hover::after{
+  content:"";
+  position:absolute;
+  inset:-22px;
+  border-radius:50%;
+  border:1px solid rgba(120,220,255,.45);
+  animation:logoHoverWave .8s ease;
+  pointer-events:none;
+}
+
+/* hover scale */
+.logo-core:hover{
+  transform:scale(1.06);
+}
+
+/* click shockwave */
+.logo-core:active::after{
+  content:"";
+  position:absolute;
+  inset:-28px;
+  border-radius:50%;
+  border:2px solid rgba(120,220,255,.6);
+  animation:logoClickWave .5s ease;
+}
+
+/* ===== ANIMATION ===== */
+
+@keyframes logoPulse{
+  0%{ transform:scale(1); opacity:.35; }
+  50%{ transform:scale(1.08); opacity:.18; }
+  100%{ transform:scale(1); opacity:.35; }
+}
+
+@keyframes logoHoverWave{
+  0%{ transform:scale(1); opacity:.6; }
+  100%{ transform:scale(1.25); opacity:0; }
+}
+
+@keyframes logoClickWave{
+  0%{ transform:scale(1); opacity:.7; }
+  100%{ transform:scale(1.4); opacity:0; }
+}
