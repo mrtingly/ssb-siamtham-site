@@ -176,7 +176,7 @@
     position:relative;
     z-index:2;
     color:#f8fdff;
-    font-size:clamp(15px, 1.1vw, 18px);
+    font-size:clamp(12px, 1vw, 14px);
     line-height:1.1;
     font-weight:800;
     letter-spacing:.25px;
