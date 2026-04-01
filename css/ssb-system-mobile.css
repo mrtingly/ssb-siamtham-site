@@ -186,3 +186,19 @@
     width:100%;
   }
 }
+@media(max-width:760px){
+
+  .ssb-top-layout{
+    flex-direction:column;
+  }
+
+  .ssb-video,
+  .ssb-side{
+    width:100%;
+  }
+
+  .ssb-video iframe{
+    height:220px;
+  }
+
+}
