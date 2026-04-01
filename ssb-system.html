@@ -2,72 +2,90 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stealth Safety Bank System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" content="notranslate" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&family=Orbitron:wght@500;700;800&display=swap" rel="stylesheet">
+  <title>Stealth Safety Bank Mobile System | Siam Tham Co.,Ltd.</title>
+  <meta
+    name="description"
+    content="Stealth Safety Bank Mobile System โดย บริษัท สยามทำ จำกัด ระบบความปลอดภัยทางการเงินเชิงโครงสร้าง การแยกอุปกรณ์ธุรกรรม การอำพรางการจัดเก็บ และแนวคิดลดความเสี่ยงจากการโจมตีตั้งแต่ต้นทาง"
+  />
+  <meta
+    name="keywords"
+    content="Stealth Safety Bank, Stealth Safety Bank Mobile System, Stealth Safety Book, Siam Tham, บริษัท สยามทำ จำกัด, ความปลอดภัยทางการเงิน, mobile banking security, anti phishing, anti hacking"
+  />
+  <meta name="author" content="Siam Tham Co.,Ltd." />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="theme-color" content="#1b63c7" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&family=Orbitron:wght@500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
 
   <link rel="stylesheet" href="css/ssb-system.css" />
-  <link rel="stylesheet" href="css/ssb-system-mobile.css" />
+  <link rel="stylesheet" href="css/ssb-system-mobile.css" media="(max-width: 1023px)" />
 </head>
-<body class="light-mode">
-
+<body>
   <main class="ssb-page">
     <section class="ssb-page-shell">
 
       <aside class="ssb-page-media">
         <div class="ssb-page-video-sticky">
-          <div class="popup-kicker" id="ssbKicker"></div>
+          <div class="popup-kicker notranslate" id="ssbKicker">SSB Mobile System</div>
 
-          <div class="popup-pro-nav" id="ssbNav"></div>
+          <nav class="popup-pro-nav notranslate" id="ssbNav"></nav>
 
           <div class="popup-pro-video-frame">
             <iframe
               id="ssbVideo"
               src=""
               title="SSB Video"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen>
-            </iframe>
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
           </div>
 
-          <div class="video-note" id="ssbVideoNote"></div>
+          <div class="video-note notranslate" id="ssbVideoNote"></div>
         </div>
       </aside>
 
       <section class="ssb-page-content" id="ssbPageContent">
         <div class="popup-pro-head">
-          <h3 id="ssbTitle"></h3>
-          <div class="popup-subtitle" id="ssbSubtitle"></div>
+          <h3 id="ssbTitle" class="notranslate"></h3>
+          <div class="popup-subtitle notranslate" id="ssbSubtitle"></div>
         </div>
 
         <div class="popup-pro-body">
           <div class="popup-panel popup-pro-intro">
-            <p class="popup-lead" id="ssbLead"></p>
-            <div class="badge-row" id="ssbBadges"></div>
+            <h4 class="popup-section-title"><span class="dot"></span>ภาพรวม</h4>
+            <p class="popup-lead notranslate" id="ssbLead"></p>
+            <div class="badge-row notranslate" id="ssbBadges"></div>
           </div>
 
           <div class="popup-pro-grid">
             <div class="popup-panel">
               <h4 class="popup-section-title"><span class="dot"></span>คุณสมบัติเด่น</h4>
-              <ul class="feature-list" id="ssbFeatures"></ul>
+              <ul class="feature-list notranslate" id="ssbFeatures"></ul>
             </div>
 
             <div class="popup-panel">
               <h4 class="popup-section-title"><span class="dot"></span>เหมาะกับใคร</h4>
-              <ul class="feature-list" id="ssbUseCases"></ul>
+              <ul class="feature-list notranslate" id="ssbUseCases"></ul>
             </div>
           </div>
 
           <div class="popup-panel">
             <h4 class="popup-section-title"><span class="dot"></span>ผลลัพธ์ของระบบ</h4>
-            <div class="impact-grid" id="ssbImpacts"></div>
+            <div class="impact-grid notranslate" id="ssbImpacts"></div>
           </div>
 
           <div class="popup-panel popup-pro-rule-panel">
-            <div class="popup-pro-rule-title">กฎสำคัญ</div>
+            <div class="popup-pro-rule-title notranslate">กฎสำคัญ</div>
             <div class="popup-pro-rule-box" id="ssbRules"></div>
           </div>
 
@@ -78,7 +96,7 @@
     </section>
   </main>
 
-    <script src="js/ssb-system-data.js"></script>
-    <script src="js/ssb-system-page.js"></script>
+  <script src="js/ssb-system-data.js"></script>
+  <script src="js/ssb-system-page.js"></script>
 </body>
 </html>
