@@ -1,34 +1,48 @@
-const sectionOrder = ["ssbmobile", "ssb", "sb", "flare", "usage", "sbpremium", "custom"];
-
 function getCurrentKey() {
   const key = window.location.hash.replace("#", "").trim();
   return popupData[key] ? key : "ssbmobile";
 }
 
+function setVideoSrc(src) {
+  const video = document.getElementById("ssbVideo");
+  if (!video) return;
+  video.src = src || "";
+}
+
 function scrollContentTop() {
   const content = document.getElementById("ssbPageContent");
   if (content) content.scrollTop = 0;
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  window.scrollTo({ top: 0, behavior: "auto" });
 }
 
 function renderNav(activeKey) {
   const nav = document.getElementById("ssbNav");
+  if (!nav) return;
+
   nav.innerHTML = "";
 
-  sectionOrder.forEach((key) => {
+  sectionOrder.forEach((key, index) => {
     const item = popupData[key];
     if (!item) return;
 
     const btn = document.createElement("a");
     btn.href = `#${key}`;
     btn.className = "popup-pro-nav-btn" + (key === activeKey ? " active" : "");
-    btn.textContent = item.title || key;
+    btn.textContent = `${index + 1}. ${item.title}`;
     nav.appendChild(btn);
   });
+
+  const orderBtn = document.createElement("a");
+  orderBtn.href = "book.html";
+  orderBtn.className = "popup-pro-nav-btn popup-pro-nav-order";
+  orderBtn.textContent = `${sectionOrder.length + 1}. เริ่มสั่งจอง`;
+  nav.appendChild(orderBtn);
 }
 
 function renderBadges(list) {
   const el = document.getElementById("ssbBadges");
+  if (!el) return;
+
   el.innerHTML = "";
 
   (list || []).forEach((text) => {
@@ -41,6 +55,8 @@ function renderBadges(list) {
 
 function renderList(targetId, list) {
   const el = document.getElementById(targetId);
+  if (!el) return;
+
   el.innerHTML = "";
 
   (list || []).forEach((text) => {
@@ -52,6 +68,8 @@ function renderList(targetId, list) {
 
 function renderImpacts(list) {
   const el = document.getElementById("ssbImpacts");
+  if (!el) return;
+
   el.innerHTML = "";
 
   (list || []).forEach((item) => {
@@ -74,6 +92,8 @@ function renderImpacts(list) {
 
 function renderRules(list) {
   const el = document.getElementById("ssbRules");
+  if (!el) return;
+
   el.innerHTML = "";
 
   (list || []).forEach((text) => {
@@ -86,6 +106,8 @@ function renderRules(list) {
 
 function renderActions(data) {
   const el = document.getElementById("ssbActions");
+  if (!el) return;
+
   el.innerHTML = "";
 
   if (data.next) {
@@ -96,7 +118,7 @@ function renderActions(data) {
     el.appendChild(nextBtn);
   } else {
     const orderBtn = document.createElement("a");
-    orderBtn.href = "configurator.html";
+    orderBtn.href = "book.html";
     orderBtn.className = "popup-cta primary";
     orderBtn.textContent = data.nextLabel || "เริ่มสั่งจอง";
     el.appendChild(orderBtn);
@@ -114,18 +136,19 @@ function renderPage() {
   const data = popupData[key];
   if (!data) return;
 
-  const video = document.getElementById("ssbVideo");
+  const kicker = document.getElementById("ssbKicker");
+  const title = document.getElementById("ssbTitle");
+  const subtitle = document.getElementById("ssbSubtitle");
+  const lead = document.getElementById("ssbLead");
+  const videoNote = document.getElementById("ssbVideoNote");
 
-  document.getElementById("ssbKicker").textContent = data.kicker || "";
-  document.getElementById("ssbTitle").textContent = data.title || "";
-  document.getElementById("ssbSubtitle").textContent = data.subtitle || "";
-  document.getElementById("ssbLead").textContent = data.lead || "";
-  document.getElementById("ssbVideoNote").textContent = data.videoNote || "";
+  if (kicker) kicker.textContent = data.kicker || "";
+  if (title) title.textContent = data.title || "";
+  if (subtitle) subtitle.textContent = data.subtitle || "";
+  if (lead) lead.textContent = data.lead || "";
+  if (videoNote) videoNote.textContent = data.videoNote || "";
 
-  if (video) {
-    video.src = data.video || "";
-  }
-
+  setVideoSrc(data.video || "");
   renderNav(key);
   renderBadges(data.badges);
   renderList("ssbFeatures", data.features);
@@ -133,16 +156,20 @@ function renderPage() {
   renderImpacts(data.impacts);
   renderRules(data.rules);
   renderActions(data);
-
   scrollContentTop();
+
+  document.title = `${data.title} | Siam Tham Co.,Ltd.`;
 }
 
 window.addEventListener("hashchange", renderPage);
 
 window.addEventListener("DOMContentLoaded", () => {
-  if (!window.location.hash || !popupData[window.location.hash.replace("#", "").trim()]) {
+  const key = window.location.hash.replace("#", "").trim();
+
+  if (!popupData[key]) {
     window.location.hash = "#ssbmobile";
-  } else {
-    renderPage();
+    return;
   }
+
+  renderPage();
 });
