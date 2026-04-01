@@ -48,12 +48,14 @@ a{
   display:grid;
   grid-template-columns:minmax(0, 70%) minmax(280px, 30%);
   gap:20px;
-  align-items:start;
+  align-items:stretch;
 }
 
 .ssb-top-video,
 .ssb-top-side{
   min-width:0;
+  display:flex;
+  flex-direction:column;
 }
 
 .ssb-page-content{
@@ -103,6 +105,7 @@ a{
   display:block;
   width:100%;
   aspect-ratio:16 / 9;
+  height:100%;
   min-height:360px;
   border:0;
 }
@@ -125,10 +128,15 @@ a{
 }
 
 .ssb-nav-fixed{
-  max-height:360px;
+  height:100%;
+  min-height:360px;
   overflow-y:auto;
   overflow-x:hidden;
   padding-right:4px;
+}
+
+.ssb-top-side .popup-pro-nav{
+  height:100%;
 }
 
 .ssb-nav-fixed::-webkit-scrollbar{
