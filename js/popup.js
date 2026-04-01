@@ -72,10 +72,9 @@ function closePopup(el, onAfterClose) {
       onAfterClose();
     }
 
-    const infoOpen = infoPopup?.style.display === "flex";
     const companyOpen = companyPopup?.style.display === "flex";
 
-    if (!infoOpen && !companyOpen) {
+    if (!companyOpen) {
       lockBodyScroll(false);
     }
 
@@ -83,79 +82,6 @@ function closePopup(el, onAfterClose) {
       lastFocusedElement.focus();
     }
   }, 180);
-}
-
-function setPopupNavActive(key) {
-  document.querySelectorAll(".popup-pro-nav-btn[data-step]").forEach(btn => {
-    btn.classList.toggle("active", btn.dataset.step === key);
-  });
-}
-
-function renderPopupStep(key) {
-  const data = popupData[key];
-  if (!data) return;
-
-  currentPopupKey = key;
-
-  if (popupKicker) popupKicker.textContent = data.kicker;
-  if (infoTitle) infoTitle.textContent = data.title;
-  if (infoSubtitle) infoSubtitle.textContent = data.subtitle;
-  if (infoLead) infoLead.textContent = data.lead;
-  if (videoNote) videoNote.textContent = data.videoNote || "";
-
-  renderBadges(data.badges || []);
-  renderFeatures(data.features || [], infoFeatures);
-  renderFeatures(data.useCases || [], infoUseCases);
-  renderImpacts(data.impacts || []);
-
-  const rule1 = document.getElementById("popupRule1");
-  const rule2 = document.getElementById("popupRule2");
-  const rule3 = document.getElementById("popupRule3");
-
-  if (rule1) rule1.textContent = data.rules?.[0] || "";
-  if (rule2) rule2.textContent = data.rules?.[1] || "";
-  if (rule3) rule3.textContent = data.rules?.[2] || "";
-
-  if (popupNextStep) {
-    if (data.next) {
-      popupNextStep.style.display = "inline-flex";
-      popupNextStep.textContent = data.nextLabel || "ไปขั้นถัดไป";
-      popupNextStep.dataset.next = data.next;
-    } else {
-      popupNextStep.style.display = "none";
-      popupNextStep.dataset.next = "";
-    }
-  }
-
-  if (infoVideo) {
-    const params = new URLSearchParams({
-      rel: "0",
-      autoplay: "0",
-      mute: "0",
-      controls: "1",
-      modestbranding: "1",
-      playsinline: "1"
-    });
-
-    infoVideo.src = `${data.video}?${params.toString()}`;
-  }
-
-  if (document.querySelector(".popup-pro-content")) {
-    document.querySelector(".popup-pro-content").scrollTop = 0;
-  }
-
-  setPopupNavActive(key);
-}
-
-function openInfoPopup(key) {
-  renderPopupStep(key);
-  openPopup(infoPopup);
-}
-
-function closeInfoPopup() {
-  closePopup(infoPopup, () => {
-    if (infoVideo) infoVideo.src = "";
-  });
 }
 
 function openCompanyPopup() {
@@ -169,7 +95,7 @@ function closeCompanyPopup() {
 function buildEnergyLines() {
   if (!techHero || !logoMenuButton) return;
 
-  const cx = 500; // center fixed
+  const cx = 500;
   const cy = 350;
 
   const positions = [
@@ -300,55 +226,4 @@ function applyThemeByViewport() {
 
   const savedTheme = localStorage.getItem("theme");
   body.classList.toggle("light-mode", savedTheme === "light");
-}
-
-// ===== POPUP SYSTEM V4 =====
-
-const popup = document.getElementById("popupSystem");
-const popupTitle = document.getElementById("popupTitle");
-const popupSubtitle = document.getElementById("popupSubtitle");
-const popupShort = document.getElementById("popupShort");
-const popupFull = document.getElementById("popupFull");
-const popupVideo = document.getElementById("popupVideoFrame");
-
-const closeBtn = document.getElementById("popupCloseBtn");
-const modeBtns = document.querySelectorAll(".mode-btn");
-
-// 🔥 OPEN
-function openPopupV4(data){
-  popupTitle.textContent = data.title;
-  popupSubtitle.textContent = data.subtitle;
-  popupShort.innerHTML = data.short;
-  popupFull.innerHTML = data.full;
-  popupVideo.src = data.video;
-
-  popup.classList.add("show");
-}
-
-// ❌ CLOSE
-function closePopupV4(){
-  popup.classList.remove("show");
-  popupVideo.src = "";
-}
-
-if (closeBtn) {
-  closeBtn.addEventListener("click", closePopupV4);
-}
-
-// 🔘 MODE SWITCH
-if (modeBtns.length) {
-  modeBtns.forEach(btn=>{
-    btn.addEventListener("click", ()=>{
-      modeBtns.forEach(b=>b.classList.remove("active"));
-      btn.classList.add("active");
-
-      if(btn.dataset.mode === "short"){
-        popupShort.classList.remove("hidden");
-        popupFull.classList.add("hidden");
-      }else{
-        popupShort.classList.add("hidden");
-        popupFull.classList.remove("hidden");
-      }
-    });
-  });
 }
