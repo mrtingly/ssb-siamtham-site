@@ -1,3 +1,21 @@
+function normalizeYouTubeUrl(url) {
+  if (!url) return "";
+
+  if (url.includes("/embed/")) return url;
+
+  const shortMatch = url.match(/youtu\.be\/([a-zA-Z0-9_-]+)/);
+  if (shortMatch?.[1]) {
+    return `https://www.youtube.com/embed/${shortMatch[1]}`;
+  }
+
+  const longMatch = url.match(/[?&]v=([a-zA-Z0-9_-]+)/);
+  if (longMatch?.[1]) {
+    return `https://www.youtube.com/embed/${longMatch[1]}`;
+  }
+
+  return url;
+}
+
 function getCurrentKey() {
   const key = window.location.hash.replace("#", "").trim();
   return popupData[key] ? key : "ssbmobile";
@@ -6,7 +24,12 @@ function getCurrentKey() {
 function setVideoSrc(src) {
   const video = document.getElementById("ssbVideo");
   if (!video) return;
-  video.src = src || "";
+
+  const finalSrc = normalizeYouTubeUrl(src);
+  video.src = "";
+  setTimeout(() => {
+    video.src = finalSrc || "";
+  }, 30);
 }
 
 function scrollContentTop() {
@@ -44,7 +67,6 @@ function renderBadges(list) {
   if (!el) return;
 
   el.innerHTML = "";
-
   (list || []).forEach((text) => {
     const span = document.createElement("span");
     span.className = "popup-badge";
@@ -58,7 +80,6 @@ function renderList(targetId, list) {
   if (!el) return;
 
   el.innerHTML = "";
-
   (list || []).forEach((text) => {
     const li = document.createElement("li");
     li.textContent = text;
@@ -71,7 +92,6 @@ function renderImpacts(list) {
   if (!el) return;
 
   el.innerHTML = "";
-
   (list || []).forEach((item) => {
     const card = document.createElement("div");
     card.className = "impact-card";
@@ -95,7 +115,6 @@ function renderRules(list) {
   if (!el) return;
 
   el.innerHTML = "";
-
   (list || []).forEach((text) => {
     const div = document.createElement("div");
     div.className = "popup-pro-rule-line";
