@@ -397,4 +397,39 @@
     min-height:58px;
     font-size:18px;
   }
+
+  /* แก้พื้นที่กดของเมนูและซับเมนูบน mobile */
+.menu-btn,
+.submenu,
+.submenu button,
+.submenu-link{
+  position:relative;
+  z-index:5;
+}
+
+.submenu-link,
+.submenu button{
+  width:100% !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  text-decoration:none !important;
+  cursor:pointer !important;
+  pointer-events:auto !important;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+
+.menu-btn{
+  cursor:pointer !important;
+  pointer-events:auto !important;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+
+/* กัน layer สวยๆ มาทับการกด */
+.menu-item::before,
+.mobile-menu-v2::before{
+  pointer-events:none !important;
+}
 }
