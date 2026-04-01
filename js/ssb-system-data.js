@@ -28,7 +28,7 @@ const popupData = {
     ],
     next: "ssb",
     nextLabel: "ไปที่ SSB",
-    video: "https://www.youtube-nocookie.com/embed/mD9i39genW8",
+    video: "https://youtu.be/pcuhurVMqLQ?si=ZsYbMtEf_vdtg7a-",
     videoNote: "ระบบความปลอดภัยทางการเงินแบบองค์รวม"
   },
 
@@ -160,7 +160,7 @@ const popupData = {
     ],
     next: "sbpremium",
     nextLabel: "ไปที่ SB Premium",
-    video: "https://www.youtube-nocookie.com/embed/mD9i39genW8",
+    video: "https://youtu.be/pcuhurVMqLQ?si=ZsYbMtEf_vdtg7a-",
     videoNote: "กฎของระบบที่ห้ามละเมิด"
   },
 
@@ -193,7 +193,7 @@ const popupData = {
     ],
     next: "custom",
     nextLabel: "ไปที่ Custom System",
-    video: "https://www.youtube-nocookie.com/embed/mD9i39genW8",
+    video: "https://youtu.be/pcuhurVMqLQ?si=ZsYbMtEf_vdtg7a-",
     videoNote: "กล่องป้องกันสัญญาณและอำพรางระดับพรีเมียม"
   },
 
@@ -226,7 +226,7 @@ const popupData = {
     ],
     next: null,
     nextLabel: "เริ่มสั่งจอง",
-    video: "https://www.youtube-nocookie.com/embed/mD9i39genW8",
+    video: "https://youtu.be/pcuhurVMqLQ?si=ZsYbMtEf_vdtg7a-",
     videoNote: "ระบบที่ออกแบบเฉพาะบุคคล"
   }
 };
