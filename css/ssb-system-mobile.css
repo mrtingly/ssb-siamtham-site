@@ -190,4 +190,38 @@
   .popup-cta{
     width:100%;
   }
+
+  .popup-pro-nav{
+  position:relative;
+}
+
+.popup-pro-nav::after{
+  content:'';
+  position:absolute;
+  right:0;
+  top:0;
+  width:40px;
+  height:100%;
+  background:linear-gradient(to right, transparent, rgba(255,255,255,0.9));
+  pointer-events:none;
+}
+
+  .popup-pro-nav::before{
+  content:'👉';
+  position:absolute;
+  right:10px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:14px;
+  opacity:0.7;
+  animation:ssbScrollHint 1.5s infinite;
+  pointer-events:none;
+}
+
+@keyframes ssbScrollHint{
+  0%{transform:translateY(-50%) translateX(0); opacity:0.7;}
+  50%{transform:translateY(-50%) translateX(6px); opacity:1;}
+  100%{transform:translateY(-50%) translateX(0); opacity:0.7;}
+}
+  
 }
