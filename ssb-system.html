@@ -15,33 +15,35 @@
     rel="stylesheet"
   />
 
-  <link rel="stylesheet" href="css/ssb-system.css?v=3" />
-  <link rel="stylesheet" href="css/ssb-system-mobile.css?v=3" media="(max-width: 1023px)" />
+  <link rel="stylesheet" href="css/ssb-system.css?v=4" />
+  <link rel="stylesheet" href="css/ssb-system-mobile.css?v=4" media="(max-width: 1023px)" />
 </head>
 <body>
   <main class="ssb-page">
     <section class="ssb-page-shell">
 
-      <div class="ssb-top-layout">
-        <div class="ssb-top-video">
-          <div class="popup-kicker notranslate" id="ssbKicker">SSB Mobile System</div>
+      <div class="ssb-top-wrap">
+        <div class="popup-kicker notranslate" id="ssbKicker">SSB Mobile System</div>
 
-          <div class="popup-pro-video-frame ssb-main-video">
-            <iframe
-              id="ssbVideo"
-              src=""
-              title="SSB Video"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen
-            ></iframe>
+        <div class="ssb-top-layout">
+          <div class="ssb-top-video">
+            <div class="popup-pro-video-frame ssb-main-video">
+              <iframe
+                id="ssbVideo"
+                src=""
+                title="SSB Video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+
+            <div class="video-note notranslate" id="ssbVideoNote"></div>
           </div>
 
-          <div class="video-note notranslate" id="ssbVideoNote"></div>
-        </div>
-
-        <div class="ssb-top-side">
-          <nav class="popup-pro-nav notranslate ssb-nav-fixed" id="ssbNav"></nav>
+          <div class="ssb-top-side">
+            <nav class="popup-pro-nav notranslate ssb-nav-fixed" id="ssbNav"></nav>
+          </div>
         </div>
       </div>
 
@@ -87,7 +89,7 @@
     </section>
   </main>
 
-  <script src="js/ssb-system-data.js?v=3"></script>
-  <script src="js/ssb-system-page.js?v=3"></script>
+  <script src="js/ssb-system-data.js?v=4"></script>
+  <script src="js/ssb-system-page.js?v=4"></script>
 </body>
 </html>
