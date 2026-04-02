@@ -1,8 +1,5 @@
 (() => {
-  /* =========================
-     MAIN.JS
-     Stable desktop hero menu
-     ========================= */
+  "use strict";
 
   const q = (selector, root = document) => root.querySelector(selector);
   const qa = (selector, root = document) => Array.from(root.querySelectorAll(selector));
@@ -34,7 +31,11 @@
 
   function callIfExists(fnName, ...args) {
     if (typeof window[fnName] === "function") {
-      return window[fnName](...args);
+      try {
+        return window[fnName](...args);
+      } catch (error) {
+        console.warn(`${fnName} failed:`, error);
+      }
     }
     return undefined;
   }
@@ -48,11 +49,27 @@
   }
 
   function openCompanyPopupSafe() {
-    callIfExists("openCompanyPopup");
+    if (typeof window.openCompanyPopup === "function") {
+      callIfExists("openCompanyPopup");
+      return;
+    }
+
+    if (!companyPopup) return;
+    companyPopup.classList.add("show");
+    companyPopup.setAttribute("aria-hidden", "false");
+    body.classList.add("popup-open");
   }
 
   function closeCompanyPopupSafe() {
-    callIfExists("closeCompanyPopup");
+    if (typeof window.closeCompanyPopup === "function") {
+      callIfExists("closeCompanyPopup");
+      return;
+    }
+
+    if (!companyPopup) return;
+    companyPopup.classList.remove("show");
+    companyPopup.setAttribute("aria-hidden", "true");
+    body.classList.remove("popup-open");
   }
 
   function renderPopupStepSafe(step) {
@@ -60,7 +77,30 @@
   }
 
   function trapFocusSafe(event, container) {
-    callIfExists("trapFocus", event, container);
+    if (typeof window.trapFocus === "function") {
+      callIfExists("trapFocus", event, container);
+      return;
+    }
+
+    if (event.key !== "Tab" || !container) return;
+
+    const focusables = qa(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+      container
+    ).filter(el => !el.disabled && el.offsetParent !== null);
+
+    if (!focusables.length) return;
+
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
   }
 
   function playClick(type = "normal") {
@@ -191,7 +231,9 @@
   function bindLanguageButtons() {
     qa(".lang-btn").forEach(btn => {
       btn.addEventListener("click", () => {
-        changeLanguage(btn.dataset.lang);
+        const lang = btn.dataset.lang;
+        if (!lang) return;
+        changeLanguage(lang);
       });
     });
   }
@@ -214,6 +256,10 @@
     resizeTimer = setTimeout(() => {
       applyThemeByViewport();
       syncHeroLabels();
+
+      if (!isMobileView() && techHero) {
+        closeMobileSubmenus();
+      }
     }, 120);
   }
 
@@ -370,13 +416,12 @@
 
     const menuGroups = qa(".menu-group", hero);
     const submenuButtons = qa(".submenu-btn", hero);
-    const mainMenuButtons = qa("[data-menu]", hero);
+    const mainMenuButtons = qa(".menu-group > .main-node [data-menu]", hero);
     const popupButtons = qa("[data-popup]", hero);
     const linkButtons = qa("[data-link]", hero);
 
-    const ssbSystemButton = q('[data-action="ssb-system"]', hero);
-    const companyAboutButton = q('[data-action="company-about"]', hero);
-    const companyContactButton = q('[data-action="company-contact"]', hero);
+    const companyAboutButtons = qa('[data-action="company-about"]', hero);
+    const companyContactButtons = qa('[data-action="company-contact"]', hero);
     const orderBtn = hero.querySelector(".m5 .node-shell");
 
     function closeAllSubmenus() {
@@ -390,7 +435,6 @@
 
     function openHeroMenu() {
       hero.classList.add("open");
-      closeAllSubmenus();
       updateHint();
       pulseLogo();
     }
@@ -430,41 +474,6 @@
       event.stopPropagation();
     });
 
-    if (ssbSystemButton) {
-      ssbSystemButton.addEventListener("click", event => {
-        event.preventDefault();
-        event.stopPropagation();
-
-        openHeroMenu();
-        flashNode(ssbSystemButton.closest(".node-shell") || ssbSystemButton);
-        pulseLogo();
-        runFlow("flow-m1");
-        openInfoPopupSafe("ssbmobile");
-      });
-    }
-
-    if (companyAboutButton) {
-      companyAboutButton.addEventListener("click", event => {
-        event.preventDefault();
-        event.stopPropagation();
-        closeAllSubmenus();
-        pulseLogo();
-        runFlow("flow-company");
-        openCompanyPopupSafe();
-      });
-    }
-
-    if (companyContactButton) {
-      companyContactButton.addEventListener("click", event => {
-        event.preventDefault();
-        event.stopPropagation();
-        closeAllSubmenus();
-        pulseLogo();
-        runFlow("flow-company");
-        openCompanyPopupSafe();
-      });
-    }
-
     mainMenuButtons.forEach(btn => {
       btn.addEventListener("click", event => {
         event.preventDefault();
@@ -500,6 +509,28 @@
       });
     });
 
+    companyAboutButtons.forEach(btn => {
+      btn.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopPropagation();
+        closeAllSubmenus();
+        pulseLogo();
+        runFlow("flow-company");
+        openCompanyPopupSafe();
+      });
+    });
+
+    companyContactButtons.forEach(btn => {
+      btn.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopPropagation();
+        closeAllSubmenus();
+        pulseLogo();
+        runFlow("flow-company");
+        openCompanyPopupSafe();
+      });
+    });
+
     popupButtons.forEach(btn => {
       btn.addEventListener("click", event => {
         event.preventDefault();
@@ -520,7 +551,9 @@
         closeAllSubmenus();
 
         const url = btn.getAttribute("data-link");
-        if (url) window.location.href = url;
+        if (url) {
+          window.location.href = url;
+        }
       });
     });
 
@@ -543,11 +576,15 @@
     q("#closeCompanyPopupBottom")?.addEventListener("click", closeCompanyPopupSafe);
 
     infoPopup?.addEventListener("click", event => {
-      if (event.target === infoPopup) closeInfoPopupSafe();
+      if (event.target === infoPopup) {
+        closeInfoPopupSafe();
+      }
     });
 
     companyPopup?.addEventListener("click", event => {
-      if (event.target === companyPopup) closeCompanyPopupSafe();
+      if (event.target === companyPopup) {
+        closeCompanyPopupSafe();
+      }
     });
 
     infoPopup?.addEventListener("keydown", event => {
@@ -558,34 +595,65 @@
       trapFocusSafe(event, companyPopup);
     });
   }
-function bindMobileMenu() {
-  const mobileItems = qa(".mobile-menu-v2 .menu-item");
-  const mobileSSBButtons = qa('.mobile-menu-v2 [data-action="ssb-system"]');
 
-  mobileItems.forEach(item => {
-    const btn = item.querySelector(":scope > .menu-btn");
-    if (!btn || btn.classList.contains("no-submenu")) return;
+  function closeMobileSubmenus() {
+    qa(".mobile-menu-v2 .menu-item.open").forEach(item => {
+      item.classList.remove("open");
+    });
+  }
 
-    btn.addEventListener("click", event => {
-      event.preventDefault();
-      event.stopPropagation();
+  function bindMobileMenu() {
+    const mobileItems = qa(".mobile-menu-v2 .menu-item.menu-item-toggle");
+    const mobileCompanyAboutButtons = qa('.mobile-menu-v2 [data-action="company-about"]');
+    const mobileCompanyContactButtons = qa('.mobile-menu-v2 [data-action="company-contact"]');
+    const mobileLinkButtons = qa(".mobile-menu-v2 [data-link]");
 
-      const isOpen = item.classList.contains("open");
+    mobileItems.forEach(item => {
+      const btn = item.querySelector(":scope > .menu-btn");
+      if (!btn) return;
 
-      mobileItems.forEach(other => {
-        if (other !== item) other.classList.remove("open");
+      btn.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const isOpen = item.classList.contains("open");
+
+        mobileItems.forEach(other => {
+          if (other !== item) other.classList.remove("open");
+        });
+
+        item.classList.toggle("open", !isOpen);
       });
-
-      item.classList.toggle("open", !isOpen);
     });
-  });
 
-  mobileSSBButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      openInfoPopupSafe("ssbmobile");
+    mobileCompanyAboutButtons.forEach(btn => {
+      btn.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopPropagation();
+        openCompanyPopupSafe();
+      });
     });
-  });
-}
+
+    mobileCompanyContactButtons.forEach(btn => {
+      btn.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopPropagation();
+        openCompanyPopupSafe();
+      });
+    });
+
+    mobileLinkButtons.forEach(btn => {
+      btn.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const url = btn.getAttribute("data-link");
+        if (url) {
+          window.location.href = url;
+        }
+      });
+    });
+  }
 
   function bindChatWidget() {
     if (!chatWidget || !chatToggle) return;
@@ -631,6 +699,10 @@ function bindMobileMenu() {
         const hint = q("#heroMenuHint");
         if (hint) hint.style.display = "";
       }
+
+      if (!q(".mobile-menu-v2")?.contains(target)) {
+        closeMobileSubmenus();
+      }
     });
 
     document.addEventListener("keydown", event => {
@@ -657,6 +729,8 @@ function bindMobileMenu() {
         const hint = q("#heroMenuHint");
         if (hint) hint.style.display = "";
       }
+
+      closeMobileSubmenus();
 
       if (chatWidget?.classList.contains("open")) {
         chatWidget.classList.remove("open");
@@ -692,7 +766,6 @@ function bindMobileMenu() {
     applyThemeByViewport();
     syncHeroLabels();
     syncActiveLangFromCookie();
-
     renderAgentResults("");
 
     bindLanguageButtons();
