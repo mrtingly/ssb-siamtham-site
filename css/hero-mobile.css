@@ -531,9 +531,27 @@
 /* ปิดการบังจาก effect ทุกชนิด */
 .menu-item::before,
 .menu-item::after,
-.submenu,
-.submenu *{
-  pointer-events:none !important;
+/* ให้ submenu ไม่บังตอนปิด */
+.submenu{
+  pointer-events:none;
+}
+
+/* เปิดแล้วค่อยให้กดได้ */
+.menu-item.open .submenu{
+  pointer-events:auto;
+}
+
+/* ปุ่มหลักต้องอยู่บนสุด */
+.menu-item > .menu-btn,
+.menu-item > a.menu-btn{
+  position:relative;
+  z-index:50;
+}
+
+/* submenu อยู่ชั้นล่าง */
+.submenu{
+  position:relative;
+  z-index:10;
 }
 
 /* แต่ให้กด submenu ได้ */
