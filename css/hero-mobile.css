@@ -161,7 +161,6 @@
     background:transparent;
     display:flex;
     align-items:center;
-    justify-content:space-between;
     box-sizing:border-box;
     text-decoration:none;
     cursor:pointer;
@@ -174,12 +173,26 @@
     outline:none;
   }
 
+  .mobile-menu-link{
+    justify-content:center;
+    text-align:center;
+  }
+
+  .mobile-menu-trigger{
+    justify-content:space-between;
+  }
+
   .mobile-menu-label{
     font-family:'Prompt',sans-serif;
     font-size:15px;
     font-weight:800;
     color:#153462;
     letter-spacing:.12px;
+    width:100%;
+  }
+
+  .mobile-menu-link .mobile-menu-label{
+    text-align:center;
   }
 
   .mobile-menu-arrow{
@@ -353,26 +366,5 @@
     width:58% !important;
     min-height:58px;
     font-size:18px;
-  }
-}
-
-@media (max-width: 1023px){
-  .mobile-menu-link{
-    justify-content:center !important;
-    text-align:center !important;
-    padding:0 24px !important;
-  }
-
-  .mobile-menu-link .mobile-menu-label{
-    width:100%;
-    text-align:center;
-  }
-
-  .mobile-menu-trigger{
-    justify-content:space-between !important;
-  }
-
-  .mobile-submenu{
-    display:block !important;
   }
 }
