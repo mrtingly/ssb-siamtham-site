@@ -132,30 +132,32 @@
     z-index:1;
   }
 
-  .menu-item{
-    width:min(100%, 320px);
-    margin:0 auto;
-    position:relative;
-    overflow:hidden;
-    border-radius:22px;
-    background:
-      linear-gradient(180deg, rgba(255,255,255,.96) 0%, rgba(248,251,255,.98) 100%);
-    border:1px solid rgba(56,100,170,.08);
-    box-shadow:
-      0 14px 32px rgba(55,96,160,.12),
-      inset 0 1px 0 rgba(255,255,255,.92);
-    transition:
-      transform .22s ease,
-      box-shadow .22s ease,
-      border-color .22s ease,
-      background .22s ease;
-  }
+    .menu-item{
+      width:min(100%, 320px);
+      margin:0 auto;
+      position:relative;
+      isolation:isolate;
+      overflow:hidden;
+      border-radius:22px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.96) 0%, rgba(248,251,255,.98) 100%);
+      border:1px solid rgba(56,100,170,.08);
+      box-shadow:
+        0 14px 32px rgba(55,96,160,.12),
+        inset 0 1px 0 rgba(255,255,255,.92);
+      transition:
+        transform .22s ease,
+        box-shadow .22s ease,
+        border-color .22s ease,
+        background .22s ease;
+    }
 
   .menu-item::before{
     content:"";
     position:absolute;
     inset:0;
-    pointer-events:none;
+    z-index:0;
+    pointer-events:none !important;
     background:
       radial-gradient(circle at top right, rgba(110,170,255,.16), transparent 42%),
       linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,0));
@@ -188,7 +190,12 @@
     padding:0 18px;
     color:#183d72;
     position:relative;
+    z-index:2;
     font-family:'Prompt',sans-serif;
+    cursor:pointer;
+    pointer-events:auto;
+    -webkit-tap-highlight-color:transparent;
+    touch-action:manipulation;
     transition:
       background .22s ease,
       color .22s ease,
@@ -228,7 +235,7 @@
     display:none;
   }
 
-  .submenu{
+    .submenu{
     max-height:0;
     overflow:hidden;
     display:flex;
@@ -236,6 +243,8 @@
     background:linear-gradient(180deg, #f7faff 0%, #f1f5fb 100%);
     opacity:0;
     transform:translateY(-6px);
+    position:relative;
+    z-index:2;
     transition:
       max-height .30s ease,
       opacity .22s ease,
@@ -254,6 +263,7 @@
     height:48px;
     display:flex;
     align-items:center;
+    justify-content:flex-start;
     border:none;
     background:transparent;
     text-align:left;
@@ -263,6 +273,13 @@
     color:#53709a;
     border-top:1px solid rgba(34,73,126,.06);
     font-family:'Prompt',sans-serif;
+    text-decoration:none;
+    position:relative;
+    z-index:2;
+    cursor:pointer;
+    pointer-events:auto;
+    -webkit-tap-highlight-color:transparent;
+    touch-action:manipulation;
     transition:
       background .18s ease,
       color .18s ease,
@@ -336,6 +353,14 @@
   @keyframes ctaShine{
     to{ transform:translateX(100%); }
   }
+
+  .mobile-menu-v2::before{
+  pointer-events:none !important;
+}
+
+.menu-item.open{
+  z-index:5;
+}
 }
 
 @media (max-width: 760px){
@@ -398,47 +423,47 @@
     font-size:18px;
   }
 
-  /* แก้พื้นที่กดของเมนูและซับเมนูบน mobile */
-.menu-btn,
-.submenu,
-.submenu button,
-.submenu-link{
-  position:relative;
-  z-index:5;
-}
-
-.submenu-link,
-.submenu button{
-  width:100% !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:flex-start !important;
-  text-decoration:none !important;
-  cursor:pointer !important;
-  pointer-events:auto !important;
-  -webkit-tap-highlight-color:transparent;
-  touch-action:manipulation;
-}
-
-.menu-btn{
-  cursor:pointer !important;
-  pointer-events:auto !important;
-  -webkit-tap-highlight-color:transparent;
-  touch-action:manipulation;
-}
-
-/* กัน layer สวยๆ มาทับการกด */
-.menu-item::before,
-.mobile-menu-v2::before{
-  pointer-events:none !important;
-}
-
-  .submenu{
-  position:relative;
-  z-index:6;
-}
-
-.menu-item.open{
-  z-index:7;
-}
-}
+      /* แก้พื้นที่กดของเมนูและซับเมนูบน mobile */
+    .menu-btn,
+    .submenu,
+    .submenu button,
+    .submenu-link{
+      position:relative;
+      z-index:5;
+    }
+    
+    .submenu-link,
+    .submenu button{
+      width:100% !important;
+      display:flex !important;
+      align-items:center !important;
+      justify-content:flex-start !important;
+      text-decoration:none !important;
+      cursor:pointer !important;
+      pointer-events:auto !important;
+      -webkit-tap-highlight-color:transparent;
+      touch-action:manipulation;
+    }
+    
+    .menu-btn{
+      cursor:pointer !important;
+      pointer-events:auto !important;
+      -webkit-tap-highlight-color:transparent;
+      touch-action:manipulation;
+    }
+    
+    /* กัน layer สวยๆ มาทับการกด */
+    .menu-item::before,
+    .mobile-menu-v2::before{
+      pointer-events:none !important;
+    }
+    
+      .submenu{
+      position:relative;
+      z-index:6;
+    }
+    
+    .menu-item.open{
+      z-index:7;
+    }
+    }
