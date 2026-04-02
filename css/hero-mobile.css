@@ -1,6 +1,6 @@
 @media (max-width: 1023px) {
-  .hero-stage {
-    padding: 10px 0 22px !important;
+  .hero-stage{
+    padding-bottom:90px !important;
   }
 
   .hero-center {
