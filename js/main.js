@@ -559,38 +559,36 @@
     });
   }
 
-  function bindMobileMenu() {
-    const mobileItems = qa(".mobile-menu-v2 .menu-item");
-    const mobileButtons = qa(".mobile-menu-v2 .menu-btn");
-    const mobileSSBButtons = qa('.mobile-menu-v2 [data-action="ssb-system"]');
+ function bindMobileMenu() {
+  const mobileItems = qa(".mobile-menu-v2 .menu-item");
+  const mobileSSBButtons = qa('.mobile-menu-v2 [data-action="ssb-system"]');
 
-    mobileButtons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        if (btn.classList.contains("no-submenu")) return;
+  mobileItems.forEach(item => {
+    const trigger = item.querySelector(":scope > .menu-btn");
 
-        const parent = btn.closest(".menu-item");
-        if (!parent) return;
+    if (!trigger || trigger.classList.contains("no-submenu")) return;
 
-        const isOpen = parent.classList.contains("open");
+    item.addEventListener("click", event => {
+      const clickedSubmenu = event.target.closest(".submenu");
+      if (clickedSubmenu) return;
 
-        mobileItems.forEach(item => {
-          if (item !== parent) item.classList.remove("open");
-        });
+      const isOpen = item.classList.contains("open");
 
-        if (isOpen) {
-          parent.classList.remove("open");
-        } else {
-          parent.classList.add("open");
-        }
+      mobileItems.forEach(other => {
+        if (other !== item) other.classList.remove("open");
       });
-    });
 
-    mobileSSBButtons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        openInfoPopupSafe("ssbmobile");
-      });
+      item.classList.toggle("open", !isOpen);
     });
-  }
+  });
+
+  mobileSSBButtons.forEach(btn => {
+    btn.addEventListener("click", event => {
+      event.stopPropagation();
+      openInfoPopupSafe("ssbmobile");
+    });
+  });
+}
 
   function bindChatWidget() {
     if (!chatWidget || !chatToggle) return;
