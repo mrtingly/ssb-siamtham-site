@@ -1,4 +1,9 @@
 (() => {
+  /* =========================
+     MAIN.JS
+     Stable desktop hero menu
+     ========================= */
+
   const q = (selector, root = document) => root.querySelector(selector);
   const qa = (selector, root = document) => Array.from(root.querySelectorAll(selector));
 
@@ -553,51 +558,29 @@
       trapFocusSafe(event, companyPopup);
     });
   }
+function bindMobileMenu() {
+  const mobileItems = qa(".mobile-menu-v2 .menu-item");
+  const toggleItems = qa(".mobile-menu-v2 .menu-item-toggle");
+  const mobileSSBButtons = qa('.mobile-menu-v2 [data-action="ssb-system"]');
 
-  function bindMobileMenu() {
-  const accordions = qa(".mobile-menu-accordion");
-  const companyAboutBtns = qa('.mobile-submenu-link[data-action="company-about"]');
-  const companyContactBtns = qa('.mobile-submenu-link[data-action="company-contact"]');
-  const linkBtns = qa('.mobile-submenu-link[data-link]');
+  toggleItems.forEach(item => {
+    item.addEventListener("click", event => {
+      const clickedSubmenu = event.target.closest(".submenu");
+      if (clickedSubmenu) return;
 
-  accordions.forEach(card => {
-    card.addEventListener("click", event => {
-      const clickedSubmenuLink = event.target.closest(".mobile-submenu-link");
-      if (clickedSubmenuLink) return;
+      const isOpen = item.classList.contains("open");
 
-      event.preventDefault();
-      event.stopPropagation();
+      mobileItems.forEach(other => {
+        if (other !== item) other.classList.remove("open");
+      });
 
-      const isOpen = card.classList.contains("open");
-
-      accordions.forEach(item => item.classList.remove("open"));
-      if (!isOpen) card.classList.add("open");
+      item.classList.toggle("open", !isOpen);
     });
   });
 
-  companyAboutBtns.forEach(btn => {
-    btn.addEventListener("click", event => {
-      event.preventDefault();
-      event.stopPropagation();
-      openCompanyPopupSafe();
-    });
-  });
-
-  companyContactBtns.forEach(btn => {
-    btn.addEventListener("click", event => {
-      event.preventDefault();
-      event.stopPropagation();
-      openCompanyPopupSafe();
-    });
-  });
-
-  linkBtns.forEach(btn => {
-    btn.addEventListener("click", event => {
-      event.preventDefault();
-      event.stopPropagation();
-
-      const url = btn.getAttribute("data-link");
-      if (url) window.location.href = url;
+  mobileSSBButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      openInfoPopupSafe("ssbmobile");
     });
   });
 }
