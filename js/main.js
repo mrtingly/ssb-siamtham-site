@@ -555,67 +555,77 @@
   }
 
   function bindMobileMenu() {
-    const mobileRoot = q(".mobile-menu-v2");
-    if (!mobileRoot) return;
+  const mobileRoot = q(".mobile-menu-v2");
+  if (!mobileRoot) return;
 
-    mobileRoot.addEventListener("click", event => {
-      const submenuLink = event.target.closest(".submenu-link");
-      const dataLinkBtn = event.target.closest("[data-link]");
-      const menuBtn = event.target.closest(".menu-btn");
+  const mobileItems = qa(".menu-item", mobileRoot);
 
-      if (submenuLink) {
-        const href = submenuLink.getAttribute("href");
-        const link = submenuLink.getAttribute("data-link");
+  mobileRoot.addEventListener("click", event => {
+    const submenuLink = event.target.closest(".submenu-link");
+    const dataLinkBtn = event.target.closest("[data-link]");
+    const menuBtn = event.target.closest(".menu-btn");
 
-        if (href && href !== "#") {
-          window.location.href = href;
-          return;
-        }
+    if (submenuLink) {
+      event.stopPropagation();
 
-        if (link) {
-          window.location.href = link;
-          return;
-        }
-      }
+      const href = submenuLink.getAttribute("href");
+      const link = submenuLink.getAttribute("data-link");
 
-      if (dataLinkBtn && dataLinkBtn !== submenuLink) {
-        const link = dataLinkBtn.getAttribute("data-link");
-        if (link) {
-          window.location.href = link;
-          return;
-        }
-      }
-
-      if (!menuBtn) return;
-
-      if (menuBtn.classList.contains("no-submenu")) {
-        const action = menuBtn.getAttribute("data-action");
-        if (action === "ssb-system") {
-          openInfoPopupSafe("ssbmobile");
-        }
+      if (href && href !== "#") {
+        window.location.href = href;
         return;
       }
 
-      if (menuBtn.hasAttribute("data-menu")) {
-        event.preventDefault();
-
-        const parent = menuBtn.closest(".menu-item");
-        if (!parent) return;
-
-        const isOpen = parent.classList.contains("open");
-
-        qa(".mobile-menu-v2 .menu-item.open").forEach(item => {
-          if (item !== parent) item.classList.remove("open");
-        });
-
-        if (isOpen) {
-          parent.classList.remove("open");
-        } else {
-          parent.classList.add("open");
-        }
+      if (link) {
+        window.location.href = link;
+        return;
       }
-    });
-  }
+    }
+
+    if (dataLinkBtn && dataLinkBtn !== submenuLink) {
+      event.stopPropagation();
+
+      const link = dataLinkBtn.getAttribute("data-link");
+      if (link) {
+        window.location.href = link;
+        return;
+      }
+    }
+
+    if (!menuBtn) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (menuBtn.classList.contains("no-submenu")) {
+      const href = menuBtn.getAttribute("href");
+      const action = menuBtn.getAttribute("data-action");
+
+      if (href && href !== "#") {
+        window.location.href = href;
+        return;
+      }
+
+      if (action === "ssb-system") {
+        openInfoPopupSafe("ssbmobile");
+      }
+      return;
+    }
+
+    if (!menuBtn.hasAttribute("data-menu")) return;
+
+    const parent = menuBtn.closest(".menu-item");
+    if (!parent) return;
+
+    const isOpen = parent.classList.contains("open");
+
+    mobileItems.forEach(item => item.classList.remove("open"));
+
+    if (!isOpen) {
+      parent.classList.add("open");
+    }
+  });
+}
 
   function bindChatWidget() {
     if (!chatWidget || !chatToggle) return;
