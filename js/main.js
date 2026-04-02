@@ -560,15 +560,13 @@
   }
 function bindMobileMenu() {
   const mobileItems = qa(".mobile-menu-v2 .menu-item");
+  const toggleItems = qa(".mobile-menu-v2 .menu-item-toggle");
   const mobileSSBButtons = qa('.mobile-menu-v2 [data-action="ssb-system"]');
 
-  mobileItems.forEach(item => {
-    const btn = item.querySelector(":scope > .menu-btn");
-    if (!btn || btn.classList.contains("no-submenu")) return;
-
-    btn.addEventListener("click", event => {
-      event.preventDefault();
-      event.stopPropagation();
+  toggleItems.forEach(item => {
+    item.addEventListener("click", event => {
+      const clickedSubmenu = event.target.closest(".submenu");
+      if (clickedSubmenu) return;
 
       const isOpen = item.classList.contains("open");
 
