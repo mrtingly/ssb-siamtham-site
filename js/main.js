@@ -1,9 +1,4 @@
 (() => {
-  /* =========================
-     MAIN.JS
-     Stable desktop hero menu
-     ========================= */
-
   const q = (selector, root = document) => root.querySelector(selector);
   const qa = (selector, root = document) => Array.from(root.querySelectorAll(selector));
 
@@ -560,20 +555,56 @@
   }
 
   function bindMobileMenu() {
-    const mobileItems = qa(".mobile-menu-v2 .menu-item");
-    const mobileButtons = qa(".mobile-menu-v2 .menu-btn");
-    const mobileSSBButtons = qa('.mobile-menu-v2 [data-action="ssb-system"]');
+    const mobileRoot = q(".mobile-menu-v2");
+    if (!mobileRoot) return;
 
-    mobileButtons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        if (btn.classList.contains("no-submenu")) return;
+    mobileRoot.addEventListener("click", event => {
+      const submenuLink = event.target.closest(".submenu-link");
+      const dataLinkBtn = event.target.closest("[data-link]");
+      const menuBtn = event.target.closest(".menu-btn");
 
-        const parent = btn.closest(".menu-item");
+      if (submenuLink) {
+        const href = submenuLink.getAttribute("href");
+        const link = submenuLink.getAttribute("data-link");
+
+        if (href && href !== "#") {
+          window.location.href = href;
+          return;
+        }
+
+        if (link) {
+          window.location.href = link;
+          return;
+        }
+      }
+
+      if (dataLinkBtn && dataLinkBtn !== submenuLink) {
+        const link = dataLinkBtn.getAttribute("data-link");
+        if (link) {
+          window.location.href = link;
+          return;
+        }
+      }
+
+      if (!menuBtn) return;
+
+      if (menuBtn.classList.contains("no-submenu")) {
+        const action = menuBtn.getAttribute("data-action");
+        if (action === "ssb-system") {
+          openInfoPopupSafe("ssbmobile");
+        }
+        return;
+      }
+
+      if (menuBtn.hasAttribute("data-menu")) {
+        event.preventDefault();
+
+        const parent = menuBtn.closest(".menu-item");
         if (!parent) return;
 
         const isOpen = parent.classList.contains("open");
 
-        mobileItems.forEach(item => {
+        qa(".mobile-menu-v2 .menu-item.open").forEach(item => {
           if (item !== parent) item.classList.remove("open");
         });
 
@@ -582,13 +613,7 @@
         } else {
           parent.classList.add("open");
         }
-      });
-    });
-
-    mobileSSBButtons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        openInfoPopupSafe("ssbmobile");
-      });
+      }
     });
   }
 
@@ -718,47 +743,3 @@
     init();
   }
 })();
-
-document.addEventListener("DOMContentLoaded", () => {
-  const mobileMenu = document.querySelector(".mobile-menu-v2");
-  if (!mobileMenu) return;
-
-  mobileMenu.addEventListener("click", (e) => {
-    const menuBtn = e.target.closest(".menu-btn");
-    const submenuLink = e.target.closest(".submenu-link");
-    const dataLinkBtn = e.target.closest("[data-link]");
-
-    if (submenuLink) {
-      const link = submenuLink.getAttribute("data-link");
-      if (link) {
-        window.location.href = link;
-        return;
-      }
-    }
-
-    if (dataLinkBtn && dataLinkBtn !== submenuLink) {
-      const link = dataLinkBtn.getAttribute("data-link");
-      if (link) {
-        window.location.href = link;
-        return;
-      }
-    }
-
-    if (menuBtn && menuBtn.hasAttribute("data-menu")) {
-      e.preventDefault();
-
-      const menuItem = menuBtn.closest(".menu-item");
-      if (!menuItem) return;
-
-      const isOpen = menuItem.classList.contains("open");
-
-      mobileMenu.querySelectorAll(".menu-item.open").forEach(item => {
-        item.classList.remove("open");
-      });
-
-      if (!isOpen) {
-        menuItem.classList.add("open");
-      }
-    }
-  });
-});
