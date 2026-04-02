@@ -431,10 +431,6 @@
     cursor:pointer;
   }
 
-  .menu-item-toggle > .menu-btn{
-    pointer-events:none;
-  }
-
   .menu-item-toggle,
   .menu-item-toggle > .menu-btn,
   .menu-item > .menu-btn,
@@ -491,5 +487,23 @@
   .mobile-menu-list .menu-item > a.menu-btn{
     position:relative;
     z-index:3;
+  }
+}
+
+@media (max-width: 1023px){
+  .menu-item-toggle > .menu-btn{
+    pointer-events:auto !important;
+  }
+
+  .menu-item > .menu-btn,
+  .menu-item > a.menu-btn{
+    position:relative !important;
+    z-index:5 !important;
+    width:100% !important;
+  }
+
+  .submenu{
+    position:relative !important;
+    z-index:1 !important;
   }
 }
