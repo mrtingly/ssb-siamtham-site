@@ -1,9 +1,4 @@
 (() => {
-  /* =========================
-     MAIN.JS
-     Stable desktop hero menu
-     ========================= */
-
   const q = (selector, root = document) => root.querySelector(selector);
   const qa = (selector, root = document) => Array.from(root.querySelectorAll(selector));
 
@@ -558,55 +553,56 @@
       trapFocusSafe(event, companyPopup);
     });
   }
-function bindMobileMenu() {
-  const accordions = qa(".mobile-menu-accordion");
-  const triggers = qa(".mobile-menu-trigger");
-  const companyAboutBtns = qa('.mobile-submenu-link[data-action="company-about"]');
-  const companyContactBtns = qa('.mobile-submenu-link[data-action="company-contact"]');
-  const linkBtns = qa('.mobile-submenu-link[data-link]');
 
-  triggers.forEach(trigger => {
-    trigger.addEventListener("click", event => {
-      event.preventDefault();
-      event.stopPropagation();
+  function bindMobileMenu() {
+    const accordions = qa(".mobile-menu-accordion");
+    const triggers = qa(".mobile-menu-trigger");
+    const companyAboutBtns = qa('.mobile-submenu-link[data-action="company-about"]');
+    const companyContactBtns = qa('.mobile-submenu-link[data-action="company-contact"]');
+    const linkBtns = qa('.mobile-submenu-link[data-link]');
 
-      const card = trigger.closest(".mobile-menu-accordion");
-      if (!card) return;
+    triggers.forEach(trigger => {
+      trigger.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopPropagation();
 
-      const isOpen = card.classList.contains("open");
+        const card = trigger.closest(".mobile-menu-accordion");
+        if (!card) return;
 
-      accordions.forEach(item => item.classList.remove("open"));
-      if (!isOpen) card.classList.add("open");
+        const isOpen = card.classList.contains("open");
+
+        accordions.forEach(item => item.classList.remove("open"));
+        if (!isOpen) card.classList.add("open");
+      });
     });
-  });
 
-  companyAboutBtns.forEach(btn => {
-    btn.addEventListener("click", event => {
-      event.preventDefault();
-      event.stopPropagation();
-      openCompanyPopupSafe();
+    companyAboutBtns.forEach(btn => {
+      btn.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopPropagation();
+        openCompanyPopupSafe();
+      });
     });
-  });
 
-  companyContactBtns.forEach(btn => {
-    btn.addEventListener("click", event => {
-      event.preventDefault();
-      event.stopPropagation();
-      openCompanyPopupSafe();
+    companyContactBtns.forEach(btn => {
+      btn.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopPropagation();
+        openCompanyPopupSafe();
+      });
     });
-  });
 
-  linkBtns.forEach(btn => {
-    btn.addEventListener("click", event => {
-      event.preventDefault();
-      event.stopPropagation();
+    linkBtns.forEach(btn => {
+      btn.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopPropagation();
 
-      const url = btn.getAttribute("data-link");
-      if (url) window.location.href = url;
+        const url = btn.getAttribute("data-link");
+        if (url) window.location.href = url;
+      });
     });
-  });
-}
-  
+  }
+
   function bindChatWidget() {
     if (!chatWidget || !chatToggle) return;
 
@@ -733,52 +729,3 @@ function bindMobileMenu() {
     init();
   }
 })();
-
-function bindMobileMenu() {
-  const accordions = qa(".mobile-menu-accordion");
-  const triggers = qa(".mobile-menu-trigger");
-  const companyAboutBtns = qa('.mobile-submenu-link[data-action="company-about"]');
-  const companyContactBtns = qa('.mobile-submenu-link[data-action="company-contact"]');
-  const linkBtns = qa('.mobile-submenu-link[data-link]');
-
-  triggers.forEach(trigger => {
-    trigger.addEventListener("click", event => {
-      event.preventDefault();
-      event.stopPropagation();
-
-      const card = trigger.closest(".mobile-menu-accordion");
-      if (!card) return;
-
-      const isOpen = card.classList.contains("open");
-
-      accordions.forEach(item => item.classList.remove("open"));
-      if (!isOpen) card.classList.add("open");
-    });
-  });
-
-  companyAboutBtns.forEach(btn => {
-    btn.addEventListener("click", event => {
-      event.preventDefault();
-      event.stopPropagation();
-      openCompanyPopupSafe();
-    });
-  });
-
-  companyContactBtns.forEach(btn => {
-    btn.addEventListener("click", event => {
-      event.preventDefault();
-      event.stopPropagation();
-      openCompanyPopupSafe();
-    });
-  });
-
-  linkBtns.forEach(btn => {
-    btn.addEventListener("click", event => {
-      event.preventDefault();
-      event.stopPropagation();
-
-      const url = btn.getAttribute("data-link");
-      if (url) window.location.href = url;
-    });
-  });
-}
