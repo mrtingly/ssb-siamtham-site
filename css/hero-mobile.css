@@ -432,3 +432,26 @@
 .menu-item-toggle > .menu-btn{
   pointer-events:none;
 }
+
+.menu-item-toggle,
+.menu-item-toggle > .menu-btn,
+.menu-item > .menu-btn,
+.menu-item > a.menu-btn,
+.submenu-link,
+.submenu button,
+.mobile-cta{
+  -webkit-tap-highlight-color: transparent !important;
+  tap-highlight-color: transparent !important;
+  outline: none !important;
+}
+
+.menu-item-toggle:focus,
+.menu-item-toggle > .menu-btn:focus,
+.menu-item > .menu-btn:focus,
+.menu-item > a.menu-btn:focus,
+.submenu-link:focus,
+.submenu button:focus,
+.mobile-cta:focus{
+  outline: none !important;
+  box-shadow: none !important;
+}
