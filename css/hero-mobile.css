@@ -424,3 +424,11 @@
     width:58% !important;
   }
 }
+
+.menu-item-toggle{
+  cursor:pointer;
+}
+
+.menu-item-toggle > .menu-btn{
+  pointer-events:none;
+}
