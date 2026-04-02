@@ -560,27 +560,23 @@
   }
 function bindMobileMenu() {
   const mobileItems = qa(".mobile-menu-v2 .menu-item");
-  const mobileButtons = qa(".mobile-menu-v2 .menu-btn");
   const mobileSSBButtons = qa('.mobile-menu-v2 [data-action="ssb-system"]');
 
-  mobileButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      if (btn.classList.contains("no-submenu")) return;
+  mobileItems.forEach(item => {
+    const btn = item.querySelector(":scope > .menu-btn");
+    if (!btn || btn.classList.contains("no-submenu")) return;
 
-      const parent = btn.closest(".menu-item");
-      if (!parent) return;
+    btn.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopPropagation();
 
-      const isOpen = parent.classList.contains("open");
+      const isOpen = item.classList.contains("open");
 
-      mobileItems.forEach(item => {
-        if (item !== parent) item.classList.remove("open");
+      mobileItems.forEach(other => {
+        if (other !== item) other.classList.remove("open");
       });
 
-      if (isOpen) {
-        parent.classList.remove("open");
-      } else {
-        parent.classList.add("open");
-      }
+      item.classList.toggle("open", !isOpen);
     });
   });
 
