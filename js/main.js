@@ -718,3 +718,47 @@
     init();
   }
 })();
+
+document.addEventListener("DOMContentLoaded", () => {
+  const mobileMenu = document.querySelector(".mobile-menu-v2");
+  if (!mobileMenu) return;
+
+  mobileMenu.addEventListener("click", (e) => {
+    const menuBtn = e.target.closest(".menu-btn");
+    const submenuLink = e.target.closest(".submenu-link");
+    const dataLinkBtn = e.target.closest("[data-link]");
+
+    if (submenuLink) {
+      const link = submenuLink.getAttribute("data-link");
+      if (link) {
+        window.location.href = link;
+        return;
+      }
+    }
+
+    if (dataLinkBtn && dataLinkBtn !== submenuLink) {
+      const link = dataLinkBtn.getAttribute("data-link");
+      if (link) {
+        window.location.href = link;
+        return;
+      }
+    }
+
+    if (menuBtn && menuBtn.hasAttribute("data-menu")) {
+      e.preventDefault();
+
+      const menuItem = menuBtn.closest(".menu-item");
+      if (!menuItem) return;
+
+      const isOpen = menuItem.classList.contains("open");
+
+      mobileMenu.querySelectorAll(".menu-item.open").forEach(item => {
+        item.classList.remove("open");
+      });
+
+      if (!isOpen) {
+        menuItem.classList.add("open");
+      }
+    }
+  });
+});
