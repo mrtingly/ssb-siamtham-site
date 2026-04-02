@@ -559,27 +559,30 @@
     });
   }
 
- function bindMobileMenu() {
+function bindMobileMenu() {
+  const mobileRoot = q(".mobile-menu-v2");
   const mobileItems = qa(".mobile-menu-v2 .menu-item");
   const mobileSSBButtons = qa('.mobile-menu-v2 [data-action="ssb-system"]');
 
-  mobileItems.forEach(item => {
-    const trigger = item.querySelector(":scope > .menu-btn");
+  if (!mobileRoot) return;
 
-    if (!trigger || trigger.classList.contains("no-submenu")) return;
+  mobileRoot.addEventListener("click", event => {
+    const directLink = event.target.closest('a.menu-btn.no-submenu, .submenu a, .submenu button');
+    if (directLink) return;
 
-    item.addEventListener("click", event => {
-      const clickedSubmenu = event.target.closest(".submenu");
-      if (clickedSubmenu) return;
+    const trigger = event.target.closest(".menu-item > .menu-btn");
+    if (!trigger) return;
 
-      const isOpen = item.classList.contains("open");
+    const parent = trigger.closest(".menu-item");
+    if (!parent) return;
 
-      mobileItems.forEach(other => {
-        if (other !== item) other.classList.remove("open");
-      });
+    const isOpen = parent.classList.contains("open");
 
-      item.classList.toggle("open", !isOpen);
+    mobileItems.forEach(item => {
+      if (item !== parent) item.classList.remove("open");
     });
+
+    parent.classList.toggle("open", !isOpen);
   });
 
   mobileSSBButtons.forEach(btn => {
