@@ -559,3 +559,81 @@
 .menu-item.open .submenu *{
   pointer-events:auto !important;
 }
+
+/* RESET */
+.mobile-menu-list{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  padding:20px;
+}
+
+/* CARD */
+.menu-item{
+  border-radius:18px;
+  background:#ffffff;
+  box-shadow:0 10px 30px rgba(0,0,0,0.06);
+  overflow:hidden;
+  position:relative;
+}
+
+/* BUTTON */
+.menu-btn{
+  width:100%;
+  height:58px;
+  padding:0 18px;
+  border:none;
+  background:transparent;
+  font-size:15px;
+  font-weight:700;
+  color:#1a2b4c;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  cursor:pointer;
+}
+
+/* ARROW */
+.menu-item[data-toggle] .menu-btn::after{
+  content:"";
+  width:8px;
+  height:8px;
+  border-right:2px solid #4a7cff;
+  border-bottom:2px solid #4a7cff;
+  transform:rotate(45deg);
+  transition:.2s;
+}
+
+/* OPEN STATE */
+.menu-item.open .menu-btn::after{
+  transform:rotate(-135deg);
+}
+
+/* SUBMENU */
+.submenu{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .25s ease;
+}
+
+/* OPEN */
+.menu-item.open .submenu{
+  max-height:200px;
+}
+
+/* SUB ITEM */
+.submenu-link{
+  display:flex;
+  align-items:center;
+  height:48px;
+  padding:0 18px;
+  font-size:14px;
+  color:#4c648a;
+  text-decoration:none;
+  border-top:1px solid rgba(0,0,0,0.05);
+}
+
+/* HOVER */
+.submenu-link:active{
+  background:#f3f6fb;
+}
