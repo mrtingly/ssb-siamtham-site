@@ -414,11 +414,12 @@
 
     if (!hero || !logoToggle) return;
 
-    const menuGroups = qa(".menu-group", hero);
-    const submenuButtons = qa(".submenu-btn", hero);
-    const mainMenuButtons = qa(".menu-group > .main-node [data-menu]", hero);
-    const popupButtons = qa("[data-popup]", hero);
-    const linkButtons = qa("[data-link]", hero);
+    const desktopLayer = q(".menu-layer-v2", hero);
+    const menuGroups = qa(".menu-group", desktopLayer);
+    const submenuButtons = qa(".submenu-btn", desktopLayer);
+    const mainMenuButtons = qa(".menu-group > .main-node [data-menu]", desktopLayer);
+    const popupButtons = qa("[data-popup]", desktopLayer);
+    const linkButtons = qa("[data-link]", desktopLayer);
 
     const companyAboutButtons = qa('[data-action="company-about"]', hero);
     const companyContactButtons = qa('[data-action="company-contact"]', hero);
