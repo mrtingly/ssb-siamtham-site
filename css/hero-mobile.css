@@ -141,23 +141,20 @@
 
   .menu-item{
     width:58%;
-    margin:0 auto 14px;
+    margin:0 auto;
     position:relative;
-    overflow:hidden;
-    border-radius:24px;
-  
+    z-index:3;
+    overflow:visible;
+    border-radius:22px;
     background:
-      linear-gradient(180deg, rgba(255,255,255,.92) 0%, rgba(245,249,255,.88) 100%);
-    border:1px solid rgba(255,255,255,.72);
-  
+      linear-gradient(180deg, rgba(255,255,255,.86) 0%, rgba(245,249,255,.80) 100%);
+    border:1px solid rgba(255,255,255,.64);
     box-shadow:
-      0 16px 32px rgba(39,79,146,.08),
-      0 6px 14px rgba(74,123,199,.05),
-      inset 0 1px 0 rgba(255,255,255,.94);
-  
+      0 18px 34px rgba(39,79,146,.10),
+      0 6px 14px rgba(74,123,199,.06),
+      inset 0 1px 0 rgba(255,255,255,.88);
     backdrop-filter:blur(10px);
     -webkit-backdrop-filter:blur(10px);
-  
     transition:
       transform .22s ease,
       box-shadow .22s ease,
@@ -206,34 +203,31 @@
   .menu-item > .menu-btn,
   .menu-item > a.menu-btn{
     width:100% !important;
-    min-height:62px;
-    height:62px;
+    min-height:60px;
+    height:60px;
     display:flex !important;
     align-items:center !important;
     justify-content:space-between !important;
     box-sizing:border-box !important;
     margin:0 !important;
-    padding:0 20px !important;
+    padding:0 18px !important;
     position:relative;
-    z-index:5;
+    z-index:6;
     border:none;
     background:transparent;
     font-weight:800;
     font-size:15px;
     text-align:left;
-    color:#153a6c;
+    color:#183d72;
     font-family:'Prompt',sans-serif;
-    letter-spacing:.14px;
+    letter-spacing:.12px;
     text-decoration:none;
     cursor:pointer;
     -webkit-appearance:none;
     appearance:none;
     -webkit-tap-highlight-color:transparent;
     touch-action:manipulation;
-    transition:
-      transform .16s ease,
-      color .16s ease,
-      letter-spacing .16s ease;
+    pointer-events:auto !important;
   }
 
   .menu-item > a.menu-btn.no-arrow.no-submenu {
@@ -342,6 +336,16 @@
     max-height: 220px;
     opacity: 1;
     transform: translateY(0);
+  }
+
+  .submenu{
+    position:relative;
+    z-index:4;
+  }
+  
+  .menu-item,
+  .menu-item *{
+    -webkit-tap-highlight-color:transparent;
   }
 
   .submenu button,
