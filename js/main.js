@@ -559,14 +559,16 @@
     });
   }
 function bindMobileMenu() {
-  const mobileItems = qa(".mobile-menu-v2 .menu-item");
-  const toggleItems = qa(".mobile-menu-v2 .menu-item-toggle");
+  const mobileItems = qa(".mobile-menu-v2 .menu-item-toggle");
   const mobileSSBButtons = qa('.mobile-menu-v2 [data-action="ssb-system"]');
 
-  toggleItems.forEach(item => {
-    item.addEventListener("click", event => {
-      const clickedSubmenu = event.target.closest(".submenu");
-      if (clickedSubmenu) return;
+  mobileItems.forEach(item => {
+    const btn = item.querySelector(":scope > .menu-btn");
+    if (!btn) return;
+
+    btn.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopPropagation();
 
       const isOpen = item.classList.contains("open");
 
@@ -584,7 +586,7 @@ function bindMobileMenu() {
     });
   });
 }
-
+  
   function bindChatWidget() {
     if (!chatWidget || !chatToggle) return;
 
