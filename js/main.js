@@ -713,3 +713,19 @@ function bindMobileMenu() {
     init();
   }
 })();
+
+document.querySelectorAll('[data-toggle]').forEach(item=>{
+  const btn = item.querySelector('.menu-btn');
+
+  btn.addEventListener('click', ()=>{
+    const isOpen = item.classList.contains('open');
+
+    document.querySelectorAll('[data-toggle]').forEach(i=>{
+      i.classList.remove('open');
+    });
+
+    if(!isOpen){
+      item.classList.add('open');
+    }
+  });
+});
