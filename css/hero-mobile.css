@@ -432,4 +432,13 @@
 .mobile-menu-v2::before{
   pointer-events:none !important;
 }
+
+  .submenu{
+  position:relative;
+  z-index:6;
+}
+
+.menu-item.open{
+  z-index:7;
+}
 }
