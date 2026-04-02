@@ -559,30 +559,50 @@
     });
   }
 function bindMobileMenu() {
-  const mobileItems = qa(".mobile-menu-v2 .menu-item-toggle");
-  const mobileSSBButtons = qa('.mobile-menu-v2 [data-action="ssb-system"]');
+  const accordions = qa(".mobile-menu-accordion");
+  const triggers = qa(".mobile-menu-trigger");
+  const companyAboutBtns = qa('.mobile-submenu-link[data-action="company-about"]');
+  const companyContactBtns = qa('.mobile-submenu-link[data-action="company-contact"]');
+  const linkBtns = qa('.mobile-submenu-link[data-link]');
 
-  mobileItems.forEach(item => {
-    const btn = item.querySelector(":scope > .menu-btn");
-    if (!btn) return;
+  triggers.forEach(trigger => {
+    trigger.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopPropagation();
 
+      const card = trigger.closest(".mobile-menu-accordion");
+      if (!card) return;
+
+      const isOpen = card.classList.contains("open");
+
+      accordions.forEach(item => item.classList.remove("open"));
+      if (!isOpen) card.classList.add("open");
+    });
+  });
+
+  companyAboutBtns.forEach(btn => {
+    btn.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopPropagation();
+      openCompanyPopupSafe();
+    });
+  });
+
+  companyContactBtns.forEach(btn => {
+    btn.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopPropagation();
+      openCompanyPopupSafe();
+    });
+  });
+
+  linkBtns.forEach(btn => {
     btn.addEventListener("click", event => {
       event.preventDefault();
       event.stopPropagation();
 
-      const isOpen = item.classList.contains("open");
-
-      mobileItems.forEach(other => {
-        if (other !== item) other.classList.remove("open");
-      });
-
-      item.classList.toggle("open", !isOpen);
-    });
-  });
-
-  mobileSSBButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      openInfoPopupSafe("ssbmobile");
+      const url = btn.getAttribute("data-link");
+      if (url) window.location.href = url;
     });
   });
 }
