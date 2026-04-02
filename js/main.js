@@ -714,18 +714,24 @@ function bindMobileMenu() {
   }
 })();
 
-document.querySelectorAll('[data-toggle]').forEach(item=>{
-  const btn = item.querySelector('.menu-btn');
+function bindMobileMenu() {
+  const toggleItems = qa(".mobile-menu-v2 .menu-item-toggle");
 
-  btn.addEventListener('click', ()=>{
-    const isOpen = item.classList.contains('open');
+  toggleItems.forEach(item => {
+    const btn = item.querySelector(":scope > .menu-btn");
+    if (!btn) return;
 
-    document.querySelectorAll('[data-toggle]').forEach(i=>{
-      i.classList.remove('open');
+    btn.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const isOpen = item.classList.contains("open");
+
+      toggleItems.forEach(other => {
+        if (other !== item) other.classList.remove("open");
+      });
+
+      item.classList.toggle("open", !isOpen);
     });
-
-    if(!isOpen){
-      item.classList.add('open');
-    }
   });
-});
+}
