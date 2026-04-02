@@ -208,37 +208,31 @@
 
   .menu-item > .menu-btn,
   .menu-item > a.menu-btn{
-    width:100% !important;
-    min-height:62px;
-    height:62px;
     display:flex !important;
     align-items:center !important;
-    justify-content:space-between !important;
+    justify-content:center !important;
   
-    box-sizing:border-box !important;
+    width:100% !important;
+    height:54px;   /* 👈 ปรับให้สั้นลง */
+    min-height:54px;
+  
+    padding:0 !important;
     margin:0 !important;
-    padding:0 20px !important;
   
     position:relative;
-    z-index:6;
+    z-index:10;
   
     border:none;
-    border-radius:24px;
+    border-radius:20px;
     background:transparent;
   
-    font-weight:800;
-    font-size:15px;
-    text-align:left;
-    color:#153a6c;
     font-family:'Prompt',sans-serif;
-    letter-spacing:.14px;
-    text-decoration:none;
-    cursor:pointer;
+    font-size:15px;
+    font-weight:700;
+    color:#183d72;
   
-    -webkit-appearance:none;
-    appearance:none;
-    -webkit-tap-highlight-color:transparent;
-    touch-action:manipulation;
+    text-align:center;
+    cursor:pointer;
   
     pointer-events:auto !important;
   }
@@ -482,6 +476,7 @@
   .menu-item{
     width:76% !important;
     margin:0 auto 12px !important;
+    overflow:visible;
   }
 
   .menu-item > .menu-btn,
