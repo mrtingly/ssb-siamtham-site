@@ -148,7 +148,6 @@
       box-shadow .20s ease,
       border-color .20s ease,
       background .20s ease;
-    cursor:pointer;
   }
 
   .menu-item::before{
@@ -214,7 +213,7 @@
     -webkit-appearance:none;
     -webkit-tap-highlight-color:transparent;
     touch-action:manipulation;
-    pointer-events:none;
+    cursor:pointer;
   }
 
   .menu-item > .menu-btn{
@@ -223,7 +222,6 @@
 
   .menu-item > a.menu-btn.no-arrow.no-submenu{
     justify-content:flex-start;
-    pointer-events:auto;
   }
 
   .menu-item > .menu-btn::before,
