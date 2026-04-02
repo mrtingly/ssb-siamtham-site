@@ -1,4 +1,9 @@
 (() => {
+  /* =========================
+     MAIN.JS
+     Stable desktop hero menu
+     ========================= */
+
   const q = (selector, root = document) => root.querySelector(selector);
   const qa = (selector, root = document) => Array.from(root.querySelectorAll(selector));
 
@@ -555,77 +560,37 @@
   }
 
   function bindMobileMenu() {
-  const mobileRoot = q(".mobile-menu-v2");
-  if (!mobileRoot) return;
+    const mobileItems = qa(".mobile-menu-v2 .menu-item");
+    const mobileButtons = qa(".mobile-menu-v2 .menu-btn");
+    const mobileSSBButtons = qa('.mobile-menu-v2 [data-action="ssb-system"]');
 
-  const mobileItems = qa(".menu-item", mobileRoot);
+    mobileButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        if (btn.classList.contains("no-submenu")) return;
 
-  mobileRoot.addEventListener("click", event => {
-    const submenuLink = event.target.closest(".submenu-link");
-    const dataLinkBtn = event.target.closest("[data-link]");
-    const menuBtn = event.target.closest(".menu-btn");
+        const parent = btn.closest(".menu-item");
+        if (!parent) return;
 
-    if (submenuLink) {
-      event.stopPropagation();
+        const isOpen = parent.classList.contains("open");
 
-      const href = submenuLink.getAttribute("href");
-      const link = submenuLink.getAttribute("data-link");
+        mobileItems.forEach(item => {
+          if (item !== parent) item.classList.remove("open");
+        });
 
-      if (href && href !== "#") {
-        window.location.href = href;
-        return;
-      }
+        if (isOpen) {
+          parent.classList.remove("open");
+        } else {
+          parent.classList.add("open");
+        }
+      });
+    });
 
-      if (link) {
-        window.location.href = link;
-        return;
-      }
-    }
-
-    if (dataLinkBtn && dataLinkBtn !== submenuLink) {
-      event.stopPropagation();
-
-      const link = dataLinkBtn.getAttribute("data-link");
-      if (link) {
-        window.location.href = link;
-        return;
-      }
-    }
-
-    if (!menuBtn) return;
-
-    event.preventDefault();
-    event.stopPropagation();
-
-    if (menuBtn.classList.contains("no-submenu")) {
-      const href = menuBtn.getAttribute("href");
-      const action = menuBtn.getAttribute("data-action");
-
-      if (href && href !== "#") {
-        window.location.href = href;
-        return;
-      }
-
-      if (action === "ssb-system") {
+    mobileSSBButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
         openInfoPopupSafe("ssbmobile");
-      }
-      return;
-    }
-
-    if (!menuBtn.hasAttribute("data-menu")) return;
-
-    const parent = menuBtn.closest(".menu-item");
-    if (!parent) return;
-
-    const isOpen = parent.classList.contains("open");
-
-    mobileItems.forEach(item => item.classList.remove("open"));
-
-    if (!isOpen) {
-      parent.classList.add("open");
-    }
-  });
-}
+      });
+    });
+  }
 
   function bindChatWidget() {
     if (!chatWidget || !chatToggle) return;
