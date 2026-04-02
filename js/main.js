@@ -595,6 +595,7 @@
     btn.addEventListener("click", event => {
       event.preventDefault();
       event.stopPropagation();
+
       const url = btn.getAttribute("data-link");
       if (url) window.location.href = url;
     });
