@@ -857,4 +857,148 @@
     color:rgba(22,72,146,.62);
     text-shadow:none;
   }
+
+  /* =========================
+   SSB FLAGSHIP CINEMATIC
+   ========================= */
+
+/* ===== เพิ่มมิติทั้งฉาก ===== */
+.tech-hero{
+  transform-style: preserve-3d;
+  perspective: 1200px;
+}
+
+/* ===== พลังตรงกลาง (เพิ่มจากเดิม ไม่ทับ) ===== */
+.center-glow{
+  filter: blur(14px);
+
+  background:
+    radial-gradient(circle, rgba(120,210,255,.35) 0%,
+    rgba(60,140,255,.25) 20%,
+    rgba(0,120,255,.15) 40%,
+    transparent 70%);
+
+  animation: glowPulse 3.5s ease-in-out infinite;
+}
+
+@keyframes glowPulse{
+  0%,100%{ transform:translate(-50%,-50%) scale(1); opacity:.9; }
+  50%{ transform:translate(-50%,-50%) scale(1.08); opacity:1; }
+}
+
+/* ===== เพิ่ม ring พลังอีกชั้น ===== */
+.center-pulse::after{
+  content:"";
+  position:absolute;
+  inset:-20px;
+  border-radius:50%;
+  border:1px solid rgba(120,210,255,.15);
+
+  animation: ringExpand 4s linear infinite;
+}
+
+@keyframes ringExpand{
+  0%{ transform:scale(.9); opacity:.4; }
+  100%{ transform:scale(1.3); opacity:0; }
+}
+
+/* ===== โลโก้ = พระเอก ===== */
+.logo-core{
+  transform: translate(-50%,-50%) translateZ(40px);
+}
+
+.logo-core img{
+  filter:
+    drop-shadow(0 0 20px rgba(120,220,255,.4))
+    drop-shadow(0 0 60px rgba(0,180,255,.25))
+    drop-shadow(0 30px 60px rgba(0,0,0,.5));
+}
+
+/* ===== hover มีพลังขึ้น ===== */
+.logo-core:hover{
+  transform: translate(-50%,-50%) scale(1.08) translateZ(60px);
+}
+
+/* ===== เส้น energy เร็วขึ้น ดูมีชีวิต ===== */
+.energy-line{
+  stroke-width:2.2;
+  opacity:.8;
+  animation: energyFlow 6s linear infinite;
+}
+
+/* ===== orbit ดูมีชีวิต ===== */
+.orbit-runner{
+  animation: orbitSpark 3.5s linear infinite;
+}
+
+/* ===== เมนูลอยแบบ cinematic ===== */
+.node-shell{
+  transform: translateZ(20px);
+
+  backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.35),
+    0 0 40px rgba(0,140,255,.2),
+    inset 0 0 20px rgba(120,200,255,.15);
+}
+
+/* ===== hover = มีแรง ===== */
+.node-shell:hover{
+  transform: translateY(-6px) scale(1.05) translateZ(40px);
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.45),
+    0 0 60px rgba(0,180,255,.35);
+}
+
+/* ===== ปุ่ม CTA = ตัวขาย ===== */
+.m5 .node-shell{
+  animation: ctaBreath 2.8s ease-in-out infinite;
+}
+
+@keyframes ctaBreath{
+  0%,100%{
+    box-shadow:
+      0 20px 50px rgba(255,0,0,.35),
+      0 0 40px rgba(255,60,60,.3);
+  }
+  50%{
+    box-shadow:
+      0 30px 70px rgba(255,0,0,.5),
+      0 0 80px rgba(255,60,60,.45);
+  }
+}
+
+/* ===== แสง sweep เพิ่มความแพง ===== */
+.node-shell::after{
+  opacity:0;
+  animation: sweep 6s linear infinite;
+}
+
+@keyframes sweep{
+  0%{ transform:translateX(-120%); opacity:0; }
+  20%{ opacity:1; }
+  60%{ opacity:1; }
+  100%{ transform:translateX(120%); opacity:0; }
+}
+
+/* ===== ฉากหลังมีพลังมากขึ้น ===== */
+.tech-hero::before{
+  background:
+    radial-gradient(circle at 50% 50%,
+    rgba(0,140,255,.12),
+    transparent 60%);
+}
+
+/* ===== subtle floating ===== */
+.menu-node,
+.menu-group{
+  animation: floatSoft 5s ease-in-out infinite;
+}
+
+@keyframes floatSoft{
+  0%,100%{ transform:translateY(0); }
+  50%{ transform:translateY(-4px); }
+}
 }
