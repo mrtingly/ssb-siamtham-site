@@ -657,6 +657,10 @@
     letter-spacing: 0;
   }
 
+  .footer-center-logo {
+  margin-bottom: 12px;
+}
+
   @keyframes heroFloat {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-4px); }
