@@ -660,3 +660,253 @@
     font-size: 8.8px;
   }
 }
+
+/* =========================================
+   MOBILE FLAGSHIP POLISH
+   วางท้าย hero-mobile.css
+========================================= */
+
+@media (max-width: 1023px) {
+
+  /* ===== HERO ทั้งก้อนให้ดูแพงขึ้น ===== */
+  .tech-hero,
+  body.light-mode .tech-hero{
+    border-radius: 38px;
+    background:
+      radial-gradient(circle at 50% -8%, rgba(120,180,255,.18) 0%, rgba(120,180,255,0) 36%),
+      radial-gradient(circle at 50% 120%, rgba(90,145,255,.10) 0%, rgba(90,145,255,0) 42%),
+      linear-gradient(180deg, #fcfdff 0%, #f4f8ff 56%, #eaf1fa 100%);
+    box-shadow:
+      0 30px 60px rgba(19,46,92,.09),
+      0 12px 30px rgba(45,96,170,.05),
+      inset 0 1px 0 rgba(255,255,255,.96);
+  }
+
+  .tech-hero::after{
+    border-radius: 32px;
+  }
+
+  /* ===== โลโก้ส่วนบน ===== */
+  .mobile-hero{
+    margin-bottom: 26px;
+  }
+
+  .mobile-hero-logo{
+    width: 124px;
+    margin: 0 auto 16px;
+    filter:
+      drop-shadow(0 14px 32px rgba(30,107,255,.22))
+      drop-shadow(0 0 24px rgba(120,200,255,.14));
+  }
+
+  .mobile-hero-title{
+    font-size: 25px;
+    letter-spacing: .18px;
+    text-shadow:
+      0 1px 0 rgba(255,255,255,.84),
+      0 0 14px rgba(120,190,255,.08);
+  }
+
+  .mobile-hero-sub{
+    font-size: 13px;
+    color: #7288ab;
+  }
+
+  /* ===== การ์ดเมนู ===== */
+  .mobile-menu-list{
+    gap: 16px;
+  }
+
+  .menu-item{
+    border-radius: 26px;
+    box-shadow:
+      0 20px 40px rgba(23,55,108,.07),
+      0 8px 18px rgba(66,118,198,.04),
+      inset 0 1px 0 rgba(255,255,255,.98);
+  }
+
+  .menu-item::before{
+    opacity: .42;
+  }
+
+  .menu-item::after{
+    left: 20px;
+    right: 20px;
+    opacity: .72;
+  }
+
+  .menu-item.open{
+    box-shadow:
+      0 22px 42px rgba(30,63,122,.09),
+      0 10px 22px rgba(76,125,198,.05),
+      0 0 18px rgba(111,169,255,.06),
+      inset 0 1px 0 rgba(255,255,255,.98);
+  }
+
+  .menu-item > .menu-btn,
+  .menu-item > a.menu-btn{
+    height: 60px;
+    min-height: 60px;
+    border-radius: 26px;
+    padding: 0 56px 0 24px !important;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: .1px;
+  }
+
+  .menu-item > .menu-btn::before,
+  .menu-item > a.menu-btn::before{
+    left: 10px;
+    right: 10px;
+    top: 7px;
+    bottom: 7px;
+    border-radius: 20px;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.26), rgba(255,255,255,0));
+  }
+
+  .menu-item.menu-item-toggle > .menu-btn::after{
+    right: 22px;
+    width: 11px;
+    height: 11px;
+    border-right: 2px solid #4c87f6;
+    border-bottom: 2px solid #4c87f6;
+    filter: drop-shadow(0 0 8px rgba(100,160,255,.18));
+  }
+
+  .submenu{
+    background:
+      linear-gradient(180deg, rgba(253,254,255,.98) 0%, rgba(244,248,255,.96) 100%);
+  }
+
+  .submenu button,
+  .submenu-link{
+    height: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #5f789e;
+  }
+
+  /* ===== CTA แบบเดสก์ท็อปแต่คงโทนฟ้าเดิม ===== */
+  .mobile-cta{
+    position: relative;
+    overflow: hidden;
+    width: min(82vw, 372px) !important;
+    min-height: 62px;
+    margin: 24px auto 0;
+    border-radius: 999px;
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: .2px;
+    color: #ffffff;
+    border: 1px solid rgba(255,255,255,.26);
+    background:
+      linear-gradient(135deg, #2f7fff 0%, #56a8ff 46%, #8fd3ff 100%);
+    box-shadow:
+      0 24px 44px rgba(63,131,255,.28),
+      0 12px 24px rgba(63,131,255,.16),
+      0 0 20px rgba(92,154,255,.10),
+      inset 0 1px 0 rgba(255,255,255,.34),
+      inset 0 -10px 18px rgba(22,84,180,.14);
+  }
+
+  .mobile-cta::before{
+    content:"";
+    position:absolute;
+    top:-28%;
+    left:-30%;
+    width:34%;
+    height:160%;
+    background:linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255,255,255,0) 12%,
+      rgba(255,255,255,.18) 44%,
+      rgba(255,255,255,.86) 50%,
+      rgba(255,255,255,.18) 56%,
+      rgba(255,255,255,0) 88%,
+      transparent 100%
+    );
+    transform:rotate(18deg);
+    animation: mobileCtaSweep 3s linear infinite;
+    pointer-events:none;
+  }
+
+  .mobile-cta::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:inherit;
+    pointer-events:none;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(255,255,255,.18), transparent 42%);
+  }
+
+  .mobile-cta:hover{
+    transform: translateY(-2px);
+    box-shadow:
+      0 28px 48px rgba(63,131,255,.32),
+      0 14px 26px rgba(63,131,255,.18),
+      0 0 24px rgba(92,154,255,.14),
+      inset 0 1px 0 rgba(255,255,255,.36),
+      inset 0 -10px 18px rgba(22,84,180,.16);
+  }
+
+  .mobile-cta:active{
+    transform: scale(.982);
+  }
+
+  @keyframes mobileCtaSweep{
+    0%{ left:-30%; opacity:0; }
+    10%{ opacity:1; }
+    54%{ opacity:1; }
+    100%{ left:120%; opacity:0; }
+  }
+
+  /* ===== Footer ให้ดูแพงขึ้นอีกนิด ===== */
+  .footer-shell{
+    border-radius: 30px;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.16),
+      0 22px 40px rgba(21,58,118,.18);
+  }
+
+  .footer-icons a{
+    box-shadow:
+      0 12px 22px rgba(14,43,92,.18),
+      inset 0 1px 0 rgba(255,255,255,.98);
+  }
+
+  .footer-icons a:active{
+    transform: scale(.94);
+  }
+}
+
+@media (max-width: 760px) {
+
+  .mobile-hero-logo{
+    width: 106px;
+  }
+
+  .mobile-hero-title{
+    font-size: 22px;
+  }
+
+  .menu-item{
+    border-radius: 24px;
+  }
+
+  .menu-item > .menu-btn,
+  .menu-item > a.menu-btn{
+    height: 56px;
+    min-height: 56px;
+    font-size: 14px;
+    border-radius: 24px;
+  }
+
+  .mobile-cta{
+    min-height: 58px;
+    font-size: 17px;
+    width: min(84vw, 360px) !important;
+  }
+}
