@@ -232,3 +232,38 @@
   }
   
 }
+
+/* =========================
+   POPUP MOBILE UPGRADE
+========================= */
+
+.popup-card {
+  border-radius: 26px;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(210,225,245,0.7);
+  box-shadow:
+    0 20px 50px rgba(30,60,120,0.12);
+}
+
+.popup-head h3 {
+  font-size: 18px;
+  font-weight: 800;
+  color: #153b73;
+}
+
+.popup-body {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #5f7596;
+}
+
+.popup-cta.primary {
+  background: linear-gradient(135deg,#3d7cff,#5aa9ff);
+  box-shadow:
+    0 12px 26px rgba(60,120,255,0.25);
+}
+
+.popup-cta.secondary {
+  background: rgba(240,246,255,0.9);
+}
