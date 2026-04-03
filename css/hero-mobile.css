@@ -571,8 +571,8 @@
   }
 
   .footer-icons-mobile a {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -590,8 +590,8 @@
   }
 
   .footer-icons-mobile img {
-    width: 14px;
-    height: 14px;
+    width: 11px;
+    height: 11px;
   }
   
   .footer-mobile-credit {
