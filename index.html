@@ -93,17 +93,17 @@
 
   <!-- DESKTOP FOOTER ONLY -->
   <style>
-    @media (min-width: 1024px) {
+   @media (min-width: 1024px) {
   .ssb-footer {
     position: relative;
     overflow: hidden;
-    padding: 26px 28px 22px;
+    padding: 18px 26px 16px;
     background:
       linear-gradient(180deg, #4f8fe4 0%, #3f7fd7 52%, #3674cc 100%);
-    border-top: 1px solid rgba(255,255,255,.22);
+    border-top: 1px solid rgba(255,255,255,.20);
     box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.18),
-      0 -10px 26px rgba(12,45,96,.08);
+      inset 0 1px 0 rgba(255,255,255,.16),
+      0 -10px 24px rgba(12,45,96,.08);
   }
 
   .ssb-footer::before {
@@ -112,9 +112,9 @@
     inset: 0;
     pointer-events: none;
     background:
-      radial-gradient(circle at 20% 10%, rgba(255,255,255,.14) 0%, rgba(255,255,255,0) 30%),
-      radial-gradient(circle at 82% 18%, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 26%);
-    opacity: .95;
+      radial-gradient(circle at 18% 18%, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 28%),
+      radial-gradient(circle at 82% 22%, rgba(255,255,255,.08) 0%, rgba(255,255,255,0) 26%);
+    opacity: .9;
   }
 
   .footer-shell {
@@ -122,36 +122,57 @@
     z-index: 1;
     max-width: 1360px;
     margin: 0 auto;
-    padding: 26px 30px 18px;
-    border-radius: 28px;
+    padding: 16px 26px 14px;
+    border-radius: 24px;
     background:
       linear-gradient(180deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,.05) 100%);
-    border: 1px solid rgba(255,255,255,.16);
+    border: 1px solid rgba(255,255,255,.14);
     box-shadow:
       inset 0 1px 0 rgba(255,255,255,.14),
-      0 18px 40px rgba(15,46,96,.12);
+      0 14px 30px rgba(15,46,96,.10);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
   }
 
-  .footer-top {
+  .footer-desktop-grid {
     display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 34px;
-    align-items: start;
+    grid-template-columns: 1.15fr 1px .9fr 1px .95fr;
+    align-items: center;
+    gap: 22px;
   }
 
-  .footer-col-left {
+  .footer-desktop-col {
     min-width: 0;
   }
 
-  .footer-col-right {
-    min-width: 250px;
+  .footer-desktop-left {
+    text-align: left;
+  }
+
+  .footer-desktop-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .footer-desktop-right {
     text-align: right;
   }
 
+  .footer-desktop-divider {
+    width: 1px;
+    height: 96px;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(255,255,255,.30) 18%,
+      rgba(255,255,255,.30) 82%,
+      transparent 100%
+    );
+  }
+
   .footer-company-th {
-    font-size: 19px;
+    font-size: 18px;
     line-height: 1.2;
     font-weight: 800;
     color: #ffffff;
@@ -160,18 +181,18 @@
   }
 
   .footer-company-en {
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.35;
     font-weight: 700;
     color: rgba(255,255,255,.92);
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     letter-spacing: 0;
   }
 
   .footer-address,
   .footer-reg {
-    font-size: 15px;
-    line-height: 1.72;
+    font-size: 14px;
+    line-height: 1.65;
     font-weight: 500;
     color: rgba(255,255,255,.88);
     letter-spacing: 0;
@@ -179,10 +200,10 @@
 
   .footer-phone-label {
     font-size: 14px;
-    line-height: 1.3;
+    line-height: 1.2;
     font-weight: 700;
     color: rgba(255,255,255,.78);
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     letter-spacing: 0;
   }
 
@@ -218,43 +239,25 @@
     display: block;
   }
 
-  .footer-divider-line {
-    height: 1px;
-    margin: 18px 0 16px;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(255,255,255,.24) 14%,
-      rgba(255,255,255,.24) 86%,
-      transparent 100%
-    );
-  }
-
-  .footer-divider-line.soft {
-    margin: 14px 0 12px;
-    opacity: .78;
-  }
-
   .footer-icons {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 16px;
-    margin-top: 2px;
+    gap: 14px;
   }
 
   .footer-icons a {
-    width: 52px;
-    height: 52px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     background:
       linear-gradient(180deg, rgba(255,255,255,.98) 0%, rgba(244,248,255,.96) 100%);
-    border: 1px solid rgba(255,255,255,.30);
+    border: 1px solid rgba(255,255,255,.28);
     box-shadow:
-      0 10px 24px rgba(14,43,92,.16),
+      0 10px 22px rgba(14,43,92,.16),
       inset 0 1px 0 rgba(255,255,255,1);
     text-decoration: none;
     transition:
@@ -266,9 +269,9 @@
   .footer-icons a:hover {
     transform: translateY(-2px);
     box-shadow:
-      0 14px 30px rgba(14,43,92,.20),
+      0 14px 28px rgba(14,43,92,.20),
       inset 0 1px 0 rgba(255,255,255,1);
-    border-color: rgba(255,255,255,.48);
+    border-color: rgba(255,255,255,.44);
   }
 
   .footer-icons a:active {
@@ -276,10 +279,22 @@
   }
 
   .footer-icons img {
-    width: 23px;
-    height: 23px;
+    width: 22px;
+    height: 22px;
     object-fit: contain;
     display: block;
+  }
+
+  .footer-bottom-line {
+    height: 1px;
+    margin: 16px 0 12px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255,255,255,.26) 14%,
+      rgba(255,255,255,.26) 86%,
+      transparent 100%
+    );
   }
 
   .footer-copy {
@@ -287,20 +302,20 @@
   }
 
   .footer-copy div:first-child {
-    font-size: 15px;
-    line-height: 1.5;
+    font-size: 14px;
+    line-height: 1.45;
     font-weight: 700;
     color: rgba(255,255,255,.94);
     margin-bottom: 2px;
-    letter-spacing: 0;
+    letter-spacing: .2px;
   }
 
   .footer-copy div:last-child {
-    font-size: 13px;
-    line-height: 1.5;
+    font-size: 12px;
+    line-height: 1.45;
     font-weight: 600;
     color: rgba(255,255,255,.78);
-    letter-spacing: 0;
+    letter-spacing: .2px;
   }
 }
   </style>
@@ -503,42 +518,20 @@
       </section>
     </main>
 
-    <footer class="ssb-footer">
-      <div class="footer-shell">
-        <div class="footer-top">
-          <div class="footer-col footer-col-left">
-            <div class="footer-company-th">บริษัท สยามทำ จำกัด</div>
-            <div class="footer-company-en">Siamtham Co.,Ltd.</div>
-            <div class="footer-address">54 ซอย 53 ถนนพุทธมณฑลสาย 1</div>
-            <div class="footer-address">แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ</div>
-            <div class="footer-reg">เลขทะเบียน 0105566099954</div>
-          </div>
+  <footer class="ssb-footer">
+  <div class="footer-shell">
+    <div class="footer-desktop-grid">
+      <div class="footer-desktop-col footer-desktop-left">
+        <div class="footer-company-th">บริษัท สยามทำ จำกัด</div>
+        <div class="footer-company-en">Siamtham Co.,Ltd.</div>
+        <div class="footer-address">54 ซอย 53 ถนนพุทธมณฑลสาย 1</div>
+        <div class="footer-address">แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ</div>
+        <div class="footer-reg">เลขทะเบียน 0105566099954</div>
+      </div>
 
-          <div class="footer-col footer-col-right">
-            <div class="footer-phone-label">โทรศัพท์</div>
-        
-          <a class="footer-phone" href="tel:020432988">
-            <span class="footer-phone-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M6.6 10.8c1.6 3.1 3.5 5 6.6 6.6l2.2-2.2c.28-.28.7-.37 1.07-.24 1.2.4 2.5.62 3.83.62.4 0 .72.32.72.72V20c0 .4-.32.72-.72.72C10.87 20.72 3.28 13.13 3.28 3.72c0-.4.32-.72.72-.72H7.6c.4 0 .72.32.72.72 0 1.33.21 2.63.62 3.83.12.37.03.79-.25 1.07L6.6 10.8Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
-            <span>02-043-2988</span>
-          </a>
-        
-          <a class="footer-phone" href="tel:0649514888">
-            <span class="footer-phone-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M6.6 10.8c1.6 3.1 3.5 5 6.6 6.6l2.2-2.2c.28-.28.7-.37 1.07-.24 1.2.4 2.5.62 3.83.62.4 0 .72.32.72.72V20c0 .4-.32.72-.72.72C10.87 20.72 3.28 13.13 3.28 3.72c0-.4.32-.72.72-.72H7.6c.4 0 .72.32.72.72 0 1.33.21 2.63.62 3.83.12.37.03.79-.25 1.07L6.6 10.8Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
-            <span>064-951-4888</span>
-          </a>
-        </div>
-        </div>
+      <div class="footer-desktop-divider" aria-hidden="true"></div>
 
-        <div class="footer-divider-line"></div>
-
+      <div class="footer-desktop-col footer-desktop-center">
         <div class="footer-icons">
           <a href="https://maps.app.goo.gl/Dz4B1kpqVbmWhkYX7" target="_blank" rel="noopener" aria-label="Map">
             <img src="https://cdn.simpleicons.org/googlemaps/EA4335" alt="Map">
@@ -556,15 +549,42 @@
             <img src="https://cdn.simpleicons.org/tiktok/000000" alt="TikTok">
           </a>
         </div>
-
-        <div class="footer-divider-line soft"></div>
-
-        <div class="footer-copy">
-          <div>© Siamtham Co.,Ltd. Stealth Safety Bank Mobile System</div>
-          <div>By Mr.Tingly Marketing Online</div>
-        </div>
       </div>
-    </footer>
+
+      <div class="footer-desktop-divider" aria-hidden="true"></div>
+
+      <div class="footer-desktop-col footer-desktop-right">
+        <div class="footer-phone-label">โทรศัพท์</div>
+
+        <a class="footer-phone" href="tel:020432988">
+          <span class="footer-phone-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M6.6 10.8c1.6 3.1 3.5 5 6.6 6.6l2.2-2.2c.28-.28.7-.37 1.07-.24 1.2.4 2.5.62 3.83.62.4 0 .72.32.72.72V20c0 .4-.32.72-.72.72C10.87 20.72 3.28 13.13 3.28 3.72c0-.4.32-.72.72-.72H7.6c.4 0 .72.32.72.72 0 1.33.21 2.63.62 3.83.12.37.03.79-.25 1.07L6.6 10.8Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span>02-043-2988</span>
+        </a>
+
+        <a class="footer-phone" href="tel:0649514888">
+          <span class="footer-phone-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M6.6 10.8c1.6 3.1 3.5 5 6.6 6.6l2.2-2.2c.28-.28.7-.37 1.07-.24 1.2.4 2.5.62 3.83.62.4 0 .72.32.72.72V20c0 .4-.32.72-.72.72C10.87 20.72 3.28 13.13 3.28 3.72c0-.4.32-.72.72-.72H7.6c.4 0 .72.32.72.72 0 1.33.21 2.63.62 3.83.12.37.03.79-.25 1.07L6.6 10.8Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span>064-951-4888</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-bottom-line"></div>
+
+    <div class="footer-copy">
+      <div>@ STEALTH SAFETY BANK MOBILE</div>
+      <div>BY MR.TINGLY MARKETING ONLINE</div>
+    </div>
+  </div>
+</footer>
+    
   </div>
 
   <div id="companyPopup" class="popup-backdrop" aria-hidden="true">
@@ -598,30 +618,6 @@
 
       <button class="popup-close th-font sound-click" type="button" id="closeCompanyPopupBottom">ปิด</button>
     </div>
-  </div>
-
-  <div class="chat-widget compact" id="chatWidget">
-    <div class="chat-menu icon-only" id="chatMenu">
-      <a class="chat-item line sound-click" href="https://line.me/R/ti/p/@siamtham" target="_blank" rel="noopener" aria-label="LINE Official">
-        <img src="https://cdn.simpleicons.org/line/06C755" alt="LINE" loading="lazy" />
-      </a>
-
-      <a class="chat-item facebook sound-click" href="https://www.facebook.com/profile.php?id=61556844339863" target="_blank" rel="noopener" aria-label="Facebook">
-        <img src="https://cdn.simpleicons.org/facebook/1877F2" alt="Facebook" loading="lazy" />
-      </a>
-
-      <a class="chat-item youtube sound-click" href="https://www.youtube.com/@siamtham" target="_blank" rel="noopener" aria-label="YouTube">
-        <img src="https://cdn.simpleicons.org/youtube/FF0000" alt="YouTube" loading="lazy" />
-      </a>
-
-      <a class="chat-item tiktok sound-click" href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">
-        <img src="https://cdn.simpleicons.org/tiktok/000000" alt="TikTok" loading="lazy" />
-      </a>
-    </div>
-
-    <button class="chat-fab sound-click" id="chatToggle" type="button" aria-label="เปิดเมนูติดต่อ">
-      <img src="https://cdn.simpleicons.org/line/06C755" alt="Open contact menu" loading="lazy" />
-    </button>
   </div>
 
   <script src="js/data.js"></script>
