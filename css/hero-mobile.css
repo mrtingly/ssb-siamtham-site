@@ -442,6 +442,7 @@
   }
 
   /* MOBILE FOOTER ONLY */
+    /* MOBILE FOOTER ONLY */
   .ssb-footer {
     background:
       linear-gradient(180deg, #eef5fc 0%, #e8f0f9 52%, #e2ebf7 100%);
@@ -454,44 +455,47 @@
   }
 
   .footer-shell {
-    max-width: 390px;
-    margin: 0 auto;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    box-sizing: border-box;
     padding: 18px 18px 14px;
-    border-radius: 24px;
+    border-radius: 30px;
     background:
-      linear-gradient(180deg, rgba(255,255,255,.94) 0%, rgba(245,249,255,.90) 100%);
-    border: 1px solid rgba(214,226,242,.88);
+      linear-gradient(180deg, rgba(255,255,255,.95) 0%, rgba(245,249,255,.91) 100%);
+    border: 1px solid rgba(214,226,242,.90);
     box-shadow:
       0 18px 34px rgba(25,54,104,.07),
       0 6px 14px rgba(68,109,182,.04),
       inset 0 1px 0 rgba(255,255,255,.96);
   }
 
-  /* override desktop footer layout */
+  /* layout มือถือใหม่ */
   .footer-desktop-grid {
     display: grid;
+    grid-template-columns: 1fr 1fr;
     grid-template-areas:
-      "company"
-      "phone"
-      "icons";
+      "company company"
+      "left right"
+      "icons icons";
     row-gap: 14px;
+    column-gap: 16px;
     align-items: start;
   }
 
   .footer-desktop-left {
-    grid-area: company;
+    grid-area: left;
     width: 100%;
     min-width: 0;
     text-align: left;
   }
 
   .footer-desktop-right {
-    grid-area: phone;
+    grid-area: right;
     width: 100%;
     min-width: 0;
-    text-align: left;
+    text-align: right;
     padding-top: 2px;
-    margin-top: 2px;
   }
 
   .footer-desktop-center {
@@ -510,13 +514,16 @@
     display: none !important;
   }
 
+  /* ชื่อบริษัทอยู่กลาง */
   .footer-company-th {
+    grid-area: company;
     font-size: 16px;
     line-height: 1.2;
     font-weight: 800;
     color: #153b73;
     margin-bottom: 4px;
     letter-spacing: 0;
+    text-align: center;
   }
 
   .footer-company-en {
@@ -524,8 +531,9 @@
     line-height: 1.3;
     font-weight: 700;
     color: #3f6196;
-    margin-bottom: 10px;
+    margin-bottom: 2px;
     letter-spacing: 0;
+    text-align: center;
   }
 
   .footer-address,
@@ -544,13 +552,14 @@
     color: #7b90af;
     margin-bottom: 8px;
     letter-spacing: 0;
+    text-align: right;
   }
 
   .footer-phone {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: 10px;
+    justify-content: flex-end;
+    gap: 8px;
     width: 100%;
     font-size: 15px;
     line-height: 1.35;
@@ -563,9 +572,9 @@
   }
 
   .footer-phone-icon {
-    width: 16px;
-    height: 16px;
-    flex: 0 0 16px;
+    width: 15px;
+    height: 15px;
+    flex: 0 0 15px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -573,8 +582,8 @@
   }
 
   .footer-phone-icon svg {
-    width: 16px;
-    height: 16px;
+    width: 15px;
+    height: 15px;
     display: block;
   }
 
@@ -717,39 +726,41 @@
     width: min(82vw, 360px) !important;
   }
 
-  .footer-shell {
-    max-width: 380px;
+   .footer-shell {
+    width: 100%;
+    max-width: none;
     padding: 16px 16px 13px;
-    border-radius: 22px;
+    border-radius: 28px;
   }
 
   .footer-desktop-grid {
     row-gap: 12px;
+    column-gap: 14px;
   }
 
   .footer-company-th {
-    font-size: 11px;
+    font-size: 15px;
   }
 
   .footer-company-en {
-    font-size: 10.5px;
+    font-size: 12.5px;
   }
 
   .footer-address,
   .footer-reg {
-    font-size: 10px;
+    font-size: 12px;
     line-height: 1.58;
   }
 
   .footer-phone {
-    font-size: 10px;
-    gap: 9px;
+    font-size: 14px;
+    gap: 8px;
   }
 
   .footer-phone-icon,
   .footer-phone-icon svg {
-    width: 15px;
-    height: 15px;
+    width: 14px;
+    height: 14px;
   }
 
   .footer-icons {
@@ -773,4 +784,3 @@
   .footer-copy div:last-child {
     font-size: 9.8px;
   }
-}
