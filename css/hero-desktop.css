@@ -908,3 +908,74 @@ body.light-mode .logo-core img{
       drop-shadow(0 0 25px rgba(30,107,255,0.25))
       drop-shadow(0 0 60px rgba(30,107,255,0.15));
   }
+
+  /* =========================
+   PREMIUM UPGRADE - DESKTOP
+   ========================= */
+
+.tech-hero{
+  background:
+    radial-gradient(circle at 50% 0%, rgba(0,140,255,.18), transparent 40%),
+    linear-gradient(180deg,#020817 0%, #06142e 40%, #020817 100%);
+}
+
+/* ===== LOGO LUXURY ===== */
+.logo-core img{
+  filter:
+    drop-shadow(0 0 20px rgba(120,220,255,.35))
+    drop-shadow(0 0 40px rgba(0,180,255,.25))
+    drop-shadow(0 20px 40px rgba(0,0,0,.45));
+}
+
+/* ===== TITLE PREMIUM ===== */
+.hero-system-title-inner{
+  background:
+    linear-gradient(180deg, rgba(10,20,40,.92), rgba(5,10,20,.96));
+
+  border:1px solid rgba(120,220,255,.25);
+
+  box-shadow:
+    0 10px 40px rgba(0,0,0,.45),
+    0 0 40px rgba(0,140,255,.18),
+    inset 0 0 20px rgba(120,220,255,.08);
+}
+
+/* ===== BUTTON UPGRADE ===== */
+.node-shell{
+  backdrop-filter: blur(14px);
+
+  box-shadow:
+    0 0 20px rgba(0,140,255,.35),
+    0 0 60px rgba(0,140,255,.15),
+    inset 0 0 20px rgba(120,200,255,.15);
+}
+
+/* ===== HOVER ลื่นขึ้น ===== */
+.node-shell:hover{
+  transform: translateY(-4px) scale(1.03);
+
+  box-shadow:
+    0 0 30px rgba(0,180,255,.55),
+    0 0 80px rgba(0,140,255,.30);
+}
+
+/* ===== CTA ปุ่มแดงให้โหดขึ้น ===== */
+.m5 .node-shell{
+  background:
+    linear-gradient(135deg,#3a0000 0%, #a80000 50%, #ff3d3d 100%);
+
+  box-shadow:
+    0 0 30px rgba(255,60,60,.55),
+    0 0 80px rgba(255,0,0,.25),
+    inset 0 0 30px rgba(255,120,120,.2);
+}
+
+/* ===== เพิ่ม glow รอบ scene ===== */
+.tech-hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(0,140,255,.08), transparent 60%);
+  pointer-events:none;
+}
