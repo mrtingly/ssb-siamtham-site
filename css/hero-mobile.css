@@ -441,64 +441,127 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.28);
   }
 
-    /* MOBILE FOOTER ONLY */
 /* =========================
-   MOBILE FOOTER - LUXE TECH (NEW)
+   MOBILE FOOTER - APPLE CENTER FINAL
 ========================= */
 
 .ssb-footer {
+  padding: 0 14px 22px;
   background: transparent;
-  padding: 0 14px 18px;
-  margin-top: 8px;
 }
 
+/* กล่องหลัก */
 .footer-shell {
-  width: 100%;
-  padding: 20px 18px 18px;
+  padding: 24px 18px 20px;
   border-radius: 26px;
-  background: rgba(255,255,255,0.92);
+  background: rgba(255,255,255,0.95);
   backdrop-filter: blur(16px);
   border: 1px solid rgba(210,225,245,0.8);
   box-shadow:
     0 18px 40px rgba(20,50,100,0.06),
     inset 0 1px 0 rgba(255,255,255,0.9);
-}
 
-/* 🔥 layout ใหม่: เน้นกลาง */
-.footer-desktop-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-/* ===== โลโก้ (เด่นสุด) ===== */
-.footer-desktop-center {
-  order: -1;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
 }
 
+/* ❌ ปิด layout desktop */
+.footer-desktop-grid {
+  display: contents;
+}
+
+.footer-desktop-left,
+.footer-desktop-right,
+.footer-desktop-center {
+  width: 100%;
+}
+
+/* ===== โลโก้ (ขึ้นบนสุด) ===== */
+.footer-desktop-center {
+  order: -1;
+  margin-bottom: 6px;
+}
+
 .footer-center-logo img {
-  width: 64px;
+  width: 72px;
   margin-bottom: 10px;
   filter:
-    drop-shadow(0 12px 24px rgba(40,90,160,0.18))
-    drop-shadow(0 0 12px rgba(90,150,255,0.12));
+    drop-shadow(0 12px 26px rgba(40,90,160,0.18))
+    drop-shadow(0 0 12px rgba(90,150,255,0.10));
+}
+
+/* ===== ชื่อบริษัท ===== */
+.footer-company-th {
+  font-size: 15px;
+  font-weight: 800;
+  color: #153b73;
+  margin-bottom: 6px;
+}
+
+/* ===== ที่อยู่ ===== */
+.footer-address {
+  font-size: 12.5px;
+  color: #6f86a6;
+  line-height: 1.6;
+}
+
+/* ===== รวมทะเบียน + โทร ===== */
+.footer-reg {
+  font-size: 12.5px;
+  color: #6f86a6;
+  margin-top: 6px;
+  line-height: 1.6;
+}
+
+/* ซ่อน label เก่า */
+.footer-phone-label {
+  display: none;
+}
+
+/* รวมเบอร์ */
+.footer-phone {
+  display: inline;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #6f86a6;
+}
+
+.footer-phone::before {
+  content: " โทร ";
+}
+
+.footer-phone-icon {
+  display: none;
+}
+
+/* ===== เส้น ===== */
+.footer-bottom-line {
+  width: 100%;
+  height: 1px;
+  margin: 18px 0 14px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(160,190,230,0.6),
+    transparent
+  );
 }
 
 /* ===== ไอคอน ===== */
 .footer-icons {
   display: flex;
-  gap: 12px;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 16px;
 }
 
 .footer-icons a {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: #ffffff;
+  background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -516,62 +579,11 @@
   width: 20px;
 }
 
-/* ===== บริษัท ===== */
-.footer-desktop-left {
-  text-align: center;
-}
-
-.footer-company-th {
-  font-size: 15px;
-  font-weight: 800;
-  color: #153b73;
-  margin-bottom: 4px;
-}
-
-.footer-company-en {
-  font-size: 13px;
-  color: #6b81a1;
-  margin-bottom: 8px;
-}
-
-.footer-address,
-.footer-reg {
-  font-size: 12px;
-  color: #7c90ad;
-  line-height: 1.5;
-}
-
-/* ===== โทร ===== */
-.footer-desktop-right {
-  text-align: center;
-}
-
-.footer-phone-label {
-  font-size: 12px;
-  margin-bottom: 6px;
-  color: #7b90af;
-}
-
-.footer-phone {
-  justify-content: center;
-  font-size: 15px;
-  font-weight: 800;
-  color: #153b73;
-}
-
-/* ===== เส้น ===== */
-.footer-bottom-line {
-  height: 1px;
-  margin: 14px 0 10px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(160,190,230,0.5),
-    transparent
-  );
-}
-
 /* ===== copyright ===== */
+.footer-copy {
+  text-align: center;
+}
+
 .footer-copy div:first-child {
   font-size: 11px;
   font-weight: 700;
