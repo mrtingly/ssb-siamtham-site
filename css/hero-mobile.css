@@ -728,21 +728,21 @@
   }
 
   .footer-company-th {
-    font-size: 15px;
+    font-size: 11px;
   }
 
   .footer-company-en {
-    font-size: 12.5px;
+    font-size: 10.5px;
   }
 
   .footer-address,
   .footer-reg {
-    font-size: 12px;
+    font-size: 10px;
     line-height: 1.58;
   }
 
   .footer-phone {
-    font-size: 14px;
+    font-size: 10px;
     gap: 9px;
   }
 
