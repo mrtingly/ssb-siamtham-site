@@ -251,13 +251,19 @@
     }
   }
 
+  function closeMobileSubmenus() {
+    qa(".mobile-menu-v2 .menu-item.open").forEach(item => {
+      item.classList.remove("open");
+    });
+  }
+
   function handleResize() {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
       applyThemeByViewport();
       syncHeroLabels();
 
-      if (!isMobileView() && techHero) {
+      if (!isMobileView()) {
         closeMobileSubmenus();
       }
     }, 120);
@@ -415,15 +421,17 @@
     if (!hero || !logoToggle) return;
 
     const desktopLayer = q(".menu-layer-v2", hero);
+    if (!desktopLayer) return;
+
     const menuGroups = qa(".menu-group", desktopLayer);
     const submenuButtons = qa(".submenu-btn", desktopLayer);
     const mainMenuButtons = qa(".menu-group > .main-node [data-menu]", desktopLayer);
     const popupButtons = qa("[data-popup]", desktopLayer);
     const linkButtons = qa("[data-link]", desktopLayer);
 
-    const companyAboutButtons = qa('[data-action="company-about"]', hero);
-    const companyContactButtons = qa('[data-action="company-contact"]', hero);
-    const orderBtn = hero.querySelector(".m5 .node-shell");
+    const companyAboutButtons = qa('[data-action="company-about"]', desktopLayer);
+    const companyContactButtons = qa('[data-action="company-contact"]', desktopLayer);
+    const orderBtn = desktopLayer.querySelector(".m5 .node-shell");
 
     function closeAllSubmenus() {
       menuGroups.forEach(group => group.classList.remove("open"));
@@ -597,17 +605,14 @@
     });
   }
 
-  function closeMobileSubmenus() {
-    qa(".mobile-menu-v2 .menu-item.open").forEach(item => {
-      item.classList.remove("open");
-    });
-  }
-
   function bindMobileMenu() {
-    const mobileItems = qa(".mobile-menu-v2 .menu-item.menu-item-toggle");
-    const mobileCompanyAboutButtons = qa('.mobile-menu-v2 [data-action="company-about"]');
-    const mobileCompanyContactButtons = qa('.mobile-menu-v2 [data-action="company-contact"]');
-    const mobileLinkButtons = qa(".mobile-menu-v2 [data-link]");
+    const mobileRoot = q(".mobile-menu-v2");
+    if (!mobileRoot) return;
+
+    const mobileItems = qa(".menu-item.menu-item-toggle", mobileRoot);
+    const mobileCompanyAboutButtons = qa('[data-action="company-about"]', mobileRoot);
+    const mobileCompanyContactButtons = qa('[data-action="company-contact"]', mobileRoot);
+    const mobileLinkButtons = qa("[data-link]", mobileRoot);
 
     mobileItems.forEach(item => {
       const btn = item.querySelector(":scope > .menu-btn");
@@ -657,6 +662,7 @@
   }
 
   function bindChatWidget() {
+    if (isMobileView()) return;
     if (!chatWidget || !chatToggle) return;
 
     chatToggle.addEventListener("click", event => {
@@ -684,7 +690,7 @@
         }
       }
 
-      if (chatWidget && !chatWidget.contains(target)) {
+      if (!isMobileView() && chatWidget && !chatWidget.contains(target)) {
         chatWidget.classList.remove("open");
       }
 
@@ -701,7 +707,8 @@
         if (hint) hint.style.display = "";
       }
 
-      if (!q(".mobile-menu-v2")?.contains(target)) {
+      const mobileRoot = q(".mobile-menu-v2");
+      if (mobileRoot && !mobileRoot.contains(target)) {
         closeMobileSubmenus();
       }
     });
@@ -733,7 +740,7 @@
 
       closeMobileSubmenus();
 
-      if (chatWidget?.classList.contains("open")) {
+      if (!isMobileView() && chatWidget?.classList.contains("open")) {
         chatWidget.classList.remove("open");
       }
     });
