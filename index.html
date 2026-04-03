@@ -83,11 +83,9 @@
 
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/layout.css" />
-
   <link rel="stylesheet" href="css/hero-base.css" />
   <link rel="stylesheet" href="css/hero-mobile.css" media="(max-width: 1023px)" />
   <link rel="stylesheet" href="css/hero-desktop.css" media="(min-width: 1024px)" />
-
   <link rel="stylesheet" href="css/popup.css" />
   <link rel="stylesheet" href="css/components.css" />
   <link rel="stylesheet" href="css/responsive.css" />
@@ -192,6 +190,7 @@
               <img src="images/logo.png" alt="Stealth Safety Bank Logo" loading="lazy" />
             </button>
 
+            <!-- DESKTOP MENU : untouched -->
             <div class="menu-layer-v2">
               <div class="menu-node m1">
                 <a href="ssb-system.html#ssbmobile" class="node-shell sound-click">
@@ -247,7 +246,8 @@
               <div class="hero-menu-hint" id="heroMenuHint">คลิกโลโก้เพื่อเปิดเมนู</div>
             </div>
 
-            <div class="mobile-menu-v2">
+            <!-- MOBILE MENU : rebuilt -->
+            <div class="mobile-menu-v2" aria-label="Mobile primary navigation">
               <div class="mobile-hero">
                 <img src="images/logo.png" class="mobile-hero-logo" alt="Stealth Safety Bank Logo" loading="lazy" />
                 <div class="mobile-hero-title">SSB Mobile System</div>
@@ -260,7 +260,7 @@
                 </div>
 
                 <div class="menu-item menu-item-toggle" data-mobile-toggle="company">
-                  <button class="menu-btn sound-click" type="button" data-menu="company">เกี่ยวกับบริษัท</button>
+                  <button class="menu-btn sound-click" type="button">เกี่ยวกับบริษัท</button>
                   <div class="submenu">
                     <button class="submenu-link sound-click" type="button" data-action="company-about">เกี่ยวกับบริษัท</button>
                     <button class="submenu-link sound-click" type="button" data-action="company-contact">ติดต่อเรา</button>
@@ -268,7 +268,7 @@
                 </div>
 
                 <div class="menu-item menu-item-toggle" data-mobile-toggle="product">
-                  <button class="menu-btn sound-click" type="button" data-menu="product">สินค้า</button>
+                  <button class="menu-btn sound-click" type="button">สินค้า</button>
                   <div class="submenu">
                     <a href="ssb-system.html#sbpremium" class="submenu-link sound-click">SB Premium</a>
                     <a href="ssb-system.html#custom" class="submenu-link sound-click">Custom System</a>
@@ -276,7 +276,7 @@
                 </div>
 
                 <div class="menu-item menu-item-toggle" data-mobile-toggle="agent">
-                  <button class="menu-btn sound-click" type="button" data-menu="agent">ตัวแทน</button>
+                  <button class="menu-btn sound-click" type="button">ตัวแทน</button>
                   <div class="submenu">
                     <button class="submenu-link sound-click" type="button" data-link="join-agent.html">สมัครตัวแทน</button>
                     <button class="submenu-link sound-click" type="button" data-link="agent-login.html">Login Agent</button>
@@ -336,6 +336,25 @@
               </a>
             </div>
           </div>
+
+          <!-- MOBILE ONLY SOCIAL ROW -->
+          <div class="footer-social-row mobile-only-social" aria-label="ช่องทางติดต่อ">
+            <a class="footer-social-btn sound-click" href="https://maps.app.goo.gl/Dz4B1kpqVbmWhkYX7" target="_blank" rel="noopener" aria-label="Map">
+              <img src="https://cdn.simpleicons.org/googlemaps/EA4335" alt="Map" loading="lazy" />
+            </a>
+            <a class="footer-social-btn sound-click" href="https://line.me/R/ti/p/@siamtham" target="_blank" rel="noopener" aria-label="LINE">
+              <img src="https://cdn.simpleicons.org/line/06C755" alt="LINE" loading="lazy" />
+            </a>
+            <a class="footer-social-btn sound-click" href="https://www.facebook.com/profile.php?id=61556844339863" target="_blank" rel="noopener" aria-label="Facebook">
+              <img src="https://cdn.simpleicons.org/facebook/1877F2" alt="Facebook" loading="lazy" />
+            </a>
+            <a class="footer-social-btn sound-click" href="https://www.youtube.com/@siamtham" target="_blank" rel="noopener" aria-label="YouTube">
+              <img src="https://cdn.simpleicons.org/youtube/FF0000" alt="YouTube" loading="lazy" />
+            </a>
+            <a class="footer-social-btn sound-click" href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">
+              <img src="https://cdn.simpleicons.org/tiktok/000000" alt="TikTok" loading="lazy" />
+            </a>
+          </div>
         </div>
 
         <div class="footer-bottom th-font">
@@ -380,31 +399,31 @@
     </div>
   </div>
 
- <!-- FLOATING CONTACT -->
-<div class="chat-widget compact" id="chatWidget">
-  <div class="chat-menu icon-only" id="chatMenu">
-    <a class="chat-item line sound-click" href="https://line.me/R/ti/p/@siamtham" target="_blank" rel="noopener" aria-label="LINE Official">
-      <img src="https://cdn.simpleicons.org/line/06C755" alt="LINE" loading="lazy">
-    </a>
+  <!-- DESKTOP ONLY FLOATING CONTACT -->
+  <div class="chat-widget compact" id="chatWidget">
+    <div class="chat-menu icon-only" id="chatMenu">
+      <a class="chat-item line sound-click" href="https://line.me/R/ti/p/@siamtham" target="_blank" rel="noopener" aria-label="LINE Official">
+        <img src="https://cdn.simpleicons.org/line/06C755" alt="LINE" loading="lazy" />
+      </a>
 
-    <a class="chat-item facebook sound-click" href="https://www.facebook.com/profile.php?id=61556844339863" target="_blank" rel="noopener" aria-label="Facebook">
-      <img src="https://cdn.simpleicons.org/facebook/1877F2" alt="Facebook" loading="lazy">
-    </a>
+      <a class="chat-item facebook sound-click" href="https://www.facebook.com/profile.php?id=61556844339863" target="_blank" rel="noopener" aria-label="Facebook">
+        <img src="https://cdn.simpleicons.org/facebook/1877F2" alt="Facebook" loading="lazy" />
+      </a>
 
-    <a class="chat-item youtube sound-click" href="https://www.youtube.com/@siamtham" target="_blank" rel="noopener" aria-label="YouTube">
-      <img src="https://cdn.simpleicons.org/youtube/FF0000" alt="YouTube" loading="lazy">
-    </a>
+      <a class="chat-item youtube sound-click" href="https://www.youtube.com/@siamtham" target="_blank" rel="noopener" aria-label="YouTube">
+        <img src="https://cdn.simpleicons.org/youtube/FF0000" alt="YouTube" loading="lazy" />
+      </a>
 
-    <a class="chat-item tiktok sound-click" href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">
-      <img src="https://cdn.simpleicons.org/tiktok/000000" alt="TikTok" loading="lazy">
-    </a>
+      <a class="chat-item tiktok sound-click" href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">
+        <img src="https://cdn.simpleicons.org/tiktok/000000" alt="TikTok" loading="lazy" />
+      </a>
+    </div>
+
+    <button class="chat-fab sound-click" id="chatToggle" type="button" aria-label="เปิดเมนูติดต่อ">
+      <img src="https://cdn.simpleicons.org/line/06C755" alt="Open contact menu" loading="lazy" />
+    </button>
   </div>
 
-  <button class="chat-fab sound-click" id="chatToggle" type="button" aria-label="เปิดเมนูติดต่อ">
-    <img src="https://cdn.simpleicons.org/line/06C755" alt="Open contact menu" loading="lazy">
-  </button>
-</div>
-  
   <script src="js/data.js"></script>
   <script src="js/ui.js"></script>
   <script src="js/popup.js"></script>
