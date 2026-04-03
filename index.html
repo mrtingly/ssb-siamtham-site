@@ -90,6 +90,197 @@
   <link rel="stylesheet" href="css/components.css" />
   <link rel="stylesheet" href="css/responsive.css" />
   <link rel="stylesheet" href="css/popup-mobile.css" media="(max-width: 1023px)" />
+
+  <!-- DESKTOP FOOTER ONLY -->
+  <style>
+    @media (min-width: 1024px) {
+      .ssb-footer {
+        position: relative;
+        overflow: hidden;
+        padding: 34px 28px 24px;
+        background:
+          radial-gradient(circle at 15% 15%, rgba(122,188,255,.22) 0%, rgba(122,188,255,0) 28%),
+          radial-gradient(circle at 85% 20%, rgba(255,255,255,.12) 0%, rgba(255,255,255,0) 30%),
+          linear-gradient(180deg, #d9ebfb 0%, #c7dcf4 52%, #b6cfe9 100%);
+        border-top: 1px solid rgba(255,255,255,.55);
+        box-shadow:
+          inset 0 1px 0 rgba(255,255,255,.75),
+          0 -12px 36px rgba(21,59,110,.06);
+      }
+
+      .ssb-footer::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background:
+          linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+        background-size: 34px 34px;
+        opacity: .14;
+      }
+
+      .footer-shell {
+        position: relative;
+        z-index: 1;
+        max-width: 1360px;
+        margin: 0 auto;
+        padding: 26px 30px 20px;
+        border-radius: 28px;
+        background:
+          linear-gradient(180deg, rgba(255,255,255,.84) 0%, rgba(243,248,255,.78) 100%);
+        border: 1px solid rgba(255,255,255,.62);
+        box-shadow:
+          0 22px 50px rgba(23,57,109,.10),
+          0 8px 20px rgba(48,95,166,.06),
+          inset 0 1px 0 rgba(255,255,255,.90);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      .footer-top {
+        display: grid;
+        grid-template-columns: 1.2fr .8fr;
+        gap: 34px;
+        align-items: start;
+      }
+
+      .footer-col-left {
+        min-width: 0;
+      }
+
+      .footer-col-right {
+        text-align: right;
+      }
+
+      .footer-company-th {
+        font-size: 25px;
+        line-height: 1.15;
+        font-weight: 800;
+        color: #153b73;
+        margin-bottom: 6px;
+      }
+
+      .footer-company-en {
+        font-size: 16px;
+        line-height: 1.3;
+        font-weight: 700;
+        color: #3d5f95;
+        margin-bottom: 12px;
+      }
+
+      .footer-address,
+      .footer-reg {
+        font-size: 15px;
+        line-height: 1.75;
+        font-weight: 500;
+        color: #597294;
+      }
+
+      .footer-phone-label {
+        font-size: 13px;
+        line-height: 1.2;
+        font-weight: 700;
+        letter-spacing: .3px;
+        color: #7b90af;
+        margin-bottom: 14px;
+      }
+
+      .footer-phone {
+        display: block;
+        font-size: 28px;
+        line-height: 1.2;
+        font-weight: 800;
+        color: #143a72;
+        text-decoration: none;
+        margin-bottom: 8px;
+      }
+
+      .footer-divider-line {
+        height: 1px;
+        margin: 22px 0 18px;
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(176,198,228,.92) 14%,
+          rgba(176,198,228,.92) 86%,
+          transparent 100%
+        );
+      }
+
+      .footer-divider-line.soft {
+        margin: 18px 0 14px;
+        opacity: .82;
+      }
+
+      .footer-icons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .footer-icons a {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background:
+          linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(241,247,255,.96) 100%);
+        border: 1px solid rgba(219,231,246,.95);
+        box-shadow:
+          0 14px 28px rgba(30,63,122,.10),
+          0 4px 10px rgba(73,114,188,.05),
+          inset 0 1px 0 rgba(255,255,255,1);
+        text-decoration: none;
+        transition:
+          transform .18s ease,
+          box-shadow .18s ease,
+          border-color .18s ease;
+      }
+
+      .footer-icons a:hover {
+        transform: translateY(-2px);
+        border-color: rgba(153,191,246,.95);
+        box-shadow:
+          0 18px 34px rgba(30,63,122,.14),
+          0 6px 12px rgba(73,114,188,.06),
+          inset 0 1px 0 rgba(255,255,255,1);
+      }
+
+      .footer-icons a:active {
+        transform: scale(.97);
+      }
+
+      .footer-icons img {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+        display: block;
+      }
+
+      .footer-copy {
+        text-align: center;
+      }
+
+      .footer-copy div:first-child {
+        font-size: 14px;
+        line-height: 1.6;
+        font-weight: 700;
+        color: #486383;
+        margin-bottom: 2px;
+      }
+
+      .footer-copy div:last-child {
+        font-size: 12px;
+        line-height: 1.6;
+        font-weight: 600;
+        color: #7b90af;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -190,7 +381,6 @@
               <img src="images/logo.png" alt="Stealth Safety Bank Logo" loading="lazy" />
             </button>
 
-            <!-- DESKTOP MENU : untouched -->
             <div class="menu-layer-v2">
               <div class="menu-node m1">
                 <a href="ssb-system.html#ssbmobile" class="node-shell sound-click">
@@ -246,7 +436,6 @@
               <div class="hero-menu-hint" id="heroMenuHint">คลิกโลโก้เพื่อเปิดเมนู</div>
             </div>
 
-            <!-- MOBILE MENU : rebuilt -->
             <div class="mobile-menu-v2" aria-label="Mobile primary navigation">
               <div class="mobile-hero">
                 <img src="images/logo.png" class="mobile-hero-logo" alt="Stealth Safety Bank Logo" loading="lazy" />
@@ -291,52 +480,54 @@
       </section>
     </main>
 
-   <!-- MOBILE FOOTER -->
-<footer class="ssb-footer">
+    <footer class="ssb-footer">
+      <div class="footer-shell">
+        <div class="footer-top">
+          <div class="footer-col footer-col-left">
+            <div class="footer-company-th">บริษัท สยามทำ จำกัด</div>
+            <div class="footer-company-en">Siamtham Co.,Ltd.</div>
+            <div class="footer-address">54 ซอย 53 ถนนพุทธมณฑลสาย 1</div>
+            <div class="footer-address">แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ</div>
+            <div class="footer-reg">เลขทะเบียน 0105566099954</div>
+          </div>
 
-  <div class="footer-info">
-    <div class="footer-left">
-      <div>บริษัท สยามทำ จำกัด</div>
-      <div>Siamtham Co.,Ltd.</div>
-      <div>54 ซอย 53 ถนนพุทธมณฑลสาย 1</div>
-      <div>แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ</div>
-      <div>เลขทะเบียน 0105566099954</div>
-    </div>
+          <div class="footer-col footer-col-right">
+            <div class="footer-phone-label">โทรศัพท์</div>
+            <a class="footer-phone" href="tel:020432988">02-043-2988</a>
+            <a class="footer-phone" href="tel:0649514888">064-951-4888</a>
+          </div>
+        </div>
 
-    <div class="footer-right">
-      <div>02-043-2988</div>
-      <div>064-951-4888</div>
-    </div>
+        <div class="footer-divider-line"></div>
+
+        <div class="footer-icons">
+          <a href="https://maps.app.goo.gl/Dz4B1kpqVbmWhkYX7" target="_blank" rel="noopener" aria-label="Map">
+            <img src="https://cdn.simpleicons.org/googlemaps/EA4335" alt="Map">
+          </a>
+          <a href="https://line.me/R/ti/p/@siamtham" target="_blank" rel="noopener" aria-label="LINE">
+            <img src="https://cdn.simpleicons.org/line/06C755" alt="LINE">
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61556844339863" target="_blank" rel="noopener" aria-label="Facebook">
+            <img src="https://cdn.simpleicons.org/facebook/1877F2" alt="Facebook">
+          </a>
+          <a href="https://www.youtube.com/@siamtham" target="_blank" rel="noopener" aria-label="YouTube">
+            <img src="https://cdn.simpleicons.org/youtube/FF0000" alt="YouTube">
+          </a>
+          <a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">
+            <img src="https://cdn.simpleicons.org/tiktok/000000" alt="TikTok">
+          </a>
+        </div>
+
+        <div class="footer-divider-line soft"></div>
+
+        <div class="footer-copy">
+          <div>© Siamtham Co.,Ltd. Stealth Safety Bank Mobile System</div>
+          <div>By Mr.Tingly Marketing Online</div>
+        </div>
+      </div>
+    </footer>
   </div>
 
-  <!-- ICON ROW -->
-<div class="footer-icons">
-  <a href="https://maps.app.goo.gl/Dz4B1kpqVbmWhkYX7" target="_blank" rel="noopener" aria-label="Map">
-    <img src="https://cdn.simpleicons.org/googlemaps/EA4335" alt="Map">
-  </a>
-  <a href="https://line.me/R/ti/p/@siamtham" target="_blank" rel="noopener" aria-label="LINE">
-    <img src="https://cdn.simpleicons.org/line/06C755" alt="LINE">
-  </a>
-  <a href="https://www.facebook.com/profile.php?id=61556844339863" target="_blank" rel="noopener" aria-label="Facebook">
-    <img src="https://cdn.simpleicons.org/facebook/1877F2" alt="Facebook">
-  </a>
-  <a href="https://www.youtube.com/@siamtham" target="_blank" rel="noopener" aria-label="YouTube">
-    <img src="https://cdn.simpleicons.org/youtube/FF0000" alt="YouTube">
-  </a>
-  <a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">
-    <img src="https://cdn.simpleicons.org/tiktok/000000" alt="TikTok">
-  </a>
-</div>
-
-  <div class="footer-copy">
-    © Siamtham Co.,Ltd. Stealth Safety Bank Mobile System<br>
-    By Mr.Tingly Marketing Online
-  </div>
-
-</footer>
-  </div>
-
-  <!-- COMPANY POPUP -->
   <div id="companyPopup" class="popup-backdrop" aria-hidden="true">
     <div class="popup-card company" role="dialog" aria-modal="true" aria-labelledby="companyTitle">
       <div class="popup-head">
@@ -370,7 +561,6 @@
     </div>
   </div>
 
-  <!-- DESKTOP ONLY FLOATING CONTACT -->
   <div class="chat-widget compact" id="chatWidget">
     <div class="chat-menu icon-only" id="chatMenu">
       <a class="chat-item line sound-click" href="https://line.me/R/ti/p/@siamtham" target="_blank" rel="noopener" aria-label="LINE Official">
