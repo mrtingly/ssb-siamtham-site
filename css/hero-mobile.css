@@ -527,3 +527,61 @@
     height: 20px;
   }
 }
+
+/* ===== MOBILE FOOTER ONLY ===== */
+@media (max-width: 760px){
+
+  .ssb-footer{
+    background:#0b0f1a;
+    color:#fff;
+    padding:20px 16px;
+    font-size:13px;
+  }
+
+  .footer-info{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:15px;
+  }
+
+  .footer-left{
+    line-height:1.6;
+  }
+
+  .footer-right{
+    text-align:right;
+    line-height:1.8;
+    font-weight:600;
+  }
+
+  /* ICON ROW */
+  .footer-icons{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:15px 0;
+  }
+
+  .footer-icons img{
+    width:28px;
+    height:28px;
+    object-fit:contain;
+    filter:brightness(1.1);
+    transition:0.3s;
+  }
+
+  .footer-icons img:active{
+    transform:scale(0.9);
+    opacity:0.7;
+  }
+
+  /* COPY */
+  .footer-copy{
+    text-align:center;
+    font-size:11px;
+    opacity:0.7;
+    margin-top:10px;
+  }
+
+}
