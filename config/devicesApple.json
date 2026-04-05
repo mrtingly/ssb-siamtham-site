@@ -7,7 +7,7 @@
         {
           "storage": "128GB",
           "colors": ["Midnight", "Starlight"],
-          "sell_price": 400000,
+          "sell_price": 40000,
           "cost_price": 14900
         }
       ]
@@ -18,7 +18,7 @@
         {
           "storage": "128GB",
           "colors": ["Midnight", "Starlight"],
-          "sell_price": 450000,
+          "sell_price": 45000,
           "cost_price": 17100
         },
         {
@@ -115,13 +115,13 @@
         {
           "storage": "256GB",
           "colors": ["Deep Blue", "Cosmic Orange", "Silver"],
-          "sell_price": 90000,
+          "sell_price": 95000,
           "cost_price": 48900
         },
         {
           "storage": "512GB",
           "colors": ["Deep Blue", "Cosmic Orange", "Silver"],
-          "sell_price": 120000,
+          "sell_price": 110000,
           "cost_price": 56900
         },
         {
