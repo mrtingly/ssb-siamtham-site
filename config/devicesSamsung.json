@@ -9,7 +9,7 @@
         {
           "storage": "128GB",
           "colors": ["Black", "Light Violet"],
-          "sell_price": 0,
+          "sell_price": 10000,
           "cost_price": 5999
         }
       ]
@@ -21,13 +21,13 @@
         {
           "storage": "128GB",
           "colors": ["Black", "Blue"],
-          "sell_price": 0,
-          "cost_price": 6499
+          "sell_price": 15000,
+          "cost_price": 7499
         },
         {
           "storage": "256GB",
           "colors": ["Black", "Blue"],
-          "sell_price": 0,
+          "sell_price": 16000,
           "cost_price": 8999
         }
       ]
