@@ -11,7 +11,7 @@
     {
       "key": "l",
       "name": "Safety Book L",
-      "sell_price": 6000,
+      "sell_price": 8000,
       "cost_price": 3500,
       "faraday_cost": 2000,
       "labor_cost": 1500
@@ -87,21 +87,21 @@
           "name": "Black",
           "label_th": "ดำ",
           "hex": "#111827",
-          "sell_price": 8000,
+          "sell_price": 15000,
           "cost_price": 4000
         },
         {
           "name": "DarkBrown",
           "label_th": "น้ำตาลเข้ม",
           "hex": "#5B3A29",
-          "sell_price": 8000,
+          "sell_price": 15000,
           "cost_price": 4000
         },
         {
           "name": "ForestGreen",
           "label_th": "เขียวเข้ม",
           "hex": "#14532D",
-          "sell_price": 8000,
+          "sell_price": 15000,
           "cost_price": 4000
         }
       ]
