@@ -3,7 +3,7 @@
     {
       "key": "m",
       "name": "Safety Book M",
-      "sell_price": 4900,
+      "sell_price": 7000,
       "cost_price": 3000,
       "faraday_cost": 1500,
       "labor_cost": 1500
@@ -11,7 +11,7 @@
     {
       "key": "l",
       "name": "Safety Book L",
-      "sell_price": 5900,
+      "sell_price": 6000,
       "cost_price": 3500,
       "faraday_cost": 2000,
       "labor_cost": 1500
@@ -26,22 +26,22 @@
           "name": "Black",
           "label_th": "ดำ",
           "hex": "#111827",
-          "sell_price": 2800,
-          "cost_price": 1600
+          "sell_price": 5000,
+          "cost_price": 2300
         },
         {
           "name": "Tan",
           "label_th": "แทน",
           "hex": "#C48A5A",
-          "sell_price": 2800,
-          "cost_price": 1600
+          "sell_price": 5000,
+          "cost_price": 2300
         },
         {
           "name": "Blue",
           "label_th": "ฟ้า",
           "hex": "#60A5FA",
-          "sell_price": 2800,
-          "cost_price": 1600
+          "sell_price": 5000,
+          "cost_price": 2300
         }
       ]
     },
@@ -53,29 +53,29 @@
           "name": "Brown",
           "label_th": "น้ำตาล",
           "hex": "#8B5E3C",
-          "sell_price": 4200,
-          "cost_price": 2500
+          "sell_price": 7000,
+          "cost_price": 3500
         },
         {
           "name": "Black",
           "label_th": "ดำ",
           "hex": "#111827",
-          "sell_price": 4200,
-          "cost_price": 2500
+          "sell_price": 7000,
+          "cost_price": 3500
         },
         {
           "name": "Burgundy",
           "label_th": "เบอร์กันดี",
           "hex": "#7C2D12",
-          "sell_price": 4300,
-          "cost_price": 2600
+          "sell_price": 7000,
+          "cost_price": 3500
         },
         {
           "name": "Navy",
           "label_th": "กรมท่า",
           "hex": "#1E3A8A",
-          "sell_price": 4300,
-          "cost_price": 2600
+          "sell_price": 7000,
+          "cost_price": 3500
         }
       ]
     },
@@ -87,22 +87,22 @@
           "name": "Black",
           "label_th": "ดำ",
           "hex": "#111827",
-          "sell_price": 5200,
-          "cost_price": 3200
+          "sell_price": 8000,
+          "cost_price": 4000
         },
         {
           "name": "DarkBrown",
           "label_th": "น้ำตาลเข้ม",
           "hex": "#5B3A29",
-          "sell_price": 5200,
-          "cost_price": 3200
+          "sell_price": 8000,
+          "cost_price": 4000
         },
         {
           "name": "ForestGreen",
           "label_th": "เขียวเข้ม",
           "hex": "#14532D",
-          "sell_price": 5400,
-          "cost_price": 3300
+          "sell_price": 8000,
+          "cost_price": 4000
         }
       ]
     },
@@ -114,8 +114,8 @@
           "name": "Monogram",
           "label_th": "ลายหลุย",
           "hex": "#6B4F3B",
-          "sell_price": 3800,
-          "cost_price": 2200
+          "sell_price": 5000,
+          "cost_price": 2500
         }
       ]
     },
@@ -127,15 +127,15 @@
           "name": "Navy",
           "label_th": "กรมท่า",
           "hex": "#1E3A8A",
-          "sell_price": 3200,
-          "cost_price": 1800
+          "sell_price": 5000,
+          "cost_price": 2500
         },
         {
           "name": "IndigoBlue",
           "label_th": "ฟ้าคราม",
           "hex": "#2563EB",
-          "sell_price": 3200,
-          "cost_price": 1800
+          "sell_price": 5000,
+          "cost_price": 2500
         }
       ]
     }
@@ -149,36 +149,36 @@
           "name": "Black",
           "label_th": "ดำ",
           "hex": "#111827",
-          "sell_price": 1400,
-          "cost_price": 700
+          "sell_price": 800,
+          "cost_price": 300
         },
         {
           "name": "Red",
           "label_th": "แดง",
           "hex": "#B91C1C",
-          "sell_price": 1400,
-          "cost_price": 700
+          "sell_price": 800,
+          "cost_price": 300
         },
         {
           "name": "Navy",
           "label_th": "กรมท่า",
           "hex": "#1E3A8A",
-          "sell_price": 1400,
-          "cost_price": 700
+          "sell_price": 800,
+          "cost_price": 300
         },
         {
           "name": "Cream",
           "label_th": "ครีม",
           "hex": "#F5F5DC",
-          "sell_price": 1400,
-          "cost_price": 700
+          "sell_price": 800,
+          "cost_price": 300
         },
         {
           "name": "LightGray",
           "label_th": "เทาอ่อน",
           "hex": "#D1D5DB",
-          "sell_price": 1400,
-          "cost_price": 700
+          "sell_price": 800,
+          "cost_price": 300
         }
       ]
     },
@@ -190,8 +190,8 @@
           "name": "LouisPattern",
           "label_th": "ลายหลุย",
           "hex": "#6B4F3B",
-          "sell_price": 1700,
-          "cost_price": 950
+          "sell_price": 1000,
+          "cost_price": 500
         }
       ]
     },
@@ -203,8 +203,8 @@
           "name": "Tan",
           "label_th": "แทน",
           "hex": "#C48A5A",
-          "sell_price": 1600,
-          "cost_price": 900
+          "sell_price": 1000,
+          "cost_price": 500
         }
       ]
     }
@@ -213,8 +213,8 @@
     {
       "key": "fingerprint",
       "name": "Fingerprint Lock",
-      "sell_price": 2200,
-      "cost_price": 1000
+      "sell_price": 1500,
+      "cost_price": 550
     }
   ]
 }
