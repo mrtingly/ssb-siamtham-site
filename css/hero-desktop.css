@@ -5,29 +5,29 @@
      ========================= */
 
   .hero-stage{
-    min-height:calc(100dvh - 210px);
-    padding:10px 0 22px !important;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
+  min-height:auto;
+  padding:32px 0 28px !important;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
 
-  .hero-center{
-    width:100%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-  }
+.hero-center{
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
 
-  .tech-hero{
-    width:min(94vw, calc((100dvh - 210px) * 1.62), 1320px);
-    aspect-ratio:16 / 9.5;
-    min-height:auto;
-    height:auto;
-    max-height:calc(100dvh - 210px);
-    border-radius:34px;
-    contain:layout paint style;
-  }
+.tech-hero{
+  width:min(94vw, 1320px);
+  aspect-ratio:16 / 9.5;
+  min-height:auto;
+  height:auto;
+  max-height:none;
+  border-radius:34px;
+  contain:layout paint style;
+}
 
   .mobile-menu-v2{
     display:none !important;
