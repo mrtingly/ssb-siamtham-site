@@ -91,5 +91,31 @@
 
   <script src="js/ssb-system-data.js?v=4"></script>
   <script src="js/ssb-system-page.js?v=4"></script>
+
+<script>
+  (function () {
+    function applyTheme() {
+      const savedTheme = localStorage.getItem("theme");
+      const isLight = savedTheme === "light";
+
+      document.documentElement.classList.toggle("light-mode", isLight);
+      document.documentElement.classList.toggle("dark-mode", !isLight);
+      document.body.classList.toggle("light-mode", isLight);
+      document.body.classList.toggle("dark-mode", !isLight);
+    }
+
+    applyTheme();
+
+    window.addEventListener("storage", function (e) {
+      if (e.key === "theme") applyTheme();
+    });
+
+    window.addEventListener("focus", applyTheme);
+    document.addEventListener("visibilitychange", function () {
+      if (!document.hidden) applyTheme();
+    });
+  })();
+</script>
+  
 </body>
 </html>
