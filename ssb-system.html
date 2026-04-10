@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google" content="notranslate" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
   <title>Stealth Safety Bank Mobile System | Siam Tham Co.,Ltd.</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -14,727 +15,81 @@
     rel="stylesheet"
   />
 
-  <style>
-    :root{
-      --blue:#0726a8;
-      --blue-deep:#051b84;
-      --red:#9f0909;
-      --red-dark:#870404;
-      --text:#0e1b52;
-      --shell:1400px;
-      --shadow-soft:0 18px 40px rgba(11,37,117,.14);
-      --shadow-card:0 14px 34px rgba(8,30,98,.16);
-    }
-
-    *{ box-sizing:border-box; }
-    html{ scroll-behavior:smooth; }
-
-    body{
-      margin:0;
-      font-family:"Prompt",sans-serif;
-      color:var(--text);
-      background:linear-gradient(180deg,#f7f9ff 0%,#eef3ff 55%,#f7f9ff 100%);
-    }
-
-    img{
-      max-width:100%;
-      display:block;
-    }
-
-    .ssb-page{
-      min-height:100vh;
-      padding:22px 18px 28px;
-    }
-
-    .ssb-page-shell{
-      width:min(100%, var(--shell));
-      margin:0 auto;
-    }
-
-    .ssb-video-top{
-      margin:0 auto 22px;
-      border-radius:26px;
-      overflow:hidden;
-      background:#0b1f85;
-      box-shadow:var(--shadow-soft);
-      border:1px solid rgba(17,54,199,.12);
-    }
-
-    .ssb-video-frame{
-      position:relative;
-      width:100%;
-      aspect-ratio:16/9;
-      background:#091451;
-    }
-
-    .ssb-video-frame iframe{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      border:0;
-    }
-
-    .ssb-layout{
-      display:grid;
-      grid-template-columns:280px minmax(420px, 1fr) 420px;
-      gap:22px;
-      align-items:start;
-    }
-
-    .ssb-col{
-      min-width:0;
-    }
-
-    /* LEFT */
-    .left-wrap{
-      background:linear-gradient(180deg,#0726a8 0%,#051a86 100%);
-      color:#fff;
-      border-radius:26px;
-      box-shadow:var(--shadow-card);
-      overflow:hidden;
-    }
-
-    .left-top-visual{
-      position:relative;
-      padding:18px 16px 14px;
-      background:
-        linear-gradient(180deg,rgba(0,0,0,.10),rgba(0,0,0,.10)),
-        radial-gradient(circle at top, rgba(255,255,255,.18), transparent 58%);
-    }
-
-    .left-top-visual img{
-      width:100%;
-      border-radius:18px;
-      object-fit:cover;
-      aspect-ratio:4/4.6;
-      box-shadow:0 12px 26px rgba(0,0,0,.20);
-    }
-
-    .left-top-badge{
-      margin:12px auto 0;
-      width:100%;
-      text-align:center;
-      background:rgba(255,255,255,.16);
-      border:1px solid rgba(255,255,255,.18);
-      border-radius:999px;
-      padding:8px 10px;
-      font-size:14px;
-      font-weight:700;
-      line-height:1.35;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.12);
-    }
-
-    .left-system-head{
-      padding:14px 16px 12px;
-      text-align:center;
-      border-top:1px solid rgba(255,255,255,.08);
-    }
-
-    .left-system-logo{
-      width:104px;
-      margin:0 auto 8px;
-    }
-
-    .left-system-name{
-      font-family:"Orbitron","Prompt",sans-serif;
-      font-size:22px;
-      font-weight:800;
-      line-height:1.1;
-      letter-spacing:.2px;
-      margin-bottom:10px;
-    }
-
-    .left-system-pill{
-      background:#fff;
-      color:var(--blue);
-      border-radius:999px;
-      padding:10px 16px;
-      display:inline-block;
-      font-size:16px;
-      font-weight:800;
-      line-height:1.2;
-      box-shadow:0 10px 24px rgba(0,0,0,.18);
-    }
-
-    .threat-list{
-      padding:14px 14px 18px;
-    }
-
-    .threat-row{
-      display:grid;
-      grid-template-columns:1fr 112px;
-      gap:10px;
-      margin-bottom:10px;
-      align-items:center;
-    }
-
-    .threat-name{
-      min-height:40px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding:8px 10px;
-      background:linear-gradient(180deg,var(--red) 0%,var(--red-dark) 100%);
-      border-radius:4px;
-      color:#fff;
-      font-size:13px;
-      font-weight:700;
-      line-height:1.25;
-      box-shadow:0 8px 18px rgba(0,0,0,.18);
-    }
-
-    .threat-solution{
-      min-height:40px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding:8px 10px;
-      background:#fff;
-      color:var(--blue);
-      border-radius:4px;
-      font-size:13px;
-      font-weight:800;
-      line-height:1.2;
-      box-shadow:0 8px 18px rgba(0,0,0,.12);
-    }
-
-    .left-footer-message{
-      margin:8px 14px 18px;
-      border-radius:24px;
-      background:linear-gradient(180deg,#1140d4 0%,#0a2cae 100%);
-      color:#fff;
-      padding:22px 16px;
-      text-align:center;
-      box-shadow:0 18px 30px rgba(0,0,0,.18);
-    }
-
-    .left-footer-message .title{
-      font-size:19px;
-      font-weight:800;
-      line-height:1.2;
-      margin-bottom:8px;
-    }
-
-    .left-footer-message .desc{
-      font-size:15px;
-      line-height:1.4;
-      font-weight:500;
-    }
-
-    /* CENTER */
-    .center-wrap{
-      background:#fff;
-      border-radius:26px;
-      box-shadow:var(--shadow-card);
-      padding:18px 20px 20px;
-      min-height:100%;
-      position:relative;
-      overflow:hidden;
-    }
-
-    .center-wrap::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      background:
-        radial-gradient(circle at 50% 0%, rgba(17,54,199,.08), transparent 34%),
-        radial-gradient(circle at 0% 40%, rgba(17,54,199,.06), transparent 28%),
-        radial-gradient(circle at 100% 70%, rgba(17,54,199,.06), transparent 24%);
-    }
-
-    .company-head{
-      position:relative;
-      z-index:1;
-      display:grid;
-      grid-template-columns:64px 1fr;
-      gap:12px;
-      align-items:start;
-      margin-bottom:10px;
-    }
-
-    .company-head img{
-      width:64px;
-      height:64px;
-      border-radius:10px;
-      object-fit:cover;
-      box-shadow:0 8px 18px rgba(8,30,98,.12);
-    }
-
-    .company-text{
-      font-size:12px;
-      line-height:1.45;
-      color:#1d2c6c;
-    }
-
-    .company-text .name{
-      font-size:22px;
-      line-height:1.15;
-      font-weight:800;
-      margin-bottom:2px;
-      color:#0b2aa9;
-    }
-
-    .company-text .small{
-      font-weight:500;
-    }
-
-    .center-title{
-      position:relative;
-      z-index:1;
-      margin:12px 0 18px;
-      text-align:center;
-      font-family:"Orbitron","Prompt",sans-serif;
-      color:#0a2cae;
-      font-size:30px;
-      line-height:1.12;
-      font-weight:900;
-      letter-spacing:.2px;
-      text-shadow:0 10px 18px rgba(7,38,168,.08);
-    }
-
-    .center-device-zone{
-      position:relative;
-      z-index:1;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      min-height:510px;
-      margin-bottom:22px;
-      overflow:hidden;
-    }
-
-    .center-device-zone::before{
-      content:"";
-      position:absolute;
-      left:50%;
-      top:52%;
-      width:380px;
-      height:380px;
-      transform:translate(-50%,-50%);
-      background:radial-gradient(circle, rgba(17,54,199,.12) 0%, rgba(17,54,199,.05) 45%, transparent 72%);
-      filter:blur(6px);
-      pointer-events:none;
-    }
-
-    .device-stack{
-      position:relative;
-      width:min(100%, 460px);
-      aspect-ratio:1/1.08;
-    }
-
-    .device-back{
-      position:absolute;
-      left:14%;
-      top:10%;
-      width:50%;
-      border-radius:26px;
-      box-shadow:0 22px 34px rgba(0,0,0,.20);
-      transform:rotate(-2deg);
-    }
-
-    .device-front{
-      position:absolute;
-      right:10%;
-      top:9%;
-      width:46%;
-      border-radius:26px;
-      box-shadow:0 24px 36px rgba(0,0,0,.26);
-      z-index:2;
-    }
-
-    .shield-badge{
-      position:absolute;
-      left:28%;
-      top:41%;
-      width:15%;
-      z-index:3;
-      filter:drop-shadow(0 10px 22px rgba(0,0,0,.22));
-    }
-
-    .center-hero-photo{
-      position:absolute;
-      right:-10px;
-      bottom:-8px;
-      width:40%;
-      opacity:.96;
-      border-top-left-radius:140px;
-      z-index:0;
-    }
-
-    .center-main-label{
-      position:relative;
-      z-index:1;
-      margin:0 0 14px;
-      text-align:center;
-      color:#0a2cae;
-      font-size:18px;
-      font-weight:800;
-      line-height:1.2;
-    }
-
-    .system-button-list{
-      position:relative;
-      z-index:1;
-      display:grid;
-      gap:10px;
-    }
-
-    .system-btn{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      min-height:52px;
-      text-align:center;
-      padding:10px 14px;
-      border-radius:999px;
-      background:
-        linear-gradient(90deg, rgba(7,38,168,0) 0%, rgba(7,38,168,.96) 18%, rgba(7,38,168,.96) 82%, rgba(7,38,168,0) 100%);
-      color:#fff;
-      font-size:17px;
-      font-weight:800;
-      line-height:1.2;
-      text-decoration:none;
-      box-shadow:0 12px 24px rgba(7,38,168,.14);
-    }
-
-    /* RIGHT */
-    .right-wrap{
-      display:grid;
-      gap:18px;
-    }
-
-    .info-box{
-      background:linear-gradient(180deg,#0726a8 0%,#051b84 100%);
-      color:#fff;
-      border-radius:28px;
-      padding:18px 20px 20px;
-      box-shadow:var(--shadow-card);
-    }
-
-    .info-box-title{
-      text-align:center;
-      font-size:18px;
-      font-weight:800;
-      line-height:1.25;
-      margin-bottom:10px;
-    }
-
-    .info-box-desc{
-      text-align:center;
-      font-size:15px;
-      line-height:1.55;
-      font-weight:400;
-    }
-
-    .info-box-desc strong{
-      font-weight:800;
-    }
-
-    @media (max-width:1279px){
-      .ssb-layout{
-        grid-template-columns:260px minmax(360px, 1fr) 360px;
-        gap:18px;
-      }
-
-      .center-title{
-        font-size:26px;
-      }
-
-      .info-box-title{
-        font-size:17px;
-      }
-
-      .info-box-desc{
-        font-size:14px;
-      }
-    }
-
-    @media (max-width:1023px){
-      .ssb-page{
-        padding:14px 10px 22px;
-      }
-
-      .ssb-layout{
-        grid-template-columns:1fr;
-      }
-
-      .left-wrap,
-      .center-wrap,
-      .info-box,
-      .ssb-video-top{
-        border-radius:22px;
-      }
-
-      .company-head{
-        grid-template-columns:54px 1fr;
-      }
-
-      .company-head img{
-        width:54px;
-        height:54px;
-      }
-
-      .company-text .name{
-        font-size:18px;
-      }
-
-      .center-title{
-        font-size:22px;
-        margin-bottom:14px;
-      }
-
-      .center-device-zone{
-        min-height:auto;
-        padding:10px 0 0;
-      }
-
-      .device-stack{
-        width:min(100%, 380px);
-      }
-
-      .system-btn{
-        font-size:15px;
-        min-height:48px;
-      }
-
-      .threat-row{
-        grid-template-columns:1fr 100px;
-      }
-    }
-
-    @media (max-width:640px){
-      .ssb-page{
-        padding:10px 8px 18px;
-      }
-
-      .left-system-pill{
-        font-size:14px;
-      }
-
-      .threat-row{
-        grid-template-columns:1fr;
-      }
-
-      .threat-solution{
-        min-height:36px;
-      }
-
-      .center-wrap{
-        padding:14px 12px 16px;
-      }
-
-      .company-head{
-        grid-template-columns:1fr;
-        text-align:center;
-      }
-
-      .company-head img{
-        margin:0 auto;
-      }
-
-      .center-title{
-        font-size:18px;
-      }
-
-      .center-main-label{
-        font-size:16px;
-      }
-
-      .system-btn{
-        font-size:14px;
-        padding:10px 12px;
-      }
-
-      .info-box{
-        padding:16px 14px 18px;
-      }
-
-      .info-box-title{
-        font-size:16px;
-      }
-
-      .info-box-desc{
-        font-size:14px;
-        line-height:1.5;
-      }
-
-      .left-footer-message .title{
-        font-size:17px;
-      }
-
-      .left-footer-message .desc{
-        font-size:14px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="css/ssb-system.css?v=4" />
+  <link rel="stylesheet" href="css/ssb-system-mobile.css?v=4" media="(max-width: 1023px)" />
 </head>
 <body>
   <main class="ssb-page">
     <section class="ssb-page-shell">
 
-      <div class="ssb-video-top">
-        <div class="ssb-video-frame">
-          <iframe
-            src="https://www.youtube-nocookie.com/embed/pcuhurVMqLQ"
-            title="Stealth Safety Bank Mobile System Video"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-          ></iframe>
+      <div class="ssb-top-wrap">
+        <div class="popup-kicker notranslate" id="ssbKicker">SSB Mobile System</div>
+
+        <div class="ssb-top-layout">
+          <div class="ssb-top-video">
+            <div class="popup-pro-video-frame ssb-main-video">
+              <iframe
+                id="ssbVideo"
+                src=""
+                title="SSB Video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+
+            <div class="video-note notranslate" id="ssbVideoNote"></div>
+          </div>
+
+          <div class="ssb-top-side">
+            <nav class="popup-pro-nav notranslate ssb-nav-fixed" id="ssbNav"></nav>
+          </div>
         </div>
       </div>
 
-      <div class="ssb-layout">
+      <section class="ssb-page-content" id="ssbPageContent">
+        <div class="popup-pro-head">
+          <h3 id="ssbTitle" class="notranslate"></h3>
+          <div class="popup-subtitle notranslate" id="ssbSubtitle"></div>
+        </div>
 
-        <aside class="ssb-col">
-          <div class="left-wrap">
-            <div class="left-top-visual">
-              <img src="images/ssb-hacker.jpg" alt="ภัยหลอกลวงออนไลน์และออฟไลน์" onerror="this.style.display='none'">
-              <div class="left-top-badge">ภัยหลอกลวงออนไลน์ + ออฟไลน์</div>
+        <div class="popup-pro-body">
+          <div class="popup-panel popup-pro-intro">
+            <h4 class="popup-section-title"><span class="dot"></span>ภาพรวม</h4>
+            <p class="popup-lead notranslate" id="ssbLead"></p>
+            <div class="badge-row notranslate" id="ssbBadges"></div>
+          </div>
+
+          <div class="popup-pro-grid">
+            <div class="popup-panel">
+              <h4 class="popup-section-title"><span class="dot"></span>คุณสมบัติเด่น</h4>
+              <ul class="feature-list notranslate" id="ssbFeatures"></ul>
             </div>
 
-            <div class="left-system-head">
-              <img class="left-system-logo" src="images/logo.png" alt="SSBMS Logo">
-              <div class="left-system-name">SSBMS</div>
-              <div class="left-system-pill">วิธีแก้ด้วย SSBMS</div>
-            </div>
-
-            <div class="threat-list">
-              <div class="threat-row"><div class="threat-name">คอลเซ็นเตอร์หลอกโอน</div><div class="threat-solution">SPC / TBS</div></div>
-              <div class="threat-row"><div class="threat-name">ฟิชชิง / ลิงก์ปลอม</div><div class="threat-solution">FD / SSB</div></div>
-              <div class="threat-row"><div class="threat-name">แอปปลอม / มัลแวร์</div><div class="threat-solution">FD / SSB</div></div>
-              <div class="threat-row"><div class="threat-name">รีโมทควบคุมเครื่องระยะไกล</div><div class="threat-solution">FD / SSB</div></div>
-              <div class="threat-row"><div class="threat-name">ขโมย OTP / ดักข้อมูล</div><div class="threat-solution">FD / SSB</div></div>
-              <div class="threat-row"><div class="threat-name">SIM Swap / แฮกเบอร์</div><div class="threat-solution">FD / SSB</div></div>
-              <div class="threat-row"><div class="threat-name">Wi-Fi ปลอม / ดักเน็ต</div><div class="threat-solution">FD / SSB</div></div>
-              <div class="threat-row"><div class="threat-name">ปลอมตัว / แอบอ้าง</div><div class="threat-solution">SPC / TBS</div></div>
-              <div class="threat-row"><div class="threat-name">แฮกบัญชีธนาคาร</div><div class="threat-solution">FD / SSB</div></div>
-              <div class="threat-row"><div class="threat-name">ดักข้อมูลการเงิน</div><div class="threat-solution">FD / SSB</div></div>
-              <div class="threat-row"><div class="threat-name">ขโมยโทรศัพท์</div><div class="threat-solution">SB / FD</div></div>
-              <div class="threat-row"><div class="threat-name">บังคับโอนเงิน</div><div class="threat-solution">SB / FD</div></div>
-              <div class="threat-row"><div class="threat-name">แอบเข้าเครื่อง</div><div class="threat-solution">SB / FD</div></div>
-              <div class="threat-row"><div class="threat-name">หลอกยืมเครื่อง</div><div class="threat-solution">SB / FD</div></div>
-              <div class="threat-row"><div class="threat-name">คนใกล้ตัวยืมเครื่อง</div><div class="threat-solution">SB / FD</div></div>
-              <div class="threat-row"><div class="threat-name">USB ดักข้อมูล</div><div class="threat-solution">SB / FD</div></div>
-              <div class="threat-row"><div class="threat-name">อุปกรณ์ชาร์จดัดแปลงแฮก</div><div class="threat-solution">SB / FD</div></div>
-              <div class="threat-row"><div class="threat-name">ปล้นจี้ใช้กำลังบังคับ</div><div class="threat-solution">SB / FD</div></div>
-            </div>
-
-            <div class="left-footer-message">
-              <div class="title">Stealth Safety Bank Mobile System</div>
-              <div class="desc">ลดโอกาสการโจมตีของมิจฉาชีพ<br>ด้วยระบบล่องหนของเรา</div>
+            <div class="popup-panel">
+              <h4 class="popup-section-title"><span class="dot"></span>เหมาะกับใคร</h4>
+              <ul class="feature-list notranslate" id="ssbUseCases"></ul>
             </div>
           </div>
-        </aside>
 
-        <section class="ssb-col">
-          <div class="center-wrap">
-            <div class="company-head">
-              <img src="images/logo.png" alt="Siam Tham Logo">
-              <div class="company-text">
-                <div class="name">บริษัท สยามทำ จำกัด</div>
-                <div class="small">54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ</div>
-                <div class="small">เลขทะเบียน 0105566099954</div>
-                <div class="small">Website: www.siamtham.com</div>
-              </div>
-            </div>
-
-            <div class="center-title">Stealth Safety Bank Mobile System</div>
-
-            <div class="center-device-zone">
-              <div class="device-stack">
-                <img class="device-back" src="images/ssb-device-back.png" alt="Stealth Safety Bank Mobile Back" onerror="this.style.display='none'">
-                <img class="device-front" src="images/ssb-device-front.png" alt="Stealth Safety Bank Mobile Front" onerror="this.style.display='none'">
-                <img class="shield-badge" src="images/logo.png" alt="Security Shield">
-                <img class="center-hero-photo" src="images/ssb-fighter.png" alt="Stealth System Visual" onerror="this.style.display='none'">
-              </div>
-            </div>
-
-            <div class="center-main-label">Stealth Safety Bank Mobile System</div>
-
-            <div class="system-button-list">
-              <a class="system-btn" href="#ssb-box-1">Stealth Safety Bank Mobile</a>
-              <a class="system-btn" href="#ssb-box-2">Flare Device</a>
-              <a class="system-btn" href="#ssb-box-3">Stealth Safety Book</a>
-              <a class="system-btn" href="#ssb-box-4">Time Barrier System</a>
-              <a class="system-btn" href="#ssb-box-5">Siamtham Protection Center</a>
-            </div>
+          <div class="popup-panel">
+            <h4 class="popup-section-title"><span class="dot"></span>ผลลัพธ์ของระบบ</h4>
+            <div class="impact-grid notranslate" id="ssbImpacts"></div>
           </div>
-        </section>
 
-        <section class="ssb-col">
-          <div class="right-wrap">
-            <div class="info-box" id="ssb-box-1">
-              <div class="info-box-title">SSBMS - Stealth Safety Bank Mobile System</div>
-              <div class="info-box-desc">
-                ระบบที่ออกแบบขึ้นเพื่อทำให้ไม่มีตัวตนให้โจมตี
-                เพราะการโจมตีต้องมีเป้าหมายให้โจมตี
-                และต้องมีองค์ประกอบสำคัญที่ทำงานร่วมกันทั้งระบบ
-              </div>
-            </div>
-
-            <div class="info-box" id="ssb-box-2">
-              <div class="info-box-title">SSB. - Stealth Safety Bank Mobile</div>
-              <div class="info-box-desc">
-                เครื่องมือสำหรับใช้ในการทำธุรกรรมทางการเงิน
-                ที่ถูกออกแบบให้ปลอดภัยสูงขึ้นด้วยแนวคิดระบบล่องหน
-              </div>
-            </div>
-
-            <div class="info-box" id="ssb-box-3">
-              <div class="info-box-title">SB. - Stealth Safety Book</div>
-              <div class="info-box-desc">
-                อุปกรณ์ป้องกันสัญญาณแบบล่องหน
-                ใช้เก็บเครื่อง Stealth Safety Bank Mobile
-                เพื่อช่วยลดการเข้าถึงจากภายนอก
-                และทำให้ดูไม่มีความสำคัญจากสายตาคนทั่วไป
-              </div>
-            </div>
-
-            <div class="info-box" id="ssb-box-4">
-              <div class="info-box-title">TBS. - Time Barrier System</div>
-              <div class="info-box-desc">
-                กระบวนการใช้งานที่มีลำดับขั้นตอนชัดเจน
-                โดยออกแบบเวลาในการเข้าถึงระบบ
-                เพื่อให้เพียงพอต่อการตั้งสติ
-                ก่อนการโอนเงินทุกครั้ง
-              </div>
-            </div>
-
-            <div class="info-box">
-              <div class="info-box-title">FD. - Flare Device</div>
-              <div class="info-box-desc">
-                ตัวตนที่เปิดเผยในโลกออนไลน์และโลกความจริง
-                เพื่อให้บุคคลภายนอกรับรู้การมีอยู่ของเครื่องนี้
-                และใช้เป็นตัวเบี่ยงเบนความสนใจ
-                เพื่อรับความเสี่ยงแทนระบบหลัก
-              </div>
-            </div>
-
-            <div class="info-box" id="ssb-box-5">
-              <div class="info-box-title">SPC. - Siamtham Protection Center</div>
-              <div class="info-box-desc">
-                หากมีสายที่มีความเสี่ยง
-                หรือมีพฤติกรรมเร่งรัดกดดันให้โอนเงิน
-                <strong>ไม่ต้องคุยต่อ</strong> ให้ผู้เชี่ยวชาญรับช่วงแทนทันที
-                <br><br>
-                แจ้งคู่สนทนา:
-                “จะมีตัวแทนของฉันเจรจาเรื่องนี้แทน รบกวนขอเบอร์ติดต่อกลับด้วยค่ะ”
-                <br><br>
-                จากนั้นสแกน QR Code จากคู่มือใน Safety Book
-                เพื่อให้เจ้าหน้าที่ติดต่อกลับ
-                และช่วยตรวจสอบ เจรจา และค้นหาความจริงแทนคุณ
-              </div>
-            </div>
+          <div class="popup-panel popup-pro-rule-panel">
+            <div class="popup-pro-rule-title notranslate">กฎสำคัญ</div>
+            <div class="popup-pro-rule-box" id="ssbRules"></div>
           </div>
-        </section>
 
-      </div>
+          <div class="popup-action-row" id="ssbActions"></div>
+        </div>
+      </section>
+
     </section>
   </main>
+
+  <script src="js/ssb-system-data.js?v=4"></script>
+  <script src="js/ssb-system-page.js?v=4"></script>
 </body>
 </html>
