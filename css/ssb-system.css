@@ -948,4 +948,19 @@ a{
     color: rgba(255,255,255,.78);
     letter-spacing: .2px;
   }  
+
+  /* 🔥 ปิด effect หน้าแรกทั้งหมด */
+body .hero-stage,
+body .tech-hero{
+  display:none !important;
+}
+
+  /* กัน background svg / glow */
+body svg,
+body .hero-energy-svg,
+body .center-glow,
+body .center-pulse{
+  display:none !important;
+}
+  
 }
