@@ -531,10 +531,11 @@ a{
 .ssb-brochure-stage{
   min-height: auto;
   padding: 10px 0 6px;
+  margin-top: -40px;
 }
 
 .ssb-brochure-image{
-  width: min(100%, 620px);
+  width: min(100%, 720px);
   margin: 0 auto;
   border-radius: 22px;
   box-shadow:
