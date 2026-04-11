@@ -1,130 +1,123 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="google" content="notranslate" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Stealth Safety Bank Mobile System | Siam Tham Co.,Ltd.</title>
+<title>Stealth Safety Bank Mobile System</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&family=Orbitron:wght@500;600;700;800;900&display=swap"
-    rel="stylesheet"
-  />
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;700&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
 
-  <script>
-    (function () {
-      const savedTheme = localStorage.getItem("theme");
-      const isLight = savedTheme === "light";
-      document.documentElement.classList.toggle("light-mode", isLight);
-      document.documentElement.classList.toggle("dark-mode", !isLight);
-    })();
-  </script>
+<script>
+(function(){
+  const t = localStorage.getItem("theme");
+  const light = t === "light";
+  document.documentElement.classList.toggle("light-mode", light);
+})();
+</script>
 
-  <link rel="stylesheet" href="css/ssb-system.css?v=6" />
-  <link
-    rel="stylesheet"
-    href="css/ssb-system-mobile.css?v=6"
-    media="screen and (max-width: 760px), screen and (max-width: 1024px) and (orientation: portrait)"
-  />
+<link rel="stylesheet" href="css/ssb-system.css">
+<link rel="stylesheet" href="css/ssb-system-mobile.css" media="(max-width:760px)">
 </head>
+
 <body>
-  <main class="ssb-page">
-    <section class="ssb-page-shell">
 
-      <div class="ssb-top-wrap">
-        <div class="popup-kicker notranslate" id="ssbKicker">SSB Mobile System</div>
+<main class="ssb">
 
-        <div class="ssb-top-layout">
-          <div class="ssb-top-video">
-            <div class="popup-pro-video-frame ssb-main-video">
-              <iframe
-                id="ssbVideo"
-                src=""
-                title="SSB Video"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              ></iframe>
-            </div>
+<!-- HERO -->
+<section class="hero">
 
-            <div class="video-note notranslate" id="ssbVideoNote"></div>
-          </div>
+  <div class="hero-left">
+    <div class="video">
+      <iframe src="" allowfullscreen></iframe>
+    </div>
 
-          <div class="ssb-top-side">
-            <nav class="popup-pro-nav notranslate ssb-nav-fixed" id="ssbNav"></nav>
-          </div>
-        </div>
-      </div>
+    <h1>STEALTH SAFETY BANK<br>MOBILE SYSTEM</h1>
+    <p class="subtitle">
+      ระบบที่ออกแบบมาเพื่อ “ไม่มีตัวตนให้โจมตี”
+      เพราะการโจมตีต้องมีเป้าหมาย แต่ระบบนี้ทำให้คุณ “ไม่ใช่เป้าหมาย”
+    </p>
+  </div>
 
-      <section class="ssb-page-content" id="ssbPageContent">
-        <div class="popup-pro-head">
-          <h3 id="ssbTitle" class="notranslate"></h3>
-          <div class="popup-subtitle notranslate" id="ssbSubtitle"></div>
-        </div>
+  <div class="hero-right">
+    <button>SSB Mobile</button>
+    <button>Flare Device</button>
+    <button>Safety Book</button>
+    <button>Time Barrier</button>
+    <button>Protection Center</button>
+  </div>
 
-        <div class="popup-pro-body">
-          <div class="popup-panel popup-pro-intro">
-            <h4 class="popup-section-title"><span class="dot"></span>ภาพรวม</h4>
-            <p class="popup-lead notranslate" id="ssbLead"></p>
-            <div class="badge-row notranslate" id="ssbBadges"></div>
-          </div>
+</section>
 
-          <div class="popup-pro-grid">
-            <div class="popup-panel">
-              <h4 class="popup-section-title"><span class="dot"></span>คุณสมบัติเด่น</h4>
-              <ul class="feature-list notranslate" id="ssbFeatures"></ul>
-            </div>
+<!-- CONTENT -->
+<section class="grid">
 
-            <div class="popup-panel">
-              <h4 class="popup-section-title"><span class="dot"></span>เหมาะกับใคร</h4>
-              <ul class="feature-list notranslate" id="ssbUseCases"></ul>
-            </div>
-          </div>
+  <!-- LEFT -->
+  <div class="panel threat">
+    <h3>ภัยที่เกิดขึ้นจริง</h3>
 
-          <div class="popup-panel">
-            <h4 class="popup-section-title"><span class="dot"></span>ผลลัพธ์ของระบบ</h4>
-            <div class="impact-grid notranslate" id="ssbImpacts"></div>
-          </div>
+    <ul>
+      <li>คอลเซ็นเตอร์หลอกโอน</li>
+      <li>Phishing / ลิงก์ปลอม</li>
+      <li>SIM Swap</li>
+      <li>Malware / แอปปลอม</li>
+      <li>ขโมย OTP</li>
+      <li>แฮกบัญชีธนาคาร</li>
+    </ul>
 
-          <div class="popup-panel popup-pro-rule-panel">
-            <div class="popup-pro-rule-title notranslate">กฎสำคัญ</div>
-            <div class="popup-pro-rule-box" id="ssbRules"></div>
-          </div>
+    <div class="result">
+      ทุกการโจมตีต้องมีเป้าหมาย  
+      <strong>แต่ระบบนี้ทำให้คุณ “ไม่มีตัวตนให้โจมตี”</strong>
+    </div>
+  </div>
 
-          <div class="popup-action-row" id="ssbActions"></div>
-        </div>
-      </section>
+  <!-- CENTER -->
+  <div class="panel core">
+    <img src="images/ssb-phone.png" alt="">
+    <h2>Stealth Safety Bank System</h2>
 
-    </section>
-  </main>
+    <div class="core-buttons">
+      <div>SSB</div>
+      <div>FD</div>
+      <div>SB</div>
+      <div>TBS</div>
+      <div>SPC</div>
+    </div>
+  </div>
 
-  <script>
-    (function () {
-      function syncTheme() {
-        const savedTheme = localStorage.getItem("theme");
-        const isLight = savedTheme === "light";
-        document.documentElement.classList.toggle("light-mode", isLight);
-        document.documentElement.classList.toggle("dark-mode", !isLight);
-        document.body.classList.toggle("light-mode", isLight);
-        document.body.classList.toggle("dark-mode", !isLight);
-      }
+  <!-- RIGHT -->
+  <div class="panel modules">
 
-      syncTheme();
-      window.addEventListener("storage", function (e) {
-        if (e.key === "theme") syncTheme();
-      });
-      window.addEventListener("focus", syncTheme);
-      document.addEventListener("visibilitychange", function () {
-        if (!document.hidden) syncTheme();
-      });
-    })();
-  </script>
+    <div class="item">
+      <h4>SSB Mobile</h4>
+      <p>เครื่องสำหรับธุรกรรมการเงินที่ปลอดภัยสูงสุด</p>
+    </div>
 
-  <script src="js/ssb-system-data.js?v=4"></script>
-  <script src="js/ssb-system-page.js?v=4"></script>
+    <div class="item">
+      <h4>Flare Device</h4>
+      <p>ตัวลวงเพื่อเบี่ยงเบนเป้าหมายจากตัวจริง</p>
+    </div>
+
+    <div class="item">
+      <h4>Safety Book</h4>
+      <p>ตัดสัญญาณ ปิดการเข้าถึงจากภายนอก</p>
+    </div>
+
+    <div class="item">
+      <h4>Time Barrier</h4>
+      <p>ระบบหน่วงเวลา ป้องกันการตัดสินใจผิดพลาด</p>
+    </div>
+
+    <div class="item">
+      <h4>Protection Center</h4>
+      <p>ทีมช่วยเหลือทันทีเมื่อมีความเสี่ยง</p>
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
 </body>
 </html>
