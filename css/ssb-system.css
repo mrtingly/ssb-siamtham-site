@@ -962,5 +962,29 @@ body .center-glow,
 body .center-pulse{
   display:none !important;
 }
-  
+  /* 🔒 FIX FOOTER ให้เหมือนหน้าแรกเป๊ะ */
+.ssb-footer{
+  all: unset;
+  display: block;
+}
+
+.ssb-footer *{
+  box-sizing: border-box;
+}
+
+  /* กัน CSS SSB ไปทับ footer */
+.ssb-page .ssb-footer{
+  position: relative;
+  z-index: 5;
+}
+
+/* รีเซ็ต font + สี */
+.ssb-footer{
+  font-family: "Prompt", sans-serif;
+}
+
+  .ssb-footer{
+  width:100%;
+  margin-top:40px;
+
 }
