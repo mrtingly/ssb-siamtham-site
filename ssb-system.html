@@ -15,8 +15,21 @@
     rel="stylesheet"
   />
 
-  <link rel="stylesheet" href="css/ssb-system.css?v=4" />
-  <link rel="stylesheet" href="css/ssb-system-mobile.css?v=5" media="screen and (max-width: 760px), screen and (max-width: 1024px) and (orientation: portrait)" />
+  <script>
+    (function () {
+      const savedTheme = localStorage.getItem("theme");
+      const isLight = savedTheme === "light";
+      document.documentElement.classList.toggle("light-mode", isLight);
+      document.documentElement.classList.toggle("dark-mode", !isLight);
+    })();
+  </script>
+
+  <link rel="stylesheet" href="css/ssb-system.css?v=6" />
+  <link
+    rel="stylesheet"
+    href="css/ssb-system-mobile.css?v=6"
+    media="screen and (max-width: 760px), screen and (max-width: 1024px) and (orientation: portrait)"
+  />
 </head>
 <body>
   <main class="ssb-page">
@@ -89,33 +102,29 @@
     </section>
   </main>
 
+  <script>
+    (function () {
+      function syncTheme() {
+        const savedTheme = localStorage.getItem("theme");
+        const isLight = savedTheme === "light";
+        document.documentElement.classList.toggle("light-mode", isLight);
+        document.documentElement.classList.toggle("dark-mode", !isLight);
+        document.body.classList.toggle("light-mode", isLight);
+        document.body.classList.toggle("dark-mode", !isLight);
+      }
+
+      syncTheme();
+      window.addEventListener("storage", function (e) {
+        if (e.key === "theme") syncTheme();
+      });
+      window.addEventListener("focus", syncTheme);
+      document.addEventListener("visibilitychange", function () {
+        if (!document.hidden) syncTheme();
+      });
+    })();
+  </script>
+
   <script src="js/ssb-system-data.js?v=4"></script>
   <script src="js/ssb-system-page.js?v=4"></script>
-
-<script>
-  (function () {
-    function applyTheme() {
-      const savedTheme = localStorage.getItem("theme");
-      const isLight = savedTheme === "light";
-
-      document.documentElement.classList.toggle("light-mode", isLight);
-      document.documentElement.classList.toggle("dark-mode", !isLight);
-      document.body.classList.toggle("light-mode", isLight);
-      document.body.classList.toggle("dark-mode", !isLight);
-    }
-
-    applyTheme();
-
-    window.addEventListener("storage", function (e) {
-      if (e.key === "theme") applyTheme();
-    });
-
-    window.addEventListener("focus", applyTheme);
-    document.addEventListener("visibilitychange", function () {
-      if (!document.hidden) applyTheme();
-    });
-  })();
-</script>
-  
 </body>
 </html>
