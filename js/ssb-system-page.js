@@ -251,34 +251,31 @@
     };
   }
 
-  function getRelayPoint(parentRect) {
-    const logoRect = logoCore.getBoundingClientRect();
-    return {
-      x: logoRect.left - parentRect.left + (logoRect.width / 2),
-      y: logoRect.top - parentRect.top + (logoRect.height * 0.70)
-    };
-  }
+ function getRelayPoint(parentRect) {
+  const logoRect = logoCore.getBoundingClientRect();
+  return {
+    x: logoRect.left - parentRect.left + (logoRect.width / 2),
+    y: logoRect.top - parentRect.top + (logoRect.height / 2)
+  };
+}
 
-  function createCurvedBeam(from, to, type) {
-    const path = document.createElementNS(SVG_NS, "path");
-    const midX = (from.x + to.x) / 2;
-    const curveLift = type === "inbound" ? 16 : 22;
-    const controlY = Math.max(from.y, to.y) + curveLift;
+  function createStraightBeam(from, to, type) {
+  const path = document.createElementNS(SVG_NS, "path");
+  const d = `M ${from.x} ${from.y} L ${to.x} ${to.y}`;
 
-    const d = `M ${from.x} ${from.y} Q ${midX} ${controlY} ${to.x} ${to.y}`;
-    path.setAttribute("d", d);
-    path.setAttribute("class", `beam-path ${type}`);
+  path.setAttribute("d", d);
+  path.setAttribute("class", `beam-path ${type}`);
 
-    beamSvg.appendChild(path);
+  beamSvg.appendChild(path);
 
-    const len = path.getTotalLength();
-    const visibleSegment = Math.max(70, len * 0.20);
+  const len = path.getTotalLength();
+  const visibleSegment = Math.max(78, len * 0.22);
 
-    path.style.strokeDasharray = `${visibleSegment} ${len}`;
-    path.style.strokeDashoffset = `${len}`;
-    path.style.setProperty("--beam-len", `${len}`);
-    path.classList.add("animate");
-  }
+  path.style.strokeDasharray = `${visibleSegment} ${len}`;
+  path.style.strokeDashoffset = `${len}`;
+  path.style.setProperty("--beam-len", `${len}`);
+  path.classList.add("animate");
+}
 
   function blinkTargets(ids) {
     ids.forEach(id => {
@@ -318,14 +315,14 @@
     logoCore.classList.add("is-burst");
     statusBar.textContent = config.label;
 
-    createCurvedBeam(sourceCenter, relayPoint, "inbound");
+    createStraightBeam(sourceCenter, relayPoint, "inbound");
 
     setTimeout(() => {
       config.targets.forEach((id) => {
         const targetCard = document.getElementById(id);
         if (!targetCard) return;
         const targetCenter = getCenter(targetCard, parentRect);
-        createCurvedBeam(relayPoint, targetCenter, "outbound");
+        createStraightBeam(relayPoint, targetCenter, "outbound");
       });
     }, 360);
 
