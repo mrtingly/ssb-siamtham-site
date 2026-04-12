@@ -23,8 +23,8 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="css/ssb-system.css?v=20" />
-  <link rel="stylesheet" href="css/ssb-system-mobile.css?v=20" media="(max-width: 1023px)" />
+  <link rel="stylesheet" href="css/ssb-system.css?v=30" />
+  <link rel="stylesheet" href="css/ssb-system-mobile.css?v=30" media="(max-width: 1023px), (max-width: 1366px) and (orientation: portrait)" />
 </head>
 <body>
   <div class="site-wrap">
@@ -62,16 +62,24 @@
           <div class="hero-kicker">SSB Mobile System</div>
           <h1>STEALTH SAFETY BANK MOBILE SYSTEM</h1>
           <p>
-            กดโลโก้เพื่อเปิดระบบ จากนั้นกดไอคอน 1 ครั้งเพื่อดูวิธีการป้องกัน
-            และกด 2 ครั้งเพื่ออ่านรายละเอียดของไอคอนนั้น
+            กดโลโก้เพื่อเปิดหรือปิดระบบ กดไอคอน 1 ครั้งเพื่อดูวิธีการป้องกัน
+            และกด 2 ครั้งเพื่ออ่านรายละเอียดของการโจมตีหรือระบบป้องกัน
           </p>
-          <div class="guide-text">กด 1 ครั้ง = ดูการป้องกัน / กด 2 ครั้ง = อ่านรายละเอียด</div>
+          <div class="guide-text">
+            <span>กด 1 ครั้ง = ดูการป้องกัน</span>
+            <span class="guide-emphasis">กด 2 ครั้ง = อ่านรายละเอียด</span>
+          </div>
         </div>
 
         <section class="showcase" id="showcase">
+          <div class="beam-rail" aria-hidden="true">
+            <div class="beam-rail-line"></div>
+            <div class="beam-rail-spark beam-rail-spark-a"></div>
+            <div class="beam-rail-spark beam-rail-spark-b"></div>
+          </div>
+
           <div class="beam-layer" id="beamLayer" aria-hidden="true"></div>
 
-          <!-- LEFT ATTACK -->
           <aside class="icon-column left" id="attackColumn">
             <article class="icon-card attack-card" id="attack-psychological">
               <button class="icon-btn" type="button" data-kind="attack" data-key="psychological">
@@ -122,7 +130,6 @@
             </article>
           </aside>
 
-          <!-- CENTER -->
           <section class="center-stage" id="centerStage">
             <div class="center-aura"></div>
 
@@ -185,7 +192,6 @@
             <div class="status-bar" id="statusBar">กดโลโก้เพื่อเริ่มต้น</div>
           </section>
 
-          <!-- RIGHT SYSTEM -->
           <aside class="icon-column right" id="systemColumn">
             <article class="icon-card system-card" id="system-fd">
               <button class="icon-btn" type="button" data-kind="system" data-key="fd">
@@ -315,6 +321,6 @@
     </footer>
   </div>
 
-  <script src="js/ssb-system-page.js?v=20"></script>
+  <script src="js/ssb-system-page.js?v=30"></script>
 </body>
 </html>
