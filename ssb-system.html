@@ -23,8 +23,8 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="css/ssb-system.css?v=30" />
-  <link rel="stylesheet" href="css/ssb-system-mobile.css?v=30" media="(max-width: 1023px), (max-width: 1366px) and (orientation: portrait)" />
+  <link rel="stylesheet" href="css/ssb-system.css?v=40" />
+  <link rel="stylesheet" href="css/ssb-system-mobile.css?v=40" media="(max-width: 1023px), (max-width: 1366px) and (orientation: portrait)" />
 </head>
 <body>
   <div class="site-wrap">
@@ -63,7 +63,7 @@
           <h1>STEALTH SAFETY BANK MOBILE SYSTEM</h1>
           <p>
             กดโลโก้เพื่อเปิดหรือปิดระบบ กดไอคอน 1 ครั้งเพื่อดูวิธีการป้องกัน
-            และกด 2 ครั้งเพื่ออ่านรายละเอียดของการโจมตีหรือระบบป้องกัน
+            และกด 2 ครั้งเพื่ออ่านรายละเอียดของไอคอนการโจมตีหรือระบบป้องกัน
           </p>
           <div class="guide-text">
             <span>กด 1 ครั้ง = ดูการป้องกัน</span>
@@ -78,7 +78,9 @@
             <div class="beam-rail-spark beam-rail-spark-b"></div>
           </div>
 
-          <div class="beam-layer" id="beamLayer" aria-hidden="true"></div>
+          <div class="beam-svg-wrap" id="beamSvgWrap" aria-hidden="true">
+            <svg class="beam-svg" id="beamSvg"></svg>
+          </div>
 
           <aside class="icon-column left" id="attackColumn">
             <article class="icon-card attack-card" id="attack-psychological">
@@ -142,7 +144,7 @@
                   <circle class="logo-orbit-runner two" cx="160" cy="48" r="4"></circle>
                 </svg>
 
-                <button class="logo-core" id="logoCore" type="button" aria-label="Open system">
+                <button class="logo-core" id="logoCore" type="button" aria-label="Open or collapse system">
                   <img src="images/logo.png" alt="SSB Core Logo">
                 </button>
               </div>
@@ -321,6 +323,6 @@
     </footer>
   </div>
 
-  <script src="js/ssb-system-page.js?v=30"></script>
+  <script src="js/ssb-system-page.js?v=40"></script>
 </body>
 </html>
