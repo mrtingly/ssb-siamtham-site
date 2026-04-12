@@ -1,339 +1,320 @@
-(function () {
-  const themeToggle = document.getElementById("themeToggle");
-  if (!themeToggle) return;
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google" content="notranslate" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Stealth Safety Bank Mobile System | Siam Tham Co.,Ltd.</title>
 
-  themeToggle.addEventListener("click", function () {
-    const html = document.documentElement;
-    const isLight = html.classList.contains("light-mode");
-    html.classList.toggle("light-mode", !isLight);
-    html.classList.toggle("dark-mode", isLight);
-    localStorage.setItem("theme", !isLight ? "light" : "dark");
-  });
-})();
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&family=Orbitron:wght@500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
 
-(function () {
-  const showcase = document.getElementById("showcase");
-  const logoCore = document.getElementById("logoCore");
-  const beamLayer = document.getElementById("beamLayer");
-  const statusBar = document.getElementById("statusBar");
+  <script>
+    (function () {
+      const savedTheme = localStorage.getItem("theme");
+      const isLight = savedTheme === "light";
+      document.documentElement.classList.toggle("light-mode", isLight);
+      document.documentElement.classList.toggle("dark-mode", !isLight);
+    })();
+  </script>
 
-  const logoMode = document.getElementById("logoMode");
-  const detailMode = document.getElementById("detailMode");
-  const detailClose = document.getElementById("detailClose");
+  <link rel="stylesheet" href="css/ssb-system.css?v=20" />
+  <link rel="stylesheet" href="css/ssb-system-mobile.css?v=20" media="(max-width: 1023px)" />
+</head>
+<body>
+  <div class="site-wrap">
+    <header class="ssb-topbar">
+      <div class="topbar-inner">
+        <div class="brand-wrap">
+          <div class="brand-logo">
+            <img src="images/logo.png" alt="Stealth Safety Bank Logo" loading="lazy" />
+          </div>
 
-  const detailKicker = document.getElementById("detailKicker");
-  const detailTitle = document.getElementById("detailTitle");
-  const detailSubtitle = document.getElementById("detailSubtitle");
-  const detailMeaning = document.getElementById("detailMeaning");
-  const detailProtection = document.getElementById("detailProtection");
-  const detailReason = document.getElementById("detailReason");
-  const detailTags = document.getElementById("detailTags");
+          <div class="brand-text">
+            <div class="brand-line-1">บริษัท สยามทำ จำกัด</div>
+            <div class="brand-line-2">Siam Tham Co.,Ltd.</div>
+            <div class="brand-site">
+              <a href="https://www.siamtham.com" target="_blank" rel="noopener">www.siamtham.com</a>
+            </div>
+          </div>
+        </div>
 
-  const attackColumn = document.getElementById("attackColumn");
-  const systemColumn = document.getElementById("systemColumn");
+        <div class="topbar-actions">
+          <div class="theme-switch-wrap">
+            <span class="mode-label">Dark</span>
+            <button id="themeToggle" class="theme-switch" type="button" aria-label="Toggle theme">
+              <span class="switch-knob"></span>
+            </button>
+            <span class="mode-label">Light</span>
+          </div>
+        </div>
+      </div>
+    </header>
 
-  let systemOpened = false;
-  let activeTimeout = null;
+    <main class="main-content">
+      <section class="hero-card">
+        <div class="hero-head">
+          <div class="hero-kicker">SSB Mobile System</div>
+          <h1>STEALTH SAFETY BANK MOBILE SYSTEM</h1>
+          <p>
+            กดโลโก้เพื่อเปิดระบบ จากนั้นกดไอคอน 1 ครั้งเพื่อดูวิธีการป้องกัน
+            และกด 2 ครั้งเพื่ออ่านรายละเอียดของไอคอนนั้น
+          </p>
+          <div class="guide-text">กด 1 ครั้ง = ดูการป้องกัน / กด 2 ครั้ง = อ่านรายละเอียด</div>
+        </div>
 
-  const attackMap = {
-    psychological: {
-      label: "Psychological → Time Barrier + SPC",
-      targets: ["system-time-barrier", "system-spc"],
-      detail: {
-        kicker: "Attack Detail",
-        title: "Psychological",
-        subtitle: "การโจมตีที่ใช้แรงกดดัน เร่งเวลา และทำให้เหยื่อขาดสติ",
-        meaning: "มิจฉาชีพใช้แรงกดดัน ความกลัว ความรีบ และการควบคุมอารมณ์ เพื่อบังคับให้เหยื่อตัดสินใจผิดในเวลาสั้น ๆ",
-        protection: "SSB ใช้ Time Barrier เพื่อหยุดความเร่งรีบ และใช้ SPC รับช่วงตรวจสอบแทนผู้ใช้งานเมื่อมีความเสี่ยง ทำให้การกดดันทางจิตวิทยาไม่สามารถแปลงเป็นการโอนเงินจริงได้ง่าย",
-        reason: "ระบบนี้ไม่ได้เน้นสู้กับคำพูดของมิจฉาชีพโดยตรง แต่เน้นแทรกจังหวะให้ผู้ใช้กลับมามีสติ และมีทีมรับช่วงทันทีเมื่อเริ่มผิดปกติ",
-        tags: ["Time Barrier", "SPC"]
-      }
-    },
-    phishing: {
-      label: "Phishing → FD + Safety Book",
-      targets: ["system-fd", "system-safety-book"],
-      detail: {
-        kicker: "Attack Detail",
-        title: "Phishing",
-        subtitle: "ลิงก์ปลอม หน้าเว็บปลอม หรือข้อความหลอกให้เปิดเผยข้อมูลสำคัญ",
-        meaning: "Phishing ทำงานได้เพราะผู้ใช้เปิดข้อมูลบนอุปกรณ์ที่ใช้งานจริงในชีวิตประจำวัน และมักเชื่อว่ากำลังคุยกับหน่วยงานจริง",
-        protection: "SSB แยกอุปกรณ์ใช้งานทั่วไปออกจากระบบการเงินจริง และใช้ Safety Book ซ่อน/แยกการเข้าถึงเครื่องหลัก ทำให้เส้นทาง phishing ไม่แตะระบบเงินจริงโดยตรง",
-        reason: "เมื่อเครื่องใช้งานประจำวันไม่ใช่เครื่องธุรกรรมหลัก มูลค่าของ phishing จะลดลงทันที เพราะเป้าหมายหลักไม่ได้อยู่บนพื้นผิวโจมตีเดียวกัน",
-        tags: ["FD", "Safety Book"]
-      }
-    },
-    remote: {
-      label: "Remote → FD + Safety Book",
-      targets: ["system-fd", "system-safety-book"],
-      detail: {
-        kicker: "Attack Detail",
-        title: "Remote",
-        subtitle: "การควบคุมเครื่องจากระยะไกลผ่านแอป เครื่องมือช่วยเหลือ หรือมัลแวร์",
-        meaning: "ผู้โจมตีพยายามเข้าแทนที่ผู้ใช้บนอุปกรณ์เดียวกัน เพื่อสั่งงาน มองเห็น และบังคับทำธุรกรรมแทน",
-        protection: "SSB ใช้ FD เป็นจุดรับแรงแทนระบบหลัก และใช้ Safety Book ทำให้เครื่องจริงไม่เปิดเผยตัวหรืออยู่ในสถานะพร้อมให้ควบคุมตลอดเวลา",
-        reason: "เมื่อเครื่องหลักถูกแยกออกจากการใช้งานประจำวัน โอกาสที่ remote access จะเข้าถึงเส้นทางเงินจริงจึงลดลงอย่างมีนัยสำคัญ",
-        tags: ["FD", "Safety Book"]
-      }
-    },
-    "fake-app": {
-      label: "Fake App → FD + Safety Book",
-      targets: ["system-fd", "system-safety-book"],
-      detail: {
-        kicker: "Attack Detail",
-        title: "Fake App",
-        subtitle: "แอปปลอมที่หลอกว่าถูกต้อง แต่มีหน้าที่เข้าถึงข้อมูลหรือธุรกรรม",
-        meaning: "แอปปลอมอาศัยการติดตั้งบนเครื่องที่ผู้ใช้ใช้ทุกวัน จากนั้นค่อยแทรกตัวเข้าถึงข้อมูล การแจ้งเตือน หรือสิทธิ์สำคัญ",
-        protection: "SSB ลดความเสี่ยงนี้ด้วยการแยกเครื่องใช้งานออกจากเครื่องธุรกรรมจริง และเก็บระบบหลักด้วย Safety Book อย่างมีวินัย",
-        reason: "แนวคิดไม่ใช่แค่กันแอปปลอม แต่คือทำให้แอปปลอมไม่มีโอกาสสัมผัสระบบการเงินจริงตั้งแต่ต้นทาง",
-        tags: ["FD", "Safety Book"]
-      }
-    }
-  };
+        <section class="showcase" id="showcase">
+          <div class="beam-layer" id="beamLayer" aria-hidden="true"></div>
 
-  const systemMap = {
-    fd: {
-      kicker: "Defense Detail",
-      title: "FD - Flare Device",
-      subtitle: "จุดรับแรงแทนระบบหลัก และเป็นชั้นเบี่ยงความสนใจจากเป้าหมายจริง",
-      meaning: "FD คืออุปกรณ์ที่เปิดเผยต่อโลกภายนอก ใช้รับความเสี่ยงแทน เพื่อไม่ให้ระบบหลักต้องออกไปอยู่บนพื้นผิวการโจมตีโดยตรง",
-      protection: "FD ช่วยให้มิจฉาชีพหรือมัลแวร์เจอเพียงชั้นภายนอก ขณะที่เครื่องหรือระบบหลักยังถูกแยกออกไว้",
-      reason: "แนวคิดคือไม่ได้เอาเครื่องสำคัญไปเสี่ยงตรง ๆ แต่ใช้ชั้นภายนอกเป็นตัวรับแรงและลดโอกาสที่ศัตรูจะเจอเป้าหมายจริง",
-      tags: ["รับแรงแทน", "ลดการเปิดเผย", "ลดเป้าหมายจริง"]
-    },
-    "safety-book": {
-      kicker: "Defense Detail",
-      title: "Safety Book",
-      subtitle: "ชั้นแยกเก็บ ลดการเข้าถึง และลดการมองเห็นจากภายนอก",
-      meaning: "Safety Book คือระบบจัดเก็บและอำพรางเครื่องหรือองค์ประกอบสำคัญ ให้ไม่เปิดเผยตัวต่อคนทั่วไปหรือการเข้าถึงที่ไม่ควรเกิดขึ้น",
-      protection: "มันช่วยแยกชิ้นส่วนสำคัญออกจากการใช้งานประจำวัน และลดโอกาสการสังเกต การหยิบใช้ หรือการแตะต้องโดยไม่จำเป็น",
-      reason: "ถ้าศัตรูไม่รู้ว่าอะไรคือของจริง โอกาสโจมตีสำเร็จก็ลดลงตั้งแต่ต้นทาง",
-      tags: ["แยกเก็บ", "อำพราง", "ลดการเข้าถึง"]
-    },
-    "time-barrier": {
-      kicker: "Defense Detail",
-      title: "Time Barrier",
-      subtitle: "หน่วงเวลาเพื่อคืนสติและหยุดการตัดสินใจผิดพลาด",
-      meaning: "Time Barrier คือกลไกที่ทำให้การเข้าถึงเงินหรือขั้นตอนสำคัญไม่เกิดขึ้นเร็วเกินไป เพื่อหยุดการตัดสินใจแบบถูกกดดัน",
-      protection: "เมื่อผู้ใช้ต้องผ่านเวลาและลำดับขั้นตอน ความเสี่ยงจากความกลัว ความรีบ หรือคำสั่งเร่งด่วนจะลดลง",
-      reason: "หลายเหตุการณ์เสียหายเกิดขึ้นในไม่กี่นาที ระบบนี้จึงใส่เวลาเข้าไปเพื่อคืนการควบคุมให้ผู้ใช้",
-      tags: ["คืนสติ", "หยุดความรีบ", "คุมจังหวะตัดสินใจ"]
-    },
-    spc: {
-      kicker: "Defense Detail",
-      title: "SPC",
-      subtitle: "ศูนย์ช่วยเหลือที่รับช่วงตรวจสอบและตอบโต้แทนผู้ใช้งาน",
-      meaning: "SPC ทำหน้าที่เป็นชั้นมนุษย์ของระบบ เมื่อผู้ใช้เริ่มไม่แน่ใจหรือเสี่ยง จะมีคนรับช่วงวิเคราะห์และประสานแทนทันที",
-      protection: "ช่วยหยุดการสนทนาหรือกระบวนการเสี่ยง และแยกผู้ใช้ให้ออกจากแรงกดดันตรงหน้า",
-      reason: "ในสถานการณ์จริง ผู้ใช้บางครั้งต้องการคนรับช่วงแทนมากกว่าข้อมูล ระบบนี้จึงออกแบบให้มีชั้นสนับสนุนจริงเข้ามาช่วย",
-      tags: ["รับช่วงแทน", "ตรวจสอบ", "ช่วยตัดวงจรเสี่ยง"]
-    }
-  };
+          <!-- LEFT ATTACK -->
+          <aside class="icon-column left" id="attackColumn">
+            <article class="icon-card attack-card" id="attack-psychological">
+              <button class="icon-btn" type="button" data-kind="attack" data-key="psychological">
+                <span class="icon-frame">
+                  <img src="images/Psychological.png" alt="Psychological">
+                </span>
+                <span class="icon-meta">
+                  <span class="icon-name">Psychological</span>
+                  <span class="icon-sub">การกดดัน หลอกลวง เร่งรัดการตัดสินใจ</span>
+                </span>
+              </button>
+            </article>
 
-  function openSystem() {
-    systemOpened = true;
-    showcase.classList.add("is-open");
-    attackColumn.classList.add("ready");
-    systemColumn.classList.add("ready");
-    statusBar.textContent = "กดไอคอน 1 ครั้งเพื่อดูการป้องกัน หรือกด 2 ครั้งเพื่ออ่านรายละเอียด";
-  }
+            <article class="icon-card attack-card" id="attack-phishing">
+              <button class="icon-btn" type="button" data-kind="attack" data-key="phishing">
+                <span class="icon-frame">
+                  <img src="images/Phishing.png" alt="Phishing">
+                </span>
+                <span class="icon-meta">
+                  <span class="icon-name">Phishing</span>
+                  <span class="icon-sub">ลิงก์ปลอม หน้าเว็บปลอม ขโมยข้อมูลสำคัญ</span>
+                </span>
+              </button>
+            </article>
 
-  function hideLogoMode() {
-    logoMode.classList.add("is-hidden");
-  }
+            <article class="icon-card attack-card" id="attack-remote">
+              <button class="icon-btn" type="button" data-kind="attack" data-key="remote">
+                <span class="icon-frame">
+                  <img src="images/Remote.png" alt="Remote">
+                </span>
+                <span class="icon-meta">
+                  <span class="icon-name">Remote</span>
+                  <span class="icon-sub">ควบคุมเครื่องจากระยะไกลผ่านแอปหรือมัลแวร์</span>
+                </span>
+              </button>
+            </article>
 
-  function showLogoMode() {
-    logoMode.classList.remove("is-hidden");
-  }
+            <article class="icon-card attack-card" id="attack-fake-app">
+              <button class="icon-btn" type="button" data-kind="attack" data-key="fake-app">
+                <span class="icon-frame">
+                  <img src="images/Fake app.png" alt="Fake App">
+                </span>
+                <span class="icon-meta">
+                  <span class="icon-name">Fake App</span>
+                  <span class="icon-sub">แอปปลอมที่เข้าถึงข้อมูลหรือธุรกรรม</span>
+                </span>
+              </button>
+            </article>
+          </aside>
 
-  function openDetail(payload) {
-    hideLogoMode();
+          <!-- CENTER -->
+          <section class="center-stage" id="centerStage">
+            <div class="center-aura"></div>
 
-    detailKicker.textContent = payload.kicker;
-    detailTitle.textContent = payload.title;
-    detailSubtitle.textContent = payload.subtitle;
-    detailMeaning.textContent = payload.meaning;
-    detailProtection.textContent = payload.protection;
-    detailReason.textContent = payload.reason;
+            <div class="logo-mode" id="logoMode">
+              <div class="logo-orbit-wrap">
+                <svg class="logo-orbit-svg" viewBox="0 0 320 320" aria-hidden="true">
+                  <circle class="logo-orbit-ring" cx="160" cy="160" r="128"></circle>
+                  <circle class="logo-orbit-ring second" cx="160" cy="160" r="112"></circle>
+                  <circle class="logo-orbit-runner" cx="160" cy="32" r="6"></circle>
+                  <circle class="logo-orbit-runner two" cx="160" cy="48" r="4"></circle>
+                </svg>
 
-    detailTags.innerHTML = "";
-    payload.tags.forEach(tag => {
-      const span = document.createElement("span");
-      span.className = "defense-tag";
-      span.textContent = tag;
-      detailTags.appendChild(span);
-    });
+                <button class="logo-core" id="logoCore" type="button" aria-label="Open system">
+                  <img src="images/logo.png" alt="SSB Core Logo">
+                </button>
+              </div>
 
-    detailMode.classList.add("is-open");
-    detailMode.setAttribute("aria-hidden", "false");
-  }
+              <div class="center-caption">
+                <div class="center-caption-main">System-Based Security</div>
+                <div class="center-caption-sub">กดโลโก้เพื่อให้ระบบกางออกจากศูนย์กลาง</div>
+              </div>
+            </div>
 
-  function closeDetail() {
-    detailMode.classList.remove("is-open");
-    detailMode.setAttribute("aria-hidden", "true");
-    showLogoMode();
-    statusBar.textContent = "กดไอคอน 1 ครั้งเพื่อดูการป้องกัน หรือกด 2 ครั้งเพื่ออ่านรายละเอียด";
-  }
+            <div class="detail-mode" id="detailMode" aria-hidden="true">
+              <div class="detail-shell">
+                <div class="detail-top">
+                  <div>
+                    <div class="detail-kicker" id="detailKicker">DETAIL</div>
+                    <h3 class="detail-title" id="detailTitle">Title</h3>
+                    <p class="detail-subtitle" id="detailSubtitle">Subtitle</p>
+                  </div>
 
-  function clearStates() {
-    clearTimeout(activeTimeout);
-    beamLayer.innerHTML = "";
-    logoCore.classList.remove("is-burst");
-    document.querySelectorAll(".icon-card").forEach(el => {
-      el.classList.remove("is-source", "is-target");
-    });
-  }
+                  <button class="detail-close" id="detailClose" type="button" aria-label="ปิด">×</button>
+                </div>
 
-  function getCenter(el, parentRect) {
-    const r = el.getBoundingClientRect();
-    return {
-      x: r.left - parentRect.left + (r.width / 2),
-      y: r.top - parentRect.top + (r.height / 2)
-    };
-  }
+                <div class="detail-body">
+                  <div class="detail-box">
+                    <h4>ความหมาย</h4>
+                    <p id="detailMeaning"></p>
+                  </div>
 
-  function createBeam(from, to, type) {
-    const dx = to.x - from.x;
-    const dy = to.y - from.y;
-    const length = Math.sqrt((dx * dx) + (dy * dy));
-    const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+                  <div class="detail-box">
+                    <h4>ระบบที่เกี่ยวข้อง</h4>
+                    <div class="defense-tags" id="detailTags"></div>
+                  </div>
 
-    const beam = document.createElement("span");
-    beam.className = "beam " + type;
-    beam.style.setProperty("--x1", from.x + "px");
-    beam.style.setProperty("--y1", from.y + "px");
-    beam.style.setProperty("--length", length + "px");
-    beam.style.setProperty("--angle", angle + "deg");
-    beamLayer.appendChild(beam);
+                  <div class="detail-box">
+                    <h4>SSB จัดการอย่างไร</h4>
+                    <p id="detailProtection"></p>
+                  </div>
 
-    requestAnimationFrame(() => {
-      beam.classList.add("show");
-    });
-  }
+                  <div class="detail-box">
+                    <h4>เหตุผลของการออกแบบ</h4>
+                    <p id="detailReason"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-  function blinkTargets(ids) {
-    ids.forEach(id => {
-      const target = document.getElementById(id);
-      if (target) target.classList.add("is-target");
-    });
+            <div class="status-bar" id="statusBar">กดโลโก้เพื่อเริ่มต้น</div>
+          </section>
 
-    activeTimeout = setTimeout(() => {
-      ids.forEach(id => {
-        const target = document.getElementById(id);
-        if (target) target.classList.remove("is-target");
-      });
-      logoCore.classList.remove("is-burst");
-      beamLayer.innerHTML = "";
-      document.querySelectorAll(".icon-card.is-source").forEach(el => {
-        el.classList.remove("is-source");
-      });
-      statusBar.textContent = "กดไอคอน 1 ครั้งเพื่อดูการป้องกัน หรือกด 2 ครั้งเพื่ออ่านรายละเอียด";
-    }, 5200);
-  }
+          <!-- RIGHT SYSTEM -->
+          <aside class="icon-column right" id="systemColumn">
+            <article class="icon-card system-card" id="system-fd">
+              <button class="icon-btn" type="button" data-kind="system" data-key="fd">
+                <span class="icon-frame">
+                  <img src="images/Flare Device.png" alt="FD - Flare Device">
+                </span>
+                <span class="icon-meta">
+                  <span class="icon-name">FD - Flare Device</span>
+                  <span class="icon-sub">จุดรับแรงและเบี่ยงความสนใจออกจากระบบหลัก</span>
+                </span>
+              </button>
+            </article>
 
-  function runAttackFlow(attackKey, sourceCard) {
-    const config = attackMap[attackKey];
-    if (!config || !systemOpened) return;
+            <article class="icon-card system-card" id="system-safety-book">
+              <button class="icon-btn" type="button" data-kind="system" data-key="safety-book">
+                <span class="icon-frame">
+                  <img src="images/Safety Book.png" alt="Safety Book">
+                </span>
+                <span class="icon-meta">
+                  <span class="icon-name">Safety Book</span>
+                  <span class="icon-sub">แยกเก็บ ลดการเข้าถึง และลดการมองเห็นจากภายนอก</span>
+                </span>
+              </button>
+            </article>
 
-    detailMode.classList.remove("is-open");
-    detailMode.setAttribute("aria-hidden", "true");
-    showLogoMode();
-    clearStates();
+            <article class="icon-card system-card" id="system-time-barrier">
+              <button class="icon-btn" type="button" data-kind="system" data-key="time-barrier">
+                <span class="icon-frame">
+                  <img src="images/Time Barrier.png" alt="Time Barrier">
+                </span>
+                <span class="icon-meta">
+                  <span class="icon-name">Time Barrier</span>
+                  <span class="icon-sub">หน่วงเวลาเพื่อคืนสติและลดการตัดสินใจผิดพลาด</span>
+                </span>
+              </button>
+            </article>
 
-    const parentRect = showcase.getBoundingClientRect();
-    const sourceCenter = getCenter(sourceCard, parentRect);
-    const logoCenter = getCenter(logoCore, parentRect);
+            <article class="icon-card system-card" id="system-spc">
+              <button class="icon-btn" type="button" data-kind="system" data-key="spc">
+                <span class="icon-frame">
+                  <img src="images/SPC.png" alt="SPC">
+                </span>
+                <span class="icon-meta">
+                  <span class="icon-name">SPC</span>
+                  <span class="icon-sub">ศูนย์ช่วยเหลือและรับช่วงตรวจสอบแทนผู้ใช้งาน</span>
+                </span>
+              </button>
+            </article>
+          </aside>
+        </section>
 
-    sourceCard.classList.add("is-source");
-    logoCore.classList.add("is-burst");
-    statusBar.textContent = config.label;
+        <div class="bottom-box">
+          <strong>SSBMS ไม่ได้ปลอดภัย เพราะอุปกรณ์เพียงชิ้นเดียว</strong>
+          <span>
+            แต่ปลอดภัย เพราะทุกองค์ประกอบถูกออกแบบให้ทำงานร่วมกัน
+            และควบคุม “จุดตัดสินใจ” ก่อนที่ความผิดพลาดจะเกิดขึ้น
+          </span>
+        </div>
+      </section>
+    </main>
 
-    createBeam(sourceCenter, logoCenter, "inbound");
+    <footer class="ssb-footer">
+      <div class="footer-shell">
+        <div class="footer-desktop-grid">
+          <div class="footer-desktop-left">
+            <div class="footer-company-th">บริษัท สยามทำ จำกัด</div>
+            <div class="footer-company-en">Siamtham Co.,Ltd.</div>
+            <div class="footer-address">54 ซอย 53 ถนนพุทธมณฑลสาย 1</div>
+            <div class="footer-address">แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ</div>
+            <div class="footer-reg">เลขทะเบียน 0105566099954</div>
+          </div>
 
-    setTimeout(() => {
-      config.targets.forEach((id) => {
-        const targetCard = document.getElementById(id);
-        if (!targetCard) return;
-        const targetCenter = getCenter(targetCard, parentRect);
-        createBeam(logoCenter, targetCenter, "outbound");
-      });
-    }, 420);
+          <div class="footer-desktop-divider" aria-hidden="true"></div>
 
-    setTimeout(() => {
-      blinkTargets(config.targets);
-    }, 850);
-  }
+          <div class="footer-desktop-center">
+            <div class="footer-icons">
+              <a href="https://maps.app.goo.gl/Dz4B1kpqVbmWhkYX7" target="_blank" rel="noopener" aria-label="Map">
+                <img src="https://cdn.simpleicons.org/googlemaps/EA4335" alt="Map">
+              </a>
+              <a href="https://line.me/R/ti/p/@siamtham" target="_blank" rel="noopener" aria-label="LINE">
+                <img src="https://cdn.simpleicons.org/line/06C755" alt="LINE">
+              </a>
+              <a href="https://www.facebook.com/profile.php?id=61556844339863" target="_blank" rel="noopener" aria-label="Facebook">
+                <img src="https://cdn.simpleicons.org/facebook/1877F2" alt="Facebook">
+              </a>
+              <a href="https://www.youtube.com/@siamtham" target="_blank" rel="noopener" aria-label="YouTube">
+                <img src="https://cdn.simpleicons.org/youtube/FF0000" alt="YouTube">
+              </a>
+              <a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">
+                <img src="https://cdn.simpleicons.org/tiktok/000000" alt="TikTok">
+              </a>
+            </div>
+          </div>
 
-  function runSystemFocus(systemKey, sourceCard) {
-    if (!systemOpened) return;
-    clearStates();
-    detailMode.classList.remove("is-open");
-    detailMode.setAttribute("aria-hidden", "true");
-    showLogoMode();
+          <div class="footer-desktop-divider" aria-hidden="true"></div>
 
-    sourceCard.classList.add("is-target");
-    statusBar.textContent = "System Focus → " + (systemMap[systemKey]?.title || "System");
+          <div class="footer-desktop-right">
+            <div class="footer-phone-label">เบอร์โทรศัพท์</div>
 
-    activeTimeout = setTimeout(() => {
-      sourceCard.classList.remove("is-target");
-      statusBar.textContent = "กดไอคอน 1 ครั้งเพื่อดูการป้องกัน หรือกด 2 ครั้งเพื่ออ่านรายละเอียด";
-    }, 2200);
-  }
+            <a class="footer-phone" href="tel:020432988">
+              <span class="footer-phone-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M6.6 10.8c1.6 3.1 3.5 5 6.6 6.6l2.2-2.2c.28-.28.7-.37 1.07-.24 1.2.4 2.5.62 3.83.62.4 0 .72.32.72.72V20c0 .4-.32.72-.72.72C10.87 20.72 3.28 13.13 3.28 3.72c0-.4.32-.72.72-.72H7.6c.4 0 .72.32.72.72 0 1.33.21 2.63.62 3.83.12.37.03.79-.25 1.07L6.6 10.8Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span>02-043-2988</span>
+            </a>
 
-  logoCore.addEventListener("click", function () {
-    if (!systemOpened) {
-      openSystem();
-      return;
-    }
+            <a class="footer-phone" href="tel:0649514888">
+              <span class="footer-phone-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M6.6 10.8c1.6 3.1 3.5 5 6.6 6.6l2.2-2.2c.28-.28.7-.37 1.07-.24 1.2.4 2.5.62 3.83.62.4 0 .72.32.72.72V20c0 .4-.32.72-.72.72C10.87 20.72 3.28 13.13 3.28 3.72c0-.4.32-.72.72-.72H7.6c.4 0 .72.32.72.72 0 1.33.21 2.63.62 3.83.12.37.03.79-.25 1.07L6.6 10.8Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span>064-951-4888</span>
+            </a>
+          </div>
+        </div>
 
-    if (detailMode.classList.contains("is-open")) {
-      closeDetail();
-      return;
-    }
+        <div class="footer-bottom-line"></div>
 
-    logoCore.classList.add("is-burst");
-    statusBar.textContent = "ระบบพร้อมใช้งานแล้ว เลือกไอคอนได้เลย";
-    setTimeout(() => {
-      logoCore.classList.remove("is-burst");
-    }, 600);
-  });
+        <div class="footer-copy">
+          <div>@ Stealth Safety Bank Mobile System</div>
+          <div>BY Mr.Tingly Marketing Online</div>
+        </div>
+      </div>
+    </footer>
+  </div>
 
-  document.querySelectorAll("[data-kind='attack']").forEach(btn => {
-    btn.addEventListener("click", function () {
-      const attackKey = btn.getAttribute("data-key");
-      const sourceCard = btn.closest(".icon-card");
-      runAttackFlow(attackKey, sourceCard);
-    });
-
-    btn.addEventListener("dblclick", function (event) {
-      event.preventDefault();
-      const attackKey = btn.getAttribute("data-key");
-      if (!systemOpened) return;
-      clearStates();
-      openDetail(attackMap[attackKey].detail);
-      statusBar.textContent = attackMap[attackKey].detail.title + " • เปิดรายละเอียดแล้ว";
-    });
-  });
-
-  document.querySelectorAll("[data-kind='system']").forEach(btn => {
-    btn.addEventListener("click", function () {
-      const systemKey = btn.getAttribute("data-key");
-      const sourceCard = btn.closest(".icon-card");
-      runSystemFocus(systemKey, sourceCard);
-    });
-
-    btn.addEventListener("dblclick", function (event) {
-      event.preventDefault();
-      const systemKey = btn.getAttribute("data-key");
-      if (!systemOpened) return;
-      clearStates();
-      openDetail(systemMap[systemKey]);
-      statusBar.textContent = systemMap[systemKey].title + " • เปิดรายละเอียดแล้ว";
-    });
-  });
-
-  detailClose.addEventListener("click", closeDetail);
-
-  window.addEventListener("resize", function () {
-    beamLayer.innerHTML = "";
-  });
-})();
+  <script src="js/ssb-system-page.js?v=20"></script>
+</body>
+</html>
