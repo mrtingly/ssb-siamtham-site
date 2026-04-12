@@ -915,7 +915,7 @@ html.light-mode .detail-box{
 .beam-path{
   fill:none;
   stroke-linecap:round;
-  stroke-width:3.25;
+  stroke-width:3.8;
   opacity:.92;
   filter:drop-shadow(0 0 10px rgba(119,216,255,.35));
 }
