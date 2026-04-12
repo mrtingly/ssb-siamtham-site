@@ -932,16 +932,38 @@ html.light-mode .detail-box{
   animation:beamSignal 1.5s linear 5;
 }
 
+.beam-path{
+  fill:none;
+  stroke-linecap:round;
+  stroke-width:3.4;
+  opacity:.96;
+  filter:
+    drop-shadow(0 0 8px rgba(119,216,255,.32))
+    drop-shadow(0 0 18px rgba(119,216,255,.18));
+}
+
+.beam-path.inbound{
+  stroke:url(#beamInboundGradient);
+}
+
+.beam-path.outbound{
+  stroke:url(#beamOutboundGradient);
+}
+
+.beam-path.animate{
+  animation:beamSignal 1.05s linear 5;
+}
+
 @keyframes beamSignal{
   0%{
     stroke-dashoffset:var(--beam-len);
     opacity:0;
   }
-  10%{
+  8%{
     opacity:1;
   }
-  50%{
-    opacity:.55;
+  52%{
+    opacity:.62;
   }
   100%{
     stroke-dashoffset:0;
