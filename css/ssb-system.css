@@ -1518,3 +1518,60 @@ html.light-mode .defense-tag{
   from{ transform:rotate(0deg); }
   to{ transform:rotate(360deg); }
 }
+
+/* ===== REACTOR CORE (SAFE ADD) ===== */
+
+/* สนามพลังรอบโลโก้ */
+.logo-core::after{
+  content:"";
+  position:absolute;
+  inset:-36px;
+  border-radius:50%;
+  pointer-events:none;
+  background:
+    radial-gradient(circle, rgba(104,244,255,.10), transparent 70%);
+  filter:blur(18px);
+  opacity:.55;
+}
+
+/* วงแหวนสแกน */
+.logo-core .scan-ring{
+  position:absolute;
+  inset:-28px;
+  border-radius:50%;
+  border:1px solid rgba(120,220,255,.18);
+  pointer-events:none;
+  opacity:.7;
+  animation:scanRotate 9s linear infinite;
+}
+
+/* เส้น sweep บาง ๆ */
+.logo-core .scan-ring::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  background:
+    conic-gradient(
+      from 0deg,
+      transparent 0%,
+      rgba(120,220,255,.0) 40%,
+      rgba(120,220,255,.35) 48%,
+      rgba(255,255,255,.6) 50%,
+      rgba(120,220,255,.35) 52%,
+      rgba(120,220,255,.0) 60%,
+      transparent 100%
+    );
+  filter:blur(2px);
+  animation:scanSweep 3.2s linear infinite;
+}
+
+@keyframes scanRotate{
+  from{ transform:rotate(0deg); }
+  to{ transform:rotate(360deg); }
+}
+
+@keyframes scanSweep{
+  from{ transform:rotate(0deg); }
+  to{ transform:rotate(360deg); }
+}
