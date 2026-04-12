@@ -730,15 +730,17 @@ html.light-mode .logo-core{
 }
 
 .detail-shell{
-  width:min(820px, calc(100% - 620px));
-  min-height:470px;
-  border-radius:28px;
-  border:1px solid var(--border);
-  background:var(--panel);
+  width:min(860px, calc(100% - 600px));
+  min-height:500px;
+  border-radius:30px;
+  border:1px solid rgba(140,210,255,.24);
+  background:
+    linear-gradient(180deg, rgba(8,20,44,.96), rgba(5,13,30,.98));
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.05),
-    var(--shadow),
-    var(--glow-strong);
+    inset 0 1px 0 rgba(255,255,255,.06),
+    inset 0 0 24px rgba(120,210,255,.05),
+    0 24px 60px rgba(0,0,0,.42),
+    0 0 40px rgba(90,180,255,.16);
   overflow:hidden;
   position:relative;
   transform:translateY(18px) scale(.96);
@@ -755,6 +757,7 @@ html.light-mode .logo-core{
   inset:0;
   pointer-events:none;
   background:
+    radial-gradient(circle at 50% 0%, rgba(120,210,255,.10), transparent 34%),
     linear-gradient(135deg, rgba(120,210,255,.08), transparent 26%, transparent 72%, rgba(120,210,255,.06) 100%);
 }
 
@@ -765,73 +768,118 @@ html.light-mode .logo-core{
   align-items:flex-start;
   justify-content:space-between;
   gap:16px;
-  padding:20px 22px 16px;
-  border-bottom:1px solid var(--border);
+  padding:24px 26px 18px;
+  border-bottom:1px solid rgba(140,210,255,.14);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0));
 }
 
 .detail-kicker{
   color:var(--system-glow);
   font-size:12px;
-  font-weight:800;
-  letter-spacing:.4px;
+  font-weight:900;
+  letter-spacing:.9px;
   text-transform:uppercase;
-  margin-bottom:6px;
+  margin-bottom:8px;
+  text-shadow:0 0 12px rgba(104,244,255,.18);
 }
 
 .detail-title{
   color:var(--title);
-  font-size:28px;
-  line-height:1.2;
-  font-weight:800;
-  margin:0 0 6px;
+  font-size:32px;
+  line-height:1.16;
+  font-weight:900;
+  margin:0 0 8px;
+  text-shadow:
+    0 0 12px rgba(120,210,255,.08),
+    0 0 26px rgba(90,180,255,.06);
 }
 
 .detail-subtitle{
   color:var(--text-soft);
   font-size:15px;
-  line-height:1.7;
+  line-height:1.8;
   margin:0;
+  max-width:580px;
 }
 
 .detail-close{
-  width:44px;
-  height:44px;
+  width:46px;
+  height:46px;
   border-radius:50%;
-  border:1px solid var(--border);
-  background:var(--panel-strong);
+  border:1px solid rgba(140,210,255,.22);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
   color:var(--title);
   font-size:24px;
   line-height:1;
   cursor:pointer;
-  flex:0 0 44px;
-  box-shadow:var(--shadow-soft);
+  flex:0 0 46px;
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.20),
+    inset 0 1px 0 rgba(255,255,255,.06);
 }
 
 .detail-body{
   position:relative;
   z-index:2;
-  padding:18px 22px 22px;
+  padding:22px 26px 26px;
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:18px;
+  gap:20px;
 }
 
 .detail-box{
-  border-radius:22px;
-  border:1px solid var(--border);
-  background:rgba(255,255,255,.02);
-  padding:18px;
+  border-radius:24px;
+  border:1px solid rgba(140,210,255,.16);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.015));
+  padding:20px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.04),
+    0 10px 24px rgba(0,0,0,.12);
 }
 
 html.light-mode .detail-box{
   background:rgba(255,255,255,.50);
 }
 
+html.light-mode .detail-shell{
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.98), rgba(242,247,255,.99));
+  border:1px solid rgba(78,144,220,.20);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.75),
+    0 24px 60px rgba(20,60,120,.12),
+    0 0 30px rgba(90,180,255,.08);
+}
+
+html.light-mode .detail-top{
+  border-bottom:1px solid rgba(78,144,220,.12);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,0));
+}
+
+html.light-mode .detail-box{
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.75), rgba(248,251,255,.58));
+  border:1px solid rgba(78,144,220,.14);
+  box-shadow:
+    0 10px 24px rgba(30,80,150,.06),
+    inset 0 1px 0 rgba(255,255,255,.85);
+}
+
+html.light-mode .defense-tag{
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.95), rgba(245,249,255,.88));
+  border:1px solid rgba(78,144,220,.14);
+}
+
 .detail-box h4{
-  margin:0 0 8px;
+  margin:0 0 10px;
   color:var(--title);
-  font-size:18px;
-  font-weight:800;
+  font-size:19px;
+  font-weight:900;
   line-height:1.35;
 }
 
@@ -839,7 +887,7 @@ html.light-mode .detail-box{
   margin:0;
   color:var(--text-soft);
   font-size:15px;
-  line-height:1.8;
+  line-height:1.9;
 }
 
 .defense-tags{
@@ -850,18 +898,21 @@ html.light-mode .detail-box{
 }
 
 .defense-tag{
-  min-height:38px;
-  padding:8px 14px;
+  min-height:40px;
+  padding:8px 15px;
   border-radius:999px;
-  border:1px solid var(--border);
-  background:var(--panel-strong);
+  border:1px solid rgba(140,210,255,.16);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
   color:var(--title);
   font-size:13px;
   font-weight:800;
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  box-shadow:var(--shadow-soft);
+  box-shadow:
+    0 8px 18px rgba(0,0,0,.12),
+    inset 0 1px 0 rgba(255,255,255,.05);
 }
 
 /* LOWER BASE RAIL */
