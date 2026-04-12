@@ -137,6 +137,16 @@
     statusBar.textContent = "กดไอคอน 1 ครั้งเพื่อดูการป้องกัน หรือกด 2 ครั้งเพื่ออ่านรายละเอียด";
   }
 
+  function collapseSystem() {
+    clearStates();
+    closeDetail(true);
+    systemOpened = false;
+    showcase.classList.remove("is-open");
+    attackColumn.classList.remove("ready");
+    systemColumn.classList.remove("ready");
+    statusBar.textContent = "กดโลโก้เพื่อเริ่มต้น";
+  }
+
   function hideLogoMode() {
     logoMode.classList.add("is-hidden");
   }
@@ -167,11 +177,13 @@
     detailMode.setAttribute("aria-hidden", "false");
   }
 
-  function closeDetail() {
+  function closeDetail(silent = false) {
     detailMode.classList.remove("is-open");
     detailMode.setAttribute("aria-hidden", "true");
     showLogoMode();
-    statusBar.textContent = "กดไอคอน 1 ครั้งเพื่อดูการป้องกัน หรือกด 2 ครั้งเพื่ออ่านรายละเอียด";
+    if (!silent && systemOpened) {
+      statusBar.textContent = "กดไอคอน 1 ครั้งเพื่อดูการป้องกัน หรือกด 2 ครั้งเพื่ออ่านรายละเอียด";
+    }
   }
 
   function clearStates() {
@@ -226,7 +238,9 @@
       document.querySelectorAll(".icon-card.is-source").forEach(el => {
         el.classList.remove("is-source");
       });
-      statusBar.textContent = "กดไอคอน 1 ครั้งเพื่อดูการป้องกัน หรือกด 2 ครั้งเพื่ออ่านรายละเอียด";
+      if (systemOpened && !detailMode.classList.contains("is-open")) {
+        statusBar.textContent = "กดไอคอน 1 ครั้งเพื่อดูการป้องกัน หรือกด 2 ครั้งเพื่ออ่านรายละเอียด";
+      }
     }, 5200);
   }
 
@@ -234,10 +248,9 @@
     const config = attackMap[attackKey];
     if (!config || !systemOpened) return;
 
-    detailMode.classList.remove("is-open");
-    detailMode.setAttribute("aria-hidden", "true");
-    showLogoMode();
+    closeDetail(true);
     clearStates();
+    showLogoMode();
 
     const parentRect = showcase.getBoundingClientRect();
     const sourceCenter = getCenter(sourceCard, parentRect);
@@ -265,9 +278,8 @@
 
   function runSystemFocus(systemKey, sourceCard) {
     if (!systemOpened) return;
+    closeDetail(true);
     clearStates();
-    detailMode.classList.remove("is-open");
-    detailMode.setAttribute("aria-hidden", "true");
     showLogoMode();
 
     sourceCard.classList.add("is-target");
@@ -275,7 +287,9 @@
 
     activeTimeout = setTimeout(() => {
       sourceCard.classList.remove("is-target");
-      statusBar.textContent = "กดไอคอน 1 ครั้งเพื่อดูการป้องกัน หรือกด 2 ครั้งเพื่ออ่านรายละเอียด";
+      if (systemOpened) {
+        statusBar.textContent = "กดไอคอน 1 ครั้งเพื่อดูการป้องกัน หรือกด 2 ครั้งเพื่ออ่านรายละเอียด";
+      }
     }, 2200);
   }
 
@@ -290,11 +304,7 @@
       return;
     }
 
-    logoCore.classList.add("is-burst");
-    statusBar.textContent = "ระบบพร้อมใช้งานแล้ว เลือกไอคอนได้เลย";
-    setTimeout(() => {
-      logoCore.classList.remove("is-burst");
-    }, 600);
+    collapseSystem();
   });
 
   document.querySelectorAll("[data-kind='attack']").forEach(btn => {
@@ -331,7 +341,9 @@
     });
   });
 
-  detailClose.addEventListener("click", closeDetail);
+  detailClose.addEventListener("click", function () {
+    closeDetail();
+  });
 
   window.addEventListener("resize", function () {
     beamLayer.innerHTML = "";
