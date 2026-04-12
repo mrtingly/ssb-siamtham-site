@@ -5,14 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google" content="notranslate" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
   <title>Stealth Safety Bank Mobile System | Siam Tham Co.,Ltd.</title>
 
+  <!-- ✅ HEAD จาก index.html -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&family=Orbitron:wght@500;600;700;800;900&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&family=Orbitron:wght@500;600;700;800;900&display=swap" rel="stylesheet"/>
 
   <script>
     (function () {
@@ -23,306 +22,174 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="css/ssb-system.css?v=40" />
-  <link rel="stylesheet" href="css/ssb-system-mobile.css?v=40" media="(max-width: 1023px), (max-width: 1366px) and (orientation: portrait)" />
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/ssb-system.css?v=ultimate" />
+  <link rel="stylesheet" href="css/ssb-system-mobile.css?v=ultimate" media="(max-width:1023px)" />
 </head>
-<body>
-  <div class="site-wrap">
-    <header class="ssb-topbar">
-      <div class="topbar-inner">
-        <div class="brand-wrap">
-          <div class="brand-logo">
-            <img src="images/logo.png" alt="Stealth Safety Bank Logo" loading="lazy" />
-          </div>
 
-          <div class="brand-text">
-            <div class="brand-line-1">บริษัท สยามทำ จำกัด</div>
-            <div class="brand-line-2">Siam Tham Co.,Ltd.</div>
-            <div class="brand-site">
-              <a href="https://www.siamtham.com" target="_blank" rel="noopener">www.siamtham.com</a>
-            </div>
-          </div>
+<body>
+<div class="site-wrap">
+
+  <!-- ✅ HEAD จาก INDEX (ยกมาเลย) -->
+  <header class="ssb-topbar">
+    <div class="topbar-inner">
+
+      <div class="brand-wrap">
+        <div class="brand-logo">
+          <img src="images/logo.png">
         </div>
 
-        <div class="topbar-actions">
-          <div class="theme-switch-wrap">
-            <span class="mode-label">Dark</span>
-            <button id="themeToggle" class="theme-switch" type="button" aria-label="Toggle theme">
-              <span class="switch-knob"></span>
-            </button>
-            <span class="mode-label">Light</span>
-          </div>
+        <div class="brand-text">
+          <div class="brand-line-1">บริษัท สยามทำ จำกัด</div>
+          <div class="brand-line-2">Siam Tham Co.,Ltd.</div>
+          <div class="brand-site">www.siamtham.com</div>
         </div>
       </div>
-    </header>
 
-    <main class="main-content">
-      <section class="hero-card">
-        <div class="hero-head">
-          <div class="hero-kicker">SSB Mobile System</div>
-          <h1>STEALTH SAFETY BANK MOBILE SYSTEM</h1>
-          <p>
-            กดโลโก้เพื่อเปิดหรือปิดระบบ กดไอคอน 1 ครั้งเพื่อดูวิธีการป้องกัน
-            และกด 2 ครั้งเพื่ออ่านรายละเอียดของไอคอนการโจมตีหรือระบบป้องกัน
-          </p>
-          <div class="guide-text">
-            <span>กด 1 ครั้ง = ดูการป้องกัน</span>
-            <span class="guide-emphasis">กด 2 ครั้ง = อ่านรายละเอียด</span>
-          </div>
+      <div class="topbar-actions">
+        <div class="theme-switch-wrap">
+          <span class="mode-label">Dark</span>
+          <button id="themeToggle" class="theme-switch">
+            <span class="switch-knob"></span>
+          </button>
+          <span class="mode-label">Light</span>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <section class="hero-card">
+
+      <div class="hero-head">
+        <div class="hero-kicker">SSB Mobile System</div>
+        <h1>STEALTH SAFETY BANK MOBILE SYSTEM</h1>
+        <p>ระบบความปลอดภัยทางการเงินเชิงโครงสร้าง ที่ลดการเป็นเป้าหมายตั้งแต่ต้นทาง</p>
+      </div>
+
+      <!-- ========================= -->
+      <!-- SHOWCASE SYSTEM -->
+      <!-- ========================= -->
+
+      <section class="showcase" id="showcase">
+
+        <div class="beam-svg-wrap">
+          <svg class="beam-svg" id="beamSvg"></svg>
         </div>
 
-        <section class="showcase" id="showcase">
-          <div class="beam-rail" aria-hidden="true">
-            <div class="beam-rail-line"></div>
-            <div class="beam-rail-spark beam-rail-spark-a"></div>
-            <div class="beam-rail-spark beam-rail-spark-b"></div>
-          </div>
+        <!-- LEFT ATTACK -->
+        <aside class="icon-column left" id="attackColumn">
 
-          <div class="beam-svg-wrap" id="beamSvgWrap" aria-hidden="true">
-            <svg class="beam-svg" id="beamSvg"></svg>
-          </div>
+          <article class="icon-card attack-card">
+            <button class="icon-btn" data-kind="attack" data-key="psychological">
+              <span class="icon-frame">
+                <img src="images/Psychological.png">
+              </span>
+              <span class="icon-meta">
+                <span class="icon-name">Psychological</span>
+                <span class="icon-sub">การกดดัน หลอกลวง</span>
+              </span>
+            </button>
+          </article>
 
-          <aside class="icon-column left" id="attackColumn">
-            <article class="icon-card attack-card" id="attack-psychological">
-              <button class="icon-btn" type="button" data-kind="attack" data-key="psychological">
-                <span class="icon-frame">
-                  <img src="images/Psychological.png" alt="Psychological">
-                </span>
-                <span class="icon-meta">
-                  <span class="icon-name">Psychological</span>
-                  <span class="icon-sub">การกดดัน หลอกลวง เร่งรัดการตัดสินใจ</span>
-                </span>
+          <article class="icon-card attack-card">
+            <button class="icon-btn" data-kind="attack" data-key="phishing">
+              <span class="icon-frame">
+                <img src="images/Phishing.png">
+              </span>
+              <span class="icon-meta">
+                <span class="icon-name">Phishing</span>
+                <span class="icon-sub">ลิงก์ปลอม</span>
+              </span>
+            </button>
+          </article>
+
+        </aside>
+
+        <!-- CENTER -->
+        <section class="center-stage">
+
+          <div class="logo-mode" id="logoMode">
+
+            <div class="logo-orbit-wrap">
+
+              <svg class="logo-orbit-svg" viewBox="0 0 320 320">
+                <circle cx="160" cy="160" r="120"></circle>
+              </svg>
+
+              <button class="logo-core" id="logoCore">
+                <img src="images/logo.png">
               </button>
-            </article>
 
-            <article class="icon-card attack-card" id="attack-phishing">
-              <button class="icon-btn" type="button" data-kind="attack" data-key="phishing">
-                <span class="icon-frame">
-                  <img src="images/Phishing.png" alt="Phishing">
-                </span>
-                <span class="icon-meta">
-                  <span class="icon-name">Phishing</span>
-                  <span class="icon-sub">ลิงก์ปลอม หน้าเว็บปลอม ขโมยข้อมูลสำคัญ</span>
-                </span>
-              </button>
-            </article>
-
-            <article class="icon-card attack-card" id="attack-remote">
-              <button class="icon-btn" type="button" data-kind="attack" data-key="remote">
-                <span class="icon-frame">
-                  <img src="images/Remote.png" alt="Remote">
-                </span>
-                <span class="icon-meta">
-                  <span class="icon-name">Remote</span>
-                  <span class="icon-sub">ควบคุมเครื่องจากระยะไกลผ่านแอปหรือมัลแวร์</span>
-                </span>
-              </button>
-            </article>
-
-            <article class="icon-card attack-card" id="attack-fake-app">
-              <button class="icon-btn" type="button" data-kind="attack" data-key="fake-app">
-                <span class="icon-frame">
-                  <img src="images/Fake app.png" alt="Fake App">
-                </span>
-                <span class="icon-meta">
-                  <span class="icon-name">Fake App</span>
-                  <span class="icon-sub">แอปปลอมที่เข้าถึงข้อมูลหรือธุรกรรม</span>
-                </span>
-              </button>
-            </article>
-          </aside>
-
-          <section class="center-stage" id="centerStage">
-            <div class="center-aura"></div>
-
-            <div class="logo-mode" id="logoMode">
-              <div class="logo-orbit-wrap">
-                <svg class="logo-orbit-svg" viewBox="0 0 320 320" aria-hidden="true">
-                  <circle class="logo-orbit-ring" cx="160" cy="160" r="128"></circle>
-                  <circle class="logo-orbit-ring second" cx="160" cy="160" r="112"></circle>
-                  <circle class="logo-orbit-runner" cx="160" cy="32" r="6"></circle>
-                  <circle class="logo-orbit-runner two" cx="160" cy="48" r="4"></circle>
-                </svg>
-
-                <button class="logo-core" id="logoCore" type="button" aria-label="Open or collapse system">
-                  <img src="images/logo.png" alt="SSB Core Logo">
-                </button>
-              </div>
-
-              <div class="center-caption">
-                <div class="center-caption-main">System-Based Security</div>
-                <div class="center-caption-sub">กดโลโก้เพื่อให้ระบบกางออกจากศูนย์กลาง</div>
-              </div>
             </div>
 
-            <div class="detail-mode" id="detailMode" aria-hidden="true">
-              <div class="detail-shell">
-                <div class="detail-top">
-                  <div>
-                    <div class="detail-kicker" id="detailKicker">DETAIL</div>
-                    <h3 class="detail-title" id="detailTitle">Title</h3>
-                    <p class="detail-subtitle" id="detailSubtitle">Subtitle</p>
-                  </div>
+          </div>
 
-                  <button class="detail-close" id="detailClose" type="button" aria-label="ปิด">×</button>
-                </div>
+          <div class="status-bar" id="statusBar">
+            กดโลโก้เพื่อเริ่มต้นระบบ
+          </div>
 
-                <div class="detail-body">
-                  <div class="detail-box">
-                    <h4>ความหมาย</h4>
-                    <p id="detailMeaning"></p>
-                  </div>
-
-                  <div class="detail-box">
-                    <h4>ระบบที่เกี่ยวข้อง</h4>
-                    <div class="defense-tags" id="detailTags"></div>
-                  </div>
-
-                  <div class="detail-box">
-                    <h4>SSB จัดการอย่างไร</h4>
-                    <p id="detailProtection"></p>
-                  </div>
-
-                  <div class="detail-box">
-                    <h4>เหตุผลของการออกแบบ</h4>
-                    <p id="detailReason"></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="status-bar" id="statusBar">กดโลโก้เพื่อเริ่มต้น</div>
-          </section>
-
-          <aside class="icon-column right" id="systemColumn">
-            <article class="icon-card system-card" id="system-fd">
-              <button class="icon-btn" type="button" data-kind="system" data-key="fd">
-                <span class="icon-frame">
-                  <img src="images/Flare Device.png" alt="FD - Flare Device">
-                </span>
-                <span class="icon-meta">
-                  <span class="icon-name">FD - Flare Device</span>
-                  <span class="icon-sub">จุดรับแรงและเบี่ยงความสนใจออกจากระบบหลัก</span>
-                </span>
-              </button>
-            </article>
-
-            <article class="icon-card system-card" id="system-safety-book">
-              <button class="icon-btn" type="button" data-kind="system" data-key="safety-book">
-                <span class="icon-frame">
-                  <img src="images/Safety Book.png" alt="Safety Book">
-                </span>
-                <span class="icon-meta">
-                  <span class="icon-name">Safety Book</span>
-                  <span class="icon-sub">แยกเก็บ ลดการเข้าถึง และลดการมองเห็นจากภายนอก</span>
-                </span>
-              </button>
-            </article>
-
-            <article class="icon-card system-card" id="system-time-barrier">
-              <button class="icon-btn" type="button" data-kind="system" data-key="time-barrier">
-                <span class="icon-frame">
-                  <img src="images/Time Barrier.png" alt="Time Barrier">
-                </span>
-                <span class="icon-meta">
-                  <span class="icon-name">Time Barrier</span>
-                  <span class="icon-sub">หน่วงเวลาเพื่อคืนสติและลดการตัดสินใจผิดพลาด</span>
-                </span>
-              </button>
-            </article>
-
-            <article class="icon-card system-card" id="system-spc">
-              <button class="icon-btn" type="button" data-kind="system" data-key="spc">
-                <span class="icon-frame">
-                  <img src="images/SPC.png" alt="SPC">
-                </span>
-                <span class="icon-meta">
-                  <span class="icon-name">SPC</span>
-                  <span class="icon-sub">ศูนย์ช่วยเหลือและรับช่วงตรวจสอบแทนผู้ใช้งาน</span>
-                </span>
-              </button>
-            </article>
-          </aside>
         </section>
 
-        <div class="bottom-box">
-          <strong>SSBMS ไม่ได้ปลอดภัย เพราะอุปกรณ์เพียงชิ้นเดียว</strong>
-          <span>
-            แต่ปลอดภัย เพราะทุกองค์ประกอบถูกออกแบบให้ทำงานร่วมกัน
-            และควบคุม “จุดตัดสินใจ” ก่อนที่ความผิดพลาดจะเกิดขึ้น
-          </span>
-        </div>
+        <!-- RIGHT SYSTEM -->
+        <aside class="icon-column right" id="systemColumn">
+
+          <article class="icon-card system-card" id="system-fd">
+            <button class="icon-btn" data-kind="system" data-key="fd">
+              <span class="icon-frame">
+                <img src="images/Flare Device.png">
+              </span>
+              <span class="icon-meta">
+                <span class="icon-name">FD</span>
+                <span class="icon-sub">Flare Device</span>
+              </span>
+            </button>
+          </article>
+
+          <article class="icon-card system-card" id="system-safety-book">
+            <button class="icon-btn" data-kind="system" data-key="safety-book">
+              <span class="icon-frame">
+                <img src="images/Safety Book.png">
+              </span>
+              <span class="icon-meta">
+                <span class="icon-name">Safety Book</span>
+                <span class="icon-sub">การอำพราง</span>
+              </span>
+            </button>
+          </article>
+
+        </aside>
+
       </section>
-    </main>
 
-    <footer class="ssb-footer">
-      <div class="footer-shell">
-        <div class="footer-desktop-grid">
-          <div class="footer-desktop-left">
-            <div class="footer-company-th">บริษัท สยามทำ จำกัด</div>
-            <div class="footer-company-en">Siamtham Co.,Ltd.</div>
-            <div class="footer-address">54 ซอย 53 ถนนพุทธมณฑลสาย 1</div>
-            <div class="footer-address">แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ</div>
-            <div class="footer-reg">เลขทะเบียน 0105566099954</div>
-          </div>
-
-          <div class="footer-desktop-divider" aria-hidden="true"></div>
-
-          <div class="footer-desktop-center">
-            <div class="footer-icons">
-              <a href="https://maps.app.goo.gl/Dz4B1kpqVbmWhkYX7" target="_blank" rel="noopener" aria-label="Map">
-                <img src="https://cdn.simpleicons.org/googlemaps/EA4335" alt="Map">
-              </a>
-              <a href="https://line.me/R/ti/p/@siamtham" target="_blank" rel="noopener" aria-label="LINE">
-                <img src="https://cdn.simpleicons.org/line/06C755" alt="LINE">
-              </a>
-              <a href="https://www.facebook.com/profile.php?id=61556844339863" target="_blank" rel="noopener" aria-label="Facebook">
-                <img src="https://cdn.simpleicons.org/facebook/1877F2" alt="Facebook">
-              </a>
-              <a href="https://www.youtube.com/@siamtham" target="_blank" rel="noopener" aria-label="YouTube">
-                <img src="https://cdn.simpleicons.org/youtube/FF0000" alt="YouTube">
-              </a>
-              <a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">
-                <img src="https://cdn.simpleicons.org/tiktok/000000" alt="TikTok">
-              </a>
-            </div>
-          </div>
-
-          <div class="footer-desktop-divider" aria-hidden="true"></div>
-
-          <div class="footer-desktop-right">
-            <div class="footer-phone-label">เบอร์โทรศัพท์</div>
-
-            <a class="footer-phone" href="tel:020432988">
-              <span class="footer-phone-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M6.6 10.8c1.6 3.1 3.5 5 6.6 6.6l2.2-2.2c.28-.28.7-.37 1.07-.24 1.2.4 2.5.62 3.83.62.4 0 .72.32.72.72V20c0 .4-.32.72-.72.72C10.87 20.72 3.28 13.13 3.28 3.72c0-.4.32-.72.72-.72H7.6c.4 0 .72.32.72.72 0 1.33.21 2.63.62 3.83.12.37.03.79-.25 1.07L6.6 10.8Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </span>
-              <span>02-043-2988</span>
-            </a>
-
-            <a class="footer-phone" href="tel:0649514888">
-              <span class="footer-phone-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M6.6 10.8c1.6 3.1 3.5 5 6.6 6.6l2.2-2.2c.28-.28.7-.37 1.07-.24 1.2.4 2.5.62 3.83.62.4 0 .72.32.72.72V20c0 .4-.32.72-.72.72C10.87 20.72 3.28 13.13 3.28 3.72c0-.4.32-.72.72-.72H7.6c.4 0 .72.32.72.72 0 1.33.21 2.63.62 3.83.12.37.03.79-.25 1.07L6.6 10.8Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </span>
-              <span>064-951-4888</span>
-            </a>
-          </div>
-        </div>
-
-        <div class="footer-bottom-line"></div>
-
-        <div class="footer-copy">
-          <div>@ Stealth Safety Bank Mobile System</div>
-          <div>BY Mr.Tingly Marketing Online</div>
-        </div>
+      <!-- BOTTOM -->
+      <div class="bottom-box">
+        <strong>ไม่ใช่แค่ป้องกัน แต่ทำให้ไม่มีเป้าหมาย</strong>
+        <span>เมื่อไม่มีเป้าหมาย การโจมตีก็ไม่สามารถเกิดขึ้นได้</span>
       </div>
-    </footer>
-  </div>
 
-  <script src="js/ssb-system-page.js?v=40"></script>
+    </section>
+
+  </main>
+
+  <!-- FOOT -->
+  <footer class="ssb-footer">
+    <div class="footer-shell">
+      <div class="footer-copy">
+        <div>@ Stealth Safety Bank Mobile System</div>
+        <div>BY Siam Tham</div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script src="js/ssb-system-page.js?v=40"></script>
+
 </body>
 </html>
