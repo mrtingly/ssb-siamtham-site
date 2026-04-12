@@ -1575,3 +1575,87 @@ html.light-mode .defense-tag{
   from{ transform:rotate(0deg); }
   to{ transform:rotate(360deg); }
 }
+
+/* ===== AI POPUP ===== */
+
+.ai-popup{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,.55);
+  z-index:999;
+  opacity:0;
+  pointer-events:none;
+  transition:.4s;
+}
+
+.ai-popup.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.ai-popup-card{
+  width:420px;
+  border-radius:22px;
+  padding:22px;
+  background:
+    linear-gradient(180deg, rgba(10,26,56,.96), rgba(5,14,32,.98));
+  border:1px solid rgba(120,210,255,.25);
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.5),
+    0 0 40px rgba(90,180,255,.18);
+  position:relative;
+}
+
+.ai-avatar{
+  display:flex;
+  justify-content:center;
+  margin-bottom:14px;
+}
+
+.ai-core{
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  background:
+    radial-gradient(circle, rgba(104,244,255,.6), rgba(0,0,0,.9));
+  box-shadow:
+    0 0 30px rgba(0,255,255,.5),
+    0 0 60px rgba(0,180,255,.3);
+  animation:aiPulse 2s infinite;
+}
+
+@keyframes aiPulse{
+  0%,100%{ transform:scale(1); }
+  50%{ transform:scale(1.1); }
+}
+
+.ai-title{
+  text-align:center;
+  font-weight:900;
+  font-size:14px;
+  letter-spacing:1px;
+  color:#7fd6ff;
+  margin-bottom:10px;
+}
+
+.ai-message{
+  font-size:15px;
+  line-height:1.7;
+  color:#d6ecff;
+  text-align:center;
+  min-height:80px;
+}
+
+.ai-close{
+  position:absolute;
+  top:10px;
+  right:12px;
+  border:none;
+  background:none;
+  color:#fff;
+  font-size:22px;
+  cursor:pointer;
+}
