@@ -25,6 +25,9 @@
   <!-- CSS -->
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/popup.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
   <link rel="stylesheet" href="css/ssb-system.css?v=ultimate" />
   <link rel="stylesheet" href="css/ssb-system-mobile.css?v=ultimate" media="(max-width:1023px)" />
 </head>
@@ -33,33 +36,70 @@
 <div class="site-wrap">
 
   <!-- ✅ HEAD จาก INDEX (ยกมาเลย) -->
-  <header class="ssb-topbar">
-    <div class="topbar-inner">
-
-      <div class="brand-wrap">
-        <div class="brand-logo">
-          <img src="images/logo.png">
-        </div>
-
-        <div class="brand-text">
-          <div class="brand-line-1">บริษัท สยามทำ จำกัด</div>
-          <div class="brand-line-2">Siam Tham Co.,Ltd.</div>
-          <div class="brand-site">www.siamtham.com</div>
-        </div>
+  <header class="ssb-topbar" role="banner">
+  <div class="topbar-inner">
+    <div class="brand-wrap">
+      <div class="brand-logo">
+        <img src="images/logo.png" alt="Stealth Safety Bank Logo" loading="lazy" />
       </div>
 
-      <div class="topbar-actions">
-        <div class="theme-switch-wrap">
-          <span class="mode-label">Dark</span>
-          <button id="themeToggle" class="theme-switch">
-            <span class="switch-knob"></span>
-          </button>
-          <span class="mode-label">Light</span>
+      <div class="brand-text">
+        <div class="brand-line-1 th-font">บริษัท สยามทำ จำกัด</div>
+        <div class="brand-line-2 en-font">Siam Tham Co.,Ltd.</div>
+        <div class="brand-site en-font">
+          <a href="https://www.siamtham.com" target="_blank" rel="noopener">www.siamtham.com</a>
         </div>
       </div>
-
     </div>
-  </header>
+
+    <div class="header-search-wrap">
+      <form class="header-search" id="agentSearchForm" autocomplete="off" role="search" aria-label="ค้นหาตัวแทน">
+        <svg class="header-search-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="2"></circle>
+          <path d="M16 16L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+        </svg>
+
+        <input
+          id="agentSearchInput"
+          class="header-search-input"
+          type="text"
+          placeholder="ค้นหาตัวแทน / Search agent"
+          aria-label="ค้นหาตัวแทน"
+        />
+
+        <button class="header-search-btn sound-click" type="submit">ค้นหา</button>
+      </form>
+
+      <div class="agent-dropdown" id="agentDropdown" aria-live="polite">
+        <div class="agent-dropdown-card">
+          <div class="agent-dropdown-head th-font">ผลการค้นหาตัวแทน</div>
+          <div class="agent-results" id="agentResults"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="topbar-actions">
+      <div class="theme-switch-wrap" id="desktopThemeSwitch">
+        <span class="mode-label">Dark</span>
+        <button id="themeToggle" class="theme-switch" type="button" aria-label="Toggle theme">
+          <span class="switch-knob"></span>
+        </button>
+        <span class="mode-label">Light</span>
+      </div>
+
+      <div class="lang-bar" aria-label="เลือกภาษา">
+        <button class="lang-btn sound-click active" type="button" data-lang="th" title="ไทย">
+          <img src="https://flagcdn.com/w40/th.png" alt="ไทย" loading="lazy" />
+        </button>
+        <button class="lang-btn sound-click" type="button" data-lang="en" title="English">
+          <img src="https://flagcdn.com/w40/us.png" alt="English" loading="lazy" />
+        </button>
+      </div>
+
+      <div id="google_translate_element"></div>
+    </div>
+  </div>
+</header>
 
   <!-- MAIN -->
   <main class="main-content">
@@ -191,5 +231,10 @@
 
 <script src="js/ssb-system-page.js?v=40"></script>
 
+<script src="js/data.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/popup.js"></script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  
 </body>
 </html>
