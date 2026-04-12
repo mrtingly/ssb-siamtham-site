@@ -103,7 +103,7 @@ button{ font:inherit; }
 .ssb-topbar{
   position:sticky;
   top:0;
-  z-index:50;
+  z-index:70;
   backdrop-filter:blur(14px);
   -webkit-backdrop-filter:blur(14px);
   background:var(--header-bg);
@@ -241,7 +241,7 @@ html.light-mode .switch-knob{
 
 .hero-head{
   position:relative;
-  z-index:3;
+  z-index:20;
   text-align:center;
   margin-bottom:8px;
 }
@@ -325,28 +325,29 @@ html.light-mode .switch-knob{
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  z-index:2;
-  padding-top:6px;
-  padding-bottom:76px;
+  z-index:12;
+  padding-top:8px;
+  padding-bottom:86px;
 }
 
 .center-aura{
   position:absolute;
   top:47%;
   left:50%;
-  width:480px;
-  height:480px;
+  width:500px;
+  height:500px;
   transform:translate(-50%, -50%);
   border-radius:50%;
   background:radial-gradient(circle, var(--logo-glow) 0%, rgba(98,188,255,0) 68%);
-  filter:blur(28px);
+  filter:blur(30px);
   pointer-events:none;
+  z-index:2;
 }
 
 /* CENTER STATES */
 .logo-mode{
   position:relative;
-  z-index:5;
+  z-index:6;
   transition:opacity .28s ease, transform .32s ease;
 }
 
@@ -363,7 +364,7 @@ html.light-mode .switch-knob{
   display:flex;
   align-items:center;
   justify-content:center;
-  z-index:5;
+  z-index:6;
 }
 
 .logo-orbit-svg{
@@ -414,7 +415,7 @@ html.light-mode .switch-knob{
 
 .logo-core{
   position:relative;
-  z-index:5;
+  z-index:6;
   width:290px;
   height:290px;
   border-radius:50%;
@@ -460,7 +461,7 @@ html.light-mode .logo-core{
     box-shadow:
       0 0 34px rgba(90,180,255,.16),
       inset 0 0 34px rgba(90,180,255,.08);
-  }
+    }
   50%{
     transform:scale(1.025);
     box-shadow:
@@ -480,7 +481,7 @@ html.light-mode .logo-core{
   margin-top:12px;
   text-align:center;
   position:relative;
-  z-index:4;
+  z-index:6;
 }
 
 .center-caption-main{
@@ -505,7 +506,7 @@ html.light-mode .logo-core{
   font-size:14px;
   font-weight:700;
   position:relative;
-  z-index:4;
+  z-index:6;
 }
 
 /* ICON COLUMNS */
@@ -517,7 +518,7 @@ html.light-mode .logo-core{
   gap:18px;
   width:248px;
   transform:translateY(-50%);
-  z-index:6;
+  z-index:14;
   pointer-events:none;
 }
 
@@ -686,7 +687,7 @@ html.light-mode .logo-core{
   justify-content:center;
   opacity:0;
   pointer-events:none;
-  z-index:8;
+  z-index:18;
   transition:opacity .28s ease;
 }
 
@@ -830,14 +831,14 @@ html.light-mode .detail-box{
   box-shadow:var(--shadow-soft);
 }
 
-/* EUROPEAN-STYLE LIGHT BAR */
+/* LOWER BASE RAIL */
 .beam-rail{
   position:absolute;
   left:70px;
   right:70px;
-  bottom:18px;
+  bottom:22px;
   height:22px;
-  z-index:2;
+  z-index:1;
   pointer-events:none;
 }
 
@@ -853,13 +854,13 @@ html.light-mode .detail-box{
   box-shadow:
     0 0 8px rgba(119,216,255,.45),
     0 0 18px rgba(119,216,255,.25);
-  opacity:.9;
+  opacity:.92;
 }
 
 .beam-rail-spark{
   position:absolute;
   top:50%;
-  width:72px;
+  width:78px;
   height:4px;
   border-radius:999px;
   transform:translateY(-50%);
@@ -871,11 +872,11 @@ html.light-mode .detail-box{
 }
 
 .beam-rail-spark-a{
-  animation:railSweep 1.15s ease-in-out infinite;
+  animation:railSweep 1.8s ease-in-out infinite;
 }
 
 .beam-rail-spark-b{
-  animation:railSweep 1.15s ease-in-out infinite .58s;
+  animation:railSweep 1.8s ease-in-out infinite .9s;
 }
 
 @keyframes railSweep{
@@ -890,13 +891,13 @@ html.light-mode .detail-box{
     opacity:1;
   }
   100%{
-    left:calc(100% - 72px);
+    left:calc(100% - 78px);
     opacity:0;
   }
 }
 
-/* ACTIVE BEAMS */
-.beam-layer{
+/* CURVED ACTIVE BEAMS UNDER GLOW */
+.beam-svg-wrap{
   position:absolute;
   inset:0;
   z-index:3;
@@ -904,52 +905,46 @@ html.light-mode .detail-box{
   overflow:hidden;
 }
 
-.beam{
-  position:absolute;
-  left:var(--x1, 0);
-  top:var(--y1, 0);
-  width:var(--length, 0);
-  height:4px;
-  transform-origin:0 50%;
-  transform:rotate(var(--angle, 0deg)) scaleX(0);
-  border-radius:999px;
-  opacity:0;
+.beam-svg{
+  width:100%;
+  height:100%;
+  display:block;
+  overflow:visible;
 }
 
-.beam.inbound{
-  background:linear-gradient(90deg, rgba(255,170,82,0), #ffb864 35%, #ffffff 100%);
-  box-shadow:
-    0 0 18px rgba(255,184,94,.52),
-    0 0 28px rgba(255,255,255,.34);
+.beam-path{
+  fill:none;
+  stroke-linecap:round;
+  stroke-width:3.25;
+  opacity:.92;
+  filter:drop-shadow(0 0 10px rgba(119,216,255,.35));
 }
 
-.beam.outbound{
-  background:linear-gradient(90deg, #ffffff 0%, var(--system-glow) 42%, rgba(119,216,255,0) 100%);
-  box-shadow:
-    0 0 16px rgba(120,220,255,.50),
-    0 0 28px rgba(120,220,255,.28);
+.beam-path.inbound{
+  stroke:url(#beamInboundGradient);
 }
 
-.beam.show{
-  opacity:1;
-  animation:beamSweep 1s linear 5;
+.beam-path.outbound{
+  stroke:url(#beamOutboundGradient);
 }
 
-@keyframes beamSweep{
+.beam-path.animate{
+  animation:beamSignal 1.5s linear 5;
+}
+
+@keyframes beamSignal{
   0%{
-    transform:rotate(var(--angle, 0deg)) scaleX(0);
+    stroke-dashoffset:var(--beam-len);
     opacity:0;
   }
-  15%{
-    transform:rotate(var(--angle, 0deg)) scaleX(1);
+  10%{
     opacity:1;
   }
   50%{
-    transform:rotate(var(--angle, 0deg)) scaleX(1);
-    opacity:.35;
+    opacity:.55;
   }
   100%{
-    transform:rotate(var(--angle, 0deg)) scaleX(1);
+    stroke-dashoffset:0;
     opacity:1;
   }
 }
