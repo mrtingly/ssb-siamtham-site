@@ -23,12 +23,7 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="css/ssb-system.css?v=8" />
-  <link
-    rel="stylesheet"
-    href="css/ssb-system-mobile.css?v=8"
-    media="screen and (max-width: 760px), screen and (max-width: 1024px) and (orientation: portrait)"
-  />
+  <link rel="stylesheet" href="css/ssb-system.css?v=9" />
 </head>
 <body>
   <main class="ssb-page">
@@ -38,264 +33,126 @@
       <section class="ssb-hero">
         <div class="ssb-kicker">SSB Mobile System</div>
 
-        <div class="ssb-hero-grid">
-          <div class="ssb-video-card">
-            <div class="ssb-video-frame">
-              <iframe
-                id="ssbVideo"
-                src="https://www.youtube-nocookie.com/embed/pcuhurVMqLQ"
-                title="Stealth Safety Bank Mobile System Video"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              ></iframe>
-            </div>
-            <div class="ssb-video-note">
-              ระบบความปลอดภัยทางการเงินแบบองค์รวม ที่ออกแบบมาเพื่อลดโอกาสการตกเป็นเป้าหมายตั้งแต่ต้นทาง
-            </div>
-          </div>
-
-          <aside class="ssb-side-nav">
-            <a href="#ssb-overview" class="ssb-side-btn">1. SSB Mobile System</a>
-            <a href="#ssb-threats" class="ssb-side-btn">2. ภัยที่เกิดขึ้นจริง</a>
-            <a href="#ssb-core" class="ssb-side-btn">3. Core System</a>
-            <a href="#ssb-modules" class="ssb-side-btn">4. ระบบย่อย</a>
-            <a href="index.html" class="ssb-side-btn ssb-side-btn-secondary">กลับหน้าแรก</a>
-          </aside>
-        </div>
-      </section>
-
-      <!-- OVERVIEW -->
-      <section class="ssb-overview-card" id="ssb-overview">
-        <div class="ssb-overview-head">
+        <div class="ssb-hero-head">
           <h1>STEALTH SAFETY BANK MOBILE SYSTEM</h1>
           <p>
-            ระบบที่ออกแบบมาเพื่อทำให้ “ไม่มีตัวตนให้โจมตี” เพราะการโจมตีต้องมีเป้าหมาย
-            และระบบนี้ทำให้การเงินของคุณถูกแยกออกจากความเสี่ยงของโลกภายนอกอย่างเป็นระบบ
+            ระบบที่ออกแบบมาเพื่อทำให้การเงินของผู้ใช้งาน
+            ถูกแยกออกจากความเสี่ยงของโลกภายนอกอย่างเป็นระบบ
           </p>
-        </div>
-
-        <div class="ssb-highlight-row">
-          <div class="ssb-highlight-box">แยกเครื่องการเงินออกจากเครื่องใช้งาน</div>
-          <div class="ssb-highlight-box">ลดโอกาสการโจมตีตั้งแต่ต้นทาง</div>
-          <div class="ssb-highlight-box">ทุกองค์ประกอบทำงานร่วมกันทั้งระบบ</div>
         </div>
       </section>
 
-      <!-- DESKTOP MAIN -->
-      <section class="ssb-main-grid">
+      <!-- SHOWCASE -->
+      <section class="ssb-showcase">
+
         <!-- LEFT -->
-        <section class="ssb-panel ssb-threat-panel" id="ssb-threats">
-          <div class="ssb-panel-head">
-            <h2>ภัยออนไลน์ + ออฟไลน์</h2>
-            <p>รูปแบบความเสี่ยงที่เกิดขึ้นจริงในชีวิตประจำวัน</p>
-          </div>
+        <section class="ssb-panel ssb-side-panel ssb-attack-panel">
+          <div class="panel-top-title">ช่องทางการจอดเต็กที่เกิดขึ้นจริง</div>
 
-          <div class="ssb-threat-table">
-            <div class="ssb-threat-row">
-              <div class="ssb-threat-name">คอลเซ็นเตอร์หลอกโอน</div>
-              <div class="ssb-threat-solution">SPC / TBS</div>
-            </div>
-            <div class="ssb-threat-row">
-              <div class="ssb-threat-name">ฟิชชิง / ลิงก์ปลอม</div>
-              <div class="ssb-threat-solution">FD / SSB</div>
-            </div>
-            <div class="ssb-threat-row">
-              <div class="ssb-threat-name">แอปปลอม / มัลแวร์</div>
-              <div class="ssb-threat-solution">FD / SSB</div>
-            </div>
-            <div class="ssb-threat-row">
-              <div class="ssb-threat-name">รีโมทควบคุมเครื่องระยะไกล</div>
-              <div class="ssb-threat-solution">FD / SSB</div>
-            </div>
-            <div class="ssb-threat-row">
-              <div class="ssb-threat-name">ขโมย OTP / ดักข้อมูล</div>
-              <div class="ssb-threat-solution">FD / SSB</div>
-            </div>
-            <div class="ssb-threat-row">
-              <div class="ssb-threat-name">SIM Swap / แฮกเบอร์</div>
-              <div class="ssb-threat-solution">FD / SSB</div>
-            </div>
-            <div class="ssb-threat-row">
-              <div class="ssb-threat-name">Wi-Fi ปลอม / ดักเน็ต</div>
-              <div class="ssb-threat-solution">FD / SSB</div>
-            </div>
-            <div class="ssb-threat-row">
-              <div class="ssb-threat-name">ปลอมตัว / แอบอ้าง</div>
-              <div class="ssb-threat-solution">SPC / TBS</div>
-            </div>
-            <div class="ssb-threat-row">
-              <div class="ssb-threat-name">แฮกบัญชีธนาคาร</div>
-              <div class="ssb-threat-solution">FD / SSB</div>
-            </div>
-            <div class="ssb-threat-row">
-              <div class="ssb-threat-name">ดักข้อมูลการเงิน</div>
-              <div class="ssb-threat-solution">FD / SSB</div>
-            </div>
-            <div class="ssb-threat-row">
-              <div class="ssb-threat-name">ขโมยโทรศัพท์</div>
-              <div class="ssb-threat-solution">SB / FD</div>
-            </div>
-            <div class="ssb-threat-row">
-              <div class="ssb-threat-name">บังคับโอนเงิน</div>
-              <div class="ssb-threat-solution">SB / FD</div>
-            </div>
-            <div class="ssb-threat-row">
-              <div class="ssb-threat-name">แอบเข้าเครื่อง</div>
-              <div class="ssb-threat-solution">SB / FD</div>
-            </div>
-            <div class="ssb-threat-row">
-              <div class="ssb-threat-name">หลอกยืมเครื่อง</div>
-              <div class="ssb-threat-solution">SB / FD</div>
-            </div>
-            <div class="ssb-threat-row">
-              <div class="ssb-threat-name">USB ดักข้อมูล</div>
-              <div class="ssb-threat-solution">SB / FD</div>
-            </div>
-            <div class="ssb-threat-row">
-              <div class="ssb-threat-name">อุปกรณ์ชาร์จดัดแปลงแฮก</div>
-              <div class="ssb-threat-solution">SB / FD</div>
-            </div>
-            <div class="ssb-threat-row">
-              <div class="ssb-threat-name">ปล้นจี้ใช้กำลังบังคับ</div>
-              <div class="ssb-threat-solution">SB / FD</div>
-            </div>
-          </div>
+          <div class="icon-list attack-list">
 
-          <div class="ssb-summary-callout">
-            <strong>Stealth Safety Bank Mobile System</strong>
-            ลดโอกาสการโจมตีของมิจฉาชีพด้วยระบบล่องหนที่ออกแบบมาให้ทุกองค์ประกอบทำงานร่วมกัน
+            <div class="ssb-icon-card">
+              <div class="ssb-icon-frame">
+                <img src="images/ChatGPT Image 1 เม.ย. 2569 05_08_49.png" alt="Psychological Attack">
+              </div>
+              <div class="ssb-icon-name">Psychological</div>
+            </div>
+
+            <div class="ssb-icon-card">
+              <div class="ssb-icon-frame">
+                <img src="images/ChatGPT Image 1 เม.ย. 2569 05_08_49.png" alt="Phishing Attack">
+              </div>
+              <div class="ssb-icon-name">Phishing</div>
+            </div>
+
+            <div class="ssb-icon-card">
+              <div class="ssb-icon-frame">
+                <img src="images/ChatGPT Image 1 เม.ย. 2569 05_08_49.png" alt="Remote Control Attack">
+              </div>
+              <div class="ssb-icon-name">Remote Control</div>
+            </div>
+
+            <div class="ssb-icon-card">
+              <div class="ssb-icon-frame">
+                <img src="images/ChatGPT Image 1 เม.ย. 2569 05_08_49.png" alt="Fake App Attack">
+              </div>
+              <div class="ssb-icon-name">Fake App</div>
+            </div>
+
+            <div class="ssb-icon-card">
+              <div class="ssb-icon-frame">
+                <img src="images/ChatGPT Image 1 เม.ย. 2569 05_08_49.png" alt="SIM Swap Attack">
+              </div>
+              <div class="ssb-icon-name">SIM Swap</div>
+            </div>
+
+            <div class="ssb-icon-card">
+              <div class="ssb-icon-frame">
+                <img src="images/ChatGPT Image 1 เม.ย. 2569 05_08_49.png" alt="Fake WiFi Attack">
+              </div>
+              <div class="ssb-icon-name">Fake WiFi</div>
+            </div>
+
           </div>
         </section>
 
         <!-- CENTER -->
-        <section class="ssb-panel ssb-core-panel" id="ssb-core">
-          <div class="ssb-company-strip">
-            <img src="images/logo.png" alt="Siam Tham Logo" />
-            <div class="ssb-company-text">
-              <div class="ssb-company-name">บริษัท สยามทำ จำกัด</div>
-              <div>54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ</div>
-              <div>เลขทะเบียน 0105566099954</div>
-              <div>Website: www.siamtham.com</div>
-            </div>
+        <section class="ssb-center-stage">
+          <div class="center-glow"></div>
+          <div class="center-logo-wrap">
+            <img src="images/logo.png" alt="SSBMS Logo" class="center-logo">
           </div>
-
-          <div class="ssb-device-stage ssb-brochure-stage">
-            <img class="ssb-brochure-image" src="images/HEAD SSB แผ่นพับ.jpg" alt="Stealth Safety Bank Mobile System Brochure">
-          </div>
-
-          <div class="ssb-core-subtitle">Stealth Safety Bank Mobile System</div>
-
-          <div class="ssb-core-menu">
-            <a href="#module-ssb">Stealth Safety Bank Mobile</a>
-            <a href="#module-fd">Flare Device</a>
-            <a href="#module-sb">Stealth Safety Book</a>
-            <a href="#module-tbs">Time Barrier System</a>
-            <a href="#module-spc">Siamtham Protection Center</a>
+          <div class="center-caption">
+            <div class="center-caption-main">System-Based Security</div>
+            <div class="center-caption-sub">ทุกองค์ประกอบทำงานร่วมกันเป็นระบบ</div>
           </div>
         </section>
 
         <!-- RIGHT -->
-        <section class="ssb-panel ssb-modules-panel" id="ssb-modules">
-          <div class="ssb-panel-head">
-            <h2>ระบบย่อย</h2>
-            <p>องค์ประกอบหลักที่ทำงานร่วมกันอย่างเป็นระบบ</p>
+        <section class="ssb-panel ssb-side-panel ssb-system-panel">
+          <div class="panel-top-title">การป้องกันที่ทำงานร่วมกันเป็นระบบ</div>
+
+          <div class="icon-list system-list">
+
+            <div class="ssb-icon-card">
+              <div class="ssb-icon-frame ssb-icon-frame-system">
+                <img src="images/logo.png" alt="FD">
+              </div>
+              <div class="ssb-icon-name">FD - First Defense Device</div>
+            </div>
+
+            <div class="ssb-icon-card">
+              <div class="ssb-icon-frame ssb-icon-frame-system">
+                <img src="images/book.jpg" alt="Safety Book">
+              </div>
+              <div class="ssb-icon-name">Safety Book</div>
+            </div>
+
+            <div class="ssb-icon-card">
+              <div class="ssb-icon-frame ssb-icon-frame-system">
+                <img src="images/logo.png" alt="TBS">
+              </div>
+              <div class="ssb-icon-name">TBS - Time Barrier System</div>
+            </div>
+
+            <div class="ssb-icon-card">
+              <div class="ssb-icon-frame ssb-icon-frame-system">
+                <img src="images/logo.png" alt="SPC">
+              </div>
+              <div class="ssb-icon-name">SPC - Crisis Interception Unit</div>
+            </div>
+
           </div>
-
-          <article class="ssb-module-card" id="module-ssb">
-            <h3>SSBMS - Stealth Safety Bank Mobile System</h3>
-            <p>
-              ระบบที่ออกแบบขึ้นเพื่อทำให้ไม่มีตัวตนให้โจมตี เพราะการโจมตีต้องมีเป้าหมาย และทุกองค์ประกอบด้านล่างทำงานร่วมกันเป็นระบบเดียว
-            </p>
-          </article>
-
-          <article class="ssb-module-card">
-            <h3>SSB. - Stealth Safety Bank Mobile</h3>
-            <p>
-              เครื่องมือสำหรับใช้ในการทำธุรกรรมทางการเงิน ที่ถูกออกแบบให้แยกออกจากความเสี่ยงของการใช้งานทั่วไปอย่างชัดเจน
-            </p>
-          </article>
-
-          <article class="ssb-module-card" id="module-fd">
-            <h3>FD. - Flare Device</h3>
-            <p>
-              เครื่องใช้งานที่เปิดเผยต่อโลกภายนอก ใช้รับความเสี่ยงแทนระบบหลัก เพื่อไม่ให้เครื่องเก็บเงินจริงต้องออกไปเผชิญความเสี่ยงโดยตรง
-            </p>
-          </article>
-
-          <article class="ssb-module-card" id="module-sb">
-            <h3>SB. - Stealth Safety Book</h3>
-            <p>
-              อุปกรณ์เก็บเครื่องแบบล่องหน ใช้ป้องกันการเข้าถึงจากภายนอก ลดการสังเกต และช่วยให้เครื่องดูไม่มีความสำคัญจากสายตาคนทั่วไป
-            </p>
-          </article>
-
-          <article class="ssb-module-card" id="module-tbs">
-            <h3>TBS. - Time Barrier System</h3>
-            <p>
-              กระบวนการใช้งานที่มีลำดับขั้นตอนชัดเจน โดยออกแบบเวลาในการเข้าถึงระบบเพื่อให้เพียงพอต่อการตั้งสติ ก่อนการโอนเงินทุกครั้ง
-            </p>
-          </article>
-
-          <article class="ssb-module-card" id="module-spc">
-            <h3>SPC. - Siamtham Protection Center</h3>
-            <p>
-              หากมีสายที่มีความเสี่ยงหรือมีพฤติกรรมเร่งรัดกดดันให้โอนเงิน ไม่ต้องคุยต่อ ให้ผู้เชี่ยวชาญรับช่วงแทนทันที เพื่อช่วยตรวจสอบ เจรจา และค้นหาความจริงแทนคุณ
-            </p>
-          </article>
         </section>
+
       </section>
 
-      <!-- MOBILE STACK -->
-      <section class="ssb-mobile-stack">
-        <section class="ssb-mobile-card ssb-mobile-intro">
-          <h2>Stealth Safety Bank Mobile System</h2>
-          <p>
-            ระบบที่ออกแบบมาเพื่อทำให้ไม่มีตัวตนให้โจมตี โดยแยกเครื่องการเงินออกจากความเสี่ยงของโลกภายนอกอย่างเป็นระบบ
-          </p>
-        </section>
-
-        <section class="ssb-mobile-card ssb-mobile-core">
-          <div class="ssb-device-stage ssb-brochure-stage">
-            <img class="ssb-brochure-image" src="images/HEAD SSB แผ่นพับ.jpg" alt="Stealth Safety Bank Mobile System Brochure">
-          </div>
-
-          <div class="ssb-mobile-core-menu">
-            <a href="#module-ssb">SSB Mobile</a>
-            <a href="#module-fd">Flare Device</a>
-            <a href="#module-sb">Safety Book</a>
-            <a href="#module-tbs">Time Barrier</a>
-            <a href="#module-spc">SPC</a>
-          </div>
-        </section>
-
-        <section class="ssb-mobile-card">
-          <h3>ภัยที่เกิดขึ้นจริง</h3>
-          <div class="ssb-mobile-list">
-            <div>คอลเซ็นเตอร์หลอกโอน</div>
-            <div>Phishing / ลิงก์ปลอม</div>
-            <div>SIM Swap</div>
-            <div>Malware / แอปปลอม</div>
-            <div>ขโมย OTP</div>
-            <div>แฮกบัญชีธนาคาร</div>
-          </div>
-        </section>
-
-        <section class="ssb-mobile-card">
-          <h3>ระบบย่อย</h3>
-          <div class="ssb-mobile-module-list">
-            <div><strong>SSB Mobile</strong><span>เครื่องธุรกรรมทางการเงินหลัก</span></div>
-            <div><strong>Flare Device</strong><span>ตัวรับความเสี่ยงแทนระบบหลัก</span></div>
-            <div><strong>Safety Book</strong><span>เก็บและลดการเข้าถึงจากภายนอก</span></div>
-            <div><strong>Time Barrier</strong><span>หน่วงเวลาให้มีสติ</span></div>
-            <div><strong>Protection Center</strong><span>ทีมช่วยเหลือทันทีเมื่อมีความเสี่ยง</span></div>
-          </div>
-        </section>
-
-        <section class="ssb-mobile-card ssb-mobile-summary">
-          <strong>Stealth Safety Bank Mobile System</strong>
-          <p>ลดโอกาสการโจมตีของมิจฉาชีพ ด้วยระบบที่ออกแบบให้ทุกองค์ประกอบทำงานร่วมกันอย่างเป็นระบบ</p>
-        </section>
+      <!-- BOTTOM MESSAGE -->
+      <section class="ssb-bottom-message">
+        <div class="ssb-bottom-box">
+          <strong>SSBMS ไม่ได้ปลอดภัย เพราะอุปกรณ์ชิ้นใดชิ้นหนึ่ง</strong>
+          <span>แต่ปลอดภัย เพราะทุกองค์ประกอบถูกออกแบบให้ทำงานร่วมกัน และควบคุม “จุดตัดสินใจ” ก่อนที่ความผิดพลาดจะเกิดขึ้น</span>
+        </div>
       </section>
 
     </section>
