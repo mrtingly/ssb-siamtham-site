@@ -23,135 +23,154 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="css/ssb-system.css?v=9" />
+  <link rel="stylesheet" href="css/ssb-system.css?v=10" />
 </head>
 <body>
   <main class="ssb-page">
     <section class="ssb-shell">
 
-      <!-- HERO -->
       <section class="ssb-hero">
         <div class="ssb-kicker">SSB Mobile System</div>
 
         <div class="ssb-hero-head">
           <h1>STEALTH SAFETY BANK MOBILE SYSTEM</h1>
           <p>
-            ระบบที่ออกแบบมาเพื่อทำให้การเงินของผู้ใช้งาน
-            ถูกแยกออกจากความเสี่ยงของโลกภายนอกอย่างเป็นระบบ
+            ระบบที่ออกแบบมาเพื่อแยกการเงินออกจากความเสี่ยงของโลกภายนอกอย่างเป็นระบบ
+            และควบคุมจุดตัดสินใจก่อนที่ความผิดพลาดจะเกิดขึ้น
           </p>
         </div>
       </section>
 
-      <!-- SHOWCASE -->
-      <section class="ssb-showcase">
+      <section class="ssb-showcase" id="ssbShowcase">
 
-        <!-- LEFT -->
+        <div class="energy-layer" aria-hidden="true">
+          <span class="energy-line energy-left"></span>
+          <span class="energy-line energy-right"></span>
+        </div>
+
         <section class="ssb-panel ssb-side-panel ssb-attack-panel">
-          <div class="panel-top-title">ช่องทางการจอดเต็กที่เกิดขึ้นจริง</div>
+          <div class="panel-top-title">ช่องทางการโจมตีที่เกิดขึ้นจริง</div>
 
           <div class="icon-list attack-list">
+            <article class="ssb-icon-card">
+              <button class="ssb-icon-btn" type="button" data-name="Psychological">
+                <span class="ssb-icon-frame">
+                  <img src="images/Psychological.png" alt="Psychological">
+                </span>
+                <span class="ssb-icon-name">Psychological</span>
+              </button>
+            </article>
 
-            <div class="ssb-icon-card">
-              <div class="ssb-icon-frame">
-                <img src="images/ChatGPT Image 1 เม.ย. 2569 05_08_49.png" alt="Psychological Attack">
-              </div>
-              <div class="ssb-icon-name">Psychological</div>
-            </div>
+            <article class="ssb-icon-card">
+              <button class="ssb-icon-btn" type="button" data-name="Phishing">
+                <span class="ssb-icon-frame">
+                  <img src="images/Phishing.png" alt="Phishing">
+                </span>
+                <span class="ssb-icon-name">Phishing</span>
+              </button>
+            </article>
 
-            <div class="ssb-icon-card">
-              <div class="ssb-icon-frame">
-                <img src="images/ChatGPT Image 1 เม.ย. 2569 05_08_49.png" alt="Phishing Attack">
-              </div>
-              <div class="ssb-icon-name">Phishing</div>
-            </div>
+            <article class="ssb-icon-card">
+              <button class="ssb-icon-btn" type="button" data-name="Remote">
+                <span class="ssb-icon-frame">
+                  <img src="images/Remote.png" alt="Remote">
+                </span>
+                <span class="ssb-icon-name">Remote</span>
+              </button>
+            </article>
 
-            <div class="ssb-icon-card">
-              <div class="ssb-icon-frame">
-                <img src="images/ChatGPT Image 1 เม.ย. 2569 05_08_49.png" alt="Remote Control Attack">
-              </div>
-              <div class="ssb-icon-name">Remote Control</div>
-            </div>
+            <article class="ssb-icon-card">
+              <button class="ssb-icon-btn" type="button" data-name="Fake App">
+                <span class="ssb-icon-frame">
+                  <img src="images/Fake app.png" alt="Fake App">
+                </span>
+                <span class="ssb-icon-name">Fake App</span>
+              </button>
+            </article>
 
-            <div class="ssb-icon-card">
-              <div class="ssb-icon-frame">
-                <img src="images/ChatGPT Image 1 เม.ย. 2569 05_08_49.png" alt="Fake App Attack">
-              </div>
-              <div class="ssb-icon-name">Fake App</div>
-            </div>
+            <article class="ssb-icon-card">
+              <button class="ssb-icon-btn" type="button" data-name="SIM Swap">
+                <span class="ssb-icon-frame">
+                  <img src="images/Phishing Dark.png" alt="SIM Swap">
+                </span>
+                <span class="ssb-icon-name">SIM Swap</span>
+              </button>
+            </article>
 
-            <div class="ssb-icon-card">
-              <div class="ssb-icon-frame">
-                <img src="images/ChatGPT Image 1 เม.ย. 2569 05_08_49.png" alt="SIM Swap Attack">
-              </div>
-              <div class="ssb-icon-name">SIM Swap</div>
-            </div>
-
-            <div class="ssb-icon-card">
-              <div class="ssb-icon-frame">
-                <img src="images/ChatGPT Image 1 เม.ย. 2569 05_08_49.png" alt="Fake WiFi Attack">
-              </div>
-              <div class="ssb-icon-name">Fake WiFi</div>
-            </div>
-
+            <article class="ssb-icon-card">
+              <button class="ssb-icon-btn" type="button" data-name="Fake WiFi">
+                <span class="ssb-icon-frame">
+                  <img src="images/Fake App Dark.png" alt="Fake WiFi">
+                </span>
+                <span class="ssb-icon-name">Fake WiFi</span>
+              </button>
+            </article>
           </div>
         </section>
 
-        <!-- CENTER -->
         <section class="ssb-center-stage">
           <div class="center-glow"></div>
-          <div class="center-logo-wrap">
+
+          <button class="center-logo-wrap" id="mainLogo" type="button" aria-label="Activate SSB System">
             <img src="images/logo.png" alt="SSBMS Logo" class="center-logo">
-          </div>
+          </button>
+
           <div class="center-caption">
             <div class="center-caption-main">System-Based Security</div>
-            <div class="center-caption-sub">ทุกองค์ประกอบทำงานร่วมกันเป็นระบบ</div>
+            <div class="center-caption-sub">กดโลโก้เพื่อกระตุ้นระบบพลังงาน</div>
           </div>
         </section>
 
-        <!-- RIGHT -->
         <section class="ssb-panel ssb-side-panel ssb-system-panel">
           <div class="panel-top-title">การป้องกันที่ทำงานร่วมกันเป็นระบบ</div>
 
           <div class="icon-list system-list">
+            <article class="ssb-icon-card">
+              <button class="ssb-icon-btn" type="button" data-name="FD">
+                <span class="ssb-icon-frame ssb-icon-frame-system">
+                  <img src="images/Flare Device.png" alt="FD - Flare Device">
+                </span>
+                <span class="ssb-icon-name">FD - Flare Device</span>
+              </button>
+            </article>
 
-            <div class="ssb-icon-card">
-              <div class="ssb-icon-frame ssb-icon-frame-system">
-                <img src="images/logo.png" alt="FD">
-              </div>
-              <div class="ssb-icon-name">FD - First Defense Device</div>
-            </div>
+            <article class="ssb-icon-card">
+              <button class="ssb-icon-btn" type="button" data-name="Safety Book">
+                <span class="ssb-icon-frame ssb-icon-frame-system">
+                  <img src="images/Safety Book.png" alt="Safety Book">
+                </span>
+                <span class="ssb-icon-name">Safety Book</span>
+              </button>
+            </article>
 
-            <div class="ssb-icon-card">
-              <div class="ssb-icon-frame ssb-icon-frame-system">
-                <img src="images/book.jpg" alt="Safety Book">
-              </div>
-              <div class="ssb-icon-name">Safety Book</div>
-            </div>
+            <article class="ssb-icon-card">
+              <button class="ssb-icon-btn" type="button" data-name="Time Barrier">
+                <span class="ssb-icon-frame ssb-icon-frame-system">
+                  <img src="images/Time Barrier.png" alt="Time Barrier">
+                </span>
+                <span class="ssb-icon-name">Time Barrier</span>
+              </button>
+            </article>
 
-            <div class="ssb-icon-card">
-              <div class="ssb-icon-frame ssb-icon-frame-system">
-                <img src="images/logo.png" alt="TBS">
-              </div>
-              <div class="ssb-icon-name">TBS - Time Barrier System</div>
-            </div>
-
-            <div class="ssb-icon-card">
-              <div class="ssb-icon-frame ssb-icon-frame-system">
-                <img src="images/logo.png" alt="SPC">
-              </div>
-              <div class="ssb-icon-name">SPC - Crisis Interception Unit</div>
-            </div>
-
+            <article class="ssb-icon-card">
+              <button class="ssb-icon-btn" type="button" data-name="SPC">
+                <span class="ssb-icon-frame ssb-icon-frame-system">
+                  <img src="images/SPC.png" alt="SPC">
+                </span>
+                <span class="ssb-icon-name">SPC</span>
+              </button>
+            </article>
           </div>
         </section>
-
       </section>
 
-      <!-- BOTTOM MESSAGE -->
       <section class="ssb-bottom-message">
         <div class="ssb-bottom-box">
-          <strong>SSBMS ไม่ได้ปลอดภัย เพราะอุปกรณ์ชิ้นใดชิ้นหนึ่ง</strong>
-          <span>แต่ปลอดภัย เพราะทุกองค์ประกอบถูกออกแบบให้ทำงานร่วมกัน และควบคุม “จุดตัดสินใจ” ก่อนที่ความผิดพลาดจะเกิดขึ้น</span>
+          <strong>SSBMS ไม่ได้ปลอดภัย เพราะอุปกรณ์เพียงชิ้นเดียว</strong>
+          <span>
+            แต่ปลอดภัย เพราะทุกองค์ประกอบถูกออกแบบให้ทำงานร่วมกัน
+            และควบคุม “จุดตัดสินใจ” ก่อนที่ความผิดพลาดจะเกิดขึ้น
+          </span>
         </div>
       </section>
 
@@ -224,5 +243,27 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      const showcase = document.getElementById("ssbShowcase");
+      const logo = document.getElementById("mainLogo");
+
+      if (!showcase || !logo) return;
+
+      let energyTimeout = null;
+
+      logo.addEventListener("click", function () {
+        showcase.classList.remove("energy-active");
+        void showcase.offsetWidth;
+        showcase.classList.add("energy-active");
+
+        clearTimeout(energyTimeout);
+        energyTimeout = setTimeout(function () {
+          showcase.classList.remove("energy-active");
+        }, 1800);
+      });
+    })();
+  </script>
 </body>
 </html>
