@@ -408,3 +408,29 @@
     ensureSvgDefs();
   });
 })();
+
+// ===== AI POPUP =====
+const aiPopup = document.getElementById("aiPopup");
+const aiMessage = document.getElementById("aiMessage");
+const aiClose = document.getElementById("aiClose");
+
+const message = "ทุกการโจมตีต้องมีเป้าหมาย...\nแต่ระบบนี้ ไม่มีตัวตนให้โจมตี\nStealth Safety Bank Mobile System กำลังทำงาน";
+
+let i = 0;
+
+function typeText(){
+  if(i < message.length){
+    aiMessage.innerHTML += message.charAt(i);
+    i++;
+    setTimeout(typeText, 28);
+  }
+}
+
+setTimeout(()=>{
+  aiPopup.classList.add("active");
+  typeText();
+}, 800);
+
+aiClose.onclick = () => {
+  aiPopup.classList.remove("active");
+};
