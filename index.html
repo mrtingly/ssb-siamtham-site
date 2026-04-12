@@ -5,39 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google" content="notranslate" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
   <title>Stealth Safety Bank Mobile System | Siam Tham Co.,Ltd.</title>
-  <meta
-    name="description"
-    content="Stealth Safety Bank Mobile System โดย บริษัท สยามทำ จำกัด ระบบความปลอดภัยทางการเงินเชิงโครงสร้าง การแยกอุปกรณ์ธุรกรรม การอำพรางการจัดเก็บ และแนวคิดลดความเสี่ยงจากการโจมตีตั้งแต่ต้นทาง"
-  />
-  <meta
-    name="keywords"
-    content="Stealth Safety Bank, Stealth Safety Bank Mobile System, Stealth Safety Book, Siam Tham, บริษัท สยามทำ จำกัด, ความปลอดภัยทางการเงิน, mobile banking security, anti phishing, anti hacking"
-  />
-  <meta name="author" content="Siam Tham Co.,Ltd." />
-  <meta name="robots" content="index, follow, max-image-preview:large" />
-  <meta name="theme-color" content="#1b63c7" />
-  <link rel="canonical" href="https://www.siamtham.com/" />
-
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Siam Tham Co.,Ltd." />
-  <meta property="og:title" content="Stealth Safety Bank Mobile System | Siam Tham Co.,Ltd." />
-  <meta
-    property="og:description"
-    content="ระบบความปลอดภัยทางการเงินเชิงโครงสร้าง ลดความเสี่ยงจากแอปไม่จำเป็น การใช้งานปะปน และช่องทางโจมตีที่ไม่เกี่ยวข้องกับธุรกรรม"
-  />
-  <meta property="og:url" content="https://www.siamtham.com/" />
-  <meta property="og:image" content="https://www.siamtham.com/images/logo.png" />
-  <meta property="og:locale" content="th_TH" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Stealth Safety Bank Mobile System | Siam Tham Co.,Ltd." />
-  <meta
-    name="twitter:description"
-    content="ระบบความปลอดภัยทางการเงินเชิงโครงสร้าง ลดความเสี่ยงตั้งแต่ต้นทาง และยกระดับการใช้งานอย่างรอบคอบ"
-  />
-  <meta name="twitter:image" content="https://www.siamtham.com/images/logo.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -46,294 +14,1057 @@
     rel="stylesheet"
   />
 
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Organization",
-    "name":"Siam Tham Co.,Ltd.",
-    "alternateName":"บริษัท สยามทำ จำกัด",
-    "url":"https://www.siamtham.com/",
-    "logo":"https://www.siamtham.com/images/logo.png",
-    "email":"mailto:mysiamtham@gmail.com",
-    "telephone":"+66-2-043-2988",
-    "sameAs":[
-      "https://www.facebook.com/profile.php?id=61556844339863",
-      "https://www.youtube.com/@siamtham",
-      "https://line.me/R/ti/p/@siamtham"
-    ],
-    "address":{
-      "@type":"PostalAddress",
-      "streetAddress":"54 Soi 53, Phutthamonthon Sai 1 Road, Chimphli",
-      "addressLocality":"Taling Chan",
-      "addressRegion":"Bangkok",
-      "postalCode":"10170",
-      "addressCountry":"TH"
-    }
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"WebSite",
-    "name":"Siam Tham Co.,Ltd.",
-    "url":"https://www.siamtham.com/"
-  }
-  </script>
-
-  <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/layout.css" />
-  <link rel="stylesheet" href="css/hero-base.css" />
-  <link rel="stylesheet" href="css/hero-mobile.css" media="(max-width: 767px)" />
-  <link rel="stylesheet" href="css/hero-tablet.css" media="(min-width: 768px) and (max-width: 1023px)" />
-  <link rel="stylesheet" href="css/hero-desktop.css" media="(min-width: 1024px)" />
-  <link rel="stylesheet" href="css/popup.css" />
-  <link rel="stylesheet" href="css/components.css" />
-  <link rel="stylesheet" href="css/responsive.css" />
-  <link rel="stylesheet" href="css/popup-mobile.css" media="(max-width: 1023px)" />
-
-  <!-- DESKTOP FOOTER ONLY -->
   <style>
-    @media (min-width: 1024px) {
-      .ssb-footer {
-        position: relative;
-        overflow: hidden;
-        padding: 18px 26px 16px;
-        background:
-          linear-gradient(180deg, #4f8fe4 0%, #3f7fd7 52%, #3674cc 100%);
-        border-top: 1px solid rgba(255,255,255,.20);
-        box-shadow:
-          inset 0 1px 0 rgba(255,255,255,.16),
-          0 -10px 24px rgba(12,45,96,.08);
+    :root{
+      --shell: 1440px;
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+
+      --font-main: "Prompt", sans-serif;
+      --font-tech: "Orbitron", "Prompt", sans-serif;
+
+      --bg:
+        radial-gradient(circle at 50% 0%, rgba(50,140,255,.16) 0%, rgba(50,140,255,0) 26%),
+        radial-gradient(circle at 0% 28%, rgba(80,180,255,.10) 0%, rgba(80,180,255,0) 32%),
+        radial-gradient(circle at 100% 72%, rgba(80,180,255,.08) 0%, rgba(80,180,255,0) 26%),
+        linear-gradient(180deg, #041126 0%, #081b38 48%, #04101f 100%);
+
+      --grid-line: rgba(120,180,255,.035);
+
+      --text: #eaf4ff;
+      --text-soft: #9cb9d8;
+      --title: #f7fbff;
+
+      --panel:
+        linear-gradient(180deg, rgba(8,20,44,.94), rgba(5,13,30,.96));
+
+      --panel-glass:
+        linear-gradient(180deg, rgba(18,40,88,.38), rgba(8,20,48,.44));
+
+      --panel-strong:
+        radial-gradient(circle at 50% 0%, rgba(95,185,255,.10), transparent 44%),
+        linear-gradient(180deg, rgba(10,26,56,.96), rgba(5,14,32,.98));
+
+      --border: rgba(103,185,255,.24);
+      --border-strong: rgba(140,210,255,.42);
+
+      --accent: #72d0ff;
+      --accent-orange: #ffb464;
+      --shadow: 0 18px 40px rgba(0,0,0,.34);
+      --shadow-soft: 0 10px 24px rgba(0,0,0,.18);
+      --glow: 0 0 22px rgba(90,180,255,.16);
+      --glow-strong: 0 0 38px rgba(90,180,255,.22);
+    }
+
+    html.light-mode{
+      --bg:
+        radial-gradient(circle at 50% 0%, rgba(96,170,255,.16) 0%, rgba(96,170,255,0) 22%),
+        radial-gradient(circle at 0% 30%, rgba(130,190,255,.10) 0%, rgba(130,190,255,0) 28%),
+        radial-gradient(circle at 100% 70%, rgba(130,190,255,.08) 0%, rgba(130,190,255,0) 24%),
+        linear-gradient(180deg, #f8fbff 0%, #eef4fb 55%, #f7fbff 100%);
+
+      --grid-line: rgba(40,110,180,.04);
+
+      --text: #173b67;
+      --text-soft: #6486ad;
+      --title: #0e3567;
+
+      --panel:
+        linear-gradient(180deg, rgba(255,255,255,.98), rgba(243,248,255,.98));
+
+      --panel-glass:
+        linear-gradient(180deg, rgba(98,165,255,.14), rgba(56,120,220,.08));
+
+      --panel-strong:
+        radial-gradient(circle at 50% 0%, rgba(105,180,255,.08), transparent 44%),
+        linear-gradient(180deg, rgba(255,255,255,.99), rgba(242,247,255,.99));
+
+      --border: rgba(78,144,220,.18);
+      --border-strong: rgba(78,144,220,.34);
+
+      --accent: #48b7ff;
+      --accent-orange: #ffab4d;
+      --shadow: 0 18px 36px rgba(18,52,108,.09);
+      --shadow-soft: 0 10px 22px rgba(18,52,108,.08);
+      --glow: 0 0 18px rgba(90,170,255,.10);
+      --glow-strong: 0 0 30px rgba(90,170,255,.12);
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family:var(--font-main);
+      color:var(--text);
+      background:var(--bg);
+      min-height:100vh;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background:
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+      background-size:28px 28px;
+      mask-image:linear-gradient(180deg, rgba(0,0,0,.78), rgba(0,0,0,.18));
+      -webkit-mask-image:linear-gradient(180deg, rgba(0,0,0,.78), rgba(0,0,0,.18));
+    }
+
+    img{ display:block; max-width:100%; }
+    a{ color:inherit; text-decoration:none; }
+    button{ font:inherit; }
+
+    .site-wrap{
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+    }
+
+    /* HEAD */
+    .ssb-topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+      background:linear-gradient(180deg, rgba(7,22,46,.92), rgba(7,22,46,.78));
+      border-bottom:1px solid rgba(255,255,255,.08);
+      box-shadow:0 12px 30px rgba(0,0,0,.18);
+    }
+
+    html.light-mode .ssb-topbar{
+      background:linear-gradient(180deg, rgba(255,255,255,.90), rgba(246,250,255,.86));
+      border-bottom:1px solid rgba(78,144,220,.16);
+    }
+
+    .topbar-inner{
+      width:min(100%, var(--shell));
+      margin:0 auto;
+      padding:14px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+    }
+
+    .brand-wrap{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      min-width:0;
+    }
+
+    .brand-logo{
+      width:58px;
+      height:58px;
+      border-radius:18px;
+      padding:8px;
+      border:1px solid var(--border);
+      background:var(--panel);
+      box-shadow:var(--shadow-soft), var(--glow);
+      flex:0 0 58px;
+    }
+
+    .brand-text{
+      min-width:0;
+    }
+
+    .brand-line-1{
+      font-size:18px;
+      font-weight:800;
+      color:var(--title);
+      line-height:1.15;
+    }
+
+    .brand-line-2{
+      font-size:14px;
+      font-weight:700;
+      color:var(--text-soft);
+      line-height:1.35;
+      margin-top:2px;
+    }
+
+    .brand-site{
+      font-size:13px;
+      font-weight:600;
+      color:var(--accent);
+      margin-top:2px;
+    }
+
+    .topbar-actions{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      flex-shrink:0;
+    }
+
+    .theme-switch-wrap{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    .mode-label{
+      font-size:13px;
+      font-weight:700;
+      color:var(--text-soft);
+    }
+
+    .theme-switch{
+      width:54px;
+      height:30px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:var(--panel);
+      position:relative;
+      cursor:pointer;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .switch-knob{
+      position:absolute;
+      top:3px;
+      left:3px;
+      width:22px;
+      height:22px;
+      border-radius:50%;
+      background:linear-gradient(180deg, #ffffff, #cfe7ff);
+      transition:transform .22s ease;
+    }
+
+    html.light-mode .switch-knob{
+      transform:translateX(24px);
+    }
+
+    .main-content{
+      flex:1;
+      width:min(100%, var(--shell));
+      margin:0 auto;
+      padding:22px 16px 28px;
+    }
+
+    /* HERO / SHOWCASE */
+    .hero-card{
+      position:relative;
+      border-radius:34px;
+      border:1px solid var(--border);
+      background:var(--panel-strong);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.05),
+        var(--shadow),
+        var(--glow);
+      overflow:hidden;
+      padding:24px 22px 26px;
+    }
+
+    .hero-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 50% 20%, rgba(120,210,255,.10), transparent 36%),
+        linear-gradient(135deg, rgba(120,210,255,.08), transparent 26%, transparent 72%, rgba(120,210,255,.06) 100%);
+    }
+
+    .hero-head{
+      position:relative;
+      z-index:2;
+      text-align:center;
+      margin-bottom:18px;
+    }
+
+    .hero-kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      margin-bottom:10px;
+      padding:8px 14px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:var(--panel);
+      color:var(--title);
+      font-size:13px;
+      font-weight:700;
+      letter-spacing:.4px;
+      text-transform:uppercase;
+      box-shadow:var(--glow);
+    }
+
+    .hero-kicker::before{
+      content:"";
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:var(--accent);
+      box-shadow:0 0 12px var(--accent);
+    }
+
+    .hero-head h1{
+      margin:0 0 8px;
+      color:var(--title);
+      font-family:var(--font-tech);
+      font-size:42px;
+      line-height:1.08;
+      font-weight:900;
+      text-shadow:0 0 18px rgba(100,190,255,.12);
+    }
+
+    .hero-head p{
+      margin:0 auto;
+      max-width:860px;
+      color:var(--text-soft);
+      font-size:16px;
+      line-height:1.75;
+    }
+
+    .showcase-grid{
+      position:relative;
+      z-index:2;
+      display:grid;
+      grid-template-columns:1fr 360px 1fr;
+      gap:22px;
+      align-items:center;
+      min-height:760px;
+    }
+
+    .showcase-col{
+      position:relative;
+      z-index:2;
+    }
+
+    .showcase-panel{
+      border-radius:28px;
+      border:1px solid var(--border);
+      background:var(--panel);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.04),
+        var(--shadow),
+        var(--glow);
+      padding:18px 16px 18px;
+      overflow:hidden;
+      position:relative;
+    }
+
+    .showcase-panel::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(135deg, rgba(120,210,255,.08), transparent 26%, transparent 72%, rgba(120,210,255,.06) 100%);
+    }
+
+    .panel-title{
+      position:relative;
+      z-index:2;
+      text-align:center;
+      color:var(--title);
+      font-size:18px;
+      font-weight:800;
+      line-height:1.35;
+      margin-bottom:14px;
+    }
+
+    .icon-grid{
+      position:relative;
+      z-index:2;
+      display:grid;
+      gap:14px;
+    }
+
+    .attack-grid{
+      grid-template-columns:repeat(2, minmax(0,1fr));
+    }
+
+    .system-grid{
+      grid-template-columns:1fr;
+    }
+
+    .icon-card{
+      position:relative;
+      border-radius:22px;
+      border:1px solid var(--border);
+      background:var(--panel-glass);
+      box-shadow:var(--shadow-soft);
+      overflow:hidden;
+      transition:
+        transform .18s ease,
+        border-color .18s ease,
+        box-shadow .18s ease;
+    }
+
+    .icon-card:hover{
+      transform:translateY(-2px);
+      border-color:var(--border-strong);
+    }
+
+    .icon-card.is-target{
+      border-color:rgba(120,220,255,.88);
+      box-shadow:
+        0 0 0 1px rgba(120,220,255,.44),
+        0 0 24px rgba(120,220,255,.34),
+        0 0 38px rgba(255,184,94,.16);
+    }
+
+    .icon-card.is-source{
+      border-color:rgba(255,184,94,.88);
+      box-shadow:
+        0 0 0 1px rgba(255,184,94,.40),
+        0 0 26px rgba(255,184,94,.28);
+    }
+
+    .icon-btn{
+      width:100%;
+      border:0;
+      background:transparent;
+      color:inherit;
+      padding:14px 12px 12px;
+      cursor:pointer;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      min-height:150px;
+    }
+
+    .icon-btn:focus-visible,
+    .logo-core:focus-visible{
+      outline:2px solid var(--border-strong);
+      outline-offset:2px;
+    }
+
+    .icon-frame{
+      width:86px;
+      height:86px;
+      border-radius:22px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin-bottom:10px;
+      background:
+        radial-gradient(circle at 50% 35%, rgba(120,210,255,.18), transparent 70%),
+        linear-gradient(180deg, rgba(16,38,84,.82), rgba(8,18,40,.92));
+      border:1px solid rgba(120,210,255,.24);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.06),
+        0 0 20px rgba(90,180,255,.10);
+    }
+
+    html.light-mode .icon-frame{
+      background:
+        radial-gradient(circle at 50% 35%, rgba(120,210,255,.18), transparent 70%),
+        linear-gradient(180deg, rgba(230,243,255,.98), rgba(215,234,255,.98));
+    }
+
+    .icon-frame img{
+      width:56px;
+      height:56px;
+      object-fit:contain;
+      filter:drop-shadow(0 0 10px rgba(80,180,255,.20));
+    }
+
+    .icon-name{
+      color:var(--title);
+      font-size:14px;
+      line-height:1.42;
+      font-weight:700;
+    }
+
+    .center-stage{
+      position:relative;
+      z-index:2;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      min-height:720px;
+    }
+
+    .center-aura{
+      position:absolute;
+      inset:50% auto auto 50%;
+      width:460px;
+      height:460px;
+      transform:translate(-50%, -50%);
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(98,188,255,.22) 0%, rgba(98,188,255,0) 68%);
+      filter:blur(22px);
+      pointer-events:none;
+    }
+
+    .logo-core{
+      position:relative;
+      z-index:3;
+      width:290px;
+      height:290px;
+      border-radius:50%;
+      border:1px solid rgba(132,212,255,.30);
+      background:
+        radial-gradient(circle at 50% 35%, rgba(130,210,255,.22), rgba(12,28,68,.92) 58%, rgba(5,12,30,.98) 100%);
+      box-shadow:
+        0 0 40px rgba(90,180,255,.18),
+        inset 0 0 34px rgba(90,180,255,.08);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      transition:transform .18s ease, box-shadow .18s ease;
+      overflow:hidden;
+    }
+
+    html.light-mode .logo-core{
+      background:
+        radial-gradient(circle at 50% 35%, rgba(130,210,255,.22), rgba(237,246,255,.98) 58%, rgba(228,240,255,.98) 100%);
+    }
+
+    .logo-core:hover{
+      transform:scale(1.03);
+      box-shadow:
+        0 0 54px rgba(90,180,255,.24),
+        inset 0 0 34px rgba(90,180,255,.10);
+    }
+
+    .logo-core.is-active{
+      box-shadow:
+        0 0 64px rgba(90,180,255,.34),
+        0 0 34px rgba(255,184,94,.22),
+        inset 0 0 34px rgba(90,180,255,.12);
+    }
+
+    .logo-core img{
+      width:180px;
+      height:180px;
+      object-fit:contain;
+      filter:drop-shadow(0 0 24px rgba(90,180,255,.24));
+    }
+
+    .center-caption{
+      margin-top:18px;
+      text-align:center;
+      position:relative;
+      z-index:2;
+    }
+
+    .center-caption-main{
+      color:var(--title);
+      font-size:24px;
+      line-height:1.2;
+      font-weight:800;
+    }
+
+    .center-caption-sub{
+      margin-top:6px;
+      color:var(--text-soft);
+      font-size:14px;
+      line-height:1.6;
+    }
+
+    .status-bar{
+      margin-top:16px;
+      min-height:28px;
+      text-align:center;
+      color:var(--accent);
+      font-size:14px;
+      font-weight:700;
+      position:relative;
+      z-index:2;
+    }
+
+    .bottom-box{
+      margin-top:22px;
+      border-radius:28px;
+      border:1px solid var(--border);
+      background:var(--panel-strong);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.04),
+        var(--shadow),
+        var(--glow);
+      padding:18px 20px;
+      text-align:center;
+      position:relative;
+      z-index:2;
+    }
+
+    .bottom-box strong{
+      display:block;
+      margin-bottom:8px;
+      color:var(--title);
+      font-size:22px;
+      line-height:1.35;
+      font-weight:800;
+    }
+
+    .bottom-box span{
+      display:block;
+      color:var(--text-soft);
+      font-size:16px;
+      line-height:1.8;
+    }
+
+    /* ENERGY LINES */
+    .beam-layer{
+      position:absolute;
+      inset:0;
+      z-index:1;
+      pointer-events:none;
+      overflow:hidden;
+    }
+
+    .beam{
+      position:absolute;
+      left:var(--x1, 0);
+      top:var(--y1, 0);
+      width:var(--length, 0);
+      height:4px;
+      transform-origin:0 50%;
+      transform:rotate(var(--angle, 0deg)) scaleX(0);
+      border-radius:999px;
+      opacity:0;
+    }
+
+    .beam.inbound{
+      background:linear-gradient(90deg, rgba(255,170,82,0), #ffb864 30%, #ffffff 100%);
+      box-shadow:
+        0 0 16px rgba(255,184,94,.48),
+        0 0 30px rgba(255,255,255,.34);
+    }
+
+    .beam.outbound{
+      background:linear-gradient(90deg, #ffffff 0%, #77d8ff 44%, rgba(119,216,255,0) 100%);
+      box-shadow:
+        0 0 16px rgba(120,220,255,.50),
+        0 0 30px rgba(120,220,255,.28);
+    }
+
+    .beam.show{
+      opacity:1;
+      animation:beamGrow .55s ease forwards;
+    }
+
+    @keyframes beamGrow{
+      from{ transform:rotate(var(--angle, 0deg)) scaleX(0); opacity:0; }
+      to{ transform:rotate(var(--angle, 0deg)) scaleX(1); opacity:1; }
+    }
+
+    /* FOOT */
+    .ssb-footer{
+      position:relative;
+      overflow:hidden;
+      margin-top:0;
+      padding:18px 26px 16px;
+      background:
+        linear-gradient(180deg, #4f8fe4 0%, #3f7fd7 52%, #3674cc 100%);
+      border-top:1px solid rgba(255,255,255,.20);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.16),
+        0 -10px 24px rgba(12,45,96,.08);
+    }
+
+    .ssb-footer::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 28%),
+        radial-gradient(circle at 82% 22%, rgba(255,255,255,.08) 0%, rgba(255,255,255,0) 26%);
+      opacity:.9;
+    }
+
+    .footer-shell{
+      position:relative;
+      z-index:1;
+      max-width:1360px;
+      margin:0 auto;
+      padding:16px 26px 14px;
+      border-radius:24px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,.05) 100%);
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.14),
+        0 14px 30px rgba(15,46,96,.10);
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
+    }
+
+    .footer-desktop-grid{
+      display:grid;
+      grid-template-columns:1fr 1px auto 1px 1fr;
+      align-items:center;
+      gap:22px;
+    }
+
+    .footer-desktop-left{ text-align:left; }
+    .footer-desktop-center{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      width:100%;
+    }
+    .footer-desktop-right{ text-align:right; }
+
+    .footer-desktop-divider{
+      width:1px;
+      height:96px;
+      background:linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(255,255,255,.30) 18%,
+        rgba(255,255,255,.30) 82%,
+        transparent 100%
+      );
+    }
+
+    .footer-company-th{
+      font-size:18px;
+      line-height:1.2;
+      font-weight:800;
+      color:#ffffff;
+      margin-bottom:6px;
+    }
+
+    .footer-company-en{
+      font-size:15px;
+      line-height:1.35;
+      font-weight:700;
+      color:rgba(255,255,255,.92);
+      margin-bottom:10px;
+    }
+
+    .footer-address,
+    .footer-reg{
+      font-size:14px;
+      line-height:1.65;
+      font-weight:500;
+      color:rgba(255,255,255,.88);
+    }
+
+    .footer-phone-label{
+      font-size:14px;
+      line-height:1.2;
+      font-weight:700;
+      color:rgba(255,255,255,.78);
+      margin-bottom:10px;
+    }
+
+    .footer-phone{
+      display:inline-flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:10px;
+      width:100%;
+      font-size:18px;
+      line-height:1.35;
+      font-weight:800;
+      color:#ffffff;
+      margin-bottom:8px;
+      white-space:nowrap;
+    }
+
+    .footer-phone-icon{
+      width:18px;
+      height:18px;
+      flex:0 0 18px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      color:rgba(255,255,255,.92);
+    }
+
+    .footer-phone-icon svg{
+      width:18px;
+      height:18px;
+      display:block;
+    }
+
+    .footer-icons{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:14px;
+      width:100%;
+      margin:0 auto;
+    }
+
+    .footer-icons a{
+      width:50px;
+      height:50px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.98) 0%, rgba(244,248,255,.96) 100%);
+      border:1px solid rgba(255,255,255,.28);
+      box-shadow:
+        0 10px 22px rgba(14,43,92,.16),
+        inset 0 1px 0 rgba(255,255,255,1);
+      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .footer-icons a:hover{
+      transform:translateY(-2px);
+      box-shadow:
+        0 14px 28px rgba(14,43,92,.20),
+        inset 0 1px 0 rgba(255,255,255,1);
+      border-color:rgba(255,255,255,.44);
+    }
+
+    .footer-icons img{
+      width:22px;
+      height:22px;
+      object-fit:contain;
+      display:block;
+    }
+
+    .footer-bottom-line{
+      height:1px;
+      margin:16px 0 12px;
+      background:linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255,255,255,.26) 14%,
+        rgba(255,255,255,.26) 86%,
+        transparent 100%
+      );
+    }
+
+    .footer-copy{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      width:100%;
+    }
+
+    .footer-copy div:first-child{
+      font-size:14px;
+      line-height:1.45;
+      font-weight:700;
+      color:rgba(255,255,255,.94);
+      margin-bottom:2px;
+      letter-spacing:.2px;
+    }
+
+    .footer-copy div:last-child{
+      font-size:12px;
+      line-height:1.45;
+      font-weight:600;
+      color:rgba(255,255,255,.78);
+      letter-spacing:.2px;
+    }
+
+    @media (max-width: 1280px){
+      .showcase-grid{
+        grid-template-columns:1fr 320px 1fr;
+      }
+      .logo-core{
+        width:250px;
+        height:250px;
+      }
+      .logo-core img{
+        width:154px;
+        height:154px;
+      }
+      .center-stage{
+        min-height:660px;
+      }
+      .hero-head h1{
+        font-size:36px;
+      }
+    }
+
+    @media (max-width: 1024px){
+      .topbar-inner{
+        flex-wrap:wrap;
       }
 
-      .ssb-footer::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        background:
-          radial-gradient(circle at 18% 18%, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 28%),
-          radial-gradient(circle at 82% 22%, rgba(255,255,255,.08) 0%, rgba(255,255,255,0) 26%);
-        opacity: .9;
+      .showcase-grid{
+        grid-template-columns:1fr;
+        gap:18px;
+        min-height:auto;
       }
 
-      .footer-shell {
-        position: relative;
-        z-index: 1;
-        max-width: 1360px;
-        margin: 0 auto;
-        padding: 16px 26px 14px;
-        border-radius: 24px;
-        background:
-          linear-gradient(180deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,.05) 100%);
-        border: 1px solid rgba(255,255,255,.14);
-        box-shadow:
-          inset 0 1px 0 rgba(255,255,255,.14),
-          0 14px 30px rgba(15,46,96,.10);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
+      .center-stage{
+        order:-1;
+        min-height:auto;
+        padding:6px 0 4px;
       }
 
-      .footer-desktop-grid {
-        display: grid;
-        grid-template-columns: 1fr 1px auto 1px 1fr;
-        align-items: center;
-        gap: 22px;
+      .attack-grid,
+      .system-grid{
+        grid-template-columns:repeat(2, minmax(0,1fr));
       }
 
-      .footer-desktop-col {
-        min-width: 0;
+      .footer-desktop-grid{
+        grid-template-columns:1fr;
+        gap:18px;
+        text-align:center;
       }
 
-      .footer-desktop-left {
-        text-align: left;
+      .footer-desktop-left,
+      .footer-desktop-right{
+        text-align:center;
       }
 
-      .footer-desktop-center {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        width: 100%;
+      .footer-desktop-divider{
+        display:none;
       }
 
-      .footer-desktop-right {
-        text-align: right;
+      .footer-phone{
+        justify-content:center;
+      }
+    }
+
+    @media (max-width: 760px){
+      .topbar-inner{
+        padding:12px;
       }
 
-      .footer-desktop-divider {
-        width: 1px;
-        height: 96px;
-        background: linear-gradient(
-          180deg,
-          transparent 0%,
-          rgba(255,255,255,.30) 18%,
-          rgba(255,255,255,.30) 82%,
-          transparent 100%
-        );
+      .brand-line-1{
+        font-size:16px;
       }
 
-      .footer-company-th {
-        font-size: 18px;
-        line-height: 1.2;
-        font-weight: 800;
-        color: #ffffff;
-        margin-bottom: 6px;
-        letter-spacing: 0;
+      .brand-line-2,
+      .brand-site{
+        font-size:12px;
       }
 
-      .footer-company-en {
-        font-size: 15px;
-        line-height: 1.35;
-        font-weight: 700;
-        color: rgba(255,255,255,.92);
-        margin-bottom: 10px;
-        letter-spacing: 0;
+      .main-content{
+        padding:14px 12px 22px;
+      }
+
+      .hero-card{
+        padding:16px 14px 18px;
+        border-radius:24px;
+      }
+
+      .hero-head h1{
+        font-size:26px;
+        line-height:1.14;
+      }
+
+      .hero-head p{
+        font-size:14px;
+        line-height:1.7;
+      }
+
+      .panel-title{
+        font-size:16px;
+      }
+
+      .icon-grid{
+        gap:12px;
+      }
+
+      .icon-btn{
+        min-height:132px;
+        padding:12px 8px 10px;
+      }
+
+      .icon-frame{
+        width:72px;
+        height:72px;
+        border-radius:18px;
+        margin-bottom:8px;
+      }
+
+      .icon-frame img{
+        width:44px;
+        height:44px;
+      }
+
+      .icon-name{
+        font-size:12px;
+      }
+
+      .logo-core{
+        width:210px;
+        height:210px;
+      }
+
+      .logo-core img{
+        width:128px;
+        height:128px;
+      }
+
+      .center-caption-main{
+        font-size:20px;
+      }
+
+      .center-caption-sub,
+      .status-bar{
+        font-size:13px;
+      }
+
+      .bottom-box{
+        padding:16px 14px;
+      }
+
+      .bottom-box strong{
+        font-size:18px;
+      }
+
+      .bottom-box span{
+        font-size:14px;
+        line-height:1.7;
+      }
+
+      .ssb-footer{
+        padding:14px 12px 12px;
+      }
+
+      .footer-shell{
+        padding:14px 14px 12px;
+        border-radius:20px;
+      }
+
+      .footer-company-th{
+        font-size:17px;
+      }
+
+      .footer-company-en{
+        font-size:14px;
       }
 
       .footer-address,
-      .footer-reg {
-        font-size: 14px;
-        line-height: 1.65;
-        font-weight: 500;
-        color: rgba(255,255,255,.88);
-        letter-spacing: 0;
+      .footer-reg{
+        font-size:13px;
+        line-height:1.6;
       }
 
-      .footer-phone-label {
-        font-size: 14px;
-        line-height: 1.2;
-        font-weight: 700;
-        color: rgba(255,255,255,.78);
-        margin-bottom: 10px;
-        letter-spacing: 0;
+      .footer-phone{
+        font-size:16px;
       }
 
-      .footer-phone {
-        display: inline-flex;
-        align-items: center;
-        justify-content: flex-end;
-        gap: 10px;
-        width: 100%;
-        font-size: 18px;
-        line-height: 1.35;
-        font-weight: 800;
-        color: #ffffff;
-        text-decoration: none;
-        margin-bottom: 8px;
-        white-space: nowrap;
-        letter-spacing: 0;
+      .footer-icons{
+        gap:10px;
+        flex-wrap:wrap;
       }
 
-      .footer-phone-icon {
-        width: 18px;
-        height: 18px;
-        flex: 0 0 18px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        color: rgba(255,255,255,.92);
+      .footer-icons a{
+        width:44px;
+        height:44px;
       }
 
-      .footer-phone-icon svg {
-        width: 18px;
-        height: 18px;
-        display: block;
-      }
-
-      .footer-icons {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 14px;
-        width: 100%;
-        margin: 0 auto;
-      }
-
-      .footer-icons a {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background:
-          linear-gradient(180deg, rgba(255,255,255,.98) 0%, rgba(244,248,255,.96) 100%);
-        border: 1px solid rgba(255,255,255,.28);
-        box-shadow:
-          0 10px 22px rgba(14,43,92,.16),
-          inset 0 1px 0 rgba(255,255,255,1);
-        text-decoration: none;
-        transition:
-          transform .18s ease,
-          box-shadow .18s ease,
-          border-color .18s ease;
-      }
-
-      .footer-icons a:hover {
-        transform: translateY(-2px);
-        box-shadow:
-          0 14px 28px rgba(14,43,92,.20),
-          inset 0 1px 0 rgba(255,255,255,1);
-        border-color: rgba(255,255,255,.44);
-      }
-
-      .footer-icons a:active {
-        transform: scale(.97);
-      }
-
-      .footer-icons img {
-        width: 22px;
-        height: 22px;
-        object-fit: contain;
-        display: block;
-      }
-
-      .footer-bottom-line {
-        height: 1px;
-        margin: 16px 0 12px;
-        background: linear-gradient(
-          90deg,
-          transparent 0%,
-          rgba(255,255,255,.26) 14%,
-          rgba(255,255,255,.26) 86%,
-          transparent 100%
-        );
-      }
-
-      .footer-copy {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        width: 100%;
-      }
-
-      .footer-copy div:first-child {
-        font-size: 14px;
-        line-height: 1.45;
-        font-weight: 700;
-        color: rgba(255,255,255,.94);
-        margin-bottom: 2px;
-        letter-spacing: .2px;
-      }
-
-      .footer-copy div:last-child {
-        font-size: 12px;
-        line-height: 1.45;
-        font-weight: 600;
-        color: rgba(255,255,255,.78);
-        letter-spacing: .2px;
+      .footer-icons img{
+        width:20px;
+        height:20px;
       }
     }
   </style>
 </head>
-
 <body>
   <div class="site-wrap">
-    <header class="ssb-topbar" role="banner">
+    <header class="ssb-topbar">
       <div class="topbar-inner">
         <div class="brand-wrap">
           <div class="brand-logo">
@@ -341,189 +1072,150 @@
           </div>
 
           <div class="brand-text">
-            <div class="brand-line-1 th-font">บริษัท สยามทำ จำกัด</div>
-            <div class="brand-line-2 en-font">Siam Tham Co.,Ltd.</div>
-            <div class="brand-site en-font">
+            <div class="brand-line-1">บริษัท สยามทำ จำกัด</div>
+            <div class="brand-line-2">Siam Tham Co.,Ltd.</div>
+            <div class="brand-site">
               <a href="https://www.siamtham.com" target="_blank" rel="noopener">www.siamtham.com</a>
             </div>
           </div>
         </div>
 
-        <div class="header-search-wrap">
-          <form class="header-search" id="agentSearchForm" autocomplete="off" role="search" aria-label="ค้นหาตัวแทน">
-            <svg class="header-search-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="2"></circle>
-              <path d="M16 16L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
-            </svg>
-
-            <input
-              id="agentSearchInput"
-              class="header-search-input"
-              type="text"
-              placeholder="ค้นหาตัวแทน / Search agent"
-              aria-label="ค้นหาตัวแทน"
-            />
-
-            <button class="header-search-btn sound-click" type="submit">ค้นหา</button>
-          </form>
-
-          <div class="agent-dropdown" id="agentDropdown" aria-live="polite">
-            <div class="agent-dropdown-card">
-              <div class="agent-dropdown-head th-font">ผลการค้นหาตัวแทน</div>
-              <div class="agent-results" id="agentResults"></div>
-            </div>
-          </div>
-        </div>
-
         <div class="topbar-actions">
-          <div class="theme-switch-wrap" id="desktopThemeSwitch">
+          <div class="theme-switch-wrap">
             <span class="mode-label">Dark</span>
             <button id="themeToggle" class="theme-switch" type="button" aria-label="Toggle theme">
               <span class="switch-knob"></span>
             </button>
             <span class="mode-label">Light</span>
           </div>
-
-          <div class="lang-bar" aria-label="เลือกภาษา">
-            <button class="lang-btn sound-click active" type="button" data-lang="th" title="ไทย">
-              <img src="https://flagcdn.com/w40/th.png" alt="ไทย" loading="lazy" />
-            </button>
-            <button class="lang-btn sound-click" type="button" data-lang="en" title="English">
-              <img src="https://flagcdn.com/w40/us.png" alt="English" loading="lazy" />
-            </button>
-          </div>
-
-          <div id="google_translate_element"></div>
         </div>
       </div>
     </header>
 
     <main class="main-content">
-      <section class="hero-stage">
-        <div class="hero-center">
-          <div class="tech-hero" id="techHero">
-            <div class="hero-bg" aria-hidden="true">
-              <div class="bg-core-glow"></div>
-            </div>
+      <section class="hero-card" id="heroCard">
+        <div class="hero-head">
+          <div class="hero-kicker">SSB Mobile System</div>
+          <h1>STEALTH SAFETY BANK MOBILE SYSTEM</h1>
+          <p>
+            กดไอคอนฝั่งการโจมตีเพื่อดูว่าแสงจะวิ่งเข้าโลโก้
+            และโลโก้จะส่งต่อไปยังระบบป้องกันที่เกี่ยวข้องกับภัยนั้น
+          </p>
+        </div>
 
-            <div class="hero-system-title" id="heroSystemTitle" aria-hidden="true">
-              <div class="hero-system-title-inner">
-                <span class="hero-system-title-text">Stealth Safety Bank Mobile System</span>
+        <div class="showcase-grid" id="showcaseGrid">
+          <div class="beam-layer" id="beamLayer" aria-hidden="true"></div>
+
+          <div class="showcase-col">
+            <section class="showcase-panel">
+              <div class="panel-title">ช่องทางการโจมตีที่เกิดขึ้นจริง</div>
+
+              <div class="icon-grid attack-grid">
+                <article class="icon-card attack-card" id="attack-psychological">
+                  <button class="icon-btn" type="button" data-attack="psychological">
+                    <span class="icon-frame">
+                      <img src="images/Psychological.png" alt="Psychological">
+                    </span>
+                    <span class="icon-name">Psychological</span>
+                  </button>
+                </article>
+
+                <article class="icon-card attack-card" id="attack-phishing">
+                  <button class="icon-btn" type="button" data-attack="phishing">
+                    <span class="icon-frame">
+                      <img src="images/Phishing.png" alt="Phishing">
+                    </span>
+                    <span class="icon-name">Phishing</span>
+                  </button>
+                </article>
+
+                <article class="icon-card attack-card" id="attack-remote">
+                  <button class="icon-btn" type="button" data-attack="remote">
+                    <span class="icon-frame">
+                      <img src="images/Remote.png" alt="Remote">
+                    </span>
+                    <span class="icon-name">Remote</span>
+                  </button>
+                </article>
+
+                <article class="icon-card attack-card" id="attack-fake-app">
+                  <button class="icon-btn" type="button" data-attack="fake-app">
+                    <span class="icon-frame">
+                      <img src="images/Fake app.png" alt="Fake App">
+                    </span>
+                    <span class="icon-name">Fake App</span>
+                  </button>
+                </article>
               </div>
-            </div>
+            </section>
+          </div>
 
-            <div class="center-glow"></div>
-            <div class="center-pulse" id="centerPulse"></div>
+          <div class="center-stage">
+            <div class="center-aura"></div>
 
-            <svg class="hero-energy-svg" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-              <circle class="orbit-ring" cx="600" cy="450" r="168"></circle>
-              <circle class="orbit-runner" cx="600" cy="282" r="6"></circle>
-
-              <path class="energy-line energy-m1" d="M305 383 Q 420 390 520 430"></path>
-              <path class="energy-line energy-company" d="M895 383 Q 780 390 680 430"></path>
-              <path class="energy-line energy-product" d="M305 595 Q 425 560 520 500"></path>
-              <path class="energy-line energy-agent" d="M895 595 Q 775 560 680 500"></path>
-            </svg>
-
-            <button class="logo-core logo-toggle sound-click" id="logoToggle" type="button" aria-label="Open menu">
-              <img src="images/logo.png" alt="Stealth Safety Bank Logo" loading="lazy" />
+            <button class="logo-core" id="logoCore" type="button" aria-label="SSB Core Logo">
+              <img src="images/logo.png" alt="SSB Core Logo">
             </button>
 
-            <div class="menu-layer-v2">
-              <div class="menu-node m1">
-                <a href="ssb-system.html#ssbmobile" class="node-shell sound-click">
-                  <span class="node-title">SSB Mobile System</span>
-                </a>
-              </div>
-
-              <div class="menu-group g-company">
-                <div class="submenu-panel">
-                  <button class="submenu-btn sound-click" type="button" data-action="company-about">เกี่ยวกับบริษัท</button>
-                  <button class="submenu-btn sound-click" type="button" data-action="company-contact">ติดต่อเรา</button>
-                </div>
-
-                <div class="main-node">
-                  <button class="node-shell sound-click" type="button" data-menu="company">
-                    <span class="node-title">เกี่ยวกับบริษัท</span>
-                  </button>
-                </div>
-              </div>
-
-              <div class="menu-group g-product">
-                <div class="main-node">
-                  <button class="node-shell sound-click" type="button" data-menu="product">
-                    <span class="node-title">สินค้า</span>
-                  </button>
-                </div>
-
-                <div class="submenu-panel">
-                  <a href="ssb-system.html#sbpremium" class="submenu-btn sound-click">SB Premium</a>
-                  <a href="ssb-system.html#custom" class="submenu-btn sound-click">Custom System</a>
-                </div>
-              </div>
-
-              <div class="menu-group g-agent">
-                <div class="main-node">
-                  <button class="node-shell sound-click" type="button" data-menu="agent">
-                    <span class="node-title">ตัวแทน</span>
-                  </button>
-                </div>
-
-                <div class="submenu-panel">
-                  <button class="submenu-btn sound-click" type="button" data-link="join-agent.html">สมัครตัวแทน</button>
-                  <button class="submenu-btn sound-click" type="button" data-link="agent-login.html">Login Agent</button>
-                </div>
-              </div>
-
-              <div class="menu-node m5">
-                <a href="book.html" class="node-shell sound-click">
-                  <span class="node-title">สั่งซื้อสินค้า</span>
-                </a>
-              </div>
-
-              <div class="hero-menu-hint" id="heroMenuHint">คลิกโลโก้เพื่อเปิดเมนู</div>
+            <div class="center-caption">
+              <div class="center-caption-main">System-Based Security</div>
+              <div class="center-caption-sub">ศูนย์กลางของระบบป้องกันแบบองค์รวม</div>
             </div>
 
-            <div class="mobile-menu-v2" aria-label="Mobile primary navigation">
-              <div class="mobile-hero">
-                <img src="images/logo.png" class="mobile-hero-logo" alt="Stealth Safety Bank Logo" loading="lazy" />
-                <div class="mobile-hero-title">SSB Mobile System</div>
-                <div class="mobile-hero-sub">ระบบความปลอดภัยทางการเงิน</div>
-              </div>
-
-              <div class="mobile-menu-list">
-                <div class="menu-item">
-                  <a href="ssb-system.html#ssbmobile" class="menu-btn sound-click no-arrow no-submenu">SSB Mobile System</a>
-                </div>
-
-                <div class="menu-item menu-item-toggle" data-mobile-toggle="company">
-                  <button class="menu-btn sound-click" type="button">เกี่ยวกับบริษัท</button>
-                  <div class="submenu">
-                    <button class="submenu-link sound-click" type="button" data-action="company-about">เกี่ยวกับบริษัท</button>
-                    <button class="submenu-link sound-click" type="button" data-action="company-contact">ติดต่อเรา</button>
-                  </div>
-                </div>
-
-                <div class="menu-item menu-item-toggle" data-mobile-toggle="product">
-                  <button class="menu-btn sound-click" type="button">สินค้า</button>
-                  <div class="submenu">
-                    <a href="ssb-system.html#sbpremium" class="submenu-link sound-click">SB Premium</a>
-                    <a href="ssb-system.html#custom" class="submenu-link sound-click">Custom System</a>
-                  </div>
-                </div>
-
-                <div class="menu-item menu-item-toggle" data-mobile-toggle="agent">
-                  <button class="menu-btn sound-click" type="button">ตัวแทน</button>
-                  <div class="submenu">
-                    <button class="submenu-link sound-click" type="button" data-link="join-agent.html">สมัครตัวแทน</button>
-                    <button class="submenu-link sound-click" type="button" data-link="agent-login.html">Login Agent</button>
-                  </div>
-                </div>
-              </div>
-
-              <a href="book.html" class="mobile-cta sound-click">สั่งซื้อสินค้า</a>
-            </div>
+            <div class="status-bar" id="statusBar">รอการเลือกไอคอนการโจมตี</div>
           </div>
+
+          <div class="showcase-col">
+            <section class="showcase-panel">
+              <div class="panel-title">ระบบป้องกันที่ทำงานร่วมกันเป็นระบบ</div>
+
+              <div class="icon-grid system-grid">
+                <article class="icon-card system-card" id="system-fd">
+                  <button class="icon-btn" type="button">
+                    <span class="icon-frame">
+                      <img src="images/Flare Device.png" alt="FD - Flare Device">
+                    </span>
+                    <span class="icon-name">FD - Flare Device</span>
+                  </button>
+                </article>
+
+                <article class="icon-card system-card" id="system-safety-book">
+                  <button class="icon-btn" type="button">
+                    <span class="icon-frame">
+                      <img src="images/Safety Book.png" alt="Safety Book">
+                    </span>
+                    <span class="icon-name">Safety Book</span>
+                  </button>
+                </article>
+
+                <article class="icon-card system-card" id="system-time-barrier">
+                  <button class="icon-btn" type="button">
+                    <span class="icon-frame">
+                      <img src="images/Time Barrier.png" alt="Time Barrier">
+                    </span>
+                    <span class="icon-name">Time Barrier</span>
+                  </button>
+                </article>
+
+                <article class="icon-card system-card" id="system-spc">
+                  <button class="icon-btn" type="button">
+                    <span class="icon-frame">
+                      <img src="images/SPC.png" alt="SPC">
+                    </span>
+                    <span class="icon-name">SPC</span>
+                  </button>
+                </article>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <div class="bottom-box">
+          <strong>SSBMS ไม่ได้ปลอดภัย เพราะอุปกรณ์ชิ้นใดชิ้นหนึ่ง</strong>
+          <span>
+            แต่ปลอดภัย เพราะทุกองค์ประกอบถูกออกแบบให้ทำงานร่วมกัน
+            และควบคุม “จุดตัดสินใจ” ก่อนที่ความผิดพลาดจะเกิดขึ้น
+          </span>
         </div>
       </section>
     </main>
@@ -531,7 +1223,7 @@
     <footer class="ssb-footer">
       <div class="footer-shell">
         <div class="footer-desktop-grid">
-          <div class="footer-desktop-col footer-desktop-left">
+          <div class="footer-desktop-left">
             <div class="footer-company-th">บริษัท สยามทำ จำกัด</div>
             <div class="footer-company-en">Siamtham Co.,Ltd.</div>
             <div class="footer-address">54 ซอย 53 ถนนพุทธมณฑลสาย 1</div>
@@ -541,7 +1233,7 @@
 
           <div class="footer-desktop-divider" aria-hidden="true"></div>
 
-          <div class="footer-desktop-col footer-desktop-center">
+          <div class="footer-desktop-center">
             <div class="footer-icons">
               <a href="https://maps.app.goo.gl/Dz4B1kpqVbmWhkYX7" target="_blank" rel="noopener" aria-label="Map">
                 <img src="https://cdn.simpleicons.org/googlemaps/EA4335" alt="Map">
@@ -563,7 +1255,7 @@
 
           <div class="footer-desktop-divider" aria-hidden="true"></div>
 
-          <div class="footer-desktop-col footer-desktop-right">
+          <div class="footer-desktop-right">
             <div class="footer-phone-label">เบอร์โทรศัพท์</div>
 
             <a class="footer-phone" href="tel:020432988">
@@ -596,43 +1288,156 @@
     </footer>
   </div>
 
-  <div id="companyPopup" class="popup-backdrop" aria-hidden="true">
-    <div class="popup-card company" role="dialog" aria-modal="true" aria-labelledby="companyTitle">
-      <div class="popup-head">
-        <div class="popup-head-main">
-          <div class="popup-kicker th-font">ข้อมูลติดต่อ</div>
-          <h3 class="th-font" id="companyTitle">บริษัท สยามทำ จำกัด</h3>
-          <div class="popup-subtitle th-font">ข้อมูลติดต่อและที่ตั้งสำหรับการสอบถาม การประสานงาน และการเดินทางมายังบริษัท</div>
-        </div>
-        <button class="popup-x sound-click" type="button" id="closeCompanyPopupTop" aria-label="ปิด">×</button>
-      </div>
+  <script>
+    (function () {
+      const savedTheme = localStorage.getItem("theme");
+      const isLight = savedTheme === "light";
+      document.documentElement.classList.toggle("light-mode", isLight);
+      document.documentElement.classList.toggle("dark-mode", !isLight);
+    })();
 
-      <div class="popup-body">
-        <div class="popup-panel company-detail">
-          <h4 class="popup-section-title th-font"><span class="dot"></span>ข้อมูลการติดต่อ</h4>
-          <p class="th-font"><strong>ชื่อภาษาอังกฤษ:</strong> Siam Tham Co.,Ltd.</p>
-          <p class="th-font"><strong>ที่อยู่:</strong> 54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
-          <p class="th-font"><strong>เลขทะเบียน:</strong> 0105566099954</p>
-          <p class="th-font"><strong>โทร:</strong> 02-043-2988</p>
-          <p class="th-font"><strong>มือถือ:</strong> 064-951-4888</p>
-          <p class="th-font"><strong>อีเมล:</strong> mysiamtham@gmail.com</p>
-          <p class="th-font"><strong>เว็บไซต์:</strong> www.siamtham.com</p>
+    (function () {
+      const themeToggle = document.getElementById("themeToggle");
+      if (themeToggle) {
+        themeToggle.addEventListener("click", function () {
+          const html = document.documentElement;
+          const isLight = html.classList.contains("light-mode");
+          html.classList.toggle("light-mode", !isLight);
+          html.classList.toggle("dark-mode", isLight);
+          localStorage.setItem("theme", !isLight ? "light" : "dark");
+        });
+      }
+    })();
 
-          <div class="popup-action-row">
-            <a class="popup-cta primary sound-click th-font" href="https://maps.app.goo.gl/Dz4B1kpqVbmWhkYX7" target="_blank" rel="noopener">เปิดแผนที่บริษัท</a>
-            <a class="popup-cta secondary sound-click th-font" href="tel:0649514888">โทรหาบริษัท</a>
-          </div>
-        </div>
-      </div>
+    (function () {
+      const statusBar = document.getElementById("statusBar");
+      const beamLayer = document.getElementById("beamLayer");
+      const logoCore = document.getElementById("logoCore");
+      const showcaseGrid = document.getElementById("showcaseGrid");
 
-      <button class="popup-close th-font sound-click" type="button" id="closeCompanyPopupBottom">ปิด</button>
-    </div>
-  </div>
+      const mapTargets = {
+        "psychological": {
+          label: "Psychological → Time Barrier + SPC",
+          targets: ["system-time-barrier", "system-spc"]
+        },
+        "phishing": {
+          label: "Phishing → FD + Safety Book",
+          targets: ["system-fd", "system-safety-book"]
+        },
+        "remote": {
+          label: "Remote → FD + Safety Book",
+          targets: ["system-fd", "system-safety-book"]
+        },
+        "fake-app": {
+          label: "Fake App → FD + Safety Book",
+          targets: ["system-fd", "system-safety-book"]
+        }
+      };
 
-  <script src="js/data.js"></script>
-  <script src="js/ui.js"></script>
-  <script src="js/popup.js"></script>
-  <script src="js/main.js"></script>
-  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+      const attackButtons = document.querySelectorAll("[data-attack]");
+
+      function clearActiveStates() {
+        document.querySelectorAll(".icon-card").forEach(el => {
+          el.classList.remove("is-source", "is-target");
+        });
+        logoCore.classList.remove("is-active");
+        beamLayer.innerHTML = "";
+      }
+
+      function getCenter(el, parentRect) {
+        const r = el.getBoundingClientRect();
+        return {
+          x: r.left - parentRect.left + (r.width / 2),
+          y: r.top - parentRect.top + (r.height / 2)
+        };
+      }
+
+      function createBeam(from, to, type, delayMs) {
+        const dx = to.x - from.x;
+        const dy = to.y - from.y;
+        const length = Math.sqrt((dx * dx) + (dy * dy));
+        const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+
+        const beam = document.createElement("span");
+        beam.className = "beam " + type;
+        beam.style.setProperty("--x1", from.x + "px");
+        beam.style.setProperty("--y1", from.y + "px");
+        beam.style.setProperty("--length", length + "px");
+        beam.style.setProperty("--angle", angle + "deg");
+        beam.style.animationDelay = delayMs + "ms";
+        beamLayer.appendChild(beam);
+
+        requestAnimationFrame(() => {
+          beam.classList.add("show");
+        });
+
+        return beam;
+      }
+
+      function runFlow(attackKey, sourceCard) {
+        const config = mapTargets[attackKey];
+        if (!config) return;
+
+        clearActiveStates();
+
+        const parentRect = showcaseGrid.getBoundingClientRect();
+        const sourceCenter = getCenter(sourceCard, parentRect);
+        const logoCenter = getCenter(logoCore, parentRect);
+
+        sourceCard.classList.add("is-source");
+        logoCore.classList.add("is-active");
+        statusBar.textContent = config.label;
+
+        createBeam(sourceCenter, logoCenter, "inbound", 0);
+
+        setTimeout(() => {
+          config.targets.forEach((id, index) => {
+            const targetCard = document.getElementById(id);
+            if (!targetCard) return;
+
+            const targetCenter = getCenter(targetCard, parentRect);
+            targetCard.classList.add("is-target");
+            createBeam(logoCenter, targetCenter, "outbound", 0);
+
+            if (index === config.targets.length - 1) {
+              setTimeout(() => {
+                logoCore.classList.remove("is-active");
+              }, 500);
+            }
+          });
+        }, 520);
+
+        setTimeout(() => {
+          document.querySelectorAll(".icon-card.is-target").forEach(el => {
+            el.classList.remove("is-target");
+          });
+          sourceCard.classList.remove("is-source");
+          beamLayer.innerHTML = "";
+          statusBar.textContent = "รอการเลือกไอคอนการโจมตี";
+        }, 2400);
+      }
+
+      attackButtons.forEach(btn => {
+        btn.addEventListener("click", function () {
+          const attackKey = btn.getAttribute("data-attack");
+          const sourceCard = btn.closest(".icon-card");
+          runFlow(attackKey, sourceCard);
+        });
+      });
+
+      logoCore.addEventListener("click", function () {
+        statusBar.textContent = "ให้กดไอคอนฝั่งการโจมตีก่อน";
+        logoCore.classList.add("is-active");
+        setTimeout(() => {
+          logoCore.classList.remove("is-active");
+          statusBar.textContent = "รอการเลือกไอคอนการโจมตี";
+        }, 700);
+      });
+
+      window.addEventListener("resize", function () {
+        beamLayer.innerHTML = "";
+      });
+    })();
+  </script>
 </body>
 </html>
