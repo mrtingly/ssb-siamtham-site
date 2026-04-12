@@ -14,7 +14,7 @@
 (function () {
   const showcase = document.getElementById("showcase");
   const logoCore = document.getElementById("logoCore");
-  const beamLayer = document.getElementById("beamLayer");
+  const beamSvg = document.getElementById("beamSvg");
   const statusBar = document.getElementById("statusBar");
 
   const logoMode = document.getElementById("logoMode");
@@ -31,6 +31,8 @@
 
   const attackColumn = document.getElementById("attackColumn");
   const systemColumn = document.getElementById("systemColumn");
+
+  const SVG_NS = "http://www.w3.org/2000/svg";
 
   let systemOpened = false;
   let activeTimeout = null;
@@ -129,6 +131,51 @@
     }
   };
 
+  function ensureSvgDefs() {
+    beamSvg.innerHTML = "";
+
+    const defs = document.createElementNS(SVG_NS, "defs");
+
+    const inboundGradient = document.createElementNS(SVG_NS, "linearGradient");
+    inboundGradient.setAttribute("id", "beamInboundGradient");
+    inboundGradient.setAttribute("x1", "0%");
+    inboundGradient.setAttribute("y1", "0%");
+    inboundGradient.setAttribute("x2", "100%");
+    inboundGradient.setAttribute("y2", "0%");
+
+    [["0%", "rgba(255,170,82,0)"], ["35%", "#ffb864"], ["100%", "#ffffff"]].forEach(([offset, color]) => {
+      const stop = document.createElementNS(SVG_NS, "stop");
+      stop.setAttribute("offset", offset);
+      stop.setAttribute("stop-color", color);
+      inboundGradient.appendChild(stop);
+    });
+
+    const outboundGradient = document.createElementNS(SVG_NS, "linearGradient");
+    outboundGradient.setAttribute("id", "beamOutboundGradient");
+    outboundGradient.setAttribute("x1", "0%");
+    outboundGradient.setAttribute("y1", "0%");
+    outboundGradient.setAttribute("x2", "100%");
+    outboundGradient.setAttribute("y2", "0%");
+
+    [["0%", "#ffffff"], ["42%", "rgba(104,244,255,.96)"], ["100%", "rgba(119,216,255,0)"]].forEach(([offset, color]) => {
+      const stop = document.createElementNS(SVG_NS, "stop");
+      stop.setAttribute("offset", offset);
+      stop.setAttribute("stop-color", color);
+      outboundGradient.appendChild(stop);
+    });
+
+    defs.appendChild(inboundGradient);
+    defs.appendChild(outboundGradient);
+    beamSvg.appendChild(defs);
+  }
+
+  function sizeSvg() {
+    const rect = showcase.getBoundingClientRect();
+    beamSvg.setAttribute("viewBox", `0 0 ${rect.width} ${rect.height}`);
+    beamSvg.setAttribute("width", rect.width);
+    beamSvg.setAttribute("height", rect.height);
+  }
+
   function openSystem() {
     systemOpened = true;
     showcase.classList.add("is-open");
@@ -188,7 +235,8 @@
 
   function clearStates() {
     clearTimeout(activeTimeout);
-    beamLayer.innerHTML = "";
+    ensureSvgDefs();
+    document.querySelectorAll(".beam-path").forEach(path => path.remove());
     logoCore.classList.remove("is-burst");
     document.querySelectorAll(".icon-card").forEach(el => {
       el.classList.remove("is-source", "is-target");
@@ -203,23 +251,33 @@
     };
   }
 
-  function createBeam(from, to, type) {
-    const dx = to.x - from.x;
-    const dy = to.y - from.y;
-    const length = Math.sqrt((dx * dx) + (dy * dy));
-    const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+  function getRelayPoint(parentRect) {
+    const logoRect = logoCore.getBoundingClientRect();
+    return {
+      x: logoRect.left - parentRect.left + (logoRect.width / 2),
+      y: logoRect.top - parentRect.top + (logoRect.height * 0.70)
+    };
+  }
 
-    const beam = document.createElement("span");
-    beam.className = "beam " + type;
-    beam.style.setProperty("--x1", from.x + "px");
-    beam.style.setProperty("--y1", from.y + "px");
-    beam.style.setProperty("--length", length + "px");
-    beam.style.setProperty("--angle", angle + "deg");
-    beamLayer.appendChild(beam);
+  function createCurvedBeam(from, to, type) {
+    const path = document.createElementNS(SVG_NS, "path");
+    const midX = (from.x + to.x) / 2;
+    const curveLift = type === "inbound" ? 16 : 22;
+    const controlY = Math.max(from.y, to.y) + curveLift;
 
-    requestAnimationFrame(() => {
-      beam.classList.add("show");
-    });
+    const d = `M ${from.x} ${from.y} Q ${midX} ${controlY} ${to.x} ${to.y}`;
+    path.setAttribute("d", d);
+    path.setAttribute("class", `beam-path ${type}`);
+
+    beamSvg.appendChild(path);
+
+    const len = path.getTotalLength();
+    const visibleSegment = Math.max(70, len * 0.20);
+
+    path.style.strokeDasharray = `${visibleSegment} ${len}`;
+    path.style.strokeDashoffset = `${len}`;
+    path.style.setProperty("--beam-len", `${len}`);
+    path.classList.add("animate");
   }
 
   function blinkTargets(ids) {
@@ -234,10 +292,10 @@
         if (target) target.classList.remove("is-target");
       });
       logoCore.classList.remove("is-burst");
-      beamLayer.innerHTML = "";
       document.querySelectorAll(".icon-card.is-source").forEach(el => {
         el.classList.remove("is-source");
       });
+      ensureSvgDefs();
       if (systemOpened && !detailMode.classList.contains("is-open")) {
         statusBar.textContent = "กดไอคอน 1 ครั้งเพื่อดูการป้องกัน หรือกด 2 ครั้งเพื่ออ่านรายละเอียด";
       }
@@ -254,26 +312,26 @@
 
     const parentRect = showcase.getBoundingClientRect();
     const sourceCenter = getCenter(sourceCard, parentRect);
-    const logoCenter = getCenter(logoCore, parentRect);
+    const relayPoint = getRelayPoint(parentRect);
 
     sourceCard.classList.add("is-source");
     logoCore.classList.add("is-burst");
     statusBar.textContent = config.label;
 
-    createBeam(sourceCenter, logoCenter, "inbound");
+    createCurvedBeam(sourceCenter, relayPoint, "inbound");
 
     setTimeout(() => {
       config.targets.forEach((id) => {
         const targetCard = document.getElementById(id);
         if (!targetCard) return;
         const targetCenter = getCenter(targetCard, parentRect);
-        createBeam(logoCenter, targetCenter, "outbound");
+        createCurvedBeam(relayPoint, targetCenter, "outbound");
       });
-    }, 420);
+    }, 360);
 
     setTimeout(() => {
       blinkTargets(config.targets);
-    }, 850);
+    }, 760);
   }
 
   function runSystemFocus(systemKey, sourceCard) {
@@ -292,6 +350,9 @@
       }
     }, 2200);
   }
+
+  ensureSvgDefs();
+  sizeSvg();
 
   logoCore.addEventListener("click", function () {
     if (!systemOpened) {
@@ -346,6 +407,7 @@
   });
 
   window.addEventListener("resize", function () {
-    beamLayer.innerHTML = "";
+    sizeSvg();
+    ensureSvgDefs();
   });
 })();
