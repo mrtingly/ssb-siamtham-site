@@ -18,6 +18,26 @@
   <meta name="author" content="Siam Tham Co.,Ltd." />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <meta name="theme-color" content="#1b63c7" />
+  <link rel="canonical" href="https://www.siamtham.com/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Siam Tham Co.,Ltd." />
+  <meta property="og:title" content="Stealth Safety Bank Mobile System | Siam Tham Co.,Ltd." />
+  <meta
+    property="og:description"
+    content="ระบบความปลอดภัยทางการเงินเชิงโครงสร้าง ลดความเสี่ยงจากแอปไม่จำเป็น การใช้งานปะปน และช่องทางโจมตีที่ไม่เกี่ยวข้องกับธุรกรรม"
+  />
+  <meta property="og:url" content="https://www.siamtham.com/" />
+  <meta property="og:image" content="https://www.siamtham.com/images/logo.png" />
+  <meta property="og:locale" content="th_TH" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Stealth Safety Bank Mobile System | Siam Tham Co.,Ltd." />
+  <meta
+    name="twitter:description"
+    content="ระบบความปลอดภัยทางการเงินเชิงโครงสร้าง ลดความเสี่ยงตั้งแต่ต้นทาง และยกระดับการใช้งานอย่างรอบคอบ"
+  />
+  <meta name="twitter:image" content="https://www.siamtham.com/images/logo.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -26,39 +46,293 @@
     rel="stylesheet"
   />
 
-  <script>
-    (function () {
-      const savedTheme = localStorage.getItem("theme");
-      const isLight = savedTheme === "light";
-      document.documentElement.classList.toggle("light-mode", isLight);
-      document.documentElement.classList.toggle("dark-mode", !isLight);
-    })();
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"Siam Tham Co.,Ltd.",
+    "alternateName":"บริษัท สยามทำ จำกัด",
+    "url":"https://www.siamtham.com/",
+    "logo":"https://www.siamtham.com/images/logo.png",
+    "email":"mailto:mysiamtham@gmail.com",
+    "telephone":"+66-2-043-2988",
+    "sameAs":[
+      "https://www.facebook.com/profile.php?id=61556844339863",
+      "https://www.youtube.com/@siamtham",
+      "https://line.me/R/ti/p/@siamtham"
+    ],
+    "address":{
+      "@type":"PostalAddress",
+      "streetAddress":"54 Soi 53, Phutthamonthon Sai 1 Road, Chimphli",
+      "addressLocality":"Taling Chan",
+      "addressRegion":"Bangkok",
+      "postalCode":"10170",
+      "addressCountry":"TH"
+    }
+  }
   </script>
 
-  <!-- CORE CSS จาก index -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "name":"Siam Tham Co.,Ltd.",
+    "url":"https://www.siamtham.com/"
+  }
+  </script>
+
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/hero-base.css" />
+  <link rel="stylesheet" href="css/hero-mobile.css" media="(max-width: 767px)" />
+  <link rel="stylesheet" href="css/hero-tablet.css" media="(min-width: 768px) and (max-width: 1023px)" />
+  <link rel="stylesheet" href="css/hero-desktop.css" media="(min-width: 1024px)" />
+  <link rel="stylesheet" href="css/popup.css" />
   <link rel="stylesheet" href="css/components.css" />
   <link rel="stylesheet" href="css/responsive.css" />
-  <link rel="stylesheet" href="css/popup.css" />
   <link rel="stylesheet" href="css/popup-mobile.css" media="(max-width: 1023px)" />
 
-  <!-- SSB CSS -->
-  <link rel="stylesheet" href="css/ssb-system.css?v=40" />
-  <link rel="stylesheet" href="css/ssb-system-header.css" />
-  <link rel="stylesheet" href="css/ssb-system-logo.css" />
-  <link rel="stylesheet" href="css/ssb-system-icons.css" />
-  <link rel="stylesheet" href="css/ssb-system-detail.css" />
-  <link rel="stylesheet" href="css/ssb-system-effects.css" />
-  <link rel="stylesheet" href="css/ssb-system-footer.css" />
-  <link rel="stylesheet" href="css/ssb-system-responsive.css" />
-  <link rel="stylesheet" href="css/ssb-system-mobile.css?v=40" media="(max-width: 1023px), (max-width: 1366px) and (orientation: portrait)" />
+  <!-- DESKTOP FOOTER ONLY -->
+  <style>
+    @media (min-width: 1024px) {
+      .ssb-footer {
+        position: relative;
+        overflow: hidden;
+        padding: 18px 26px 16px;
+        background:
+          linear-gradient(180deg, #4f8fe4 0%, #3f7fd7 52%, #3674cc 100%);
+        border-top: 1px solid rgba(255,255,255,.20);
+        box-shadow:
+          inset 0 1px 0 rgba(255,255,255,.16),
+          0 -10px 24px rgba(12,45,96,.08);
+      }
+
+      .ssb-footer::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(circle at 18% 18%, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 28%),
+          radial-gradient(circle at 82% 22%, rgba(255,255,255,.08) 0%, rgba(255,255,255,0) 26%);
+        opacity: .9;
+      }
+
+      .footer-shell {
+        position: relative;
+        z-index: 1;
+        max-width: 1360px;
+        margin: 0 auto;
+        padding: 16px 26px 14px;
+        border-radius: 24px;
+        background:
+          linear-gradient(180deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,.05) 100%);
+        border: 1px solid rgba(255,255,255,.14);
+        box-shadow:
+          inset 0 1px 0 rgba(255,255,255,.14),
+          0 14px 30px rgba(15,46,96,.10);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+
+      .footer-desktop-grid {
+        display: grid;
+        grid-template-columns: 1fr 1px auto 1px 1fr;
+        align-items: center;
+        gap: 22px;
+      }
+
+      .footer-desktop-col {
+        min-width: 0;
+      }
+
+      .footer-desktop-left {
+        text-align: left;
+      }
+
+      .footer-desktop-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+      }
+
+      .footer-desktop-right {
+        text-align: right;
+      }
+
+      .footer-desktop-divider {
+        width: 1px;
+        height: 96px;
+        background: linear-gradient(
+          180deg,
+          transparent 0%,
+          rgba(255,255,255,.30) 18%,
+          rgba(255,255,255,.30) 82%,
+          transparent 100%
+        );
+      }
+
+      .footer-company-th {
+        font-size: 18px;
+        line-height: 1.2;
+        font-weight: 800;
+        color: #ffffff;
+        margin-bottom: 6px;
+        letter-spacing: 0;
+      }
+
+      .footer-company-en {
+        font-size: 15px;
+        line-height: 1.35;
+        font-weight: 700;
+        color: rgba(255,255,255,.92);
+        margin-bottom: 10px;
+        letter-spacing: 0;
+      }
+
+      .footer-address,
+      .footer-reg {
+        font-size: 14px;
+        line-height: 1.65;
+        font-weight: 500;
+        color: rgba(255,255,255,.88);
+        letter-spacing: 0;
+      }
+
+      .footer-phone-label {
+        font-size: 14px;
+        line-height: 1.2;
+        font-weight: 700;
+        color: rgba(255,255,255,.78);
+        margin-bottom: 10px;
+        letter-spacing: 0;
+      }
+
+      .footer-phone {
+        display: inline-flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 10px;
+        width: 100%;
+        font-size: 18px;
+        line-height: 1.35;
+        font-weight: 800;
+        color: #ffffff;
+        text-decoration: none;
+        margin-bottom: 8px;
+        white-space: nowrap;
+        letter-spacing: 0;
+      }
+
+      .footer-phone-icon {
+        width: 18px;
+        height: 18px;
+        flex: 0 0 18px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255,255,255,.92);
+      }
+
+      .footer-phone-icon svg {
+        width: 18px;
+        height: 18px;
+        display: block;
+      }
+
+      .footer-icons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 14px;
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      .footer-icons a {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background:
+          linear-gradient(180deg, rgba(255,255,255,.98) 0%, rgba(244,248,255,.96) 100%);
+        border: 1px solid rgba(255,255,255,.28);
+        box-shadow:
+          0 10px 22px rgba(14,43,92,.16),
+          inset 0 1px 0 rgba(255,255,255,1);
+        text-decoration: none;
+        transition:
+          transform .18s ease,
+          box-shadow .18s ease,
+          border-color .18s ease;
+      }
+
+      .footer-icons a:hover {
+        transform: translateY(-2px);
+        box-shadow:
+          0 14px 28px rgba(14,43,92,.20),
+          inset 0 1px 0 rgba(255,255,255,1);
+        border-color: rgba(255,255,255,.44);
+      }
+
+      .footer-icons a:active {
+        transform: scale(.97);
+      }
+
+      .footer-icons img {
+        width: 22px;
+        height: 22px;
+        object-fit: contain;
+        display: block;
+      }
+
+      .footer-bottom-line {
+        height: 1px;
+        margin: 16px 0 12px;
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(255,255,255,.26) 14%,
+          rgba(255,255,255,.26) 86%,
+          transparent 100%
+        );
+      }
+
+      .footer-copy {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+      }
+
+      .footer-copy div:first-child {
+        font-size: 14px;
+        line-height: 1.45;
+        font-weight: 700;
+        color: rgba(255,255,255,.94);
+        margin-bottom: 2px;
+        letter-spacing: .2px;
+      }
+
+      .footer-copy div:last-child {
+        font-size: 12px;
+        line-height: 1.45;
+        font-weight: 600;
+        color: rgba(255,255,255,.78);
+        letter-spacing: .2px;
+      }
+    }
+  </style>
 </head>
 
 <body>
   <div class="site-wrap">
-
-    <!-- HEADER ใช้ชุดเดียวกับ index -->
     <header class="ssb-topbar" role="banner">
       <div class="topbar-inner">
         <div class="brand-wrap">
@@ -124,202 +398,132 @@
       </div>
     </header>
 
-    <!-- MAIN ใช้ระบบเดิมของ SSB -->
     <main class="main-content">
-      <section class="hero-card">
-        <div class="hero-head">
-          <div class="hero-kicker">SSB Mobile System</div>
-          <h1>STEALTH SAFETY BANK MOBILE SYSTEM</h1>
-          <p>
-            กดโลโก้เพื่อเปิดหรือปิดระบบ กดไอคอน 1 ครั้งเพื่อดูวิธีการป้องกัน
-            และกด 2 ครั้งเพื่ออ่านรายละเอียดของไอคอนการโจมตีหรือระบบป้องกัน
-          </p>
-          <div class="guide-text">
-            <span>กด 1 ครั้ง = ดูการป้องกัน</span>
-            <span class="guide-emphasis">กด 2 ครั้ง = อ่านรายละเอียด</span>
-          </div>
-        </div>
+      <section class="hero-stage">
+        <div class="hero-center">
+          <div class="tech-hero" id="techHero">
+            <div class="hero-bg" aria-hidden="true">
+              <div class="bg-core-glow"></div>
+            </div>
 
-        <section class="showcase" id="showcase">
-          <div class="beam-rail" aria-hidden="true">
-            <div class="beam-rail-line"></div>
-            <div class="beam-rail-spark beam-rail-spark-a"></div>
-            <div class="beam-rail-spark beam-rail-spark-b"></div>
-          </div>
-
-          <div class="beam-svg-wrap" id="beamSvgWrap" aria-hidden="true">
-            <svg class="beam-svg" id="beamSvg"></svg>
-          </div>
-
-          <aside class="icon-column left" id="attackColumn">
-            <article class="icon-card attack-card" id="attack-psychological">
-              <button class="icon-btn" type="button" data-kind="attack" data-key="psychological">
-                <span class="icon-frame">
-                  <img src="images/Psychological.png" alt="Psychological" />
-                </span>
-                <span class="icon-meta">
-                  <span class="icon-name">Psychological</span>
-                  <span class="icon-sub">การกดดัน หลอกลวง เร่งรัดการตัดสินใจ</span>
-                </span>
-              </button>
-            </article>
-
-            <article class="icon-card attack-card" id="attack-phishing">
-              <button class="icon-btn" type="button" data-kind="attack" data-key="phishing">
-                <span class="icon-frame">
-                  <img src="images/Phishing.png" alt="Phishing" />
-                </span>
-                <span class="icon-meta">
-                  <span class="icon-name">Phishing</span>
-                  <span class="icon-sub">ลิงก์ปลอม หน้าเว็บปลอม ขโมยข้อมูลสำคัญ</span>
-                </span>
-              </button>
-            </article>
-
-            <article class="icon-card attack-card" id="attack-remote">
-              <button class="icon-btn" type="button" data-kind="attack" data-key="remote">
-                <span class="icon-frame">
-                  <img src="images/Remote.png" alt="Remote" />
-                </span>
-                <span class="icon-meta">
-                  <span class="icon-name">Remote</span>
-                  <span class="icon-sub">ควบคุมเครื่องจากระยะไกลผ่านแอปหรือมัลแวร์</span>
-                </span>
-              </button>
-            </article>
-
-            <article class="icon-card attack-card" id="attack-fake-app">
-              <button class="icon-btn" type="button" data-kind="attack" data-key="fake-app">
-                <span class="icon-frame">
-                  <img src="images/Fake app.png" alt="Fake App" />
-                </span>
-                <span class="icon-meta">
-                  <span class="icon-name">Fake App</span>
-                  <span class="icon-sub">แอปปลอมที่เข้าถึงข้อมูลหรือธุรกรรม</span>
-                </span>
-              </button>
-            </article>
-          </aside>
-
-          <section class="center-stage" id="centerStage">
-            <div class="center-aura"></div>
-
-            <div class="logo-mode" id="logoMode">
-              <div class="logo-orbit-wrap">
-                <svg class="logo-orbit-svg" viewBox="0 0 320 320" aria-hidden="true">
-                  <circle class="logo-orbit-ring" cx="160" cy="160" r="128"></circle>
-                  <circle class="logo-orbit-ring second" cx="160" cy="160" r="112"></circle>
-                  <circle class="logo-orbit-runner" cx="160" cy="32" r="6"></circle>
-                  <circle class="logo-orbit-runner two" cx="160" cy="48" r="4"></circle>
-                </svg>
-
-                <button class="logo-core" id="logoCore" type="button" aria-label="Open or collapse system">
-                  <img src="images/logo.png" alt="SSB Core Logo" />
-                </button>
-              </div>
-
-              <div class="center-caption">
-                <div class="center-caption-main">System-Based Security</div>
-                <div class="center-caption-sub">กดโลโก้เพื่อให้ระบบกางออกจากศูนย์กลาง</div>
+            <div class="hero-system-title" id="heroSystemTitle" aria-hidden="true">
+              <div class="hero-system-title-inner">
+                <span class="hero-system-title-text">Stealth Safety Bank Mobile System</span>
               </div>
             </div>
 
-            <div class="detail-mode" id="detailMode" aria-hidden="true">
-              <div class="detail-shell">
-                <div class="detail-top">
-                  <div>
-                    <div class="detail-kicker" id="detailKicker">DETAIL</div>
-                    <h3 class="detail-title" id="detailTitle">Title</h3>
-                    <p class="detail-subtitle" id="detailSubtitle">Subtitle</p>
-                  </div>
+            <div class="center-glow"></div>
+            <div class="center-pulse" id="centerPulse"></div>
 
-                  <button class="detail-close" id="detailClose" type="button" aria-label="ปิด">×</button>
+            <svg class="hero-energy-svg" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+              <circle class="orbit-ring" cx="600" cy="450" r="168"></circle>
+              <circle class="orbit-runner" cx="600" cy="282" r="6"></circle>
+
+              <path class="energy-line energy-m1" d="M305 383 Q 420 390 520 430"></path>
+              <path class="energy-line energy-company" d="M895 383 Q 780 390 680 430"></path>
+              <path class="energy-line energy-product" d="M305 595 Q 425 560 520 500"></path>
+              <path class="energy-line energy-agent" d="M895 595 Q 775 560 680 500"></path>
+            </svg>
+
+            <button class="logo-core logo-toggle sound-click" id="logoToggle" type="button" aria-label="Open menu">
+              <img src="images/logo.png" alt="Stealth Safety Bank Logo" loading="lazy" />
+            </button>
+
+            <div class="menu-layer-v2">
+              <div class="menu-node m1">
+                <a href="ssb-system.html#ssbmobile" class="node-shell sound-click">
+                  <span class="node-title">SSB Mobile System</span>
+                </a>
+              </div>
+
+              <div class="menu-group g-company">
+                <div class="submenu-panel">
+                  <button class="submenu-btn sound-click" type="button" data-action="company-about">เกี่ยวกับบริษัท</button>
+                  <button class="submenu-btn sound-click" type="button" data-action="company-contact">ติดต่อเรา</button>
                 </div>
 
-                <div class="detail-body">
-                  <div class="detail-box">
-                    <h4>ความหมาย</h4>
-                    <p id="detailMeaning"></p>
-                  </div>
+                <div class="main-node">
+                  <button class="node-shell sound-click" type="button" data-menu="company">
+                    <span class="node-title">เกี่ยวกับบริษัท</span>
+                  </button>
+                </div>
+              </div>
 
-                  <div class="detail-box">
-                    <h4>ระบบที่เกี่ยวข้อง</h4>
-                    <div class="defense-tags" id="detailTags"></div>
-                  </div>
+              <div class="menu-group g-product">
+                <div class="main-node">
+                  <button class="node-shell sound-click" type="button" data-menu="product">
+                    <span class="node-title">สินค้า</span>
+                  </button>
+                </div>
 
-                  <div class="detail-box">
-                    <h4>SSB จัดการอย่างไร</h4>
-                    <p id="detailProtection"></p>
-                  </div>
+                <div class="submenu-panel">
+                  <a href="ssb-system.html#sbpremium" class="submenu-btn sound-click">SB Premium</a>
+                  <a href="ssb-system.html#custom" class="submenu-btn sound-click">Custom System</a>
+                </div>
+              </div>
 
-                  <div class="detail-box">
-                    <h4>เหตุผลของการออกแบบ</h4>
-                    <p id="detailReason"></p>
+              <div class="menu-group g-agent">
+                <div class="main-node">
+                  <button class="node-shell sound-click" type="button" data-menu="agent">
+                    <span class="node-title">ตัวแทน</span>
+                  </button>
+                </div>
+
+                <div class="submenu-panel">
+                  <button class="submenu-btn sound-click" type="button" data-link="join-agent.html">สมัครตัวแทน</button>
+                  <button class="submenu-btn sound-click" type="button" data-link="agent-login.html">Login Agent</button>
+                </div>
+              </div>
+
+              <div class="menu-node m5">
+                <a href="book.html" class="node-shell sound-click">
+                  <span class="node-title">สั่งซื้อสินค้า</span>
+                </a>
+              </div>
+
+              <div class="hero-menu-hint" id="heroMenuHint">คลิกโลโก้เพื่อเปิดเมนู</div>
+            </div>
+
+            <div class="mobile-menu-v2" aria-label="Mobile primary navigation">
+              <div class="mobile-hero">
+                <img src="images/logo.png" class="mobile-hero-logo" alt="Stealth Safety Bank Logo" loading="lazy" />
+                <div class="mobile-hero-title">SSB Mobile System</div>
+                <div class="mobile-hero-sub">ระบบความปลอดภัยทางการเงิน</div>
+              </div>
+
+              <div class="mobile-menu-list">
+                <div class="menu-item">
+                  <a href="ssb-system.html#ssbmobile" class="menu-btn sound-click no-arrow no-submenu">SSB Mobile System</a>
+                </div>
+
+                <div class="menu-item menu-item-toggle" data-mobile-toggle="company">
+                  <button class="menu-btn sound-click" type="button">เกี่ยวกับบริษัท</button>
+                  <div class="submenu">
+                    <button class="submenu-link sound-click" type="button" data-action="company-about">เกี่ยวกับบริษัท</button>
+                    <button class="submenu-link sound-click" type="button" data-action="company-contact">ติดต่อเรา</button>
+                  </div>
+                </div>
+
+                <div class="menu-item menu-item-toggle" data-mobile-toggle="product">
+                  <button class="menu-btn sound-click" type="button">สินค้า</button>
+                  <div class="submenu">
+                    <a href="ssb-system.html#sbpremium" class="submenu-link sound-click">SB Premium</a>
+                    <a href="ssb-system.html#custom" class="submenu-link sound-click">Custom System</a>
+                  </div>
+                </div>
+
+                <div class="menu-item menu-item-toggle" data-mobile-toggle="agent">
+                  <button class="menu-btn sound-click" type="button">ตัวแทน</button>
+                  <div class="submenu">
+                    <button class="submenu-link sound-click" type="button" data-link="join-agent.html">สมัครตัวแทน</button>
+                    <button class="submenu-link sound-click" type="button" data-link="agent-login.html">Login Agent</button>
                   </div>
                 </div>
               </div>
+
+              <a href="book.html" class="mobile-cta sound-click">สั่งซื้อสินค้า</a>
             </div>
-
-            <div class="status-bar" id="statusBar">กดโลโก้เพื่อเริ่มต้น</div>
-          </section>
-
-          <aside class="icon-column right" id="systemColumn">
-            <article class="icon-card system-card" id="system-fd">
-              <button class="icon-btn" type="button" data-kind="system" data-key="fd">
-                <span class="icon-frame">
-                  <img src="images/Flare Device.png" alt="FD - Flare Device" />
-                </span>
-                <span class="icon-meta">
-                  <span class="icon-name">FD - Flare Device</span>
-                  <span class="icon-sub">จุดรับแรงและเบี่ยงความสนใจออกจากระบบหลัก</span>
-                </span>
-              </button>
-            </article>
-
-            <article class="icon-card system-card" id="system-safety-book">
-              <button class="icon-btn" type="button" data-kind="system" data-key="safety-book">
-                <span class="icon-frame">
-                  <img src="images/Safety Book.png" alt="Safety Book" />
-                </span>
-                <span class="icon-meta">
-                  <span class="icon-name">Safety Book</span>
-                  <span class="icon-sub">แยกเก็บ ลดการเข้าถึง และลดการมองเห็นจากภายนอก</span>
-                </span>
-              </button>
-            </article>
-
-            <article class="icon-card system-card" id="system-time-barrier">
-              <button class="icon-btn" type="button" data-kind="system" data-key="time-barrier">
-                <span class="icon-frame">
-                  <img src="images/Time Barrier.png" alt="Time Barrier" />
-                </span>
-                <span class="icon-meta">
-                  <span class="icon-name">Time Barrier</span>
-                  <span class="icon-sub">หน่วงเวลาเพื่อคืนสติและลดการตัดสินใจผิดพลาด</span>
-                </span>
-              </button>
-            </article>
-
-            <article class="icon-card system-card" id="system-spc">
-              <button class="icon-btn" type="button" data-kind="system" data-key="spc">
-                <span class="icon-frame">
-                  <img src="images/SPC.png" alt="SPC" />
-                </span>
-                <span class="icon-meta">
-                  <span class="icon-name">SPC</span>
-                  <span class="icon-sub">ศูนย์ช่วยเหลือและรับช่วงตรวจสอบแทนผู้ใช้งาน</span>
-                </span>
-              </button>
-            </article>
-          </aside>
-        </section>
-
-        <div class="bottom-box">
-          <strong>SSBMS ไม่ได้ปลอดภัย เพราะอุปกรณ์เพียงชิ้นเดียว</strong>
-          <span>
-            แต่ปลอดภัย เพราะทุกองค์ประกอบถูกออกแบบให้ทำงานร่วมกัน
-            และควบคุม “จุดตัดสินใจ” ก่อนที่ความผิดพลาดจะเกิดขึ้น
-          </span>
+          </div>
         </div>
       </section>
     </main>
@@ -327,7 +531,7 @@
     <footer class="ssb-footer">
       <div class="footer-shell">
         <div class="footer-desktop-grid">
-          <div class="footer-desktop-left">
+          <div class="footer-desktop-col footer-desktop-left">
             <div class="footer-company-th">บริษัท สยามทำ จำกัด</div>
             <div class="footer-company-en">Siamtham Co.,Ltd.</div>
             <div class="footer-address">54 ซอย 53 ถนนพุทธมณฑลสาย 1</div>
@@ -337,29 +541,29 @@
 
           <div class="footer-desktop-divider" aria-hidden="true"></div>
 
-          <div class="footer-desktop-center">
+          <div class="footer-desktop-col footer-desktop-center">
             <div class="footer-icons">
               <a href="https://maps.app.goo.gl/Dz4B1kpqVbmWhkYX7" target="_blank" rel="noopener" aria-label="Map">
-                <img src="https://cdn.simpleicons.org/googlemaps/EA4335" alt="Map" />
+                <img src="https://cdn.simpleicons.org/googlemaps/EA4335" alt="Map">
               </a>
               <a href="https://line.me/R/ti/p/@siamtham" target="_blank" rel="noopener" aria-label="LINE">
-                <img src="https://cdn.simpleicons.org/line/06C755" alt="LINE" />
+                <img src="https://cdn.simpleicons.org/line/06C755" alt="LINE">
               </a>
               <a href="https://www.facebook.com/profile.php?id=61556844339863" target="_blank" rel="noopener" aria-label="Facebook">
-                <img src="https://cdn.simpleicons.org/facebook/1877F2" alt="Facebook" />
+                <img src="https://cdn.simpleicons.org/facebook/1877F2" alt="Facebook">
               </a>
               <a href="https://www.youtube.com/@siamtham" target="_blank" rel="noopener" aria-label="YouTube">
-                <img src="https://cdn.simpleicons.org/youtube/FF0000" alt="YouTube" />
+                <img src="https://cdn.simpleicons.org/youtube/FF0000" alt="YouTube">
               </a>
               <a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">
-                <img src="https://cdn.simpleicons.org/tiktok/000000" alt="TikTok" />
+                <img src="https://cdn.simpleicons.org/tiktok/000000" alt="TikTok">
               </a>
             </div>
           </div>
 
           <div class="footer-desktop-divider" aria-hidden="true"></div>
 
-          <div class="footer-desktop-right">
+          <div class="footer-desktop-col footer-desktop-right">
             <div class="footer-phone-label">เบอร์โทรศัพท์</div>
 
             <a class="footer-phone" href="tel:020432988">
@@ -392,7 +596,39 @@
     </footer>
   </div>
 
-  <script src="js/ssb-system-page.js?v=40"></script>
+  <div id="companyPopup" class="popup-backdrop" aria-hidden="true">
+    <div class="popup-card company" role="dialog" aria-modal="true" aria-labelledby="companyTitle">
+      <div class="popup-head">
+        <div class="popup-head-main">
+          <div class="popup-kicker th-font">ข้อมูลติดต่อ</div>
+          <h3 class="th-font" id="companyTitle">บริษัท สยามทำ จำกัด</h3>
+          <div class="popup-subtitle th-font">ข้อมูลติดต่อและที่ตั้งสำหรับการสอบถาม การประสานงาน และการเดินทางมายังบริษัท</div>
+        </div>
+        <button class="popup-x sound-click" type="button" id="closeCompanyPopupTop" aria-label="ปิด">×</button>
+      </div>
+
+      <div class="popup-body">
+        <div class="popup-panel company-detail">
+          <h4 class="popup-section-title th-font"><span class="dot"></span>ข้อมูลการติดต่อ</h4>
+          <p class="th-font"><strong>ชื่อภาษาอังกฤษ:</strong> Siam Tham Co.,Ltd.</p>
+          <p class="th-font"><strong>ที่อยู่:</strong> 54 ซอย 53 ถนนพุทธมณฑลสาย 1 แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ 10170</p>
+          <p class="th-font"><strong>เลขทะเบียน:</strong> 0105566099954</p>
+          <p class="th-font"><strong>โทร:</strong> 02-043-2988</p>
+          <p class="th-font"><strong>มือถือ:</strong> 064-951-4888</p>
+          <p class="th-font"><strong>อีเมล:</strong> mysiamtham@gmail.com</p>
+          <p class="th-font"><strong>เว็บไซต์:</strong> www.siamtham.com</p>
+
+          <div class="popup-action-row">
+            <a class="popup-cta primary sound-click th-font" href="https://maps.app.goo.gl/Dz4B1kpqVbmWhkYX7" target="_blank" rel="noopener">เปิดแผนที่บริษัท</a>
+            <a class="popup-cta secondary sound-click th-font" href="tel:0649514888">โทรหาบริษัท</a>
+          </div>
+        </div>
+      </div>
+
+      <button class="popup-close th-font sound-click" type="button" id="closeCompanyPopupBottom">ปิด</button>
+    </div>
+  </div>
+
   <script src="js/data.js"></script>
   <script src="js/ui.js"></script>
   <script src="js/popup.js"></script>
