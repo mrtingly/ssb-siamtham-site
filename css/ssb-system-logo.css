@@ -231,10 +231,10 @@ html.light-mode .logo-orbit-ring.second{
 }
 
 html.light-mode .logo-orbit-runner{
-  fill:#79d8ff;
+  fill:#1e6bff;
   filter:
-    drop-shadow(0 0 6px rgba(94,216,255,.55))
-    drop-shadow(0 0 14px rgba(20,110,255,.18));
+    drop-shadow(0 0 6px rgba(30,107,255,.55))
+    drop-shadow(0 0 12px rgba(0,60,180,.25));
 }
 
 html.light-mode .logo-radar-layer::before{
@@ -248,12 +248,12 @@ html.light-mode .logo-radar-layer::after{
   background:
     conic-gradient(
       from 0deg,
-      rgba(255,255,255,0) 0deg,
-      rgba(255,255,255,0) 302deg,
-      rgba(255,255,255,.06) 328deg,
-      rgba(255,255,255,.98) 342deg,
-      rgba(255,255,255,.32) 350deg,
-      rgba(255,255,255,0) 360deg
+      rgba(0,40,120,0) 0deg,
+      rgba(0,40,120,0) 302deg,
+      rgba(0,70,180,.12) 328deg,
+      rgba(0,90,220,.95) 342deg,
+      rgba(0,70,180,.45) 350deg,
+      rgba(0,40,120,0) 360deg
     );
   mix-blend-mode:normal;
   filter:blur(.2px);
@@ -274,31 +274,35 @@ html.light-mode .logo-radar-cross::after{
 }
 
 html.light-mode .logo-scan-dot{
-  background:#42bfff;
+  background:#2f7dff;
   box-shadow:
-    0 0 4px rgba(0,166,255,.45),
-    0 0 10px rgba(20,110,255,.22);
-  opacity:.18;
+    0 0 4px rgba(30,107,255,.45),
+    0 0 10px rgba(0,60,180,.22);
+  opacity:.16;
 }
 
 html.light-mode .logo-scan-dot.is-hit{
-  background:#8fe6ff;
+  background:#4da3ff;
   box-shadow:
-    0 0 8px rgba(255,255,255,.85),
-    0 0 16px rgba(20,110,255,.35),
-    0 0 24px rgba(94,216,255,.22);
-  transform:scale(1.35);
+    0 0 8px rgba(30,107,255,.85),
+    0 0 16px rgba(0,60,180,.35),
+    0 0 24px rgba(30,107,255,.22);
+  transform:scale(1.3);
   opacity:.9;
 }
 
 html.light-mode .logo-core{
   background:
-    radial-gradient(circle at 50% 16%, rgba(255,255,255,.16), transparent 24%),
-    radial-gradient(circle at 50% 35%, rgba(80,160,255,.18), rgba(86,148,255,.72) 46%, rgba(28,94,210,.78) 74%, rgba(14,58,156,.84) 100%);
-  border:1px solid rgba(20,110,255,.18);
+    radial-gradient(circle at 50% 16%, rgba(255,255,255,.10), transparent 26%),
+    radial-gradient(circle at 50% 35%,
+      rgba(80,160,255,.10),
+      rgba(86,148,255,.40) 46%,
+      rgba(28,94,210,.48) 74%,
+      rgba(14,58,156,.55) 100%);
+  border:1px solid rgba(20,110,255,.14);
   box-shadow:
-    0 0 20px rgba(15,103,255,.10),
-    inset 0 0 20px rgba(255,255,255,.04);
+    0 0 12px rgba(15,103,255,.06),
+    inset 0 0 14px rgba(255,255,255,.03);
 }
 
 html.light-mode .logo-core::before{
