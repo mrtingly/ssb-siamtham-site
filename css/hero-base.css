@@ -206,6 +206,35 @@ body.light-mode .center-pulse{
   z-index:-1;
 }
 
+/* =========================
+   CENTER RADAR (SAFE ADD)
+   ========================= */
+
+.logo-core::after{
+  content:'';
+  position:absolute;
+  inset:-30px;
+  border-radius:50%;
+
+  background:conic-gradient(
+    rgba(0,255,255,0) 0deg,
+    rgba(0,255,255,0) 300deg,
+    rgba(120,250,255,.9) 340deg,
+    rgba(255,255,255,1) 345deg,
+    rgba(120,250,255,.2) 350deg,
+    rgba(0,255,255,0) 360deg
+  );
+
+  animation:centerRadar 4s linear infinite;
+  pointer-events:none;
+  z-index:1;
+}
+
+@keyframes centerRadar{
+  from{ transform:rotate(0deg); }
+  to{ transform:rotate(360deg); }
+}
+
 .logo-core img{
   position:relative;
   z-index:2;
