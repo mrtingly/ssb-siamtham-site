@@ -152,30 +152,66 @@
         </aside>
 
         <!-- CENTER -->
-        <section class="center-stage">
+       <section class="center-stage">
 
-          <div class="logo-mode" id="logoMode">
+  <div class="logo-mode" id="logoMode">
 
-            <div class="logo-orbit-wrap">
+    <div class="logo-orbit-wrap">
 
-              <svg class="logo-orbit-svg" viewBox="0 0 320 320">
-                <circle cx="160" cy="160" r="120"></circle>
-              </svg>
+      <svg class="logo-orbit-svg" viewBox="0 0 320 320">
+        <circle cx="160" cy="160" r="120"></circle>
+      </svg>
 
-                     <button class="logo-core" id="logoCore">
-                  <span class="scan-ring"></span>
-                  <img src="images/logo.png">
-                </button>
+      <button class="logo-core" id="logoCore">
+        <span class="scan-ring"></span>
+        <img src="images/logo.png">
+      </button>
 
-            </div>
+    </div>
 
-          </div>
+  </div>
 
-          <div class="status-bar" id="statusBar">
-            กดโลโก้เพื่อเริ่มต้นระบบ
-          </div>
+  <div class="detail-mode" id="detailMode">
+    <div class="detail-shell">
+      <div class="detail-top">
+        <div>
+          <div class="detail-kicker" id="detailKicker">DETAIL</div>
+          <h3 class="detail-title" id="detailTitle">Title</h3>
+          <p class="detail-subtitle" id="detailSubtitle">Subtitle</p>
+        </div>
 
-        </section>
+        <button class="detail-close" id="detailClose" type="button" aria-label="ปิด">×</button>
+      </div>
+
+      <div class="detail-body">
+        <div class="detail-box">
+          <h4>ความหมาย</h4>
+          <p id="detailMeaning"></p>
+        </div>
+
+        <div class="detail-box">
+          <h4>ระบบที่เกี่ยวข้อง</h4>
+          <div class="defense-tags" id="detailTags"></div>
+        </div>
+
+        <div class="detail-box">
+          <h4>SSB จัดการอย่างไร</h4>
+          <p id="detailProtection"></p>
+        </div>
+
+        <div class="detail-box">
+          <h4>เหตุผลของการออกแบบ</h4>
+          <p id="detailReason"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="status-bar" id="statusBar">
+    กดโลโก้เพื่อเริ่มต้นระบบ
+  </div>
+
+</section>
 
         <!-- RIGHT SYSTEM -->
         <aside class="icon-column right" id="systemColumn">
