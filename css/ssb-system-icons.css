@@ -1,4 +1,3 @@
-/* ICON COLUMNS */
 .icon-column{
   position:absolute;
   top:50%;
@@ -74,9 +73,23 @@
   display:flex;
   align-items:center;
   justify-content:center;
-  background:transparent;
-  border:none;
-  transition:transform .25s ease, filter .25s ease, opacity .25s ease;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(255,255,255,.20), transparent 46%),
+    linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+  border:1px solid rgba(120,210,255,.12);
+  box-shadow:
+    0 10px 26px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.04);
+  transition:transform .25s ease, filter .25s ease, opacity .25s ease, box-shadow .25s ease;
+}
+
+html.light-mode .icon-frame{
+  background:
+    radial-gradient(circle at 50% 18%, rgba(255,255,255,.92), transparent 46%),
+    linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.34));
+  box-shadow:
+    0 8px 20px rgba(31,74,140,.08),
+    inset 0 1px 0 rgba(255,255,255,.80);
 }
 
 .icon-frame img{
@@ -108,6 +121,13 @@
   filter:
     drop-shadow(0 0 6px rgba(15,103,255,.42))
     drop-shadow(0 0 14px rgba(15,103,255,.24));
+}
+
+.icon-card:hover .icon-frame{
+  transform:translateY(-3px) scale(1.03);
+  box-shadow:
+    0 14px 32px rgba(0,0,0,.24),
+    0 0 24px rgba(104,244,255,.14);
 }
 
 .icon-card:hover .icon-frame img{
@@ -166,4 +186,3 @@
   0%,100%{ opacity:1; transform:scale(1); }
   50%{ opacity:.38; transform:scale(1.04); }
 }
-
