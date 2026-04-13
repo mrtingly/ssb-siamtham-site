@@ -32,10 +32,13 @@
   const attackColumn = document.getElementById("attackColumn");
   const systemColumn = document.getElementById("systemColumn");
 
+  const radarLayer = document.getElementById("logoRadarLayer");
   const SVG_NS = "http://www.w3.org/2000/svg";
 
   let systemOpened = false;
   let activeTimeout = null;
+  let radarInterval = null;
+  let scanIndex = 0;
 
   const attackMap = {
     psychological: {
@@ -131,6 +134,61 @@
     }
   };
 
+  const radarDotMap = [
+    { x: 66, y: 26 },
+    { x: 76, y: 48 },
+    { x: 63, y: 71 },
+    { x: 39, y: 79 },
+    { x: 24, y: 58 },
+    { x: 28, y: 34 }
+  ];
+
+  function buildRadarDots() {
+    if (!radarLayer) return;
+    radarLayer.querySelectorAll(".logo-scan-dot").forEach((dot) => dot.remove());
+
+    radarDotMap.forEach((point, index) => {
+      const dot = document.createElement("span");
+      dot.className = "logo-scan-dot";
+      dot.dataset.index = String(index);
+      dot.style.left = `${point.x}%`;
+      dot.style.top = `${point.y}%`;
+      radarLayer.appendChild(dot);
+    });
+  }
+
+  function pulseNextRadarDot() {
+    if (!radarLayer || !systemOpened) return;
+    const dots = Array.from(radarLayer.querySelectorAll(".logo-scan-dot"));
+    if (!dots.length) return;
+
+    dots.forEach((dot) => dot.classList.remove("is-hit"));
+    const current = dots[scanIndex % dots.length];
+    current.classList.add("is-hit");
+
+    setTimeout(() => {
+      current.classList.remove("is-hit");
+    }, 420);
+
+    scanIndex += 1;
+  }
+
+  function startRadarLoop() {
+    stopRadarLoop();
+    scanIndex = 0;
+    radarInterval = setInterval(pulseNextRadarDot, 640);
+  }
+
+  function stopRadarLoop() {
+    if (radarInterval) {
+      clearInterval(radarInterval);
+      radarInterval = null;
+    }
+    if (radarLayer) {
+      radarLayer.querySelectorAll(".logo-scan-dot").forEach((dot) => dot.classList.remove("is-hit"));
+    }
+  }
+
   function ensureSvgDefs() {
     beamSvg.innerHTML = "";
 
@@ -182,6 +240,7 @@
     attackColumn.classList.add("ready");
     systemColumn.classList.add("ready");
     statusBar.textContent = "กดไอคอน 1 ครั้งเพื่อดูการป้องกัน หรือกด 2 ครั้งเพื่ออ่านรายละเอียด";
+    startRadarLoop();
   }
 
   function collapseSystem() {
@@ -192,6 +251,7 @@
     attackColumn.classList.remove("ready");
     systemColumn.classList.remove("ready");
     statusBar.textContent = "กดโลโก้เพื่อเริ่มต้น";
+    stopRadarLoop();
   }
 
   function hideLogoMode() {
@@ -251,31 +311,31 @@
     };
   }
 
- function getRelayPoint(parentRect) {
-  const logoRect = logoCore.getBoundingClientRect();
-  return {
-    x: logoRect.left - parentRect.left + (logoRect.width / 2),
-    y: logoRect.top - parentRect.top + (logoRect.height / 2)
-  };
-}
+  function getRelayPoint(parentRect) {
+    const logoRect = logoCore.getBoundingClientRect();
+    return {
+      x: logoRect.left - parentRect.left + (logoRect.width / 2),
+      y: logoRect.top - parentRect.top + (logoRect.height / 2)
+    };
+  }
 
   function createStraightBeam(from, to, type) {
-  const path = document.createElementNS(SVG_NS, "path");
-  const d = `M ${from.x} ${from.y} L ${to.x} ${to.y}`;
+    const path = document.createElementNS(SVG_NS, "path");
+    const d = `M ${from.x} ${from.y} L ${to.x} ${to.y}`;
 
-  path.setAttribute("d", d);
-  path.setAttribute("class", `beam-path ${type}`);
+    path.setAttribute("d", d);
+    path.setAttribute("class", `beam-path ${type}`);
 
-  beamSvg.appendChild(path);
+    beamSvg.appendChild(path);
 
-  const len = path.getTotalLength();
-  const visibleSegment = Math.max(78, len * 0.22);
+    const len = path.getTotalLength();
+    const visibleSegment = Math.max(78, len * 0.22);
 
-  path.style.strokeDasharray = `${visibleSegment} ${len}`;
-  path.style.strokeDashoffset = `${len}`;
-  path.style.setProperty("--beam-len", `${len}`);
-  path.classList.add("animate");
-}
+    path.style.strokeDasharray = `${visibleSegment} ${len}`;
+    path.style.strokeDashoffset = `${len}`;
+    path.style.setProperty("--beam-len", `${len}`);
+    path.classList.add("animate");
+  }
 
   function blinkTargets(ids) {
     ids.forEach(id => {
@@ -350,6 +410,7 @@
 
   ensureSvgDefs();
   sizeSvg();
+  buildRadarDots();
 
   logoCore.addEventListener("click", function () {
     if (!systemOpened) {
@@ -406,5 +467,6 @@
   window.addEventListener("resize", function () {
     sizeSvg();
     ensureSvgDefs();
+    buildRadarDots();
   });
 })();
