@@ -192,3 +192,31 @@ html.light-mode .brand-logo{
 html.light-mode .brand-logo img{
   filter:drop-shadow(0 0 10px rgba(15,103,255,.16));
 }
+
+.home-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:92px;
+  height:38px;
+  padding:0 16px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background:var(--panel);
+  color:var(--title);
+  font-size:14px;
+  font-weight:800;
+  line-height:1;
+  box-shadow:var(--shadow-soft);
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+
+.home-btn:hover{
+  transform:translateY(-1px);
+  box-shadow:0 10px 20px rgba(0,0,0,.16);
+  border-color:var(--border-strong);
+}
+
+html.light-mode .home-btn{
+  background:rgba(255,255,255,.92);
+}
