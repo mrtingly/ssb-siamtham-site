@@ -1,4 +1,3 @@
-/* DETAIL MODE */
 .detail-mode{
   position:absolute;
   inset:0;
@@ -17,7 +16,7 @@
 }
 
 .detail-shell{
-  width:min(820px, calc(100% - 620px));
+  width:min(840px, calc(100% - 620px));
   min-height:470px;
   border-radius:28px;
   border:1px solid var(--border);
