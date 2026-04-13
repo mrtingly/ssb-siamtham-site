@@ -5,7 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google" content="notranslate" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
   <title>Stealth Safety Bank Mobile System | Siam Tham Co.,Ltd.</title>
+  <meta
+    name="description"
+    content="Stealth Safety Bank Mobile System โดย บริษัท สยามทำ จำกัด ระบบความปลอดภัยทางการเงินเชิงโครงสร้าง การแยกอุปกรณ์ธุรกรรม การอำพรางการจัดเก็บ และแนวคิดลดความเสี่ยงจากการโจมตีตั้งแต่ต้นทาง"
+  />
+  <meta
+    name="keywords"
+    content="Stealth Safety Bank, Stealth Safety Bank Mobile System, Stealth Safety Book, Siam Tham, บริษัท สยามทำ จำกัด, ความปลอดภัยทางการเงิน, mobile banking security, anti phishing, anti hacking"
+  />
+  <meta name="author" content="Siam Tham Co.,Ltd." />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="theme-color" content="#1b63c7" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,12 +35,31 @@
     })();
   </script>
 
+  <!-- CORE CSS จาก index -->
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <link rel="stylesheet" href="css/popup.css" />
+  <link rel="stylesheet" href="css/popup-mobile.css" media="(max-width: 1023px)" />
+
+  <!-- SSB CSS -->
   <link rel="stylesheet" href="css/ssb-system.css?v=40" />
+  <link rel="stylesheet" href="css/ssb-system-header.css" />
+  <link rel="stylesheet" href="css/ssb-system-logo.css" />
+  <link rel="stylesheet" href="css/ssb-system-icons.css" />
+  <link rel="stylesheet" href="css/ssb-system-detail.css" />
+  <link rel="stylesheet" href="css/ssb-system-effects.css" />
+  <link rel="stylesheet" href="css/ssb-system-footer.css" />
+  <link rel="stylesheet" href="css/ssb-system-responsive.css" />
   <link rel="stylesheet" href="css/ssb-system-mobile.css?v=40" media="(max-width: 1023px), (max-width: 1366px) and (orientation: portrait)" />
 </head>
+
 <body>
   <div class="site-wrap">
-    <header class="ssb-topbar">
+
+    <!-- HEADER ใช้ชุดเดียวกับ index -->
+    <header class="ssb-topbar" role="banner">
       <div class="topbar-inner">
         <div class="brand-wrap">
           <div class="brand-logo">
@@ -36,26 +67,64 @@
           </div>
 
           <div class="brand-text">
-            <div class="brand-line-1">บริษัท สยามทำ จำกัด</div>
-            <div class="brand-line-2">Siam Tham Co.,Ltd.</div>
-            <div class="brand-site">
+            <div class="brand-line-1 th-font">บริษัท สยามทำ จำกัด</div>
+            <div class="brand-line-2 en-font">Siam Tham Co.,Ltd.</div>
+            <div class="brand-site en-font">
               <a href="https://www.siamtham.com" target="_blank" rel="noopener">www.siamtham.com</a>
             </div>
           </div>
         </div>
 
+        <div class="header-search-wrap">
+          <form class="header-search" id="agentSearchForm" autocomplete="off" role="search" aria-label="ค้นหาตัวแทน">
+            <svg class="header-search-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="2"></circle>
+              <path d="M16 16L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+            </svg>
+
+            <input
+              id="agentSearchInput"
+              class="header-search-input"
+              type="text"
+              placeholder="ค้นหาตัวแทน / Search agent"
+              aria-label="ค้นหาตัวแทน"
+            />
+
+            <button class="header-search-btn sound-click" type="submit">ค้นหา</button>
+          </form>
+
+          <div class="agent-dropdown" id="agentDropdown" aria-live="polite">
+            <div class="agent-dropdown-card">
+              <div class="agent-dropdown-head th-font">ผลการค้นหาตัวแทน</div>
+              <div class="agent-results" id="agentResults"></div>
+            </div>
+          </div>
+        </div>
+
         <div class="topbar-actions">
-          <div class="theme-switch-wrap">
+          <div class="theme-switch-wrap" id="desktopThemeSwitch">
             <span class="mode-label">Dark</span>
             <button id="themeToggle" class="theme-switch" type="button" aria-label="Toggle theme">
               <span class="switch-knob"></span>
             </button>
             <span class="mode-label">Light</span>
           </div>
+
+          <div class="lang-bar" aria-label="เลือกภาษา">
+            <button class="lang-btn sound-click active" type="button" data-lang="th" title="ไทย">
+              <img src="https://flagcdn.com/w40/th.png" alt="ไทย" loading="lazy" />
+            </button>
+            <button class="lang-btn sound-click" type="button" data-lang="en" title="English">
+              <img src="https://flagcdn.com/w40/us.png" alt="English" loading="lazy" />
+            </button>
+          </div>
+
+          <div id="google_translate_element"></div>
         </div>
       </div>
     </header>
 
+    <!-- MAIN ใช้ระบบเดิมของ SSB -->
     <main class="main-content">
       <section class="hero-card">
         <div class="hero-head">
@@ -86,7 +155,7 @@
             <article class="icon-card attack-card" id="attack-psychological">
               <button class="icon-btn" type="button" data-kind="attack" data-key="psychological">
                 <span class="icon-frame">
-                  <img src="images/Psychological.png" alt="Psychological">
+                  <img src="images/Psychological.png" alt="Psychological" />
                 </span>
                 <span class="icon-meta">
                   <span class="icon-name">Psychological</span>
@@ -98,7 +167,7 @@
             <article class="icon-card attack-card" id="attack-phishing">
               <button class="icon-btn" type="button" data-kind="attack" data-key="phishing">
                 <span class="icon-frame">
-                  <img src="images/Phishing.png" alt="Phishing">
+                  <img src="images/Phishing.png" alt="Phishing" />
                 </span>
                 <span class="icon-meta">
                   <span class="icon-name">Phishing</span>
@@ -110,7 +179,7 @@
             <article class="icon-card attack-card" id="attack-remote">
               <button class="icon-btn" type="button" data-kind="attack" data-key="remote">
                 <span class="icon-frame">
-                  <img src="images/Remote.png" alt="Remote">
+                  <img src="images/Remote.png" alt="Remote" />
                 </span>
                 <span class="icon-meta">
                   <span class="icon-name">Remote</span>
@@ -122,7 +191,7 @@
             <article class="icon-card attack-card" id="attack-fake-app">
               <button class="icon-btn" type="button" data-kind="attack" data-key="fake-app">
                 <span class="icon-frame">
-                  <img src="images/Fake app.png" alt="Fake App">
+                  <img src="images/Fake app.png" alt="Fake App" />
                 </span>
                 <span class="icon-meta">
                   <span class="icon-name">Fake App</span>
@@ -145,7 +214,7 @@
                 </svg>
 
                 <button class="logo-core" id="logoCore" type="button" aria-label="Open or collapse system">
-                  <img src="images/logo.png" alt="SSB Core Logo">
+                  <img src="images/logo.png" alt="SSB Core Logo" />
                 </button>
               </div>
 
@@ -198,7 +267,7 @@
             <article class="icon-card system-card" id="system-fd">
               <button class="icon-btn" type="button" data-kind="system" data-key="fd">
                 <span class="icon-frame">
-                  <img src="images/Flare Device.png" alt="FD - Flare Device">
+                  <img src="images/Flare Device.png" alt="FD - Flare Device" />
                 </span>
                 <span class="icon-meta">
                   <span class="icon-name">FD - Flare Device</span>
@@ -210,7 +279,7 @@
             <article class="icon-card system-card" id="system-safety-book">
               <button class="icon-btn" type="button" data-kind="system" data-key="safety-book">
                 <span class="icon-frame">
-                  <img src="images/Safety Book.png" alt="Safety Book">
+                  <img src="images/Safety Book.png" alt="Safety Book" />
                 </span>
                 <span class="icon-meta">
                   <span class="icon-name">Safety Book</span>
@@ -222,7 +291,7 @@
             <article class="icon-card system-card" id="system-time-barrier">
               <button class="icon-btn" type="button" data-kind="system" data-key="time-barrier">
                 <span class="icon-frame">
-                  <img src="images/Time Barrier.png" alt="Time Barrier">
+                  <img src="images/Time Barrier.png" alt="Time Barrier" />
                 </span>
                 <span class="icon-meta">
                   <span class="icon-name">Time Barrier</span>
@@ -234,7 +303,7 @@
             <article class="icon-card system-card" id="system-spc">
               <button class="icon-btn" type="button" data-kind="system" data-key="spc">
                 <span class="icon-frame">
-                  <img src="images/SPC.png" alt="SPC">
+                  <img src="images/SPC.png" alt="SPC" />
                 </span>
                 <span class="icon-meta">
                   <span class="icon-name">SPC</span>
@@ -271,19 +340,19 @@
           <div class="footer-desktop-center">
             <div class="footer-icons">
               <a href="https://maps.app.goo.gl/Dz4B1kpqVbmWhkYX7" target="_blank" rel="noopener" aria-label="Map">
-                <img src="https://cdn.simpleicons.org/googlemaps/EA4335" alt="Map">
+                <img src="https://cdn.simpleicons.org/googlemaps/EA4335" alt="Map" />
               </a>
               <a href="https://line.me/R/ti/p/@siamtham" target="_blank" rel="noopener" aria-label="LINE">
-                <img src="https://cdn.simpleicons.org/line/06C755" alt="LINE">
+                <img src="https://cdn.simpleicons.org/line/06C755" alt="LINE" />
               </a>
               <a href="https://www.facebook.com/profile.php?id=61556844339863" target="_blank" rel="noopener" aria-label="Facebook">
-                <img src="https://cdn.simpleicons.org/facebook/1877F2" alt="Facebook">
+                <img src="https://cdn.simpleicons.org/facebook/1877F2" alt="Facebook" />
               </a>
               <a href="https://www.youtube.com/@siamtham" target="_blank" rel="noopener" aria-label="YouTube">
-                <img src="https://cdn.simpleicons.org/youtube/FF0000" alt="YouTube">
+                <img src="https://cdn.simpleicons.org/youtube/FF0000" alt="YouTube" />
               </a>
               <a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">
-                <img src="https://cdn.simpleicons.org/tiktok/000000" alt="TikTok">
+                <img src="https://cdn.simpleicons.org/tiktok/000000" alt="TikTok" />
               </a>
             </div>
           </div>
@@ -324,5 +393,10 @@
   </div>
 
   <script src="js/ssb-system-page.js?v=40"></script>
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/popup.js"></script>
+  <script src="js/main.js"></script>
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
