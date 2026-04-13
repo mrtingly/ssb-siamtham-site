@@ -222,92 +222,92 @@
 }
 
 html.light-mode .logo-orbit-ring{
-  stroke:rgba(20,110,255,.20);
-  filter:drop-shadow(0 0 8px rgba(20,110,255,.12));
+  stroke:rgba(20,110,255,.14);
+  filter:drop-shadow(0 0 6px rgba(20,110,255,.08));
 }
 
 html.light-mode .logo-orbit-ring.second{
-  stroke:rgba(20,110,255,.14);
+  stroke:rgba(255,255,255,.26);
 }
 
 html.light-mode .logo-orbit-runner{
-  fill:#3cbcff;
+  fill:#79d8ff;
   filter:
-    drop-shadow(0 0 8px rgba(0,166,255,.85))
-    drop-shadow(0 0 18px rgba(20,110,255,.34));
+    drop-shadow(0 0 6px rgba(94,216,255,.55))
+    drop-shadow(0 0 14px rgba(20,110,255,.18));
 }
 
 html.light-mode .logo-radar-layer::before{
-  border:1px solid rgba(20,110,255,.22);
+  border:1px solid rgba(20,110,255,.14);
   box-shadow:
-    inset 0 0 20px rgba(20,110,255,.08),
-    0 0 22px rgba(20,110,255,.10);
+    inset 0 0 14px rgba(20,110,255,.05),
+    0 0 14px rgba(20,110,255,.06);
 }
 
 html.light-mode .logo-radar-layer::after{
   background:
     conic-gradient(
       from 0deg,
-      rgba(0,110,255,0) 0deg,
-      rgba(0,110,255,0) 302deg,
-      rgba(30,150,255,.18) 328deg,
-      rgba(0,166,255,.95) 342deg,
-      rgba(94,216,255,.58) 350deg,
-      rgba(0,110,255,0) 360deg
+      rgba(255,255,255,0) 0deg,
+      rgba(255,255,255,0) 302deg,
+      rgba(255,255,255,.06) 328deg,
+      rgba(255,255,255,.98) 342deg,
+      rgba(255,255,255,.32) 350deg,
+      rgba(255,255,255,0) 360deg
     );
   mix-blend-mode:normal;
-  filter:blur(.25px);
+  filter:blur(.2px);
 }
 
 html.light-mode .logo-radar-grid{
-  border:1px solid rgba(20,110,255,.12);
+  border:1px solid rgba(20,110,255,.08);
 }
 
 html.light-mode .logo-radar-grid::before,
 html.light-mode .logo-radar-grid::after{
-  border:1px solid rgba(20,110,255,.12);
+  border:1px solid rgba(20,110,255,.08);
 }
 
 html.light-mode .logo-radar-cross::before,
 html.light-mode .logo-radar-cross::after{
-  background:rgba(20,110,255,.12);
+  background:rgba(255,255,255,.24);
 }
 
 html.light-mode .logo-scan-dot{
-  background:#0aa8ff;
+  background:#42bfff;
   box-shadow:
-    0 0 6px rgba(0,166,255,.82),
-    0 0 16px rgba(20,110,255,.44);
-  opacity:.28;
+    0 0 4px rgba(0,166,255,.45),
+    0 0 10px rgba(20,110,255,.22);
+  opacity:.18;
 }
 
 html.light-mode .logo-scan-dot.is-hit{
-  background:#5ed8ff;
+  background:#8fe6ff;
   box-shadow:
-    0 0 12px rgba(0,200,255,1),
-    0 0 26px rgba(20,110,255,.88),
-    0 0 38px rgba(94,216,255,.58);
-  transform:scale(1.6);
-  opacity:1;
+    0 0 8px rgba(255,255,255,.85),
+    0 0 16px rgba(20,110,255,.35),
+    0 0 24px rgba(94,216,255,.22);
+  transform:scale(1.35);
+  opacity:.9;
 }
 
 html.light-mode .logo-core{
   background:
-    radial-gradient(circle at 50% 16%, rgba(255,255,255,.22), transparent 24%),
-    radial-gradient(circle at 50% 35%, rgba(80,160,255,.34), rgba(86,148,255,.96) 46%, rgba(28,94,210,.98) 74%, rgba(14,58,156,.99) 100%);
-  border:1px solid rgba(20,110,255,.24);
+    radial-gradient(circle at 50% 16%, rgba(255,255,255,.16), transparent 24%),
+    radial-gradient(circle at 50% 35%, rgba(80,160,255,.18), rgba(86,148,255,.72) 46%, rgba(28,94,210,.78) 74%, rgba(14,58,156,.84) 100%);
+  border:1px solid rgba(20,110,255,.18);
   box-shadow:
-    0 0 30px rgba(15,103,255,.16),
-    inset 0 0 30px rgba(255,255,255,.05);
+    0 0 20px rgba(15,103,255,.10),
+    inset 0 0 20px rgba(255,255,255,.04);
 }
 
 html.light-mode .logo-core::before{
-  border:1px solid rgba(94,216,255,.18);
-  box-shadow:inset 0 0 16px rgba(94,216,255,.12);
+  border:1px solid rgba(94,216,255,.12);
+  box-shadow:inset 0 0 12px rgba(94,216,255,.08);
 }
 
 html.light-mode .logo-core::after{
-  background:radial-gradient(circle, rgba(20,110,255,.20), transparent 70%);
+  background:radial-gradient(circle, rgba(20,110,255,.12), transparent 70%);
 }
 
 .logo-core:hover{
@@ -319,8 +319,8 @@ html.light-mode .logo-core::after{
 
 html.light-mode .logo-core:hover{
   box-shadow:
-    0 0 54px rgba(15,103,255,.22),
-    inset 0 0 34px rgba(94,216,255,.08);
+    0 0 34px rgba(15,103,255,.14),
+    inset 0 0 20px rgba(94,216,255,.06);
 }
 
 .logo-core.is-burst{
@@ -334,9 +334,9 @@ html.light-mode .logo-core:hover{
 
 html.light-mode .logo-core.is-burst{
   box-shadow:
-    0 0 68px rgba(15,103,255,.30),
-    0 0 30px rgba(94,216,255,.22),
-    inset 0 0 30px rgba(94,216,255,.12);
+    0 0 46px rgba(15,103,255,.18),
+    0 0 22px rgba(94,216,255,.14),
+    inset 0 0 24px rgba(94,216,255,.08);
 }
 
 @keyframes logoBreath{
@@ -370,6 +370,6 @@ html.light-mode .logo-core.is-burst{
 
 html.light-mode .logo-core img{
   filter:
-    drop-shadow(0 0 18px rgba(94,216,255,.22))
-    drop-shadow(0 12px 24px rgba(20,110,255,.14));
+    drop-shadow(0 0 14px rgba(94,216,255,.14))
+    drop-shadow(0 10px 20px rgba(20,110,255,.10));
 }
