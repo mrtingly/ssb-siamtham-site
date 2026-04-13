@@ -35,7 +35,6 @@
     })();
   </script>
 
-  <!-- CORE CSS จาก index -->
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/layout.css" />
   <link rel="stylesheet" href="css/components.css" />
@@ -43,22 +42,20 @@
   <link rel="stylesheet" href="css/popup.css" />
   <link rel="stylesheet" href="css/popup-mobile.css" media="(max-width: 1023px)" />
 
-<!-- SSB CSS -->
-<link rel="stylesheet" href="css/ssb-system.css?v=40" />
-<link rel="stylesheet" href="css/ssb-system-header.css?v=40" />
-<link rel="stylesheet" href="css/ssb-system-logo.css?v=40" />
-<link rel="stylesheet" href="css/ssb-system-effects.css?v=40" />
-<link rel="stylesheet" href="css/ssb-system-icons.css?v=40" />
-<link rel="stylesheet" href="css/ssb-system-detail.css?v=40" />
-<link rel="stylesheet" href="css/ssb-system-footer.css?v=40" />
-<link rel="stylesheet" href="css/ssb-system-responsive.css?v=40" />
-<link rel="stylesheet" href="css/ssb-system-mobile.css?v=40" media="(max-width: 767px)" />
+  <link rel="stylesheet" href="css/ssb-system.css?v=41" />
+  <link rel="stylesheet" href="css/ssb-system-header.css?v=41" />
+  <link rel="stylesheet" href="css/ssb-system-logo.css?v=41" />
+  <link rel="stylesheet" href="css/ssb-system-effects.css?v=41" />
+  <link rel="stylesheet" href="css/ssb-system-icons.css?v=41" />
+  <link rel="stylesheet" href="css/ssb-system-detail.css?v=41" />
+  <link rel="stylesheet" href="css/ssb-system-footer.css?v=41" />
+  <link rel="stylesheet" href="css/ssb-system-responsive.css?v=41" />
+  <link rel="stylesheet" href="css/ssb-system-mobile.css?v=41" media="(max-width: 767px)" />
 </head>
 
 <body>
   <div class="site-wrap">
 
-    <!-- HEADER ใช้ชุดเดียวกับ index -->
     <header class="ssb-topbar" role="banner">
       <div class="topbar-inner">
         <div class="brand-wrap">
@@ -103,7 +100,7 @@
 
         <div class="topbar-actions">
           <a href="index.html" class="home-btn sound-click">หน้าแรก</a>
-        
+
           <div class="theme-switch-wrap" id="desktopThemeSwitch">
             <span class="mode-label">Dark</span>
             <button id="themeToggle" class="theme-switch" type="button" aria-label="Toggle theme">
@@ -111,7 +108,7 @@
             </button>
             <span class="mode-label">Light</span>
           </div>
-        
+
           <div class="lang-bar" aria-label="เลือกภาษา">
             <button class="lang-btn sound-click active" type="button" data-lang="th" title="ไทย">
               <img src="https://flagcdn.com/w40/th.png" alt="ไทย" loading="lazy" />
@@ -120,13 +117,12 @@
               <img src="https://flagcdn.com/w40/us.png" alt="English" loading="lazy" />
             </button>
           </div>
-        
+
           <div id="google_translate_element"></div>
         </div>
       </div>
     </header>
 
-    <!-- MAIN ใช้ระบบเดิมของ SSB -->
     <main class="main-content">
       <section class="hero-card">
         <div class="hero-head">
@@ -214,6 +210,10 @@
                   <circle class="logo-orbit-runner" cx="160" cy="32" r="6"></circle>
                   <circle class="logo-orbit-runner two" cx="160" cy="48" r="4"></circle>
                 </svg>
+
+                <div class="logo-radar-grid" aria-hidden="true"></div>
+                <div class="logo-radar-cross" aria-hidden="true"></div>
+                <div class="logo-radar-layer" id="logoRadarLayer" aria-hidden="true"></div>
 
                 <button class="logo-core" id="logoCore" type="button" aria-label="Open or collapse system">
                   <img src="images/logo.png" alt="SSB Core Logo" />
@@ -394,7 +394,7 @@
     </footer>
   </div>
 
-  <script src="js/ssb-system-page.js?v=40"></script>
+  <script src="js/ssb-system-page.js?v=41"></script>
   <script src="js/data.js"></script>
   <script src="js/ui.js"></script>
   <script src="js/popup.js"></script>
