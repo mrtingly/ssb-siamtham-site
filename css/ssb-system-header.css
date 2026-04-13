@@ -1,5 +1,5 @@
 /* =========================
-   SSB HEADER – PREMIUM RADAR
+   SSB HEADER – MASTER V3 (FINAL)
    ========================= */
 
 .ssb-topbar{
@@ -97,6 +97,27 @@
   flex:0 0 58px;
 }
 
+/* radar sweep โลโก้ */
+.brand-logo::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius:20px;
+  background:conic-gradient(
+    from 0deg,
+    rgba(90,220,255,0) 0deg,
+    rgba(90,220,255,.00) 300deg,
+    rgba(120,250,255,.85) 338deg,
+    rgba(255,255,255,.95) 345deg,
+    rgba(120,250,255,.18) 352deg,
+    rgba(90,220,255,0) 360deg
+  );
+  filter:blur(1px);
+  animation:brandRadarSpin 3.2s linear infinite;
+  pointer-events:none;
+  z-index:1;
+}
+
 /* glow pulse */
 .brand-logo::after{
   content:"";
@@ -109,6 +130,11 @@
 
   opacity:.6;
   animation:logoPulse 3s ease-in-out infinite;
+}
+
+@keyframes brandRadarSpin{
+  from{ transform:rotate(0deg); }
+  to{ transform:rotate(360deg); }
 }
 
 @keyframes logoPulse{
@@ -128,7 +154,6 @@
   color:var(--title);
   line-height:1.15;
   letter-spacing:.25px;
-
   text-shadow:0 0 10px rgba(120,210,255,.12);
 }
 
@@ -174,7 +199,6 @@
   color:var(--text-soft);
 }
 
-/* toggle */
 .theme-switch{
   width:54px;
   height:30px;
@@ -195,13 +219,6 @@
   transition:.25s;
 }
 
-.theme-switch:hover{
-  box-shadow:
-    0 0 14px rgba(90,180,255,.25),
-    inset 0 1px 0 rgba(255,255,255,.12);
-}
-
-/* knob */
 .switch-knob{
   position:absolute;
   top:3px;
@@ -221,20 +238,21 @@
   transition:transform .22s ease;
 }
 
-/* light mode */
 html.light-mode .switch-knob{
   transform:translateX(24px);
 }
 
 /* =========================
-   HEADER LIGHT MODE
+   LIGHT MODE (สำคัญสุด)
    ========================= */
 
 html.light-mode .ssb-topbar{
   background:
     radial-gradient(circle at 50% -20%, rgba(80,160,255,.12), transparent 60%),
     linear-gradient(180deg, rgba(255,255,255,.96), rgba(234,242,255,.92));
+
   border-bottom:1px solid rgba(30,107,255,.10);
+
   box-shadow:
     0 10px 30px rgba(31,74,140,.10),
     0 0 18px rgba(90,180,255,.08);
@@ -242,15 +260,6 @@ html.light-mode .ssb-topbar{
 
 html.light-mode .ssb-topbar::before{
   opacity:.22;
-  background:
-    linear-gradient(
-      120deg,
-      transparent 0%,
-      rgba(30,107,255,.04) 40%,
-      rgba(255,255,255,.55) 50%,
-      rgba(30,107,255,.04) 60%,
-      transparent 100%
-    );
 }
 
 html.light-mode .brand-line-1{
@@ -280,15 +289,13 @@ html.light-mode .theme-switch{
 
 html.light-mode .switch-knob{
   background:linear-gradient(180deg, #ffffff, #d8e9ff);
-  box-shadow:
-    0 4px 10px rgba(31,74,140,.16),
-    0 0 10px rgba(80,160,255,.16);
 }
 
 html.light-mode .brand-logo{
   border:1px solid rgba(30,107,255,.14);
   background:
     radial-gradient(circle at 50% 30%, rgba(80,160,255,.12), rgba(255,255,255,.96));
+
   box-shadow:
     0 10px 24px rgba(31,74,140,.10),
     0 0 16px rgba(80,160,255,.08);
