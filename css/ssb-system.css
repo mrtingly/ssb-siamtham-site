@@ -35,6 +35,7 @@
 
   --system-glow: rgba(104,244,255,.95);
   --logo-glow: rgba(104,244,255,.28);
+  --warn-glow: rgba(255,184,94,.95);
 }
 
 html.light-mode{
@@ -63,6 +64,7 @@ html.light-mode{
   --header-bg: linear-gradient(180deg, rgba(255,255,255,.90), rgba(246,250,255,.86));
   --system-glow: rgba(15,103,255,.95);
   --logo-glow: rgba(15,103,255,.20);
+  --warn-glow: rgba(255,160,60,.92);
 }
 
 *{ box-sizing:border-box; }
@@ -99,12 +101,11 @@ button{ font:inherit; }
   flex-direction:column;
 }
 
-/* MAIN */
 .main-content{
   flex:1;
   width:min(100%, var(--shell));
   margin:0 auto;
-  padding:18px 16px 22px;
+  padding:18px 16px 26px;
 }
 
 .hero-card{
@@ -126,7 +127,7 @@ button{ font:inherit; }
   inset:0;
   pointer-events:none;
   background:
-    radial-gradient(circle at 50% 18%, rgba(120,210,255,.10), transparent 38%),
+    radial-gradient(circle at 50% 12%, rgba(120,210,255,.11), transparent 34%),
     linear-gradient(135deg, rgba(120,210,255,.08), transparent 26%, transparent 72%, rgba(120,210,255,.06) 100%);
 }
 
@@ -167,7 +168,7 @@ button{ font:inherit; }
   margin:0 0 6px;
   color:var(--title);
   font-family:var(--font-tech);
-  font-size:42px;
+  font-size:clamp(30px, 3vw, 46px);
   line-height:1.06;
   font-weight:900;
   letter-spacing:.2px;
@@ -200,7 +201,6 @@ button{ font:inherit; }
   text-shadow:0 0 10px rgba(104,244,255,.22);
 }
 
-/* SHOWCASE */
 .showcase{
   position:relative;
   min-height:700px;
@@ -225,17 +225,17 @@ button{ font:inherit; }
   position:absolute;
   top:47%;
   left:50%;
-  width:500px;
-  height:500px;
+  width:560px;
+  height:560px;
   transform:translate(-50%, -50%);
   border-radius:50%;
-  background:radial-gradient(circle, var(--logo-glow) 0%, rgba(98,188,255,0) 68%);
-  filter:blur(30px);
+  background:
+    radial-gradient(circle, var(--logo-glow) 0%, rgba(98,188,255,0) 68%);
+  filter:blur(34px);
   pointer-events:none;
   z-index:2;
 }
 
-/* CENTER STATES */
 .logo-mode{
   position:relative;
   z-index:6;
@@ -249,7 +249,7 @@ button{ font:inherit; }
 }
 
 .center-caption{
-  margin-top:12px;
+  margin-top:14px;
   text-align:center;
   position:relative;
   z-index:6;
@@ -257,7 +257,7 @@ button{ font:inherit; }
 
 .center-caption-main{
   color:var(--title);
-  font-size:24px;
+  font-size:26px;
   line-height:1.2;
   font-weight:800;
 }
@@ -280,7 +280,6 @@ button{ font:inherit; }
   z-index:6;
 }
 
-/* BOTTOM */
 .bottom-box{
   margin-top:18px;
   border-radius:28px;
@@ -312,10 +311,9 @@ button{ font:inherit; }
   line-height:1.8;
 }
 
-
-
 @media (max-width: 1200px){
-  .detail-shell{
-    width:min(700px, calc(100% - 500px));
+  .center-aura{
+    width:460px;
+    height:460px;
   }
 }
