@@ -225,3 +225,71 @@
 html.light-mode .switch-knob{
   transform:translateX(24px);
 }
+
+/* =========================
+   HEADER LIGHT MODE
+   ========================= */
+
+html.light-mode .ssb-topbar{
+  background:
+    radial-gradient(circle at 50% -20%, rgba(80,160,255,.12), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.96), rgba(234,242,255,.92));
+  border-bottom:1px solid rgba(30,107,255,.10);
+  box-shadow:
+    0 10px 30px rgba(31,74,140,.10),
+    0 0 18px rgba(90,180,255,.08);
+}
+
+html.light-mode .ssb-topbar::before{
+  opacity:.22;
+  background:
+    linear-gradient(
+      120deg,
+      transparent 0%,
+      rgba(30,107,255,.04) 40%,
+      rgba(255,255,255,.55) 50%,
+      rgba(30,107,255,.04) 60%,
+      transparent 100%
+    );
+}
+
+html.light-mode .brand-line-1{
+  color:#123d7a;
+  text-shadow:none;
+}
+
+html.light-mode .brand-line-2{
+  color:#4a6a96;
+}
+
+html.light-mode .brand-site{
+  color:#1e6bff;
+}
+
+html.light-mode .mode-label{
+  color:#3f5f8f;
+}
+
+html.light-mode .theme-switch{
+  border:1px solid rgba(30,107,255,.14);
+  background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(226,238,255,.92));
+  box-shadow:
+    0 8px 20px rgba(31,74,140,.10),
+    inset 0 1px 0 rgba(255,255,255,.95);
+}
+
+html.light-mode .switch-knob{
+  background:linear-gradient(180deg, #ffffff, #d8e9ff);
+  box-shadow:
+    0 4px 10px rgba(31,74,140,.16),
+    0 0 10px rgba(80,160,255,.16);
+}
+
+html.light-mode .brand-logo{
+  border:1px solid rgba(30,107,255,.14);
+  background:
+    radial-gradient(circle at 50% 30%, rgba(80,160,255,.12), rgba(255,255,255,.96));
+  box-shadow:
+    0 10px 24px rgba(31,74,140,.10),
+    0 0 16px rgba(80,160,255,.08);
+}
