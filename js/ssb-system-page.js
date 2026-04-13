@@ -1,14 +1,33 @@
 (function () {
+  function syncSystemMenuImages() {
+    const isLight = document.documentElement.classList.contains("light-mode");
+
+    document.querySelectorAll("img[data-light][data-dark]").forEach((img) => {
+      const nextSrc = isLight ? img.dataset.light : img.dataset.dark;
+      if (nextSrc && img.getAttribute("src") !== nextSrc) {
+        img.setAttribute("src", nextSrc);
+      }
+    });
+  }
+
   const themeToggle = document.getElementById("themeToggle");
+
+  syncSystemMenuImages();
+
   if (!themeToggle) return;
 
   themeToggle.addEventListener("click", function () {
     const html = document.documentElement;
     const isLight = html.classList.contains("light-mode");
+
     html.classList.toggle("light-mode", !isLight);
     html.classList.toggle("dark-mode", isLight);
     localStorage.setItem("theme", !isLight ? "light" : "dark");
+
+    syncSystemMenuImages();
   });
+
+  window.addEventListener("pageshow", syncSystemMenuImages);
 })();
 
 (function () {
@@ -34,6 +53,27 @@
 
   const radarLayer = document.getElementById("logoRadarLayer");
   const SVG_NS = "http://www.w3.org/2000/svg";
+
+  if (
+    !showcase ||
+    !logoCore ||
+    !beamSvg ||
+    !statusBar ||
+    !logoMode ||
+    !detailMode ||
+    !detailClose ||
+    !detailKicker ||
+    !detailTitle ||
+    !detailSubtitle ||
+    !detailMeaning ||
+    !detailProtection ||
+    !detailReason ||
+    !detailTags ||
+    !attackColumn ||
+    !systemColumn
+  ) {
+    return;
+  }
 
   let systemOpened = false;
   let activeTimeout = null;
@@ -145,6 +185,7 @@
 
   function buildRadarDots() {
     if (!radarLayer) return;
+
     radarLayer.querySelectorAll(".logo-scan-dot").forEach((dot) => dot.remove());
 
     radarDotMap.forEach((point, index) => {
@@ -159,10 +200,12 @@
 
   function pulseNextRadarDot() {
     if (!radarLayer || !systemOpened) return;
+
     const dots = Array.from(radarLayer.querySelectorAll(".logo-scan-dot"));
     if (!dots.length) return;
 
     dots.forEach((dot) => dot.classList.remove("is-hit"));
+
     const current = dots[scanIndex % dots.length];
     current.classList.add("is-hit");
 
@@ -184,8 +227,11 @@
       clearInterval(radarInterval);
       radarInterval = null;
     }
+
     if (radarLayer) {
-      radarLayer.querySelectorAll(".logo-scan-dot").forEach((dot) => dot.classList.remove("is-hit"));
+      radarLayer.querySelectorAll(".logo-scan-dot").forEach((dot) => {
+        dot.classList.remove("is-hit");
+      });
     }
   }
 
@@ -263,17 +309,19 @@
   }
 
   function openDetail(payload) {
+    if (!payload) return;
+
     hideLogoMode();
 
-    detailKicker.textContent = payload.kicker;
-    detailTitle.textContent = payload.title;
-    detailSubtitle.textContent = payload.subtitle;
-    detailMeaning.textContent = payload.meaning;
-    detailProtection.textContent = payload.protection;
-    detailReason.textContent = payload.reason;
+    detailKicker.textContent = payload.kicker || "";
+    detailTitle.textContent = payload.title || "";
+    detailSubtitle.textContent = payload.subtitle || "";
+    detailMeaning.textContent = payload.meaning || "";
+    detailProtection.textContent = payload.protection || "";
+    detailReason.textContent = payload.reason || "";
 
     detailTags.innerHTML = "";
-    payload.tags.forEach(tag => {
+    (payload.tags || []).forEach((tag) => {
       const span = document.createElement("span");
       span.className = "defense-tag";
       span.textContent = tag;
@@ -288,6 +336,7 @@
     detailMode.classList.remove("is-open");
     detailMode.setAttribute("aria-hidden", "true");
     showLogoMode();
+
     if (!silent && systemOpened) {
       statusBar.textContent = "กดไอคอน 1 ครั้งเพื่อดูการป้องกัน หรือกด 2 ครั้งเพื่ออ่านรายละเอียด";
     }
@@ -296,9 +345,11 @@
   function clearStates() {
     clearTimeout(activeTimeout);
     ensureSvgDefs();
-    document.querySelectorAll(".beam-path").forEach(path => path.remove());
+    beamSvg.querySelectorAll(".beam-path").forEach((path) => path.remove());
+
     logoCore.classList.remove("is-burst");
-    document.querySelectorAll(".icon-card").forEach(el => {
+
+    document.querySelectorAll(".icon-card").forEach((el) => {
       el.classList.remove("is-source", "is-target");
     });
   }
@@ -325,7 +376,6 @@
 
     path.setAttribute("d", d);
     path.setAttribute("class", `beam-path ${type}`);
-
     beamSvg.appendChild(path);
 
     const len = path.getTotalLength();
@@ -338,21 +388,25 @@
   }
 
   function blinkTargets(ids) {
-    ids.forEach(id => {
+    ids.forEach((id) => {
       const target = document.getElementById(id);
       if (target) target.classList.add("is-target");
     });
 
     activeTimeout = setTimeout(() => {
-      ids.forEach(id => {
+      ids.forEach((id) => {
         const target = document.getElementById(id);
         if (target) target.classList.remove("is-target");
       });
+
       logoCore.classList.remove("is-burst");
-      document.querySelectorAll(".icon-card.is-source").forEach(el => {
+
+      document.querySelectorAll(".icon-card.is-source").forEach((el) => {
         el.classList.remove("is-source");
       });
+
       ensureSvgDefs();
+
       if (systemOpened && !detailMode.classList.contains("is-open")) {
         statusBar.textContent = "กดไอคอน 1 ครั้งเพื่อดูการป้องกัน หรือกด 2 ครั้งเพื่ออ่านรายละเอียด";
       }
@@ -361,7 +415,7 @@
 
   function runAttackFlow(attackKey, sourceCard) {
     const config = attackMap[attackKey];
-    if (!config || !systemOpened) return;
+    if (!config || !systemOpened || !sourceCard) return;
 
     closeDetail(true);
     clearStates();
@@ -381,6 +435,7 @@
       config.targets.forEach((id) => {
         const targetCard = document.getElementById(id);
         if (!targetCard) return;
+
         const targetCenter = getCenter(targetCard, parentRect);
         createStraightBeam(relayPoint, targetCenter, "outbound");
       });
@@ -392,7 +447,8 @@
   }
 
   function runSystemFocus(systemKey, sourceCard) {
-    if (!systemOpened) return;
+    if (!systemOpened || !sourceCard) return;
+
     closeDetail(true);
     clearStates();
     showLogoMode();
@@ -402,6 +458,7 @@
 
     activeTimeout = setTimeout(() => {
       sourceCard.classList.remove("is-target");
+
       if (systemOpened) {
         statusBar.textContent = "กดไอคอน 1 ครั้งเพื่อดูการป้องกัน หรือกด 2 ครั้งเพื่ออ่านรายละเอียด";
       }
@@ -426,8 +483,11 @@
     collapseSystem();
   });
 
-  document.querySelectorAll("[data-kind='attack']").forEach(btn => {
-    btn.addEventListener("click", function () {
+  document.querySelectorAll("[data-kind='attack']").forEach((btn) => {
+    btn.addEventListener("click", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+
       const attackKey = btn.getAttribute("data-key");
       const sourceCard = btn.closest(".icon-card");
       runAttackFlow(attackKey, sourceCard);
@@ -435,16 +495,22 @@
 
     btn.addEventListener("dblclick", function (event) {
       event.preventDefault();
+      event.stopPropagation();
+
       const attackKey = btn.getAttribute("data-key");
       if (!systemOpened) return;
+
       clearStates();
-      openDetail(attackMap[attackKey].detail);
-      statusBar.textContent = attackMap[attackKey].detail.title + " • เปิดรายละเอียดแล้ว";
+      openDetail(attackMap[attackKey]?.detail);
+      statusBar.textContent = (attackMap[attackKey]?.detail?.title || "Detail") + " • เปิดรายละเอียดแล้ว";
     });
   });
 
-  document.querySelectorAll("[data-kind='system']").forEach(btn => {
-    btn.addEventListener("click", function () {
+  document.querySelectorAll("[data-kind='system']").forEach((btn) => {
+    btn.addEventListener("click", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+
       const systemKey = btn.getAttribute("data-key");
       const sourceCard = btn.closest(".icon-card");
       runSystemFocus(systemKey, sourceCard);
@@ -452,16 +518,26 @@
 
     btn.addEventListener("dblclick", function (event) {
       event.preventDefault();
+      event.stopPropagation();
+
       const systemKey = btn.getAttribute("data-key");
       if (!systemOpened) return;
+
       clearStates();
       openDetail(systemMap[systemKey]);
-      statusBar.textContent = systemMap[systemKey].title + " • เปิดรายละเอียดแล้ว";
+      statusBar.textContent = (systemMap[systemKey]?.title || "Detail") + " • เปิดรายละเอียดแล้ว";
     });
   });
 
-  detailClose.addEventListener("click", function () {
+  detailClose.addEventListener("click", function (event) {
+    event.preventDefault();
     closeDetail();
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && detailMode.classList.contains("is-open")) {
+      closeDetail();
+    }
   });
 
   window.addEventListener("resize", function () {
