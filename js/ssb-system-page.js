@@ -49,6 +49,8 @@
   const logoMode = document.getElementById("logoMode");
   const detailMode = document.getElementById("detailMode");
   const detailClose = document.getElementById("detailClose");
+  const actionBottom = document.querySelector(".action-bottom");
+  const bottomBox = document.querySelector(".bottom-box");
 
   const detailKicker = document.getElementById("detailKicker");
   const detailTitle = document.getElementById("detailTitle");
@@ -64,7 +66,7 @@
   const radarLayer = document.getElementById("logoRadarLayer");
   const SVG_NS = "http://www.w3.org/2000/svg";
 
-  if (
+   if (
     !showcase ||
     !logoCore ||
     !beamSvg ||
@@ -80,7 +82,9 @@
     !detailReason ||
     !detailTags ||
     !attackColumn ||
-    !systemColumn
+    !systemColumn ||
+    !actionBottom ||
+    !bottomBox
   ) {
     return;
   }
@@ -318,6 +322,20 @@
     logoMode.classList.remove("is-hidden");
   }
 
+  function setDetailPageState(isOpen) {
+  if (isOpen) {
+    actionBottom.style.opacity = "0";
+    actionBottom.style.pointerEvents = "none";
+    actionBottom.style.transform = "translateY(18px)";
+    bottomBox.style.opacity = ".38";
+  } else {
+    actionBottom.style.opacity = "";
+    actionBottom.style.pointerEvents = "";
+    actionBottom.style.transform = "";
+    bottomBox.style.opacity = "";
+  }
+}
+
   function openDetail(payload) {
     if (!payload) return;
 
@@ -340,13 +358,15 @@
 
     detailMode.classList.add("is-open");
     detailMode.setAttribute("aria-hidden", "false");
+    setDetailPageState(true);
   }
 
   function closeDetail(silent = false) {
-    detailMode.classList.remove("is-open");
-    detailMode.setAttribute("aria-hidden", "true");
-    showLogoMode();
-
+      detailMode.classList.remove("is-open");
+      detailMode.setAttribute("aria-hidden", "true");
+      showLogoMode();
+      setDetailPageState(false);
+    
     if (!silent && systemOpened) {
       statusBar.textContent = "กดไอคอน 1 ครั้งเพื่อดูการป้องกัน หรือกด 2 ครั้งเพื่ออ่านรายละเอียด";
     }
