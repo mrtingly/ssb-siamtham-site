@@ -473,3 +473,15 @@ html.light-mode .action-btn.secondary{
     line-height:1.65;
   }
 }
+
+.hero-card:has(.detail-mode.is-open) .action-bottom{
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(18px);
+  transition:opacity .22s ease, transform .22s ease;
+}
+
+.hero-card:has(.detail-mode.is-open) .bottom-box{
+  opacity:.38;
+  transition:opacity .22s ease;
+}
