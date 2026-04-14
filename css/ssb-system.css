@@ -136,6 +136,15 @@ button{ font:inherit; }
   z-index:20;
   text-align:center;
   margin-bottom:10px;
+  padding:16px 18px;
+  border-radius:28px;
+  border:1px solid rgba(120,210,255,.22);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.05),
+    0 10px 28px rgba(0,0,0,.14),
+    0 0 20px rgba(90,180,255,.08);
 }
 
 .hero-kicker{
@@ -156,7 +165,7 @@ button{ font:inherit; }
   color:var(--title);
   font-family:var(--font-tech);
   font-size:clamp(30px, 3vw, 46px);
-  line-height:1.06;
+  line-height:1.04;
   font-weight:900;
   letter-spacing:.2px;
   text-shadow:0 0 18px rgba(100,190,255,.12);
