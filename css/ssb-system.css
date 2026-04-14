@@ -497,3 +497,7 @@ html.light-mode .action-btn.secondary{
   0%,100%{ transform:translateY(0); }
   50%{ transform:translateY(-8px); }
 }
+
+.ai-mode{
+  z-index:999 !important;
+}
