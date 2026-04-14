@@ -5,7 +5,7 @@
   display:flex;
   align-items:center;
   justify-content:center;
-  z-index:6;
+  z-index:1;
 }
 
 .logo-orbit-svg{
@@ -182,7 +182,7 @@
 
 .logo-core{
   position:relative;
-  z-index:6;
+  z-index:2;
   width:300px;
   height:300px;
   border-radius:50%;
