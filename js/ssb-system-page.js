@@ -14,18 +14,18 @@
 
   syncSystemMenuImages();
 
-  if (!themeToggle) return;
+  if (themeToggle) {
+    themeToggle.addEventListener("click", function () {
+      const html = document.documentElement;
+      const isLight = html.classList.contains("light-mode");
 
-  themeToggle.addEventListener("click", function () {
-    const html = document.documentElement;
-    const isLight = html.classList.contains("light-mode");
+      html.classList.toggle("light-mode", !isLight);
+      html.classList.toggle("dark-mode", isLight);
+      localStorage.setItem("theme", !isLight ? "light" : "dark");
 
-    html.classList.toggle("light-mode", !isLight);
-    html.classList.toggle("dark-mode", isLight);
-    localStorage.setItem("theme", !isLight ? "light" : "dark");
-
-    syncSystemMenuImages();
-  });
+      syncSystemMenuImages();
+    });
+  }
 
   window.addEventListener("pageshow", syncSystemMenuImages);
 })();
@@ -52,6 +52,11 @@
   const systemColumn = document.getElementById("systemColumn");
 
   const radarLayer = document.getElementById("logoRadarLayer");
+  const aiMode = document.getElementById("aiMode");
+  const aiText = document.getElementById("aiText");
+  const aiDetailBtn = document.getElementById("aiDetailBtn");
+  const aiClose = document.getElementById("aiClose");
+
   const SVG_NS = "http://www.w3.org/2000/svg";
 
   if (
@@ -60,15 +65,6 @@
     !beamSvg ||
     !statusBar ||
     !logoMode ||
-    !detailMode ||
-    !detailClose ||
-    !detailKicker ||
-    !detailTitle ||
-    !detailSubtitle ||
-    !detailMeaning ||
-    !detailProtection ||
-    !detailReason ||
-    !detailTags ||
     !attackColumn ||
     !systemColumn
   ) {
@@ -79,6 +75,8 @@
   let activeTimeout = null;
   let radarInterval = null;
   let scanIndex = 0;
+  let aiSpeech = null;
+  let currentDetailUrl = "";
 
   const attackMap = {
     psychological: {
@@ -87,51 +85,66 @@
       detail: {
         kicker: "Attack Detail",
         title: "Psychological",
-        subtitle: "การโจมตีที่ใช้แรงกดดัน เร่งเวลา และทำให้เหยื่อขาดสติ",
-        meaning: "มิจฉาชีพใช้แรงกดดัน ความกลัว ความรีบ และการควบคุมอารมณ์ เพื่อบังคับให้เหยื่อตัดสินใจผิดในเวลาสั้น ๆ",
-        protection: "SSB ใช้ Time Barrier เพื่อหยุดความเร่งรีบ และใช้ SPC รับช่วงตรวจสอบแทนผู้ใช้งานเมื่อมีความเสี่ยง ทำให้การกดดันทางจิตวิทยาไม่สามารถแปลงเป็นการโอนเงินจริงได้ง่าย",
-        reason: "ระบบนี้ไม่ได้เน้นสู้กับคำพูดของมิจฉาชีพโดยตรง แต่เน้นแทรกจังหวะให้ผู้ใช้กลับมามีสติ และมีทีมรับช่วงทันทีเมื่อเริ่มผิดปกติ",
+        subtitle: "การกดดัน หลอกลวง เร่งรัดการตัดสินใจ",
+        meaning: "มิจฉาชีพใช้แรงกดดัน ความกลัว ความรีบ และการควบคุมอารมณ์ เพื่อบังคับให้เหยื่อตัดสินใจภายใต้เวลาจำกัด",
+        protection: "SSB ใช้ Time Barrier และ SPC เพื่อคืนสติผู้ใช้งาน และเพิ่มชั้นการตรวจสอบก่อนเกิดความเสียหาย",
+        reason: "ระบบถูกออกแบบให้ควบคุมจังหวะการตัดสินใจ เพื่อให้ผู้ใช้งานมีเวลาทบทวนและตรวจสอบได้มากขึ้น",
         tags: ["Time Barrier", "SPC"]
-      }
+      },
+      aiScript:
+        "คุณกำลังดูภัยคุกคามด้านการกดดันและเร่งรัดการตัดสินใจ ระบบนี้คือการอัปเกรดความปลอดภัยด้วย Time Barrier และ SPC เพื่อเพิ่มเวลา เพิ่มสติ และเพิ่มการควบคุมก่อนตัดสินใจสำคัญ",
+      detailUrl: "psychological.html"
     },
+
     phishing: {
       label: "Phishing → FD + Safety Book",
       targets: ["system-fd", "system-safety-book"],
       detail: {
         kicker: "Attack Detail",
         title: "Phishing",
-        subtitle: "ลิงก์ปลอม หน้าเว็บปลอม หรือข้อความหลอกให้เปิดเผยข้อมูลสำคัญ",
-        meaning: "Phishing ทำงานได้เพราะผู้ใช้เปิดข้อมูลบนอุปกรณ์ที่ใช้งานจริงในชีวิตประจำวัน และมักเชื่อว่ากำลังคุยกับหน่วยงานจริง",
-        protection: "SSB แยกอุปกรณ์ใช้งานทั่วไปออกจากระบบการเงินจริง และใช้ Safety Book ซ่อน/แยกการเข้าถึงเครื่องหลัก ทำให้เส้นทาง phishing ไม่แตะระบบเงินจริงโดยตรง",
-        reason: "เมื่อเครื่องใช้งานประจำวันไม่ใช่เครื่องธุรกรรมหลัก มูลค่าของ phishing จะลดลงทันที เพราะเป้าหมายหลักไม่ได้อยู่บนพื้นผิวโจมตีเดียวกัน",
+        subtitle: "ลิงก์ปลอม หน้าเว็บปลอม และการลวงข้อมูล",
+        meaning: "Phishing ทำงานผ่านการชักจูงให้ผู้ใช้กดลิงก์ เปิดหน้าเว็บปลอม หรือเปิดเผยข้อมูลสำคัญบนอุปกรณ์ประจำวัน",
+        protection: "SSB แยกอุปกรณ์ใช้งานทั่วไปออกจากระบบธุรกรรม และใช้ Safety Book ลดการเข้าถึงเครื่องหลัก",
+        reason: "เมื่อเครื่องประจำวันไม่ใช่เครื่องธุรกรรมหลัก มูลค่าของ phishing จะลดลงทันที",
         tags: ["FD", "Safety Book"]
-      }
+      },
+      aiScript:
+        "คุณกำลังดูภัยคุกคามแบบฟิชชิ่ง ระบบนี้คือการอัปเกรดความปลอดภัยด้วยการแยกอุปกรณ์ใช้งานทั่วไปออกจากระบบธุรกรรมหลัก พร้อมจัดเก็บเครื่องสำคัญภายใต้ Safety Book",
+      detailUrl: "phishing.html"
     },
+
     remote: {
       label: "Remote → FD + Safety Book",
       targets: ["system-fd", "system-safety-book"],
       detail: {
         kicker: "Attack Detail",
         title: "Remote",
-        subtitle: "การควบคุมเครื่องจากระยะไกลผ่านแอป เครื่องมือช่วยเหลือ หรือมัลแวร์",
-        meaning: "ผู้โจมตีพยายามเข้าแทนที่ผู้ใช้บนอุปกรณ์เดียวกัน เพื่อสั่งงาน มองเห็น และบังคับทำธุรกรรมแทน",
-        protection: "SSB ใช้ FD เป็นจุดรับแรงแทนระบบหลัก และใช้ Safety Book ทำให้เครื่องจริงไม่เปิดเผยตัวหรืออยู่ในสถานะพร้อมให้ควบคุมตลอดเวลา",
-        reason: "เมื่อเครื่องหลักถูกแยกออกจากการใช้งานประจำวัน โอกาสที่ remote access จะเข้าถึงเส้นทางเงินจริงจึงลดลงอย่างมีนัยสำคัญ",
+        subtitle: "การควบคุมอุปกรณ์จากระยะไกล",
+        meaning: "ผู้โจมตีใช้เครื่องมือหรือแอปเพื่อมองเห็น สั่งงาน หรือควบคุมอุปกรณ์แทนผู้ใช้งาน",
+        protection: "SSB ใช้ FD เป็นชั้นรับแรงแทนระบบหลัก และใช้ Safety Book ลดการเปิดเผยเครื่องจริง",
+        reason: "เมื่อเครื่องหลักอยู่ภายใต้การแยกใช้งานอย่างมีระบบ โอกาสเข้าถึงโดยตรงก็ลดลงอย่างมาก",
         tags: ["FD", "Safety Book"]
-      }
+      },
+      aiScript:
+        "คุณกำลังดูภัยคุกคามจากการควบคุมระยะไกล ระบบนี้คือการอัปเกรดความปลอดภัยด้วยการแยกเครื่องหลักออกจากการใช้งานทั่วไป และเพิ่มชั้นรับแรงผ่าน Flare Device",
+      detailUrl: "remote.html"
     },
+
     "fake-app": {
       label: "Fake App → FD + Safety Book",
       targets: ["system-fd", "system-safety-book"],
       detail: {
         kicker: "Attack Detail",
         title: "Fake App",
-        subtitle: "แอปปลอมที่หลอกว่าถูกต้อง แต่มีหน้าที่เข้าถึงข้อมูลหรือธุรกรรม",
-        meaning: "แอปปลอมอาศัยการติดตั้งบนเครื่องที่ผู้ใช้ใช้ทุกวัน จากนั้นค่อยแทรกตัวเข้าถึงข้อมูล การแจ้งเตือน หรือสิทธิ์สำคัญ",
-        protection: "SSB ลดความเสี่ยงนี้ด้วยการแยกเครื่องใช้งานออกจากเครื่องธุรกรรมจริง และเก็บระบบหลักด้วย Safety Book อย่างมีวินัย",
-        reason: "แนวคิดไม่ใช่แค่กันแอปปลอม แต่คือทำให้แอปปลอมไม่มีโอกาสสัมผัสระบบการเงินจริงตั้งแต่ต้นทาง",
+        subtitle: "แอปปลอมที่เข้าถึงข้อมูลหรือธุรกรรม",
+        meaning: "แอปปลอมอาศัยความน่าเชื่อถือปลอม เพื่อขอสิทธิ์ เข้าถึงข้อมูล และเชื่อมโยงสู่ความเสียหาย",
+        protection: "SSB ลดความเสี่ยงนี้ด้วยการแยกเครื่องใช้งานออกจากเครื่องธุรกรรมจริง และเก็บเครื่องสำคัญอย่างมีวินัย",
+        reason: "แนวคิดสำคัญคือยกระดับความปลอดภัยตั้งแต่โครงสร้างการใช้งาน ไม่ใช่เพียงการป้องกันปลายทาง",
         tags: ["FD", "Safety Book"]
-      }
+      },
+      aiScript:
+        "คุณกำลังดูภัยคุกคามจากแอปปลอม ระบบนี้คือการอัปเกรดความปลอดภัยด้วยการแยกบทบาทของอุปกรณ์ และจัดเก็บระบบสำคัญให้อยู่ภายใต้การควบคุมที่สูงขึ้น",
+      detailUrl: "fake-app.html"
     }
   };
 
@@ -139,38 +152,53 @@
     fd: {
       kicker: "Defense Detail",
       title: "FD - Flare Device",
-      subtitle: "จุดรับแรงแทนระบบหลัก และเป็นชั้นเบี่ยงความสนใจจากเป้าหมายจริง",
-      meaning: "FD คืออุปกรณ์ที่เปิดเผยต่อโลกภายนอก ใช้รับความเสี่ยงแทน เพื่อไม่ให้ระบบหลักต้องออกไปอยู่บนพื้นผิวการโจมตีโดยตรง",
-      protection: "FD ช่วยให้มิจฉาชีพหรือมัลแวร์เจอเพียงชั้นภายนอก ขณะที่เครื่องหรือระบบหลักยังถูกแยกออกไว้",
-      reason: "แนวคิดคือไม่ได้เอาเครื่องสำคัญไปเสี่ยงตรง ๆ แต่ใช้ชั้นภายนอกเป็นตัวรับแรงและลดโอกาสที่ศัตรูจะเจอเป้าหมายจริง",
-      tags: ["รับแรงแทน", "ลดการเปิดเผย", "ลดเป้าหมายจริง"]
+      subtitle: "จุดรับแรงแทนระบบหลัก",
+      meaning: "FD คืออุปกรณ์ที่เปิดเผยต่อโลกภายนอก เพื่อรับแรงกระทบแทนระบบหลัก",
+      protection: "FD ช่วยลดการสัมผัสโดยตรงกับเครื่องหรือโครงสร้างที่สำคัญจริง",
+      reason: "เป็นชั้นเบี่ยงความสนใจและเพิ่มความยืดหยุ่นให้ระบบโดยรวม",
+      tags: ["รับแรงแทน", "ลดการเปิดเผย", "เสริมความปลอดภัย"],
+      aiScript:
+        "คุณกำลังดู Flare Device ชั้นรับแรงของระบบ Stealth Safety Bank Mobile System ออกแบบมาเพื่อยกระดับความปลอดภัย ด้วยการแยกจุดเปิดเผยออกจากระบบหลัก",
+      detailUrl: "fd.html"
     },
+
     "safety-book": {
       kicker: "Defense Detail",
       title: "Safety Book",
-      subtitle: "ชั้นแยกเก็บ ลดการเข้าถึง และลดการมองเห็นจากภายนอก",
-      meaning: "Safety Book คือระบบจัดเก็บและอำพรางเครื่องหรือองค์ประกอบสำคัญ ให้ไม่เปิดเผยตัวต่อคนทั่วไปหรือการเข้าถึงที่ไม่ควรเกิดขึ้น",
-      protection: "มันช่วยแยกชิ้นส่วนสำคัญออกจากการใช้งานประจำวัน และลดโอกาสการสังเกต การหยิบใช้ หรือการแตะต้องโดยไม่จำเป็น",
-      reason: "ถ้าศัตรูไม่รู้ว่าอะไรคือของจริง โอกาสโจมตีสำเร็จก็ลดลงตั้งแต่ต้นทาง",
-      tags: ["แยกเก็บ", "อำพราง", "ลดการเข้าถึง"]
+      subtitle: "ชั้นแยกเก็บ ลดการเข้าถึง และลดการมองเห็น",
+      meaning: "Safety Book คือระบบจัดเก็บและอำพรางองค์ประกอบสำคัญ เพื่อเพิ่มระดับการควบคุม",
+      protection: "ช่วยลดการเข้าถึงโดยไม่จำเป็น และเพิ่มความเป็นส่วนตัวในการจัดเก็บ",
+      reason: "การซ่อนตำแหน่งและแยกเก็บอย่างมีระบบ ช่วยยกระดับความปลอดภัยของทั้งโครงสร้าง",
+      tags: ["แยกเก็บ", "อำพราง", "ควบคุมการเข้าถึง"],
+      aiScript:
+        "คุณกำลังดู Safety Book โครงสร้างการจัดเก็บที่ยกระดับความปลอดภัย ด้วยการลดการมองเห็น ลดการเข้าถึง และเพิ่มการควบคุมต่อองค์ประกอบสำคัญของระบบ",
+      detailUrl: "safety-book.html"
     },
+
     "time-barrier": {
       kicker: "Defense Detail",
       title: "Time Barrier",
-      subtitle: "หน่วงเวลาเพื่อคืนสติและหยุดการตัดสินใจผิดพลาด",
-      meaning: "Time Barrier คือกลไกที่ทำให้การเข้าถึงเงินหรือขั้นตอนสำคัญไม่เกิดขึ้นเร็วเกินไป เพื่อหยุดการตัดสินใจแบบถูกกดดัน",
-      protection: "เมื่อผู้ใช้ต้องผ่านเวลาและลำดับขั้นตอน ความเสี่ยงจากความกลัว ความรีบ หรือคำสั่งเร่งด่วนจะลดลง",
-      reason: "หลายเหตุการณ์เสียหายเกิดขึ้นในไม่กี่นาที ระบบนี้จึงใส่เวลาเข้าไปเพื่อคืนการควบคุมให้ผู้ใช้",
-      tags: ["คืนสติ", "หยุดความรีบ", "คุมจังหวะตัดสินใจ"]
+      subtitle: "หน่วงเวลาเพื่อคืนสติและเพิ่มการควบคุม",
+      meaning: "Time Barrier คือกลไกที่เพิ่มเวลาให้ผู้ใช้งานก่อนตัดสินใจในจุดสำคัญ",
+      protection: "ช่วยลดผลกระทบจากความรีบ ความกลัว และแรงกดดัน",
+      reason: "เวลา คือหนึ่งในกลไกสำคัญของระบบป้องกันภัยขั้นสูง",
+      tags: ["คืนสติ", "เพิ่มเวลา", "เพิ่มการควบคุม"],
+      aiScript:
+        "คุณกำลังดู Time Barrier กลไกสำคัญที่ยกระดับความปลอดภัย ด้วยการเพิ่มเวลาให้ผู้ใช้งานได้ทบทวนและควบคุมการตัดสินใจได้มากขึ้น",
+      detailUrl: "time-barrier.html"
     },
+
     spc: {
       kicker: "Defense Detail",
       title: "SPC",
-      subtitle: "ศูนย์ช่วยเหลือที่รับช่วงตรวจสอบและตอบโต้แทนผู้ใช้งาน",
-      meaning: "SPC ทำหน้าที่เป็นชั้นมนุษย์ของระบบ เมื่อผู้ใช้เริ่มไม่แน่ใจหรือเสี่ยง จะมีคนรับช่วงวิเคราะห์และประสานแทนทันที",
-      protection: "ช่วยหยุดการสนทนาหรือกระบวนการเสี่ยง และแยกผู้ใช้ให้ออกจากแรงกดดันตรงหน้า",
-      reason: "ในสถานการณ์จริง ผู้ใช้บางครั้งต้องการคนรับช่วงแทนมากกว่าข้อมูล ระบบนี้จึงออกแบบให้มีชั้นสนับสนุนจริงเข้ามาช่วย",
-      tags: ["รับช่วงแทน", "ตรวจสอบ", "ช่วยตัดวงจรเสี่ยง"]
+      subtitle: "ศูนย์ช่วยเหลือและรับช่วงตรวจสอบแทนผู้ใช้งาน",
+      meaning: "SPC คือชั้นสนับสนุนของระบบ ที่เข้ามารับช่วงการตรวจสอบเมื่อเกิดความเสี่ยง",
+      protection: "ช่วยเพิ่มความมั่นใจในการตัดสินใจ และเพิ่มการควบคุมในช่วงเวลาสำคัญ",
+      reason: "ระบบที่แข็งแรงควรมีทั้งเทคโนโลยีและการสนับสนุนเชิงปฏิบัติการ",
+      tags: ["รับช่วงแทน", "ตรวจสอบ", "สนับสนุน"],
+      aiScript:
+        "คุณกำลังดู SPC ศูนย์ช่วยเหลือของระบบ Stealth Safety Bank Mobile System ออกแบบมาเพื่อยกระดับความปลอดภัย ด้วยการรับช่วงตรวจสอบและสนับสนุนผู้ใช้งานในช่วงเวลาสำคัญ",
+      detailUrl: "spc.html"
     }
   };
 
@@ -280,24 +308,25 @@
     beamSvg.setAttribute("height", rect.height);
   }
 
-  function openSystem() {
-    systemOpened = true;
-    showcase.classList.add("is-open");
-    attackColumn.classList.add("ready");
-    systemColumn.classList.add("ready");
-    statusBar.textContent = "กดไอคอน 1 ครั้งเพื่อดูการป้องกัน หรือกด 2 ครั้งเพื่ออ่านรายละเอียด";
-    startRadarLoop();
+  function stopAiSpeech() {
+    if ("speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+    }
+    aiSpeech = null;
   }
 
-  function collapseSystem() {
-    clearStates();
-    closeDetail(true);
-    systemOpened = false;
-    showcase.classList.remove("is-open");
-    attackColumn.classList.remove("ready");
-    systemColumn.classList.remove("ready");
-    statusBar.textContent = "กดโลโก้เพื่อเริ่มต้น";
-    stopRadarLoop();
+  function speakAi(text) {
+    stopAiSpeech();
+
+    if (!("speechSynthesis" in window) || !text) return;
+
+    aiSpeech = new SpeechSynthesisUtterance(text);
+    aiSpeech.lang = "th-TH";
+    aiSpeech.rate = 0.95;
+    aiSpeech.pitch = 1;
+    aiSpeech.volume = 1;
+
+    window.speechSynthesis.speak(aiSpeech);
   }
 
   function hideLogoMode() {
@@ -308,38 +337,44 @@
     logoMode.classList.remove("is-hidden");
   }
 
-  function openDetail(payload) {
-    if (!payload) return;
-
-    hideLogoMode();
-
-    detailKicker.textContent = payload.kicker || "";
-    detailTitle.textContent = payload.title || "";
-    detailSubtitle.textContent = payload.subtitle || "";
-    detailMeaning.textContent = payload.meaning || "";
-    detailProtection.textContent = payload.protection || "";
-    detailReason.textContent = payload.reason || "";
-
-    detailTags.innerHTML = "";
-    (payload.tags || []).forEach((tag) => {
-      const span = document.createElement("span");
-      span.className = "defense-tag";
-      span.textContent = tag;
-      detailTags.appendChild(span);
-    });
-
-    detailMode.classList.add("is-open");
-    detailMode.setAttribute("aria-hidden", "false");
-  }
-
   function closeDetail(silent = false) {
+    if (!detailMode) return;
+
     detailMode.classList.remove("is-open");
     detailMode.setAttribute("aria-hidden", "true");
     showLogoMode();
 
     if (!silent && systemOpened) {
-      statusBar.textContent = "กดไอคอน 1 ครั้งเพื่อดูการป้องกัน หรือกด 2 ครั้งเพื่ออ่านรายละเอียด";
+      statusBar.textContent = "กดไอคอน 1 ครั้งเพื่อดูการป้องกัน หรือกด 2 ครั้งเพื่อให้ AI อธิบาย";
     }
+  }
+
+  function closeAiMode(silent = false) {
+    if (!aiMode) return;
+
+    aiMode.classList.remove("show");
+    currentDetailUrl = "";
+    stopAiSpeech();
+    showLogoMode();
+
+    if (!silent && systemOpened) {
+      statusBar.textContent = "กดไอคอน 1 ครั้งเพื่อดูการป้องกัน หรือกด 2 ครั้งเพื่อให้ AI อธิบาย";
+    }
+  }
+
+  function openAiMode(payload) {
+    if (!aiMode || !aiText || !payload) return;
+
+    closeDetail(true);
+    hideLogoMode();
+
+    currentDetailUrl = payload.detailUrl || "";
+    aiText.textContent = payload.aiScript || payload.subtitle || payload.title || "";
+
+    aiMode.classList.add("show");
+    speakAi(aiText.textContent);
+
+    statusBar.textContent = (payload.title || "AI System") + " • AI พร้อมอธิบาย";
   }
 
   function clearStates() {
@@ -407,8 +442,8 @@
 
       ensureSvgDefs();
 
-      if (systemOpened && !detailMode.classList.contains("is-open")) {
-        statusBar.textContent = "กดไอคอน 1 ครั้งเพื่อดูการป้องกัน หรือกด 2 ครั้งเพื่ออ่านรายละเอียด";
+      if (systemOpened && !aiMode?.classList.contains("show")) {
+        statusBar.textContent = "กดไอคอน 1 ครั้งเพื่อดูการป้องกัน หรือกด 2 ครั้งเพื่อให้ AI อธิบาย";
       }
     }, 5200);
   }
@@ -417,6 +452,7 @@
     const config = attackMap[attackKey];
     if (!config || !systemOpened || !sourceCard) return;
 
+    closeAiMode(true);
     closeDetail(true);
     clearStates();
     showLogoMode();
@@ -449,6 +485,7 @@
   function runSystemFocus(systemKey, sourceCard) {
     if (!systemOpened || !sourceCard) return;
 
+    closeAiMode(true);
     closeDetail(true);
     clearStates();
     showLogoMode();
@@ -459,10 +496,31 @@
     activeTimeout = setTimeout(() => {
       sourceCard.classList.remove("is-target");
 
-      if (systemOpened) {
-        statusBar.textContent = "กดไอคอน 1 ครั้งเพื่อดูการป้องกัน หรือกด 2 ครั้งเพื่ออ่านรายละเอียด";
+      if (systemOpened && !aiMode?.classList.contains("show")) {
+        statusBar.textContent = "กดไอคอน 1 ครั้งเพื่อดูการป้องกัน หรือกด 2 ครั้งเพื่อให้ AI อธิบาย";
       }
     }, 2200);
+  }
+
+  function openSystem() {
+    systemOpened = true;
+    showcase.classList.add("is-open");
+    attackColumn.classList.add("ready");
+    systemColumn.classList.add("ready");
+    statusBar.textContent = "กดไอคอน 1 ครั้งเพื่อดูการป้องกัน หรือกด 2 ครั้งเพื่อให้ AI อธิบาย";
+    startRadarLoop();
+  }
+
+  function collapseSystem() {
+    clearStates();
+    closeAiMode(true);
+    closeDetail(true);
+    systemOpened = false;
+    showcase.classList.remove("is-open");
+    attackColumn.classList.remove("ready");
+    systemColumn.classList.remove("ready");
+    statusBar.textContent = "กดโลโก้เพื่อเริ่มต้น";
+    stopRadarLoop();
   }
 
   ensureSvgDefs();
@@ -475,7 +533,12 @@
       return;
     }
 
-    if (detailMode.classList.contains("is-open")) {
+    if (aiMode?.classList.contains("show")) {
+      closeAiMode();
+      return;
+    }
+
+    if (detailMode?.classList.contains("is-open")) {
       closeDetail();
       return;
     }
@@ -501,8 +564,7 @@
       if (!systemOpened) return;
 
       clearStates();
-      openDetail(attackMap[attackKey]?.detail);
-      statusBar.textContent = (attackMap[attackKey]?.detail?.title || "Detail") + " • เปิดรายละเอียดแล้ว";
+      openAiMode(attackMap[attackKey]);
     });
   });
 
@@ -524,19 +586,42 @@
       if (!systemOpened) return;
 
       clearStates();
-      openDetail(systemMap[systemKey]);
-      statusBar.textContent = (systemMap[systemKey]?.title || "Detail") + " • เปิดรายละเอียดแล้ว";
+      openAiMode(systemMap[systemKey]);
     });
   });
 
-  detailClose.addEventListener("click", function (event) {
-    event.preventDefault();
-    closeDetail();
-  });
+  if (aiClose) {
+    aiClose.addEventListener("click", function (event) {
+      event.preventDefault();
+      closeAiMode();
+    });
+  }
+
+  if (aiDetailBtn) {
+    aiDetailBtn.addEventListener("click", function (event) {
+      event.preventDefault();
+      if (!currentDetailUrl) return;
+      window.location.href = currentDetailUrl;
+    });
+  }
+
+  if (detailClose) {
+    detailClose.addEventListener("click", function (event) {
+      event.preventDefault();
+      closeDetail();
+    });
+  }
 
   document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape" && detailMode.classList.contains("is-open")) {
-      closeDetail();
+    if (event.key === "Escape") {
+      if (aiMode?.classList.contains("show")) {
+        closeAiMode();
+        return;
+      }
+
+      if (detailMode?.classList.contains("is-open")) {
+        closeDetail();
+      }
     }
   });
 
