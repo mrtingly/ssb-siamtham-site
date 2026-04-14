@@ -193,24 +193,29 @@
     bottom:12px;
   }
 
-  .detail-shell{
-    width:min(90vw, 720px);
-    min-height:auto;
-    border-radius:24px;
-  }
+  .detail-mode{
+  padding:18px 18px 108px;
+}
 
-  .detail-body{
-    grid-template-columns:1fr;
-    gap:14px;
-  }
+.detail-shell{
+  width:min(860px, calc(100% - 340px));
+  max-height:calc(100% - 10px);
+  min-height:auto;
+  border-radius:26px;
+}
 
-  .detail-title{
-    font-size:24px;
-  }
+.detail-body{
+  grid-template-columns:1fr;
+  gap:14px;
+}
 
-  .detail-subtitle{
-    font-size:14px;
-  }
+.detail-title{
+  font-size:26px;
+}
+
+.detail-subtitle{
+  font-size:14px;
+}
 
   .footer-shell{
     padding:14px 18px 12px;
