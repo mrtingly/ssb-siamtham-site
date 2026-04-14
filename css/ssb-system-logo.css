@@ -36,7 +36,6 @@
     drop-shadow(0 0 8px rgba(255,255,255,.92))
     drop-shadow(0 0 18px rgba(120,210,255,.48));
   transform-origin:160px 160px;
-  transform-box:fill-box;
   animation:logoOrbitSpin 6s linear infinite;
 }
 
