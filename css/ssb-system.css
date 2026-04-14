@@ -217,8 +217,8 @@ button{ font:inherit; }
   align-items:center;
   justify-content:center;
   z-index:12;
-  padding-top:8px;
-  padding-bottom:35px;
+  padding-top:40px;
+  padding-bottom:-40px;
 }
 
 .center-aura{
