@@ -328,26 +328,37 @@
 function speakAi(text) {
   if (!("speechSynthesis" in window) || !text) return;
 
-  window.speechSynthesis.cancel();
+  stopAiSpeech();
 
-  const voices = window.speechSynthesis.getVoices();
+  const voices = availableVoices.length
+    ? availableVoices
+    : window.speechSynthesis.getVoices();
+
+  const femaleHints = ["female","zira","samantha","kanya","siri"];
 
   let voice =
-    voices.find(v => v.lang === "th-TH") ||
-    voices.find(v => v.lang.toLowerCase().includes("en"));
+    voices.find(v =>
+      v.lang.includes("th") &&
+      femaleHints.some(h => v.name.toLowerCase().includes(h))
+    ) ||
+    voices.find(v => v.lang.includes("th")) ||
+    voices.find(v =>
+      femaleHints.some(h => v.name.toLowerCase().includes(h))
+    ) ||
+    voices[0];
 
   const speech = new SpeechSynthesisUtterance(text);
 
   speech.voice = voice || null;
-  speech.lang = voice ? voice.lang : "en-US";
+  speech.lang = voice?.lang || "th-TH";
 
-  speech.rate = 0.78;   // 🔥 ทำให้เสียง smooth ขึ้น
-  speech.pitch = 1;
+  speech.rate = 0.72;
+  speech.pitch = 1.05;
   speech.volume = 1;
 
   setTimeout(()=>{
     window.speechSynthesis.speak(speech);
-  }, 200);
+  }, 300);
 }
 
   function hideLogoMode() {
@@ -376,7 +387,9 @@ function speakAi(text) {
     aiMode.classList.remove("show");
     currentDetailUrl = "";
     stopAiSpeech();
+    requestAnimationFrame(()=>{
     showLogoMode();
+  });
 
     if (!silent && systemOpened) {
       statusBar.textContent = "กดไอคอน 1 ครั้งเพื่อดูการป้องกัน หรือกด 2 ครั้งเพื่อให้ AI อธิบาย";
@@ -393,7 +406,11 @@ function speakAi(text) {
     aiText.textContent = payload.aiScript || payload.subtitle || payload.title || "";
 
     aiMode.classList.add("show");
-    speakAi(aiText.textContent);
+    aiMode.classList.add("show");
+
+    setTimeout(()=>{
+      speakAi(aiText.textContent);
+    }, 250);
 
     statusBar.textContent = (payload.title || "AI System") + " • AI พร้อมอธิบาย";
   }
