@@ -135,7 +135,7 @@ button{ font:inherit; }
   position:relative;
   z-index:20;
   text-align:center;
-  margin-bottom:-10px;
+  margin-bottom:10px;
 }
 
 .hero-kicker{
@@ -163,11 +163,7 @@ button{ font:inherit; }
 }
 
 .hero-head p{
-  margin:0 auto;
-  max-width:1060px;
-  color:var(--text-soft);
-  font-size:15px;
-  line-height:1.6;
+  display:none !important;
 }
 
 .guide-text{
@@ -187,6 +183,7 @@ button{ font:inherit; }
   z-index:2;
   overflow:hidden;
   border-radius:28px;
+  margin-top:0;
 }
 
 .center-stage{
@@ -200,7 +197,7 @@ button{ font:inherit; }
   z-index:12;
   padding-top:0;
   padding-bottom:0;
-  transform:translateY(-40px);
+  transform:translateY(-18px);
 }
 
 .center-aura{
@@ -393,7 +390,7 @@ html.light-mode .action-btn.secondary{
   }
 
   .hero-head{
-    margin-bottom:-14px;
+    margin-bottom:8px;
   }
 
   .hero-head h1{
