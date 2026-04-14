@@ -35,23 +35,14 @@
   filter:
     drop-shadow(0 0 8px rgba(255,255,255,.92))
     drop-shadow(0 0 18px rgba(120,210,255,.48));
-  transform-origin:180px 180px;
+  transform-origin:160px 160px;
+  transform-box:fill-box;
   animation:logoOrbitSpin 6s linear infinite;
-}
-
-.logo-orbit-runner.two{
-  opacity:.88;
-  animation:logoOrbitSpinReverse 8s linear infinite;
 }
 
 @keyframes logoOrbitSpin{
   from{ transform:rotate(0deg); }
   to{ transform:rotate(360deg); }
-}
-
-@keyframes logoOrbitSpinReverse{
-  from{ transform:rotate(360deg); }
-  to{ transform:rotate(0deg); }
 }
 
 .logo-radar-layer{
