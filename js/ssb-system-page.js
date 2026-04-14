@@ -328,30 +328,26 @@
 function speakAi(text) {
   if (!("speechSynthesis" in window) || !text) return;
 
-  stopAiSpeech();
-
-  const voices = availableVoices && availableVoices.length
-    ? availableVoices
-    : window.speechSynthesis.getVoices();
-
-  let selectedVoice =
-    voices.find(v => v.lang === "th-TH") ||
-    voices.find(v => v.lang === "th_TH") ||
-    voices.find(v => v.lang && v.lang.toLowerCase().includes("th")) ||
-    voices.find(v => v.lang && v.lang.toLowerCase().includes("en"));
-
-  aiSpeech = new SpeechSynthesisUtterance(text);
-  aiSpeech.voice = selectedVoice || null;
-  aiSpeech.lang = selectedVoice ? selectedVoice.lang : "th-TH";
-  aiSpeech.rate = 0.82;
-  aiSpeech.pitch = 1;
-  aiSpeech.volume = 1;
-
   window.speechSynthesis.cancel();
 
-  setTimeout(() => {
-    window.speechSynthesis.speak(aiSpeech);
-  }, 180);
+  const voices = window.speechSynthesis.getVoices();
+
+  let voice =
+    voices.find(v => v.lang === "th-TH") ||
+    voices.find(v => v.lang.toLowerCase().includes("en"));
+
+  const speech = new SpeechSynthesisUtterance(text);
+
+  speech.voice = voice || null;
+  speech.lang = voice ? voice.lang : "en-US";
+
+  speech.rate = 0.78;   // 🔥 ทำให้เสียง smooth ขึ้น
+  speech.pitch = 1;
+  speech.volume = 1;
+
+  setTimeout(()=>{
+    window.speechSynthesis.speak(speech);
+  }, 200);
 }
 
   function hideLogoMode() {
