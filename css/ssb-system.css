@@ -184,15 +184,7 @@ button{ font:inherit; }
 }
 
 .guide-text{
-  margin-top:6px;
-  display:flex;
-  justify-content:center;
-  gap:16px;
-  align-items:center;
-  flex-wrap:wrap;
-  color:var(--system-glow);
-  font-size:14px;
-  font-weight:700;
+  display:none;
 }
 
 .guide-emphasis{
@@ -320,7 +312,7 @@ button{ font:inherit; }
   justify-content:center;
   align-items:center;
   gap:20px;
-  margin:-34px auto 0;
+  margin:-52px auto 0;
   padding:0;
   z-index:5;
 }
