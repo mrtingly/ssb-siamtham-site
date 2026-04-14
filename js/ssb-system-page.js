@@ -90,10 +90,10 @@
   let radarInterval = null;
   let scanIndex = 0;
 
-  const attackMap = {
+   const attackMap = {
     psychological: {
-      label: "Psychological → Time Barrier + SPC",
-      targets: ["system-time-barrier", "system-spc"],
+      label: "Psychological → All Defense Systems",
+      targets: ["system-fd", "system-safety-book", "system-time-barrier", "system-spc"],
       detail: {
         kicker: "Attack Detail",
         title: "Psychological",
