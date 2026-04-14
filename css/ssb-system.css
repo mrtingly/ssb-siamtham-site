@@ -471,3 +471,29 @@ html.light-mode .action-btn.secondary{
   0%,100%{ transform:translateY(0); }
   50%{ transform:translateY(-6px); }
 }
+
+.ai-avatar{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-bottom:14px;
+}
+
+.ai-avatar img{
+  width:110px;
+  height:110px;
+  object-fit:contain;
+  border-radius:50%;
+
+  filter:
+    drop-shadow(0 0 18px rgba(0,140,255,.7))
+    drop-shadow(0 0 40px rgba(0,90,255,.25));
+
+  animation:aiFloat 3s ease-in-out infinite;
+}
+
+/* ลอยนิดๆ */
+@keyframes aiFloat{
+  0%,100%{ transform:translateY(0); }
+  50%{ transform:translateY(-8px); }
+}
