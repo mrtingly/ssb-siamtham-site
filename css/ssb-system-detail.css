@@ -7,7 +7,7 @@
   opacity:0;
   pointer-events:none;
   z-index:22;
-  padding:20px 22px 118px;
+  padding:20px 22px 122px;
   transition:opacity .28s ease;
 }
 
@@ -17,9 +17,9 @@
 }
 
 .detail-shell{
-  width:min(900px, calc(100% - 520px));
+  width:min(900px, calc(100% - 540px));
   min-height:0;
-  max-height:calc(100% - 12px);
+  max-height:calc(100% - 8px);
   border-radius:30px;
   border:1px solid var(--border);
   background:
@@ -211,18 +211,4 @@ html.light-mode .defense-tag{
   background:
     radial-gradient(circle at 50% 20%, rgba(255,255,255,.90), transparent 58%),
     linear-gradient(180deg, rgba(255,255,255,.96), rgba(241,247,255,.92));
-}
-
-@media (max-width: 1199px){
-  .detail-mode{
-    padding:18px 18px 108px;
-  }
-
-  .detail-shell{
-    width:min(860px, calc(100% - 420px));
-  }
-
-  .detail-title{
-    font-size:28px;
-  }
 }
