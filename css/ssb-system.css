@@ -389,3 +389,62 @@ html.light-mode .action-btn.secondary{
   0%,100%{ opacity:.25; }
   50%{ opacity:.5; }
 }
+
+.ai-mode{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,10,30,.55);
+  backdrop-filter:blur(10px);
+  opacity:0;
+  pointer-events:none;
+  z-index:20;
+  transition:.3s;
+}
+
+.ai-mode.show{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.ai-box{
+  width:320px;
+  padding:20px;
+  border-radius:20px;
+  background:var(--panel);
+  border:1px solid var(--border);
+  text-align:center;
+}
+
+.ai-title{
+  font-weight:800;
+  margin-bottom:10px;
+}
+
+.ai-text{
+  font-size:14px;
+  line-height:1.6;
+  margin-bottom:14px;
+}
+
+.ai-detail-btn{
+  padding:10px 16px;
+  border-radius:999px;
+  border:none;
+  background:linear-gradient(135deg,#1e6bff,#00d4ff);
+  color:#fff;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.ai-close{
+  position:absolute;
+  top:10px;
+  right:12px;
+  background:none;
+  border:none;
+  font-size:20px;
+  cursor:pointer;
+}
