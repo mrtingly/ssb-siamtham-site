@@ -77,6 +77,16 @@
   let scanIndex = 0;
   let aiSpeech = null;
   let currentDetailUrl = "";
+  let availableVoices = [];
+
+      function preloadVoices() {
+        availableVoices = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
+      }
+      
+      if ("speechSynthesis" in window) {
+        preloadVoices();
+        window.speechSynthesis.onvoiceschanged = preloadVoices;
+      }
 
   const attackMap = {
     psychological: {
@@ -315,19 +325,34 @@
     aiSpeech = null;
   }
 
-  function speakAi(text) {
-    stopAiSpeech();
+function speakAi(text) {
+  if (!("speechSynthesis" in window) || !text) return;
 
-    if (!("speechSynthesis" in window) || !text) return;
+  stopAiSpeech();
 
-    aiSpeech = new SpeechSynthesisUtterance(text);
-    aiSpeech.lang = "th-TH";
-    aiSpeech.rate = 0.95;
-    aiSpeech.pitch = 1;
-    aiSpeech.volume = 1;
+  const voices = availableVoices && availableVoices.length
+    ? availableVoices
+    : window.speechSynthesis.getVoices();
 
+  let selectedVoice =
+    voices.find(v => v.lang === "th-TH") ||
+    voices.find(v => v.lang === "th_TH") ||
+    voices.find(v => v.lang && v.lang.toLowerCase().includes("th")) ||
+    voices.find(v => v.lang && v.lang.toLowerCase().includes("en"));
+
+  aiSpeech = new SpeechSynthesisUtterance(text);
+  aiSpeech.voice = selectedVoice || null;
+  aiSpeech.lang = selectedVoice ? selectedVoice.lang : "th-TH";
+  aiSpeech.rate = 0.82;
+  aiSpeech.pitch = 1;
+  aiSpeech.volume = 1;
+
+  window.speechSynthesis.cancel();
+
+  setTimeout(() => {
     window.speechSynthesis.speak(aiSpeech);
-  }
+  }, 180);
+}
 
   function hideLogoMode() {
     logoMode.classList.add("is-hidden");
