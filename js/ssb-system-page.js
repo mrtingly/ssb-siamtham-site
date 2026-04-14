@@ -31,6 +31,16 @@
 })();
 
 (function () {
+    const clickSound = document.getElementById("clickSound");
+
+  function playClickSound() {
+    if (!clickSound) return;
+
+    clickSound.pause();
+    clickSound.currentTime = 0;
+    clickSound.play().catch(() => {});
+  }
+  
   const showcase = document.getElementById("showcase");
   const logoCore = document.getElementById("logoCore");
   const beamSvg = document.getElementById("beamSvg");
@@ -544,5 +554,11 @@
     sizeSvg();
     ensureSvgDefs();
     buildRadarDots();
+  });
+
+    document.querySelectorAll(".sound-click").forEach((el) => {
+    el.addEventListener("click", function () {
+      playClickSound();
+    });
   });
 })();
