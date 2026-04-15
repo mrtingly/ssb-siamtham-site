@@ -188,4 +188,30 @@
     padding:14px 14px 12px;
     border-radius:20px;
   }
+    .action-bottom{
+    gap:12px;
+    flex-wrap:wrap;
+  }
+
+  .action-bottom.in-bottom-box{
+    margin-top:6px;
+  }
+
+  .action-btn{
+    min-width:132px;
+    height:46px;
+    padding:0 18px;
+    font-size:14px;
+  }
+
+  .detail-shell{
+    max-height:none;
+    border-radius:22px;
+  }
+
+  .center-caption-sub,
+  .status-bar{
+    font-size:12px;
+    line-height:1.5;
+  }
 }
