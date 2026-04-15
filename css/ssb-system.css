@@ -164,7 +164,7 @@ button{ font:inherit; }
   margin:0;
   color:var(--title);
   font-family:var(--font-tech);
-  font-size:clamp(30px, 3vw, 46px);
+  font-size:clamp(24px, 2.2vw, 36px);
   line-height:1.04;
   font-weight:900;
   letter-spacing:.2px;
@@ -368,102 +368,6 @@ html.light-mode .action-btn.secondary{
 @keyframes ctaPulse{
   0%,100%{ opacity:.25; }
   50%{ opacity:.5; }
-}
-
-@media (max-width: 767px){
-  .main-content{
-    padding:10px 10px 8px;
-  }
-
-  .hero-card{
-    padding:14px 14px 12px;
-    border-radius:26px;
-  }
-
-  .showcase{
-    min-height:auto;
-  }
-
-  .center-stage{
-    min-height:auto;
-    transform:none;
-    padding-top:0;
-    padding-bottom:0;
-  }
-
-  .center-aura{
-    top:46%;
-    width:360px;
-    height:360px;
-  }
-
-  .hero-head{
-    margin-bottom:8px;
-  }
-
-  .hero-head h1{
-    font-size:clamp(24px, 7vw, 34px);
-  }
-
-  .hero-head p{
-    font-size:14px;
-    line-height:1.6;
-  }
-
-  .guide-text{
-    gap:10px;
-    font-size:13px;
-  }
-
-  .guide-emphasis{
-    font-size:15px;
-  }
-
-  .center-caption{
-    margin-top:8px;
-  }
-
-  .center-caption-main{
-    font-size:22px;
-  }
-
-  .center-caption-sub{
-    font-size:13px;
-  }
-
-  .status-bar{
-    margin-top:6px;
-    min-height:22px;
-    font-size:13px;
-  }
-
-   .action-bottom{
-    gap:12px;
-    margin:0 auto;
-    padding:0;
-  }
-
-  .action-btn{
-    min-width:136px;
-    height:46px;
-    padding:0 20px;
-    font-size:14px;
-  }
-
-  .bottom-box{
-    margin-top:10px;
-    padding:14px 16px;
-    border-radius:22px;
-  }
-
-  .bottom-box strong{
-    font-size:18px;
-  }
-
-  .bottom-box span{
-    font-size:14px;
-    line-height:1.65;
-  }
 }
 
 .hero-card:has(.detail-mode.is-open) .action-bottom{
