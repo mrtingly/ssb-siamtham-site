@@ -297,18 +297,16 @@ button{ font:inherit; }
 }
 
 .action-bottom{
-  position:relative;
   display:flex;
   justify-content:center;
   align-items:center;
   gap:18px;
-  margin:0 auto;
+  margin:0;
   padding:0;
-  z-index:5;
 }
 
 .action-bottom.in-bottom-box{
-  width:100%;
+  margin-top:6px;
 }
 
 .action-btn{
