@@ -1,1 +1,153 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google" content="notranslate" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>SSB Mobile | Siam Tham Co.,Ltd.</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&family=Orbitron:wght@500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="css/ssb-system-mobile.css?v=1" />
+</head>
+<body>
+  <main class="mobile-shell">
+    <header class="mobile-topbar">
+      <div class="brand-left">
+        <img src="images/logo.png" alt="SSB Logo" class="brand-logo" />
+        <div class="brand-text">
+          <div class="brand-th">บริษัท สยามทำ จำกัด</div>
+          <div class="brand-en">Siam Tham Co.,Ltd.</div>
+          <div class="brand-web">www.siamtham.com</div>
+        </div>
+      </div>
+    </header>
+
+    <section class="mobile-hero">
+      <h1 class="mobile-title">STEALTH SAFETY BANK MOBILE SYSTEM</h1>
+
+      <div class="mobile-stage" id="mobileStage">
+        <!-- ซ้าย = ไอคอนการโจมตี -->
+        <aside class="attack-rail" id="attackRail">
+          <button class="attack-item is-active" type="button" data-key="phishing">
+            <span class="attack-frame">
+              <img src="images/Phishing.png" alt="Phishing" />
+            </span>
+            <span class="attack-label">Phishing</span>
+          </button>
+
+          <button class="attack-item" type="button" data-key="psychological">
+            <span class="attack-frame">
+              <img src="images/Psychological.png" alt="Psychological" />
+            </span>
+            <span class="attack-label">Psycho</span>
+          </button>
+
+          <button class="attack-item" type="button" data-key="remote">
+            <span class="attack-frame">
+              <img src="images/Remote.png" alt="Remote" />
+            </span>
+            <span class="attack-label">Remote</span>
+          </button>
+
+          <button class="attack-item" type="button" data-key="fake-app">
+            <span class="attack-frame">
+              <img src="images/Fake app.png" alt="Fake App" />
+            </span>
+            <span class="attack-label">Fake App</span>
+          </button>
+        </aside>
+
+        <!-- ขวา = โหมดโลโก้ -->
+        <section class="mobile-main">
+          <div class="logo-view" id="logoView">
+            <div class="radar-wrap">
+              <div class="radar-grid"></div>
+              <div class="radar-sweep"></div>
+
+              <button class="radar-core" type="button" id="radarCore" aria-label="SSB Core">
+                <img src="images/logo.png" alt="SSB Core Logo" />
+              </button>
+            </div>
+
+            <div class="hero-note">
+              เลือกไอค่อนที่ต้องการ<br />
+              <span>ทราบรายละเอียด</span>
+            </div>
+          </div>
+
+          <!-- ขวา = โหมดรายละเอียด -->
+          <div class="detail-view" id="detailView" hidden>
+            <div class="detail-top">
+              <div class="detail-icon-wrap">
+                <img id="detailIcon" src="images/Phishing.png" alt="Detail icon" />
+              </div>
+
+              <div class="detail-head">
+                <div class="detail-kicker">ภัยคุกคาม</div>
+                <h2 id="detailTitle">PHISHING</h2>
+                <p id="detailSubtitle">หลอกให้กรอกข้อมูล</p>
+              </div>
+            </div>
+
+            <div class="detail-body">
+              <p class="detail-desc" id="detailDesc">
+                การหลอกลวงผ่านเว็บปลอมหรือข้อความปลอมเพื่อขโมยข้อมูลสำคัญ
+              </p>
+
+              <div class="defense-card">
+                <div class="defense-chip">SSB ป้องกันด้วย</div>
+
+                <div class="defense-row">
+                  <img src="images/logo.png" alt="SSB Shield" class="defense-shield" />
+                  <div class="defense-copy">
+                    <div class="defense-title" id="defenseTitle">DEVICE SEPARATION</div>
+                    <div class="defense-sub" id="defenseSub">แยกอุปกรณ์ธุรกรรม</div>
+                  </div>
+                </div>
+
+                <p class="defense-desc" id="defenseDesc">
+                  ใช้อุปกรณ์เฉพาะสำหรับธุรกรรม ไม่ปะปนกับเครื่องใช้งานทั่วไป จึงลดโอกาสถูกโจมตีได้มาก
+                </p>
+
+                <div class="device-compare">
+                  <div class="device-box danger">
+                    <div class="device-label-top">อุปกรณ์ทั่วไป</div>
+                    <img src="images/Phishing.png" alt="Threat" />
+                    <div class="device-label danger-text">เสี่ยงถูกโจมตี</div>
+                  </div>
+
+                  <div class="device-arrow">→</div>
+
+                  <div class="device-box safe">
+                    <div class="device-label-top">อุปกรณ์ธุรกรรม</div>
+                    <img src="images/logo.png" alt="Safe device" />
+                    <div class="device-label safe-text">ปลอดภัยกว่า</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button class="close-detail" id="closeDetail" type="button">ปิดรายละเอียด</button>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="mobile-bottom-card">
+      <div class="mobile-actions">
+        <a href="index.html" class="mobile-btn secondary">หน้าแรก</a>
+        <a href="book.html" class="mobile-btn primary">สั่งซื้อ</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/ssb-system-mobile.js?v=1"></script>
+</body>
+</html>
