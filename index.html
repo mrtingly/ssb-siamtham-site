@@ -330,11 +330,15 @@
     }
   </style>
 
+<!-- =========================
+SSB MOBILE REDIRECT (FINAL)
+========================= -->
 <script>
 (function () {
   var isMobile = window.matchMedia('(max-width: 760px)').matches;
   var path = window.location.pathname;
 
+  // กัน redirect ซ้ำ
   if (isMobile && path.indexOf('/ssb-mobile/') === -1) {
     var target = 'ssb-mobile/index.html' + window.location.search + window.location.hash;
     window.location.replace(target);
