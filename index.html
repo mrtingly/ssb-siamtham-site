@@ -329,6 +329,18 @@
       }
     }
   </style>
+
+  <script>
+(function () {
+  var isMobile = window.innerWidth <= 760;
+  var path = window.location.pathname;
+
+  if (isMobile && path.indexOf('/ssb-mobile/') === -1) {
+    window.location.replace('/ssb-siamtham-site/ssb-mobile/index.html');
+  }
+})();
+</script>
+  
 </head>
 
 <body>
