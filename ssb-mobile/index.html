@@ -4,8 +4,10 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b4ea2" />
+  <meta name="format-detection" content="telephone=no, email=no, address=no" />
 
-  <title>Stealth Safety Bank Mobile System | Advanced Financial Protection</title>
+  <title>Stealth Safety Bank Mobile System | Siamtham</title>
   <meta
     name="description"
     content="Stealth Safety Bank Mobile System by Siamtham. ระบบปกป้องการใช้งานการเงินแบบยกระดับ ด้วยโครงสร้างการแยกอุปกรณ์ การควบคุมการเข้าถึง และแนวทางการใช้งานอย่างเป็นระบบ"
@@ -14,79 +16,58 @@
     name="keywords"
     content="SSB, Stealth Safety Bank, Stealth Safety Bank Mobile System, Siamtham, mobile banking security, financial protection, ระบบปกป้องการเงิน, ความปลอดภัยทางการเงิน"
   />
-  <meta name="theme-color" content="#0b4ea2" />
-  <meta name="format-detection" content="telephone=no, email=no, address=no" />
   <meta name="robots" content="index, follow" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Stealth Safety Bank Mobile System" />
+  <meta property="og:title" content="Stealth Safety Bank Mobile System | Siamtham" />
   <meta
     property="og:description"
     content="Advanced Financial Protection with Controlled Access, Stealth Separation, and Structured Usage Workflow."
   />
-  <meta property="og:image" content="images/brand/og-cover.jpg" />
-  <meta property="og:url" content="https://mrtingly.github.io/ssb-siamtham-site/ssb-mobile/" />
+  <meta property="og:url" content="https://www.siamtham.com/ssb-mobile/index.html" />
+  <meta property="og:image" content="https://www.siamtham.com/images/logo-ssbms.png" />
   <meta property="og:site_name" content="Siamtham" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Stealth Safety Bank Mobile System" />
+  <meta name="twitter:title" content="Stealth Safety Bank Mobile System | Siamtham" />
   <meta
     name="twitter:description"
     content="Advanced Financial Protection with Controlled Access, Stealth Separation, and Structured Usage Workflow."
   />
-  <meta name="twitter:image" content="images/brand/og-cover.jpg" />
+  <meta name="twitter:image" content="https://www.siamtham.com/images/logo-ssbms.png" />
 
-  <link rel="canonical" href="https://mrtingly.github.io/ssb-siamtham-site/ssb-mobile/" />
-  <link rel="icon" type="image/png" href="images/brand/favicon.png" />
-
+  <link rel="canonical" href="https://www.siamtham.com/ssb-mobile/index.html" />
+  <link rel="icon" href="images/logo-ssbms.png" />
+  <link rel="preload" href="images/logo-ssbms.png" as="image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&family=Orbitron:wght@500;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&family=Orbitron:wght@500;600;700;800&display=swap"
     rel="stylesheet"
   />
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "Stealth Safety Bank Mobile System",
-    "brand": {
-      "@type": "Brand",
-      "name": "Siamtham"
-    },
-    "description": "Advanced financial protection system with controlled access, stealth separation, and structured usage workflow.",
-    "category": "Security System",
-    "url": "https://mrtingly.github.io/ssb-siamtham-site/ssb-mobile/",
-    "image": "https://mrtingly.github.io/ssb-siamtham-site/ssb-mobile/images/brand/og-cover.jpg"
-  }
-  </script>
-
   <style>
     :root{
-      --bg:#f4f8ff;
-      --bg-soft:#eef4ff;
+      --bg:#f2f7ff;
+      --bg-2:#e9f2ff;
       --surface:#ffffff;
       --surface-2:#f8fbff;
-      --line:#dce8ff;
-      --line-2:rgba(11,78,162,.12);
+      --line:#d8e7ff;
       --text:#0d1c3b;
-      --text-soft:#50627f;
+      --text-soft:#5b6f90;
       --primary:#0b4ea2;
       --primary-2:#0f6bda;
-      --primary-3:#e8f2ff;
-      --accent:#d4af37;
-      --success:#148a57;
-      --danger:#d64045;
-      --shadow:0 16px 40px rgba(17,62,126,.10);
-      --shadow-soft:0 10px 24px rgba(17,62,126,.08);
-      --radius-xl:28px;
-      --radius-lg:22px;
-      --radius-md:16px;
-      --radius-sm:12px;
-      --container:min(100% - 28px, 720px);
-      --top-safe: env(safe-area-inset-top, 0px);
-      --bottom-safe: env(safe-area-inset-bottom, 0px);
+      --primary-3:#e9f2ff;
+      --gold:#dcb14a;
+      --shadow:0 18px 40px rgba(14,53,112,.12);
+      --shadow-soft:0 10px 24px rgba(14,53,112,.08);
+      --radius-xl:30px;
+      --radius-lg:24px;
+      --radius-md:18px;
+      --radius-sm:14px;
+      --container:min(100% - 24px, 720px);
+      --safe-top:env(safe-area-inset-top,0px);
+      --safe-bottom:env(safe-area-inset-bottom,0px);
     }
 
     *{box-sizing:border-box}
@@ -94,31 +75,23 @@
     body{
       margin:0;
       font-family:"Prompt",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      background:
-        radial-gradient(circle at top right, rgba(15,107,218,.10), transparent 28%),
-        radial-gradient(circle at top left, rgba(212,175,55,.08), transparent 24%),
-        linear-gradient(180deg,#f7faff 0%,#eef5ff 100%);
       color:var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(15,107,218,.12), transparent 28%),
+        radial-gradient(circle at top left, rgba(220,177,74,.10), transparent 22%),
+        linear-gradient(180deg,#f8fbff 0%, #eef5ff 100%);
       -webkit-font-smoothing:antialiased;
       text-rendering:optimizeLegibility;
     }
 
-    img{max-width:100%;display:block}
+    img{display:block;max-width:100%}
     a{text-decoration:none;color:inherit}
     button,input,textarea,select{font:inherit}
 
-    .sr-only{
-      position:absolute!important;
-      width:1px;height:1px;
-      padding:0;margin:-1px;
-      overflow:hidden;clip:rect(0,0,0,0);
-      white-space:nowrap;border:0;
-    }
-
     .page-shell{
-      width:100%;
+      min-height:100vh;
       overflow:hidden;
-      padding-bottom:calc(100px + var(--bottom-safe));
+      padding-bottom:calc(94px + var(--safe-bottom));
     }
 
     .container{
@@ -130,10 +103,10 @@
       position:sticky;
       top:0;
       z-index:80;
-      padding-top:var(--top-safe);
-      background:linear-gradient(90deg, #083b7f 0%, #0f6bda 55%, #0b4ea2 100%);
+      padding-top:var(--safe-top);
+      background:linear-gradient(90deg,#083b7f 0%, #0f6bda 55%, #0b4ea2 100%);
       color:#fff;
-      box-shadow:0 8px 22px rgba(10,54,116,.18);
+      box-shadow:0 8px 20px rgba(12,45,96,.18);
     }
 
     .announcement-inner{
@@ -144,64 +117,75 @@
       align-items:center;
       justify-content:center;
       gap:8px;
-      text-align:center;
-      font-size:.88rem;
-      font-weight:500;
-      letter-spacing:.01em;
       padding:10px 0;
+      text-align:center;
+      font-size:.84rem;
+      font-weight:600;
+      letter-spacing:.01em;
     }
 
     .announcement-dot{
-      width:7px;height:7px;border-radius:999px;
+      width:7px;
+      height:7px;
+      border-radius:999px;
       background:#fff;
-      opacity:.9;
+      opacity:.92;
       flex:0 0 auto;
     }
 
-    .mobile-header-wrap{
+    .header-wrap{
       position:sticky;
-      top:calc(42px + var(--top-safe));
+      top:calc(var(--safe-top) + 42px);
       z-index:70;
       padding:12px 0 0;
-      backdrop-filter:saturate(120%) blur(10px);
-      -webkit-backdrop-filter:saturate(120%) blur(10px);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
     }
 
-    .mobile-header{
+    .header{
       width:var(--container);
       margin:0 auto;
-      background:rgba(255,255,255,.78);
-      border:1px solid rgba(220,232,255,.95);
-      border-radius:20px;
-      box-shadow:var(--shadow-soft);
-      min-height:64px;
+      min-height:68px;
+      padding:10px 12px;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      padding:10px 12px;
+      gap:12px;
+      background:rgba(255,255,255,.82);
+      border:1px solid rgba(216,231,255,.96);
+      border-radius:22px;
+      box-shadow:var(--shadow-soft);
     }
 
     .brand{
       display:flex;
       align-items:center;
-      gap:10px;
+      gap:12px;
       min-width:0;
     }
 
     .brand-mark{
-      width:42px;height:42px;
-      border-radius:14px;
+      width:46px;
+      height:46px;
+      border-radius:16px;
       background:
-        radial-gradient(circle at 30% 25%, rgba(255,255,255,.95), rgba(255,255,255,.55) 32%, transparent 33%),
-        linear-gradient(135deg, #0f6bda 0%, #0b4ea2 100%);
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.45), 0 10px 20px rgba(15,107,218,.18);
-      display:grid;place-items:center;
-      color:#fff;
-      font-family:"Orbitron",sans-serif;
-      font-size:1rem;
-      font-weight:700;
-      letter-spacing:.04em;
+        linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,.45)),
+        linear-gradient(135deg,#0f6bda 0%,#0b4ea2 100%);
+      border:1px solid rgba(255,255,255,.72);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.72),
+        0 10px 20px rgba(15,107,218,.18);
+      display:grid;
+      place-items:center;
+      overflow:hidden;
       flex:0 0 auto;
+    }
+
+    .brand-mark img{
+      width:84%;
+      height:84%;
+      object-fit:contain;
+      filter:drop-shadow(0 2px 6px rgba(11,78,162,.14));
     }
 
     .brand-text{
@@ -212,10 +196,10 @@
     }
 
     .brand-title{
-      font-size:.98rem;
+      font-size:1rem;
       line-height:1.1;
-      font-weight:700;
-      color:#0d2450;
+      font-weight:800;
+      color:#0c2149;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
@@ -223,6 +207,7 @@
 
     .brand-sub{
       font-size:.74rem;
+      line-height:1.35;
       color:var(--text-soft);
       white-space:nowrap;
       overflow:hidden;
@@ -236,42 +221,53 @@
       flex:0 0 auto;
     }
 
-    .icon-btn,
+    .menu-btn,
     .contact-btn{
       border:0;
-      cursor:pointer;
       appearance:none;
+      cursor:pointer;
     }
 
-    .icon-btn{
-      width:42px;height:42px;
+    .menu-btn{
+      width:42px;
+      height:42px;
       border-radius:14px;
       background:#fff;
       border:1px solid var(--line);
-      display:grid;place-items:center;
       box-shadow:var(--shadow-soft);
+      display:grid;
+      place-items:center;
       color:#173567;
+      flex:0 0 auto;
     }
 
     .hamburger{
-      width:18px;height:13px;position:relative;
+      width:18px;
+      height:13px;
+      position:relative;
     }
+
     .hamburger span{
-      position:absolute;left:0;width:100%;height:2px;border-radius:999px;background:currentColor;
-      transition:.25s ease;
+      position:absolute;
+      left:0;
+      width:100%;
+      height:2px;
+      border-radius:999px;
+      background:currentColor;
     }
+
     .hamburger span:nth-child(1){top:0}
     .hamburger span:nth-child(2){top:5.5px}
     .hamburger span:nth-child(3){bottom:0}
 
     .contact-btn{
-      min-width:92px;
+      min-width:94px;
       height:42px;
-      border-radius:14px;
       padding:0 14px;
+      border-radius:14px;
       background:linear-gradient(135deg,#0f6bda 0%,#0b4ea2 100%);
       color:#fff;
-      font-weight:600;
+      font-weight:700;
       display:inline-flex;
       align-items:center;
       justify-content:center;
@@ -292,23 +288,24 @@
     .drawer-backdrop{
       position:absolute;
       inset:0;
-      background:rgba(7,24,56,.32);
+      background:rgba(7,24,56,.34);
       opacity:0;
       transition:.25s ease;
     }
 
     .drawer-panel{
       position:absolute;
-      top:0; right:0;
-      width:min(90vw, 360px);
+      top:0;
+      right:0;
+      width:min(90vw,360px);
       height:100%;
-      background:linear-gradient(180deg,#ffffff 0%,#f6faff 100%);
-      box-shadow:-18px 0 40px rgba(14,45,92,.16);
+      background:linear-gradient(180deg,#ffffff 0%, #f7fbff 100%);
       transform:translateX(100%);
       transition:.3s ease;
+      box-shadow:-18px 0 40px rgba(14,45,92,.16);
+      padding:calc(18px + var(--safe-top)) 18px calc(24px + var(--safe-bottom));
       display:flex;
       flex-direction:column;
-      padding:calc(18px + var(--top-safe)) 18px calc(24px + var(--bottom-safe));
       gap:18px;
     }
 
@@ -326,18 +323,21 @@
 
     .drawer-title{
       font-size:1rem;
-      font-weight:700;
+      font-weight:800;
       color:#102652;
     }
 
     .drawer-close{
-      width:42px;height:42px;
+      width:42px;
+      height:42px;
       border-radius:14px;
       border:1px solid var(--line);
       background:#fff;
-      color:#173567;
-      display:grid;place-items:center;
       box-shadow:var(--shadow-soft);
+      display:grid;
+      place-items:center;
+      font-size:1.2rem;
+      color:#173567;
     }
 
     .drawer-nav{
@@ -346,26 +346,26 @@
     }
 
     .drawer-link{
+      min-height:58px;
+      border-radius:18px;
+      background:#fff;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow-soft);
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:12px;
-      min-height:56px;
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:18px;
+      gap:10px;
       padding:14px 16px;
-      box-shadow:var(--shadow-soft);
-      font-weight:600;
       color:#14315f;
+      font-weight:700;
     }
 
     .drawer-link small{
       display:block;
-      margin-top:3px;
+      margin-top:4px;
       color:var(--text-soft);
-      font-weight:400;
       font-size:.76rem;
+      font-weight:500;
     }
 
     .hero{
@@ -376,7 +376,7 @@
       position:relative;
       background:
         linear-gradient(180deg, rgba(255,255,255,.98) 0%, rgba(245,250,255,.98) 100%);
-      border:1px solid rgba(220,232,255,.96);
+      border:1px solid rgba(216,231,255,.96);
       border-radius:32px;
       box-shadow:var(--shadow);
       overflow:hidden;
@@ -386,18 +386,22 @@
     .hero-card::before{
       content:"";
       position:absolute;
-      inset:-30% auto auto -10%;
-      width:240px;height:240px;
-      background:radial-gradient(circle, rgba(15,107,218,.18) 0%, transparent 68%);
+      left:-60px;
+      top:-60px;
+      width:220px;
+      height:220px;
+      background:radial-gradient(circle, rgba(15,107,218,.16), transparent 70%);
       z-index:-1;
     }
 
     .hero-card::after{
       content:"";
       position:absolute;
-      right:-70px;top:-80px;
-      width:240px;height:240px;
-      background:radial-gradient(circle, rgba(212,175,55,.14) 0%, transparent 70%);
+      right:-70px;
+      top:-80px;
+      width:240px;
+      height:240px;
+      background:radial-gradient(circle, rgba(220,177,74,.16), transparent 70%);
       z-index:-1;
     }
 
@@ -408,15 +412,13 @@
     .hero-pill{
       display:inline-flex;
       align-items:center;
-      gap:8px;
       min-height:34px;
       padding:0 12px;
       border-radius:999px;
       background:rgba(15,107,218,.10);
       color:var(--primary);
-      font-weight:600;
-      font-size:.82rem;
-      letter-spacing:.01em;
+      font-weight:700;
+      font-size:.8rem;
       margin-bottom:16px;
     }
 
@@ -435,9 +437,9 @@
 
     .hero-desc{
       margin:14px 0 0;
-      font-size:.98rem;
-      line-height:1.75;
       color:var(--text-soft);
+      font-size:.97rem;
+      line-height:1.72;
     }
 
     .hero-actions{
@@ -450,16 +452,14 @@
     .btn{
       min-height:54px;
       border-radius:18px;
-      padding:0 18px;
+      padding:0 16px;
       display:inline-flex;
       align-items:center;
       justify-content:center;
       text-align:center;
-      font-weight:700;
-      font-size:.95rem;
+      font-size:.94rem;
+      font-weight:800;
       border:1px solid transparent;
-      transition:.22s ease;
-      cursor:pointer;
     }
 
     .btn-primary{
@@ -479,21 +479,20 @@
       margin-top:20px;
       padding:18px;
       border-radius:26px;
-      background:
-        linear-gradient(180deg,#fafdff 0%, #edf5ff 100%);
+      background:linear-gradient(180deg,#fbfdff 0%, #edf5ff 100%);
       border:1px solid var(--line);
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.84);
     }
 
     .visual-card{
       position:relative;
-      min-height:320px;
+      min-height:330px;
       border-radius:24px;
       padding:16px;
       overflow:hidden;
       background:
-        linear-gradient(180deg, rgba(9,56,120,.98) 0%, rgba(11,78,162,.98) 54%, rgba(14,100,210,.96) 100%);
-      box-shadow:0 20px 34px rgba(8,59,127,.25);
+        linear-gradient(180deg, rgba(8,53,115,.98) 0%, rgba(11,78,162,.98) 56%, rgba(14,100,210,.96) 100%);
+      box-shadow:0 20px 34px rgba(8,59,127,.26);
     }
 
     .visual-grid{
@@ -504,8 +503,8 @@
         linear-gradient(rgba(255,255,255,.45) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,.45) 1px, transparent 1px);
       background-size:22px 22px;
-      mask-image:linear-gradient(180deg,rgba(0,0,0,.9),transparent 100%);
-      -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.9),transparent 100%);
+      -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.92),transparent 100%);
+      mask-image:linear-gradient(180deg,rgba(0,0,0,.92),transparent 100%);
     }
 
     .visual-orb{
@@ -515,18 +514,24 @@
     }
 
     .visual-orb.orb-1{
-      width:150px;height:150px;right:-30px;top:-30px;
-      background:radial-gradient(circle, rgba(255,255,255,.30), rgba(255,255,255,.05) 52%, transparent 68%);
+      width:150px;
+      height:150px;
+      right:-24px;
+      top:-24px;
+      background:radial-gradient(circle, rgba(255,255,255,.28), rgba(255,255,255,.06) 55%, transparent 70%);
     }
+
     .visual-orb.orb-2{
-      width:110px;height:110px;left:-18px;bottom:26px;
-      background:radial-gradient(circle, rgba(212,175,55,.40), rgba(212,175,55,.06) 54%, transparent 70%);
+      width:110px;
+      height:110px;
+      left:-12px;
+      bottom:20px;
+      background:radial-gradient(circle, rgba(220,177,74,.40), rgba(220,177,74,.08) 54%, transparent 70%);
     }
 
     .device-stack{
       position:relative;
-      width:100%;
-      min-height:250px;
+      min-height:260px;
       display:grid;
       place-items:center;
       margin-top:8px;
@@ -534,23 +539,23 @@
 
     .device-book{
       position:absolute;
-      width:210px;height:145px;
+      width:220px;
+      height:146px;
       border-radius:18px;
-      background:
-        linear-gradient(135deg, #102c58 0%, #173d76 34%, #234d91 100%);
+      background:linear-gradient(135deg,#102c58 0%, #173d76 34%, #234d91 100%);
       box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.25),
-        0 16px 26px rgba(6,34,77,.34);
-      transform:rotate(-7deg) translateY(10px);
+        inset 0 1px 0 rgba(255,255,255,.24),
+        0 18px 28px rgba(6,34,77,.34);
+      transform:rotate(-8deg) translateY(10px);
       border:1px solid rgba(255,255,255,.12);
     }
 
     .device-book::before{
       content:"SAFETY BOOK";
       position:absolute;
-      left:18px;top:18px;
+      left:18px;
+      top:18px;
       color:#fff;
-      opacity:.95;
       font-family:"Orbitron",sans-serif;
       font-size:.78rem;
       letter-spacing:.08em;
@@ -559,31 +564,34 @@
     .device-book::after{
       content:"Stealth Storage";
       position:absolute;
-      left:18px;bottom:18px;
-      color:rgba(255,255,255,.76);
+      left:18px;
+      bottom:18px;
+      color:rgba(255,255,255,.78);
       font-size:.74rem;
       letter-spacing:.04em;
     }
 
     .device-phone{
       position:relative;
-      width:155px;height:285px;
+      width:160px;
+      height:292px;
       border-radius:30px;
-      background:
-        linear-gradient(180deg,#fefefe 0%, #eaf3ff 100%);
+      background:linear-gradient(180deg,#fdfefe 0%, #eaf3ff 100%);
       box-shadow:
-        inset 0 0 0 2px rgba(255,255,255,.75),
+        inset 0 0 0 2px rgba(255,255,255,.72),
         0 24px 40px rgba(6,34,77,.36);
       border:1px solid rgba(255,255,255,.54);
       overflow:hidden;
-      transform:translateY(-4px);
+      transform:translateY(-6px);
     }
 
     .device-phone::before{
       content:"";
       position:absolute;
-      width:72px;height:14px;
-      top:8px;left:50%;
+      width:72px;
+      height:14px;
+      top:8px;
+      left:50%;
       transform:translateX(-50%);
       border-radius:999px;
       background:#0d2450;
@@ -595,28 +603,22 @@
       inset:18px 10px 10px;
       border-radius:24px;
       overflow:hidden;
-      background:
-        linear-gradient(180deg,#fafdff 0%, #edf5ff 100%);
+      background:linear-gradient(180deg,#fafdff 0%, #edf5ff 100%);
       box-shadow:inset 0 0 0 1px rgba(11,78,162,.08);
       padding:14px;
       display:flex;
       flex-direction:column;
       justify-content:space-between;
+      gap:10px;
     }
 
     .screen-top{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:8px;
       color:#173567;
       font-size:.7rem;
-      font-weight:600;
-    }
-
-    .screen-hero{
-      display:grid;
-      gap:10px;
+      font-weight:700;
     }
 
     .screen-chip{
@@ -627,7 +629,7 @@
       background:#e7f1ff;
       color:#0b4ea2;
       font-size:.68rem;
-      font-weight:600;
+      font-weight:700;
       display:flex;
       align-items:center;
     }
@@ -635,14 +637,16 @@
     .screen-headline{
       font-size:1rem;
       line-height:1.28;
-      font-weight:700;
+      font-weight:800;
       color:#0d1c3b;
+      margin-top:10px;
     }
 
     .screen-copy{
       font-size:.72rem;
-      line-height:1.5;
+      line-height:1.55;
       color:#5a6f90;
+      margin-top:8px;
     }
 
     .screen-cta{
@@ -651,15 +655,16 @@
       background:linear-gradient(135deg,#0f6bda 0%,#0b4ea2 100%);
       color:#fff;
       font-size:.76rem;
-      font-weight:700;
-      display:grid;place-items:center;
+      font-weight:800;
+      display:grid;
+      place-items:center;
     }
 
     .hero-feature-row{
-      margin-top:18px;
       display:grid;
       grid-template-columns:repeat(3,1fr);
       gap:10px;
+      margin-top:18px;
     }
 
     .hero-mini{
@@ -690,23 +695,18 @@
     }
 
     .section-header{
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap:12px;
       margin-bottom:14px;
     }
 
     .section-eyebrow{
       display:inline-flex;
       align-items:center;
-      gap:8px;
       min-height:30px;
       padding:0 10px;
       border-radius:999px;
       background:#eaf3ff;
       color:var(--primary);
-      font-weight:600;
+      font-weight:700;
       font-size:.78rem;
       margin-bottom:10px;
     }
@@ -740,7 +740,20 @@
       box-shadow:var(--shadow-soft);
       display:grid;
       gap:6px;
-      min-height:98px;
+      min-height:102px;
+    }
+
+    .icon-badge{
+      width:40px;
+      height:40px;
+      border-radius:14px;
+      background:linear-gradient(135deg,#eaf3ff 0%,#f7fbff 100%);
+      border:1px solid var(--line);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.88);
+      display:grid;
+      place-items:center;
+      color:var(--primary);
+      font-weight:800;
     }
 
     .trust-item strong{
@@ -753,17 +766,6 @@
       color:var(--text-soft);
       font-size:.78rem;
       line-height:1.55;
-    }
-
-    .icon-badge{
-      width:40px;height:40px;
-      border-radius:14px;
-      background:linear-gradient(135deg,#eaf3ff 0%,#f7fbff 100%);
-      border:1px solid var(--line);
-      display:grid;
-      place-items:center;
-      color:var(--primary);
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.85);
     }
 
     .grid-cards{
@@ -784,7 +786,7 @@
     .feature-title{
       margin:0;
       font-size:1.04rem;
-      line-height:1.35;
+      line-height:1.34;
       color:#0d2450;
     }
 
@@ -792,15 +794,15 @@
       margin:0;
       color:var(--text-soft);
       font-size:.9rem;
-      line-height:1.7;
+      line-height:1.68;
     }
 
     .feature-points{
       display:grid;
       gap:8px;
+      list-style:none;
       margin:0;
       padding:0;
-      list-style:none;
     }
 
     .feature-points li{
@@ -814,8 +816,10 @@
     .feature-points li::before{
       content:"";
       position:absolute;
-      left:0;top:.44em;
-      width:12px;height:12px;
+      left:0;
+      top:.42em;
+      width:12px;
+      height:12px;
       border-radius:999px;
       background:linear-gradient(135deg,#0f6bda 0%,#0b4ea2 100%);
       box-shadow:0 0 0 4px rgba(15,107,218,.12);
@@ -838,7 +842,7 @@
     .product-visual{
       position:relative;
       border-radius:24px;
-      min-height:240px;
+      min-height:248px;
       background:
         radial-gradient(circle at top right, rgba(15,107,218,.18), transparent 38%),
         linear-gradient(180deg,#ffffff 0%,#edf5ff 100%);
@@ -850,7 +854,8 @@
     }
 
     .product-phone{
-      width:148px;height:280px;
+      width:148px;
+      height:280px;
       border-radius:28px;
       background:linear-gradient(180deg,#0f203f 0%, #102d58 100%);
       box-shadow:0 20px 36px rgba(11,42,88,.24);
@@ -862,17 +867,21 @@
     .product-phone::before{
       content:"";
       position:absolute;
-      top:8px;left:50%;
+      top:8px;
+      left:50%;
       transform:translateX(-50%);
-      width:66px;height:12px;border-radius:999px;background:#07162f;
+      width:66px;
+      height:12px;
+      border-radius:999px;
+      background:#07162f;
       z-index:2;
     }
 
     .product-screen{
-      width:100%;height:100%;
+      width:100%;
+      height:100%;
       border-radius:22px;
-      background:
-        linear-gradient(180deg,#f9fcff 0%,#eaf3ff 100%);
+      background:linear-gradient(180deg,#f9fcff 0%,#eaf3ff 100%);
       padding:14px;
       display:flex;
       flex-direction:column;
@@ -882,10 +891,12 @@
 
     .product-book{
       position:absolute;
-      width:170px;height:110px;
+      width:170px;
+      height:110px;
       border-radius:18px;
       background:linear-gradient(135deg,#1b3b71 0%,#295493 100%);
-      bottom:28px;left:26px;
+      bottom:28px;
+      left:26px;
       box-shadow:0 16px 30px rgba(11,42,88,.18);
       transform:rotate(8deg);
       opacity:.95;
@@ -894,7 +905,8 @@
     .product-book::before{
       content:"SAFETY BOOK";
       position:absolute;
-      top:14px;left:14px;
+      top:14px;
+      left:14px;
       color:#fff;
       font-family:"Orbitron",sans-serif;
       font-size:.72rem;
@@ -904,7 +916,8 @@
     .product-book::after{
       content:"Premium Storage";
       position:absolute;
-      bottom:14px;left:14px;
+      bottom:14px;
+      left:14px;
       color:rgba(255,255,255,.76);
       font-size:.7rem;
     }
@@ -927,7 +940,7 @@
       border-radius:999px;
       background:#eff6ff;
       color:var(--primary);
-      font-weight:600;
+      font-weight:700;
       font-size:.78rem;
       display:inline-flex;
       align-items:center;
@@ -936,7 +949,7 @@
     .product-title{
       margin:0;
       font-size:1.28rem;
-      line-height:1.22;
+      line-height:1.2;
       color:#0d1c3b;
     }
 
@@ -957,7 +970,7 @@
     .price{
       font-size:1.72rem;
       line-height:1;
-      font-weight:700;
+      font-weight:800;
       color:var(--primary);
       letter-spacing:-.03em;
     }
@@ -979,16 +992,16 @@
     .info-box-title{
       margin:0;
       font-size:.94rem;
-      font-weight:700;
+      font-weight:800;
       color:#10305d;
     }
 
     .bullet-list{
       display:grid;
       gap:8px;
+      list-style:none;
       margin:0;
       padding:0;
-      list-style:none;
     }
 
     .bullet-list li{
@@ -1002,9 +1015,10 @@
     .bullet-list li::before{
       content:"✓";
       position:absolute;
-      left:0;top:0;
-      color:var(--success);
-      font-weight:700;
+      left:0;
+      top:0;
+      color:#148a57;
+      font-weight:800;
     }
 
     .dual-actions{
@@ -1031,13 +1045,14 @@
     }
 
     .step-num{
-      width:46px;height:46px;
+      width:46px;
+      height:46px;
       border-radius:16px;
       background:linear-gradient(135deg,#0f6bda 0%,#0b4ea2 100%);
       color:#fff;
       display:grid;
       place-items:center;
-      font-weight:700;
+      font-weight:800;
       font-size:1rem;
       box-shadow:0 14px 24px rgba(15,107,218,.20);
       flex:0 0 auto;
@@ -1073,8 +1088,10 @@
     .final-cta::before{
       content:"";
       position:absolute;
-      inset:auto -60px -80px auto;
-      width:200px;height:200px;
+      width:200px;
+      height:200px;
+      right:-60px;
+      bottom:-80px;
       background:radial-gradient(circle, rgba(15,107,218,.10), transparent 68%);
       pointer-events:none;
     }
@@ -1171,15 +1188,18 @@
       text-align:left;
       padding:14px 16px;
       color:#102652;
-      font-weight:600;
+      font-weight:700;
       cursor:pointer;
     }
 
     .faq-trigger span:last-child{
-      width:28px;height:28px;border-radius:10px;
+      width:28px;
+      height:28px;
+      border-radius:10px;
       background:#eef5ff;
       border:1px solid var(--line);
-      display:grid;place-items:center;
+      display:grid;
+      place-items:center;
       color:var(--primary);
       flex:0 0 auto;
       transition:.22s ease;
@@ -1214,14 +1234,14 @@
 
     .final-cta{
       background:
-        radial-gradient(circle at top right, rgba(212,175,55,.10), transparent 28%),
+        radial-gradient(circle at top right, rgba(220,177,74,.10), transparent 28%),
         linear-gradient(180deg,#ffffff 0%,#f4f9ff 100%);
     }
 
     .final-title{
       margin:0;
       font-size:1.5rem;
-      line-height:1.14;
+      line-height:1.12;
       color:#0b1b3a;
       letter-spacing:-.02em;
     }
@@ -1269,7 +1289,7 @@
       background:#0d2450;
       color:rgba(255,255,255,.90);
       border-radius:28px;
-      padding:22px 18px calc(22px + var(--bottom-safe));
+      padding:22px 18px calc(22px + var(--safe-bottom));
       box-shadow:0 22px 36px rgba(6,34,77,.22);
       display:grid;
       gap:18px;
@@ -1288,12 +1308,13 @@
 
     .footer-brand .brand-mark{
       box-shadow:none;
-      width:46px;height:46px;
+      width:46px;
+      height:46px;
     }
 
     .footer-company{
       font-size:1rem;
-      font-weight:700;
+      font-weight:800;
       color:#fff;
     }
 
@@ -1316,7 +1337,7 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      font-weight:600;
+      font-weight:700;
       color:#fff;
     }
 
@@ -1328,27 +1349,50 @@
       padding-top:14px;
     }
 
+    .desktop-back-btn{
+      position:fixed;
+      top:calc(var(--safe-top) + 8px);
+      right:12px;
+      z-index:96;
+      min-height:38px;
+      padding:0 14px;
+      border-radius:999px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(255,255,255,.92);
+      color:#0b4ea2;
+      border:1px solid rgba(11,78,162,.12);
+      box-shadow:0 10px 20px rgba(17,62,126,.12);
+      font-size:.8rem;
+      font-weight:800;
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
+    }
+
     .bottom-sticky{
       position:fixed;
-      left:0;right:0;bottom:0;
+      left:0;
+      right:0;
+      bottom:0;
       z-index:95;
-      padding:10px 14px calc(10px + var(--bottom-safe));
+      padding:10px 14px calc(10px + var(--safe-bottom));
       background:linear-gradient(180deg, rgba(244,248,255,0) 0%, rgba(244,248,255,.95) 34%, rgba(244,248,255,1) 100%);
-      backdrop-filter:saturate(120%) blur(10px);
-      -webkit-backdrop-filter:saturate(120%) blur(10px);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
     }
 
     .bottom-sticky-inner{
-      width:min(100%, 720px);
+      width:min(100%,720px);
       margin:0 auto;
       display:grid;
       grid-template-columns:1fr auto;
       gap:10px;
-      background:rgba(255,255,255,.88);
-      border:1px solid rgba(220,232,255,.95);
-      box-shadow:var(--shadow);
+      background:rgba(255,255,255,.90);
+      border:1px solid rgba(220,232,255,.96);
       border-radius:22px;
       padding:10px;
+      box-shadow:var(--shadow);
     }
 
     .sticky-main{
@@ -1356,7 +1400,7 @@
     }
 
     .sticky-secondary{
-      min-width:58px;
+      min-width:62px;
       min-height:56px;
       border-radius:18px;
       background:#fff;
@@ -1365,29 +1409,29 @@
       display:grid;
       place-items:center;
       color:#173567;
-      font-weight:700;
+      font-weight:800;
       padding:0 16px;
     }
 
-    @media (min-width: 480px){
+    @media (min-width:480px){
       .hero-title{font-size:2.25rem}
       .product-visual{min-height:270px}
       .visual-card{min-height:360px}
     }
 
-    @media (prefers-reduced-motion: reduce){
+    @media (prefers-reduced-motion:reduce){
       html{scroll-behavior:auto}
-      *,
-      *::before,
-      *::after{
-        animation:none!important;
-        transition:none!important;
+      *,*::before,*::after{
+        animation:none !important;
+        transition:none !important;
       }
     }
   </style>
 </head>
 <body>
   <div class="page-shell">
+    <a href="/index.html?view=desktop" class="desktop-back-btn">Desktop</a>
+
     <div class="announcement" role="status" aria-label="Announcement">
       <div class="announcement-inner">
         <span class="announcement-dot" aria-hidden="true"></span>
@@ -1395,10 +1439,12 @@
       </div>
     </div>
 
-    <div class="mobile-header-wrap">
-      <header class="mobile-header" role="banner">
+    <div class="header-wrap">
+      <header class="header" role="banner">
         <a class="brand" href="index.html" aria-label="SSB Home">
-          <div class="brand-mark" aria-hidden="true">SSB</div>
+          <div class="brand-mark">
+            <img src="images/logo-ssbms.png" alt="SSB Logo" width="46" height="46" />
+          </div>
           <div class="brand-text">
             <div class="brand-title">Stealth Safety Bank</div>
             <div class="brand-sub">Mobile System by Siamtham</div>
@@ -1406,7 +1452,7 @@
         </a>
 
         <div class="header-actions">
-          <button class="icon-btn" type="button" aria-label="Open menu" id="menuToggle">
+          <button class="menu-btn" type="button" aria-label="Open menu" id="menuToggle">
             <span class="hamburger" aria-hidden="true">
               <span></span><span></span><span></span>
             </span>
@@ -1433,18 +1479,18 @@
             <span>→</span>
           </a>
 
-          <a class="drawer-link" href="product.html">
-            <div>
-              Product
-              <small>ดูรายละเอียดสินค้า</small>
-            </div>
-            <span>→</span>
-          </a>
-
           <a class="drawer-link" href="learn.html">
             <div>
               Learn
               <small>ทำความเข้าใจ SSB</small>
+            </div>
+            <span>→</span>
+          </a>
+
+          <a class="drawer-link" href="product.html">
+            <div>
+              Product
+              <small>ดูรายละเอียดสินค้า</small>
             </div>
             <span>→</span>
           </a>
@@ -1507,19 +1553,22 @@
 
                   <div class="device-stack">
                     <div class="device-book"></div>
+
                     <div class="device-phone">
                       <div class="device-screen">
                         <div class="screen-top">
                           <span>SSB</span>
                           <span>09:41</span>
                         </div>
-                        <div class="screen-hero">
+
+                        <div>
                           <div class="screen-chip">Controlled Access</div>
                           <div class="screen-headline">Secure process with structured workflow</div>
                           <div class="screen-copy">
                             แยกการใช้งานให้ชัดเจน ควบคุมการเข้าถึงอย่างเป็นขั้นตอน
                           </div>
                         </div>
+
                         <div class="screen-cta">Start Secure Flow</div>
                       </div>
                     </div>
@@ -1549,37 +1598,35 @@
       <section class="section" aria-labelledby="trust-title">
         <div class="container">
           <div class="section-header">
-            <div>
-              <div class="section-eyebrow">Trust Layer</div>
-              <h2 class="section-title" id="trust-title">Built for trust, structure, and control</h2>
-              <p class="section-desc">
-                โครงสร้างหน้ามือถือถูกออกแบบให้เข้าใจง่าย ดูน่าเชื่อถือ
-                และพร้อมพาผู้ใช้งานไปสู่การตัดสินใจได้อย่างชัดเจน
-              </p>
-            </div>
+            <div class="section-eyebrow">Trust Layer</div>
+            <h2 class="section-title" id="trust-title">Built for trust, structure, and control</h2>
+            <p class="section-desc">
+              โครงสร้างหน้ามือถือถูกออกแบบให้เข้าใจง่าย ดูน่าเชื่อถือ
+              และพร้อมพาผู้ใช้งานไปสู่การตัดสินใจได้อย่างชัดเจน
+            </p>
           </div>
 
           <div class="trust-strip">
             <div class="trust-item">
-              <div class="icon-badge" aria-hidden="true">◉</div>
+              <div class="icon-badge">◉</div>
               <strong>Siamtham Co.,Ltd.</strong>
               <span>โครงสร้างแบรนด์ชัดเจน พร้อมภาพลักษณ์ระดับพรีเมียม</span>
             </div>
 
             <div class="trust-item">
-              <div class="icon-badge" aria-hidden="true">⌘</div>
+              <div class="icon-badge">⌘</div>
               <strong>Structured Workflow</strong>
               <span>ออกแบบให้การใช้งานเป็นระบบและควบคุมได้มากขึ้น</span>
             </div>
 
             <div class="trust-item">
-              <div class="icon-badge" aria-hidden="true">⌖</div>
+              <div class="icon-badge">⌖</div>
               <strong>Stealth Usage Protocol</strong>
               <span>เน้นแยกการใช้งานอย่างมีวินัยและมีขั้นตอนที่ชัดเจน</span>
             </div>
 
             <div class="trust-item">
-              <div class="icon-badge" aria-hidden="true">✦</div>
+              <div class="icon-badge">✦</div>
               <strong>SPC Support</strong>
               <span>มีช่องทางช่วยเหลือและประสานงานเมื่อผู้ใช้ต้องการความมั่นใจ</span>
             </div>
@@ -1590,19 +1637,17 @@
       <section class="section" aria-labelledby="why-title">
         <div class="container">
           <div class="section-header">
-            <div>
-              <div class="section-eyebrow">Why SSB</div>
-              <h2 class="section-title" id="why-title">Core principles of the SSB system</h2>
-              <p class="section-desc">
-                แกนหลักของ SSB คือการออกแบบให้การเข้าถึง การใช้งาน
-                และการตัดสินใจอยู่ภายใต้กรอบที่ชัดเจนมากขึ้น
-              </p>
-            </div>
+            <div class="section-eyebrow">Why SSB</div>
+            <h2 class="section-title" id="why-title">Core principles of the SSB system</h2>
+            <p class="section-desc">
+              แกนหลักของ SSB คือการออกแบบให้การเข้าถึง การใช้งาน
+              และการตัดสินใจอยู่ภายใต้กรอบที่ชัดเจนมากขึ้น
+            </p>
           </div>
 
           <div class="grid-cards">
             <article class="feature-card">
-              <div class="icon-badge" aria-hidden="true">⎈</div>
+              <div class="icon-badge">⎈</div>
               <h3 class="feature-title">Controlled Access</h3>
               <p class="feature-text">
                 ทุกช่วงของการใช้งานควรเกิดขึ้นอย่างมีขั้นตอน ลดความเร่งรีบ
@@ -1616,7 +1661,7 @@
             </article>
 
             <article class="feature-card">
-              <div class="icon-badge" aria-hidden="true">⧉</div>
+              <div class="icon-badge">⧉</div>
               <h3 class="feature-title">Stealth Separation</h3>
               <p class="feature-text">
                 แยกบทบาทการใช้งานให้ชัดเจนระหว่างอุปกรณ์และบริบท
@@ -1630,7 +1675,7 @@
             </article>
 
             <article class="feature-card">
-              <div class="icon-badge" aria-hidden="true">⌛</div>
+              <div class="icon-badge">⌛</div>
               <h3 class="feature-title">Time Barrier Protection</h3>
               <p class="feature-text">
                 การหน่วงเวลาอย่างมีแบบแผนช่วยให้มีพื้นที่ในการคิด
@@ -1649,14 +1694,12 @@
       <section class="section" aria-labelledby="product-title-section">
         <div class="container">
           <div class="section-header">
-            <div>
-              <div class="section-eyebrow">Featured Product</div>
-              <h2 class="section-title" id="product-title-section">Sell-ready showcase for mobile users</h2>
-              <p class="section-desc">
-                หน้า index นี้ตั้งใจให้เป็นหน้าขายหลักที่พาไปต่อยังหน้ารายละเอียดสินค้า
-                หน้าความรู้ และหน้าติดต่อได้ทันที
-              </p>
-            </div>
+            <div class="section-eyebrow">Featured Product</div>
+            <h2 class="section-title" id="product-title-section">Sell-ready showcase for mobile users</h2>
+            <p class="section-desc">
+              หน้า index นี้ตั้งใจให้เป็นหน้าขายหลักที่พาไปต่อยังหน้ารายละเอียดสินค้า
+              หน้าความรู้ และหน้าติดต่อได้ทันที
+            </p>
           </div>
 
           <article class="product-card">
@@ -1670,13 +1713,15 @@
                       <span>SSB</span>
                       <span>09:41</span>
                     </div>
-                    <div class="screen-hero">
+
+                    <div>
                       <div class="screen-chip">Starter Set</div>
                       <div class="screen-headline">Structured protection for modern financial life</div>
                       <div class="screen-copy">
                         หน้า mobile เน้นอ่านง่าย ปุ่มใหญ่ กดไว และคงภาพลักษณ์พรีเมียม
                       </div>
                     </div>
+
                     <div class="screen-cta">View Product</div>
                   </div>
                 </div>
@@ -1721,13 +1766,11 @@
       <section class="section" aria-labelledby="steps-title">
         <div class="container">
           <div class="section-header">
-            <div>
-              <div class="section-eyebrow">How It Works</div>
-              <h2 class="section-title" id="steps-title">Simple structure, clear mobile flow</h2>
-              <p class="section-desc">
-                โครงนี้ทำให้หน้าแรกทำงานเหมือน mini landing page ที่อ่านจบแล้วกดต่อได้ทันที
-              </p>
-            </div>
+            <div class="section-eyebrow">How It Works</div>
+            <h2 class="section-title" id="steps-title">Simple structure, clear mobile flow</h2>
+            <p class="section-desc">
+              โครงนี้ทำให้หน้าแรกทำงานเหมือน mini landing page ที่อ่านจบแล้วกดต่อได้ทันที
+            </p>
           </div>
 
           <div class="steps">
@@ -1810,7 +1853,7 @@
 
               <div class="spc-list">
                 <div class="spc-item">
-                  <div class="icon-badge" aria-hidden="true">⚑</div>
+                  <div class="icon-badge">⚑</div>
                   <div>
                     <strong>Support when users feel uncertain</strong>
                     <span>สร้างความมั่นใจว่ามีศูนย์ช่วยเหลือและมีช่องทางติดต่อที่ชัดเจน</span>
@@ -1818,7 +1861,7 @@
                 </div>
 
                 <div class="spc-item">
-                  <div class="icon-badge" aria-hidden="true">⏱</div>
+                  <div class="icon-badge">⏱</div>
                   <div>
                     <strong>Fast access to guidance</strong>
                     <span>เหมาะสำหรับนำไปต่อยอดกับหน้าติดต่อหรือ workflow การช่วยเหลือในอนาคต</span>
@@ -1826,7 +1869,7 @@
                 </div>
 
                 <div class="spc-item">
-                  <div class="icon-badge" aria-hidden="true">⌁</div>
+                  <div class="icon-badge">⌁</div>
                   <div>
                     <strong>Strong trust signal on mobile</strong>
                     <span>ช่วยให้หน้าแรกดูครบทั้งด้านขาย ความรู้ และการดูแลหลังการตัดสินใจ</span>
@@ -1846,13 +1889,11 @@
       <section class="section" aria-labelledby="faq-title">
         <div class="container">
           <div class="section-header">
-            <div>
-              <div class="section-eyebrow">FAQ</div>
-              <h2 class="section-title" id="faq-title">Frequently asked questions</h2>
-              <p class="section-desc">
-                ใช้คำตอบสั้น กระชับ และพาไปต่อยังหน้ารายละเอียดเมื่อผู้ใช้งานต้องการข้อมูลเพิ่ม
-              </p>
-            </div>
+            <div class="section-eyebrow">FAQ</div>
+            <h2 class="section-title" id="faq-title">Frequently asked questions</h2>
+            <p class="section-desc">
+              ใช้คำตอบสั้น กระชับ และพาไปต่อยังหน้ารายละเอียดเมื่อผู้ใช้งานต้องการข้อมูลเพิ่ม
+            </p>
           </div>
 
           <div class="faq-list">
@@ -1956,7 +1997,9 @@
         <div class="footer-card">
           <div class="footer-top">
             <div class="footer-brand">
-              <div class="brand-mark" aria-hidden="true">SSB</div>
+              <div class="brand-mark">
+                <img src="images/logo-ssbms.png" alt="SSB Logo" width="46" height="46" />
+              </div>
               <div>
                 <div class="footer-company">Stealth Safety Bank Mobile System</div>
                 <div class="footer-sub">Premium mobile-first structure for Siamtham</div>
@@ -1976,7 +2019,7 @@
           </div>
 
           <div class="footer-meta">
-            © 2026 Siamtham Co.,Ltd. All rights reserved.<br>
+            © 2026 Siamtham Co.,Ltd. All rights reserved.<br />
             Stealth Safety Bank Mobile System / SSB Mobile
           </div>
         </div>
@@ -1994,48 +2037,48 @@
   <script>
     (function () {
       const body = document.body;
-      const menuToggle = document.getElementById('menuToggle');
-      const mobileDrawer = document.getElementById('mobileDrawer');
-      const drawerClose = document.getElementById('drawerClose');
-      const drawerBackdrop = document.getElementById('drawerBackdrop');
-      const faqItems = document.querySelectorAll('.faq-item');
+      const menuToggle = document.getElementById("menuToggle");
+      const mobileDrawer = document.getElementById("mobileDrawer");
+      const drawerClose = document.getElementById("drawerClose");
+      const drawerBackdrop = document.getElementById("drawerBackdrop");
+      const faqItems = document.querySelectorAll(".faq-item");
 
       function openDrawer() {
-        mobileDrawer.classList.add('is-open');
-        mobileDrawer.setAttribute('aria-hidden', 'false');
-        body.style.overflow = 'hidden';
+        mobileDrawer.classList.add("is-open");
+        mobileDrawer.setAttribute("aria-hidden", "false");
+        body.style.overflow = "hidden";
       }
 
       function closeDrawer() {
-        mobileDrawer.classList.remove('is-open');
-        mobileDrawer.setAttribute('aria-hidden', 'true');
-        body.style.overflow = '';
+        mobileDrawer.classList.remove("is-open");
+        mobileDrawer.setAttribute("aria-hidden", "true");
+        body.style.overflow = "";
       }
 
-      if (menuToggle) menuToggle.addEventListener('click', openDrawer);
-      if (drawerClose) drawerClose.addEventListener('click', closeDrawer);
-      if (drawerBackdrop) drawerBackdrop.addEventListener('click', closeDrawer);
+      if (menuToggle) menuToggle.addEventListener("click", openDrawer);
+      if (drawerClose) drawerClose.addEventListener("click", closeDrawer);
+      if (drawerBackdrop) drawerBackdrop.addEventListener("click", closeDrawer);
 
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') closeDrawer();
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") closeDrawer();
       });
 
-      faqItems.forEach((item) => {
-        const trigger = item.querySelector('.faq-trigger');
+      faqItems.forEach(function (item) {
+        const trigger = item.querySelector(".faq-trigger");
         if (!trigger) return;
 
-        trigger.addEventListener('click', function () {
-          const isOpen = item.classList.contains('open');
+        trigger.addEventListener("click", function () {
+          const isOpen = item.classList.contains("open");
 
-          faqItems.forEach((faq) => {
-            faq.classList.remove('open');
-            const btn = faq.querySelector('.faq-trigger');
-            if (btn) btn.setAttribute('aria-expanded', 'false');
+          faqItems.forEach(function (faq) {
+            faq.classList.remove("open");
+            const btn = faq.querySelector(".faq-trigger");
+            if (btn) btn.setAttribute("aria-expanded", "false");
           });
 
           if (!isOpen) {
-            item.classList.add('open');
-            trigger.setAttribute('aria-expanded', 'true');
+            item.classList.add("open");
+            trigger.setAttribute("aria-expanded", "true");
           }
         });
       });
