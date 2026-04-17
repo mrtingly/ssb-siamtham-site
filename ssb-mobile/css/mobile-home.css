@@ -397,6 +397,20 @@ html.lang-en [data-lang-inline="th"]{display:none}
   padding:26px 18px 20px;
 }
 
+.hero-split{
+  display:grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap:14px;
+  align-items:stretch;
+}
+
+.hero-copy{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  min-width:0;
+}
+
 .hero-pill{
   display:inline-flex;
   align-items:center;
@@ -464,14 +478,13 @@ html.lang-en [data-lang-inline="th"]{display:none}
 }
 
 .hero-cover{
-  margin-top:20px;
-  border-radius:26px;
+  border-radius:24px;
   overflow:hidden;
   border:1px solid var(--line);
   box-shadow:var(--shadow-soft);
   background:#f7fbff;
-  min-height:260px;
-  aspect-ratio: 4 / 5;
+  min-height:100%;
+  display:flex;
 }
 
 .hero-cover img{
@@ -479,7 +492,7 @@ html.lang-en [data-lang-inline="th"]{display:none}
   height:100%;
   display:block;
   object-fit:cover;
-  object-position:center top;
+  object-position:center;
 }
 
 .hero-feature-row{
