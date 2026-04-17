@@ -24,8 +24,8 @@
     property="og:description"
     content="Advanced Financial Protection with Controlled Access, Stealth Separation, and Structured Usage Workflow."
   />
-  <meta property="og:url" content="https://www.siamtham.com/ssb-mobile/index.html" />
-  <meta property="og:image" content="https://www.siamtham.com/images/logo-ssbms.png" />
+  <meta property="og:url" content="https://www.siamtham.com/ssb-mobile/" />
+  <meta property="og:image" content="https://www.siamtham.com/ssb-mobile/images/HEAD-SSB-Mobile.jpg" />
   <meta property="og:site_name" content="Siamtham" />
 
   <meta name="twitter:card" content="summary_large_image" />
@@ -34,11 +34,13 @@
     name="twitter:description"
     content="Advanced Financial Protection with Controlled Access, Stealth Separation, and Structured Usage Workflow."
   />
-  <meta name="twitter:image" content="https://www.siamtham.com/images/logo-ssbms.png" />
+  <meta name="twitter:image" content="https://www.siamtham.com/ssb-mobile/images/HEAD-SSB-Mobile.jpg" />
 
-  <link rel="canonical" href="https://www.siamtham.com/ssb-mobile/index.html" />
+  <link rel="canonical" href="https://www.siamtham.com/ssb-mobile/" />
   <link rel="icon" href="images/logo-ssbms.png" />
   <link rel="preload" href="images/logo-ssbms.png" as="image" />
+  <link rel="preload" href="images/HEAD-SSB-Mobile.jpg" as="image" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -48,8 +50,8 @@
 
   <style>
     :root{
-      --bg:#f2f7ff;
-      --bg-2:#e9f2ff;
+      --bg:#f3f8ff;
+      --bg-2:#eaf2ff;
       --surface:#ffffff;
       --surface-2:#f8fbff;
       --line:#d8e7ff;
@@ -57,7 +59,6 @@
       --text-soft:#5b6f90;
       --primary:#0b4ea2;
       --primary-2:#0f6bda;
-      --primary-3:#e9f2ff;
       --gold:#dcb14a;
       --shadow:0 18px 40px rgba(14,53,112,.12);
       --shadow-soft:0 10px 24px rgba(14,53,112,.08);
@@ -86,7 +87,15 @@
 
     img{display:block;max-width:100%}
     a{text-decoration:none;color:inherit}
-    button,input,textarea,select{font:inherit}
+    button{font:inherit}
+
+    [data-lang]{display:none}
+    html.lang-th [data-lang="th"]{display:block}
+    html.lang-en [data-lang="en"]{display:block}
+    html.lang-th [data-lang-inline="th"]{display:inline}
+    html.lang-th [data-lang-inline="en"]{display:none}
+    html.lang-en [data-lang-inline="en"]{display:inline}
+    html.lang-en [data-lang-inline="th"]{display:none}
 
     .page-shell{
       min-height:100vh;
@@ -150,8 +159,8 @@
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:12px;
-      background:rgba(255,255,255,.82);
+      gap:10px;
+      background:rgba(255,255,255,.84);
       border:1px solid rgba(216,231,255,.96);
       border-radius:22px;
       box-shadow:var(--shadow-soft);
@@ -162,6 +171,7 @@
       align-items:center;
       gap:12px;
       min-width:0;
+      flex:1;
     }
 
     .brand-mark{
@@ -221,6 +231,34 @@
       flex:0 0 auto;
     }
 
+    .lang-switch{
+      display:flex;
+      align-items:center;
+      gap:4px;
+      padding:4px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:999px;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .lang-btn{
+      min-width:42px;
+      height:34px;
+      border:0;
+      border-radius:999px;
+      background:transparent;
+      color:#173567;
+      font-weight:800;
+      cursor:pointer;
+      padding:0 10px;
+    }
+
+    .lang-btn.active{
+      background:linear-gradient(135deg,#0f6bda 0%,#0b4ea2 100%);
+      color:#fff;
+    }
+
     .menu-btn,
     .contact-btn{
       border:0;
@@ -261,6 +299,7 @@
     .hamburger span:nth-child(3){bottom:0}
 
     .contact-btn{
+      display:none;
       min-width:94px;
       height:42px;
       padding:0 14px;
@@ -268,7 +307,6 @@
       background:linear-gradient(135deg,#0f6bda 0%,#0b4ea2 100%);
       color:#fff;
       font-weight:700;
-      display:inline-flex;
       align-items:center;
       justify-content:center;
       box-shadow:0 12px 24px rgba(15,107,218,.22);
@@ -338,6 +376,7 @@
       place-items:center;
       font-size:1.2rem;
       color:#173567;
+      cursor:pointer;
     }
 
     .drawer-nav{
@@ -406,7 +445,7 @@
     }
 
     .hero-inner{
-      padding:26px 20px 20px;
+      padding:26px 18px 20px;
     }
 
     .hero-pill{
@@ -475,189 +514,19 @@
       box-shadow:var(--shadow-soft);
     }
 
-    .hero-visual{
+    .hero-cover{
       margin-top:20px;
-      padding:18px;
       border-radius:26px;
-      background:linear-gradient(180deg,#fbfdff 0%, #edf5ff 100%);
+      overflow:hidden;
       border:1px solid var(--line);
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.84);
+      box-shadow:var(--shadow-soft);
+      background:#fff;
     }
 
-    .visual-card{
-      position:relative;
-      min-height:330px;
-      border-radius:24px;
-      padding:16px;
-      overflow:hidden;
-      background:
-        linear-gradient(180deg, rgba(8,53,115,.98) 0%, rgba(11,78,162,.98) 56%, rgba(14,100,210,.96) 100%);
-      box-shadow:0 20px 34px rgba(8,59,127,.26);
-    }
-
-    .visual-grid{
-      position:absolute;
-      inset:0;
-      opacity:.14;
-      background-image:
-        linear-gradient(rgba(255,255,255,.45) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.45) 1px, transparent 1px);
-      background-size:22px 22px;
-      -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.92),transparent 100%);
-      mask-image:linear-gradient(180deg,rgba(0,0,0,.92),transparent 100%);
-    }
-
-    .visual-orb{
-      position:absolute;
-      border-radius:999px;
-      filter:blur(1px);
-    }
-
-    .visual-orb.orb-1{
-      width:150px;
-      height:150px;
-      right:-24px;
-      top:-24px;
-      background:radial-gradient(circle, rgba(255,255,255,.28), rgba(255,255,255,.06) 55%, transparent 70%);
-    }
-
-    .visual-orb.orb-2{
-      width:110px;
-      height:110px;
-      left:-12px;
-      bottom:20px;
-      background:radial-gradient(circle, rgba(220,177,74,.40), rgba(220,177,74,.08) 54%, transparent 70%);
-    }
-
-    .device-stack{
-      position:relative;
-      min-height:260px;
-      display:grid;
-      place-items:center;
-      margin-top:8px;
-    }
-
-    .device-book{
-      position:absolute;
-      width:220px;
-      height:146px;
-      border-radius:18px;
-      background:linear-gradient(135deg,#102c58 0%, #173d76 34%, #234d91 100%);
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.24),
-        0 18px 28px rgba(6,34,77,.34);
-      transform:rotate(-8deg) translateY(10px);
-      border:1px solid rgba(255,255,255,.12);
-    }
-
-    .device-book::before{
-      content:"SAFETY BOOK";
-      position:absolute;
-      left:18px;
-      top:18px;
-      color:#fff;
-      font-family:"Orbitron",sans-serif;
-      font-size:.78rem;
-      letter-spacing:.08em;
-    }
-
-    .device-book::after{
-      content:"Stealth Storage";
-      position:absolute;
-      left:18px;
-      bottom:18px;
-      color:rgba(255,255,255,.78);
-      font-size:.74rem;
-      letter-spacing:.04em;
-    }
-
-    .device-phone{
-      position:relative;
-      width:160px;
-      height:292px;
-      border-radius:30px;
-      background:linear-gradient(180deg,#fdfefe 0%, #eaf3ff 100%);
-      box-shadow:
-        inset 0 0 0 2px rgba(255,255,255,.72),
-        0 24px 40px rgba(6,34,77,.36);
-      border:1px solid rgba(255,255,255,.54);
-      overflow:hidden;
-      transform:translateY(-6px);
-    }
-
-    .device-phone::before{
-      content:"";
-      position:absolute;
-      width:72px;
-      height:14px;
-      top:8px;
-      left:50%;
-      transform:translateX(-50%);
-      border-radius:999px;
-      background:#0d2450;
-      opacity:.92;
-    }
-
-    .device-screen{
-      position:absolute;
-      inset:18px 10px 10px;
-      border-radius:24px;
-      overflow:hidden;
-      background:linear-gradient(180deg,#fafdff 0%, #edf5ff 100%);
-      box-shadow:inset 0 0 0 1px rgba(11,78,162,.08);
-      padding:14px;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      gap:10px;
-    }
-
-    .screen-top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      color:#173567;
-      font-size:.7rem;
-      font-weight:700;
-    }
-
-    .screen-chip{
-      width:max-content;
-      min-height:24px;
-      padding:0 10px;
-      border-radius:999px;
-      background:#e7f1ff;
-      color:#0b4ea2;
-      font-size:.68rem;
-      font-weight:700;
-      display:flex;
-      align-items:center;
-    }
-
-    .screen-headline{
-      font-size:1rem;
-      line-height:1.28;
-      font-weight:800;
-      color:#0d1c3b;
-      margin-top:10px;
-    }
-
-    .screen-copy{
-      font-size:.72rem;
-      line-height:1.55;
-      color:#5a6f90;
-      margin-top:8px;
-    }
-
-    .screen-cta{
-      min-height:40px;
-      border-radius:14px;
-      background:linear-gradient(135deg,#0f6bda 0%,#0b4ea2 100%);
-      color:#fff;
-      font-size:.76rem;
-      font-weight:800;
-      display:grid;
-      place-items:center;
+    .hero-cover img{
+      width:100%;
+      height:auto;
+      display:block;
     }
 
     .hero-feature-row{
@@ -825,255 +694,6 @@
       box-shadow:0 0 0 4px rgba(15,107,218,.12);
     }
 
-    .product-card{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:26px;
-      box-shadow:var(--shadow);
-      overflow:hidden;
-    }
-
-    .product-media{
-      padding:18px;
-      background:linear-gradient(180deg,#f8fbff 0%,#eef5ff 100%);
-      border-bottom:1px solid var(--line);
-    }
-
-    .product-visual{
-      position:relative;
-      border-radius:24px;
-      min-height:248px;
-      background:
-        radial-gradient(circle at top right, rgba(15,107,218,.18), transparent 38%),
-        linear-gradient(180deg,#ffffff 0%,#edf5ff 100%);
-      border:1px solid var(--line);
-      padding:16px;
-      display:grid;
-      place-items:center;
-      overflow:hidden;
-    }
-
-    .product-phone{
-      width:148px;
-      height:280px;
-      border-radius:28px;
-      background:linear-gradient(180deg,#0f203f 0%, #102d58 100%);
-      box-shadow:0 20px 36px rgba(11,42,88,.24);
-      padding:10px;
-      position:relative;
-      transform:rotate(-6deg) translateX(8px);
-    }
-
-    .product-phone::before{
-      content:"";
-      position:absolute;
-      top:8px;
-      left:50%;
-      transform:translateX(-50%);
-      width:66px;
-      height:12px;
-      border-radius:999px;
-      background:#07162f;
-      z-index:2;
-    }
-
-    .product-screen{
-      width:100%;
-      height:100%;
-      border-radius:22px;
-      background:linear-gradient(180deg,#f9fcff 0%,#eaf3ff 100%);
-      padding:14px;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      gap:12px;
-    }
-
-    .product-book{
-      position:absolute;
-      width:170px;
-      height:110px;
-      border-radius:18px;
-      background:linear-gradient(135deg,#1b3b71 0%,#295493 100%);
-      bottom:28px;
-      left:26px;
-      box-shadow:0 16px 30px rgba(11,42,88,.18);
-      transform:rotate(8deg);
-      opacity:.95;
-    }
-
-    .product-book::before{
-      content:"SAFETY BOOK";
-      position:absolute;
-      top:14px;
-      left:14px;
-      color:#fff;
-      font-family:"Orbitron",sans-serif;
-      font-size:.72rem;
-      letter-spacing:.06em;
-    }
-
-    .product-book::after{
-      content:"Premium Storage";
-      position:absolute;
-      bottom:14px;
-      left:14px;
-      color:rgba(255,255,255,.76);
-      font-size:.7rem;
-    }
-
-    .product-body{
-      padding:18px 18px 20px;
-      display:grid;
-      gap:14px;
-    }
-
-    .product-badge-row{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-    }
-
-    .soft-badge{
-      min-height:30px;
-      padding:0 10px;
-      border-radius:999px;
-      background:#eff6ff;
-      color:var(--primary);
-      font-weight:700;
-      font-size:.78rem;
-      display:inline-flex;
-      align-items:center;
-    }
-
-    .product-title{
-      margin:0;
-      font-size:1.28rem;
-      line-height:1.2;
-      color:#0d1c3b;
-    }
-
-    .product-desc{
-      margin:0;
-      color:var(--text-soft);
-      font-size:.92rem;
-      line-height:1.72;
-    }
-
-    .price-wrap{
-      display:flex;
-      align-items:flex-end;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-
-    .price{
-      font-size:1.72rem;
-      line-height:1;
-      font-weight:800;
-      color:var(--primary);
-      letter-spacing:-.03em;
-    }
-
-    .price-note{
-      color:var(--text-soft);
-      font-size:.82rem;
-    }
-
-    .info-box{
-      background:linear-gradient(180deg,#f9fcff 0%, #f2f7ff 100%);
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:14px;
-      display:grid;
-      gap:10px;
-    }
-
-    .info-box-title{
-      margin:0;
-      font-size:.94rem;
-      font-weight:800;
-      color:#10305d;
-    }
-
-    .bullet-list{
-      display:grid;
-      gap:8px;
-      list-style:none;
-      margin:0;
-      padding:0;
-    }
-
-    .bullet-list li{
-      position:relative;
-      padding-left:22px;
-      color:#324765;
-      font-size:.86rem;
-      line-height:1.58;
-    }
-
-    .bullet-list li::before{
-      content:"✓";
-      position:absolute;
-      left:0;
-      top:0;
-      color:#148a57;
-      font-weight:800;
-    }
-
-    .dual-actions{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
-    }
-
-    .steps{
-      display:grid;
-      gap:12px;
-    }
-
-    .step-card{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:22px;
-      padding:16px;
-      box-shadow:var(--shadow-soft);
-      display:grid;
-      grid-template-columns:auto 1fr;
-      gap:14px;
-      align-items:flex-start;
-    }
-
-    .step-num{
-      width:46px;
-      height:46px;
-      border-radius:16px;
-      background:linear-gradient(135deg,#0f6bda 0%,#0b4ea2 100%);
-      color:#fff;
-      display:grid;
-      place-items:center;
-      font-weight:800;
-      font-size:1rem;
-      box-shadow:0 14px 24px rgba(15,107,218,.20);
-      flex:0 0 auto;
-    }
-
-    .step-content h3{
-      margin:0;
-      font-size:1rem;
-      line-height:1.3;
-      color:#102652;
-    }
-
-    .step-content p{
-      margin:6px 0 0;
-      color:var(--text-soft);
-      font-size:.88rem;
-      line-height:1.68;
-    }
-
-    .learn-card,
-    .spc-card,
     .final-cta{
       position:relative;
       overflow:hidden;
@@ -1081,161 +701,15 @@
       border:1px solid var(--line);
       border-radius:28px;
       box-shadow:var(--shadow);
+      background:
+        radial-gradient(circle at top right, rgba(220,177,74,.10), transparent 28%),
+        linear-gradient(180deg,#ffffff 0%,#f4f9ff 100%);
     }
 
-    .learn-card::before,
-    .spc-card::before,
-    .final-cta::before{
-      content:"";
-      position:absolute;
-      width:200px;
-      height:200px;
-      right:-60px;
-      bottom:-80px;
-      background:radial-gradient(circle, rgba(15,107,218,.10), transparent 68%);
-      pointer-events:none;
-    }
-
-    .learn-inner,
-    .spc-inner,
     .final-cta-inner{
       padding:20px;
       display:grid;
       gap:14px;
-    }
-
-    .inline-stat-row{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:10px;
-    }
-
-    .inline-stat{
-      background:#f7fbff;
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:12px 10px;
-      text-align:center;
-    }
-
-    .inline-stat strong{
-      display:block;
-      color:#0d2450;
-      font-size:.95rem;
-    }
-
-    .inline-stat span{
-      display:block;
-      margin-top:4px;
-      color:var(--text-soft);
-      font-size:.74rem;
-      line-height:1.4;
-    }
-
-    .spc-list{
-      display:grid;
-      gap:10px;
-    }
-
-    .spc-item{
-      display:grid;
-      grid-template-columns:auto 1fr;
-      gap:12px;
-      align-items:flex-start;
-      background:#f9fcff;
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:14px;
-    }
-
-    .spc-item strong{
-      display:block;
-      color:#102652;
-      font-size:.9rem;
-      line-height:1.35;
-    }
-
-    .spc-item span{
-      display:block;
-      color:var(--text-soft);
-      font-size:.82rem;
-      line-height:1.58;
-      margin-top:4px;
-    }
-
-    .faq-list{
-      display:grid;
-      gap:10px;
-    }
-
-    .faq-item{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:20px;
-      box-shadow:var(--shadow-soft);
-      overflow:hidden;
-    }
-
-    .faq-trigger{
-      width:100%;
-      min-height:64px;
-      border:0;
-      background:#fff;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      text-align:left;
-      padding:14px 16px;
-      color:#102652;
-      font-weight:700;
-      cursor:pointer;
-    }
-
-    .faq-trigger span:last-child{
-      width:28px;
-      height:28px;
-      border-radius:10px;
-      background:#eef5ff;
-      border:1px solid var(--line);
-      display:grid;
-      place-items:center;
-      color:var(--primary);
-      flex:0 0 auto;
-      transition:.22s ease;
-    }
-
-    .faq-item.open .faq-trigger span:last-child{
-      transform:rotate(45deg);
-      background:#e7f1ff;
-    }
-
-    .faq-panel{
-      display:grid;
-      grid-template-rows:0fr;
-      transition:.24s ease;
-    }
-
-    .faq-item.open .faq-panel{
-      grid-template-rows:1fr;
-    }
-
-    .faq-panel-inner{
-      overflow:hidden;
-    }
-
-    .faq-answer{
-      padding:0 16px 16px;
-      color:var(--text-soft);
-      font-size:.88rem;
-      line-height:1.72;
-      margin:0;
-    }
-
-    .final-cta{
-      background:
-        radial-gradient(circle at top right, rgba(220,177,74,.10), transparent 28%),
-        linear-gradient(180deg,#ffffff 0%,#f4f9ff 100%);
     }
 
     .final-title{
@@ -1413,10 +887,8 @@
       padding:0 16px;
     }
 
-    @media (min-width:480px){
-      .hero-title{font-size:2.25rem}
-      .product-visual{min-height:270px}
-      .visual-card{min-height:360px}
+    @media (min-width:560px){
+      .contact-btn{display:inline-flex}
     }
 
     @media (prefers-reduced-motion:reduce){
@@ -1430,12 +902,16 @@
 </head>
 <body>
   <div class="page-shell">
-    <a href="/index.html?view=desktop" class="desktop-back-btn">Desktop</a>
+    <a href="/index.html?view=desktop" class="desktop-back-btn">
+      <span data-lang-inline="th">Desktop</span>
+      <span data-lang-inline="en">Desktop</span>
+    </a>
 
     <div class="announcement" role="status" aria-label="Announcement">
       <div class="announcement-inner">
         <span class="announcement-dot" aria-hidden="true"></span>
-        <span>Advanced Protection for Modern Financial Life</span>
+        <span data-lang-inline="th">Advanced Protection for Modern Financial Life</span>
+        <span data-lang-inline="en">Advanced Protection for Modern Financial Life</span>
       </div>
     </div>
 
@@ -1447,17 +923,29 @@
           </div>
           <div class="brand-text">
             <div class="brand-title">Stealth Safety Bank</div>
-            <div class="brand-sub">Mobile System by Siamtham</div>
+            <div class="brand-sub">
+              <span data-lang-inline="th">Mobile System by Siamtham</span>
+              <span data-lang-inline="en">Mobile System by Siamtham</span>
+            </div>
           </div>
         </a>
 
         <div class="header-actions">
+          <div class="lang-switch" aria-label="Language switch">
+            <button class="lang-btn active" type="button" data-set-lang="th">TH</button>
+            <button class="lang-btn" type="button" data-set-lang="en">EN</button>
+          </div>
+
           <button class="menu-btn" type="button" aria-label="Open menu" id="menuToggle">
             <span class="hamburger" aria-hidden="true">
               <span></span><span></span><span></span>
             </span>
           </button>
-          <a class="contact-btn" href="contact.html">Contact</a>
+
+          <a class="contact-btn" href="contact.html">
+            <span data-lang-inline="th">Contact</span>
+            <span data-lang-inline="en">Contact</span>
+          </a>
         </div>
       </header>
     </div>
@@ -1466,55 +954,82 @@
       <div class="drawer-backdrop" id="drawerBackdrop"></div>
       <div class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
         <div class="drawer-top">
-          <div class="drawer-title" id="drawerTitle">Menu</div>
+          <div class="drawer-title" id="drawerTitle">
+            <span data-lang-inline="th">Menu</span>
+            <span data-lang-inline="en">Menu</span>
+          </div>
           <button class="drawer-close" type="button" id="drawerClose" aria-label="Close menu">✕</button>
         </div>
 
         <nav class="drawer-nav" aria-label="Mobile navigation">
           <a class="drawer-link" href="index.html">
             <div>
-              Home
-              <small>หน้าเริ่มต้นของระบบ</small>
+              <span data-lang="th">หน้าแรก</span>
+              <span data-lang="en">Home</span>
+              <small>
+                <span data-lang-inline="th">หน้าเริ่มต้นของระบบ</span>
+                <span data-lang-inline="en">Main page of the system</span>
+              </small>
             </div>
             <span>→</span>
           </a>
 
           <a class="drawer-link" href="learn.html">
             <div>
-              Learn
-              <small>ทำความเข้าใจ SSB</small>
+              <span data-lang="th">เรียนรู้</span>
+              <span data-lang="en">Learn</span>
+              <small>
+                <span data-lang-inline="th">ทำความเข้าใจ SSB</span>
+                <span data-lang-inline="en">Understand the SSB concept</span>
+              </small>
             </div>
             <span>→</span>
           </a>
 
           <a class="drawer-link" href="product.html">
             <div>
-              Product
-              <small>ดูรายละเอียดสินค้า</small>
+              <span data-lang="th">สินค้า</span>
+              <span data-lang="en">Product</span>
+              <small>
+                <span data-lang-inline="th">ดูรายละเอียดสินค้า</span>
+                <span data-lang-inline="en">View product details</span>
+              </small>
             </div>
             <span>→</span>
           </a>
 
           <a class="drawer-link" href="faq.html">
             <div>
-              FAQ
-              <small>คำถามพบบ่อย</small>
+              <span data-lang="th">คำถามพบบ่อย</span>
+              <span data-lang="en">FAQ</span>
+              <small>
+                <span data-lang-inline="th">คำถามที่พบบ่อย</span>
+                <span data-lang-inline="en">Frequently asked questions</span>
+              </small>
             </div>
             <span>→</span>
           </a>
 
           <a class="drawer-link" href="contact.html">
             <div>
-              Contact
-              <small>ติดต่อ Siamtham / SPC</small>
+              <span data-lang="th">ติดต่อ</span>
+              <span data-lang="en">Contact</span>
+              <small>
+                <span data-lang-inline="th">ติดต่อ Siamtham / SPC</span>
+                <span data-lang-inline="en">Contact Siamtham / SPC</span>
+              </small>
             </div>
             <span>→</span>
           </a>
 
           <a class="drawer-link" href="checkout.html">
             <div>
-              Start Order
-              <small>เริ่มขั้นตอนสั่งซื้อ</small>
+              <span data-lang="th">เริ่มสั่งซื้อ</span>
+              <span data-lang="en">Start Order</span>
+              <small>
+                <span data-lang-inline="th">เริ่มขั้นตอนสั่งซื้อ</span>
+                <span data-lang-inline="en">Begin checkout process</span>
+              </small>
             </div>
             <span>→</span>
           </a>
@@ -1530,64 +1045,59 @@
               <div class="hero-pill">Stealth Safety Bank Mobile System</div>
 
               <h1 class="hero-title">
-                Advanced Financial
-                <span>Protection System</span>
+                <span data-lang="th">Stealth Safety Bank<span>Mobile System</span></span>
+                <span data-lang="en">Advanced Financial<span>Protection System</span></span>
               </h1>
 
               <p class="hero-desc">
-                ระบบปกป้องการใช้งานการเงินแบบยกระดับ ด้วยแนวคิดการแยกอุปกรณ์
-                การควบคุมการเข้าถึง และโครงสร้างการใช้งานอย่างเป็นระบบ
-                เพื่อเพิ่มความมั่นใจในทุกช่วงเวลาสำคัญ
+                <span data-lang="th">
+                  ระบบปกป้องการใช้งานการเงินแบบยกระดับ ด้วยแนวคิดการแยกอุปกรณ์
+                  การควบคุมการเข้าถึง และโครงสร้างการใช้งานอย่างเป็นระบบ
+                  เพื่อเพิ่มความมั่นใจในทุกช่วงเวลาสำคัญ
+                </span>
+                <span data-lang="en">
+                  An advanced financial protection system designed around device separation,
+                  controlled access, and a structured usage workflow to support more confident
+                  decision-making in important moments.
+                </span>
               </p>
 
               <div class="hero-actions">
-                <a class="btn btn-primary" href="checkout.html">Order Now</a>
-                <a class="btn btn-secondary" href="learn.html">Learn More</a>
+                <a class="btn btn-primary" href="checkout.html">
+                  <span data-lang-inline="th">Order Now</span>
+                  <span data-lang-inline="en">Order Now</span>
+                </a>
+                <a class="btn btn-secondary" href="learn.html">
+                  <span data-lang-inline="th">Learn More</span>
+                  <span data-lang-inline="en">Learn More</span>
+                </a>
               </div>
 
-              <div class="hero-visual" aria-hidden="true">
-                <div class="visual-card">
-                  <div class="visual-grid"></div>
-                  <div class="visual-orb orb-1"></div>
-                  <div class="visual-orb orb-2"></div>
-
-                  <div class="device-stack">
-                    <div class="device-book"></div>
-
-                    <div class="device-phone">
-                      <div class="device-screen">
-                        <div class="screen-top">
-                          <span>SSB</span>
-                          <span>09:41</span>
-                        </div>
-
-                        <div>
-                          <div class="screen-chip">Controlled Access</div>
-                          <div class="screen-headline">Secure process with structured workflow</div>
-                          <div class="screen-copy">
-                            แยกการใช้งานให้ชัดเจน ควบคุมการเข้าถึงอย่างเป็นขั้นตอน
-                          </div>
-                        </div>
-
-                        <div class="screen-cta">Start Secure Flow</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <div class="hero-cover">
+                <img src="images/HEAD-SSB-Mobile.jpg" alt="Stealth Safety Bank Mobile System cover" />
               </div>
 
               <div class="hero-feature-row">
                 <div class="hero-mini">
                   <strong>Stealth</strong>
-                  <span>Separation</span>
+                  <span>
+                    <span data-lang-inline="th">Separation</span>
+                    <span data-lang-inline="en">Separation</span>
+                  </span>
                 </div>
                 <div class="hero-mini">
                   <strong>Controlled</strong>
-                  <span>Access</span>
+                  <span>
+                    <span data-lang-inline="th">Access</span>
+                    <span data-lang-inline="en">Access</span>
+                  </span>
                 </div>
                 <div class="hero-mini">
                   <strong>Time</strong>
-                  <span>Barrier</span>
+                  <span>
+                    <span data-lang-inline="th">Barrier</span>
+                    <span data-lang-inline="en">Barrier</span>
+                  </span>
                 </div>
               </div>
             </div>
@@ -1598,11 +1108,23 @@
       <section class="section" aria-labelledby="trust-title">
         <div class="container">
           <div class="section-header">
-            <div class="section-eyebrow">Trust Layer</div>
-            <h2 class="section-title" id="trust-title">Built for trust, structure, and control</h2>
+            <div class="section-eyebrow">
+              <span data-lang-inline="th">Trust Layer</span>
+              <span data-lang-inline="en">Trust Layer</span>
+            </div>
+            <h2 class="section-title" id="trust-title">
+              <span data-lang="th">โครงสร้างเพื่อความน่าเชื่อถือ การควบคุม และความชัดเจน</span>
+              <span data-lang="en">Built for trust, structure, and control</span>
+            </h2>
             <p class="section-desc">
-              โครงสร้างหน้ามือถือถูกออกแบบให้เข้าใจง่าย ดูน่าเชื่อถือ
-              และพร้อมพาผู้ใช้งานไปสู่การตัดสินใจได้อย่างชัดเจน
+              <span data-lang="th">
+                โครงสร้างหน้ามือถือถูกออกแบบให้เข้าใจง่าย ดูน่าเชื่อถือ
+                และพร้อมพาผู้ใช้งานไปสู่การตัดสินใจได้อย่างชัดเจน
+              </span>
+              <span data-lang="en">
+                The mobile structure is designed to be clear, credible, and ready to guide users
+                toward confident action.
+              </span>
             </p>
           </div>
 
@@ -1610,25 +1132,37 @@
             <div class="trust-item">
               <div class="icon-badge">◉</div>
               <strong>Siamtham Co.,Ltd.</strong>
-              <span>โครงสร้างแบรนด์ชัดเจน พร้อมภาพลักษณ์ระดับพรีเมียม</span>
+              <span>
+                <span data-lang-inline="th">โครงสร้างแบรนด์ชัดเจน พร้อมภาพลักษณ์ระดับพรีเมียม</span>
+                <span data-lang-inline="en">A clear brand structure with a premium presentation.</span>
+              </span>
             </div>
 
             <div class="trust-item">
               <div class="icon-badge">⌘</div>
               <strong>Structured Workflow</strong>
-              <span>ออกแบบให้การใช้งานเป็นระบบและควบคุมได้มากขึ้น</span>
+              <span>
+                <span data-lang-inline="th">ออกแบบให้การใช้งานเป็นระบบและควบคุมได้มากขึ้น</span>
+                <span data-lang-inline="en">Designed to support more structured and controlled usage.</span>
+              </span>
             </div>
 
             <div class="trust-item">
               <div class="icon-badge">⌖</div>
               <strong>Stealth Usage Protocol</strong>
-              <span>เน้นแยกการใช้งานอย่างมีวินัยและมีขั้นตอนที่ชัดเจน</span>
+              <span>
+                <span data-lang-inline="th">เน้นแยกการใช้งานอย่างมีวินัยและมีขั้นตอนที่ชัดเจน</span>
+                <span data-lang-inline="en">Focused on disciplined separation and clear procedural use.</span>
+              </span>
             </div>
 
             <div class="trust-item">
               <div class="icon-badge">✦</div>
               <strong>SPC Support</strong>
-              <span>มีช่องทางช่วยเหลือและประสานงานเมื่อผู้ใช้ต้องการความมั่นใจ</span>
+              <span>
+                <span data-lang-inline="th">มีช่องทางช่วยเหลือและประสานงานเมื่อผู้ใช้ต้องการความมั่นใจ</span>
+                <span data-lang-inline="en">Includes a support path when users need reassurance and guidance.</span>
+              </span>
             </div>
           </div>
         </div>
@@ -1637,11 +1171,23 @@
       <section class="section" aria-labelledby="why-title">
         <div class="container">
           <div class="section-header">
-            <div class="section-eyebrow">Why SSB</div>
-            <h2 class="section-title" id="why-title">Core principles of the SSB system</h2>
+            <div class="section-eyebrow">
+              <span data-lang-inline="th">Why SSB</span>
+              <span data-lang-inline="en">Why SSB</span>
+            </div>
+            <h2 class="section-title" id="why-title">
+              <span data-lang="th">หลักสำคัญของระบบ SSB</span>
+              <span data-lang="en">Core principles of the SSB system</span>
+            </h2>
             <p class="section-desc">
-              แกนหลักของ SSB คือการออกแบบให้การเข้าถึง การใช้งาน
-              และการตัดสินใจอยู่ภายใต้กรอบที่ชัดเจนมากขึ้น
+              <span data-lang="th">
+                แกนหลักของ SSB คือการออกแบบให้การเข้าถึง การใช้งาน
+                และการตัดสินใจอยู่ภายใต้กรอบที่ชัดเจนมากขึ้น
+              </span>
+              <span data-lang="en">
+                At its core, SSB is designed so that access, usage, and critical decisions happen
+                within a clearer structure.
+              </span>
             </p>
           </div>
 
@@ -1650,13 +1196,19 @@
               <div class="icon-badge">⎈</div>
               <h3 class="feature-title">Controlled Access</h3>
               <p class="feature-text">
-                ทุกช่วงของการใช้งานควรเกิดขึ้นอย่างมีขั้นตอน ลดความเร่งรีบ
-                และเพิ่มการควบคุมในช่วงเวลาที่สำคัญต่อการตัดสินใจ
+                <span data-lang="th">
+                  ทุกช่วงของการใช้งานควรเกิดขึ้นอย่างมีขั้นตอน ลดความเร่งรีบ
+                  และเพิ่มการควบคุมในช่วงเวลาที่สำคัญต่อการตัดสินใจ
+                </span>
+                <span data-lang="en">
+                  Important usage moments should happen in sequence, reducing haste and improving
+                  control when decisions matter most.
+                </span>
               </p>
               <ul class="feature-points">
-                <li>เน้นการเข้าถึงแบบมีลำดับ</li>
-                <li>ออกแบบให้ใช้งานอย่างรอบคอบ</li>
-                <li>เสริมความมั่นใจในกระบวนการ</li>
+                <li><span data-lang-inline="th">เน้นการเข้าถึงแบบมีลำดับ</span><span data-lang-inline="en">Sequential access design</span></li>
+                <li><span data-lang-inline="th">ออกแบบให้ใช้งานอย่างรอบคอบ</span><span data-lang-inline="en">Encourages careful use</span></li>
+                <li><span data-lang-inline="th">เสริมความมั่นใจในกระบวนการ</span><span data-lang-inline="en">Supports confidence in the process</span></li>
               </ul>
             </article>
 
@@ -1664,13 +1216,18 @@
               <div class="icon-badge">⧉</div>
               <h3 class="feature-title">Stealth Separation</h3>
               <p class="feature-text">
-                แยกบทบาทการใช้งานให้ชัดเจนระหว่างอุปกรณ์และบริบท
-                เพื่อให้การใช้งานทางการเงินมีความเป็นระบบมากขึ้น
+                <span data-lang="th">
+                  แยกบทบาทการใช้งานให้ชัดเจนระหว่างอุปกรณ์และบริบท
+                  เพื่อให้การใช้งานทางการเงินมีความเป็นระบบมากขึ้น
+                </span>
+                <span data-lang="en">
+                  Separates roles across devices and contexts to make financial usage more structured.
+                </span>
               </p>
               <ul class="feature-points">
-                <li>แยกภารกิจการใช้งาน</li>
-                <li>ช่วยจัดระเบียบความเสี่ยง</li>
-                <li>ลดความสับสนในพฤติกรรมการใช้งาน</li>
+                <li><span data-lang-inline="th">แยกภารกิจการใช้งาน</span><span data-lang-inline="en">Separated usage missions</span></li>
+                <li><span data-lang-inline="th">ช่วยจัดระเบียบความเสี่ยง</span><span data-lang-inline="en">Better risk organization</span></li>
+                <li><span data-lang-inline="th">ลดความสับสนในพฤติกรรมการใช้งาน</span><span data-lang-inline="en">Less confusion in behavior</span></li>
               </ul>
             </article>
 
@@ -1678,274 +1235,20 @@
               <div class="icon-badge">⌛</div>
               <h3 class="feature-title">Time Barrier Protection</h3>
               <p class="feature-text">
-                การหน่วงเวลาอย่างมีแบบแผนช่วยให้มีพื้นที่ในการคิด
-                และลดโอกาสการตัดสินใจที่รีบเกินไปในช่วงที่กดดัน
+                <span data-lang="th">
+                  การหน่วงเวลาอย่างมีแบบแผนช่วยให้มีพื้นที่ในการคิด
+                  และลดโอกาสการตัดสินใจที่รีบเกินไปในช่วงที่กดดัน
+                </span>
+                <span data-lang="en">
+                  Deliberate delay creates space for thinking and reduces rushed decisions under pressure.
+                </span>
               </p>
               <ul class="feature-points">
-                <li>เน้นสติในจังหวะสำคัญ</li>
-                <li>ออกแบบเพื่อช่วยชะลอแรงกดดัน</li>
-                <li>เสริมพฤติกรรมการใช้งานที่มีวินัย</li>
+                <li><span data-lang-inline="th">เน้นสติในจังหวะสำคัญ</span><span data-lang-inline="en">Supports calm in key moments</span></li>
+                <li><span data-lang-inline="th">ออกแบบเพื่อช่วยชะลอแรงกดดัน</span><span data-lang-inline="en">Designed to slow pressure</span></li>
+                <li><span data-lang-inline="th">เสริมพฤติกรรมการใช้งานที่มีวินัย</span><span data-lang-inline="en">Encourages disciplined behavior</span></li>
               </ul>
             </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" aria-labelledby="product-title-section">
-        <div class="container">
-          <div class="section-header">
-            <div class="section-eyebrow">Featured Product</div>
-            <h2 class="section-title" id="product-title-section">Sell-ready showcase for mobile users</h2>
-            <p class="section-desc">
-              หน้า index นี้ตั้งใจให้เป็นหน้าขายหลักที่พาไปต่อยังหน้ารายละเอียดสินค้า
-              หน้าความรู้ และหน้าติดต่อได้ทันที
-            </p>
-          </div>
-
-          <article class="product-card">
-            <div class="product-media">
-              <div class="product-visual" aria-hidden="true">
-                <div class="product-book"></div>
-
-                <div class="product-phone">
-                  <div class="product-screen">
-                    <div class="screen-top">
-                      <span>SSB</span>
-                      <span>09:41</span>
-                    </div>
-
-                    <div>
-                      <div class="screen-chip">Starter Set</div>
-                      <div class="screen-headline">Structured protection for modern financial life</div>
-                      <div class="screen-copy">
-                        หน้า mobile เน้นอ่านง่าย ปุ่มใหญ่ กดไว และคงภาพลักษณ์พรีเมียม
-                      </div>
-                    </div>
-
-                    <div class="screen-cta">View Product</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="product-body">
-              <div class="product-badge-row">
-                <span class="soft-badge">Best for mobile flow</span>
-                <span class="soft-badge">Premium structure</span>
-              </div>
-
-              <h3 class="product-title">SSB Mobile Starter Set</h3>
-              <p class="product-desc">
-                โครงหน้าแบบพร้อมขายที่รวมการเล่าแนวคิด ความน่าเชื่อถือ
-                และทางเข้าสู่ขั้นตอนสั่งซื้อไว้ในหน้าเดียวอย่างชัดเจน
-              </p>
-
-              <div class="price-wrap">
-                <div class="price">Contact Price</div>
-                <div class="price-note">สามารถเชื่อมกับ products.json ภายหลังได้</div>
-              </div>
-
-              <div class="info-box">
-                <h4 class="info-box-title">สิ่งที่หน้าแรกนี้ควรทำได้</h4>
-                <ul class="bullet-list">
-                  <li>พา user ไป Product / Learn / Contact / Checkout ได้ทันที</li>
-                  <li>สร้างความน่าเชื่อถือก่อนกดซื้อ</li>
-                  <li>รองรับการแชร์ลิงก์และ SEO ตั้งแต่หน้าแรก</li>
-                </ul>
-              </div>
-
-              <div class="dual-actions">
-                <a class="btn btn-primary" href="product.html">View Product</a>
-                <a class="btn btn-secondary" href="checkout.html">Start Order</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="section" aria-labelledby="steps-title">
-        <div class="container">
-          <div class="section-header">
-            <div class="section-eyebrow">How It Works</div>
-            <h2 class="section-title" id="steps-title">Simple structure, clear mobile flow</h2>
-            <p class="section-desc">
-              โครงนี้ทำให้หน้าแรกทำงานเหมือน mini landing page ที่อ่านจบแล้วกดต่อได้ทันที
-            </p>
-          </div>
-
-          <div class="steps">
-            <article class="step-card">
-              <div class="step-num">1</div>
-              <div class="step-content">
-                <h3>Understand the system</h3>
-                <p>เริ่มจากการรับสาระสำคัญของระบบให้เข้าใจเร็วผ่าน Hero, Trust และ Why SSB</p>
-              </div>
-            </article>
-
-            <article class="step-card">
-              <div class="step-num">2</div>
-              <div class="step-content">
-                <h3>Review the product path</h3>
-                <p>ดูภาพรวมสินค้า จุดเด่น และแนวทางการใช้งานก่อนเข้าสู่หน้ารายละเอียดหรือขั้นตอนสั่งซื้อ</p>
-              </div>
-            </article>
-
-            <article class="step-card">
-              <div class="step-num">3</div>
-              <div class="step-content">
-                <h3>Move into a controlled checkout</h3>
-                <p>เมื่อ user พร้อม ก็เข้าสู่ flow สั่งซื้อที่เรียบง่าย ชัดเจน และเหมาะกับมือถือโดยตรง</p>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" aria-labelledby="learn-preview-title">
-        <div class="container">
-          <article class="learn-card">
-            <div class="learn-inner">
-              <div>
-                <div class="section-eyebrow">Learn Preview</div>
-                <h2 class="section-title" id="learn-preview-title">A better page for users who need more understanding</h2>
-                <p class="section-desc">
-                  สำหรับผู้ใช้งานที่ต้องการความเข้าใจมากขึ้น หน้า learn จะเป็นพื้นที่สำหรับอธิบายแนวคิด
-                  เหตุผล และความแตกต่างของระบบ SSB ในแบบที่อ่านง่ายบนมือถือ
-                </p>
-              </div>
-
-              <div class="inline-stat-row">
-                <div class="inline-stat">
-                  <strong>Clear</strong>
-                  <span>เข้าใจง่าย</span>
-                </div>
-                <div class="inline-stat">
-                  <strong>Premium</strong>
-                  <span>ภาพลักษณ์น่าเชื่อถือ</span>
-                </div>
-                <div class="inline-stat">
-                  <strong>Focused</strong>
-                  <span>พาไปต่อได้ไว</span>
-                </div>
-              </div>
-
-              <div class="dual-actions">
-                <a class="btn btn-primary" href="learn.html">Explore SSB Concept</a>
-                <a class="btn btn-secondary" href="faq.html">View FAQ</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="section" aria-labelledby="spc-title">
-        <div class="container">
-          <article class="spc-card">
-            <div class="spc-inner">
-              <div>
-                <div class="section-eyebrow">SPC Support</div>
-                <h2 class="section-title" id="spc-title">Siamtham Protection Center</h2>
-                <p class="section-desc">
-                  อีกหนึ่งองค์ประกอบสำคัญของหน้า mobile คือการมีบล็อกช่วยเหลือที่ต่างจากเว็บขายของทั่วไป
-                  เพื่อให้แบรนด์ดูพร้อมดูแลผู้ใช้งานมากขึ้น
-                </p>
-              </div>
-
-              <div class="spc-list">
-                <div class="spc-item">
-                  <div class="icon-badge">⚑</div>
-                  <div>
-                    <strong>Support when users feel uncertain</strong>
-                    <span>สร้างความมั่นใจว่ามีศูนย์ช่วยเหลือและมีช่องทางติดต่อที่ชัดเจน</span>
-                  </div>
-                </div>
-
-                <div class="spc-item">
-                  <div class="icon-badge">⏱</div>
-                  <div>
-                    <strong>Fast access to guidance</strong>
-                    <span>เหมาะสำหรับนำไปต่อยอดกับหน้าติดต่อหรือ workflow การช่วยเหลือในอนาคต</span>
-                  </div>
-                </div>
-
-                <div class="spc-item">
-                  <div class="icon-badge">⌁</div>
-                  <div>
-                    <strong>Strong trust signal on mobile</strong>
-                    <span>ช่วยให้หน้าแรกดูครบทั้งด้านขาย ความรู้ และการดูแลหลังการตัดสินใจ</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="dual-actions">
-                <a class="btn btn-primary" href="contact.html">Contact SPC</a>
-                <a class="btn btn-secondary" href="learn.html">Read More</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="section" aria-labelledby="faq-title">
-        <div class="container">
-          <div class="section-header">
-            <div class="section-eyebrow">FAQ</div>
-            <h2 class="section-title" id="faq-title">Frequently asked questions</h2>
-            <p class="section-desc">
-              ใช้คำตอบสั้น กระชับ และพาไปต่อยังหน้ารายละเอียดเมื่อผู้ใช้งานต้องการข้อมูลเพิ่ม
-            </p>
-          </div>
-
-          <div class="faq-list">
-            <article class="faq-item open">
-              <button class="faq-trigger" type="button" aria-expanded="true">
-                <span>SSB คืออะไร</span>
-                <span>+</span>
-              </button>
-              <div class="faq-panel">
-                <div class="faq-panel-inner">
-                  <p class="faq-answer">
-                    SSB คือแนวทางการปกป้องการใช้งานการเงินแบบยกระดับ
-                    ที่ให้ความสำคัญกับการแยกการใช้งาน การควบคุมการเข้าถึง
-                    และการใช้งานอย่างมีขั้นตอนมากขึ้น
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="faq-item">
-              <button class="faq-trigger" type="button" aria-expanded="false">
-                <span>เหมาะกับใคร</span>
-                <span>+</span>
-              </button>
-              <div class="faq-panel">
-                <div class="faq-panel-inner">
-                  <p class="faq-answer">
-                    เหมาะกับผู้ที่ต้องการแนวทางการใช้งานทางการเงินที่เป็นระบบมากขึ้น
-                    ต้องการแยกภารกิจการใช้งาน และให้ความสำคัญกับความรอบคอบในช่วงเวลาสำคัญ
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="faq-item">
-              <button class="faq-trigger" type="button" aria-expanded="false">
-                <span>สั่งซื้อแล้วไปขั้นตอนไหนต่อ</span>
-                <span>+</span>
-              </button>
-              <div class="faq-panel">
-                <div class="faq-panel-inner">
-                  <p class="faq-answer">
-                    หน้า index จะพาผู้ใช้งานไปยัง product, learn, contact และ checkout ได้โดยตรง
-                    ทำให้เส้นทางตั้งแต่รับรู้ข้อมูลจนถึงเริ่มสั่งซื้อมีความต่อเนื่องบนมือถือ
-                  </p>
-                </div>
-              </div>
-            </article>
-          </div>
-
-          <div style="margin-top:12px;">
-            <a class="btn btn-secondary" href="faq.html" style="width:100%;">View All FAQ</a>
           </div>
         </div>
       </section>
@@ -1955,17 +1258,35 @@
           <article class="final-cta">
             <div class="final-cta-inner">
               <div>
-                <div class="section-eyebrow">Start Now</div>
-                <h2 class="final-title" id="final-cta-title">Ready to move into a more controlled financial workflow?</h2>
+                <div class="section-eyebrow">
+                  <span data-lang-inline="th">Start Now</span>
+                  <span data-lang-inline="en">Start Now</span>
+                </div>
+                <h2 class="final-title" id="final-cta-title">
+                  <span data-lang="th">พร้อมเริ่มต้นการใช้งานการเงินที่มีระบบและควบคุมมากขึ้นหรือยัง</span>
+                  <span data-lang="en">Ready to move into a more controlled financial workflow?</span>
+                </h2>
                 <p class="final-desc">
-                  หน้า mobile นี้ถูกวางให้พร้อมสำหรับการขายจริง การแชร์จริง และการขยายต่อไปยังระบบสั่งซื้อ
-                  ระบบความรู้ และระบบติดต่อของแบรนด์
+                  <span data-lang="th">
+                    หน้า mobile นี้ถูกวางให้พร้อมสำหรับการขายจริง การแชร์จริง และการขยายต่อไปยังระบบสั่งซื้อ
+                    ระบบความรู้ และระบบติดต่อของแบรนด์
+                  </span>
+                  <span data-lang="en">
+                    This mobile page is designed for real-world selling, sharing, and expansion into
+                    product, learning, and contact workflows.
+                  </span>
                 </p>
               </div>
 
-              <div class="dual-actions">
-                <a class="btn btn-primary" href="checkout.html">Start Your Order</a>
-                <a class="btn btn-secondary" href="contact.html">Contact Us</a>
+              <div class="hero-actions">
+                <a class="btn btn-primary" href="checkout.html">
+                  <span data-lang-inline="th">Start Your Order</span>
+                  <span data-lang-inline="en">Start Your Order</span>
+                </a>
+                <a class="btn btn-secondary" href="contact.html">
+                  <span data-lang-inline="th">Contact Us</span>
+                  <span data-lang-inline="en">Contact Us</span>
+                </a>
               </div>
 
               <div class="contact-cards">
@@ -2007,8 +1328,13 @@
             </div>
 
             <div class="footer-sub">
-              ออกแบบให้เหมาะสำหรับมือถือ เน้นความชัดเจน ความน่าเชื่อถือ
-              และพร้อมต่อยอดสู่ flow ขายจริงได้ทันที
+              <span data-lang="th">
+                ออกแบบให้เหมาะสำหรับมือถือ เน้นความชัดเจน ความน่าเชื่อถือ
+                และพร้อมต่อยอดสู่ flow ขายจริงได้ทันที
+              </span>
+              <span data-lang="en">
+                Designed for mobile-first clarity, credibility, and a practical sales-ready workflow.
+              </span>
             </div>
           </div>
 
@@ -2028,7 +1354,10 @@
 
     <div class="bottom-sticky">
       <div class="bottom-sticky-inner">
-        <a class="btn btn-primary sticky-main" href="checkout.html">Start Order</a>
+        <a class="btn btn-primary sticky-main" href="checkout.html">
+          <span data-lang-inline="th">Start Order</span>
+          <span data-lang-inline="en">Start Order</span>
+        </a>
         <a class="sticky-secondary" href="contact.html" aria-label="Contact">LINE</a>
       </div>
     </div>
@@ -2037,11 +1366,24 @@
   <script>
     (function () {
       const body = document.body;
+      const root = document.documentElement;
       const menuToggle = document.getElementById("menuToggle");
       const mobileDrawer = document.getElementById("mobileDrawer");
       const drawerClose = document.getElementById("drawerClose");
       const drawerBackdrop = document.getElementById("drawerBackdrop");
-      const faqItems = document.querySelectorAll(".faq-item");
+      const langButtons = document.querySelectorAll("[data-set-lang]");
+
+      function setLanguage(lang) {
+        root.classList.remove("lang-th", "lang-en");
+        root.classList.add("lang-" + lang);
+        localStorage.setItem("ssbMobileLang", lang);
+
+        langButtons.forEach(function(btn){
+          btn.classList.toggle("active", btn.getAttribute("data-set-lang") === lang);
+        });
+
+        document.documentElement.lang = lang === "th" ? "th" : "en";
+      }
 
       function openDrawer() {
         mobileDrawer.classList.add("is-open");
@@ -2055,32 +1397,21 @@
         body.style.overflow = "";
       }
 
+      const savedLang = localStorage.getItem("ssbMobileLang") || "th";
+      setLanguage(savedLang);
+
+      langButtons.forEach(function(btn){
+        btn.addEventListener("click", function(){
+          setLanguage(btn.getAttribute("data-set-lang"));
+        });
+      });
+
       if (menuToggle) menuToggle.addEventListener("click", openDrawer);
       if (drawerClose) drawerClose.addEventListener("click", closeDrawer);
       if (drawerBackdrop) drawerBackdrop.addEventListener("click", closeDrawer);
 
       document.addEventListener("keydown", function (e) {
         if (e.key === "Escape") closeDrawer();
-      });
-
-      faqItems.forEach(function (item) {
-        const trigger = item.querySelector(".faq-trigger");
-        if (!trigger) return;
-
-        trigger.addEventListener("click", function () {
-          const isOpen = item.classList.contains("open");
-
-          faqItems.forEach(function (faq) {
-            faq.classList.remove("open");
-            const btn = faq.querySelector(".faq-trigger");
-            if (btn) btn.setAttribute("aria-expanded", "false");
-          });
-
-          if (!isOpen) {
-            item.classList.add("open");
-            trigger.setAttribute("aria-expanded", "true");
-          }
-        });
       });
     })();
   </script>
