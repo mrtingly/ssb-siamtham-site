@@ -469,13 +469,17 @@ html.lang-en [data-lang-inline="th"]{display:none}
   overflow:hidden;
   border:1px solid var(--line);
   box-shadow:var(--shadow-soft);
-  background:#fff;
+  background:#f7fbff;
+  min-height:260px;
+  aspect-ratio: 4 / 5;
 }
 
 .hero-cover img{
   width:100%;
-  height:auto;
+  height:100%;
   display:block;
+  object-fit:cover;
+  object-position:center top;
 }
 
 .hero-feature-row{
