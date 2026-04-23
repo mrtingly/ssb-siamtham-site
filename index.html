@@ -335,13 +335,15 @@ SSB MOBILE REDIRECT (FINAL)
 ========================= -->
 <script>
 (function () {
-  var isMobile = window.matchMedia('(max-width: 760px)').matches;
   var path = window.location.pathname;
+  var isMobileWidth = window.matchMedia("(max-width: 820px)").matches;
+  var isPortrait = window.matchMedia("(orientation: portrait)").matches;
 
-  // กัน redirect ซ้ำ
-  if (isMobile && path.indexOf('/ssb-mobile/') === -1) {
-    var target = 'ssb-mobile/index.html' + window.location.search + window.location.hash;
-    window.location.replace(target);
+  // 📱 เงื่อนไขไป mobile
+  var goMobile = isMobileWidth && isPortrait;
+
+  if (goMobile && path.indexOf('/ssb-mobile/') === -1) {
+    window.location.replace('ssb-mobile/index.html');
   }
 })();
 </script>
