@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="google" content="notranslate" />
+
+  <title>ให้เจ้าหน้าที่ติดต่อกลับ | Stealth Safety Bank Mobile System</title>
+  <meta
+    name="description"
+    content="กรอกข้อมูลเพื่อให้เจ้าหน้าที่หรือตัวแทนติดต่อกลับเกี่ยวกับ Stealth Safety Bank Mobile System"
+  />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#1b63c7" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root{
+      --bg:#eef5ff;
+      --bg-soft:#f8fbff;
+      --surface:#ffffff;
+      --surface-2:rgba(255,255,255,.84);
+      --line:#d7e5fb;
+      --line-2:rgba(27,99,199,.12);
+      --text:#0f1d3a;
+      --text-soft:#5f7397;
+      --primary:#1b63c7;
+      --primary-2:#0e4ea8;
+      --shadow-soft:0 14px 34px rgba(15,47,98,.08);
+      --shadow-main:0 24px 64px rgba(10,39,86,.12);
+      --radius-xl:32px;
+      --radius-lg:24px;
+      --radius-md:18px;
+      --radius-sm:14px;
+      --container:min(100% - 28px, 760px);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Prompt",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(27,99,199,.12), transparent 28%),
+        radial-gradient(circle at top left, rgba(255,255,255,.50), transparent 18%),
+        linear-gradient(180deg,#f7fbff 0%, #edf4ff 100%);
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+    button,input,select,textarea{font:inherit}
+
+    .page-shell{
+      min-height:100vh;
+      padding:22px 0 30px;
+    }
+
+    .container{
+      width:var(--container);
+      margin:0 auto;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:18px;
+      padding:12px 14px;
+      border-radius:20px;
+      background:var(--surface-2);
+      border:1px solid rgba(255,255,255,.7);
+      box-shadow:var(--shadow-soft);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+
+    .brand-logo{
+      width:48px;
+      height:48px;
+      border-radius:16px;
+      background:
+        linear-gradient(180deg,rgba(255,255,255,.92),rgba(255,255,255,.58)),
+        linear-gradient(135deg,#1b63c7 0%,#0e4ea8 100%);
+      display:grid;
+      place-items:center;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.9),
+        0 12px 24px rgba(27,99,199,.16);
+      overflow:hidden;
+      flex:0 0 auto;
+    }
+
+    .brand-logo img{
+      width:84%;
+      height:84%;
+      object-fit:contain;
+    }
+
+    .brand-text{
+      min-width:0;
+    }
+
+    .brand-title{
+      font-size:1rem;
+      line-height:1.15;
+      font-weight:800;
+      color:#0b1936;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .brand-sub{
+      font-size:.78rem;
+      color:var(--text-soft);
+      margin-top:2px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .back-btn{
+      min-height:42px;
+      padding:0 16px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#fff;
+      color:#12335f;
+      font-weight:700;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:var(--shadow-soft);
+      white-space:nowrap;
+    }
+
+    .hero-card{
+      position:relative;
+      overflow:hidden;
+      border-radius:var(--radius-xl);
+      background:
+        radial-gradient(circle at top right, rgba(27,99,199,.10), transparent 26%),
+        linear-gradient(180deg, rgba(255,255,255,.98) 0%, rgba(246,250,255,.98) 100%);
+      border:1px solid rgba(215,229,251,.96);
+      box-shadow:var(--shadow-main);
+      padding:32px 22px 24px;
+      margin-bottom:16px;
+    }
+
+    .hero-card::before{
+      content:"";
+      position:absolute;
+      width:220px;
+      height:220px;
+      right:-60px;
+      top:-60px;
+      background:radial-gradient(circle, rgba(27,99,199,.10), transparent 70%);
+      pointer-events:none;
+    }
+
+    .hero-kicker{
+      margin:0 0 12px;
+      color:var(--primary);
+      font-size:.82rem;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      text-align:center;
+    }
+
+    .hero-title{
+      margin:0;
+      text-align:center;
+      font-size:clamp(1.8rem, 4vw, 2.5rem);
+      line-height:1.14;
+      letter-spacing:-.03em;
+      font-weight:800;
+      color:#0b1733;
+    }
+
+    .hero-desc{
+      max-width:34ch;
+      margin:14px auto 0;
+      text-align:center;
+      color:var(--text-soft);
+      font-size:.98rem;
+      line-height:1.72;
+    }
+
+    .hero-note{
+      margin:18px auto 0;
+      max-width:38ch;
+      text-align:center;
+      color:#1b4f96;
+      font-size:.9rem;
+      line-height:1.65;
+      font-weight:600;
+      background:rgba(27,99,199,.06);
+      border:1px solid rgba(27,99,199,.10);
+      border-radius:18px;
+      padding:14px 14px;
+    }
+
+    .form-card{
+      border-radius:var(--radius-xl);
+      background:#fff;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow-main);
+      padding:22px 18px 20px;
+    }
+
+    .section-title{
+      margin:0 0 6px;
+      font-size:1.28rem;
+      line-height:1.2;
+      font-weight:800;
+      color:#0f1d3a;
+    }
+
+    .section-desc{
+      margin:0 0 18px;
+      color:var(--text-soft);
+      font-size:.92rem;
+      line-height:1.65;
+    }
+
+    .lead-form{
+      display:grid;
+      gap:14px;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+
+    .field-label{
+      font-size:.9rem;
+      font-weight:700;
+      color:#16305b;
+    }
+
+    .field-label .required{
+      color:#d23b3b;
+    }
+
+    .input,
+    .select,
+    .textarea{
+      width:100%;
+      border:1px solid var(--line);
+      background:var(--bg-soft);
+      color:var(--text);
+      border-radius:16px;
+      padding:14px 14px;
+      outline:none;
+      transition:border-color .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+
+    .textarea{
+      min-height:120px;
+      resize:vertical;
+    }
+
+    .input:focus,
+    .select:focus,
+    .textarea:focus{
+      border-color:rgba(27,99,199,.34);
+      background:#fff;
+      box-shadow:0 0 0 4px rgba(27,99,199,.08);
+    }
+
+    .field-help{
+      font-size:.8rem;
+      line-height:1.55;
+      color:var(--text-soft);
+    }
+
+    .consent-box{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      padding:14px 14px;
+      border-radius:18px;
+      background:#f8fbff;
+      border:1px solid var(--line);
+      color:#294767;
+      font-size:.88rem;
+      line-height:1.6;
+    }
+
+    .consent-box input{
+      margin-top:3px;
+      flex:0 0 auto;
+    }
+
+    .form-actions{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:4px;
+    }
+
+    .btn{
+      min-height:56px;
+      border-radius:18px;
+      border:1px solid transparent;
+      padding:0 16px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      font-weight:800;
+      cursor:pointer;
+      transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+    }
+
+    .btn-primary{
+      color:#fff;
+      background:linear-gradient(135deg,#1b63c7 0%,#0e4ea8 100%);
+      box-shadow:0 14px 28px rgba(27,99,199,.22);
+    }
+
+    .btn-secondary{
+      color:#16305b;
+      background:#fff;
+      border-color:var(--line);
+      box-shadow:var(--shadow-soft);
+    }
+
+    .contact-mini{
+      margin-top:16px;
+      padding-top:16px;
+      border-top:1px solid var(--line);
+      display:grid;
+      gap:8px;
+    }
+
+    .contact-mini-title{
+      font-size:.88rem;
+      font-weight:800;
+      color:#16305b;
+    }
+
+    .contact-mini-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    .contact-chip{
+      min-height:40px;
+      padding:0 14px;
+      border-radius:999px;
+      background:#f6faff;
+      border:1px solid var(--line);
+      color:#1b4f96;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-size:.84rem;
+      font-weight:700;
+    }
+
+    .foot-note{
+      margin-top:16px;
+      text-align:center;
+      color:#768aa9;
+      font-size:.8rem;
+      line-height:1.6;
+    }
+
+    @media (max-width: 640px){
+      .topbar{
+        align-items:flex-start;
+        flex-direction:column;
+      }
+
+      .back-btn{
+        width:100%;
+      }
+
+      .form-grid{
+        grid-template-columns:1fr;
+      }
+
+      .form-actions{
+        grid-template-columns:1fr;
+      }
+
+      .hero-card{
+        padding:28px 18px 22px;
+      }
+
+      .form-card{
+        padding:20px 14px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <div class="container">
+      <div class="topbar">
+        <div class="brand">
+          <div class="brand-logo">
+            <img src="images/logo.png" alt="Stealth Safety Bank Logo" loading="lazy" />
+          </div>
+          <div class="brand-text">
+            <div class="brand-title">Stealth Safety Bank Mobile System</div>
+            <div class="brand-sub">Siam Tham Co.,Ltd.</div>
+          </div>
+        </div>
+
+        <a href="index.html" class="back-btn">กลับหน้าหลัก</a>
+      </div>
+
+      <section class="hero-card">
+        <p class="hero-kicker">Contact Request</p>
+        <h1 class="hero-title">ให้เจ้าหน้าที่ติดต่อกลับ</h1>
+        <p class="hero-desc">
+          ระบบนี้ต้องมีการแนะนำก่อนใช้งาน
+          กรุณากรอกข้อมูลเพื่อให้เจ้าหน้าที่หรือตัวแทนติดต่อกลับ
+        </p>
+        <div class="hero-note">
+          หน้านี้ใช้สำหรับลงทะเบียนความสนใจเท่านั้น
+          ยังไม่ใช่หน้าสั่งซื้อสินค้า
+        </div>
+      </section>
+
+      <section class="form-card">
+        <h2 class="section-title">ข้อมูลสำหรับการติดต่อกลับ</h2>
+        <p class="section-desc">
+          กรุณากรอกข้อมูลที่จำเป็นให้ครบ เพื่อให้ทีมงานติดต่อกลับได้รวดเร็วและตรงความต้องการมากที่สุด
+        </p>
+
+        <form class="lead-form" id="leadForm" novalidate>
+          <div class="form-grid">
+            <div class="field">
+              <label class="field-label" for="fullName">ชื่อ - นามสกุล <span class="required">*</span></label>
+              <input class="input" id="fullName" name="fullName" type="text" placeholder="กรอกชื่อ - นามสกุล" required />
+            </div>
+
+            <div class="field">
+              <label class="field-label" for="phone">เบอร์โทรศัพท์ <span class="required">*</span></label>
+              <input class="input" id="phone" name="phone" type="tel" placeholder="เช่น 0812345678" required />
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="field">
+              <label class="field-label" for="lineId">LINE ID / เบอร์ LINE</label>
+              <input class="input" id="lineId" name="lineId" type="text" placeholder="กรอก LINE ID หรือเบอร์ที่ใช้ LINE" />
+            </div>
+
+            <div class="field">
+              <label class="field-label" for="province">จังหวัด</label>
+              <input class="input" id="province" name="province" type="text" placeholder="กรอกจังหวัด" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="interest">สิ่งที่สนใจ <span class="required">*</span></label>
+            <select class="select" id="interest" name="interest" required>
+              <option value="">เลือกหัวข้อที่สนใจ</option>
+              <option value="SSB Mobile System">SSB Mobile System</option>
+              <option value="SB Premium">SB Premium</option>
+              <option value="Custom System">Custom System</option>
+              <option value="Agent / Partnership">Agent / Partnership</option>
+              <option value="General Consultation">สอบถามข้อมูลทั่วไป</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="note">รายละเอียดเพิ่มเติม</label>
+            <textarea class="textarea" id="note" name="note" placeholder="เช่น ต้องการให้ติดต่อช่วงเวลาใด หรือมีความต้องการพิเศษอะไร"></textarea>
+            <div class="field-help">ใส่ข้อมูลสั้น ๆ เพื่อให้เจ้าหน้าที่เข้าใจความต้องการได้เร็วขึ้น</div>
+          </div>
+
+          <label class="consent-box">
+            <input type="checkbox" id="consent" name="consent" required />
+            <span>
+              ข้าพเจ้ายินยอมให้บริษัทหรือเจ้าหน้าที่ที่เกี่ยวข้องติดต่อกลับตามข้อมูลที่ให้ไว้
+              เพื่อให้ข้อมูล แนะนำระบบ และดำเนินการประสานงานตามความสนใจ
+            </span>
+          </label>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">ให้เจ้าหน้าที่ติดต่อกลับ</button>
+            <a href="index.html" class="btn btn-secondary">กลับหน้าหลัก</a>
+          </div>
+        </form>
+
+        <div class="contact-mini">
+          <div class="contact-mini-title">ช่องทางติดต่อบริษัท</div>
+          <div class="contact-mini-links">
+            <a class="contact-chip" href="tel:020432988">02-043-2988</a>
+            <a class="contact-chip" href="tel:0649514888">064-951-4888</a>
+            <a class="contact-chip" href="mailto:mysiamtham@gmail.com">mysiamtham@gmail.com</a>
+            <a class="contact-chip" href="https://line.me/R/ti/p/@siamtham" target="_blank" rel="noopener">LINE Official</a>
+          </div>
+        </div>
+
+        <div class="foot-note">
+          หลังส่งข้อมูลแล้ว ควรเชื่อมต่อเข้าระบบรับข้อมูลของพี่ต่อกับ Google Sheets / Apps Script ในขั้นถัดไป
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const form = document.getElementById("leadForm");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const fullName = document.getElementById("fullName").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const interest = document.getElementById("interest").value.trim();
+        const consent = document.getElementById("consent").checked;
+
+        if (!fullName || !phone || !interest || !consent) {
+          alert("กรุณากรอกข้อมูลที่มีเครื่องหมาย * ให้ครบ และยืนยันการยินยอมก่อนส่งข้อมูล");
+          return;
+        }
+
+        alert("บันทึกข้อมูลเรียบร้อย\n(รอบถัดไปค่อยเชื่อมต่อกับระบบรับข้อมูลจริง)");
+        form.reset();
+      });
+    })();
+  </script>
+</body>
+</html>
