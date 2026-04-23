@@ -58,22 +58,6 @@
     })();
   </script>
 
-  <!-- MOBILE REDIRECT FOR SSB SYSTEM PAGE -->
-  <script>
-    (function () {
-      var isMobile = window.matchMedia('(max-width: 760px)').matches;
-      var path = window.location.pathname;
-
-      if (isMobile && path.indexOf('/ssb-mobile/') === -1) {
-        window.location.replace('/ssb-mobile/learn.html' + window.location.search + window.location.hash);
-      }
-    })();
-  </script>
-
-  <noscript>
-    <meta http-equiv="refresh" content="0; url=/ssb-mobile/learn.html">
-  </noscript>
-
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/layout.css" />
   <link rel="stylesheet" href="css/components.css" />
@@ -372,7 +356,7 @@
 
           <div class="action-bottom in-bottom-box">
             <a href="index.html" class="action-btn secondary">หน้าแรก</a>
-            <a href="book.html" class="action-btn primary">สั่งซื้อ</a>
+          <a href="lead-form.html" class="action-btn primary">ให้เจ้าหน้าที่ติดต่อกลับ</a>
           </div>
         </div>
       </section>
