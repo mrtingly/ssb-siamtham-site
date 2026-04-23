@@ -378,9 +378,20 @@ html.lang-en [data-lang-inline="th"]{display:none}
 }
 
 .hero-logo-shell{
+  position:relative;
   display:flex;
   justify-content:center;
-  margin-bottom:14px;
+  margin-bottom:18px;
+}
+
+.hero-logo-shell::before{
+  content:"";
+  position:absolute;
+  width:140px;
+  height:140px;
+  background:radial-gradient(circle, rgba(15,107,218,.15), transparent 70%);
+  border-radius:50%;
+  z-index:-1;
 }
 
 .hero-logo{
@@ -403,11 +414,14 @@ html.lang-en [data-lang-inline="th"]{display:none}
 .hero-title{
   margin:0;
   text-align:center;
-  font-size:2.28rem;
-  line-height:1.08;
-  letter-spacing:-.045em;
+  font-size:1.9rem;
+  line-height:1.2;
+  letter-spacing:-0.02em;
   color:#0a1731;
-  font-weight:700;
+  font-weight:800;
+  max-width:22ch;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 .hero-title [data-lang="en"]{
@@ -415,12 +429,12 @@ html.lang-en [data-lang-inline="th"]{display:none}
 }
 
 .hero-subline{
-  margin:14px auto 0;
-  max-width:30ch;
+  margin:10px auto 0;
+  max-width:26ch;
   text-align:center;
-  color:var(--text-soft);
-  font-size:.98rem;
-  line-height:1.65;
+  color:#8aa0c2;
+  font-size:.9rem;
+  line-height:1.6;
 }
 
 .hero-image-wrap{
