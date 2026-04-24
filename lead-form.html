@@ -564,11 +564,9 @@
 
     fetch(SCRIPT_URL, {
       method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json"
-      }
+      body: JSON.stringify(data)
     })
+          
     .then(res => res.json())
     .then(() => {
       alert("ส่งข้อมูลเรียบร้อย เจ้าหน้าที่จะติดต่อกลับ");
