@@ -537,27 +537,49 @@
     </div>
   </div>
 
-  <script>
-    (function () {
-      const form = document.getElementById("leadForm");
+ <script>
+(function () {
+  const form = document.getElementById("leadForm");
 
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
+  const SCRIPT_URL = "วาง URL Apps Script ตรงนี้";
 
-        const fullName = document.getElementById("fullName").value.trim();
-        const phone = document.getElementById("phone").value.trim();
-        const interest = document.getElementById("interest").value.trim();
-        const consent = document.getElementById("consent").checked;
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-        if (!fullName || !phone || !interest || !consent) {
-          alert("กรุณากรอกข้อมูลที่มีเครื่องหมาย * ให้ครบ และยืนยันการยินยอมก่อนส่งข้อมูล");
-          return;
-        }
+    const data = {
+      fullName: document.getElementById("fullName").value.trim(),
+      phone: document.getElementById("phone").value.trim(),
+      lineId: document.getElementById("lineId").value.trim(),
+      province: document.getElementById("province").value.trim(),
+      interest: document.getElementById("interest").value.trim(),
+      note: document.getElementById("note").value.trim()
+    };
 
-        alert("บันทึกข้อมูลเรียบร้อย\n(รอบถัดไปค่อยเชื่อมต่อกับระบบรับข้อมูลจริง)");
-        form.reset();
-      });
-    })();
-  </script>
+    const consent = document.getElementById("consent").checked;
+
+    if (!data.fullName || !data.phone || !data.interest || !consent) {
+      alert("กรุณากรอกข้อมูลให้ครบ");
+      return;
+    }
+
+    fetch(SCRIPT_URL, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(res => res.json())
+    .then(() => {
+      alert("ส่งข้อมูลเรียบร้อย เจ้าหน้าที่จะติดต่อกลับ");
+      form.reset();
+    })
+    .catch(() => {
+      alert("เกิดข้อผิดพลาด กรุณาลองใหม่");
+    });
+  });
+})();
+</script>
+  
 </body>
 </html>
