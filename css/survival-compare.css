@@ -289,7 +289,7 @@ button{ font:inherit; }
   position:absolute;
   inset:0;
   pointer-events:none;
-  z-index:9;
+  z-index:50;
 }
 
 .beam-svg{
@@ -300,19 +300,22 @@ button{ font:inherit; }
 
 .beam-path{
   fill:none;
-  stroke-width:3.6;
+  stroke-width:6;
   stroke-linecap:round;
-  filter:drop-shadow(0 0 8px currentColor);
+  filter:
+    drop-shadow(0 0 6px currentColor)
+    drop-shadow(0 0 18px currentColor)
+    drop-shadow(0 0 34px currentColor);
 }
 
 .beam-path.inbound{
   stroke:url(#beamInboundGradient);
-  color:var(--attack-glow);
+  color:#ff1f1f;
 }
 
 .beam-path.outbound{
   stroke:url(#beamOutboundGradient);
-  color:var(--system-glow);
+  color:#00d9ff;
 }
 
 .beam-path.animate{
@@ -327,24 +330,24 @@ button{ font:inherit; }
 
 .icon-column{
   position:absolute;
-  top:15%;
+  top:36%;
   transform:translateY(-50%);
-  width:34%;
+  width:30%;
   display:flex;
   flex-direction:column;
-  gap:14px;
+  gap:12px;
   opacity:1;
   z-index:14;
 }
 
-.icon-column.left{ left:28px; }
-.icon-column.right{ right:28px; }
+.icon-column.left{ left:36px; }
+.icon-column.right{ right:36px; }
 
 .icon-card{
   position:relative;
-  border-radius:22px;
-  border:none;
-  background:transparent;
+  border-radius:18px;
+  border:1px solid rgba(120,210,255,.10);
+  background:rgba(255,255,255,.018);
   transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
 }
 
@@ -867,4 +870,40 @@ html.light-mode .action-btn.secondary{
   .action-btn{
     width:100%;
   }
+}
+
+  .icon-card.is-source{
+  border-color:rgba(255,55,55,.75);
+  box-shadow:
+    0 0 18px rgba(255,55,55,.35),
+    inset 0 0 18px rgba(255,55,55,.08);
+}
+
+.icon-card.is-target{
+  border-color:rgba(0,220,255,.85);
+  box-shadow:
+    0 0 22px rgba(0,220,255,.42),
+    inset 0 0 20px rgba(0,220,255,.10);
+}
+
+.icon-card.is-source .icon-frame{
+  filter:
+    drop-shadow(0 0 10px rgba(255,40,40,.95))
+    drop-shadow(0 0 22px rgba(255,40,40,.75));
+}
+
+.icon-card.is-target .icon-frame{
+  filter:
+    drop-shadow(0 0 10px rgba(0,220,255,.95))
+    drop-shadow(0 0 24px rgba(0,220,255,.80));
+}
+
+.icon-card.is-source .icon-name{
+  color:#ff2b2b;
+  text-shadow:0 0 12px rgba(255,40,40,.75);
+}
+
+.icon-card.is-target .icon-name{
+  color:#00d8ff;
+  text-shadow:0 0 14px rgba(0,220,255,.85);
 }
