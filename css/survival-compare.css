@@ -872,7 +872,7 @@ html.light-mode .action-btn.secondary{
   }
 }
 
-  .icon-card.is-source{
+.icon-card.is-source{
   border-color:rgba(255,55,55,.75);
   box-shadow:
     0 0 18px rgba(255,55,55,.35),
