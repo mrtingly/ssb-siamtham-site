@@ -10,26 +10,30 @@
     });
   }
 
-  const themeToggle = document.getElementById("themeToggle");
+  function setTheme(mode) {
+    const html = document.documentElement;
+    const isLight = mode === "light";
 
-  syncThemeImages();
+    html.classList.toggle("light-mode", isLight);
+    html.classList.toggle("dark-mode", !isLight);
+    localStorage.setItem("theme", mode);
 
-  if (themeToggle) {
-    themeToggle.addEventListener("click", function () {
-      const html = document.documentElement;
-      const isLight = html.classList.contains("light-mode");
-
-      html.classList.toggle("light-mode", !isLight);
-      html.classList.toggle("dark-mode", isLight);
-      localStorage.setItem("theme", !isLight ? "light" : "dark");
-
-      syncThemeImages();
-    });
+    syncThemeImages();
   }
+
+  const savedTheme = localStorage.getItem("theme") || "dark";
+  setTheme(savedTheme);
+
+  document.addEventListener("click", function (event) {
+    const btn = event.target.closest("#themeToggle");
+    if (!btn) return;
+
+    const isLight = document.documentElement.classList.contains("light-mode");
+    setTheme(isLight ? "dark" : "light");
+  });
 
   window.addEventListener("pageshow", syncThemeImages);
 })();
-
 (function () {
   const clickSound = document.getElementById("clickSound");
 
@@ -508,9 +512,12 @@ function runAttackFlow(attackKey, sourceCard) {
   const maxRound = 3;
 
   function fireOnce() {
-    clearStates();
     sizeSvg();
     ensureSvgDefs();
+
+    document.querySelectorAll(".icon-card").forEach((el) => {
+      el.classList.remove("is-source", "is-target");
+    });
 
     const parentRect = showcase.getBoundingClientRect();
     const sourceCenter = getCenter(sourceCard, parentRect);
@@ -527,6 +534,8 @@ function runAttackFlow(attackKey, sourceCard) {
         const targetCard = document.getElementById(id);
         if (!targetCard) return;
 
+        targetCard.classList.add("is-target");
+
         const targetCenter = getCenter(targetCard, parentRect);
         createStraightBeam(relayPoint, targetCenter, "outbound");
       });
@@ -535,19 +544,18 @@ function runAttackFlow(attackKey, sourceCard) {
     round += 1;
 
     if (round < maxRound) {
-      activeTimeout = setTimeout(fireOnce, 900);
+      activeTimeout = setTimeout(fireOnce, 950);
     } else {
       activeTimeout = setTimeout(() => {
         clearStates();
         statusBar.textContent =
           "กดไอคอนการโจมตีด้านซ้าย เพื่อดูแสงวิ่งไปยังระบบเอาตัวรอด";
-      }, 1400);
+      }, 1800);
     }
   }
 
   fireOnce();
 }
-
   function runSystemFocus(systemKey, sourceCard) {
     if (!sourceCard) return;
 
