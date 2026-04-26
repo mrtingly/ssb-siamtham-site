@@ -289,7 +289,7 @@ button{ font:inherit; }
   position:absolute;
   inset:0;
   pointer-events:none;
-  z-index:50;
+  z-index:100;
 }
 
 .beam-svg{
@@ -626,9 +626,16 @@ button{ font:inherit; }
 .detail-shell{
   height:100%;
   border-radius:28px;
-  border:1px solid var(--border-strong);
-  background:var(--panel-strong);
-  box-shadow:0 24px 60px rgba(0,0,0,.40), 0 0 30px rgba(80,190,255,.20);
+  border:1px solid rgba(120,210,255,.25);
+
+  /* 🔥 glass effect */
+  background:rgba(10,20,40,.65);
+  backdrop-filter:blur(18px);
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.45),
+    0 0 40px rgba(80,200,255,.25);
+
   padding:22px;
   overflow:auto;
 }
@@ -906,4 +913,40 @@ html.light-mode .action-btn.secondary{
 .icon-card.is-target .icon-name{
   color:#00d8ff;
   text-shadow:0 0 14px rgba(0,220,255,.85);
+}
+
+/* ===== THEME SWITCH FIX ===== */
+.theme-switch{
+  width:56px;
+  height:28px;
+  border-radius:999px;
+  background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.25);
+  position:relative;
+  transition:.25s;
+}
+
+.switch-knob{
+  position:absolute;
+  top:2px;
+  left:2px;
+  width:24px;
+  height:24px;
+  border-radius:50%;
+  background:#fff;
+  transition:.25s;
+}
+
+/* 👉 ตอนเป็น LIGHT */
+html.light-mode .switch-knob{
+  transform:translateX(28px);
+}
+
+.detail-mode.is-open .detail-shell{
+  animation:popupGlow .35s ease;
+}
+
+@keyframes popupGlow{
+  from{ transform:scale(.94); opacity:0; }
+  to{ transform:scale(1); opacity:1; }
 }
