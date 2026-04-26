@@ -496,13 +496,21 @@
     }, 5200);
   }
 
-  function runAttackFlow(attackKey, sourceCard) {
-    const config = attackMap[attackKey];
-    if (!config || !sourceCard) return;
+function runAttackFlow(attackKey, sourceCard) {
+  const config = attackMap[attackKey];
+  if (!config || !sourceCard) return;
 
-    closeDetail(true);
+  closeDetail(true);
+  clearStates();
+  showLogoMode();
+
+  let round = 0;
+  const maxRound = 3;
+
+  function fireOnce() {
     clearStates();
-    showLogoMode();
+    sizeSvg();
+    ensureSvgDefs();
 
     const parentRect = showcase.getBoundingClientRect();
     const sourceCenter = getCenter(sourceCard, parentRect);
@@ -522,12 +530,23 @@
         const targetCenter = getCenter(targetCard, parentRect);
         createStraightBeam(relayPoint, targetCenter, "outbound");
       });
-    }, 360);
+    }, 260);
 
-    setTimeout(() => {
-      blinkTargets(config.targets);
-    }, 760);
+    round += 1;
+
+    if (round < maxRound) {
+      activeTimeout = setTimeout(fireOnce, 900);
+    } else {
+      activeTimeout = setTimeout(() => {
+        clearStates();
+        statusBar.textContent =
+          "กดไอคอนการโจมตีด้านซ้าย เพื่อดูแสงวิ่งไปยังระบบเอาตัวรอด";
+      }, 1400);
+    }
   }
+
+  fireOnce();
+}
 
   function runSystemFocus(systemKey, sourceCard) {
     if (!sourceCard) return;
