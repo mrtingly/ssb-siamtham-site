@@ -398,6 +398,8 @@
   }
 
   function openDetail(payload) {
+    clearStates();
+    
     if (!payload) return;
 
     hideLogoMode();
