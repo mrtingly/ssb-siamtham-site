@@ -30,7 +30,6 @@ html.light-mode{
     radial-gradient(circle at 0% 30%, rgba(130,190,255,.12) 0%, rgba(130,190,255,0) 30%),
     radial-gradient(circle at 100% 70%, rgba(130,190,255,.10) 0%, rgba(130,190,255,0) 28%),
     linear-gradient(180deg, #eef4fb 0%, #e3ecf8 55%, #eef4fb 100%);
-}
 
   --text:#183a67;
   --text-soft:#6286ad;
@@ -323,7 +322,7 @@ button{ font:inherit; }
 
 .icon-column{
   position:absolute;
-  top:50%;
+  top:44%;
   transform:translateY(-50%);
   width:34%;
   display:flex;
@@ -333,8 +332,8 @@ button{ font:inherit; }
   z-index:14;
 }
 
-.icon-column.left{ left:18px; }
-.icon-column.right{ right:18px; }
+.icon-column.left{ left:28px; }
+.icon-column.right{ right:28px; }
 
 .icon-card{
   position:relative;
@@ -546,8 +545,8 @@ button{ font:inherit; }
 }
 
 .f22-core{
-  width:330px;
-  height:330px;
+  width:260px;
+  height:260px;
 }
 
 .center-caption{
