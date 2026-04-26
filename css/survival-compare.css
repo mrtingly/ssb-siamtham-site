@@ -330,7 +330,7 @@ button{ font:inherit; }
 
 .icon-column{
   position:absolute;
-  top:36%;
+  top:15%;
   transform:translateY(-50%);
   width:30%;
   display:flex;
