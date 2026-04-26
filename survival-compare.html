@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>F-22 vs SSB | Survival Compare</title>
+
+  <link rel="stylesheet" href="css/survival-compare.css" />
+</head>
+
+<body>
+  <main class="survival-page">
+
+    <header class="survival-topbar">
+      <a href="index.html" class="back-link">← หน้าแรก</a>
+
+      <div class="top-title">
+        <span>Survival Compare</span>
+        <strong>F-22 Raptor vs Stealth Safety Bank</strong>
+      </div>
+
+      <a href="ssb-system.html" class="back-link">SSB System →</a>
+    </header>
+
+    <section class="hero-title">
+      <h1>ช่วงเปิดเผยตัว คือช่วงที่เสี่ยงที่สุด</h1>
+      <p>
+        เปรียบเทียบหลักการเอาตัวรอดของเครื่องบินล่องหน F-22
+        กับสมาร์ทโฟน SSB ที่ลดช่องทางโจมตีให้เหลือน้อยที่สุด
+      </p>
+    </section>
+
+    <section class="mode-switch">
+      <button class="mode-btn active" data-mode="f22">F-22 Mode</button>
+      <button class="mode-btn" data-mode="ssb">SSB Mode</button>
+    </section>
+
+    <section class="compare-stage" id="compareStage">
+
+      <div class="attack-zone">
+        <h3>ATTACK</h3>
+        <ul id="attackList">
+          <li>Radar Detection</li>
+          <li>Missile Lock</li>
+          <li>Moment of Exposure</li>
+        </ul>
+      </div>
+
+      <div class="system-card f22-card active-card" data-target="f22">
+        <div class="machine-visual f22-visual">✈</div>
+        <h2>F-22 Raptor</h2>
+        <h4>Lockheed Martin / Boeing</h4>
+        <p>
+          เครื่องบินขับไล่ล่องหนยุคที่ 5 ออกแบบเพื่อเห็นก่อน ยิงก่อน
+          และลดช่วงเวลาที่ถูกตรวจจับให้น้อยที่สุด
+        </p>
+      </div>
+
+      <div class="energy-core">
+        <div class="core-ring"></div>
+        <div class="core-dot"></div>
+        <div class="beam beam-left"></div>
+        <div class="beam beam-right"></div>
+        <span>Moment<br>of Exposure</span>
+      </div>
+
+      <div class="system-card ssb-card" data-target="ssb">
+        <div class="machine-visual ssb-visual">📱</div>
+        <h2>Stealth Safety Bank</h2>
+        <h4>Siamtham Co.,Ltd.</h4>
+        <p>
+          สมาร์ทโฟนที่ถูกปรับลดความเสี่ยง ตัดแอปและช่องทางที่ไม่จำเป็น
+          เหลือไว้เฉพาะแอปธนาคารและระบบความปลอดภัยของเครื่อง
+        </p>
+      </div>
+
+      <div class="defense-zone">
+        <h3>DEFENSE</h3>
+        <ul id="defenseList">
+          <li>Stealth Shape</li>
+          <li>Internal Weapon Bay</li>
+          <li>Flare / Chaff</li>
+        </ul>
+      </div>
+
+    </section>
+
+    <section class="detail-panel" id="detailPanel">
+      <h2 id="detailTitle">F-22 Survival System</h2>
+      <p id="detailText">
+        F-22 ลดการถูกตรวจจับด้วยการเปิดเผยตัวในเวลาสั้นมาก
+        ยิงแล้วเปลี่ยนตำแหน่งทันที พร้อมระบบช่วยเอาตัวรอดหลายชั้น
+      </p>
+
+      <div class="detail-grid" id="detailGrid"></div>
+    </section>
+
+  </main>
+
+  <script src="js/survival-compare.js"></script>
+</body>
+</html>
