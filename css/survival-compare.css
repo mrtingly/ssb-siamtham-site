@@ -322,7 +322,7 @@ button{ font:inherit; }
 
 .icon-column{
   position:absolute;
-  top:44%;
+  top:25%;
   transform:translateY(-50%);
   width:34%;
   display:flex;
@@ -338,8 +338,8 @@ button{ font:inherit; }
 .icon-card{
   position:relative;
   border-radius:22px;
-  border:1px solid rgba(120,210,255,.16);
-  background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.015));
+  border:none;
+  background:transparent;
   transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
 }
 
@@ -416,6 +416,7 @@ button{ font:inherit; }
   align-items:center;
   justify-content:center;
   z-index:12;
+  transform:translateY(-70px);
 }
 
 .center-aura{
