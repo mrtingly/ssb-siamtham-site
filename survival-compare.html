@@ -2,102 +2,410 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="google" content="notranslate" />
 
-  <title>F-22 vs SSB | Survival Compare</title>
+  <title>F-22 Survival System | Siam Tham Co.,Ltd.</title>
 
-  <link rel="stylesheet" href="css/survival-compare.css" />
+  <link rel="icon" href="images/logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&family=Orbitron:wght@500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+
+  <script>
+    (function () {
+      const savedTheme = localStorage.getItem("theme");
+      const isLight = savedTheme === "light";
+      document.documentElement.classList.toggle("light-mode", isLight);
+      document.documentElement.classList.toggle("dark-mode", !isLight);
+    })();
+  </script>
+
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+
+  <link rel="stylesheet" href="css/survival-compare.css?v=1" />
 </head>
 
 <body>
-  <main class="survival-page">
+  <div class="site-wrap">
 
-    <header class="survival-topbar">
-      <a href="index.html" class="back-link">← หน้าแรก</a>
+    <header class="ssb-topbar" role="banner">
+      <div class="topbar-inner">
+        <div class="brand-wrap">
+          <div class="brand-logo">
+            <img src="images/logo.png" alt="Stealth Safety Bank Logo" loading="eager" width="80" height="80" />
+          </div>
 
-      <div class="top-title">
-        <span>Survival Compare</span>
-        <strong>F-22 Raptor vs Stealth Safety Bank</strong>
+          <div class="brand-text">
+            <div class="brand-line-1 th-font">บริษัท สยามทำ จำกัด</div>
+            <div class="brand-line-2 en-font">Siam Tham Co.,Ltd.</div>
+            <div class="brand-site en-font">
+              <a href="https://www.siamtham.com" target="_blank" rel="noopener">www.siamtham.com</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <a href="index.html" class="home-btn sound-click">หน้าแรก</a>
+
+          <div class="theme-switch-wrap" id="desktopThemeSwitch">
+            <span class="mode-label">Dark</span>
+            <button id="themeToggle" class="theme-switch" type="button" aria-label="Toggle theme">
+              <span class="switch-knob"></span>
+            </button>
+            <span class="mode-label">Light</span>
+          </div>
+        </div>
       </div>
-
-      <a href="ssb-system.html" class="back-link">SSB System →</a>
     </header>
 
-    <section class="hero-title">
-      <h1>ช่วงเปิดเผยตัว คือช่วงที่เสี่ยงที่สุด</h1>
-      <p>
-        เปรียบเทียบหลักการเอาตัวรอดของเครื่องบินล่องหน F-22
-        กับสมาร์ทโฟน SSB ที่ลดช่องทางโจมตีให้เหลือน้อยที่สุด
-      </p>
-    </section>
+    <main class="main-content survival-main">
 
-    <section class="mode-switch">
-      <button class="mode-btn active" data-mode="f22">F-22 Mode</button>
-      <button class="mode-btn" data-mode="ssb">SSB Mode</button>
-    </section>
+      <section class="hero-card survival-card">
 
-    <section class="compare-stage" id="compareStage">
+        <div class="hero-head survival-head">
+          <h1>F-22 RAPTOR SURVIVAL SYSTEM</h1>
+        </div>
 
-      <div class="attack-zone">
-        <h3>ATTACK</h3>
-        <ul id="attackList">
-          <li>Radar Detection</li>
-          <li>Missile Lock</li>
-          <li>Moment of Exposure</li>
-        </ul>
-      </div>
+        <!-- MODE SELECT -->
+        <section class="survival-select" id="survivalSelect">
+          <div class="select-title">
+            <div class="select-kicker">SELECT SURVIVAL MODEL</div>
+            <h2>เลือกระบบเพื่อดูหลักการเอาตัวรอด</h2>
+            <p>เลือก F-22 เพื่อดูระบบเอาตัวรอดจากการโจมตี หรือเลือก SSB เพื่อกลับสู่ระบบ SSBMS</p>
+          </div>
 
-      <div class="system-card f22-card active-card" data-target="f22">
-        <div class="machine-visual f22-visual">✈</div>
-        <h2>F-22 Raptor</h2>
-        <h4>Lockheed Martin / Boeing</h4>
-        <p>
-          เครื่องบินขับไล่ล่องหนยุคที่ 5 ออกแบบเพื่อเห็นก่อน ยิงก่อน
-          และลดช่วงเวลาที่ถูกตรวจจับให้น้อยที่สุด
-        </p>
-      </div>
+          <div class="select-grid">
+            <button class="select-card f22-select sound-click" type="button" id="selectF22">
+              <div class="select-img-wrap">
+                <picture>
+                  <source
+                    srcset="images/f22-bright-mode/f-22-raptor-bright-mode.png"
+                    media="(prefers-color-scheme: light)"
+                  />
+                  <img
+                    class="theme-img"
+                    src="images/f22-dark-mode/F-22-raptor.png"
+                    data-light="images/f22-bright-mode/f-22-raptor-bright-mode.png"
+                    data-dark="images/f22-dark-mode/F-22-raptor.png"
+                    alt="F-22 Raptor"
+                  />
+                </picture>
+              </div>
 
-      <div class="energy-core">
-        <div class="core-ring"></div>
-        <div class="core-dot"></div>
-        <div class="beam beam-left"></div>
-        <div class="beam beam-right"></div>
-        <span>Moment<br>of Exposure</span>
-      </div>
+              <div class="select-copy">
+                <span>F-22 RAPTOR</span>
+                <strong>Lockheed Martin / Boeing</strong>
+                <small>ระบบเอาตัวรอดจากการตรวจจับ การล็อกเป้า และอาวุธต่อต้านอากาศยาน</small>
+              </div>
+            </button>
 
-      <div class="system-card ssb-card" data-target="ssb">
-        <div class="machine-visual ssb-visual">📱</div>
-        <h2>Stealth Safety Bank</h2>
-        <h4>Siamtham Co.,Ltd.</h4>
-        <p>
-          สมาร์ทโฟนที่ถูกปรับลดความเสี่ยง ตัดแอปและช่องทางที่ไม่จำเป็น
-          เหลือไว้เฉพาะแอปธนาคารและระบบความปลอดภัยของเครื่อง
-        </p>
-      </div>
+            <a class="select-card ssb-select sound-click" href="ssb-system.html">
+              <div class="select-img-wrap">
+                <img src="images/ssb-mobile.png" alt="Stealth Safety Bank Mobile" />
+              </div>
 
-      <div class="defense-zone">
-        <h3>DEFENSE</h3>
-        <ul id="defenseList">
-          <li>Stealth Shape</li>
-          <li>Internal Weapon Bay</li>
-          <li>Flare / Chaff</li>
-        </ul>
-      </div>
+              <div class="select-copy">
+                <span>STEALTH SAFETY BANK</span>
+                <strong>Siam Tham Co.,Ltd.</strong>
+                <small>กลับสู่หน้า SSB Mobile System เพื่อดูระบบความปลอดภัยทางการเงิน</small>
+              </div>
+            </a>
+          </div>
+        </section>
 
-    </section>
+        <!-- F22 SYSTEM -->
+        <section class="showcase survival-showcase" id="showcase" hidden>
 
-    <section class="detail-panel" id="detailPanel">
-      <h2 id="detailTitle">F-22 Survival System</h2>
-      <p id="detailText">
-        F-22 ลดการถูกตรวจจับด้วยการเปิดเผยตัวในเวลาสั้นมาก
-        ยิงแล้วเปลี่ยนตำแหน่งทันที พร้อมระบบช่วยเอาตัวรอดหลายชั้น
-      </p>
+          <div class="beam-rail" aria-hidden="true">
+            <div class="beam-rail-line"></div>
+            <div class="beam-rail-spark beam-rail-spark-a"></div>
+            <div class="beam-rail-spark beam-rail-spark-b"></div>
+          </div>
 
-      <div class="detail-grid" id="detailGrid"></div>
-    </section>
+          <div class="beam-svg-wrap" id="beamSvgWrap" aria-hidden="true">
+            <svg class="beam-svg" id="beamSvg"></svg>
+          </div>
 
-  </main>
+          <!-- LEFT: ATTACK -->
+          <aside class="icon-column left ready" id="attackColumn">
 
-  <script src="js/survival-compare.js"></script>
+            <article class="icon-card attack-card" id="attack-radar">
+              <button class="icon-btn sound-click" type="button" data-kind="attack" data-key="radar">
+                <span class="icon-frame">
+                  <img
+                    src="images/f22-dark-mode/radar-detection.png"
+                    data-light="images/f22-bright-mode/radar-bright-mode.png"
+                    data-dark="images/f22-dark-mode/radar-detection.png"
+                    alt="Radar Detection"
+                  />
+                </span>
+                <span class="icon-meta">
+                  <span class="icon-name">Radar Detection</span>
+                  <span class="icon-sub">เรดาร์ตรวจจับและล็อกเป้าหมาย</span>
+                </span>
+              </button>
+            </article>
+
+            <article class="icon-card attack-card" id="attack-sam">
+              <button class="icon-btn sound-click" type="button" data-kind="attack" data-key="sam">
+                <span class="icon-frame">
+                  <img
+                    src="images/f22-dark-mode/surface-to-air-missile.png"
+                    data-light="images/f22-bright-mode/surface-to-air-missile-bright-mode.png"
+                    data-dark="images/f22-dark-mode/surface-to-air-missile.png"
+                    alt="Surface to Air Missile"
+                  />
+                </span>
+                <span class="icon-meta">
+                  <span class="icon-name">Surface to Air Missile</span>
+                  <span class="icon-sub">ขีปนาวุธพื้นสู่อากาศ</span>
+                </span>
+              </button>
+            </article>
+
+            <article class="icon-card attack-card" id="attack-aam">
+              <button class="icon-btn sound-click" type="button" data-kind="attack" data-key="aam">
+                <span class="icon-frame">
+                  <img
+                    src="images/f22-dark-mode/air-to-air-missile.png"
+                    data-light="images/f22-bright-mode/air-to-air-missile-bright-mode.png"
+                    data-dark="images/f22-dark-mode/air-to-air-missile.png"
+                    alt="Air to Air Missile"
+                  />
+                </span>
+                <span class="icon-meta">
+                  <span class="icon-name">Air to Air Missile</span>
+                  <span class="icon-sub">ขีปนาวุธอากาศสู่อากาศ</span>
+                </span>
+              </button>
+            </article>
+
+            <article class="icon-card attack-card" id="attack-gun">
+              <button class="icon-btn sound-click" type="button" data-kind="attack" data-key="gun">
+                <span class="icon-frame">
+                  <img
+                    src="images/f22-dark-mode/anti-aircraft-gun.png"
+                    data-light="images/f22-bright-mode/anti-aircraft-gun-bright-mode.png"
+                    data-dark="images/f22-dark-mode/anti-aircraft-gun.png"
+                    alt="Anti Aircraft Gun"
+                  />
+                </span>
+                <span class="icon-meta">
+                  <span class="icon-name">Anti Aircraft Gun</span>
+                  <span class="icon-sub">ปืนต่อต้านอากาศยาน</span>
+                </span>
+              </button>
+            </article>
+
+            <article class="icon-card attack-card" id="attack-ir">
+              <button class="icon-btn sound-click" type="button" data-kind="attack" data-key="ir">
+                <span class="icon-frame">
+                  <img
+                    src="images/f22-dark-mode/visual-ir-tracking.png"
+                    data-light="images/f22-bright-mode/visual-ir-tracking-bright-mode.png"
+                    data-dark="images/f22-dark-mode/visual-ir-tracking.png"
+                    alt="Visual IR Tracking"
+                  />
+                </span>
+                <span class="icon-meta">
+                  <span class="icon-name">Visual / IR Tracking</span>
+                  <span class="icon-sub">ตรวจจับด้วยสายตาและอินฟราเรด</span>
+                </span>
+              </button>
+            </article>
+          </aside>
+
+          <!-- CENTER -->
+          <section class="center-stage" id="centerStage">
+            <div class="center-aura"></div>
+
+            <div class="logo-mode f22-mode" id="logoMode">
+              <div class="logo-orbit-wrap f22-orbit-wrap">
+                <svg class="logo-orbit-svg" viewBox="0 0 320 320" aria-hidden="true">
+                  <circle class="logo-orbit-ring" cx="160" cy="160" r="128"></circle>
+                  <circle class="logo-orbit-runner" cx="160" cy="32" r="6"></circle>
+                </svg>
+
+                <div class="logo-radar-grid" aria-hidden="true"></div>
+                <div class="logo-radar-cross" aria-hidden="true"></div>
+                <div class="logo-radar-layer" id="logoRadarLayer" aria-hidden="true"></div>
+
+                <button class="logo-core f22-core" id="logoCore" type="button" aria-label="F-22 Core">
+                  <img
+                    class="theme-img"
+                    src="images/f22-dark-mode/F-22-raptor.png"
+                    data-light="images/f22-bright-mode/f-22-raptor-bright-mode.png"
+                    data-dark="images/f22-dark-mode/F-22-raptor.png"
+                    alt="F-22 Raptor"
+                  />
+                </button>
+              </div>
+
+              <div class="center-caption">
+                <div class="center-caption-main">F-22 Raptor</div>
+                <div class="center-caption-sub">กดไอคอนด้านซ้ายเพื่อดูการโจมตี และแสงจะวิ่งไปยังระบบเอาตัวรอด</div>
+              </div>
+            </div>
+
+            <div class="detail-mode" id="detailMode" aria-hidden="true">
+              <div class="detail-shell">
+                <div class="detail-top">
+                  <div>
+                    <div class="detail-kicker" id="detailKicker">DETAIL</div>
+                    <h3 class="detail-title" id="detailTitle">Title</h3>
+                    <p class="detail-subtitle" id="detailSubtitle">Subtitle</p>
+                  </div>
+
+                  <button class="detail-close" id="detailClose" type="button" aria-label="ปิด">×</button>
+                </div>
+
+                <div class="detail-body">
+                  <div class="detail-box">
+                    <h4>ภัยคุกคาม</h4>
+                    <p id="detailMeaning"></p>
+                  </div>
+
+                  <div class="detail-box">
+                    <h4>ระบบเอาตัวรอดที่เกี่ยวข้อง</h4>
+                    <div class="defense-tags" id="detailTags"></div>
+                  </div>
+
+                  <div class="detail-box">
+                    <h4>F-22 เอาตัวรอดอย่างไร</h4>
+                    <p id="detailProtection"></p>
+                  </div>
+
+                  <div class="detail-box">
+                    <h4>หลักการสำคัญ</h4>
+                    <p id="detailReason"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="status-bar" id="statusBar">กดไอคอนการโจมตีด้านซ้าย เพื่อดูแสงวิ่งไปยังระบบเอาตัวรอด</div>
+          </section>
+
+          <!-- RIGHT: DEFENSE -->
+          <aside class="icon-column right ready" id="systemColumn">
+
+            <article class="icon-card system-card" id="system-stealth">
+              <button class="icon-btn sound-click" type="button" data-kind="system" data-key="stealth">
+                <span class="icon-frame">
+                  <img
+                    src="images/f22-dark-mode/stealth-technology.png"
+                    data-light="images/f22-bright-mode/stealth-technology-bright-mode.png"
+                    data-dark="images/f22-dark-mode/stealth-technology.png"
+                    alt="Stealth Technology"
+                  />
+                </span>
+                <span class="icon-meta">
+                  <span class="icon-name">Stealth Technology</span>
+                  <span class="icon-sub">ลดการสะท้อนเรดาร์และลดโอกาสถูกตรวจจับ</span>
+                </span>
+              </button>
+            </article>
+
+            <article class="icon-card system-card" id="system-flare">
+              <button class="icon-btn sound-click" type="button" data-kind="system" data-key="flare">
+                <span class="icon-frame">
+                  <img
+                    src="images/f22-dark-mode/flare-dispenser.png"
+                    data-light="images/f22-bright-mode/flare-dispenser-bright-mode.png"
+                    data-dark="images/f22-dark-mode/flare-dispenser.png"
+                    alt="Flare Dispenser"
+                  />
+                </span>
+                <span class="icon-meta">
+                  <span class="icon-name">Flare Dispenser</span>
+                  <span class="icon-sub">ปล่อยเป้าลวงความร้อนเบี่ยงเบนขีปนาวุธ</span>
+                </span>
+              </button>
+            </article>
+
+            <article class="icon-card system-card" id="system-chaff">
+              <button class="icon-btn sound-click" type="button" data-kind="system" data-key="chaff">
+                <span class="icon-frame">
+                  <img
+                    src="images/f22-dark-mode/chaff-dispenser.png"
+                    data-light="images/f22-bright-mode/chaff-dispenser.png"
+                    data-dark="images/f22-dark-mode/chaff-dispenser.png"
+                    alt="Chaff Dispenser"
+                  />
+                </span>
+                <span class="icon-meta">
+                  <span class="icon-name">Chaff Dispenser</span>
+                  <span class="icon-sub">ปล่อยแถบสะท้อนเรดาร์รบกวนการล็อกเป้า</span>
+                </span>
+              </button>
+            </article>
+
+            <article class="icon-card system-card" id="system-maneuver">
+              <button class="icon-btn sound-click" type="button" data-kind="system" data-key="maneuver">
+                <span class="icon-frame">
+                  <img
+                    src="images/f22-dark-mode/high-g-maneuver.png"
+                    data-light="images/f22-bright-mode/high-g-maneuver-bright-mode.png"
+                    data-dark="images/f22-dark-mode/high-g-maneuver.png"
+                    alt="High G Maneuver"
+                  />
+                </span>
+                <span class="icon-meta">
+                  <span class="icon-name">High-G Maneuver</span>
+                  <span class="icon-sub">เปลี่ยนทิศทางและพลังงานเพื่อหลบการติดตาม</span>
+                </span>
+              </button>
+            </article>
+
+            <article class="icon-card system-card" id="system-sensor">
+              <button class="icon-btn sound-click" type="button" data-kind="system" data-key="sensor">
+                <span class="icon-frame">
+                  <img
+                    src="images/f22-dark-mode/sensor-fusion.png"
+                    data-light="images/f22-bright-mode/sensor-fusion-bright-mode.png"
+                    data-dark="images/f22-dark-mode/sensor-fusion.png"
+                    alt="Sensor Fusion"
+                  />
+                </span>
+                <span class="icon-meta">
+                  <span class="icon-name">Sensor Fusion</span>
+                  <span class="icon-sub">รวมข้อมูลเซ็นเซอร์เพื่อรับรู้ภัยก่อนตัดสินใจ</span>
+                </span>
+              </button>
+            </article>
+          </aside>
+        </section>
+
+        <div class="bottom-box survival-bottom" id="survivalBottom" hidden>
+          <strong>F-22 ไม่ได้เอาตัวรอดด้วยสเตลธ์เพียงอย่างเดียว</strong>
+          <div class="survival-principle">
+            <div class="principle-item">1. ตรวจจับก่อน<br><span>DETECT</span></div>
+            <div class="principle-item">2. วิเคราะห์เร็ว<br><span>DECIDE</span></div>
+            <div class="principle-item">3. ป้องกันตัว<br><span>DEFEND</span></div>
+            <div class="principle-item">4. หลบหลีก<br><span>EVADE</span></div>
+            <div class="principle-item">5. โจมตีกลับ<br><span>COUNTER</span></div>
+          </div>
+
+          <div class="action-bottom in-bottom-box">
+            <a href="index.html" class="action-btn secondary">หน้าแรก</a>
+            <button type="button" class="action-btn secondary sound-click" id="backToSelect">เลือกใหม่</button>
+            <a href="ssb-system.html" class="action-btn primary">ไปหน้า SSB</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/survival-compare.js?v=1"></script>
+  <audio id="clickSound" src="sounds/ui-click.mp3" preload="auto"></audio>
 </body>
 </html>
