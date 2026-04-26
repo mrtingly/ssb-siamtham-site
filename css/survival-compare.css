@@ -190,7 +190,7 @@ button{ font:inherit; }
 }
 
 .f22-select .select-img-wrap img{
-  width:min(88%, 430px);
+  width:min(70%, 320px);
   filter:drop-shadow(0 0 28px rgba(70,190,255,.45));
 }
 
