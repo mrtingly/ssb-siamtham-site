@@ -412,7 +412,7 @@ html.light-mode .action-btn.secondary{
 
 /* 🔥 FORCE SSB PHONE SIZE (FINAL OVERRIDE) */
 .logo-core{
-  width:200px !important;
+  width:100px !important;
   height:200px !important;
   overflow:visible !important;
 }
