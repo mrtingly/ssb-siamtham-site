@@ -362,7 +362,7 @@ button{
 /* ICON COLUMNS */
 .icon-column{
   position:absolute;
-  top:21%;
+  top:24%;
   transform:translateY(-50%);
   width:30%;
   display:flex;
