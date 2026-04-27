@@ -188,3 +188,47 @@
   line-height:1.45;
 }
 
+/* ACTIVE EFFECT */
+.icon-card.is-source .icon-frame{
+  filter:
+    drop-shadow(0 0 10px rgba(255,40,40,.95))
+    drop-shadow(0 0 22px rgba(255,40,40,.75));
+  animation:attackPulse .7s ease-in-out infinite;
+}
+
+.icon-card.is-target .icon-frame{
+  filter:
+    drop-shadow(0 0 10px rgba(0,220,255,.95))
+    drop-shadow(0 0 24px rgba(0,220,255,.80));
+  animation:defensePulse .7s ease-in-out infinite;
+}
+
+.icon-card.is-source .icon-name{
+  color:#ff2b2b;
+  text-shadow:0 0 12px rgba(255,40,40,.75);
+}
+
+.icon-card.is-target .icon-name{
+  color:#00d8ff;
+  text-shadow:0 0 14px rgba(0,220,255,.85);
+}
+
+@keyframes attackPulse{
+  0%,100%{
+    transform:scale(1);
+  }
+
+  50%{
+    transform:scale(1.12);
+  }
+}
+
+@keyframes defensePulse{
+  0%,100%{
+    transform:scale(1);
+  }
+
+  50%{
+    transform:scale(1.12);
+  }
+}
