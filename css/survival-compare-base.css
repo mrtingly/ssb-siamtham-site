@@ -722,3 +722,90 @@ html.light-mode .icon-column.left .icon-card::after{
   color:rgba(15,103,255,.72);
 }
 
+.ssb-footer{
+  position:relative;
+  overflow:hidden;
+  padding:18px 26px 16px;
+  background:linear-gradient(180deg,#4f8fe4 0%,#3f7fd7 52%,#3674cc 100%);
+  border-top:1px solid rgba(255,255,255,.20);
+}
+
+.footer-shell{
+  max-width:1360px;
+  margin:0 auto;
+  padding:16px 26px 14px;
+  border-radius:24px;
+  background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.05));
+  border:1px solid rgba(255,255,255,.14);
+}
+
+.footer-desktop-grid{
+  display:grid;
+  grid-template-columns:1fr 1px auto 1px 1fr;
+  align-items:center;
+  gap:22px;
+}
+
+.footer-desktop-left{text-align:left;}
+.footer-desktop-center{text-align:center;}
+.footer-desktop-right{text-align:right;}
+
+.footer-desktop-divider{
+  width:1px;
+  height:96px;
+  background:linear-gradient(180deg,transparent,rgba(255,255,255,.30),transparent);
+}
+
+.footer-company-th{
+  font-size:18px;
+  font-weight:800;
+  color:#fff;
+}
+
+.footer-company-en,
+.footer-address,
+.footer-reg,
+.footer-phone-label{
+  color:rgba(255,255,255,.88);
+}
+
+.footer-icons{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+}
+
+.footer-icons a{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+}
+
+.footer-icons img{
+  width:22px;
+  height:22px;
+}
+
+.footer-phone{
+  display:block;
+  color:#fff;
+  font-size:18px;
+  font-weight:800;
+  margin-bottom:8px;
+}
+
+.footer-bottom-line{
+  height:1px;
+  margin:16px 0 12px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.26),transparent);
+}
+
+.footer-copy{
+  text-align:center;
+  color:rgba(255,255,255,.9);
+  font-weight:700;
+}
