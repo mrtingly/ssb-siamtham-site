@@ -34,6 +34,7 @@
 
   window.addEventListener("pageshow", syncThemeImages);
 })();
+
 (function () {
   const clickSound = document.getElementById("clickSound");
 
@@ -397,31 +398,37 @@
     logoMode.classList.remove("is-hidden");
   }
 
-  function openDetail(payload) {
-    clearStates();
-    
-    if (!payload) return;
+ function openDetail(payload) {
+  if (!payload) return;
 
-    hideLogoMode();
+  clearTimeout(activeTimeout);
+  ensureSvgDefs();
 
-    detailKicker.textContent = payload.kicker || "";
-    detailTitle.textContent = payload.title || "";
-    detailSubtitle.textContent = payload.subtitle || "";
-    detailMeaning.textContent = payload.meaning || "";
-    detailProtection.textContent = payload.protection || "";
-    detailReason.textContent = payload.reason || "";
+  document.querySelectorAll(".icon-card").forEach((el) => {
+    el.classList.remove("is-source", "is-target");
+  });
 
-    detailTags.innerHTML = "";
-    (payload.tags || []).forEach((tag) => {
-      const span = document.createElement("span");
-      span.className = "defense-tag";
-      span.textContent = tag;
-      detailTags.appendChild(span);
-    });
+  logoCore.classList.remove("is-burst");
+  hideLogoMode();
 
-    detailMode.classList.add("is-open");
-    detailMode.setAttribute("aria-hidden", "false");
-  }
+  detailKicker.textContent = payload.kicker || "";
+  detailTitle.textContent = payload.title || "";
+  detailSubtitle.textContent = payload.subtitle || "";
+  detailMeaning.textContent = payload.meaning || "";
+  detailProtection.textContent = payload.protection || "";
+  detailReason.textContent = payload.reason || "";
+
+  detailTags.innerHTML = "";
+  (payload.tags || []).forEach((tag) => {
+    const span = document.createElement("span");
+    span.className = "defense-tag";
+    span.textContent = tag;
+    detailTags.appendChild(span);
+  });
+
+  detailMode.classList.add("is-open");
+  detailMode.setAttribute("aria-hidden", "false");
+}
 
   function closeDetail(silent = false) {
     detailMode.classList.remove("is-open");
@@ -505,6 +512,7 @@
 function runAttackFlow(attackKey, sourceCard) {
   const config = attackMap[attackKey];
   if (!config || !sourceCard) return;
+  if (detailMode.classList.contains("is-open")) return;
 
   closeDetail(true);
   clearStates();
