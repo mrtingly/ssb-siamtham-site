@@ -1004,3 +1004,22 @@ html.light-mode .switch-knob{
 .detail-shell{
   pointer-events:auto;
 }
+
+/* 🔥 FORCE PHONE BIG (FINAL FIX) */
+.logo-orbit-wrap{
+  overflow:visible !important;
+}
+
+.logo-core{
+  width:200px !important;
+  height:200px !important;
+  overflow:visible !important;
+}
+
+.logo-core img{
+  width:240% !important;
+  max-width:none !important;
+  height:auto !important;
+
+  transform:scale(1.25) translateY(-10px) !important;
+}
