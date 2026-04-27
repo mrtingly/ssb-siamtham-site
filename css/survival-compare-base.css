@@ -253,15 +253,15 @@ button{
   isolation:isolate;
 }
 
-.icon-column.right .icon-sub{
-  display:-webkit-box;
-  -webkit-line-clamp:2;
-  -webkit-box-orient:vertical;
+.icon-column.right .icon-name{
+  display:-webkit-box !important;
+  -webkit-line-clamp:2 !important;
+  -webkit-box-orient:vertical !important;
 
-  overflow:hidden;
-  white-space:normal;
-  line-height:1.4;
-  max-height:34px;
+  overflow:hidden !important;
+  white-space:normal !important;
+  line-height:1.4 !important;
+  max-height:38px !important;
 }
 
 /* CENTER */
