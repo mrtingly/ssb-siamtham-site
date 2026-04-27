@@ -10,25 +10,20 @@
     linear-gradient(180deg, #031022 0%, #071932 52%, #030c19 100%);
 
   --grid-line: rgba(120,180,255,.035);
-
   --text: #eaf4ff;
   --text-soft: #96b7d8;
   --title: #f8fbff;
 
-  --panel:
-    linear-gradient(180deg, rgba(8,20,44,.94), rgba(5,13,30,.96));
-
+  --panel: linear-gradient(180deg, rgba(8,20,44,.94), rgba(5,13,30,.96));
   --panel-strong:
     radial-gradient(circle at 50% 0%, rgba(95,185,255,.10), transparent 44%),
     linear-gradient(180deg, rgba(10,26,56,.96), rgba(5,14,32,.98));
 
   --border: rgba(110,190,255,.22);
   --border-strong: rgba(140,210,255,.42);
-
   --shadow: 0 18px 40px rgba(0,0,0,.34);
   --shadow-soft: 0 10px 24px rgba(0,0,0,.18);
   --glow: 0 0 22px rgba(90,180,255,.16);
-  --glow-strong: 0 0 38px rgba(90,180,255,.22);
 
   --header-bg: linear-gradient(180deg, rgba(7,22,46,.92), rgba(7,22,46,.78));
   --footer-bg: linear-gradient(180deg, #4f8fe4 0%, #3f7fd7 52%, #3674cc 100%);
@@ -46,21 +41,17 @@ html.light-mode{
     linear-gradient(180deg, #f8fbff 0%, #eef4fb 55%, #f7fbff 100%);
 
   --grid-line: rgba(40,110,180,.04);
-
   --text: #183a67;
   --text-soft: #6286ad;
   --title: #0e3567;
 
-  --panel:
-    linear-gradient(180deg, rgba(255,255,255,.97), rgba(244,248,255,.98));
-
+  --panel: linear-gradient(180deg, rgba(255,255,255,.97), rgba(244,248,255,.98));
   --panel-strong:
     radial-gradient(circle at 50% 0%, rgba(105,180,255,.08), transparent 44%),
     linear-gradient(180deg, rgba(255,255,255,.99), rgba(242,247,255,.99));
 
   --border: rgba(78,144,220,.18);
   --border-strong: rgba(78,144,220,.34);
-
   --header-bg: linear-gradient(180deg, rgba(255,255,255,.90), rgba(246,250,255,.86));
   --system-glow: rgba(15,103,255,.95);
   --logo-glow: rgba(15,103,255,.20);
@@ -139,17 +130,14 @@ button{ font:inherit; }
   padding:12px 16px;
   border-radius:24px;
   border:1px solid rgba(120,210,255,.20);
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+  background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.05),
     0 8px 22px rgba(0,0,0,.12),
     0 0 16px rgba(90,180,255,.07);
 }
 
-.hero-kicker{
-  display:none !important;
-}
+.hero-kicker{ display:none !important; }
 
 .hero-head h1{
   margin:0;
@@ -173,10 +161,11 @@ button{ font:inherit; }
   text-shadow:0 0 10px rgba(104,244,255,.22);
 }
 
+/* MAIN STAGE */
 .showcase{
   position:relative;
-  min-height:520px;
-  height:520px;
+  min-height:700px;
+  height:700px;
   z-index:2;
   overflow:hidden;
   border-radius:28px;
@@ -185,8 +174,8 @@ button{ font:inherit; }
 
 .center-stage{
   position:relative;
-  min-height:520px;
-  height:520px;
+  min-height:700px;
+  height:700px;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -194,37 +183,20 @@ button{ font:inherit; }
   z-index:12;
   padding-top:0;
   padding-bottom:0;
-  transform:translateY(-8px);
-}
-
-.logo-core{
-  width:200px !important;
-  height:200px !important;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin:0 auto;
-}
-
-.logo-core img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-
-  transform:scale(1.2); /* 🔥 ขยายอีก */
+  transform:translateY(-12px);
 }
 
 .center-aura{
   position:absolute;
-  top:46%;
+  top:47%;
   left:50%;
-  width:500px;
-  height:500px;
+  width:760px;
+  height:760px;
   transform:translate(-50%, -50%);
   border-radius:50%;
   background:
-    radial-gradient(circle, var(--logo-glow) 0%, rgba(98,188,255,0) 68%);
-  filter:blur(34px);
+    radial-gradient(circle, rgba(104,244,255,.26) 0%, rgba(98,188,255,.10) 34%, rgba(98,188,255,0) 70%);
+  filter:blur(42px);
   pointer-events:none;
   z-index:2;
 }
@@ -241,8 +213,51 @@ button{ font:inherit; }
   pointer-events:none;
 }
 
+/* BIG SSBMS SMARTPHONE */
+.logo-core{
+  width:420px !important;
+  height:420px !important;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto;
+  border:0;
+  background:transparent;
+  cursor:pointer;
+  filter:
+    drop-shadow(0 0 22px rgba(104,244,255,.42))
+    drop-shadow(0 0 46px rgba(0,140,255,.22));
+}
+
+.logo-core img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  transform:scale(1.15);
+}
+
+.logo-orbit-wrap{
+  width:520px !important;
+  height:520px !important;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.logo-orbit-svg{
+  position:absolute;
+  width:520px !important;
+  height:520px !important;
+}
+
+.logo-radar-grid,
+.logo-radar-cross,
+.logo-radar-layer{
+  inset:46px !important;
+}
+
 .center-caption{
-  margin-top:6px;
+  margin-top:-20px;
   text-align:center;
   position:relative;
   z-index:6;
@@ -250,15 +265,15 @@ button{ font:inherit; }
 
 .center-caption-main{
   color:var(--title);
-  font-size:26px;
+  font-size:30px;
   line-height:1.18;
-  font-weight:800;
+  font-weight:900;
 }
 
 .center-caption-sub{
   margin-top:3px;
   color:var(--text-soft);
-  font-size:14px;
+  font-size:15px;
   line-height:1.45;
 }
 
@@ -267,12 +282,13 @@ button{ font:inherit; }
   min-height:24px;
   text-align:center;
   color:var(--system-glow);
-  font-size:14px;
-  font-weight:700;
+  font-size:15px;
+  font-weight:800;
   position:relative;
   z-index:6;
 }
 
+/* BOTTOM */
 .bottom-box{
   margin-top:6px;
   border-radius:28px;
@@ -297,9 +313,7 @@ button{ font:inherit; }
   font-weight:800;
 }
 
-.bottom-box span{
-  display:none;
-}
+.bottom-box span{ display:none; }
 
 .action-bottom{
   display:flex;
