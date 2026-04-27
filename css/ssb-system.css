@@ -214,26 +214,34 @@ button{ font:inherit; }
 }
 
 /* BIG SSBMS SMARTPHONE */
+/* === CORE (กรอบมือถือ) === */
 .logo-core{
-  width:420px !important;
-  height:420px !important;
+  width:200px !important;
+  height:200px !important;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   margin:0 auto;
   border:0;
   background:transparent;
   cursor:pointer;
+
+  overflow:visible; /* 🔥 สำคัญ ไม่งั้นมือถือโดนตัด */
+
   filter:
     drop-shadow(0 0 22px rgba(104,244,255,.42))
     drop-shadow(0 0 46px rgba(0,140,255,.22));
 }
 
+/* === ขยาย “ตัวมือถือจริง” === */
 .logo-core img{
-  width:100%;
-  height:100%;
+  width:200% !important;   /* 🔥 ตรงนี้คือขยายมือถือ */
+  height:auto;
   object-fit:contain;
-  transform:scale(1.15);
+
+  transform:translateY(-8px); /* ปรับตำแหน่งให้อยู่กลาง */
 }
 
 .logo-orbit-wrap{
