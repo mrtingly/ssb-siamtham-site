@@ -993,8 +993,14 @@ html.light-mode .switch-knob{
   }
 }
 
-.icon-column,
-.icon-card,
-.center-stage{
-  z-index:1 !important;
+.detail-mode{
+  z-index:99999 !important;
+}
+
+.center-stage:has(.detail-mode.is-open){
+  z-index:99999 !important;
+}
+
+.detail-mode.is-open{
+  pointer-events:auto !important;
 }
