@@ -646,8 +646,10 @@ button{
 /* DETAIL POPUP - SSB STYLE */
 .detail-mode{
   position:absolute;
-  inset:52px 345px 120px;
-  z-index:999;
+  inset:52px 300px 120px;
+
+  z-index:9999; /* 🔥 ดันขึ้นบนสุด */
+
   opacity:0;
   pointer-events:none;
   transform:translateY(12px) scale(.98);
@@ -989,4 +991,10 @@ html.light-mode .switch-knob{
   .action-btn{
     width:100%;
   }
+}
+
+.icon-column,
+.icon-card,
+.center-stage{
+  z-index:1 !important;
 }
