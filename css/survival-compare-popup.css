@@ -116,3 +116,15 @@
   font-weight:800;
   font-size:13px;
 }
+
+.detail-mode{
+  pointer-events:none;
+}
+
+.detail-mode.is-open{
+  pointer-events:none;
+}
+
+.detail-shell{
+  pointer-events:auto;
+}
