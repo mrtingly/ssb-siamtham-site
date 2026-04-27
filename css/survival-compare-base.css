@@ -644,5 +644,81 @@ html.light-mode .switch-knob{
   }
 }
 
+/* === SUPER ULTIMATE SURVIVAL PAGE POLISH === */
 
+.survival-main{
+  padding:10px 16px 14px;
+}
+
+.survival-card{
+  max-width:1360px;
+  margin:0 auto;
+}
+
+.survival-showcase{
+  min-height:620px;
+  height:620px;
+}
+
+.center-stage{
+  min-height:620px;
+  height:620px;
+  transform:translateY(-42px);
+}
+
+.icon-column{
+  top:42%;
+}
+
+.icon-column.right .icon-sub{
+  display:-webkit-box !important;
+  -webkit-line-clamp:2 !important;
+  -webkit-box-orient:vertical !important;
+  overflow:hidden !important;
+  white-space:normal !important;
+  line-height:1.38 !important;
+  max-height:34px !important;
+}
+
+.icon-column.right .icon-card::after,
+.icon-column.left .icon-card::after{
+  content:"คลิ๊ก 2 ครั้งเพื่ออ่านรายละเอียด";
+  display:block;
+  margin-top:-6px;
+  padding-right:82px;
+  font-size:10.5px;
+  line-height:1.2;
+  color:rgba(104,244,255,.72);
+  opacity:.82;
+  text-align:right;
+}
+
+.icon-column.left .icon-card::after{
+  padding-left:82px;
+  padding-right:0;
+  text-align:left;
+}
+
+.survival-bottom{
+  margin-top:-52px;
+  position:relative;
+  z-index:8;
+}
+
+.survival-principle{
+  margin-bottom:12px;
+}
+
+.principle-item{
+  min-height:54px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+html.light-mode .icon-column.right .icon-card::after,
+html.light-mode .icon-column.left .icon-card::after{
+  color:rgba(15,103,255,.72);
+}
 
