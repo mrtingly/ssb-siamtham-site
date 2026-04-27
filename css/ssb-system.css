@@ -197,6 +197,23 @@ button{ font:inherit; }
   transform:translateY(-8px);
 }
 
+.logo-core{
+  width:200px !important;
+  height:200px !important;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto;
+}
+
+.logo-core img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+
+  transform:scale(1.2); /* 🔥 ขยายอีก */
+}
+
 .center-aura{
   position:absolute;
   top:46%;
