@@ -289,7 +289,7 @@ button{ font:inherit; }
   position:absolute;
   inset:0;
   pointer-events:none;
-  z-index:40;
+  z-index:1;
 }
 
 .beam-svg{
@@ -330,7 +330,7 @@ button{ font:inherit; }
 
 .icon-column{
   position:absolute;
-  top:8%;
+  top:22%;
   transform:translateY(-50%);
   width:30%;
   display:flex;
