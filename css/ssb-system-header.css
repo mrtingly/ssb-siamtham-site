@@ -319,7 +319,7 @@
 }
 
 html.light-mode .switch-knob{
-  transform:translateX(28px, -50%);
+  transform:translate(28px, -50%);
 }
 
 /* =========================
