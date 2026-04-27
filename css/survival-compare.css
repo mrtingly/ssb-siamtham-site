@@ -994,13 +994,13 @@ html.light-mode .switch-knob{
 }
 
 .detail-mode{
-  z-index:99999 !important;
-}
-
-.center-stage:has(.detail-mode.is-open){
-  z-index:99999 !important;
+  pointer-events:none;
 }
 
 .detail-mode.is-open{
-  pointer-events:auto !important;
+  pointer-events:none;
+}
+
+.detail-shell{
+  pointer-events:auto;
 }
