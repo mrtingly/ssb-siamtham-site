@@ -253,17 +253,6 @@ button{
   isolation:isolate;
 }
 
-.icon-column.right .icon-name{
-  display:-webkit-box !important;
-  -webkit-line-clamp:2 !important;
-  -webkit-box-orient:vertical !important;
-
-  overflow:hidden !important;
-  white-space:normal !important;
-  line-height:1.4 !important;
-  max-height:38px !important;
-}
-
 /* CENTER */
 .center-stage{
   position:relative;
@@ -554,32 +543,6 @@ html.light-mode .action-btn.secondary{
   transform:translateY(-3px);
 }
 
-/* THEME SWITCH FIX */
-.theme-switch{
-  width:56px;
-  height:28px;
-  border-radius:999px;
-  background:rgba(255,255,255,.15);
-  border:1px solid rgba(255,255,255,.25);
-  position:relative;
-  transition:.25s;
-}
-
-.switch-knob{
-  position:absolute;
-  top:2px;
-  left:2px;
-  width:24px;
-  height:24px;
-  border-radius:50%;
-  background:#fff;
-  transition:.25s;
-}
-
-html.light-mode .switch-knob{
-  transform:translateX(28px);
-}
-
 /* MOBILE */
 @media (max-width:1023px){
   .survival-card{
@@ -808,4 +771,66 @@ html.light-mode .icon-column.left .icon-card::after{
   text-align:center;
   color:rgba(255,255,255,.9);
   font-weight:700;
+}
+
+/* FIX TEXT RIGHT SIDE */
+.icon-column.right .icon-name{
+  white-space:normal !important;
+}
+
+.icon-column.right .icon-sub{
+  display:-webkit-box !important;
+  -webkit-line-clamp:2 !important;
+  -webkit-box-orient:vertical !important;
+
+  overflow:hidden !important;
+  white-space:normal !important;
+  line-height:1.4 !important;
+
+  max-width:200px !important;
+  text-align:right !important;
+}
+
+.icon-column.right .icon-btn{
+  align-items:flex-start !important;
+}
+
+.icon-column.right .icon-meta{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  max-width:220px;
+}
+
+/* FINAL FIX: right icon subtitle 2 lines */
+.icon-column.right .icon-btn{
+  align-items:center !important;
+}
+
+.icon-column.right .icon-meta{
+  max-width:210px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-end !important;
+}
+
+.icon-column.right .icon-sub{
+  display:-webkit-box !important;
+  -webkit-line-clamp:2 !important;
+  -webkit-box-orient:vertical !important;
+  overflow:hidden !important;
+  white-space:normal !important;
+  line-height:1.35 !important;
+  max-height:34px !important;
+  text-align:right !important;
+}
+
+/* FINAL FIX: theme switch knob */
+.switch-knob{
+  top:50% !important;
+  transform:translateY(-50%) !important;
+}
+
+html.light-mode .switch-knob{
+  transform:translate(28px, -50%) !important;
 }
