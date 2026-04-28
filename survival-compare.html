@@ -30,21 +30,90 @@
   <link rel="stylesheet" href="css/layout.css" />
   <link rel="stylesheet" href="css/components.css" />
   <link rel="stylesheet" href="css/responsive.css" />
+  <link rel="stylesheet" href="css/ssb-system-header.css" />
 
-  <link rel="stylesheet" href="css/survival-compare-base.css?v=1">
-  <link rel="stylesheet" href="css/survival-compare-popup.css?v=1">
-  <link rel="stylesheet" href="css/survival-compare-effects.css?v=1">
+  <link rel="stylesheet" href="css/survival-compare-base.css?v=1" />
+  <link rel="stylesheet" href="css/survival-compare-popup.css?v=1" />
+  <link rel="stylesheet" href="css/survival-compare-effects.css?v=1" />
 </head>
 
 <body>
   <div class="site-wrap">
+
+    <header class="ssb-topbar" role="banner">
+      <div class="topbar-inner">
+        <div class="brand-wrap">
+          <div class="brand-logo">
+            <img src="images/logo.png" alt="Stealth Safety Bank Logo" loading="lazy" />
+          </div>
+
+          <div class="brand-text">
+            <div class="brand-line-1 th-font">บริษัท สยามทำ จำกัด</div>
+            <div class="brand-line-2 en-font">Siam Tham Co.,Ltd.</div>
+            <div class="brand-site en-font">
+              <a href="https://www.siamtham.com" target="_blank" rel="noopener">www.siamtham.com</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="header-search-wrap">
+          <form class="header-search" id="agentSearchForm" autocomplete="off" role="search" aria-label="ค้นหาตัวแทน">
+            <svg class="header-search-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="2"></circle>
+              <path d="M16 16L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+            </svg>
+
+            <input
+              id="agentSearchInput"
+              class="header-search-input"
+              type="text"
+              placeholder="ค้นหาตัวแทน / Search agent"
+              aria-label="ค้นหาตัวแทน"
+            />
+
+            <button class="header-search-btn sound-click" type="submit">ค้นหา</button>
+          </form>
+
+          <div class="agent-dropdown" id="agentDropdown" aria-live="polite">
+            <div class="agent-dropdown-card">
+              <div class="agent-dropdown-head th-font">ผลการค้นหาตัวแทน</div>
+              <div class="agent-results" id="agentResults"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <a href="index.html" class="home-btn sound-click">หน้าแรก</a>
+
+          <div class="theme-switch-wrap" id="desktopThemeSwitch">
+            <span class="mode-label">Dark</span>
+            <button id="themeToggle" class="theme-switch" type="button" aria-label="Toggle theme">
+              <span class="switch-knob"></span>
+            </button>
+            <span class="mode-label">Light</span>
+          </div>
+
+          <div class="lang-bar" aria-label="เลือกภาษา">
+            <button class="lang-btn sound-click active" type="button" data-lang="th" title="ไทย">
+              <img src="https://flagcdn.com/w40/th.png" alt="ไทย" loading="lazy" />
+            </button>
+            <button class="lang-btn sound-click" type="button" data-lang="en" title="English">
+              <img src="https://flagcdn.com/w40/us.png" alt="English" loading="lazy" />
+            </button>
+          </div>
+
+          <div id="google_translate_element"></div>
+        </div>
+      </div>
+    </header>
+
     <main class="main-content survival-main">
       <section class="hero-card survival-card">
+
         <div class="hero-head survival-head">
           <h1>F-22 RAPTOR SURVIVAL SYSTEM</h1>
         </div>
 
-        <!-- MODE SELECT -->
         <section class="survival-select" id="survivalSelect">
           <div class="select-title">
             <div class="select-kicker">SELECT SURVIVAL MODEL</div>
@@ -56,10 +125,7 @@
             <button class="select-card f22-select sound-click" type="button" id="selectF22">
               <div class="select-img-wrap">
                 <picture>
-                  <source
-                    srcset="images/f22-bright-mode/f-22-raptor-bright-mode.png"
-                    media="(prefers-color-scheme: light)"
-                  />
+                  <source srcset="images/f22-bright-mode/f-22-raptor-bright-mode.png" media="(prefers-color-scheme: light)" />
                   <img
                     class="theme-img"
                     src="images/f22-dark-mode/F-22-raptor.png"
@@ -90,7 +156,6 @@
           </div>
         </section>
 
-        <!-- F22 SYSTEM -->
         <section class="showcase survival-showcase" id="showcase" hidden>
 
           <div class="beam-rail" aria-hidden="true">
@@ -103,18 +168,11 @@
             <svg class="beam-svg" id="beamSvg"></svg>
           </div>
 
-          <!-- LEFT: ATTACK -->
           <aside class="icon-column left ready" id="attackColumn">
-
             <article class="icon-card attack-card" id="attack-radar">
               <button class="icon-btn sound-click" type="button" data-kind="attack" data-key="radar">
                 <span class="icon-frame">
-                  <img
-                    src="images/f22-dark-mode/radar-detection.png"
-                    data-light="images/f22-bright-mode/radar-bright-mode.png"
-                    data-dark="images/f22-dark-mode/radar-detection.png"
-                    alt="Radar Detection"
-                  />
+                  <img src="images/f22-dark-mode/radar-detection.png" data-light="images/f22-bright-mode/radar-bright-mode.png" data-dark="images/f22-dark-mode/radar-detection.png" alt="Radar Detection" />
                 </span>
                 <span class="icon-meta">
                   <span class="icon-name">Radar Detection</span>
@@ -126,12 +184,7 @@
             <article class="icon-card attack-card" id="attack-sam">
               <button class="icon-btn sound-click" type="button" data-kind="attack" data-key="sam">
                 <span class="icon-frame">
-                  <img
-                    src="images/f22-dark-mode/surface-to-air-missile.png"
-                    data-light="images/f22-bright-mode/surface-to-air-missile-bright-mode.png"
-                    data-dark="images/f22-dark-mode/surface-to-air-missile.png"
-                    alt="Surface to Air Missile"
-                  />
+                  <img src="images/f22-dark-mode/surface-to-air-missile.png" data-light="images/f22-bright-mode/surface-to-air-missile-bright-mode.png" data-dark="images/f22-dark-mode/surface-to-air-missile.png" alt="Surface to Air Missile" />
                 </span>
                 <span class="icon-meta">
                   <span class="icon-name">Surface to Air Missile</span>
@@ -143,12 +196,7 @@
             <article class="icon-card attack-card" id="attack-aam">
               <button class="icon-btn sound-click" type="button" data-kind="attack" data-key="aam">
                 <span class="icon-frame">
-                  <img
-                    src="images/f22-dark-mode/air-to-air-missile.png"
-                    data-light="images/f22-bright-mode/air-to-air-missile-bright-mode.png"
-                    data-dark="images/f22-dark-mode/air-to-air-missile.png"
-                    alt="Air to Air Missile"
-                  />
+                  <img src="images/f22-dark-mode/air-to-air-missile.png" data-light="images/f22-bright-mode/air-to-air-missile-bright-mode.png" data-dark="images/f22-dark-mode/air-to-air-missile.png" alt="Air to Air Missile" />
                 </span>
                 <span class="icon-meta">
                   <span class="icon-name">Air to Air Missile</span>
@@ -160,12 +208,7 @@
             <article class="icon-card attack-card" id="attack-gun">
               <button class="icon-btn sound-click" type="button" data-kind="attack" data-key="gun">
                 <span class="icon-frame">
-                  <img
-                    src="images/f22-dark-mode/anti-aircraft-gun.png"
-                    data-light="images/f22-bright-mode/anti-aircraft-gun-bright-mode.png"
-                    data-dark="images/f22-dark-mode/anti-aircraft-gun.png"
-                    alt="Anti Aircraft Gun"
-                  />
+                  <img src="images/f22-dark-mode/anti-aircraft-gun.png" data-light="images/f22-bright-mode/anti-aircraft-gun-bright-mode.png" data-dark="images/f22-dark-mode/anti-aircraft-gun.png" alt="Anti Aircraft Gun" />
                 </span>
                 <span class="icon-meta">
                   <span class="icon-name">Anti Aircraft Gun</span>
@@ -177,12 +220,7 @@
             <article class="icon-card attack-card" id="attack-ir">
               <button class="icon-btn sound-click" type="button" data-kind="attack" data-key="ir">
                 <span class="icon-frame">
-                  <img
-                    src="images/f22-dark-mode/visual-ir-tracking.png"
-                    data-light="images/f22-bright-mode/visual-ir-tracking-bright-mode.png"
-                    data-dark="images/f22-dark-mode/visual-ir-tracking.png"
-                    alt="Visual IR Tracking"
-                  />
+                  <img src="images/f22-dark-mode/visual-ir-tracking.png" data-light="images/f22-bright-mode/visual-ir-tracking-bright-mode.png" data-dark="images/f22-dark-mode/visual-ir-tracking.png" alt="Visual IR Tracking" />
                 </span>
                 <span class="icon-meta">
                   <span class="icon-name">Visual / IR Tracking</span>
@@ -192,7 +230,6 @@
             </article>
           </aside>
 
-          <!-- CENTER -->
           <section class="center-stage" id="centerStage">
             <div class="center-aura"></div>
 
@@ -220,7 +257,7 @@
 
               <div class="center-caption">
                 <div class="center-caption-main">F-22 Raptor</div>
-                <div class="center-caption-sub">กดไอคอนด้านซ้ายเพื่อดูการโจมตี และแสงจะวิ่งไปยังระบบเอาตัวรอด</div>
+                <div class="center-caption-sub">กดไอคอนด้านซ้ายเพื่อดูการโจมตี และดับเบิลคลิกเพื่ออ่านรายละเอียด</div>
               </div>
             </div>
 
@@ -263,18 +300,11 @@
             <div class="status-bar" id="statusBar">กดไอคอนการโจมตีด้านซ้าย เพื่อดูแสงวิ่งไปยังระบบเอาตัวรอด</div>
           </section>
 
-          <!-- RIGHT: DEFENSE -->
           <aside class="icon-column right ready" id="systemColumn">
-
             <article class="icon-card system-card" id="system-stealth">
               <button class="icon-btn sound-click" type="button" data-kind="system" data-key="stealth">
                 <span class="icon-frame">
-                  <img
-                    src="images/f22-dark-mode/stealth-technology.png"
-                    data-light="images/f22-bright-mode/stealth-technology-bright-mode.png"
-                    data-dark="images/f22-dark-mode/stealth-technology.png"
-                    alt="Stealth Technology"
-                  />
+                  <img src="images/f22-dark-mode/stealth-technology.png" data-light="images/f22-bright-mode/stealth-technology-bright-mode.png" data-dark="images/f22-dark-mode/stealth-technology.png" alt="Stealth Technology" />
                 </span>
                 <span class="icon-meta">
                   <span class="icon-name">Stealth Technology</span>
@@ -286,12 +316,7 @@
             <article class="icon-card system-card" id="system-flare">
               <button class="icon-btn sound-click" type="button" data-kind="system" data-key="flare">
                 <span class="icon-frame">
-                  <img
-                    src="images/f22-dark-mode/flare-dispenser.png"
-                    data-light="images/f22-bright-mode/flare-dispenser-bright-mode.png"
-                    data-dark="images/f22-dark-mode/flare-dispenser.png"
-                    alt="Flare Dispenser"
-                  />
+                  <img src="images/f22-dark-mode/flare-dispenser.png" data-light="images/f22-bright-mode/flare-dispenser-bright-mode.png" data-dark="images/f22-dark-mode/flare-dispenser.png" alt="Flare Dispenser" />
                 </span>
                 <span class="icon-meta">
                   <span class="icon-name">Flare Dispenser</span>
@@ -303,12 +328,7 @@
             <article class="icon-card system-card" id="system-chaff">
               <button class="icon-btn sound-click" type="button" data-kind="system" data-key="chaff">
                 <span class="icon-frame">
-                  <img
-                    src="images/f22-dark-mode/chaff-dispenser.png"
-                    data-light="images/f22-bright-mode/chaff-dispenser.png"
-                    data-dark="images/f22-dark-mode/chaff-dispenser.png"
-                    alt="Chaff Dispenser"
-                  />
+                  <img src="images/f22-dark-mode/chaff-dispenser.png" data-light="images/f22-bright-mode/chaff-dispenser.png" data-dark="images/f22-dark-mode/chaff-dispenser.png" alt="Chaff Dispenser" />
                 </span>
                 <span class="icon-meta">
                   <span class="icon-name">Chaff Dispenser</span>
@@ -320,12 +340,7 @@
             <article class="icon-card system-card" id="system-maneuver">
               <button class="icon-btn sound-click" type="button" data-kind="system" data-key="maneuver">
                 <span class="icon-frame">
-                  <img
-                    src="images/f22-dark-mode/high-g-maneuver.png"
-                    data-light="images/f22-bright-mode/high-g-maneuver-bright-mode.png"
-                    data-dark="images/f22-dark-mode/high-g-meneuver.png"
-                    alt="High G Maneuver"
-                  />
+                  <img src="images/f22-dark-mode/high-g-maneuver.png" data-light="images/f22-bright-mode/high-g-maneuver-bright-mode.png" data-dark="images/f22-dark-mode/high-g-maneuver.png" alt="High G Maneuver" />
                 </span>
                 <span class="icon-meta">
                   <span class="icon-name">High-G Maneuver</span>
@@ -337,12 +352,7 @@
             <article class="icon-card system-card" id="system-sensor">
               <button class="icon-btn sound-click" type="button" data-kind="system" data-key="sensor">
                 <span class="icon-frame">
-                  <img
-                    src="images/f22-dark-mode/sensor-fusion.png"
-                    data-light="images/f22-bright-mode/sensor-fusion-bright-mode.png"
-                    data-dark="images/f22-dark-mode/sensor-fusion.png"
-                    alt="Sensor Fusion"
-                  />
+                  <img src="images/f22-dark-mode/sensor-fusion.png" data-light="images/f22-bright-mode/sensor-fusion-bright-mode.png" data-dark="images/f22-dark-mode/sensor-fusion.png" alt="Sensor Fusion" />
                 </span>
                 <span class="icon-meta">
                   <span class="icon-name">Sensor Fusion</span>
@@ -355,6 +365,7 @@
 
         <div class="bottom-box survival-bottom" id="survivalBottom" hidden>
           <strong>F-22 ไม่ได้เอาตัวรอดด้วยสเตลธ์เพียงอย่างเดียว</strong>
+
           <div class="survival-principle">
             <div class="principle-item">1. ตรวจจับก่อน<br><span>DETECT</span></div>
             <div class="principle-item">2. วิเคราะห์เร็ว<br><span>DECIDE</span></div>
@@ -371,60 +382,66 @@
         </div>
       </section>
     </main>
-  </div>
 
-  <footer class="ssb-footer">
-  <div class="footer-shell">
-    <div class="footer-desktop-grid">
-      <div class="footer-desktop-col footer-desktop-left">
-        <div class="footer-company-th">บริษัท สยามทำ จำกัด</div>
-        <div class="footer-company-en">Siamtham Co.,Ltd.</div>
-        <div class="footer-address">54 ซอย 53 ถนนพุทธมณฑลสาย 1</div>
-        <div class="footer-address">แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ</div>
-        <div class="footer-reg">เลขทะเบียน 0105566099954</div>
-      </div>
+    <footer class="ssb-footer">
+      <div class="footer-shell">
+        <div class="footer-desktop-grid">
+          <div class="footer-desktop-col footer-desktop-left">
+            <div class="footer-company-th">บริษัท สยามทำ จำกัด</div>
+            <div class="footer-company-en">Siamtham Co.,Ltd.</div>
+            <div class="footer-address">54 ซอย 53 ถนนพุทธมณฑลสาย 1</div>
+            <div class="footer-address">แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ</div>
+            <div class="footer-reg">เลขทะเบียน 0105566099954</div>
+          </div>
 
-      <div class="footer-desktop-divider" aria-hidden="true"></div>
+          <div class="footer-desktop-divider" aria-hidden="true"></div>
 
-      <div class="footer-desktop-col footer-desktop-center">
-        <div class="footer-icons">
-          <a href="https://maps.app.goo.gl/Dz4B1kpqVbmWhkYX7" target="_blank" rel="noopener" aria-label="Map">
-            <img src="https://cdn.simpleicons.org/googlemaps/EA4335" alt="Map">
-          </a>
-          <a href="https://line.me/R/ti/p/@siamtham" target="_blank" rel="noopener" aria-label="LINE">
-            <img src="https://cdn.simpleicons.org/line/06C755" alt="LINE">
-          </a>
-          <a href="https://www.facebook.com/profile.php?id=61556844339863" target="_blank" rel="noopener" aria-label="Facebook">
-            <img src="https://cdn.simpleicons.org/facebook/1877F2" alt="Facebook">
-          </a>
-          <a href="https://www.youtube.com/@siamtham" target="_blank" rel="noopener" aria-label="YouTube">
-            <img src="https://cdn.simpleicons.org/youtube/FF0000" alt="YouTube">
-          </a>
-          <a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">
-            <img src="https://cdn.simpleicons.org/tiktok/000000" alt="TikTok">
-          </a>
+          <div class="footer-desktop-col footer-desktop-center">
+            <div class="footer-icons">
+              <a href="https://maps.app.goo.gl/Dz4B1kpqVbmWhkYX7" target="_blank" rel="noopener" aria-label="Map">
+                <img src="https://cdn.simpleicons.org/googlemaps/EA4335" alt="Map" />
+              </a>
+              <a href="https://line.me/R/ti/p/@siamtham" target="_blank" rel="noopener" aria-label="LINE">
+                <img src="https://cdn.simpleicons.org/line/06C755" alt="LINE" />
+              </a>
+              <a href="https://www.facebook.com/profile.php?id=61556844339863" target="_blank" rel="noopener" aria-label="Facebook">
+                <img src="https://cdn.simpleicons.org/facebook/1877F2" alt="Facebook" />
+              </a>
+              <a href="https://www.youtube.com/@siamtham" target="_blank" rel="noopener" aria-label="YouTube">
+                <img src="https://cdn.simpleicons.org/youtube/FF0000" alt="YouTube" />
+              </a>
+              <a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">
+                <img src="https://cdn.simpleicons.org/tiktok/000000" alt="TikTok" />
+              </a>
+            </div>
+          </div>
+
+          <div class="footer-desktop-divider" aria-hidden="true"></div>
+
+          <div class="footer-desktop-col footer-desktop-right">
+            <div class="footer-phone-label">เบอร์โทรศัพท์</div>
+            <a class="footer-phone" href="tel:020432988">02-043-2988</a>
+            <a class="footer-phone" href="tel:0649514888">064-951-4888</a>
+          </div>
+        </div>
+
+        <div class="footer-bottom-line"></div>
+
+        <div class="footer-copy">
+          <div>@ Stealth Safety Bank Mobile System</div>
+          <div>BY Mr.Tingly Marketing Online</div>
         </div>
       </div>
-
-      <div class="footer-desktop-divider" aria-hidden="true"></div>
-
-      <div class="footer-desktop-col footer-desktop-right">
-        <div class="footer-phone-label">เบอร์โทรศัพท์</div>
-        <a class="footer-phone" href="tel:020432988">02-043-2988</a>
-        <a class="footer-phone" href="tel:0649514888">064-951-4888</a>
-      </div>
-    </div>
-
-    <div class="footer-bottom-line"></div>
-
-    <div class="footer-copy">
-      <div>@ Stealth Safety Bank Mobile System</div>
-      <div>BY Mr.Tingly Marketing Online</div>
-    </div>
+    </footer>
   </div>
-</footer>
-  
+
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/popup.js"></script>
+  <script src="js/main.js"></script>
   <script src="js/survival-compare.js?v=1"></script>
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
   <audio id="clickSound" src="sounds/ui-click.mp3" preload="auto"></audio>
 </body>
 </html>
