@@ -643,19 +643,6 @@ html.light-mode .action-btn.secondary{
   max-height:34px !important;
 }
 
-.icon-column.right .icon-card::after,
-.icon-column.left .icon-card::after{
-  content:"คลิ๊ก 2 ครั้งเพื่ออ่านรายละเอียด";
-  display:block;
-  margin-top:-6px;
-  padding-right:82px;
-  font-size:10.5px;
-  line-height:1.2;
-  color:rgba(104,244,255,.72);
-  opacity:.82;
-  text-align:right;
-}
-
 .icon-column.left .icon-card::after{
   padding-left:82px;
   padding-right:0;
@@ -833,4 +820,13 @@ html.light-mode .icon-column.left .icon-card::after{
 
 html.light-mode .switch-knob{
   transform:translate(28px, -50%) !important;
+}
+
+.center-hint{
+  margin-top:6px;
+  font-size:12px;
+  color:rgba(104,244,255,.75);
+  opacity:.85;
+  text-align:center;
+  letter-spacing:.2px;
 }
