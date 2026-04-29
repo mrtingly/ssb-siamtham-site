@@ -2,26 +2,36 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Agent Login</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agent Login | SSBMS</title>
+  <link rel="icon" href="images/logo.png" />
+  <link rel="stylesheet" href="css/agent-login.css" />
 </head>
-<body class="bg-slate-50 text-slate-900">
-  <main class="max-w-md mx-auto px-4 py-10">
-    <div class="bg-white border rounded-2xl shadow-sm p-6">
-      <h1 class="text-2xl font-bold mb-4">Agent Login</h1>
 
-      <div id="statusBox" class="hidden mb-4 p-3 rounded-lg border"></div>
+<body>
+  <main class="login-page">
+    <section class="login-card">
+      <img src="images/logo.png" class="login-logo" alt="SSB Logo" />
 
-      <input id="agentCode" class="border rounded-lg p-2 w-full mb-3" placeholder="Agent Code" />
-      <input id="agentPhone" class="border rounded-lg p-2 w-full mb-4" placeholder="Phone Number" />
+      <h1>Agent Login</h1>
+      <p>เข้าสู่ระบบตัวแทน Stealth Safety Bank</p>
 
-      <button id="btnLogin" class="w-full bg-blue-600 text-white rounded-xl py-3 hover:opacity-90">
-        Login
-      </button>
-    </div>
+      <form class="login-form" action="agent-dashboard.html">
+        <label>
+          รหัสตัวแทน / อีเมล
+          <input type="text" required placeholder="AGT-0001 หรือ Email" />
+        </label>
+
+        <label>
+          รหัสผ่าน
+          <input type="password" required placeholder="Password" />
+        </label>
+
+        <button type="submit">เข้าสู่ระบบ</button>
+      </form>
+
+      <a href="agent-register.html" class="register-link">สมัครเป็นตัวแทน</a>
+    </section>
   </main>
-
-  <script type="module" src="js/agentLogin.js"></script>
 </body>
 </html>
