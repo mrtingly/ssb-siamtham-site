@@ -14,7 +14,7 @@
 
     <aside class="agent-sidebar">
       <div class="brand-box">
-        <img src="images/logo.png" alt="SSB Logo" />
+        <img src="images/logo.png" />
         <div>
           <strong>SSBMS</strong>
           <span>Agent System</span>
@@ -47,52 +47,56 @@
 
       <section class="dashboard-grid">
 
+        <!-- Agent Card -->
         <div class="agent-card">
           <div class="card-glow"></div>
 
           <div class="agent-photo">
-            <img src="images/logo.png" alt="Agent Photo" />
+            <img src="images/logo.png" />
           </div>
 
-          <h2>รัตนชัย คำช่วง</h2>
-          <div class="agent-code">AGT-0001</div>
+          <h2 class="agent-name">-</h2>
+          <div class="agent-code">-</div>
 
           <div class="agent-status approved">APPROVED</div>
 
           <div class="agent-info">
-            <p><b>โทร:</b> 064-951-4888</p>
-            <p><b>Email:</b> mysiamtham@gmail.com</p>
-            <p><b>LINE:</b> @siamtham</p>
-            <p><b>Team Manager:</b> Manager A</p>
-            <p><b>AM:</b> Bangkok Area</p>
-            <p><b>บัญชี:</b> XXX-X-XXXXX-X</p>
+            <p><b>โทร:</b> <span class="agent-phone">-</span></p>
+            <p><b>Email:</b> <span class="agent-email">-</span></p>
+            <p><b>LINE:</b> <span>-</span></p>
+            <p><b>Team Manager:</b> <span>-</span></p>
+            <p><b>AM:</b> <span>-</span></p>
+            <p><b>บัญชี:</b> <span>-</span></p>
           </div>
 
           <div class="qr-box">QR</div>
         </div>
 
+        <!-- Summary -->
         <div class="summary-area">
 
           <div class="money-cards">
+
             <div class="money-card">
               <span>รายได้รวมทั้งหมด</span>
-              <strong>฿1,250,000</strong>
+              <strong class="total-income">0</strong>
             </div>
 
             <div class="money-card highlight">
               <span>ถอนได้ตอนนี้</span>
-              <strong>฿320,000</strong>
+              <strong class="available">0</strong>
             </div>
 
             <div class="money-card">
               <span>รอครบ 7 วัน</span>
-              <strong>฿180,000</strong>
+              <strong class="waiting">0</strong>
             </div>
 
             <div class="money-card">
               <span>โบนัสเดือนนี้</span>
-              <strong>฿45,000</strong>
+              <strong class="bonus">0</strong>
             </div>
+
           </div>
 
           <section class="income-panel">
@@ -100,29 +104,27 @@
               <h2>ผังรายได้ประจำเดือน</h2>
               <select>
                 <option>เมษายน 2026</option>
-                <option>มีนาคม 2026</option>
-                <option>กุมภาพันธ์ 2026</option>
               </select>
             </div>
 
             <div class="income-row">
               <span>คอมมิชชั่น</span>
-              <b>฿750,000</b>
+              <b class="commission">0</b>
             </div>
 
             <div class="income-row">
-              <span>โบนัสจากบริษัท</span>
-              <b>฿45,000</b>
+              <span>โบนัส</span>
+              <b class="bonus-detail">0</b>
             </div>
 
             <div class="income-row tax">
-              <span>ภาษีหัก ณ ที่จ่าย 3%</span>
-              <b>- ฿23,850</b>
+              <span>ภาษี</span>
+              <b class="tax">0</b>
             </div>
 
             <div class="income-total">
               <span>ยอดสุทธิ</span>
-              <strong>฿771,150</strong>
+              <strong class="net">0</strong>
             </div>
 
             <button class="withdraw-btn">ถอนเงิน</button>
@@ -141,11 +143,11 @@
           </div>
           <div>
             <span>Team Manager</span>
-            <strong>Manager A</strong>
+            <strong>-</strong>
           </div>
           <div>
             <span>AM</span>
-            <strong>Bangkok Area</strong>
+            <strong>-</strong>
           </div>
           <div>
             <span>Owner</span>
@@ -156,5 +158,12 @@
 
     </main>
   </div>
+
+  <script src="js/agent-api.js"></script>
+
+  <script>
+    loadDashboard("AGT-0001");
+  </script>
+
 </body>
 </html>
