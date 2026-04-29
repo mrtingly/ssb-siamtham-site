@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Agents List | SSBMS</title>
+
+  <link rel="icon" href="images/logo.png" />
+  <link rel="stylesheet" href="css/admin-agents-list.css" />
+</head>
+
+<body>
+  <div class="admin-page">
+
+    <aside class="admin-sidebar">
+      <div class="brand">
+        <img src="images/logo.png" alt="SSB Logo" />
+        <div>
+          <strong>SSBMS</strong>
+          <span>Agent Management</span>
+        </div>
+      </div>
+
+      <nav>
+        <a href="admin-dashboard.html">Dashboard</a>
+        <a href="admin-agent.html">ตรวจตัวแทน</a>
+        <a class="active" href="admin-agents-list.html">รายชื่อตัวแทน</a>
+        <a href="admin-bonus.html">โบนัส</a>
+        <a href="admin-withdraw.html">ถอนเงิน</a>
+        <a href="agent-dashboard.html">Agent View</a>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+
+      <header class="admin-head">
+        <div>
+          <h1>รายชื่อตัวแทน</h1>
+          <p>จัดการสถานะ ทีม ผู้จัดการทีม AM และข้อมูลตัวแทนทั้งหมด</p>
+        </div>
+
+        <a href="admin-agent.html" class="add-btn">+ เพิ่ม / ตรวจตัวแทน</a>
+      </header>
+
+      <section class="filter-bar">
+        <input type="text" placeholder="ค้นหาชื่อ / รหัสตัวแทน / เบอร์โทร" />
+
+        <select>
+          <option>ทุกสถานะ</option>
+          <option>APPROVED</option>
+          <option>PENDING</option>
+          <option>INCOMPLETE</option>
+          <option>SUSPENDED</option>
+        </select>
+
+        <select>
+          <option>ทุกทีม</option>
+          <option>Manager A</option>
+          <option>Manager B</option>
+        </select>
+
+        <button>ค้นหา</button>
+      </section>
+
+      <section class="summary-grid">
+        <div><span>ทั้งหมด</span><strong>128</strong></div>
+        <div><span>Approved</span><strong>96</strong></div>
+        <div><span>Pending</span><strong>24</strong></div>
+        <div><span>Incomplete</span><strong>8</strong></div>
+      </section>
+
+      <section class="agents-table-card">
+        <table>
+          <thead>
+            <tr>
+              <th>ตัวแทน</th>
+              <th>รหัส</th>
+              <th>เบอร์โทร</th>
+              <th>Team Manager</th>
+              <th>AM</th>
+              <th>สถานะ</th>
+              <th>จัดการ</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>
+                <div class="agent-cell">
+                  <img src="images/logo.png" alt="Agent" />
+                  <div>
+                    <b>รัตนชัย คำช่วง</b>
+                    <span>mysiamtham@gmail.com</span>
+                  </div>
+                </div>
+              </td>
+              <td>AGT-0001</td>
+              <td>064-951-4888</td>
+              <td>Manager A</td>
+              <td>Bangkok Area</td>
+              <td><span class="status approved">APPROVED</span></td>
+              <td>
+                <div class="action-set">
+                  <a href="agent-profile.html">ดู</a>
+                  <a href="admin-agent.html">แก้</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="agent-cell">
+                  <img src="images/logo.png" alt="Agent" />
+                  <div>
+                    <b>สมชาย ตัวอย่าง</b>
+                    <span>example@email.com</span>
+                  </div>
+                </div>
+              </td>
+              <td>AGT-0002</td>
+              <td>080-000-0000</td>
+              <td>Manager B</td>
+              <td>Central Area</td>
+              <td><span class="status pending">PENDING</span></td>
+              <td>
+                <div class="action-set">
+                  <a href="agent-profile.html">ดู</a>
+                  <a href="admin-agent.html">ตรวจ</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="agent-cell">
+                  <img src="images/logo.png" alt="Agent" />
+                  <div>
+                    <b>ตัวแทน ข้อมูลไม่ครบ</b>
+                    <span>missing@email.com</span>
+                  </div>
+                </div>
+              </td>
+              <td>AGT-0003</td>
+              <td>081-111-1111</td>
+              <td>-</td>
+              <td>-</td>
+              <td><span class="status incomplete">INCOMPLETE</span></td>
+              <td>
+                <div class="action-set">
+                  <a href="agent-profile.html">ดู</a>
+                  <a href="admin-agent.html">แก้</a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+    </main>
+  </div>
+</body>
+</html>
