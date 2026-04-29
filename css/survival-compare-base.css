@@ -855,3 +855,22 @@ html.light-mode .switch-knob{
 html.light-mode .switch-knob{
   transform:translate(24px, -50%) !important;
 }
+
+/* FIX LIGHT MODE TEXT VISIBILITY (CENTER) */
+html.light-mode .center-caption-main{
+  color:#0a2a55 !important;
+}
+
+html.light-mode .center-caption-sub{
+  color:#3b6a9a !important;
+}
+
+html.light-mode .center-hint{
+  color:#007bff !important;
+  font-weight:700 !important;
+}
+
+html.light-mode .status-bar{
+  color:#0056cc !important;
+  font-weight:800 !important;
+}
