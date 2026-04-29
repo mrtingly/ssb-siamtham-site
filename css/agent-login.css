@@ -1,0 +1,96 @@
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:"Prompt",sans-serif;
+  color:#fff;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(45,150,255,.25),transparent 34%),
+    linear-gradient(180deg,#06172e,#020916);
+}
+
+.login-page{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.login-card{
+  width:min(100%,420px);
+  padding:34px;
+  border-radius:32px;
+  text-align:center;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(80,210,255,.16),transparent 38%),
+    linear-gradient(180deg,#0b2c59,#071a35);
+  border:1px solid rgba(120,210,255,.25);
+  box-shadow:0 24px 60px rgba(0,0,0,.34);
+}
+
+.login-logo{
+  width:82px;
+  margin:0 auto 16px;
+}
+
+.login-card h1{
+  margin:0;
+  font-size:34px;
+}
+
+.login-card p{
+  margin:8px 0 26px;
+  color:#a9c9e9;
+}
+
+.login-form{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  text-align:left;
+}
+
+label{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  font-weight:800;
+  color:#dcecff;
+}
+
+input{
+  height:52px;
+  border-radius:16px;
+  border:1px solid rgba(120,210,255,.22);
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  padding:0 16px;
+  font:inherit;
+  outline:none;
+}
+
+input:focus{
+  border-color:#5fdcff;
+  box-shadow:0 0 0 3px rgba(95,220,255,.12);
+}
+
+button{
+  height:54px;
+  border:0;
+  border-radius:999px;
+  color:#fff;
+  font-weight:900;
+  font-size:17px;
+  cursor:pointer;
+  background:linear-gradient(135deg,#1e6bff,#00d4ff);
+  box-shadow:0 14px 30px rgba(0,150,255,.28);
+}
+
+.register-link{
+  display:inline-block;
+  margin-top:20px;
+  color:#7fdcff;
+  font-weight:800;
+  text-decoration:none;
+}
