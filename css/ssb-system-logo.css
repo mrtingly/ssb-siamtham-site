@@ -1,18 +1,18 @@
 /* ==============================
-   SSB LOGO SYSTEM - OPTIMIZED
-   ============================== */
+   SSB LOGO SYSTEM
+   Super Ultimate / Large / Smooth
+============================== */
 
 .logo-orbit-wrap{
   position:relative;
-  width:520px;
-  height:520px;
+  width:480px;
+  height:480px;
   display:flex;
   align-items:center;
   justify-content:center;
   z-index:1;
 }
 
-/* ORBIT SVG */
 .logo-orbit-svg{
   position:absolute;
   inset:0;
@@ -32,7 +32,7 @@
   stroke:rgba(255,255,255,.08);
 }
 
-/* 🔥 ลดความเร็ว + ลดกินเครื่อง */
+/* จุดวิ่งรอบวง */
 .logo-orbit-runner{
   fill:#e6fbff;
   transform-origin:160px 160px;
@@ -47,7 +47,7 @@
 /* RADAR */
 .logo-radar-layer{
   position:absolute;
-  inset:30px;
+  inset:26px;
   border-radius:50%;
   z-index:4;
   pointer-events:none;
@@ -61,7 +61,6 @@
   border:1px solid rgba(132,212,255,.18);
 }
 
-/* 🔥 เบาลง */
 .logo-radar-layer::after{
   content:"";
   position:absolute;
@@ -71,8 +70,8 @@
     from 0deg,
     transparent 0deg,
     transparent 300deg,
-    rgba(120,250,255,.12) 330deg,
-    rgba(255,255,255,.7) 345deg,
+    rgba(120,250,255,.13) 330deg,
+    rgba(255,255,255,.72) 345deg,
     transparent 360deg
   );
   animation:radarSweep 6s linear infinite;
@@ -86,19 +85,94 @@
 /* GRID */
 .logo-radar-grid{
   position:absolute;
-  inset:60px;
+  inset:56px;
   border-radius:50%;
   border:1px solid rgba(120,210,255,.06);
+  z-index:2;
+}
+
+.logo-radar-grid::before,
+.logo-radar-grid::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  border:1px solid rgba(120,210,255,.055);
+}
+
+.logo-radar-grid::before{
+  width:68%;
+  height:68%;
+}
+
+.logo-radar-grid::after{
+  width:36%;
+  height:36%;
+}
+
+/* CROSS */
+.logo-radar-cross{
+  position:absolute;
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+}
+
+.logo-radar-cross::before,
+.logo-radar-cross::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  background:rgba(120,210,255,.06);
+  transform:translate(-50%,-50%);
+}
+
+.logo-radar-cross::before{
+  width:1px;
+  height:70%;
+}
+
+.logo-radar-cross::after{
+  width:70%;
+  height:1px;
+}
+
+/* DOTS */
+.logo-scan-dot{
+  position:absolute;
+  width:10px;
+  height:10px;
+  margin:-5px 0 0 -5px;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:
+    0 0 8px rgba(255,255,255,.85),
+    0 0 14px rgba(120,210,255,.42);
+  opacity:.18;
+  transform:scale(.7);
+  transition:.22s ease;
+  z-index:6;
+}
+
+.logo-scan-dot.is-hit{
+  opacity:1;
+  transform:scale(1.25);
+  box-shadow:
+    0 0 12px rgba(255,255,255,.95),
+    0 0 24px rgba(120,210,255,.65);
 }
 
 /* CENTER CORE */
 .logo-core{
   position:relative;
   z-index:5;
-  width:320px;
-  height:320px;
+  width:360px;
+  height:360px;
   border-radius:50%;
-  border:1px solid rgba(132,212,255,.26);
+  border:1px solid rgba(132,212,255,.25);
 
   background:
     radial-gradient(circle at 50% 18%, rgba(255,255,255,.10), transparent 26%),
@@ -110,42 +184,106 @@
   display:flex;
   align-items:center;
   justify-content:center;
-
   cursor:pointer;
   overflow:hidden;
 
-  /* 🔥 ลดเงาหนัก */
   box-shadow:
     0 0 28px rgba(90,180,255,.14),
     inset 0 0 20px rgba(90,180,255,.06);
+
+  transition:transform .22s ease, box-shadow .22s ease;
 }
 
-/* glow เบา ๆ */
+.logo-core::before{
+  content:"";
+  position:absolute;
+  inset:18px;
+  border-radius:50%;
+  border:1px solid rgba(120,210,255,.08);
+}
+
 .logo-core::after{
   content:"";
   position:absolute;
-  inset:-20px;
+  inset:-24px;
   border-radius:50%;
-  background:radial-gradient(circle, rgba(104,244,255,.12), transparent 70%);
+  background:radial-gradient(circle, rgba(104,244,255,.18), transparent 70%);
   z-index:-1;
 }
 
-/* PHONE */
+/* SMARTPHONE IMAGE */
 .logo-core img{
-  width:170%;
+  width:190%;
+  max-width:none;
   height:auto;
   object-fit:contain;
 }
 
-/* hover */
+/* HOVER */
 .logo-core:hover{
-  transform:scale(1.03);
+  transform:scale(1.025);
+  box-shadow:
+    0 0 36px rgba(90,180,255,.20),
+    inset 0 0 22px rgba(90,180,255,.08);
+}
+
+.logo-core.is-burst{
+  transform:scale(1.04);
+  box-shadow:
+    0 0 44px rgba(90,180,255,.24),
+    0 0 24px rgba(255,184,94,.14),
+    inset 0 0 24px rgba(90,180,255,.10);
 }
 
 /* LIGHT MODE */
+html.light-mode .logo-orbit-ring{
+  stroke:rgba(20,110,255,.14);
+}
+
+html.light-mode .logo-orbit-ring.second{
+  stroke:rgba(255,255,255,.24);
+}
+
+html.light-mode .logo-orbit-runner{
+  fill:#1e6bff;
+}
+
+html.light-mode .logo-radar-layer::before{
+  border-color:rgba(20,110,255,.14);
+}
+
+html.light-mode .logo-radar-layer::after{
+  background:conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 300deg,
+    rgba(0,70,180,.12) 330deg,
+    rgba(0,90,220,.78) 345deg,
+    transparent 360deg
+  );
+}
+
+html.light-mode .logo-radar-grid,
+html.light-mode .logo-radar-grid::before,
+html.light-mode .logo-radar-grid::after{
+  border-color:rgba(20,110,255,.075);
+}
+
+html.light-mode .logo-radar-cross::before,
+html.light-mode .logo-radar-cross::after{
+  background:rgba(20,110,255,.08);
+}
+
+html.light-mode .logo-scan-dot{
+  background:#2f7dff;
+  box-shadow:
+    0 0 6px rgba(30,107,255,.55),
+    0 0 12px rgba(0,60,180,.22);
+}
+
 html.light-mode .logo-core{
   background:
-    radial-gradient(circle at 50% 18%, rgba(255,255,255,.08), transparent 26%),
+    radial-gradient(circle at 50% 18%, rgba(255,255,255,.10), transparent 26%),
     radial-gradient(circle at 50% 35%,
       rgba(80,160,255,.12),
       rgba(86,148,255,.36) 50%,
@@ -156,9 +294,60 @@ html.light-mode .logo-core{
 
   box-shadow:
     0 0 18px rgba(15,103,255,.10),
-    inset 0 0 12px rgba(255,255,255,.02);
+    inset 0 0 12px rgba(255,255,255,.03);
+}
+
+html.light-mode .logo-core::before{
+  border-color:rgba(94,216,255,.10);
 }
 
 html.light-mode .logo-core::after{
-  background:radial-gradient(circle, rgba(20,110,255,.10), transparent 70%);
+  background:radial-gradient(circle, rgba(20,110,255,.13), transparent 70%);
+}
+
+html.light-mode .logo-core:hover{
+  box-shadow:
+    0 0 28px rgba(15,103,255,.15),
+    inset 0 0 16px rgba(94,216,255,.06);
+}
+
+/* MOBILE */
+@media (max-width:1023px){
+  .logo-orbit-wrap{
+    width:390px;
+    height:390px;
+  }
+
+  .logo-core{
+    width:280px;
+    height:280px;
+  }
+
+  .logo-core img{
+    width:185%;
+  }
+
+  .logo-radar-layer{
+    inset:22px;
+  }
+
+  .logo-radar-grid{
+    inset:48px;
+  }
+}
+
+@media (max-width:560px){
+  .logo-orbit-wrap{
+    width:340px;
+    height:340px;
+  }
+
+  .logo-core{
+    width:245px;
+    height:245px;
+  }
+
+  .logo-core img{
+    width:180%;
+  }
 }
