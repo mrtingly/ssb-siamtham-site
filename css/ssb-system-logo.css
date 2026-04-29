@@ -221,12 +221,12 @@
 .logo-core img{
   position:relative;
   z-index:10;
-  width:158%;
+  width:142%;
   max-width:none;
   height:auto;
   object-fit:contain;
-  transform:translateY(-20px);
-  filter:drop-shadow(0 16px 20px rgba(0,0,0,.22));
+  transform:translateY(0px);
+  filter:drop-shadow(0 14px 18px rgba(0,0,0,.20));
 }
 
 /* Hover เบา ไม่หน่วง */
