@@ -209,8 +209,8 @@ button{ font:inherit; }
 /* CENTER PHONE */
 .logo-core{
   position:relative;
-  width:200px !important;
-  height:200px !important;
+  width:260px !important;
+  height:260px !important;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -232,10 +232,10 @@ button{ font:inherit; }
 }
 
 .logo-core img{
-  width:120%;
-  max-width:260px;
+  width:145%;
+  max-width:360px;
   height:auto;
-  transform:translateY(-4px);
+  transform:translateY(-6px);
 }
 
 .logo-orbit-wrap{
