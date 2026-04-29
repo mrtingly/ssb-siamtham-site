@@ -427,15 +427,15 @@ html.light-mode .action-btn.secondary{
     height:360px !important;
   }
 
-  .logo-core{
-    width:160px !important;
-    height:160px !important;
-    filter:drop-shadow(0 0 12px rgba(104,244,255,.22));
+   .logo-core{
+    width:230px !important;
+    height:230px !important;
   }
-
+  
   .logo-core img{
-    width:116%;
-    max-width:210px;
+    width:145%;
+    max-width:340px;
+    transform:translateY(-6px);
   }
 
   .center-caption-main{
