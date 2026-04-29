@@ -1,0 +1,281 @@
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:"Prompt",sans-serif;
+  color:#fff;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(45,150,255,.24),transparent 34%),
+    linear-gradient(180deg,#06172e,#020916);
+}
+
+.admin-page{
+  min-height:100vh;
+  display:flex;
+}
+
+.admin-sidebar{
+  width:270px;
+  padding:24px;
+  background:linear-gradient(180deg,#071e3d,#041124);
+  border-right:1px solid rgba(120,210,255,.18);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:32px;
+}
+
+.brand img{
+  width:56px;
+  height:56px;
+}
+
+.brand strong{
+  display:block;
+  font-size:22px;
+}
+
+.brand span{
+  color:#8fc8ff;
+  font-size:13px;
+}
+
+nav{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+nav a{
+  padding:14px 16px;
+  border-radius:16px;
+  color:#bcd9f5;
+  text-decoration:none;
+  font-weight:800;
+}
+
+nav a.active,
+nav a:hover{
+  background:linear-gradient(135deg,#1e6bff,#00c8ff);
+  color:#fff;
+}
+
+.admin-main{
+  flex:1;
+  padding:30px;
+}
+
+.admin-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  margin-bottom:22px;
+}
+
+.admin-head h1{
+  margin:0;
+  font-size:36px;
+}
+
+.admin-head p{
+  margin:6px 0 0;
+  color:#9fc4e8;
+}
+
+.add-btn{
+  height:48px;
+  padding:0 22px;
+  border-radius:999px;
+  display:flex;
+  align-items:center;
+  color:#fff;
+  text-decoration:none;
+  font-weight:900;
+  background:linear-gradient(135deg,#1e6bff,#00c8ff);
+  box-shadow:0 14px 28px rgba(0,150,255,.24);
+}
+
+.filter-bar{
+  display:grid;
+  grid-template-columns:1fr 180px 180px 120px;
+  gap:14px;
+  margin-bottom:18px;
+}
+
+input,
+select,
+button{
+  height:48px;
+  border-radius:16px;
+  border:1px solid rgba(120,210,255,.20);
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  padding:0 14px;
+  font:inherit;
+  outline:none;
+}
+
+select option{
+  color:#111;
+}
+
+button{
+  border:0;
+  font-weight:900;
+  cursor:pointer;
+  background:linear-gradient(135deg,#1e6bff,#00c8ff);
+}
+
+.summary-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin-bottom:20px;
+}
+
+.summary-grid div{
+  padding:18px;
+  border-radius:22px;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(120,210,255,.16);
+}
+
+.summary-grid span{
+  display:block;
+  color:#a9c9e9;
+  font-size:14px;
+}
+
+.summary-grid strong{
+  display:block;
+  margin-top:8px;
+  font-size:28px;
+}
+
+.agents-table-card{
+  overflow:auto;
+  border-radius:28px;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(80,210,255,.12),transparent 34%),
+    linear-gradient(180deg,#0b2c59,#071a35);
+  border:1px solid rgba(120,210,255,.22);
+  box-shadow:0 24px 60px rgba(0,0,0,.24);
+}
+
+table{
+  width:100%;
+  min-width:980px;
+  border-collapse:collapse;
+}
+
+th,
+td{
+  padding:16px;
+  text-align:left;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+th{
+  color:#9fc4e8;
+  font-size:13px;
+}
+
+td{
+  color:#eaf4ff;
+}
+
+.agent-cell{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.agent-cell img{
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  background:#fff;
+  padding:8px;
+}
+
+.agent-cell b{
+  display:block;
+}
+
+.agent-cell span{
+  display:block;
+  margin-top:3px;
+  color:#9fc4e8;
+  font-size:13px;
+}
+
+.status{
+  display:inline-flex;
+  padding:7px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:900;
+}
+
+.status.approved{
+  color:#18ff9b;
+  background:rgba(24,255,155,.12);
+  border:1px solid rgba(24,255,155,.30);
+}
+
+.status.pending{
+  color:#ffe59b;
+  background:rgba(255,190,60,.12);
+  border:1px solid rgba(255,190,60,.30);
+}
+
+.status.incomplete{
+  color:#ff9f9f;
+  background:rgba(255,80,80,.12);
+  border:1px solid rgba(255,80,80,.30);
+}
+
+.action-set{
+  display:flex;
+  gap:8px;
+}
+
+.action-set a{
+  padding:8px 12px;
+  border-radius:999px;
+  color:#fff;
+  text-decoration:none;
+  font-weight:900;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(120,210,255,.16);
+}
+
+.action-set a:hover{
+  background:linear-gradient(135deg,#1e6bff,#00c8ff);
+}
+
+@media(max-width:1023px){
+  .admin-page{
+    flex-direction:column;
+  }
+
+  .admin-sidebar{
+    width:100%;
+  }
+
+  .admin-head{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .filter-bar,
+  .summary-grid{
+    grid-template-columns:1fr;
+  }
+}
