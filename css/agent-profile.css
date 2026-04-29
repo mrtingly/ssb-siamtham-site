@@ -1,0 +1,137 @@
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:"Prompt",sans-serif;
+  color:#fff;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(45,150,255,.25),transparent 34%),
+    linear-gradient(180deg,#06172e,#020916);
+}
+
+.profile-page{
+  min-height:100vh;
+  padding:34px 18px;
+  display:flex;
+  justify-content:center;
+}
+
+.profile-card{
+  width:min(100%,960px);
+}
+
+.profile-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
+}
+
+.profile-head a{
+  color:#8fdcff;
+  text-decoration:none;
+  font-weight:900;
+}
+
+.status{
+  padding:8px 18px;
+  border-radius:999px;
+  font-weight:900;
+}
+
+.status.approved{
+  color:#18ff9b;
+  background:rgba(24,255,155,.12);
+  border:1px solid rgba(24,255,155,.32);
+}
+
+.agent-id-card{
+  padding:30px;
+  border-radius:34px;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(80,210,255,.18),transparent 38%),
+    linear-gradient(180deg,#0b2c59,#071a35);
+  border:1px solid rgba(120,210,255,.25);
+  box-shadow:0 24px 60px rgba(0,0,0,.32);
+  text-align:center;
+}
+
+.agent-photo{
+  width:118px;
+  height:118px;
+  object-fit:contain;
+  margin:0 auto 16px;
+  border-radius:50%;
+  background:#fff;
+  padding:16px;
+  box-shadow:0 0 28px rgba(0,210,255,.38);
+}
+
+h1{
+  margin:0;
+  font-size:32px;
+}
+
+.agent-code{
+  margin-top:6px;
+  color:#6ddcff;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+.info-grid{
+  margin-top:28px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+  text-align:left;
+}
+
+.info-grid div,
+.address-box{
+  padding:16px;
+  border-radius:20px;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(120,210,255,.15);
+}
+
+.info-grid span,
+.address-box span{
+  display:block;
+  color:#9fc4e8;
+  font-size:13px;
+  margin-bottom:6px;
+}
+
+.info-grid b{
+  color:#fff;
+}
+
+.address-box{
+  margin-top:14px;
+  text-align:left;
+}
+
+.address-box p{
+  margin:0;
+  color:#eaf4ff;
+}
+
+.note{
+  margin-top:20px;
+  padding:14px;
+  border-radius:18px;
+  color:#cfefff;
+  background:rgba(0,200,255,.10);
+  border:1px solid rgba(0,200,255,.22);
+}
+
+@media(max-width:760px){
+  .info-grid{
+    grid-template-columns:1fr;
+  }
+
+  h1{
+    font-size:26px;
+  }
+}
