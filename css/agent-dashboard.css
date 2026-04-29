@@ -1,0 +1,335 @@
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:"Prompt",sans-serif;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(40,140,255,.22),transparent 30%),
+    linear-gradient(180deg,#06172e,#020916);
+  color:#fff;
+}
+
+.agent-page{
+  min-height:100vh;
+  display:flex;
+}
+
+.agent-sidebar{
+  width:260px;
+  padding:24px;
+  background:linear-gradient(180deg,#071e3d,#041124);
+  border-right:1px solid rgba(120,200,255,.18);
+}
+
+.brand-box{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:32px;
+}
+
+.brand-box img{
+  width:52px;
+  height:52px;
+}
+
+.brand-box strong{
+  display:block;
+  font-size:20px;
+}
+
+.brand-box span{
+  color:#8fc8ff;
+  font-size:13px;
+}
+
+.side-menu{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.side-menu a{
+  padding:13px 16px;
+  border-radius:16px;
+  color:#bcd9f5;
+  text-decoration:none;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.side-menu a.active,
+.side-menu a:hover{
+  background:linear-gradient(135deg,#1e6bff,#00c8ff);
+  color:#fff;
+}
+
+.agent-main{
+  flex:1;
+  padding:28px;
+}
+
+.agent-topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:24px;
+}
+
+.agent-topbar h1{
+  margin:0;
+  font-size:34px;
+}
+
+.agent-topbar p{
+  margin:6px 0 0;
+  color:#9fc4e8;
+}
+
+.logout-btn{
+  border:0;
+  border-radius:999px;
+  padding:12px 24px;
+  font-weight:900;
+  color:#fff;
+  background:rgba(255,255,255,.12);
+}
+
+.dashboard-grid{
+  display:grid;
+  grid-template-columns:340px 1fr;
+  gap:24px;
+}
+
+.agent-card{
+  position:relative;
+  overflow:hidden;
+  border-radius:30px;
+  padding:26px;
+  text-align:center;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(80,210,255,.22),transparent 38%),
+    linear-gradient(180deg,#0b2c59,#071a35);
+  border:1px solid rgba(120,210,255,.28);
+  box-shadow:0 24px 50px rgba(0,0,0,.28);
+}
+
+.card-glow{
+  position:absolute;
+  inset:-80px;
+  background:radial-gradient(circle,rgba(0,200,255,.18),transparent 60%);
+  pointer-events:none;
+}
+
+.agent-photo{
+  width:112px;
+  height:112px;
+  margin:0 auto 14px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+  box-shadow:0 0 28px rgba(0,210,255,.45);
+}
+
+.agent-photo img{
+  width:78px;
+}
+
+.agent-card h2{
+  margin:10px 0 4px;
+  font-size:24px;
+}
+
+.agent-code{
+  color:#69dcff;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+.agent-status{
+  display:inline-flex;
+  margin:14px 0;
+  padding:7px 16px;
+  border-radius:999px;
+  font-weight:900;
+}
+
+.agent-status.approved{
+  color:#18ff9b;
+  background:rgba(24,255,155,.12);
+  border:1px solid rgba(24,255,155,.32);
+}
+
+.agent-info{
+  margin-top:10px;
+  text-align:left;
+  font-size:14px;
+  color:#dcecff;
+}
+
+.agent-info p{
+  margin:8px 0;
+}
+
+.qr-box{
+  width:92px;
+  height:92px;
+  margin:20px auto 0;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#082044;
+  font-weight:900;
+  background:#fff;
+}
+
+.summary-area{
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+}
+
+.money-cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+}
+
+.money-card{
+  border-radius:24px;
+  padding:20px;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(120,210,255,.18);
+}
+
+.money-card span{
+  display:block;
+  color:#a9c9e9;
+  font-size:14px;
+}
+
+.money-card strong{
+  display:block;
+  margin-top:10px;
+  font-size:28px;
+}
+
+.money-card.highlight{
+  background:linear-gradient(135deg,#1e6bff,#00c8ff);
+}
+
+.income-panel,
+.team-panel{
+  border-radius:30px;
+  padding:24px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(120,210,255,.18);
+  box-shadow:0 18px 38px rgba(0,0,0,.20);
+}
+
+.panel-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
+}
+
+.panel-head h2,
+.team-panel h2{
+  margin:0;
+}
+
+.panel-head select{
+  border:0;
+  border-radius:999px;
+  padding:10px 16px;
+  background:#102b55;
+  color:#fff;
+}
+
+.income-row,
+.income-total{
+  display:flex;
+  justify-content:space-between;
+  padding:14px 0;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.income-row.tax{
+  color:#ffb36b;
+}
+
+.income-total strong{
+  font-size:28px;
+  color:#6ee7ff;
+}
+
+.withdraw-btn{
+  margin-top:22px;
+  width:100%;
+  height:54px;
+  border:0;
+  border-radius:18px;
+  color:#fff;
+  font-size:18px;
+  font-weight:900;
+  background:linear-gradient(135deg,#1e6bff,#00d4ff);
+  box-shadow:0 14px 28px rgba(0,150,255,.26);
+}
+
+.team-panel{
+  margin-top:24px;
+}
+
+.team-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+  margin-top:18px;
+}
+
+.team-grid div{
+  border-radius:20px;
+  padding:18px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(120,210,255,.14);
+}
+
+.team-grid span{
+  display:block;
+  color:#9fc4e8;
+  font-size:13px;
+}
+
+.team-grid strong{
+  display:block;
+  margin-top:8px;
+  font-size:18px;
+}
+
+@media(max-width:1023px){
+  .agent-page{
+    flex-direction:column;
+  }
+
+  .agent-sidebar{
+    width:100%;
+  }
+
+  .dashboard-grid,
+  .money-cards,
+  .team-grid{
+    grid-template-columns:1fr;
+  }
+
+  .agent-topbar{
+    align-items:flex-start;
+    gap:14px;
+    flex-direction:column;
+  }
+}
