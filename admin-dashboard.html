@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Admin Dashboard | SSBMS</title>
+
+  <link rel="icon" href="images/logo.png" />
+  <link rel="stylesheet" href="css/admin-dashboard.css" />
+</head>
+
+<body>
+  <div class="admin-page">
+
+    <aside class="admin-sidebar">
+      <div class="brand">
+        <img src="images/logo.png" alt="SSB Logo" />
+        <div>
+          <strong>SSBMS</strong>
+          <span>Admin / Owner</span>
+        </div>
+      </div>
+
+      <nav>
+        <a class="active" href="admin-dashboard.html">Dashboard</a>
+        <a href="admin-agent.html">ตรวจตัวแทน</a>
+        <a href="admin-agents-list.html">รายชื่อตัวแทน</a>
+        <a href="admin-bonus.html">โบนัส</a>
+        <a href="admin-withdraw.html">ถอนเงิน</a>
+        <a href="agent-dashboard.html">Agent View</a>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+
+      <header class="admin-head">
+        <div>
+          <h1>Admin Dashboard</h1>
+          <p>ศูนย์ควบคุมตัวแทน รายได้ โบนัส และการถอนเงิน</p>
+        </div>
+
+        <button class="owner-badge">OWNER</button>
+      </header>
+
+      <section class="stat-grid">
+        <div class="stat-card">
+          <span>ตัวแทนทั้งหมด</span>
+          <strong>128</strong>
+          <small>Approved 96 / Pending 32</small>
+        </div>
+
+        <div class="stat-card">
+          <span>ยอดขายรวม</span>
+          <strong>฿8,450,000</strong>
+          <small>เดือนนี้</small>
+        </div>
+
+        <div class="stat-card">
+          <span>รออนุมัติถอน</span>
+          <strong>฿420,000</strong>
+          <small>12 รายการ</small>
+        </div>
+
+        <div class="stat-card highlight">
+          <span>โบนัสเดือนนี้</span>
+          <strong>฿180,000</strong>
+          <small>สร้างโดย Owner</small>
+        </div>
+      </section>
+
+      <section class="dashboard-grid">
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>งานที่ต้องตรวจ</h2>
+            <a href="admin-agent.html">ดูทั้งหมด</a>
+          </div>
+
+          <div class="task-list">
+            <div class="task-item">
+              <div>
+                <b>ตัวแทนรออนุมัติ</b>
+                <span>32 รายการ</span>
+              </div>
+              <a href="admin-agent.html">ตรวจ</a>
+            </div>
+
+            <div class="task-item">
+              <div>
+                <b>คำขอถอนเงิน</b>
+                <span>12 รายการ</span>
+              </div>
+              <a href="admin-withdraw.html">อนุมัติ</a>
+            </div>
+
+            <div class="task-item">
+              <div>
+                <b>ข้อมูล Profile ไม่ครบ</b>
+                <span>7 รายการ</span>
+              </div>
+              <a href="admin-agents-list.html">แก้ไข</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>สรุปรายได้บริษัท</h2>
+            <select>
+              <option>เมษายน 2026</option>
+              <option>มีนาคม 2026</option>
+              <option>กุมภาพันธ์ 2026</option>
+            </select>
+          </div>
+
+          <div class="income-table">
+            <div><span>ยอดขายรวม</span><b>฿8,450,000</b></div>
+            <div><span>คอมมิชชั่นตัวแทน</span><b>- ฿2,535,000</b></div>
+            <div><span>โบนัส</span><b>- ฿180,000</b></div>
+            <div><span>ภาษีหัก ณ ที่จ่าย</span><b>฿81,450</b></div>
+            <div class="total"><span>คงเหลือบริษัท</span><b>฿5,816,450</b></div>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="quick-panel">
+        <h2>Quick Actions</h2>
+
+        <div class="quick-grid">
+          <a href="admin-agent.html">อนุมัติตัวแทน</a>
+          <a href="admin-bonus.html">สร้างโบนัส</a>
+          <a href="admin-withdraw.html">อนุมัติถอนเงิน</a>
+          <a href="admin-agents-list.html">จัดการรายชื่อตัวแทน</a>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</body>
+</html>
