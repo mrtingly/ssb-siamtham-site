@@ -165,7 +165,6 @@ button{ font:inherit; }
 .showcase{
   position:relative;
   min-height:700px;
-  height:700px;
   z-index:2;
   overflow:hidden;
   border-radius:28px;
@@ -175,7 +174,6 @@ button{ font:inherit; }
 .center-stage{
   position:relative;
   min-height:700px;
-  height:700px;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -183,15 +181,14 @@ button{ font:inherit; }
   z-index:12;
   padding-top:0;
   padding-bottom:0;
-  transform:translateY(-12px);
 }
 
 .center-aura{
   position:absolute;
   top:47%;
   left:50%;
-  width:760px;
-  height:760px;
+  width:520px;
+  height:520px;
   transform:translate(-50%, -50%);
   border-radius:50%;
   background:
@@ -237,11 +234,10 @@ button{ font:inherit; }
 
 /* === ขยาย “ตัวมือถือจริง” === */
 .logo-core img{
-  width:200% !important;   /* 🔥 ตรงนี้คือขยายมือถือ */
+  width:120%;
+  max-width:260px;
   height:auto;
-  object-fit:contain;
-
-  transform:translateY(-8px); /* ปรับตำแหน่งให้อยู่กลาง */
+  transform:translateY(-4px);
 }
 
 .logo-orbit-wrap{
