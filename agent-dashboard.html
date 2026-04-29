@@ -2,22 +2,159 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Agent Dashboard</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agent Dashboard | SSBMS</title>
+
+  <link rel="icon" href="images/logo.png" />
+  <link rel="stylesheet" href="css/agent-dashboard.css" />
 </head>
-<body class="bg-slate-50 text-slate-900">
-  <main class="max-w-3xl mx-auto px-4 py-10">
-    <div class="bg-white border rounded-2xl shadow-sm p-6">
-      <div class="flex items-center justify-between mb-4">
-        <h1 class="text-2xl font-bold">Agent Dashboard</h1>
-        <button id="btnLogout" class="px-4 py-2 rounded-lg bg-red-500 text-white">Logout</button>
+
+<body>
+  <div class="agent-page">
+
+    <aside class="agent-sidebar">
+      <div class="brand-box">
+        <img src="images/logo.png" alt="SSB Logo" />
+        <div>
+          <strong>SSBMS</strong>
+          <span>Agent System</span>
+        </div>
       </div>
 
-      <div id="agentInfo" class="space-y-2 text-sm"></div>
-    </div>
-  </main>
+      <nav class="side-menu">
+        <a class="active">Dashboard</a>
+        <a href="book.html">สั่งสินค้า</a>
+        <a>ลูกค้า / Leads</a>
+        <a>รายได้</a>
+        <a>โบนัส</a>
+        <a>ถอนเงิน</a>
+        <a>ภาษี</a>
+        <a>ทีมของฉัน</a>
+        <a>ประวัติย้อนหลัง</a>
+      </nav>
+    </aside>
 
-  <script type="module" src="js/agentDashboard.js"></script>
+    <main class="agent-main">
+
+      <header class="agent-topbar">
+        <div>
+          <h1>Agent Dashboard</h1>
+          <p>ศูนย์จัดการรายได้ ตัวแทน ทีม และระบบถอนเงิน</p>
+        </div>
+
+        <button class="logout-btn">Logout</button>
+      </header>
+
+      <section class="dashboard-grid">
+
+        <div class="agent-card">
+          <div class="card-glow"></div>
+
+          <div class="agent-photo">
+            <img src="images/logo.png" alt="Agent Photo" />
+          </div>
+
+          <h2>รัตนชัย คำช่วง</h2>
+          <div class="agent-code">AGT-0001</div>
+
+          <div class="agent-status approved">APPROVED</div>
+
+          <div class="agent-info">
+            <p><b>โทร:</b> 064-951-4888</p>
+            <p><b>Email:</b> mysiamtham@gmail.com</p>
+            <p><b>LINE:</b> @siamtham</p>
+            <p><b>Team Manager:</b> Manager A</p>
+            <p><b>AM:</b> Bangkok Area</p>
+            <p><b>บัญชี:</b> XXX-X-XXXXX-X</p>
+          </div>
+
+          <div class="qr-box">QR</div>
+        </div>
+
+        <div class="summary-area">
+
+          <div class="money-cards">
+            <div class="money-card">
+              <span>รายได้รวมทั้งหมด</span>
+              <strong>฿1,250,000</strong>
+            </div>
+
+            <div class="money-card highlight">
+              <span>ถอนได้ตอนนี้</span>
+              <strong>฿320,000</strong>
+            </div>
+
+            <div class="money-card">
+              <span>รอครบ 7 วัน</span>
+              <strong>฿180,000</strong>
+            </div>
+
+            <div class="money-card">
+              <span>โบนัสเดือนนี้</span>
+              <strong>฿45,000</strong>
+            </div>
+          </div>
+
+          <section class="income-panel">
+            <div class="panel-head">
+              <h2>ผังรายได้ประจำเดือน</h2>
+              <select>
+                <option>เมษายน 2026</option>
+                <option>มีนาคม 2026</option>
+                <option>กุมภาพันธ์ 2026</option>
+              </select>
+            </div>
+
+            <div class="income-row">
+              <span>คอมมิชชั่น</span>
+              <b>฿750,000</b>
+            </div>
+
+            <div class="income-row">
+              <span>โบนัสจากบริษัท</span>
+              <b>฿45,000</b>
+            </div>
+
+            <div class="income-row tax">
+              <span>ภาษีหัก ณ ที่จ่าย 3%</span>
+              <b>- ฿23,850</b>
+            </div>
+
+            <div class="income-total">
+              <span>ยอดสุทธิ</span>
+              <strong>฿771,150</strong>
+            </div>
+
+            <button class="withdraw-btn">ถอนเงิน</button>
+          </section>
+
+        </div>
+      </section>
+
+      <section class="team-panel">
+        <h2>โครงสร้างทีม</h2>
+
+        <div class="team-grid">
+          <div>
+            <span>Role</span>
+            <strong>Agent</strong>
+          </div>
+          <div>
+            <span>Team Manager</span>
+            <strong>Manager A</strong>
+          </div>
+          <div>
+            <span>AM</span>
+            <strong>Bangkok Area</strong>
+          </div>
+          <div>
+            <span>Owner</span>
+            <strong>Siamtham Co.,Ltd.</strong>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
 </body>
 </html>
