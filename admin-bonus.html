@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Bonus | SSBMS</title>
+
+  <link rel="icon" href="images/logo.png" />
+  <link rel="stylesheet" href="css/admin-bonus.css" />
+</head>
+
+<body>
+  <div class="admin-page">
+
+    <aside class="admin-sidebar">
+      <div class="brand">
+        <img src="images/logo.png" />
+        <div>
+          <strong>SSBMS</strong>
+          <span>Bonus System</span>
+        </div>
+      </div>
+
+      <nav>
+        <a href="admin-dashboard.html">Dashboard</a>
+        <a href="admin-agent.html">ตรวจตัวแทน</a>
+        <a href="admin-agents-list.html">รายชื่อตัวแทน</a>
+        <a class="active" href="admin-bonus.html">โบนัส</a>
+        <a href="admin-withdraw.html">ถอนเงิน</a>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+
+      <header class="admin-head">
+        <div>
+          <h1>ระบบโบนัส</h1>
+          <p>Owner สามารถสร้างโบนัสให้ตัวแทนได้ตลอดเวลา</p>
+        </div>
+      </header>
+
+      <!-- CREATE BONUS -->
+      <section class="bonus-form-card">
+        <h2>สร้างโบนัส</h2>
+
+        <div class="form-grid">
+
+          <label>
+            เลือกตัวแทน
+            <select>
+              <option>ทั้งหมด</option>
+              <option>AGT-0001 รัตนชัย</option>
+              <option>AGT-0002 สมชาย</option>
+            </select>
+          </label>
+
+          <label>
+            ประเภทโบนัส
+            <select>
+              <option>โบนัสยอดขาย</option>
+              <option>โบนัสปิดดีล</option>
+              <option>โบนัสพิเศษ</option>
+              <option>โบนัสแคมเปญ</option>
+            </select>
+          </label>
+
+          <label>
+            จำนวนเงิน (บาท)
+            <input type="number" placeholder="เช่น 10000" />
+          </label>
+
+          <label>
+            เดือน
+            <input type="month" />
+          </label>
+
+        </div>
+
+        <label class="full">
+          หมายเหตุ
+          <textarea rows="3" placeholder="รายละเอียดโบนัส..."></textarea>
+        </label>
+
+        <button class="create-btn">สร้างโบนัส</button>
+      </section>
+
+      <!-- BONUS SUMMARY -->
+      <section class="summary-grid">
+        <div>
+          <span>โบนัสทั้งหมดเดือนนี้</span>
+          <strong>฿180,000</strong>
+        </div>
+
+        <div>
+          <span>จำนวนรายการ</span>
+          <strong>24</strong>
+        </div>
+
+        <div>
+          <span>อนุมัติแล้ว</span>
+          <strong>18</strong>
+        </div>
+
+        <div>
+          <span>รอดำเนินการ</span>
+          <strong>6</strong>
+        </div>
+      </section>
+
+      <!-- BONUS TABLE -->
+      <section class="bonus-table-card">
+        <table>
+          <thead>
+            <tr>
+              <th>ตัวแทน</th>
+              <th>ประเภท</th>
+              <th>จำนวน</th>
+              <th>เดือน</th>
+              <th>สถานะ</th>
+              <th>จัดการ</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>AGT-0001 รัตนชัย</td>
+              <td>โบนัสยอดขาย</td>
+              <td>฿50,000</td>
+              <td>04/2026</td>
+              <td><span class="status approved">APPROVED</span></td>
+              <td><a>แก้ไข</a></td>
+            </tr>
+
+            <tr>
+              <td>AGT-0002 สมชาย</td>
+              <td>โบนัสพิเศษ</td>
+              <td>฿10,000</td>
+              <td>04/2026</td>
+              <td><span class="status pending">PENDING</span></td>
+              <td><a>อนุมัติ</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+    </main>
+  </div>
+</body>
+</html>
