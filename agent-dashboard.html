@@ -132,7 +132,7 @@
               <strong class="net">0</strong>
             </div>
 
-            <button class="withdraw-btn">ถอนเงิน</button>
+            <button class="withdraw-btn" onclick="requestWithdraw()">ถอนเงิน</button>
           </section>
 
         </div>
@@ -167,6 +167,7 @@
 
   <!-- JS -->
   <script src="js/agent-api.js"></script>
+  <script src="js/withdraw.js"></script>
 
   <script>
     const agentId = localStorage.getItem("agent_id");
