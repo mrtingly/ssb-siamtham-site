@@ -3,142 +3,51 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>สมัครตัวแทน | SSBMS</title>
 
-  <link rel="icon" href="images/logo.png" />
-  <link rel="stylesheet" href="css/agent-register.css" />
+  <link rel="stylesheet" href="css/agent-login.css" />
 </head>
 
 <body>
-  <main class="register-page">
 
-    <section class="register-card">
+  <main class="login-page">
+    <section class="login-card">
 
-      <div class="register-head">
-        <img src="images/logo.png" alt="SSB Logo" />
-        <h1>สมัครเป็นตัวแทน</h1>
-        <p>กรอกข้อมูลให้ครบถ้วน เพื่อเข้าสู่ขั้นตอนตรวจสอบและอนุมัติ</p>
-      </div>
+      <h1>สมัครตัวแทน</h1>
+      <p>กรอกข้อมูลให้ครบเพื่อสมัครเป็นตัวแทน</p>
 
-      <form class="register-form">
+      <!-- ✅ FORM -->
+      <form class="login-form" onsubmit="submitRegister(event)">
 
-        <div class="form-section">
-          <h2>ข้อมูลส่วนตัว</h2>
+        <input id="first_name" type="text" placeholder="ชื่อ" required />
+        <input id="last_name" type="text" placeholder="นามสกุล" required />
 
-          <div class="form-grid">
-            <label>
-              ชื่อ
-              <input type="text" required />
-            </label>
+        <input id="phone" type="text" placeholder="เบอร์โทรศัพท์" required />
+        <input id="email" type="email" placeholder="อีเมล" required />
+        <input id="password" type="password" placeholder="รหัสผ่าน" required />
 
-            <label>
-              นามสกุล
-              <input type="text" required />
-            </label>
+        <input id="line" type="text" placeholder="LINE" required />
+        <input id="facebook" type="text" placeholder="Facebook" required />
+        <input id="tiktok" type="text" placeholder="TikTok" required />
+        <input id="youtube" type="text" placeholder="YouTube" required />
 
-            <label>
-              อายุ
-              <input type="number" required />
-            </label>
+        <textarea id="address" placeholder="ที่อยู่" required></textarea>
 
-            <label>
-              รูปถ่าย
-              <input type="file" accept="image/*" required />
-            </label>
-          </div>
-        </div>
+        <input id="bank_name" type="text" placeholder="ชื่อธนาคาร" required />
+        <input id="bank_account" type="text" placeholder="เลขบัญชี" required />
 
-        <div class="form-section">
-          <h2>ข้อมูลติดต่อ</h2>
+        <input id="team_manager" type="text" placeholder="Team Manager" required />
+        <input id="am" type="text" placeholder="AM (ถ้ามี)" />
 
-          <div class="form-grid">
-            <label>
-              เบอร์โทรศัพท์
-              <input type="tel" required />
-            </label>
-
-            <label>
-              อีเมล
-              <input type="email" required />
-            </label>
-
-            <label>
-              LINE
-              <input type="text" required />
-            </label>
-
-            <label>
-              Facebook
-              <input type="text" required />
-            </label>
-
-            <label>
-              TikTok
-              <input type="text" required />
-            </label>
-
-            <label>
-              YouTube
-              <input type="text" required />
-            </label>
-          </div>
-        </div>
-
-        <div class="form-section">
-          <h2>ข้อมูลที่อยู่และบัญชี</h2>
-
-          <label>
-            ที่อยู่เต็ม
-            <textarea rows="4" required></textarea>
-          </label>
-
-          <div class="form-grid">
-            <label>
-              ธนาคาร
-              <input type="text" required />
-            </label>
-
-            <label>
-              เลขบัญชี
-              <input type="text" required />
-            </label>
-
-            <label>
-              ชื่อบัญชี
-              <input type="text" required />
-            </label>
-          </div>
-        </div>
-
-        <div class="form-section">
-          <h2>ข้อมูลระบบตัวแทน</h2>
-
-          <div class="form-grid">
-            <label>
-              รหัสผู้แนะนำ / Team Manager
-              <input type="text" required />
-            </label>
-
-            <label>
-              พื้นที่ / จังหวัด
-              <input type="text" required />
-            </label>
-          </div>
-
-          <div class="notice-box">
-            หลังส่งใบสมัคร Admin จะตรวจสอบข้อมูล และ Owner จะเป็นผู้อนุมัติขั้นสุดท้าย
-          </div>
-        </div>
-
-        <div class="form-actions">
-          <a href="agent-login.html" class="secondary-btn">เข้าสู่ระบบ</a>
-          <button type="submit" class="primary-btn">ส่งใบสมัคร</button>
-        </div>
+        <button type="submit">สมัครตัวแทน</button>
 
       </form>
-    </section>
 
+    </section>
   </main>
+
+  <!-- ✅ JS -->
+  <script src="js/register.js"></script>
+
 </body>
 </html>
