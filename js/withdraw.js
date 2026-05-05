@@ -1,4 +1,4 @@
-const API_URL = "วาง_URL_APPS_SCRIPT_ตรงนี้";
+const API_URL = "https://script.google.com/macros/s/AKfycbxPaGc5vaX5Yj6y9jJU1eoS4oKzTXGuIDWcJUNATribqMzpL700PY2xe1k_oBxqupLJhw/exec";
 
 async function requestWithdraw(){
   const agentId = localStorage.getItem("agent_id");
