@@ -12,6 +12,7 @@
 <body>
   <div class="agent-page">
 
+    <!-- Sidebar -->
     <aside class="agent-sidebar">
       <div class="brand-box">
         <img src="images/logo.png" />
@@ -34,17 +35,20 @@
       </nav>
     </aside>
 
+    <!-- Main -->
     <main class="agent-main">
 
+      <!-- Topbar -->
       <header class="agent-topbar">
         <div>
           <h1>Agent Dashboard</h1>
           <p>ศูนย์จัดการรายได้ ตัวแทน ทีม และระบบถอนเงิน</p>
         </div>
 
-        <button class="logout-btn">Logout</button>
+        <button class="logout-btn" onclick="logout()">Logout</button>
       </header>
 
+      <!-- Content -->
       <section class="dashboard-grid">
 
         <!-- Agent Card -->
@@ -99,6 +103,7 @@
 
           </div>
 
+          <!-- Income Panel -->
           <section class="income-panel">
             <div class="panel-head">
               <h2>ผังรายได้ประจำเดือน</h2>
@@ -133,6 +138,7 @@
         </div>
       </section>
 
+      <!-- Team -->
       <section class="team-panel">
         <h2>โครงสร้างทีม</h2>
 
@@ -159,10 +165,17 @@
     </main>
   </div>
 
+  <!-- JS -->
   <script src="js/agent-api.js"></script>
 
   <script>
-    loadDashboard("AGT-0001");
+    const agentId = localStorage.getItem("agent_id");
+
+    if(!agentId){
+      window.location.href = "agent-login.html";
+    }else{
+      loadDashboard(agentId);
+    }
   </script>
 
 </body>
