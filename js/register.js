@@ -1,36 +1,43 @@
-const API_URL = "ใส่ URL Apps Script";
+const API_URL = "วาง_URL_APPS_SCRIPT_ตรงนี้";
 
-async function submitRegister(e){
-  e.preventDefault();
+async function submitRegister(event){
+  event.preventDefault();
 
   const data = {
     action: "registerAgent",
-    first_name: document.querySelector("#first_name").value,
-    last_name: document.querySelector("#last_name").value,
-    phone: document.querySelector("#phone").value,
-    email: document.querySelector("#email").value,
-    password: document.querySelector("#password").value,
-    line: document.querySelector("#line").value,
-    facebook: document.querySelector("#facebook").value,
-    tiktok: document.querySelector("#tiktok").value,
-    youtube: document.querySelector("#youtube").value,
-    address: document.querySelector("#address").value,
-    bank_name: document.querySelector("#bank_name").value,
-    bank_account: document.querySelector("#bank_account").value,
-    team_manager: document.querySelector("#team_manager").value
+    first_name: document.querySelector("#first_name").value.trim(),
+    last_name: document.querySelector("#last_name").value.trim(),
+    phone: document.querySelector("#phone").value.trim(),
+    email: document.querySelector("#email").value.trim(),
+    password: document.querySelector("#password").value.trim(),
+    line: document.querySelector("#line").value.trim(),
+    facebook: document.querySelector("#facebook").value.trim(),
+    tiktok: document.querySelector("#tiktok").value.trim(),
+    youtube: document.querySelector("#youtube").value.trim(),
+    address: document.querySelector("#address").value.trim(),
+    bank_name: document.querySelector("#bank_name").value.trim(),
+    bank_account: document.querySelector("#bank_account").value.trim(),
+    team_manager: document.querySelector("#team_manager").value.trim(),
+    am: document.querySelector("#am")?.value.trim() || ""
   };
 
-  const res = await fetch(API_URL,{
-    method:"POST",
-    body: JSON.stringify(data)
-  });
+  try{
+    const response = await fetch(API_URL, {
+      method: "POST",
+      body: JSON.stringify(data)
+    });
 
-  const result = await res.json();
+    const result = await response.json();
 
-  if(result.ok){
-    alert("สมัครสำเร็จ");
-    window.location.href = "agent-login.html";
-  }else{
-    alert("เกิดข้อผิดพลาด");
+    if(result.ok){
+      alert("สมัครสำเร็จ รอการอนุมัติ");
+      window.location.href = "agent-login.html";
+    }else{
+      alert(result.message || "สมัครไม่สำเร็จ");
+    }
+
+  }catch(error){
+    console.error(error);
+    alert("เชื่อมต่อระบบไม่ได้ กรุณาลองใหม่");
   }
 }
