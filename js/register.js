@@ -1,4 +1,4 @@
-const API_URL = "วาง_URL_APPS_SCRIPT_ตรงนี้";
+const API_URL = "https://script.google.com/macros/s/AKfycbxPaGc5vaX5YjGy9jJUlo0S4oKzTXGuIDWcJUNATribqMzpL70OPY2xelk_oBxqupLJhw/exec";
 
 async function submitRegister(event){
   event.preventDefault();
