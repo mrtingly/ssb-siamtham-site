@@ -4,34 +4,48 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Agent Login | SSBMS</title>
-  <link rel="icon" href="images/logo.png" />
+
   <link rel="stylesheet" href="css/agent-login.css" />
 </head>
 
 <body>
+
   <main class="login-page">
     <section class="login-card">
-      <img src="images/logo.png" class="login-logo" alt="SSB Logo" />
 
       <h1>Agent Login</h1>
-      <p>เข้าสู่ระบบตัวแทน Stealth Safety Bank</p>
+      <p>เข้าสู่ระบบตัวแทน</p>
 
-      <form class="login-form" action="agent-dashboard.html">
-        <label>
-          รหัสตัวแทน / อีเมล
-          <input type="text" required placeholder="AGT-0001 หรือ Email" />
-        </label>
+      <!-- ✅ FORM -->
+      <form class="login-form" onsubmit="doLogin(event)">
 
-        <label>
-          รหัสผ่าน
-          <input type="password" required placeholder="Password" />
-        </label>
+        <input 
+          id="username"
+          type="text" 
+          placeholder="Agent ID หรือ Email" 
+          required 
+        />
+
+        <input 
+          id="password"
+          type="password" 
+          placeholder="Password" 
+          required 
+        />
 
         <button type="submit">เข้าสู่ระบบ</button>
+
       </form>
 
-      <a href="agent-register.html" class="register-link">สมัครเป็นตัวแทน</a>
+      <a href="agent-register.html" class="register-link">
+        สมัครตัวแทน
+      </a>
+
     </section>
   </main>
+
+  <!-- ✅ JS -->
+  <script src="js/login.js"></script>
+
 </body>
 </html>
