@@ -1,10 +1,11 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbwxuLFd3Udc9m7OI3XtdvRFDK2pUpUB5mWo0M8d4YF5ak_m6xJ8BuCt8na2t75LpXi3Gw/exec";
+const WITHDRAW_API_URL = "https://script.google.com/macros/s/AKfycbwxuLFd3Udc9m7OI3XtdvRFDK2pUpUB5mWo0M8d4YF5ak_m6xJ8BuCt8na2t75LpXi3Gw/exec";
 
 async function requestWithdraw(){
   const agentId = localStorage.getItem("agent_id");
 
   if(!agentId){
-    alert("กรุณา login");
+    alert("กรุณาเข้าสู่ระบบก่อน");
+    window.location.href = "agent-login.html";
     return;
   }
 
@@ -16,7 +17,7 @@ async function requestWithdraw(){
   }
 
   try{
-    const res = await fetch(API_URL,{
+    const res = await fetch(WITHDRAW_API_URL,{
       method:"POST",
       body: JSON.stringify({
         action:"requestWithdraw",
@@ -31,11 +32,11 @@ async function requestWithdraw(){
       alert("ส่งคำขอถอนเงินสำเร็จ");
       location.reload();
     }else{
-      alert(result.message);
+      alert(result.message || "ถอนเงินไม่สำเร็จ");
     }
 
   }catch(err){
     console.error(err);
-    alert("ระบบขัดข้อง");
+    alert("ระบบขัดข้อง กรุณาลองใหม่");
   }
 }
