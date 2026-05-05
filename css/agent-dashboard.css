@@ -5,10 +5,8 @@
 body{
   margin:0;
   font-family:"Prompt",sans-serif;
-  background:
-    radial-gradient(circle at 50% 0%,rgba(40,140,255,.22),transparent 30%),
-    linear-gradient(180deg,#06172e,#020916);
-  color:#fff;
+  background:#f4f8fd;
+  color:#10233f;
 }
 
 .agent-page{
@@ -16,59 +14,64 @@ body{
   display:flex;
 }
 
+/* Sidebar */
 .agent-sidebar{
   width:260px;
-  padding:24px;
-  background:linear-gradient(180deg,#071e3d,#041124);
-  border-right:1px solid rgba(120,200,255,.18);
+  padding:24px 18px;
+  background:#ffffff;
+  border-right:1px solid #dbe7f5;
+  box-shadow:8px 0 24px rgba(25,80,140,.06);
 }
 
 .brand-box{
   display:flex;
   align-items:center;
   gap:12px;
-  margin-bottom:32px;
+  margin-bottom:30px;
 }
 
 .brand-box img{
-  width:52px;
-  height:52px;
+  width:48px;
+  height:48px;
 }
 
 .brand-box strong{
   display:block;
   font-size:20px;
+  color:#0b3a70;
 }
 
 .brand-box span{
-  color:#8fc8ff;
+  color:#5d7fa8;
   font-size:13px;
 }
 
 .side-menu{
   display:flex;
   flex-direction:column;
-  gap:10px;
+  gap:8px;
 }
 
 .side-menu a{
-  padding:13px 16px;
+  padding:14px 16px;
   border-radius:16px;
-  color:#bcd9f5;
+  color:#355b83;
   text-decoration:none;
-  font-weight:700;
+  font-weight:800;
   cursor:pointer;
 }
 
 .side-menu a.active,
 .side-menu a:hover{
-  background:linear-gradient(135deg,#1e6bff,#00c8ff);
+  background:linear-gradient(135deg,#1f75ff,#19c8ff);
   color:#fff;
+  box-shadow:0 10px 20px rgba(31,117,255,.22);
 }
 
+/* Main */
 .agent-main{
   flex:1;
-  padding:28px;
+  padding:32px;
 }
 
 .agent-topbar{
@@ -81,11 +84,12 @@ body{
 .agent-topbar h1{
   margin:0;
   font-size:34px;
+  color:#0b2e59;
 }
 
 .agent-topbar p{
   margin:6px 0 0;
-  color:#9fc4e8;
+  color:#6d88a8;
 }
 
 .logout-btn{
@@ -93,34 +97,32 @@ body{
   border-radius:999px;
   padding:12px 24px;
   font-weight:900;
-  color:#fff;
-  background:rgba(255,255,255,.12);
+  color:#0b3a70;
+  background:#fff;
+  border:1px solid #d8e6f5;
+  box-shadow:0 8px 18px rgba(30,90,160,.08);
 }
 
+/* Layout */
 .dashboard-grid{
   display:grid;
   grid-template-columns:340px 1fr;
   gap:24px;
 }
 
+/* Agent Card */
 .agent-card{
   position:relative;
-  overflow:hidden;
-  border-radius:30px;
+  border-radius:28px;
   padding:26px;
   text-align:center;
-  background:
-    radial-gradient(circle at 50% 0%,rgba(80,210,255,.22),transparent 38%),
-    linear-gradient(180deg,#0b2c59,#071a35);
-  border:1px solid rgba(120,210,255,.28);
-  box-shadow:0 24px 50px rgba(0,0,0,.28);
+  background:#ffffff;
+  border:1px solid #dbe7f5;
+  box-shadow:0 18px 38px rgba(25,80,140,.10);
 }
 
 .card-glow{
-  position:absolute;
-  inset:-80px;
-  background:radial-gradient(circle,rgba(0,200,255,.18),transparent 60%);
-  pointer-events:none;
+  display:none;
 }
 
 .agent-photo{
@@ -131,21 +133,22 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  background:#fff;
-  box-shadow:0 0 28px rgba(0,210,255,.45);
+  background:#f2f7ff;
+  border:1px solid #dbe7f5;
 }
 
 .agent-photo img{
-  width:78px;
+  width:72px;
 }
 
 .agent-card h2{
   margin:10px 0 4px;
   font-size:24px;
+  color:#0b2e59;
 }
 
 .agent-code{
-  color:#69dcff;
+  color:#1675ff;
   font-weight:900;
   letter-spacing:1px;
 }
@@ -159,20 +162,24 @@ body{
 }
 
 .agent-status.approved{
-  color:#18ff9b;
-  background:rgba(24,255,155,.12);
-  border:1px solid rgba(24,255,155,.32);
+  color:#07864d;
+  background:#e8fff4;
+  border:1px solid #9ee8c5;
 }
 
 .agent-info{
   margin-top:10px;
   text-align:left;
   font-size:14px;
-  color:#dcecff;
+  color:#334b68;
 }
 
 .agent-info p{
-  margin:8px 0;
+  margin:9px 0;
+}
+
+.agent-info b{
+  color:#0b3a70;
 }
 
 .qr-box{
@@ -183,11 +190,13 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  color:#082044;
+  color:#0b3a70;
   font-weight:900;
-  background:#fff;
+  background:#f6faff;
+  border:1px solid #dbe7f5;
 }
 
+/* Summary */
 .summary-area{
   display:flex;
   flex-direction:column;
@@ -201,35 +210,45 @@ body{
 }
 
 .money-card{
-  border-radius:24px;
+  border-radius:22px;
   padding:20px;
-  background:rgba(255,255,255,.07);
-  border:1px solid rgba(120,210,255,.18);
+  background:#ffffff;
+  border:1px solid #dbe7f5;
+  box-shadow:0 12px 26px rgba(25,80,140,.08);
 }
 
 .money-card span{
   display:block;
-  color:#a9c9e9;
+  color:#6d88a8;
   font-size:14px;
+  font-weight:700;
 }
 
 .money-card strong{
   display:block;
   margin-top:10px;
-  font-size:28px;
+  font-size:30px;
+  color:#0b2e59;
 }
 
 .money-card.highlight{
-  background:linear-gradient(135deg,#1e6bff,#00c8ff);
+  background:linear-gradient(135deg,#1f75ff,#19c8ff);
+  border:none;
 }
 
+.money-card.highlight span,
+.money-card.highlight strong{
+  color:#fff;
+}
+
+/* Panels */
 .income-panel,
 .team-panel{
-  border-radius:30px;
+  border-radius:28px;
   padding:24px;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(120,210,255,.18);
-  box-shadow:0 18px 38px rgba(0,0,0,.20);
+  background:#ffffff;
+  border:1px solid #dbe7f5;
+  box-shadow:0 18px 38px rgba(25,80,140,.09);
 }
 
 .panel-head{
@@ -242,31 +261,38 @@ body{
 .panel-head h2,
 .team-panel h2{
   margin:0;
+  color:#0b2e59;
 }
 
 .panel-head select{
-  border:0;
+  border:1px solid #dbe7f5;
   border-radius:999px;
   padding:10px 16px;
-  background:#102b55;
-  color:#fff;
+  background:#f6faff;
+  color:#0b3a70;
+  font-weight:800;
 }
 
 .income-row,
 .income-total{
   display:flex;
   justify-content:space-between;
-  padding:14px 0;
-  border-bottom:1px solid rgba(255,255,255,.08);
+  padding:15px 0;
+  border-bottom:1px solid #e6eef7;
+  color:#334b68;
+}
+
+.income-row b{
+  color:#0b2e59;
 }
 
 .income-row.tax{
-  color:#ffb36b;
+  color:#d37421;
 }
 
 .income-total strong{
-  font-size:28px;
-  color:#6ee7ff;
+  font-size:30px;
+  color:#1675ff;
 }
 
 .withdraw-btn{
@@ -278,10 +304,12 @@ body{
   color:#fff;
   font-size:18px;
   font-weight:900;
-  background:linear-gradient(135deg,#1e6bff,#00d4ff);
-  box-shadow:0 14px 28px rgba(0,150,255,.26);
+  background:linear-gradient(135deg,#1f75ff,#19c8ff);
+  box-shadow:0 14px 28px rgba(31,117,255,.22);
+  cursor:pointer;
 }
 
+/* Team */
 .team-panel{
   margin-top:24px;
 }
@@ -296,13 +324,13 @@ body{
 .team-grid div{
   border-radius:20px;
   padding:18px;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(120,210,255,.14);
+  background:#f8fbff;
+  border:1px solid #dbe7f5;
 }
 
 .team-grid span{
   display:block;
-  color:#9fc4e8;
+  color:#6d88a8;
   font-size:13px;
 }
 
@@ -310,8 +338,10 @@ body{
   display:block;
   margin-top:8px;
   font-size:18px;
+  color:#0b2e59;
 }
 
+/* Mobile */
 @media(max-width:1023px){
   .agent-page{
     flex-direction:column;
@@ -319,6 +349,10 @@ body{
 
   .agent-sidebar{
     width:100%;
+  }
+
+  .agent-main{
+    padding:20px;
   }
 
   .dashboard-grid,
