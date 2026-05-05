@@ -1,4 +1,4 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbwxuLFd3Udc9m7OI3XtdvRFDK2pUpUB5mWo0M8d4YF5ak_m6xJ8BuCt8na2t75LpXi3Gw/exec";
+const REGISTER_API_URL = "https://script.google.com/macros/s/AKfycbwxuLFd3Udc9m7OI3XtdvRFDK2pUpUB5mWo0M8d4YF5ak_m6xJ8BuCt8na2t75LpXi3Gw/exec";
 
 async function submitRegister(event){
   event.preventDefault();
@@ -22,12 +22,12 @@ async function submitRegister(event){
   };
 
   try{
-    const response = await fetch(API_URL, {
-      method: "POST",
+    const res = await fetch(REGISTER_API_URL,{
+      method:"POST",
       body: JSON.stringify(data)
     });
 
-    const result = await response.json();
+    const result = await res.json();
 
     if(result.ok){
       alert("สมัครสำเร็จ รอการอนุมัติ");
@@ -36,8 +36,8 @@ async function submitRegister(event){
       alert(result.message || "สมัครไม่สำเร็จ");
     }
 
-  }catch(error){
-    console.error(error);
+  }catch(err){
+    console.error(err);
     alert("เชื่อมต่อระบบไม่ได้ กรุณาลองใหม่");
   }
 }
