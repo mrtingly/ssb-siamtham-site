@@ -1,5 +1,23 @@
 const API_URL = "https://script.google.com/macros/s/AKfycbxPaGc5vaX5YjGy9jJUlo0S4oKzTXGuIDWcJUNATribqMzpL70OPY2xelk_oBxqupLJhw/exec";
 
+function jsonp(url){
+  return new Promise((resolve, reject) => {
+    const callbackName = "jsonp_" + Date.now();
+
+    window[callbackName] = function(data){
+      resolve(data);
+      delete window[callbackName];
+      script.remove();
+    };
+
+    const script = document.createElement("script");
+    script.src = url + "&callback=" + callbackName;
+    script.onerror = reject;
+
+    document.body.appendChild(script);
+  });
+}
+
 async function doLogin(event){
   event.preventDefault();
 
@@ -11,12 +29,14 @@ async function doLogin(event){
     return;
   }
 
-  try{
-    const url =
-      `${API_URL}?action=login&username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+  const url =
+    API_URL +
+    "?action=login" +
+    "&username=" + encodeURIComponent(username) +
+    "&password=" + encodeURIComponent(password);
 
-    const response = await fetch(url);
-    const result = await response.json();
+  try{
+    const result = await jsonp(url);
 
     if(!result.ok){
       alert(result.message || "เข้าสู่ระบบไม่สำเร็จ");
