@@ -14,15 +14,15 @@
   <div class="admin-page">
 
     <aside class="admin-sidebar">
-      <div class="brand">
+      <div class="brand-box">
         <img src="images/logo.png" alt="SSB Logo" />
         <div>
           <strong>SSBMS</strong>
-          <span>Admin / Owner</span>
+          <span>Admin System</span>
         </div>
       </div>
 
-      <nav>
+      <nav class="side-menu">
         <a class="active" href="admin-dashboard.html">Dashboard</a>
         <a href="admin-agent.html">ตรวจตัวแทน</a>
         <a href="admin-agents-list.html">รายชื่อตัวแทน</a>
@@ -34,13 +34,13 @@
 
     <main class="admin-main">
 
-      <header class="admin-head">
+      <header class="admin-topbar">
         <div>
           <h1>Admin Dashboard</h1>
           <p>ศูนย์ควบคุมตัวแทน รายได้ โบนัส และการถอนเงิน</p>
         </div>
 
-        <button class="owner-badge">OWNER</button>
+        <div class="owner-badge">OWNER</div>
       </header>
 
       <section class="stat-grid">
@@ -56,13 +56,13 @@
           <small>เดือนนี้</small>
         </div>
 
-        <div class="stat-card">
+        <div class="stat-card highlight">
           <span>รออนุมัติถอน</span>
           <strong>฿420,000</strong>
           <small>12 รายการ</small>
         </div>
 
-        <div class="stat-card highlight">
+        <div class="stat-card">
           <span>โบนัสเดือนนี้</span>
           <strong>฿180,000</strong>
           <small>สร้างโดย Owner</small>
@@ -78,29 +78,29 @@
           </div>
 
           <div class="task-list">
-            <div class="task-item">
+            <a href="admin-agent.html" class="task-item">
               <div>
                 <b>ตัวแทนรออนุมัติ</b>
                 <span>32 รายการ</span>
               </div>
-              <a href="admin-agent.html">ตรวจ</a>
-            </div>
+              <strong>ตรวจ</strong>
+            </a>
 
-            <div class="task-item">
+            <a href="admin-withdraw.html" class="task-item">
               <div>
                 <b>คำขอถอนเงิน</b>
                 <span>12 รายการ</span>
               </div>
-              <a href="admin-withdraw.html">อนุมัติ</a>
-            </div>
+              <strong>อนุมัติ</strong>
+            </a>
 
-            <div class="task-item">
+            <a href="admin-agents-list.html" class="task-item">
               <div>
                 <b>ข้อมูล Profile ไม่ครบ</b>
                 <span>7 รายการ</span>
               </div>
-              <a href="admin-agents-list.html">แก้ไข</a>
-            </div>
+              <strong>แก้ไข</strong>
+            </a>
           </div>
         </div>
 
