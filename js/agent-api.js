@@ -129,3 +129,76 @@ function formatDate(value){
   if(isNaN(d.getTime())) return "-";
   return d.toLocaleDateString("th-TH");
 }
+
+async function loadIncomePage(agentId){
+  const url = `${API_URL}?action=getDashboard&agent_id=${encodeURIComponent(agentId)}`;
+
+  try{
+    const data = await jsonp(url);
+
+    if(!data.ok){
+      alert(data.message || "โหลดข้อมูลรายได้ไม่สำเร็จ");
+      return;
+    }
+
+    const summary = data.summary;
+
+    document.querySelectorAll(".commission").forEach(el=>{
+      el.innerText = money(summary.commission);
+    });
+
+    document.querySelectorAll(".bonus-detail").forEach(el=>{
+      el.innerText = money(summary.totalBonus);
+    });
+
+    document.querySelectorAll(".tax").forEach(el=>{
+      el.innerText = "- " + money(summary.tax);
+    });
+
+    document.querySelectorAll(".net").forEach(el=>{
+      el.innerText = money(summary.net);
+    });
+
+    const tbody = document.querySelector("#incomeTable");
+    const rows = data.income || [];
+
+    if(rows.length === 0){
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="7">ยังไม่มีรายการรายได้</td>
+        </tr>
+      `;
+      return;
+    }
+
+    tbody.innerHTML = rows.map(item=>`
+      <tr>
+        <td>${item.income_id || "-"}</td>
+        <td>${item.type || "-"}</td>
+        <td>${money(item.amount)}</td>
+        <td>${money(item.tax)}</td>
+        <td>${money(item.net_amount)}</td>
+        <td>${renderIncomeStatus(item.status)}</td>
+        <td>${formatDate(item.available_date)}</td>
+      </tr>
+    `).join("");
+
+  }catch(err){
+    console.error(err);
+    alert("เชื่อมต่อข้อมูลรายได้ไม่ได้");
+  }
+}
+
+function renderIncomeStatus(status){
+  const s = String(status || "").toUpperCase();
+
+  if(s === "AVAILABLE"){
+    return `<span class="status available">AVAILABLE</span>`;
+  }
+
+  if(s === "PAID"){
+    return `<span class="status paid">PAID</span>`;
+  }
+
+  return `<span class="status waiting">WAIT_7_DAYS</span>`;
+}
