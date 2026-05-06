@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ถอนเงิน | SSBMS Agent</title>
+
+  <link rel="icon" href="images/logo.png" />
+  <link rel="stylesheet" href="css/agent-withdraw.css" />
+</head>
+
+<body>
+  <div class="agent-page">
+
+    <aside class="agent-sidebar">
+      <div class="brand-box">
+        <img src="images/logo.png" />
+        <div>
+          <strong>SSBMS</strong>
+          <span>Agent System</span>
+        </div>
+      </div>
+
+      <nav class="side-menu">
+        <a href="agent-dashboard.html">Dashboard</a>
+        <a href="book.html">สั่งสินค้า</a>
+        <a href="agent-leads.html">ลูกค้า / Leads</a>
+        <a href="agent-income.html">รายได้</a>
+        <a href="agent-bonus.html">โบนัส</a>
+        <a class="active" href="agent-withdraw.html">ถอนเงิน</a>
+        <a href="agent-tax.html">ภาษี</a>
+        <a href="agent-team.html">ทีมของฉัน</a>
+        <a href="agent-history.html">ประวัติย้อนหลัง</a>
+      </nav>
+    </aside>
+
+    <main class="agent-main">
+
+      <header class="agent-topbar">
+        <div>
+          <h1>ถอนเงิน</h1>
+          <p>ตรวจสอบยอดที่ถอนได้ และส่งคำขอถอนเงิน</p>
+        </div>
+
+        <button class="logout-btn" onclick="logout()">Logout</button>
+      </header>
+
+      <section class="withdraw-grid">
+
+        <div class="balance-card">
+          <span>ยอดที่ถอนได้ตอนนี้</span>
+          <strong class="available">฿0</strong>
+          <p>ระบบจะถอนได้หลังส่งสินค้าแล้วครบ 7 วัน</p>
+
+          <button class="withdraw-btn" onclick="requestWithdraw()">
+            ส่งคำขอถอนเงิน
+          </button>
+        </div>
+
+        <div class="bank-card">
+          <h2>บัญชีรับเงิน</h2>
+
+          <div class="bank-row">
+            <span>ธนาคาร</span>
+            <strong class="bank-name">-</strong>
+          </div>
+
+          <div class="bank-row">
+            <span>เลขบัญชี</span>
+            <strong class="bank-account">-</strong>
+          </div>
+
+          <div class="bank-row">
+            <span>สถานะบัญชี</span>
+            <strong class="status-text">APPROVED</strong>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="table-card">
+        <h2>ประวัติการถอนเงิน</h2>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>รหัสถอนเงิน</th>
+                <th>จำนวนเงิน</th>
+                <th>สถานะ</th>
+                <th>วันที่ขอถอน</th>
+                <th>วันที่จ่าย</th>
+              </tr>
+            </thead>
+            <tbody id="withdrawTable">
+              <tr>
+                <td colspan="5">กำลังโหลดข้อมูล...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="js/agent-api.js"></script>
+  <script src="js/withdraw.js"></script>
+
+  <script>
+    const agentId = localStorage.getItem("agent_id");
+
+    if(!agentId){
+      window.location.href = "agent-login.html";
+    }else{
+      loadWithdrawPage(agentId);
+    }
+  </script>
+</body>
+</html>
