@@ -1,0 +1,288 @@
+*{ box-sizing:border-box; }
+
+body{
+  margin:0;
+  font-family:"Prompt",sans-serif;
+  background:#f4f8fd;
+  color:#10233f;
+}
+
+.agent-page{
+  min-height:100vh;
+  display:flex;
+}
+
+.agent-sidebar{
+  width:260px;
+  padding:24px 18px;
+  background:#fff;
+  border-right:1px solid #dbe7f5;
+  box-shadow:8px 0 24px rgba(25,80,140,.06);
+}
+
+.brand-box{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:30px;
+}
+
+.brand-box img{
+  width:48px;
+  height:48px;
+}
+
+.brand-box strong{
+  display:block;
+  font-size:20px;
+  color:#0b3a70;
+}
+
+.brand-box span{
+  color:#5d7fa8;
+  font-size:13px;
+}
+
+.side-menu{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.side-menu a{
+  padding:14px 16px;
+  border-radius:16px;
+  color:#355b83;
+  text-decoration:none;
+  font-weight:800;
+}
+
+.side-menu a.active,
+.side-menu a:hover{
+  background:linear-gradient(135deg,#1f75ff,#19c8ff);
+  color:#fff;
+  box-shadow:0 10px 20px rgba(31,117,255,.22);
+}
+
+.agent-main{
+  flex:1;
+  padding:32px;
+}
+
+.agent-topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:24px;
+}
+
+.agent-topbar h1{
+  margin:0;
+  font-size:34px;
+  color:#0b2e59;
+}
+
+.agent-topbar p{
+  margin:6px 0 0;
+  color:#6d88a8;
+}
+
+.logout-btn{
+  border-radius:999px;
+  padding:12px 24px;
+  font-weight:900;
+  color:#0b3a70;
+  background:#fff;
+  border:1px solid #d8e6f5;
+}
+
+.income-summary{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+}
+
+.summary-card,
+.income-panel,
+.table-card{
+  background:#fff;
+  border:1px solid #dbe7f5;
+  border-radius:26px;
+  box-shadow:0 18px 38px rgba(25,80,140,.09);
+}
+
+.summary-card{
+  padding:22px;
+}
+
+.summary-card span{
+  display:block;
+  color:#6d88a8;
+  font-weight:800;
+}
+
+.summary-card strong{
+  display:block;
+  margin-top:10px;
+  font-size:30px;
+  color:#0b2e59;
+}
+
+.summary-card.highlight{
+  background:linear-gradient(135deg,#1f75ff,#19c8ff);
+  border:none;
+}
+
+.summary-card.highlight span,
+.summary-card.highlight strong{
+  color:#fff;
+}
+
+.tax-card strong{
+  color:#d37421;
+}
+
+.income-panel{
+  margin-top:24px;
+  padding:26px;
+}
+
+.panel-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:22px;
+}
+
+.panel-head h2,
+.table-card h2{
+  margin:0;
+  color:#0b2e59;
+}
+
+.panel-head select{
+  border:1px solid #dbe7f5;
+  border-radius:999px;
+  padding:10px 16px;
+  background:#f6faff;
+  color:#0b3a70;
+  font-weight:800;
+}
+
+.income-bar{
+  margin-top:18px;
+}
+
+.bar-label{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:8px;
+  color:#355b83;
+  font-weight:800;
+}
+
+.bar-track{
+  height:14px;
+  border-radius:999px;
+  background:#edf4fb;
+  overflow:hidden;
+}
+
+.bar-fill{
+  height:100%;
+  border-radius:999px;
+}
+
+.commission-fill{
+  width:72%;
+  background:linear-gradient(135deg,#1f75ff,#19c8ff);
+}
+
+.bonus-fill{
+  width:35%;
+  background:linear-gradient(135deg,#18c28f,#58e6b5);
+}
+
+.tax-fill{
+  width:18%;
+  background:linear-gradient(135deg,#ff9f43,#ffcc70);
+}
+
+.table-card{
+  margin-top:24px;
+  padding:26px;
+}
+
+.table-wrap{
+  overflow:auto;
+  margin-top:18px;
+}
+
+table{
+  width:100%;
+  min-width:860px;
+  border-collapse:collapse;
+}
+
+th,
+td{
+  padding:14px;
+  text-align:left;
+  border-bottom:1px solid #e6eef7;
+}
+
+th{
+  color:#6d88a8;
+  font-size:13px;
+}
+
+td{
+  color:#10233f;
+}
+
+.status{
+  display:inline-flex;
+  padding:7px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:900;
+}
+
+.status.available{
+  color:#07864d;
+  background:#e8fff4;
+}
+
+.status.waiting{
+  color:#b77900;
+  background:#fff5dc;
+}
+
+.status.paid{
+  color:#1675ff;
+  background:#edf5ff;
+}
+
+@media(max-width:1023px){
+  .agent-page{
+    flex-direction:column;
+  }
+
+  .agent-sidebar{
+    width:100%;
+  }
+
+  .agent-main{
+    padding:20px;
+  }
+
+  .income-summary{
+    grid-template-columns:1fr;
+  }
+
+  .agent-topbar{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:12px;
+  }
+}
