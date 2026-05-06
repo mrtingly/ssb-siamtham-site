@@ -2,10 +2,98 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<title>กำลังพัฒนา</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>โบนัส | SSBMS</title>
+
+<link rel="icon" href="images/logo.png">
+<link rel="stylesheet" href="css/agent-bonus.css">
 </head>
-<body style="font-family:Prompt;text-align:center;padding:100px;">
-<h1>หน้านี้กำลังพัฒนา</h1>
-<a href="agent-dashboard.html">← กลับ Dashboard</a>
+
+<body>
+<div class="agent-page">
+
+<aside class="agent-sidebar">
+  <div class="brand-box">
+    <img src="images/logo.png">
+    <div>
+      <strong>SSBMS</strong>
+      <span>Agent System</span>
+    </div>
+  </div>
+
+  <nav class="side-menu">
+    <a href="agent-dashboard.html">Dashboard</a>
+    <a href="book.html">สั่งสินค้า</a>
+    <a href="agent-leads.html">ลูกค้า</a>
+    <a href="agent-income.html">รายได้</a>
+    <a class="active" href="agent-bonus.html">โบนัส</a>
+    <a href="agent-withdraw.html">ถอนเงิน</a>
+    <a href="agent-tax.html">ภาษี</a>
+    <a href="agent-team.html">ทีม</a>
+    <a href="agent-history.html">ประวัติ</a>
+  </nav>
+</aside>
+
+<main class="agent-main">
+
+<header class="agent-topbar">
+  <div>
+    <h1>โบนัสของฉัน</h1>
+    <p>โบนัสที่บริษัทมอบให้</p>
+  </div>
+
+  <button class="logout-btn" onclick="logout()">Logout</button>
+</header>
+
+<section class="bonus-summary">
+  <div class="bonus-card">
+    <span>โบนัสรวมทั้งหมด</span>
+    <strong class="total-bonus">฿0</strong>
+  </div>
+
+  <div class="bonus-card highlight">
+    <span>โบนัสเดือนนี้</span>
+    <strong class="month-bonus">฿0</strong>
+  </div>
+</section>
+
+<section class="table-card">
+  <h2>รายการโบนัส</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>รหัสโบนัส</th>
+          <th>ประเภท</th>
+          <th>จำนวนเงิน</th>
+          <th>เดือน</th>
+          <th>สถานะ</th>
+          <th>หมายเหตุ</th>
+        </tr>
+      </thead>
+
+      <tbody id="bonusTable">
+        <tr><td colspan="6">กำลังโหลด...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script src="js/agent-api.js"></script>
+
+<script>
+const agentId = localStorage.getItem("agent_id");
+
+if(!agentId){
+  location.href = "agent-login.html";
+}else{
+  loadBonusPage(agentId);
+}
+</script>
+
 </body>
 </html>
