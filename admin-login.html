@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Admin Login | SSBMS</title>
+
+  <link rel="icon" href="images/logo.png" />
+  <link rel="stylesheet" href="css/agent-login.css" />
+</head>
+
+<body>
+
+  <main class="login-page">
+    <section class="login-card">
+
+      <img src="images/logo.png" class="login-logo" alt="SSB Logo" />
+
+      <h1>Admin Login</h1>
+      <p>เข้าสู่ระบบผู้ดูแล / Owner</p>
+
+      <form class="login-form" onsubmit="adminLogin(event)">
+
+        <label>
+          Email / Admin ID
+          <input id="admin_username" type="text" required />
+        </label>
+
+        <label>
+          Password
+          <input id="admin_password" type="password" required />
+        </label>
+
+        <button type="submit">เข้าสู่ระบบ Admin</button>
+      </form>
+
+      <a href="agent-login.html" class="register-link">กลับ Agent Login</a>
+
+    </section>
+  </main>
+
+  <script src="js/admin-login.js"></script>
+
+</body>
+</html>
