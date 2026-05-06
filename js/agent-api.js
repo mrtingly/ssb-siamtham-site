@@ -202,3 +202,44 @@ function renderIncomeStatus(status){
 
   return `<span class="status waiting">WAIT_7_DAYS</span>`;
 }
+
+async function loadBonusPage(agentId){
+  const url = `${API_URL}?action=getDashboard&agent_id=${agentId}`;
+
+  const data = await jsonp(url);
+
+  if(!data.ok){
+    alert("โหลดโบนัสไม่สำเร็จ");
+    return;
+  }
+
+  const bonus = data.bonus || [];
+
+  let total = 0;
+  let month = 0;
+
+  bonus.forEach(b=>{
+    total += Number(b.amount || 0);
+  });
+
+  document.querySelector(".total-bonus").innerText = money(total);
+  document.querySelector(".month-bonus").innerText = money(total);
+
+  const table = document.querySelector("#bonusTable");
+
+  if(bonus.length === 0){
+    table.innerHTML = `<tr><td colspan="6">ไม่มีโบนัส</td></tr>`;
+    return;
+  }
+
+  table.innerHTML = bonus.map(b=>`
+    <tr>
+      <td>${b.bonus_id}</td>
+      <td>${b.type}</td>
+      <td>${money(b.amount)}</td>
+      <td>${b.month}</td>
+      <td>${b.status}</td>
+      <td>${b.note || "-"}</td>
+    </tr>
+  `).join("");
+}
