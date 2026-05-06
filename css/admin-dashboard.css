@@ -5,8 +5,8 @@
 body{
   margin:0;
   font-family:"Prompt",sans-serif;
-  background:#f4f8fd;
-  color:#10233f;
+  background:#07111f;
+  color:#eaf4ff;
 }
 
 .admin-page{
@@ -18,7 +18,7 @@ body{
 .admin-sidebar{
   width:260px;
   padding:24px 18px;
-  background:#ffffff;
+  background:#0d1726;
   border-right:1px solid #dbe7f5;
   box-shadow:8px 0 24px rgba(25,80,140,.06);
 }
@@ -85,12 +85,12 @@ body{
 .admin-topbar h1{
   margin:0;
   font-size:34px;
-  color:#0b2e59;
+  color:#ffffff;
 }
 
 .admin-topbar p{
   margin:6px 0 0;
-  color:#6d88a8;
+  color:#8ca3c0;
 }
 
 .owner-badge{
@@ -113,7 +113,7 @@ body{
 }
 
 .stat-card{
-  background:#fff;
+  background:#111c2b;
   padding:22px;
   border-radius:24px;
   border:1px solid #dbe7f5;
@@ -122,7 +122,7 @@ body{
 
 .stat-card span{
   display:block;
-  color:#6d88a8;
+  color:#8ca3c0;
   font-weight:800;
 }
 
@@ -130,13 +130,13 @@ body{
   display:block;
   margin-top:10px;
   font-size:30px;
-  color:#0b2e59;
+  color:#ffffff;
 }
 
 .stat-card small{
   display:block;
   margin-top:6px;
-  color:#6d88a8;
+  color:#8ca3c0;
 }
 
 .stat-card.highlight{
@@ -160,7 +160,7 @@ body{
 
 .panel,
 .quick-panel{
-  background:#fff;
+  background:#111c2b;
   border:1px solid #dbe7f5;
   border-radius:28px;
   padding:26px;
@@ -177,7 +177,7 @@ body{
 .panel-head h2,
 .quick-panel h2{
   margin:0;
-  color:#0b2e59;
+  color:#ffffff;
 }
 
 .panel-head a{
@@ -187,7 +187,7 @@ body{
 }
 
 .panel-head select{
-  border:1px solid #dbe7f5;
+  border:1px solid rgba(255,255,255,.08);
   border-radius:999px;
   padding:10px 16px;
   background:#f6faff;
@@ -208,7 +208,7 @@ body{
   align-items:center;
   padding:18px;
   border-radius:20px;
-  background:#f8fbff;
+  background:#162235;
   border:1px solid #dbe7f5;
   text-decoration:none;
   color:#10233f;
@@ -216,13 +216,13 @@ body{
 
 .task-item b{
   display:block;
-  color:#0b2e59;
+  color:#ffffff;
 }
 
 .task-item span{
   display:block;
   margin-top:4px;
-  color:#6d88a8;
+  color:#8ca3c0;
 }
 
 .task-item strong{
@@ -238,12 +238,12 @@ body{
 }
 
 .income-table span{
-  color:#6d88a8;
+  color:#8ca3c0;
   font-weight:800;
 }
 
 .income-table b{
-  color:#0b2e59;
+  color:#ffffff;
 }
 
 .income-table .total{
@@ -274,7 +274,7 @@ body{
   text-decoration:none;
   font-weight:900;
   color:#355b83;
-  background:#f8fbff;
+  background:#162235;
   border:1px solid #dbe7f5;
 }
 
