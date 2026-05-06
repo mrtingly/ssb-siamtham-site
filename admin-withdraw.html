@@ -103,8 +103,13 @@
               <td><span class="status pending">PENDING</span></td>
               <td>
                 <div class="action-set">
-                  <button class="approve">อนุมัติ</button>
-                  <button class="reject">ปฏิเสธ</button>
+                 <button class="approve" onclick="markWithdrawPaid('WD-123456789')">
+                    อนุมัติ
+                 </button>
+                  
+                  <button class="reject" onclick="rejectWithdraw('WD-123456789')">
+                    ปฏิเสธ
+                  </button>
                 </div>
               </td>
             </tr>
@@ -118,7 +123,9 @@
               <td><span class="status approved">APPROVED</span></td>
               <td>
                 <div class="action-set">
-                  <button class="paid">จ่ายแล้ว</button>
+                  <button class="paid" onclick="markWithdrawPaid('WD-123456789')">
+                  จ่ายแล้ว
+                </button>
                 </div>
               </td>
             </tr>
