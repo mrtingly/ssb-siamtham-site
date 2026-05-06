@@ -62,3 +62,70 @@ function logout(){
   localStorage.removeItem("agent_role");
   window.location.href = "agent-login.html";
 }
+
+async function loadWithdrawPage(agentId){
+  const url = `${API_URL}?action=getDashboard&agent_id=${encodeURIComponent(agentId)}`;
+
+  try{
+    const data = await jsonp(url);
+
+    if(!data.ok){
+      alert(data.message || "โหลดข้อมูลไม่สำเร็จ");
+      return;
+    }
+
+    const agent = data.agent;
+    const summary = data.summary;
+
+    document.querySelector(".available").innerText = money(summary.available);
+    document.querySelector(".bank-name").innerText = agent.bank_name || "-";
+    document.querySelector(".bank-account").innerText = agent.bank_account || "-";
+
+    const tbody = document.querySelector("#withdrawTable");
+    const rows = data.withdraws || [];
+
+    if(rows.length === 0){
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="5">ยังไม่มีประวัติการถอนเงิน</td>
+        </tr>
+      `;
+      return;
+    }
+
+    tbody.innerHTML = rows.map(w => `
+      <tr>
+        <td>${w.withdraw_id || "-"}</td>
+        <td>${money(w.amount)}</td>
+        <td>${renderWithdrawStatus(w.status)}</td>
+        <td>${formatDate(w.request_date)}</td>
+        <td>${formatDate(w.paid_date)}</td>
+      </tr>
+    `).join("");
+
+  }catch(err){
+    console.error(err);
+    alert("เชื่อมต่อข้อมูลถอนเงินไม่ได้");
+  }
+}
+
+function renderWithdrawStatus(status){
+  const s = String(status || "").toUpperCase();
+
+  if(s === "PAID"){
+    return `<span class="status paid">PAID</span>`;
+  }
+
+  if(s === "REJECTED"){
+    return `<span class="status rejected">REJECTED</span>`;
+  }
+
+  return `<span class="status pending">PENDING</span>`;
+}
+
+function formatDate(value){
+  if(!value) return "-";
+  const d = new Date(value);
+  if(isNaN(d.getTime())) return "-";
+  return d.toLocaleDateString("th-TH");
+}
