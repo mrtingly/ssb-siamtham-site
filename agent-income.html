@@ -1,11 +1,152 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<title>กำลังพัฒนา</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>รายได้ | SSBMS Agent</title>
+
+  <link rel="icon" href="images/logo.png" />
+  <link rel="stylesheet" href="css/agent-income.css" />
 </head>
-<body style="font-family:Prompt;text-align:center;padding:100px;">
-<h1>หน้านี้กำลังพัฒนา</h1>
-<a href="agent-dashboard.html">← กลับ Dashboard</a>
+
+<body>
+  <div class="agent-page">
+
+    <aside class="agent-sidebar">
+      <div class="brand-box">
+        <img src="images/logo.png" />
+        <div>
+          <strong>SSBMS</strong>
+          <span>Agent System</span>
+        </div>
+      </div>
+
+      <nav class="side-menu">
+        <a href="agent-dashboard.html">Dashboard</a>
+        <a href="book.html">สั่งสินค้า</a>
+        <a href="agent-leads.html">ลูกค้า / Leads</a>
+        <a class="active" href="agent-income.html">รายได้</a>
+        <a href="agent-bonus.html">โบนัส</a>
+        <a href="agent-withdraw.html">ถอนเงิน</a>
+        <a href="agent-tax.html">ภาษี</a>
+        <a href="agent-team.html">ทีมของฉัน</a>
+        <a href="agent-history.html">ประวัติย้อนหลัง</a>
+      </nav>
+    </aside>
+
+    <main class="agent-main">
+
+      <header class="agent-topbar">
+        <div>
+          <h1>รายได้ของฉัน</h1>
+          <p>สรุปรายได้ คอมมิชชั่น โบนัส ภาษี และยอดสุทธิ</p>
+        </div>
+
+        <button class="logout-btn" onclick="logout()">Logout</button>
+      </header>
+
+      <section class="income-summary">
+        <div class="summary-card">
+          <span>คอมมิชชั่นรวม</span>
+          <strong class="commission">฿0</strong>
+        </div>
+
+        <div class="summary-card">
+          <span>โบนัสรวม</span>
+          <strong class="bonus-detail">฿0</strong>
+        </div>
+
+        <div class="summary-card tax-card">
+          <span>ภาษีหัก ณ ที่จ่าย</span>
+          <strong class="tax">฿0</strong>
+        </div>
+
+        <div class="summary-card highlight">
+          <span>ยอดสุทธิ</span>
+          <strong class="net">฿0</strong>
+        </div>
+      </section>
+
+      <section class="income-panel">
+        <div class="panel-head">
+          <h2>ผังรายได้</h2>
+          <select>
+            <option>เมษายน 2026</option>
+            <option>มีนาคม 2026</option>
+            <option>กุมภาพันธ์ 2026</option>
+          </select>
+        </div>
+
+        <div class="income-bar">
+          <div class="bar-label">
+            <span>คอมมิชชั่น</span>
+            <b class="commission">฿0</b>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill commission-fill"></div>
+          </div>
+        </div>
+
+        <div class="income-bar">
+          <div class="bar-label">
+            <span>โบนัส</span>
+            <b class="bonus-detail">฿0</b>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill bonus-fill"></div>
+          </div>
+        </div>
+
+        <div class="income-bar">
+          <div class="bar-label">
+            <span>ภาษี</span>
+            <b class="tax">฿0</b>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill tax-fill"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="table-card">
+        <h2>รายการรายได้</h2>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>รหัสรายได้</th>
+                <th>ประเภท</th>
+                <th>ยอดก่อนหัก</th>
+                <th>ภาษี</th>
+                <th>ยอดสุทธิ</th>
+                <th>สถานะ</th>
+                <th>วันที่ถอนได้</th>
+              </tr>
+            </thead>
+
+            <tbody id="incomeTable">
+              <tr>
+                <td colspan="7">กำลังโหลดข้อมูล...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="js/agent-api.js"></script>
+
+  <script>
+    const agentId = localStorage.getItem("agent_id");
+
+    if(!agentId){
+      window.location.href = "agent-login.html";
+    }else{
+      loadIncomePage(agentId);
+    }
+  </script>
 </body>
 </html>
