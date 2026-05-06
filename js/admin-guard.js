@@ -14,3 +14,11 @@ if(adminRole !== "Admin" && adminRole !== "Owner"){
 
   window.location.href = "admin-login.html";
 }
+
+function adminLogout(){
+  localStorage.removeItem("admin_id");
+  localStorage.removeItem("admin_name");
+  localStorage.removeItem("admin_role");
+
+  window.location.href = "admin-login.html";
+}
