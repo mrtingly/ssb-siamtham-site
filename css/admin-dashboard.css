@@ -5,8 +5,8 @@
 body{
   margin:0;
   font-family:"Prompt",sans-serif;
-  background:#07111f;
-  color:#eaf4ff;
+  background:#f4f8fd;
+  color:#10233f;
 }
 
 .admin-page{
@@ -15,11 +15,12 @@ body{
 }
 
 /* Sidebar */
+
 .admin-sidebar{
   width:260px;
-  padding:24px 18px;
-  background:#0d1726;
+  background:#ffffff;
   border-right:1px solid #dbe7f5;
+  padding:24px 18px;
   box-shadow:8px 0 24px rgba(25,80,140,.06);
 }
 
@@ -31,19 +32,19 @@ body{
 }
 
 .brand-box img{
-  width:48px;
-  height:48px;
+  width:46px;
+  height:46px;
   object-fit:contain;
 }
 
 .brand-box strong{
   display:block;
-  font-size:20px;
+  font-size:22px;
   color:#0b3a70;
 }
 
 .brand-box span{
-  color:#5d7fa8;
+  color:#6d88a8;
   font-size:13px;
 }
 
@@ -60,6 +61,7 @@ body{
   color:#355b83;
   text-decoration:none;
   font-weight:800;
+  transition:.25s;
 }
 
 .side-menu a.active,
@@ -70,6 +72,7 @@ body{
 }
 
 /* Main */
+
 .admin-main{
   flex:1;
   padding:32px;
@@ -78,124 +81,121 @@ body{
 .admin-topbar{
   display:flex;
   justify-content:space-between;
-  align-items:center;
+  align-items:flex-start;
   margin-bottom:24px;
 }
 
 .admin-topbar h1{
   margin:0;
-  font-size:34px;
-  color:#ffffff;
+  font-size:42px;
+  color:#0b2e59;
 }
 
 .admin-topbar p{
-  margin:6px 0 0;
-  color:#8ca3c0;
+  margin-top:8px;
+  color:#6d88a8;
 }
 
 .owner-badge{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:10px 18px;
+  border:none;
   border-radius:999px;
-  color:#a36b00;
-  background:#fff5dc;
-  border:1px solid #ffd982;
+  padding:14px 22px;
   font-weight:900;
+  background:linear-gradient(135deg,#1f75ff,#19c8ff);
+  color:#fff;
+  cursor:pointer;
 }
 
 /* Stats */
+
 .stat-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:16px;
+  gap:18px;
+  margin-bottom:24px;
 }
 
 .stat-card{
-  background:#111c2b;
-  padding:22px;
-  border-radius:24px;
+  background:#fff;
   border:1px solid #dbe7f5;
-  box-shadow:0 18px 38px rgba(25,80,140,.09);
+  border-radius:26px;
+  padding:22px;
+  box-shadow:0 18px 38px rgba(25,80,140,.08);
+}
+
+.stat-card.highlight{
+  background:linear-gradient(135deg,#1f75ff,#19c8ff);
+  color:#fff;
 }
 
 .stat-card span{
   display:block;
-  color:#8ca3c0;
+  font-size:14px;
   font-weight:800;
+  color:#6d88a8;
+}
+
+.stat-card.highlight span{
+  color:#fff;
 }
 
 .stat-card strong{
   display:block;
   margin-top:10px;
-  font-size:30px;
-  color:#ffffff;
+  font-size:38px;
+  color:#0b2e59;
+}
+
+.stat-card.highlight strong{
+  color:#fff;
 }
 
 .stat-card small{
   display:block;
   margin-top:6px;
-  color:#8ca3c0;
+  color:#6d88a8;
 }
 
-.stat-card.highlight{
-  background:linear-gradient(135deg,#1f75ff,#19c8ff);
-  border:none;
-}
-
-.stat-card.highlight span,
-.stat-card.highlight strong,
 .stat-card.highlight small{
   color:#fff;
 }
 
 /* Panels */
+
 .dashboard-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:22px;
-  margin-top:24px;
+  gap:20px;
 }
 
-.panel,
-.quick-panel{
-  background:#111c2b;
+.panel{
+  background:#fff;
   border:1px solid #dbe7f5;
   border-radius:28px;
-  padding:26px;
-  box-shadow:0 18px 38px rgba(25,80,140,.09);
+  padding:24px;
+  box-shadow:0 18px 38px rgba(25,80,140,.08);
 }
 
 .panel-head{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:18px;
+  margin-bottom:20px;
 }
 
-.panel-head h2,
-.quick-panel h2{
+.panel-head h2{
   margin:0;
-  color:#ffffff;
+  color:#0b2e59;
 }
 
 .panel-head a{
-  color:#1675ff;
+  color:#1f75ff;
   text-decoration:none;
   font-weight:900;
 }
 
-.panel-head select{
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:999px;
-  padding:10px 16px;
-  background:#f6faff;
-  color:#0b3a70;
-  font-weight:800;
-}
-
 /* Tasks */
+
 .task-list{
   display:flex;
   flex-direction:column;
@@ -208,74 +208,93 @@ body{
   align-items:center;
   padding:18px;
   border-radius:20px;
-  background:#162235;
   border:1px solid #dbe7f5;
+  background:#f8fbff;
   text-decoration:none;
-  color:#10233f;
 }
 
 .task-item b{
-  display:block;
-  color:#ffffff;
+  color:#0b2e59;
 }
 
 .task-item span{
   display:block;
   margin-top:4px;
-  color:#8ca3c0;
+  color:#6d88a8;
 }
 
 .task-item strong{
-  color:#1675ff;
+  color:#1f75ff;
 }
 
 /* Income */
+
+.income-table{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
 .income-table div{
   display:flex;
   justify-content:space-between;
-  padding:15px 0;
-  border-bottom:1px solid #e6eef7;
+  align-items:center;
+  padding-bottom:14px;
+  border-bottom:1px solid #e5eef7;
 }
 
 .income-table span{
-  color:#8ca3c0;
-  font-weight:800;
+  color:#355b83;
+  font-weight:700;
 }
 
 .income-table b{
-  color:#ffffff;
+  color:#0b2e59;
 }
 
 .income-table .total{
-  border-bottom:0;
+  border:none;
 }
 
 .income-table .total b{
-  font-size:26px;
-  color:#1675ff;
+  font-size:32px;
+  color:#1f75ff;
 }
 
 /* Quick */
+
 .quick-panel{
   margin-top:24px;
+  background:#fff;
+  border:1px solid #dbe7f5;
+  border-radius:28px;
+  padding:24px;
+  box-shadow:0 18px 38px rgba(25,80,140,.08);
+}
+
+.quick-panel h2{
+  margin-top:0;
+  color:#0b2e59;
 }
 
 .quick-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:14px;
-  margin-top:18px;
+  gap:16px;
 }
 
 .quick-grid a{
-  padding:18px;
-  border-radius:20px;
-  text-align:center;
-  text-decoration:none;
-  font-weight:900;
-  color:#355b83;
-  background:#162235;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:64px;
+  border-radius:18px;
+  background:#f8fbff;
   border:1px solid #dbe7f5;
+  text-decoration:none;
+  color:#355b83;
+  font-weight:900;
+  transition:.25s;
 }
 
 .quick-grid a:hover{
@@ -284,7 +303,9 @@ body{
 }
 
 /* Mobile */
+
 @media(max-width:1023px){
+
   .admin-page{
     flex-direction:column;
   }
@@ -297,15 +318,18 @@ body{
     padding:20px;
   }
 
-  .admin-topbar{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:12px;
-  }
-
   .stat-grid,
   .dashboard-grid,
   .quick-grid{
     grid-template-columns:1fr;
+  }
+
+  .admin-topbar{
+    flex-direction:column;
+    gap:14px;
+  }
+
+  .admin-topbar h1{
+    font-size:34px;
   }
 }
