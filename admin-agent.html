@@ -1,159 +1,74 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-  <title>Admin Agent | SSBMS</title>
-
-  <link rel="icon" href="images/logo.png"/>
-  <link rel="stylesheet" href="css/admin-agent.css"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ตรวจสอบตัวแทน | SSBMS</title>
+  <link rel="icon" href="images/logo.png">
+  <style>
+    :root{--blue:#1769d2;--blue2:#0d4fa8;--ink:#102033;--muted:#64748b;--line:#dbe7f4;--ok:#16834f;--bad:#b42318;--warn:#a15c00;--bg:#eef6ff;--shadow:0 16px 40px rgba(35,82,130,.12)}
+    *{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI","Noto Sans Thai",sans-serif;background:linear-gradient(180deg,#f8fbff,var(--bg));color:var(--ink)}button,input{font:inherit}.page{min-height:100vh;display:grid;grid-template-columns:250px 1fr}.side{background:#102f58;color:#fff;padding:24px 18px}.brand{display:flex;align-items:center;gap:11px;margin-bottom:28px}.brand img{width:46px;height:46px;border-radius:14px}.brand strong{display:block}.brand span{font-size:.8rem;opacity:.7}.nav{display:grid;gap:8px}.nav a{color:#dceaff;text-decoration:none;padding:11px 13px;border-radius:12px;font-weight:800}.nav a.active,.nav a:hover{background:rgba(255,255,255,.12);color:#fff}.main{padding:26px}.head{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:18px}.head h1{margin:0}.head p{margin:5px 0 0;color:var(--muted)}.search{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}.search input{min-width:280px;flex:1;border:1px solid var(--line);border-radius:14px;padding:12px 14px}.btn{border:1px solid var(--line);background:#fff;padding:11px 16px;border-radius:13px;font-weight:900;cursor:pointer}.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}.btn.approve{background:var(--ok);border-color:var(--ok);color:#fff}.btn.reject{background:#fff0f0;border-color:#ffcaca;color:var(--bad)}.btn.suspend{background:#fff7e8;border-color:#f1d7a0;color:#7e5300}.card{background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:22px}.message{display:none;margin-bottom:14px;padding:13px 15px;border-radius:14px;font-weight:700}.message.show{display:block}.message.ok{background:#edf9f3;color:#12623c;border:1px solid #bfe9d3}.message.err{background:#fff0f0;color:#8c1e1e;border:1px solid #ffd0d0}.profile{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.field{padding:14px;border:1px solid var(--line);border-radius:15px;background:#fbfdff}.field span{display:block;color:var(--muted);font-size:.8rem}.field strong{display:block;margin-top:4px;word-break:break-word}.full{grid-column:1/-1}.status-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}.status-grid div{padding:16px;border-radius:16px;background:#f4f9ff;border:1px solid var(--line)}.status-grid span{display:block;color:var(--muted);font-size:.8rem}.status-grid strong{display:block;margin-top:5px}.actions{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:20px}.empty{text-align:center;color:var(--muted);padding:30px}.badge{display:inline-flex;padding:6px 10px;border-radius:999px;background:#edf5ff;color:var(--blue2);font-weight:900;font-size:.8rem}@media(max-width:850px){.page{grid-template-columns:1fr}.side{display:none}.main{padding:14px}.profile,.status-grid{grid-template-columns:1fr}.full{grid-column:auto}.head{align-items:flex-start;flex-direction:column}.search input{min-width:0;width:100%}}
+  </style>
 </head>
-
 <body>
-
-<div class="admin-page">
-
-  <!-- Sidebar -->
-  <aside class="admin-sidebar">
-
-    <div class="brand">
-      <img src="images/logo.png"/>
-      <div>
-        <strong>SSBMS</strong>
-        <span>Admin System</span>
-      </div>
-    </div>
-
-    <nav>
+<div class="page">
+  <aside class="side">
+    <div class="brand"><img src="images/logo.png" alt="SSB"><div><strong>SSBMS</strong><span>Admin System</span></div></div>
+    <nav class="nav">
       <a href="admin-dashboard.html">Dashboard</a>
       <a class="active" href="admin-agent.html">ตรวจตัวแทน</a>
       <a href="admin-agents-list.html">รายชื่อตัวแทน</a>
       <a href="admin-bonus.html">โบนัส</a>
       <a href="admin-withdraw.html">ถอนเงิน</a>
     </nav>
-
   </aside>
-
-  <!-- Main -->
-  <main class="admin-main">
-
-    <div class="admin-head">
-      <h1>ตรวจสอบและอนุมัติตัวแทน</h1>
-      <p>Admin ตรวจข้อมูล / Owner อนุมัติสุดท้าย</p>
-    </div>
-
-    <div class="form-card">
-
-      <h2>Agent Profile Form</h2>
-
-      <div class="form-grid">
-
-        <div class="form-group">
-          <label>ชื่อ</label>
-          <input type="text" value="รัตนชัย">
+  <main class="main">
+    <header class="head"><div><h1>ตรวจสอบและอนุมัติตัวแทน</h1><p>ตรวจข้อมูลการสมัคร ผลการอบรม และคะแนนสอบก่อนอนุมัติ</p></div><span class="badge" id="currentStatus">ยังไม่ได้เลือกตัวแทน</span></header>
+    <div id="message" class="message"></div>
+    <section class="search">
+      <input id="agentIdInput" type="text" placeholder="กรอก Agent ID เช่น AGT-1785069568240">
+      <button class="btn primary" id="searchBtn">ค้นหา</button>
+    </section>
+    <section class="card" id="card">
+      <div class="empty" id="emptyState">กรอก Agent ID เพื่อโหลดข้อมูลตัวแทน</div>
+      <div id="profileContent" hidden>
+        <div class="profile">
+          <div class="field"><span>ชื่อ-นามสกุล</span><strong id="fullName">-</strong></div>
+          <div class="field"><span>รหัสตัวแทน</span><strong id="agentId">-</strong></div>
+          <div class="field"><span>อีเมล</span><strong id="email">-</strong></div>
+          <div class="field"><span>เบอร์โทร</span><strong id="phone">-</strong></div>
+          <div class="field"><span>Team Manager</span><strong id="teamManager">-</strong></div>
+          <div class="field"><span>AM</span><strong id="am">-</strong></div>
+          <div class="field"><span>ธนาคาร</span><strong id="bank">-</strong></div>
+          <div class="field"><span>เลขบัญชี</span><strong id="bankAccount">-</strong></div>
+          <div class="field full"><span>ที่อยู่</span><strong id="address">-</strong></div>
         </div>
-
-        <div class="form-group">
-          <label>นามสกุล</label>
-          <input type="text" value="คำช่วง">
+        <div class="status-grid">
+          <div><span>สถานะปัจจุบัน</span><strong id="status">-</strong></div>
+          <div><span>ความคืบหน้าอบรม</span><strong id="trainingProgress">0%</strong></div>
+          <div><span>คะแนนสอบ</span><strong id="examScore">0%</strong></div>
+          <div><span>จำนวนครั้งที่สอบ</span><strong id="examAttempts">0</strong></div>
         </div>
-
-        <div class="form-group">
-          <label>อายุ</label>
-          <input type="text" value="35">
+        <div class="actions">
+          <button class="btn suspend" data-status="SUSPENDED">ระงับบัญชี</button>
+          <button class="btn reject" data-status="REJECTED">ไม่อนุมัติ</button>
+          <button class="btn approve" data-status="APPROVED">อนุมัติเป็นตัวแทน</button>
         </div>
-
-        <div class="form-group">
-          <label>เบอร์โทร</label>
-          <input type="text" value="064-951-4888">
-        </div>
-
-        <div class="form-group">
-          <label>อีเมล</label>
-          <input type="text" value="mysiamtham@gmail.com">
-        </div>
-
-        <div class="form-group">
-          <label>LINE</label>
-          <input type="text" value="@siamtham">
-        </div>
-
-        <div class="form-group">
-          <label>Facebook</label>
-          <input type="text">
-        </div>
-
-        <div class="form-group">
-          <label>Tiktok</label>
-          <input type="text">
-        </div>
-
-        <div class="form-group">
-          <label>YouTube</label>
-          <input type="text">
-        </div>
-
-        <div class="form-group">
-          <label>เลขบัญชี</label>
-          <input type="text">
-        </div>
-
-        <div class="form-group">
-          <label>รหัสตัวแทน</label>
-          <input type="text" value="AGT-0001">
-        </div>
-
-        <div class="form-group">
-          <label>Team Manager</label>
-          <input type="text">
-        </div>
-
-        <div class="form-group">
-          <label>AM</label>
-          <input type="text">
-        </div>
-
-        <div class="form-group">
-          <label>สถานะ</label>
-
-          <select>
-            <option>INCOMPLETE</option>
-            <option>APPROVED</option>
-            <option>SUSPENDED</option>
-            <option>REJECTED</option>
-          </select>
-        </div>
-
-        <div class="form-group full">
-          <label>ที่อยู่</label>
-          <textarea></textarea>
-        </div>
-
-        <div class="form-group full">
-          <label>รูปถ่าย</label>
-
-          <div class="upload-box">
-            <input type="file">
-          </div>
-        </div>
-
       </div>
-
-      <div class="action-row">
-        <button class="btn suspend">พักบัญชี</button>
-        <button class="btn approve">อนุมัติ</button>
-        <button class="btn reject">ไม่อนุมัติ</button>
-      </div>
-
-    </div>
-
+    </section>
   </main>
-
 </div>
-
-<script src="js/logout.js"></script>
+<script>
+const API_URL="https://script.google.com/macros/s/AKfycbyKhWE-_SuKreCPyD4tsNmqNMQz2hZ8hQtrckk92mh8rszh1jaNEeuuFBGsPOLKfAziNg/exec";
+let currentAgentId="";
+function show(type,text){const box=document.getElementById("message");box.className="message show "+type;box.textContent=text}
+function clearMessage(){document.getElementById("message").className="message"}
+function value(v){return String(v===undefined||v===null||v===""?"-":v)}
+async function loadAgent(){clearMessage();const id=document.getElementById("agentIdInput").value.trim();if(!id){show("err","กรุณากรอก Agent ID");return}try{const res=await fetch(API_URL+"?action=getAgent&agent_id="+encodeURIComponent(id)+"&_="+Date.now());const data=await res.json();if(!data.ok)throw new Error(data.message||"ไม่พบตัวแทน");const a=data.agent;currentAgentId=a.agent_id;document.getElementById("emptyState").hidden=true;document.getElementById("profileContent").hidden=false;document.getElementById("fullName").textContent=(value(a.first_name)+" "+value(a.last_name)).replace(/- /g,"").trim();document.getElementById("agentId").textContent=value(a.agent_id);document.getElementById("email").textContent=value(a.email);document.getElementById("phone").textContent=value(a.phone);document.getElementById("teamManager").textContent=value(a.team_manager);document.getElementById("am").textContent=value(a.am);document.getElementById("bank").textContent=value(a.bank_name);document.getElementById("bankAccount").textContent=value(a.bank_account);document.getElementById("address").textContent=value(a.address);document.getElementById("status").textContent=value(a.status);document.getElementById("currentStatus").textContent=value(a.status);document.getElementById("trainingProgress").textContent=Number(a.training_progress||0)+"%";document.getElementById("examScore").textContent=Number(a.exam_score||0)+"%";document.getElementById("examAttempts").textContent=Number(a.exam_attempts||0);show("ok","โหลดข้อมูลตัวแทนเรียบร้อย")}catch(err){show("err",err.message||"เชื่อมต่อระบบไม่ได้")}}
+async function updateStatus(status){if(!currentAgentId){show("err","กรุณาค้นหาตัวแทนก่อน");return}if(status==="APPROVED"&&Number(document.getElementById("examScore").textContent.replace("%",""))<80){if(!confirm("คะแนนสอบยังไม่ถึง 80% ต้องการอนุมัติต่อหรือไม่?"))return}try{const action=status==="APPROVED"?"approveAgent":status==="REJECTED"?"rejectAgent":"suspendAgent";const res=await fetch(API_URL+"?action="+action+"&agent_id="+encodeURIComponent(currentAgentId)+"&_="+Date.now());const data=await res.json();if(!data.ok)throw new Error(data.message||"เปลี่ยนสถานะไม่สำเร็จ");document.getElementById("status").textContent=status;document.getElementById("currentStatus").textContent=status;show("ok",status==="APPROVED"?"อนุมัติตัวแทนเรียบร้อย":"อัปเดตสถานะเรียบร้อย")}catch(err){show("err",err.message||"เชื่อมต่อระบบไม่ได้")}}
+document.getElementById("searchBtn").onclick=loadAgent;document.getElementById("agentIdInput").addEventListener("keydown",e=>{if(e.key==="Enter")loadAgent()});document.querySelectorAll("[data-status]").forEach(btn=>btn.onclick=()=>updateStatus(btn.dataset.status));
+const params=new URLSearchParams(location.search);if(params.get("agent_id")){document.getElementById("agentIdInput").value=params.get("agent_id");loadAgent()}
+</script>
 <script src="js/admin-guard.js"></script>
-  
 </body>
 </html>
