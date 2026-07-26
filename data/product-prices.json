@@ -1,23 +1,75 @@
 {
-  "updatedAt": "ยังไม่อัปเดต",
+  "updatedAt": "27/07/2026 00:00 น.",
   "currency": "THB",
   "serviceFee": 45000,
   "vatRate": 0.07,
+  "priceLabel": "ราคาปัจจุบัน",
   "products": {
-    "Galaxy A17 5G": {"storage": {"128GB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}, "256GB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}}},
-    "Galaxy A27 5G": {"storage": {"128GB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}, "256GB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}}},
-    "Galaxy A37 5G": {"storage": {"128GB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}, "256GB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}}},
-    "Galaxy A57 5G": {"storage": {"256GB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}}},
-    "Galaxy S25 FE": {"storage": {"128GB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}, "256GB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}}},
-    "Galaxy S26": {"storage": {"256GB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}, "512GB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}}},
-    "Galaxy S26+": {"storage": {"256GB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}, "512GB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}}},
-    "Galaxy S26 Ultra": {"storage": {"256GB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}, "512GB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}, "1TB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}}},
-    "Galaxy Z Flip": {"storage": {"256GB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}, "512GB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}}},
-    "Galaxy Z Fold": {"storage": {"256GB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}, "512GB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}, "1TB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}}},
-    "iPhone 17": {"storage": {"128GB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}, "256GB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}, "512GB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}}},
-    "iPhone Air": {"storage": {"256GB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}, "512GB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}, "1TB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}}},
-    "iPhone 17 Pro": {"storage": {"256GB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}, "512GB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}, "1TB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}}},
-    "iPhone 17 Pro Max": {"storage": {"256GB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}, "512GB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}, "1TB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}}},
-    "iPad mini Cellular": {"storage": {"128GB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}, "256GB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}, "512GB": {"price": 0, "status": "รออัปเดตราคา", "updatedAt": "-"}}}
+    "Galaxy A17 5G": {"storage": {
+      "128GB": {"price": 7999, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"},
+      "256GB": {"price": 9999, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"}
+    }},
+    "Galaxy A27 5G": {"storage": {
+      "128GB": {"price": 10999, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"},
+      "256GB": {"price": 12999, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"}
+    }},
+    "Galaxy A37 5G": {"storage": {
+      "128GB": {"price": 13999, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"},
+      "256GB": {"price": 13999, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"}
+    }},
+    "Galaxy A57 5G": {"storage": {
+      "256GB": {"price": 14999, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"}
+    }},
+    "Galaxy S25 FE": {"storage": {
+      "128GB": {"price": 20900, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"},
+      "256GB": {"price": 23900, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"}
+    }},
+    "Galaxy S26": {"storage": {
+      "256GB": {"price": 27900, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"},
+      "512GB": {"price": 31900, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"}
+    }},
+    "Galaxy S26+": {"storage": {
+      "256GB": {"price": 32900, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"},
+      "512GB": {"price": 40900, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"}
+    }},
+    "Galaxy S26 Ultra": {"storage": {
+      "256GB": {"price": 44900, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"},
+      "512GB": {"price": 49900, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"},
+      "1TB": {"price": 0, "status": "งดจำหน่ายชั่วคราว", "updatedAt": "27/07/2026"}
+    }},
+    "Galaxy Z Flip": {"storage": {
+      "256GB": {"price": 29900, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"},
+      "512GB": {"price": 37900, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"}
+    }},
+    "Galaxy Z Fold": {"storage": {
+      "256GB": {"price": 49900, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"},
+      "512GB": {"price": 57900, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"},
+      "1TB": {"price": 75900, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"}
+    }},
+    "iPhone 17": {"storage": {
+      "128GB": {"price": 0, "status": "ไม่มีความจุนี้", "updatedAt": "27/07/2026"},
+      "256GB": {"price": 29900, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"},
+      "512GB": {"price": 37900, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"}
+    }},
+    "iPhone Air": {"storage": {
+      "256GB": {"price": 39900, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"},
+      "512GB": {"price": 47900, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"},
+      "1TB": {"price": 55900, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"}
+    }},
+    "iPhone 17 Pro": {"storage": {
+      "256GB": {"price": 43900, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"},
+      "512GB": {"price": 51900, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"},
+      "1TB": {"price": 59900, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"}
+    }},
+    "iPhone 17 Pro Max": {"storage": {
+      "256GB": {"price": 48900, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"},
+      "512GB": {"price": 56900, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"},
+      "1TB": {"price": 64900, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"}
+    }},
+    "iPad mini Cellular": {"storage": {
+      "128GB": {"price": 23900, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"},
+      "256GB": {"price": 27900, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"},
+      "512GB": {"price": 34900, "status": "พร้อมเสนอราคา", "updatedAt": "27/07/2026"}
+    }}
   }
 }
