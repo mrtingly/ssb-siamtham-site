@@ -3,155 +3,103 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Agent Dashboard | SSBMS</title>
+  <title>SSB Agent ERP | Dashboard</title>
   <link rel="icon" href="images/logo.png" />
-  <link rel="stylesheet" href="css/agent-dashboard.css" />
   <style>
-    .dashboard-message{display:none;margin:0 0 16px;padding:13px 15px;border-radius:14px;font-weight:800;line-height:1.55}
-    .dashboard-message.show{display:block}.dashboard-message.info{background:#eef6ff;color:#0d4fa8;border:1px solid #bfdcff}.dashboard-message.error{background:#fff0f0;color:#8c1e1e;border:1px solid #ffd0d0}
+    :root{--navy:#071d3d;--blue:#1368d7;--blue2:#2f8cff;--soft:#eef6ff;--bg:#f4f7fb;--card:#fff;--text:#122033;--muted:#6c788b;--line:#dfe7f1;--ok:#148052;--shadow:0 14px 38px rgba(20,48,82,.10)}
+    *{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI","Noto Sans Thai",sans-serif;background:var(--bg);color:var(--text)}a{text-decoration:none;color:inherit}button{font:inherit}
+    .app{min-height:100vh;display:grid;grid-template-columns:276px 1fr}.sidebar{background:linear-gradient(180deg,#071d3d,#0d3264);color:#fff;padding:22px 16px;position:sticky;top:0;height:100vh;overflow:auto}.brand{display:flex;align-items:center;gap:12px;padding:4px 8px 20px;border-bottom:1px solid rgba(255,255,255,.13)}.brand img{width:48px;height:48px;object-fit:contain;background:#fff;border-radius:15px;padding:5px}.brand strong{display:block;font-size:1.15rem}.brand span{display:block;font-size:.78rem;opacity:.7;margin-top:2px}.nav-title{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;opacity:.5;margin:20px 10px 8px}.menu{display:grid;gap:5px}.menu a,.logout{display:flex;align-items:center;gap:11px;padding:11px 12px;border-radius:12px;color:rgba(255,255,255,.85);font-size:.91rem}.menu a:hover,.menu a.active{background:rgba(255,255,255,.13);color:#fff}.icon{width:23px;text-align:center}.logout{width:100%;border:0;background:rgba(255,255,255,.08);cursor:pointer;margin-top:16px}
+    .main{min-width:0}.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;background:#fff;border-bottom:1px solid var(--line);padding:17px 28px;position:sticky;top:0;z-index:5}.topbar h1{font-size:1.25rem;margin:0}.topbar p{margin:3px 0 0;color:var(--muted);font-size:.85rem}.user-pill{display:flex;align-items:center;gap:10px;background:var(--soft);border-radius:999px;padding:7px 12px}.user-pill img{width:34px;height:34px;border-radius:50%;object-fit:cover;background:#fff}.user-pill strong{display:block;font-size:.85rem}.user-pill span{font-size:.72rem;color:var(--muted)}
+    .content{padding:24px 28px 50px;max-width:1500px;margin:auto}.message{display:none;padding:13px 15px;border-radius:13px;margin-bottom:16px;font-weight:700}.message.show{display:block}.message.info{background:#eef6ff;color:#0d4fa8;border:1px solid #bedcff}.message.error{background:#fff0f0;color:#8c1e1e;border:1px solid #ffd0d0}
+    .welcome{background:linear-gradient(120deg,#0b3e82,#1e79e5);color:#fff;border-radius:24px;padding:26px;display:flex;justify-content:space-between;align-items:center;gap:20px;box-shadow:0 18px 45px rgba(20,90,175,.22)}.welcome h2{font-size:1.8rem;margin:0 0 8px}.welcome p{margin:0;opacity:.85}.welcome .agent-id{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.22);padding:11px 15px;border-radius:14px;font-weight:800;white-space:nowrap}
+    .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin:18px 0}.kpi{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow)}.kpi span{display:block;color:var(--muted);font-size:.82rem}.kpi strong{display:block;font-size:1.65rem;margin:7px 0}.kpi small{color:var(--ok)}
+    .quick-title,.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:25px 0 12px}.quick-title h2,.section-head h2{margin:0;font-size:1.15rem}.quick-title p,.section-head p{margin:3px 0 0;color:var(--muted);font-size:.82rem}.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.quick{background:#fff;border:1px solid var(--line);border-radius:17px;padding:18px;box-shadow:var(--shadow);transition:.2s}.quick:hover{transform:translateY(-3px);border-color:#9bc5f7}.quick .qicon{width:44px;height:44px;display:grid;place-items:center;border-radius:14px;background:var(--soft);font-size:1.35rem}.quick strong{display:block;margin-top:12px}.quick span{display:block;color:var(--muted);font-size:.8rem;margin-top:4px;line-height:1.45}
+    .two-col{display:grid;grid-template-columns:1.2fr .8fr;gap:17px;margin-top:18px}.panel{background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:var(--shadow)}.panel h3{margin:0 0 14px}.income-list{display:grid;gap:12px}.income-row{display:flex;justify-content:space-between;padding-bottom:11px;border-bottom:1px solid var(--line)}.income-row.total{border:0;padding:12px;background:var(--soft);border-radius:13px;font-size:1.05rem}.news{display:grid;gap:12px}.news-item{padding:13px;border:1px solid var(--line);border-radius:14px}.news-item b{display:block}.news-item span{font-size:.8rem;color:var(--muted);display:block;margin-top:4px}.profile-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.profile-grid div{background:#f8fafc;padding:12px;border-radius:12px}.profile-grid span{display:block;color:var(--muted);font-size:.72rem}.profile-grid strong{display:block;margin-top:4px;font-size:.86rem;word-break:break-word}
+    @media(max-width:1100px){.kpis,.quick-grid{grid-template-columns:repeat(2,1fr)}.two-col{grid-template-columns:1fr}}@media(max-width:760px){.app{display:block}.sidebar{height:auto;position:static}.menu{grid-template-columns:1fr 1fr}.nav-title{margin-top:15px}.main{width:100%}.topbar{padding:13px 14px}.content{padding:15px 12px 35px}.welcome{align-items:flex-start;flex-direction:column}.welcome h2{font-size:1.45rem}.kpis,.quick-grid,.profile-grid{grid-template-columns:1fr}.user-pill div{display:none}}
   </style>
 </head>
 <body>
-  <div class="agent-page">
-    <aside class="agent-sidebar">
-      <div class="brand-box">
-        <img src="images/logo.png" alt="SSBMS" />
-        <div><strong>SSBMS</strong><span>Agent System</span></div>
-      </div>
-      <nav class="side-menu">
-        <a href="agent-dashboard.html">Dashboard</a>
-        <a href="book.html">สั่งสินค้า</a>
-        <a href="agent-leads.html">ลูกค้า / Leads</a>
-        <a href="agent-income.html">รายได้</a>
-        <a href="agent-bonus.html">โบนัส</a>
-        <a href="agent-withdraw.html">ถอนเงิน</a>
-        <a href="agent-tax.html">ภาษี</a>
-        <a href="agent-team.html">ทีมของฉัน</a>
-        <a href="agent-history.html">ประวัติย้อนหลัง</a>
-      </nav>
-    </aside>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><img src="images/logo.png" alt="SSBMS"><div><strong>SSB Agent ERP</strong><span>บริษัท สยามทำ จำกัด</span></div></div>
+    <div class="nav-title">เมนูหลัก</div>
+    <nav class="menu">
+      <a class="active" href="agent-dashboard.html"><span class="icon">🏠</span>หน้าแรก</a>
+      <a href="agent-products.html"><span class="icon">🛒</span>สินค้าและเสนอราคา</a>
+      <a href="agent-quotation.html"><span class="icon">📄</span>ใบเสนอราคา</a>
+      <a href="agent-orders.html"><span class="icon">📦</span>คำสั่งซื้อ</a>
+      <a href="agent-leads.html"><span class="icon">👥</span>ลูกค้า / Leads</a>
+    </nav>
+    <div class="nav-title">รายได้และทีม</div>
+    <nav class="menu">
+      <a href="agent-income.html"><span class="icon">💰</span>รายได้</a>
+      <a href="agent-bonus.html"><span class="icon">🎁</span>โบนัส</a>
+      <a href="agent-withdraw.html"><span class="icon">💳</span>ถอนเงิน</a>
+      <a href="agent-tax.html"><span class="icon">🧾</span>ภาษี</a>
+      <a href="agent-team.html"><span class="icon">👨‍👩‍👧</span>ทีมของฉัน</a>
+      <a href="agent-partner.html"><span class="icon">🤝</span>พาร์ตเนอร์</a>
+    </nav>
+    <div class="nav-title">บัญชีและเครื่องมือ</div>
+    <nav class="menu">
+      <a href="agent-history.html"><span class="icon">🕘</span>ประวัติรายการ</a>
+      <a href="agent-card.html"><span class="icon">🪪</span>บัตรตัวแทน</a>
+      <a href="agent-media.html"><span class="icon">📂</span>คู่มือและสื่อการขาย</a>
+      <a href="agent-profile.html"><span class="icon">👤</span>โปรไฟล์ตัวแทน</a>
+      <a href="agent-settings.html"><span class="icon">⚙️</span>ตั้งค่า</a>
+    </nav>
+    <button class="logout" id="logoutBtn"><span class="icon">🚪</span>ออกจากระบบ</button>
+  </aside>
 
-    <main class="agent-main">
-      <header class="agent-topbar">
-        <div><h1>Agent Dashboard</h1><p>ศูนย์จัดการรายได้ ตัวแทน ทีม และระบบถอนเงิน</p></div>
-        <button class="logout-btn" id="logoutBtn">ออกจากระบบ</button>
-      </header>
-
-      <div id="dashboardMessage" class="dashboard-message info">กำลังโหลดข้อมูลจากระบบ...</div>
-
-      <section class="dashboard-grid">
-        <div class="agent-card">
-          <div class="card-glow"></div>
-          <div class="agent-photo"><img src="images/logo.png" alt="Agent" /></div>
-          <h2 class="agent-name">กำลังโหลด...</h2>
-          <div class="agent-code">-</div>
-          <div class="agent-status approved">APPROVED</div>
-          <div class="agent-info">
-            <p><b>โทร:</b> <span class="agent-phone">-</span></p>
-            <p><b>Email:</b> <span class="agent-email">-</span></p>
-            <p><b>LINE:</b> <span class="agent-line">-</span></p>
-            <p><b>Team Manager:</b> <span class="agent-manager">-</span></p>
-            <p><b>AM:</b> <span class="agent-am">-</span></p>
-            <p><b>บัญชี:</b> <span class="agent-bank">-</span></p>
-          </div>
-          <div class="qr-box">QR</div>
-        </div>
-
-        <div class="summary-area">
-          <div class="money-cards">
-            <div class="money-card"><span>รายได้รวมทั้งหมด</span><strong class="total-income">฿0</strong></div>
-            <div class="money-card highlight"><span>ถอนได้ตอนนี้</span><strong class="available">฿0</strong></div>
-            <div class="money-card"><span>รอครบ 7 วัน</span><strong class="waiting">฿0</strong></div>
-            <div class="money-card"><span>โบนัสทั้งหมด</span><strong class="bonus">฿0</strong></div>
-          </div>
-
-          <section class="income-panel">
-            <div class="panel-head"><h2>สรุปรายได้</h2></div>
-            <div class="income-row"><span>คอมมิชชั่น</span><b class="commission">฿0</b></div>
-            <div class="income-row"><span>โบนัส</span><b class="bonus-detail">฿0</b></div>
-            <div class="income-row tax"><span>ภาษี</span><b class="tax">- ฿0</b></div>
-            <div class="income-total"><span>ยอดสุทธิ</span><strong class="net">฿0</strong></div>
-            <button class="withdraw-btn" onclick="window.location.href='agent-withdraw.html'">ถอนเงิน</button>
-          </section>
-        </div>
+  <main class="main">
+    <header class="topbar">
+      <div><h1>Agent Dashboard</h1><p>ศูนย์บริหารงานขายและตัวแทน SSBMS</p></div>
+      <div class="user-pill"><img id="topPhoto" src="images/logo.png" alt="Agent"><div><strong id="topName">กำลังโหลด...</strong><span id="topRole">Agent</span></div></div>
+    </header>
+    <div class="content">
+      <div id="message" class="message info">กำลังโหลดข้อมูลจากระบบ...</div>
+      <section class="welcome">
+        <div><h2>ยินดีต้อนรับ <span id="welcomeName">ตัวแทน SSB</span></h2><p>บริหารลูกค้า สร้างราคา ติดตามคำสั่งซื้อ และตรวจสอบรายได้ได้จากหน้าเดียว</p></div>
+        <div class="agent-id" id="agentCode">AGENT ID: -</div>
       </section>
 
-      <section class="team-panel">
-        <h2>โครงสร้างทีม</h2>
-        <div class="team-grid">
-          <div><span>Role</span><strong class="agent-role">Agent</strong></div>
-          <div><span>Team Manager</span><strong class="team-manager-value">-</strong></div>
-          <div><span>AM</span><strong class="am-value">-</strong></div>
-          <div><span>Owner</span><strong>Siamtham Co., Ltd.</strong></div>
-        </div>
+      <section class="kpis">
+        <div class="kpi"><span>รายได้รวมทั้งหมด</span><strong id="totalIncome">฿0</strong><small>ข้อมูลจากระบบบริษัท</small></div>
+        <div class="kpi"><span>ถอนได้ตอนนี้</span><strong id="available">฿0</strong><small>พร้อมส่งคำขอถอน</small></div>
+        <div class="kpi"><span>โบนัสทั้งหมด</span><strong id="totalBonus">฿0</strong><small>รวมโบนัสที่อนุมัติ</small></div>
+        <div class="kpi"><span>คำสั่งซื้อ</span><strong id="orderCount">0</strong><small>รายการทั้งหมด</small></div>
       </section>
-    </main>
-  </div>
 
-  <script>
-    const DASHBOARD_API_URL = "https://script.google.com/macros/s/AKfycbyKhWE-_SuKreCPyD4tsNmqNMQz2hZ8hQtrckk92mh8rszh1jaNEeuuFBGsPOLKfAziNg/exec";
+      <div class="quick-title"><div><h2>เมนูด่วน</h2><p>เริ่มงานสำคัญได้ทันที</p></div></div>
+      <section class="quick-grid">
+        <a class="quick" href="agent-products.html"><div class="qicon">🛒</div><strong>สินค้าและเสนอราคา</strong><span>เลือกรุ่น กรอกราคาสมาร์ตโฟน และคำนวณ VAT อัตโนมัติ</span></a>
+        <a class="quick" href="agent-quotation.html"><div class="qicon">📄</div><strong>สร้างใบเสนอราคา</strong><span>จัดทำราคาสำหรับนำเสนอลูกค้าอย่างเป็นทางการ</span></a>
+        <a class="quick" href="agent-leads.html"><div class="qicon">👥</div><strong>เพิ่มลูกค้าใหม่</strong><span>บันทึกข้อมูลลูกค้าและติดตามโอกาสการขาย</span></a>
+        <a class="quick" href="agent-orders.html"><div class="qicon">📦</div><strong>ติดตามคำสั่งซื้อ</strong><span>ตรวจสถานะรอยืนยัน ชำระเงิน และจัดส่ง</span></a>
+        <a class="quick" href="agent-income.html"><div class="qicon">💰</div><strong>ตรวจสอบรายได้</strong><span>ดูคอมมิชชั่น ภาษี โบนัส และยอดสุทธิ</span></a>
+        <a class="quick" href="agent-team.html"><div class="qicon">👨‍👩‍👧</div><strong>ทีมของฉัน</strong><span>ตรวจสอบแม่ทีม AM และโครงสร้างทีมตัวแทน</span></a>
+        <a class="quick" href="agent-media.html"><div class="qicon">📂</div><strong>สื่อการขาย</strong><span>โบรชัวร์ คู่มือ ภาพสินค้า และเอกสารล่าสุด</span></a>
+        <a class="quick" href="agent-card.html"><div class="qicon">🪪</div><strong>บัตรตัวแทน</strong><span>ดูข้อมูลยืนยันตัวแทนและรหัสประจำตัว</span></a>
+      </section>
 
-    function getAgentId(){
-      const direct = localStorage.getItem("agent_id") || localStorage.getItem("ssb_agent_id") || localStorage.getItem("ssb_current_agent_v1");
-      if(direct) return direct;
-      for(const key of ["ssb_agent_session","ssb_agent_session_v1"]){
-        try{
-          const session = JSON.parse(localStorage.getItem(key) || "null");
-          if(session && (session.agent_id || session.applicationId)) return session.agent_id || session.applicationId;
-        }catch(error){}
-      }
-      return "";
-    }
+      <section class="two-col">
+        <div class="panel"><h3>สรุปรายได้</h3><div class="income-list"><div class="income-row"><span>คอมมิชชั่น</span><b id="commission">฿0</b></div><div class="income-row"><span>โบนัส</span><b id="bonusDetail">฿0</b></div><div class="income-row"><span>ภาษี</span><b id="tax">- ฿0</b></div><div class="income-row total"><span>ยอดสุทธิ</span><strong id="net">฿0</strong></div></div></div>
+        <div class="panel"><h3>ประกาศบริษัท</h3><div class="news"><div class="news-item"><b>ตรวจสอบราคาสมาร์ตโฟนก่อนเสนอราคาทุกครั้ง</b><span>ตัวแทนต้องยืนยันราคาปัจจุบันกับบริษัทก่อนกรอกข้อมูลให้ลูกค้า</span></div><div class="news-item"><b>ค่าดำเนินการติดตั้งระบบ SSBMS</b><span>กำหนดตายตัว 45,000 บาท และคำนวณ VAT 7% จากยอดรวมก่อนภาษี</span></div></div></div>
+      </section>
 
-    function jsonp(url){
-      return new Promise((resolve,reject)=>{
-        const callbackName = "dashboard_cb_" + Date.now() + "_" + Math.floor(Math.random()*10000);
-        const script = document.createElement("script");
-        const timer = setTimeout(()=>{ cleanup(); reject(new Error("หมดเวลารอข้อมูลจากระบบ")); },15000);
-        function cleanup(){ clearTimeout(timer); try{delete window[callbackName]}catch(e){} if(script.parentNode)script.parentNode.removeChild(script); }
-        window[callbackName] = data => { cleanup(); resolve(data); };
-        script.src = url + "&callback=" + encodeURIComponent(callbackName) + "&_=" + Date.now();
-        script.onerror = () => { cleanup(); reject(new Error("เรียกข้อมูลจากระบบไม่สำเร็จ")); };
-        document.body.appendChild(script);
-      });
-    }
-
-    function setText(selector,value){ const element=document.querySelector(selector); if(element)element.textContent=value; }
-    function money(value){ return "฿" + Number(value || 0).toLocaleString("th-TH"); }
-    function showMessage(type,text){ const box=document.getElementById("dashboardMessage"); box.className="dashboard-message show "+type; box.textContent=text; }
-    function hideMessage(){ document.getElementById("dashboardMessage").className="dashboard-message"; }
-
-    async function loadDashboard(){
-      const agentId = getAgentId();
-      if(!agentId){ window.location.href="agent-login.html"; return; }
-      showMessage("info","กำลังโหลดข้อมูลตัวแทน " + agentId + " ...");
-      try{
-        const data = await jsonp(DASHBOARD_API_URL + "?action=getDashboard&agent_id=" + encodeURIComponent(agentId));
-        if(!data || !data.ok){
-          showMessage("error", (data && data.message) || "โหลดข้อมูล Dashboard ไม่สำเร็จ");
-          if(data && data.next_page && data.next_page !== "agent-dashboard.html") setTimeout(()=>location.href=data.next_page,1800);
-          return;
-        }
-        const agent=data.agent || {}; const summary=data.summary || {};
-        setText(".agent-name",`${agent.first_name||""} ${agent.last_name||""}`.trim()||"-");
-        setText(".agent-code",agent.agent_id||"-"); setText(".agent-phone",agent.phone||"-"); setText(".agent-email",agent.email||"-");
-        setText(".agent-line",agent.line||"-"); setText(".agent-manager",agent.team_manager||"-"); setText(".agent-am",agent.am||"-");
-        setText(".agent-bank",[agent.bank_name,agent.bank_account].filter(Boolean).join(" ")||"-"); setText(".agent-role",agent.role||"Agent");
-        setText(".team-manager-value",agent.team_manager||"-"); setText(".am-value",agent.am||"-"); setText(".agent-status",String(agent.status||"APPROVED").toUpperCase());
-        setText(".total-income",money(summary.totalIncome)); setText(".available",money(summary.available)); setText(".waiting",money(summary.waiting));
-        setText(".bonus",money(summary.totalBonus)); setText(".commission",money(summary.commission)); setText(".bonus-detail",money(summary.totalBonus));
-        setText(".tax","- "+money(summary.tax)); setText(".net",money(summary.net));
-        const photo=document.querySelector(".agent-photo img"); if(photo && agent.photo_url)photo.src=agent.photo_url;
-        hideMessage();
-      }catch(error){ console.error(error); showMessage("error","เชื่อมต่อ Dashboard ไม่ได้: "+error.message); }
-    }
-
-    document.getElementById("logoutBtn").onclick=()=>{
-      ["agent_id","agent_name","agent_role","agent_status","ssb_agent_id","ssb_current_agent_v1","ssb_agent_session","ssb_agent_session_v1"].forEach(key=>localStorage.removeItem(key));
-      location.href="agent-login.html";
-    };
-
-    loadDashboard();
-  </script>
+      <div class="section-head"><div><h2>ข้อมูลตัวแทน</h2><p>ข้อมูลจากฐานข้อมูลกลางของบริษัท</p></div></div>
+      <section class="panel profile-grid">
+        <div><span>ชื่อ–นามสกุล</span><strong id="fullName">-</strong></div><div><span>สถานะ</span><strong id="status">-</strong></div><div><span>Role</span><strong id="role">Agent</strong></div><div><span>โทรศัพท์</span><strong id="phone">-</strong></div><div><span>อีเมล</span><strong id="email">-</strong></div><div><span>LINE</span><strong id="line">-</strong></div><div><span>Team Manager</span><strong id="manager">-</strong></div><div><span>AM</span><strong id="am">-</strong></div><div><span>บัญชีธนาคาร</span><strong id="bank">-</strong></div>
+      </section>
+    </div>
+  </main>
+</div>
+<script>
+const API_URL="https://script.google.com/macros/s/AKfycbyKhWE-_SuKreCPyD4tsNmqNMQz2hZ8hQtrckk92mh8rszh1jaNEeuuFBGsPOLKfAziNg/exec";
+function getAgentId(){const direct=localStorage.getItem("agent_id")||localStorage.getItem("ssb_agent_id")||localStorage.getItem("ssb_current_agent_v1");if(direct)return direct;for(const key of ["ssb_agent_session","ssb_agent_session_v1"]){try{const s=JSON.parse(localStorage.getItem(key)||"null");if(s&&(s.agent_id||s.applicationId))return s.agent_id||s.applicationId}catch(e){}}return ""}
+function jsonp(url){return new Promise((resolve,reject)=>{const cb="erp_cb_"+Date.now()+"_"+Math.floor(Math.random()*9999);const s=document.createElement("script");const timer=setTimeout(()=>{clean();reject(new Error("หมดเวลารอข้อมูล"))},15000);function clean(){clearTimeout(timer);try{delete window[cb]}catch(e){}if(s.parentNode)s.remove()}window[cb]=d=>{clean();resolve(d)};s.src=url+"&callback="+encodeURIComponent(cb)+"&_="+Date.now();s.onerror=()=>{clean();reject(new Error("เชื่อมต่อระบบไม่ได้"))};document.body.appendChild(s)})}
+function money(v){return "฿"+Number(v||0).toLocaleString("th-TH",{maximumFractionDigits:2})}function text(id,v){const e=document.getElementById(id);if(e)e.textContent=v}function show(type,msg){const b=document.getElementById("message");b.className="message show "+type;b.textContent=msg}function hide(){document.getElementById("message").className="message"}
+async function load(){const id=getAgentId();if(!id){location.href="agent-login.html";return}show("info","กำลังโหลดข้อมูลตัวแทน "+id+" ...");try{const d=await jsonp(API_URL+"?action=getDashboard&agent_id="+encodeURIComponent(id));if(!d||!d.ok){show("error",d&&d.message||"โหลดข้อมูลไม่สำเร็จ");if(d&&d.next_page&&d.next_page!=="agent-dashboard.html")setTimeout(()=>location.href=d.next_page,1800);return}const a=d.agent||{},s=d.summary||{},name=((a.first_name||"")+" "+(a.last_name||"")).trim()||"ตัวแทน SSB";text("topName",name);text("welcomeName",name);text("fullName",name);text("topRole",a.role||"Agent");text("role",a.role||"Agent");text("agentCode","AGENT ID: "+(a.agent_id||"-"));text("status",String(a.status||"-").toUpperCase());text("phone",a.phone||"-");text("email",a.email||"-");text("line",a.line||"-");text("manager",a.team_manager||"-");text("am",a.am||"-");text("bank",[a.bank_name,a.bank_account].filter(Boolean).join(" ")||"-");text("totalIncome",money(s.totalIncome));text("available",money(s.available));text("totalBonus",money(s.totalBonus));text("orderCount",(d.orders||[]).length);text("commission",money(s.commission));text("bonusDetail",money(s.totalBonus));text("tax","- "+money(s.tax));text("net",money(s.net));if(a.photo_url){document.getElementById("topPhoto").src=a.photo_url}hide()}catch(e){console.error(e);show("error","เชื่อมต่อ Dashboard ไม่ได้: "+e.message)}}
+document.getElementById("logoutBtn").onclick=()=>{["agent_id","agent_name","agent_role","agent_status","ssb_agent_id","ssb_current_agent_v1","ssb_agent_session","ssb_agent_session_v1"].forEach(k=>localStorage.removeItem(k));location.href="agent-login.html"};load();
+</script>
 </body>
 </html>
