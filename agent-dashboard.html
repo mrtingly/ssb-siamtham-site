@@ -6,6 +6,10 @@
   <title>Agent Dashboard | SSBMS</title>
   <link rel="icon" href="images/logo.png" />
   <link rel="stylesheet" href="css/agent-dashboard.css" />
+  <style>
+    .dashboard-message{display:none;margin:0 0 16px;padding:13px 15px;border-radius:14px;font-weight:800;line-height:1.55}
+    .dashboard-message.show{display:block}.dashboard-message.info{background:#eef6ff;color:#0d4fa8;border:1px solid #bfdcff}.dashboard-message.error{background:#fff0f0;color:#8c1e1e;border:1px solid #ffd0d0}
+  </style>
 </head>
 <body>
   <div class="agent-page">
@@ -30,8 +34,10 @@
     <main class="agent-main">
       <header class="agent-topbar">
         <div><h1>Agent Dashboard</h1><p>ศูนย์จัดการรายได้ ตัวแทน ทีม และระบบถอนเงิน</p></div>
-        <button class="logout-btn" onclick="logout()">ออกจากระบบ</button>
+        <button class="logout-btn" id="logoutBtn">ออกจากระบบ</button>
       </header>
+
+      <div id="dashboardMessage" class="dashboard-message info">กำลังโหลดข้อมูลจากระบบ...</div>
 
       <section class="dashboard-grid">
         <div class="agent-card">
@@ -82,14 +88,70 @@
     </main>
   </div>
 
-  <script src="js/agent-api.js?v=20260726-3"></script>
   <script>
-    const agentId = getCurrentAgentId();
-    if (!agentId) {
-      window.location.href = "agent-login.html";
-    } else {
-      loadDashboard(agentId);
+    const DASHBOARD_API_URL = "https://script.google.com/macros/s/AKfycbyKhWE-_SuKreCPyD4tsNmqNMQz2hZ8hQtrckk92mh8rszh1jaNEeuuFBGsPOLKfAziNg/exec";
+
+    function getAgentId(){
+      const direct = localStorage.getItem("agent_id") || localStorage.getItem("ssb_agent_id") || localStorage.getItem("ssb_current_agent_v1");
+      if(direct) return direct;
+      for(const key of ["ssb_agent_session","ssb_agent_session_v1"]){
+        try{
+          const session = JSON.parse(localStorage.getItem(key) || "null");
+          if(session && (session.agent_id || session.applicationId)) return session.agent_id || session.applicationId;
+        }catch(error){}
+      }
+      return "";
     }
+
+    function jsonp(url){
+      return new Promise((resolve,reject)=>{
+        const callbackName = "dashboard_cb_" + Date.now() + "_" + Math.floor(Math.random()*10000);
+        const script = document.createElement("script");
+        const timer = setTimeout(()=>{ cleanup(); reject(new Error("หมดเวลารอข้อมูลจากระบบ")); },15000);
+        function cleanup(){ clearTimeout(timer); try{delete window[callbackName]}catch(e){} if(script.parentNode)script.parentNode.removeChild(script); }
+        window[callbackName] = data => { cleanup(); resolve(data); };
+        script.src = url + "&callback=" + encodeURIComponent(callbackName) + "&_=" + Date.now();
+        script.onerror = () => { cleanup(); reject(new Error("เรียกข้อมูลจากระบบไม่สำเร็จ")); };
+        document.body.appendChild(script);
+      });
+    }
+
+    function setText(selector,value){ const element=document.querySelector(selector); if(element)element.textContent=value; }
+    function money(value){ return "฿" + Number(value || 0).toLocaleString("th-TH"); }
+    function showMessage(type,text){ const box=document.getElementById("dashboardMessage"); box.className="dashboard-message show "+type; box.textContent=text; }
+    function hideMessage(){ document.getElementById("dashboardMessage").className="dashboard-message"; }
+
+    async function loadDashboard(){
+      const agentId = getAgentId();
+      if(!agentId){ window.location.href="agent-login.html"; return; }
+      showMessage("info","กำลังโหลดข้อมูลตัวแทน " + agentId + " ...");
+      try{
+        const data = await jsonp(DASHBOARD_API_URL + "?action=getDashboard&agent_id=" + encodeURIComponent(agentId));
+        if(!data || !data.ok){
+          showMessage("error", (data && data.message) || "โหลดข้อมูล Dashboard ไม่สำเร็จ");
+          if(data && data.next_page && data.next_page !== "agent-dashboard.html") setTimeout(()=>location.href=data.next_page,1800);
+          return;
+        }
+        const agent=data.agent || {}; const summary=data.summary || {};
+        setText(".agent-name",`${agent.first_name||""} ${agent.last_name||""}`.trim()||"-");
+        setText(".agent-code",agent.agent_id||"-"); setText(".agent-phone",agent.phone||"-"); setText(".agent-email",agent.email||"-");
+        setText(".agent-line",agent.line||"-"); setText(".agent-manager",agent.team_manager||"-"); setText(".agent-am",agent.am||"-");
+        setText(".agent-bank",[agent.bank_name,agent.bank_account].filter(Boolean).join(" ")||"-"); setText(".agent-role",agent.role||"Agent");
+        setText(".team-manager-value",agent.team_manager||"-"); setText(".am-value",agent.am||"-"); setText(".agent-status",String(agent.status||"APPROVED").toUpperCase());
+        setText(".total-income",money(summary.totalIncome)); setText(".available",money(summary.available)); setText(".waiting",money(summary.waiting));
+        setText(".bonus",money(summary.totalBonus)); setText(".commission",money(summary.commission)); setText(".bonus-detail",money(summary.totalBonus));
+        setText(".tax","- "+money(summary.tax)); setText(".net",money(summary.net));
+        const photo=document.querySelector(".agent-photo img"); if(photo && agent.photo_url)photo.src=agent.photo_url;
+        hideMessage();
+      }catch(error){ console.error(error); showMessage("error","เชื่อมต่อ Dashboard ไม่ได้: "+error.message); }
+    }
+
+    document.getElementById("logoutBtn").onclick=()=>{
+      ["agent_id","agent_name","agent_role","agent_status","ssb_agent_id","ssb_current_agent_v1","ssb_agent_session","ssb_agent_session_v1"].forEach(key=>localStorage.removeItem(key));
+      location.href="agent-login.html";
+    };
+
+    loadDashboard();
   </script>
 </body>
 </html>
