@@ -1,28 +1,113 @@
 const API_URL = "https://script.google.com/macros/s/AKfycbwxuLFd3Udc9m7OI3XtdvRFDK2pUpUB5mWo0M8d4YF5ak_m6xJ8BuCt8na2t75LpXi3Gw/exec";
 
-function jsonp(url){
+function jsonp(url) {
   return new Promise((resolve, reject) => {
-    const callbackName = "cb_" + Date.now();
+    const callbackName = "cb_" + Date.now() + "_" + Math.floor(Math.random() * 10000);
+    const script = document.createElement("script");
 
-    window[callbackName] = function(data){
-      resolve(data);
-      delete window[callbackName];
-      script.remove();
+    const cleanup = () => {
+      try {
+        delete window[callbackName];
+      } catch (error) {
+        window[callbackName] = undefined;
+      }
+
+      if (script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
     };
 
-    const script = document.createElement("script");
-    script.src = url + "&callback=" + callbackName;
-    script.onerror = reject;
+    window[callbackName] = function (data) {
+      cleanup();
+      resolve(data);
+    };
+
+    script.src = url + "&callback=" + encodeURIComponent(callbackName);
+    script.async = true;
+    script.onerror = function () {
+      cleanup();
+      reject(new Error("JSONP request failed"));
+    };
 
     document.body.appendChild(script);
   });
 }
 
-async function doLogin(e){
+function togglePassword() {
+  const passwordInput = document.querySelector("#password");
+
+  if (!passwordInput) return;
+
+  passwordInput.type = passwordInput.type === "password" ? "text" : "password";
+}
+
+function saveAgentSession(res, username) {
+  const session = {
+    agent_id: res.agent_id,
+    applicationId: res.agent_id,
+    username: username,
+    name: res.name || "",
+    role: res.role || "Agent",
+    status: res.status || "",
+    training_progress: Number(res.training_progress || 0),
+    training_completed: res.training_completed === true,
+    exam_score: Number(res.exam_score || 0),
+    exam_passed: res.exam_passed === true,
+    exam_attempts: Number(res.exam_attempts || 0),
+    loginAt: new Date().toISOString()
+  };
+
+  // รองรับไฟล์เดิมและไฟล์ใหม่ทั้งหมดในระบบตัวแทน
+  localStorage.setItem("agent_id", res.agent_id);
+  localStorage.setItem("agent_name", res.name || "");
+  localStorage.setItem("agent_role", res.role || "Agent");
+  localStorage.setItem("agent_status", res.status || "");
+  localStorage.setItem("ssb_agent_id", res.agent_id);
+  localStorage.setItem("ssb_current_agent_v1", res.agent_id);
+  localStorage.setItem("ssb_agent_session", JSON.stringify(session));
+  localStorage.setItem("ssb_agent_session_v1", JSON.stringify(session));
+}
+
+function routeByStatus(res) {
+  if (res.next_page) {
+    return res.next_page;
+  }
+
+  const status = String(res.status || "").trim().toUpperCase();
+
+  if (status === "REGISTERED" || status === "TRAINING") {
+    return "agent-learning.html";
+  }
+
+  if (status === "EXAM") {
+    return "agent-exam.html";
+  }
+
+  if (status === "WAIT_APPROVAL" || status === "PENDING") {
+    return "agent-waiting.html";
+  }
+
+  if (status === "APPROVED") {
+    return "agent-dashboard.html";
+  }
+
+  return "agent-login.html";
+}
+
+async function doLogin(e) {
   e.preventDefault();
 
-  const username = document.querySelector("#username").value.trim();
-  const password = document.querySelector("#password").value.trim();
+  const usernameInput = document.querySelector("#username");
+  const passwordInput = document.querySelector("#password");
+  const submitButton = e.target.querySelector('button[type="submit"]');
+
+  const username = usernameInput ? usernameInput.value.trim() : "";
+  const password = passwordInput ? passwordInput.value.trim() : "";
+
+  if (!username || !password) {
+    alert("กรุณากรอก Agent ID หรือ Email และ Password");
+    return;
+  }
 
   const url =
     API_URL +
@@ -30,22 +115,32 @@ async function doLogin(e){
     "&username=" + encodeURIComponent(username) +
     "&password=" + encodeURIComponent(password);
 
-  try{
+  try {
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = "กำลังเข้าสู่ระบบ...";
+    }
+
     const res = await jsonp(url);
 
-    if(!res.ok){
-      alert(res.message || "เข้าสู่ระบบไม่สำเร็จ");
+    if (!res || !res.ok) {
+      alert((res && res.message) || "เข้าสู่ระบบไม่สำเร็จ");
       return;
     }
 
-    localStorage.setItem("agent_id", res.agent_id);
-    localStorage.setItem("agent_name", res.name);
-    localStorage.setItem("agent_role", res.role);
+    saveAgentSession(res, username);
 
-    window.location.href = "agent-dashboard.html";
+    const destination = routeByStatus(res);
+    window.location.href = destination;
 
-  }catch(err){
-    console.error(err);
-    alert("เชื่อมต่อระบบไม่ได้");
+  } catch (err) {
+    console.error("Agent login error:", err);
+    alert("เชื่อมต่อระบบไม่ได้ กรุณาลองใหม่อีกครั้ง");
+
+  } finally {
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.textContent = "เข้าสู่ระบบ";
+    }
   }
 }
