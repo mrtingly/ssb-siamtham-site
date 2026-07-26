@@ -5,100 +5,151 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SSB Agent ERP | Dashboard</title>
   <link rel="icon" href="images/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root{--navy:#071d3d;--blue:#1368d7;--blue2:#2f8cff;--soft:#eef6ff;--bg:#f4f7fb;--card:#fff;--text:#122033;--muted:#6c788b;--line:#dfe7f1;--ok:#148052;--shadow:0 14px 38px rgba(20,48,82,.10)}
-    *{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI","Noto Sans Thai",sans-serif;background:var(--bg);color:var(--text)}a{text-decoration:none;color:inherit}button{font:inherit}
-    .app{min-height:100vh;display:grid;grid-template-columns:276px 1fr}.sidebar{background:linear-gradient(180deg,#071d3d,#0d3264);color:#fff;padding:22px 16px;position:sticky;top:0;height:100vh;overflow:auto}.brand{display:flex;align-items:center;gap:12px;padding:4px 8px 20px;border-bottom:1px solid rgba(255,255,255,.13)}.brand img{width:48px;height:48px;object-fit:contain;background:#fff;border-radius:15px;padding:5px}.brand strong{display:block;font-size:1.15rem}.brand span{display:block;font-size:.78rem;opacity:.7;margin-top:2px}.nav-title{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;opacity:.5;margin:20px 10px 8px}.menu{display:grid;gap:5px}.menu a,.logout{display:flex;align-items:center;gap:11px;padding:11px 12px;border-radius:12px;color:rgba(255,255,255,.85);font-size:.91rem}.menu a:hover,.menu a.active{background:rgba(255,255,255,.13);color:#fff}.icon{width:23px;text-align:center}.logout{width:100%;border:0;background:rgba(255,255,255,.08);cursor:pointer;margin-top:16px}
-    .main{min-width:0}.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;background:#fff;border-bottom:1px solid var(--line);padding:17px 28px;position:sticky;top:0;z-index:5}.topbar h1{font-size:1.25rem;margin:0}.topbar p{margin:3px 0 0;color:var(--muted);font-size:.85rem}.user-pill{display:flex;align-items:center;gap:10px;background:var(--soft);border-radius:999px;padding:7px 12px}.user-pill img{width:34px;height:34px;border-radius:50%;object-fit:cover;background:#fff}.user-pill strong{display:block;font-size:.85rem}.user-pill span{font-size:.72rem;color:var(--muted)}
-    .content{padding:24px 28px 50px;max-width:1500px;margin:auto}.message{display:none;padding:13px 15px;border-radius:13px;margin-bottom:16px;font-weight:700}.message.show{display:block}.message.info{background:#eef6ff;color:#0d4fa8;border:1px solid #bedcff}.message.error{background:#fff0f0;color:#8c1e1e;border:1px solid #ffd0d0}
-    .welcome{background:linear-gradient(120deg,#0b3e82,#1e79e5);color:#fff;border-radius:24px;padding:26px;display:flex;justify-content:space-between;align-items:center;gap:20px;box-shadow:0 18px 45px rgba(20,90,175,.22)}.welcome h2{font-size:1.8rem;margin:0 0 8px}.welcome p{margin:0;opacity:.85}.welcome .agent-id{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.22);padding:11px 15px;border-radius:14px;font-weight:800;white-space:nowrap}
-    .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin:18px 0}.kpi{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow)}.kpi span{display:block;color:var(--muted);font-size:.82rem}.kpi strong{display:block;font-size:1.65rem;margin:7px 0}.kpi small{color:var(--ok)}
-    .quick-title,.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:25px 0 12px}.quick-title h2,.section-head h2{margin:0;font-size:1.15rem}.quick-title p,.section-head p{margin:3px 0 0;color:var(--muted);font-size:.82rem}.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.quick{background:#fff;border:1px solid var(--line);border-radius:17px;padding:18px;box-shadow:var(--shadow);transition:.2s}.quick:hover{transform:translateY(-3px);border-color:#9bc5f7}.quick .qicon{width:44px;height:44px;display:grid;place-items:center;border-radius:14px;background:var(--soft);font-size:1.35rem}.quick strong{display:block;margin-top:12px}.quick span{display:block;color:var(--muted);font-size:.8rem;margin-top:4px;line-height:1.45}
-    .two-col{display:grid;grid-template-columns:1.2fr .8fr;gap:17px;margin-top:18px}.panel{background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:var(--shadow)}.panel h3{margin:0 0 14px}.income-list{display:grid;gap:12px}.income-row{display:flex;justify-content:space-between;padding-bottom:11px;border-bottom:1px solid var(--line)}.income-row.total{border:0;padding:12px;background:var(--soft);border-radius:13px;font-size:1.05rem}.news{display:grid;gap:12px}.news-item{padding:13px;border:1px solid var(--line);border-radius:14px}.news-item b{display:block}.news-item span{font-size:.8rem;color:var(--muted);display:block;margin-top:4px}.profile-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.profile-grid div{background:#f8fafc;padding:12px;border-radius:12px}.profile-grid span{display:block;color:var(--muted);font-size:.72rem}.profile-grid strong{display:block;margin-top:4px;font-size:.86rem;word-break:break-word}
-    @media(max-width:1100px){.kpis,.quick-grid{grid-template-columns:repeat(2,1fr)}.two-col{grid-template-columns:1fr}}@media(max-width:760px){.app{display:block}.sidebar{height:auto;position:static}.menu{grid-template-columns:1fr 1fr}.nav-title{margin-top:15px}.main{width:100%}.topbar{padding:13px 14px}.content{padding:15px 12px 35px}.welcome{align-items:flex-start;flex-direction:column}.welcome h2{font-size:1.45rem}.kpis,.quick-grid,.profile-grid{grid-template-columns:1fr}.user-pill div{display:none}}
+    :root{
+      --navy:#071a36;--navy2:#0b2c58;--blue:#176bdc;--blue2:#4aa2ff;--sky:#eaf5ff;
+      --bg:#f5f8fc;--card:#fff;--text:#15243a;--muted:#728097;--line:#e3eaf3;
+      --green:#14845c;--gold:#d9a63a;--danger:#c54747;
+      --shadow:0 18px 45px rgba(20,49,83,.09);--shadow-sm:0 10px 26px rgba(20,49,83,.07)
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:"Prompt",system-ui,sans-serif;background:linear-gradient(180deg,#f8fbff 0%,#f3f7fc 100%);color:var(--text)}
+    a{text-decoration:none;color:inherit}button,input{font:inherit}
+    .app{min-height:100vh;display:grid;grid-template-columns:270px minmax(0,1fr)}
+    .sidebar{position:sticky;top:0;height:100vh;padding:22px 16px;background:linear-gradient(180deg,var(--navy),var(--navy2));color:#fff;overflow:auto;box-shadow:18px 0 45px rgba(4,22,49,.12);z-index:20}
+    .brand{display:flex;align-items:center;gap:12px;padding:2px 8px 21px;border-bottom:1px solid rgba(255,255,255,.12)}
+    .brand img{width:48px;height:48px;object-fit:contain;background:#fff;border-radius:15px;padding:5px;box-shadow:0 10px 24px rgba(0,0,0,.18)}
+    .brand strong{display:block;font-size:1.05rem}.brand span{display:block;font-size:.72rem;opacity:.68;margin-top:3px}
+    .nav-label{font-size:.65rem;letter-spacing:.13em;text-transform:uppercase;opacity:.42;margin:22px 10px 8px}
+    .nav{display:grid;gap:4px}.nav a,.logout{display:flex;align-items:center;gap:11px;min-height:43px;padding:10px 12px;border-radius:12px;color:rgba(255,255,255,.78);font-size:.86rem;transition:.18s}
+    .nav a:hover,.nav a.active{background:rgba(255,255,255,.12);color:#fff;transform:translateX(2px)}
+    .nav a.active{box-shadow:inset 3px 0 0 #6cb6ff;background:linear-gradient(90deg,rgba(55,146,255,.20),rgba(255,255,255,.08))}
+    .nav-icon{width:23px;text-align:center;font-size:1rem}.logout{width:100%;border:0;background:rgba(255,255,255,.07);cursor:pointer;margin-top:18px}
+    .main{min-width:0}
+    .topbar{height:78px;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:0 28px;background:rgba(255,255,255,.90);border-bottom:1px solid var(--line);backdrop-filter:blur(14px);position:sticky;top:0;z-index:10}
+    .topbar h1{margin:0;font-size:1.22rem}.topbar p{margin:3px 0 0;color:var(--muted);font-size:.78rem}
+    .top-actions{display:flex;align-items:center;gap:10px}.bell{width:40px;height:40px;border:1px solid var(--line);border-radius:13px;background:#fff;display:grid;place-items:center;box-shadow:var(--shadow-sm)}
+    .user-pill{display:flex;align-items:center;gap:10px;padding:6px 11px 6px 7px;background:#fff;border:1px solid var(--line);border-radius:999px;box-shadow:var(--shadow-sm)}
+    .user-pill img{width:38px;height:38px;border-radius:50%;object-fit:cover;background:var(--sky)}.user-pill strong{display:block;font-size:.82rem}.user-pill span{display:block;font-size:.68rem;color:var(--muted)}
+    .content{max-width:1480px;margin:auto;padding:25px 28px 55px}
+    .message{display:none;padding:13px 15px;border-radius:14px;margin-bottom:16px;font-weight:600;font-size:.85rem}.message.show{display:block}.message.info{background:#edf6ff;color:#1659a5;border:1px solid #cbe4ff}.message.error{background:#fff0f0;color:#922f2f;border:1px solid #ffd1d1}
+    .hero{position:relative;overflow:hidden;display:grid;grid-template-columns:1.25fr .75fr;gap:20px;min-height:230px;padding:30px;border-radius:28px;color:#fff;background:linear-gradient(125deg,#082b5b 0%,#1269d3 58%,#3b9cff 100%);box-shadow:0 22px 55px rgba(30,102,190,.22)}
+    .hero:before{content:"";position:absolute;width:360px;height:360px;border-radius:50%;right:-100px;top:-170px;background:rgba(255,255,255,.13)}
+    .hero:after{content:"";position:absolute;width:240px;height:240px;border-radius:50%;right:100px;bottom:-180px;background:rgba(255,255,255,.08)}
+    .hero-copy,.hero-side{position:relative;z-index:1}.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.18);font-size:.72rem;font-weight:700}
+    .hero h2{font-size:clamp(1.7rem,3vw,2.35rem);line-height:1.18;margin:16px 0 8px}.hero p{margin:0;color:rgba(255,255,255,.78);line-height:1.75;max-width:700px;font-size:.9rem}
+    .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.hero-btn{padding:11px 16px;border-radius:13px;font-weight:700;font-size:.82rem}.hero-btn.primary{background:#fff;color:#115ebc}.hero-btn.ghost{border:1px solid rgba(255,255,255,.26);background:rgba(255,255,255,.10);color:#fff}
+    .hero-side{display:flex;align-items:center;justify-content:flex-end}.agent-card{width:min(100%,330px);padding:18px;border:1px solid rgba(255,255,255,.20);border-radius:20px;background:rgba(4,24,55,.18);backdrop-filter:blur(10px)}
+    .agent-card small{display:block;color:rgba(255,255,255,.65);font-size:.7rem}.agent-card strong{display:block;font-size:1.15rem;margin:4px 0 14px}.agent-meta{display:grid;grid-template-columns:1fr 1fr;gap:9px}.agent-meta div{padding:10px;border-radius:12px;background:rgba(255,255,255,.10)}.agent-meta span{display:block;font-size:.65rem;opacity:.65}.agent-meta b{display:block;font-size:.78rem;margin-top:3px}
+    .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0}
+    .kpi{position:relative;overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow-sm)}
+    .kpi:after{content:"";position:absolute;width:90px;height:90px;border-radius:50%;right:-35px;top:-35px;background:var(--sky)}
+    .kpi-top{display:flex;justify-content:space-between;align-items:center}.kpi-icon{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;background:var(--sky);font-size:1.15rem}.kpi-label{font-size:.75rem;color:var(--muted)}
+    .kpi strong{display:block;font-size:1.55rem;margin:11px 0 4px}.kpi small{color:var(--green);font-size:.68rem}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:14px;margin:25px 0 12px}.section-head h2{margin:0;font-size:1.12rem}.section-head p{margin:4px 0 0;color:var(--muted);font-size:.76rem}.section-link{font-size:.75rem;color:var(--blue);font-weight:700}
+    .actions-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.action-card{background:#fff;border:1px solid var(--line);border-radius:19px;padding:18px;box-shadow:var(--shadow-sm);transition:.18s}.action-card:hover{transform:translateY(-4px);border-color:#a7ccf7;box-shadow:var(--shadow)}
+    .action-icon{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(145deg,#eaf5ff,#f8fbff);font-size:1.3rem}.action-card strong{display:block;margin-top:13px;font-size:.92rem}.action-card span{display:block;color:var(--muted);font-size:.72rem;line-height:1.55;margin-top:5px}
+    .workspace{display:grid;grid-template-columns:1.2fr .8fr;gap:17px;margin-top:18px}.panel{background:#fff;border:1px solid var(--line);border-radius:21px;padding:20px;box-shadow:var(--shadow-sm)}
+    .panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.panel-head h3{margin:0;font-size:1rem}.tag{padding:6px 9px;border-radius:999px;background:var(--sky);color:var(--blue);font-size:.64rem;font-weight:700}
+    .income-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--line);font-size:.82rem}.income-row:last-child{border-bottom:0}.income-row span{color:var(--muted)}.income-row.total{margin-top:10px;padding:13px;border:0;border-radius:14px;background:linear-gradient(135deg,#edf6ff,#f8fbff)}.income-row.total strong{color:var(--blue);font-size:1.05rem}
+    .notice-list{display:grid;gap:10px}.notice{padding:13px;border:1px solid var(--line);border-radius:14px;background:#fbfdff}.notice b{display:block;font-size:.8rem}.notice span{display:block;color:var(--muted);font-size:.7rem;line-height:1.55;margin-top:4px}
+    .profile-card{margin-top:18px}.profile-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.profile-grid div{padding:12px;border-radius:13px;background:#f8fafc;border:1px solid #edf1f6}.profile-grid span{display:block;color:var(--muted);font-size:.66rem}.profile-grid strong{display:block;margin-top:4px;font-size:.79rem;word-break:break-word}
+    @media(max-width:1150px){.kpis,.actions-grid{grid-template-columns:repeat(2,1fr)}.workspace{grid-template-columns:1fr}.hero{grid-template-columns:1fr}.hero-side{justify-content:flex-start}.profile-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:780px){.app{display:block}.sidebar{position:static;height:auto;padding:14px}.brand{padding-bottom:13px}.nav-label{display:none}.nav{display:flex;overflow-x:auto;gap:7px;padding:10px 0}.nav a{white-space:nowrap;background:rgba(255,255,255,.07)}.logout{margin-top:7px}.topbar{height:auto;padding:12px 14px}.topbar p,.user-pill div,.bell{display:none}.content{padding:14px 12px 35px}.hero{padding:21px;border-radius:22px}.hero h2{font-size:1.5rem}.agent-card{width:100%}.kpis,.actions-grid,.profile-grid{grid-template-columns:1fr}.section-head{margin-top:21px}}
   </style>
 </head>
 <body>
 <div class="app">
   <aside class="sidebar">
     <div class="brand"><img src="images/logo.png" alt="SSBMS"><div><strong>SSB Agent ERP</strong><span>บริษัท สยามทำ จำกัด</span></div></div>
-    <div class="nav-title">เมนูหลัก</div>
-    <nav class="menu">
-      <a class="active" href="agent-dashboard.html"><span class="icon">🏠</span>หน้าแรก</a>
-      <a href="agent-products.html"><span class="icon">🛒</span>สินค้าและเสนอราคา</a>
-      <a href="agent-quotation.html"><span class="icon">📄</span>ใบเสนอราคา</a>
-      <a href="agent-orders.html"><span class="icon">📦</span>คำสั่งซื้อ</a>
-      <a href="agent-leads.html"><span class="icon">👥</span>ลูกค้า / Leads</a>
+    <div class="nav-label">เมนูหลัก</div>
+    <nav class="nav">
+      <a class="active" href="agent-dashboard.html"><span class="nav-icon">🏠</span>หน้าแรก</a>
+      <a href="agent-products.html"><span class="nav-icon">🛒</span>สินค้าและเสนอราคา</a>
+      <a href="agent-quotation.html"><span class="nav-icon">📄</span>ใบเสนอราคา</a>
+      <a href="agent-orders.html"><span class="nav-icon">📦</span>คำสั่งซื้อ</a>
+      <a href="agent-leads.html"><span class="nav-icon">👥</span>ลูกค้า / Leads</a>
     </nav>
-    <div class="nav-title">รายได้และทีม</div>
-    <nav class="menu">
-      <a href="agent-income.html"><span class="icon">💰</span>รายได้</a>
-      <a href="agent-bonus.html"><span class="icon">🎁</span>โบนัส</a>
-      <a href="agent-withdraw.html"><span class="icon">💳</span>ถอนเงิน</a>
-      <a href="agent-tax.html"><span class="icon">🧾</span>ภาษี</a>
-      <a href="agent-team.html"><span class="icon">👨‍👩‍👧</span>ทีมของฉัน</a>
-      <a href="agent-partner.html"><span class="icon">🤝</span>พาร์ตเนอร์</a>
+    <div class="nav-label">รายได้และทีม</div>
+    <nav class="nav">
+      <a href="agent-income.html"><span class="nav-icon">💰</span>รายได้</a>
+      <a href="agent-bonus.html"><span class="nav-icon">🎁</span>โบนัส</a>
+      <a href="agent-withdraw.html"><span class="nav-icon">💳</span>ถอนเงิน</a>
+      <a href="agent-tax.html"><span class="nav-icon">🧾</span>ภาษี</a>
+      <a href="agent-team.html"><span class="nav-icon">👨‍👩‍👧</span>ทีมของฉัน</a>
+      <a href="agent-partner.html"><span class="nav-icon">🤝</span>พาร์ตเนอร์</a>
     </nav>
-    <div class="nav-title">บัญชีและเครื่องมือ</div>
-    <nav class="menu">
-      <a href="agent-history.html"><span class="icon">🕘</span>ประวัติรายการ</a>
-      <a href="agent-card.html"><span class="icon">🪪</span>บัตรตัวแทน</a>
-      <a href="agent-media.html"><span class="icon">📂</span>คู่มือและสื่อการขาย</a>
-      <a href="agent-profile.html"><span class="icon">👤</span>โปรไฟล์ตัวแทน</a>
-      <a href="agent-settings.html"><span class="icon">⚙️</span>ตั้งค่า</a>
+    <div class="nav-label">บัญชีและเครื่องมือ</div>
+    <nav class="nav">
+      <a href="agent-history.html"><span class="nav-icon">🕘</span>ประวัติรายการ</a>
+      <a href="agent-card.html"><span class="nav-icon">🪪</span>บัตรตัวแทน</a>
+      <a href="agent-media.html"><span class="nav-icon">📂</span>คู่มือและสื่อการขาย</a>
+      <a href="agent-profile.html"><span class="nav-icon">👤</span>โปรไฟล์ตัวแทน</a>
+      <a href="agent-settings.html"><span class="nav-icon">⚙️</span>ตั้งค่า</a>
     </nav>
-    <button class="logout" id="logoutBtn"><span class="icon">🚪</span>ออกจากระบบ</button>
+    <button class="logout" id="logoutBtn"><span class="nav-icon">🚪</span>ออกจากระบบ</button>
   </aside>
 
   <main class="main">
     <header class="topbar">
       <div><h1>Agent Dashboard</h1><p>ศูนย์บริหารงานขายและตัวแทน SSBMS</p></div>
-      <div class="user-pill"><img id="topPhoto" src="images/logo.png" alt="Agent"><div><strong id="topName">กำลังโหลด...</strong><span id="topRole">Agent</span></div></div>
+      <div class="top-actions"><div class="bell">🔔</div><div class="user-pill"><img id="topPhoto" src="images/logo.png" alt="Agent"><div><strong id="topName">กำลังโหลด...</strong><span id="topRole">Agent</span></div></div></div>
     </header>
+
     <div class="content">
       <div id="message" class="message info">กำลังโหลดข้อมูลจากระบบ...</div>
-      <section class="welcome">
-        <div><h2>ยินดีต้อนรับ <span id="welcomeName">ตัวแทน SSB</span></h2><p>บริหารลูกค้า สร้างราคา ติดตามคำสั่งซื้อ และตรวจสอบรายได้ได้จากหน้าเดียว</p></div>
-        <div class="agent-id" id="agentCode">AGENT ID: -</div>
+
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow">SSB AGENT BUSINESS CENTER</div>
+          <h2>ยินดีต้อนรับ<br><span id="welcomeName">ตัวแทน SSB</span></h2>
+          <p>บริหารลูกค้า ตรวจสอบสินค้า สร้างราคา ติดตามคำสั่งซื้อ และดูรายได้ทั้งหมดได้จากศูนย์กลางเดียว</p>
+          <div class="hero-actions"><a class="hero-btn primary" href="agent-products.html">เริ่มเสนอราคาสินค้า</a><a class="hero-btn ghost" href="agent-leads.html">เพิ่มลูกค้าใหม่</a></div>
+        </div>
+        <div class="hero-side">
+          <div class="agent-card"><small>ข้อมูลบัญชีตัวแทน</small><strong id="agentCode">AGENT ID: -</strong><div class="agent-meta"><div><span>สถานะ</span><b id="status">-</b></div><div><span>ตำแหน่ง</span><b id="role">Agent</b></div><div><span>Team Manager</span><b id="manager">-</b></div><div><span>AM</span><b id="am">-</b></div></div></div>
+        </div>
       </section>
 
       <section class="kpis">
-        <div class="kpi"><span>รายได้รวมทั้งหมด</span><strong id="totalIncome">฿0</strong><small>ข้อมูลจากระบบบริษัท</small></div>
-        <div class="kpi"><span>ถอนได้ตอนนี้</span><strong id="available">฿0</strong><small>พร้อมส่งคำขอถอน</small></div>
-        <div class="kpi"><span>โบนัสทั้งหมด</span><strong id="totalBonus">฿0</strong><small>รวมโบนัสที่อนุมัติ</small></div>
-        <div class="kpi"><span>คำสั่งซื้อ</span><strong id="orderCount">0</strong><small>รายการทั้งหมด</small></div>
+        <article class="kpi"><div class="kpi-top"><span class="kpi-label">รายได้รวมทั้งหมด</span><div class="kpi-icon">💰</div></div><strong id="totalIncome">฿0</strong><small>ข้อมูลจากระบบบริษัท</small></article>
+        <article class="kpi"><div class="kpi-top"><span class="kpi-label">ถอนได้ตอนนี้</span><div class="kpi-icon">💳</div></div><strong id="available">฿0</strong><small>พร้อมส่งคำขอถอน</small></article>
+        <article class="kpi"><div class="kpi-top"><span class="kpi-label">โบนัสทั้งหมด</span><div class="kpi-icon">🎁</div></div><strong id="totalBonus">฿0</strong><small>รวมโบนัสที่อนุมัติ</small></article>
+        <article class="kpi"><div class="kpi-top"><span class="kpi-label">คำสั่งซื้อทั้งหมด</span><div class="kpi-icon">📦</div></div><strong id="orderCount">0</strong><small>รายการทั้งหมด</small></article>
       </section>
 
-      <div class="quick-title"><div><h2>เมนูด่วน</h2><p>เริ่มงานสำคัญได้ทันที</p></div></div>
-      <section class="quick-grid">
-        <a class="quick" href="agent-products.html"><div class="qicon">🛒</div><strong>สินค้าและเสนอราคา</strong><span>เลือกรุ่น กรอกราคาสมาร์ตโฟน และคำนวณ VAT อัตโนมัติ</span></a>
-        <a class="quick" href="agent-quotation.html"><div class="qicon">📄</div><strong>สร้างใบเสนอราคา</strong><span>จัดทำราคาสำหรับนำเสนอลูกค้าอย่างเป็นทางการ</span></a>
-        <a class="quick" href="agent-leads.html"><div class="qicon">👥</div><strong>เพิ่มลูกค้าใหม่</strong><span>บันทึกข้อมูลลูกค้าและติดตามโอกาสการขาย</span></a>
-        <a class="quick" href="agent-orders.html"><div class="qicon">📦</div><strong>ติดตามคำสั่งซื้อ</strong><span>ตรวจสถานะรอยืนยัน ชำระเงิน และจัดส่ง</span></a>
-        <a class="quick" href="agent-income.html"><div class="qicon">💰</div><strong>ตรวจสอบรายได้</strong><span>ดูคอมมิชชั่น ภาษี โบนัส และยอดสุทธิ</span></a>
-        <a class="quick" href="agent-team.html"><div class="qicon">👨‍👩‍👧</div><strong>ทีมของฉัน</strong><span>ตรวจสอบแม่ทีม AM และโครงสร้างทีมตัวแทน</span></a>
-        <a class="quick" href="agent-media.html"><div class="qicon">📂</div><strong>สื่อการขาย</strong><span>โบรชัวร์ คู่มือ ภาพสินค้า และเอกสารล่าสุด</span></a>
-        <a class="quick" href="agent-card.html"><div class="qicon">🪪</div><strong>บัตรตัวแทน</strong><span>ดูข้อมูลยืนยันตัวแทนและรหัสประจำตัว</span></a>
+      <div class="section-head"><div><h2>เริ่มงานได้ทันที</h2><p>เครื่องมือสำคัญสำหรับตัวแทน</p></div><a class="section-link" href="agent-products.html">ดูสินค้าทั้งหมด →</a></div>
+      <section class="actions-grid">
+        <a class="action-card" href="agent-products.html"><div class="action-icon">🛒</div><strong>สินค้าและเสนอราคา</strong><span>เลือกรุ่น กรอกราคาสมาร์ตโฟน และคำนวณ VAT อัตโนมัติ</span></a>
+        <a class="action-card" href="agent-quotation.html"><div class="action-icon">📄</div><strong>สร้างใบเสนอราคา</strong><span>จัดทำเอกสารนำเสนอลูกค้าอย่างเป็นทางการ</span></a>
+        <a class="action-card" href="agent-leads.html"><div class="action-icon">👥</div><strong>เพิ่มลูกค้าใหม่</strong><span>บันทึกข้อมูลและติดตามโอกาสทางการขาย</span></a>
+        <a class="action-card" href="agent-orders.html"><div class="action-icon">📦</div><strong>ติดตามคำสั่งซื้อ</strong><span>ตรวจสอบสถานะการยืนยัน ชำระเงิน และจัดส่ง</span></a>
+        <a class="action-card" href="agent-income.html"><div class="action-icon">💰</div><strong>ตรวจสอบรายได้</strong><span>ดูค่าตอบแทน โบนัส ภาษี และยอดสุทธิ</span></a>
+        <a class="action-card" href="agent-team.html"><div class="action-icon">👨‍👩‍👧</div><strong>ทีมของฉัน</strong><span>ดูโครงสร้างทีม แม่ทีม และสมาชิกในสายงาน</span></a>
+        <a class="action-card" href="agent-media.html"><div class="action-icon">📂</div><strong>สื่อการขาย</strong><span>ดาวน์โหลดโบรชัวร์ ภาพสินค้า และคู่มือฉบับล่าสุด</span></a>
+        <a class="action-card" href="agent-card.html"><div class="action-icon">🪪</div><strong>บัตรตัวแทน</strong><span>ดูข้อมูลยืนยันตัวแทนและรหัสประจำตัว</span></a>
       </section>
 
-      <section class="two-col">
-        <div class="panel"><h3>สรุปรายได้</h3><div class="income-list"><div class="income-row"><span>คอมมิชชั่น</span><b id="commission">฿0</b></div><div class="income-row"><span>โบนัส</span><b id="bonusDetail">฿0</b></div><div class="income-row"><span>ภาษี</span><b id="tax">- ฿0</b></div><div class="income-row total"><span>ยอดสุทธิ</span><strong id="net">฿0</strong></div></div></div>
-        <div class="panel"><h3>ประกาศบริษัท</h3><div class="news"><div class="news-item"><b>ตรวจสอบราคาสมาร์ตโฟนก่อนเสนอราคาทุกครั้ง</b><span>ตัวแทนต้องยืนยันราคาปัจจุบันกับบริษัทก่อนกรอกข้อมูลให้ลูกค้า</span></div><div class="news-item"><b>ค่าดำเนินการติดตั้งระบบ SSBMS</b><span>กำหนดตายตัว 45,000 บาท และคำนวณ VAT 7% จากยอดรวมก่อนภาษี</span></div></div></div>
+      <section class="workspace">
+        <div class="panel"><div class="panel-head"><h3>สรุปรายได้</h3><span class="tag">LIVE SUMMARY</span></div><div class="income-row"><span>คอมมิชชั่น</span><b id="commission">฿0</b></div><div class="income-row"><span>โบนัส</span><b id="bonusDetail">฿0</b></div><div class="income-row"><span>ภาษี</span><b id="tax">- ฿0</b></div><div class="income-row total"><span>ยอดสุทธิ</span><strong id="net">฿0</strong></div></div>
+        <div class="panel"><div class="panel-head"><h3>ประกาศบริษัท</h3><span class="tag">สำคัญ</span></div><div class="notice-list"><div class="notice"><b>ตรวจสอบราคาสมาร์ตโฟนก่อนเสนอราคาทุกครั้ง</b><span>ตัวแทนต้องยืนยันราคาปัจจุบันกับบริษัทก่อนกรอกข้อมูลให้ลูกค้า</span></div><div class="notice"><b>ค่าดำเนินการติดตั้งระบบ SSBMS</b><span>กำหนดตายตัว 45,000 บาท และคำนวณ VAT 7% จากยอดรวมก่อนภาษี</span></div></div></div>
       </section>
 
-      <div class="section-head"><div><h2>ข้อมูลตัวแทน</h2><p>ข้อมูลจากฐานข้อมูลกลางของบริษัท</p></div></div>
-      <section class="panel profile-grid">
-        <div><span>ชื่อ–นามสกุล</span><strong id="fullName">-</strong></div><div><span>สถานะ</span><strong id="status">-</strong></div><div><span>Role</span><strong id="role">Agent</strong></div><div><span>โทรศัพท์</span><strong id="phone">-</strong></div><div><span>อีเมล</span><strong id="email">-</strong></div><div><span>LINE</span><strong id="line">-</strong></div><div><span>Team Manager</span><strong id="manager">-</strong></div><div><span>AM</span><strong id="am">-</strong></div><div><span>บัญชีธนาคาร</span><strong id="bank">-</strong></div>
-      </section>
+      <section class="panel profile-card"><div class="panel-head"><h3>ข้อมูลตัวแทน</h3><span class="tag">ข้อมูลจากระบบกลาง</span></div><div class="profile-grid"><div><span>ชื่อ–นามสกุล</span><strong id="fullName">-</strong></div><div><span>โทรศัพท์</span><strong id="phone">-</strong></div><div><span>อีเมล</span><strong id="email">-</strong></div><div><span>LINE</span><strong id="line">-</strong></div><div><span>บัญชีธนาคาร</span><strong id="bank">-</strong></div><div><span>Role</span><strong id="profileRole">Agent</strong></div></div></section>
     </div>
   </main>
 </div>
+
 <script>
 const API_URL="https://script.google.com/macros/s/AKfycbyKhWE-_SuKreCPyD4tsNmqNMQz2hZ8hQtrckk92mh8rszh1jaNEeuuFBGsPOLKfAziNg/exec";
 function getAgentId(){const direct=localStorage.getItem("agent_id")||localStorage.getItem("ssb_agent_id")||localStorage.getItem("ssb_current_agent_v1");if(direct)return direct;for(const key of ["ssb_agent_session","ssb_agent_session_v1"]){try{const s=JSON.parse(localStorage.getItem(key)||"null");if(s&&(s.agent_id||s.applicationId))return s.agent_id||s.applicationId}catch(e){}}return ""}
 function jsonp(url){return new Promise((resolve,reject)=>{const cb="erp_cb_"+Date.now()+"_"+Math.floor(Math.random()*9999);const s=document.createElement("script");const timer=setTimeout(()=>{clean();reject(new Error("หมดเวลารอข้อมูล"))},15000);function clean(){clearTimeout(timer);try{delete window[cb]}catch(e){}if(s.parentNode)s.remove()}window[cb]=d=>{clean();resolve(d)};s.src=url+"&callback="+encodeURIComponent(cb)+"&_="+Date.now();s.onerror=()=>{clean();reject(new Error("เชื่อมต่อระบบไม่ได้"))};document.body.appendChild(s)})}
 function money(v){return "฿"+Number(v||0).toLocaleString("th-TH",{maximumFractionDigits:2})}function text(id,v){const e=document.getElementById(id);if(e)e.textContent=v}function show(type,msg){const b=document.getElementById("message");b.className="message show "+type;b.textContent=msg}function hide(){document.getElementById("message").className="message"}
-async function load(){const id=getAgentId();if(!id){location.href="agent-login.html";return}show("info","กำลังโหลดข้อมูลตัวแทน "+id+" ...");try{const d=await jsonp(API_URL+"?action=getDashboard&agent_id="+encodeURIComponent(id));if(!d||!d.ok){show("error",d&&d.message||"โหลดข้อมูลไม่สำเร็จ");if(d&&d.next_page&&d.next_page!=="agent-dashboard.html")setTimeout(()=>location.href=d.next_page,1800);return}const a=d.agent||{},s=d.summary||{},name=((a.first_name||"")+" "+(a.last_name||"")).trim()||"ตัวแทน SSB";text("topName",name);text("welcomeName",name);text("fullName",name);text("topRole",a.role||"Agent");text("role",a.role||"Agent");text("agentCode","AGENT ID: "+(a.agent_id||"-"));text("status",String(a.status||"-").toUpperCase());text("phone",a.phone||"-");text("email",a.email||"-");text("line",a.line||"-");text("manager",a.team_manager||"-");text("am",a.am||"-");text("bank",[a.bank_name,a.bank_account].filter(Boolean).join(" ")||"-");text("totalIncome",money(s.totalIncome));text("available",money(s.available));text("totalBonus",money(s.totalBonus));text("orderCount",(d.orders||[]).length);text("commission",money(s.commission));text("bonusDetail",money(s.totalBonus));text("tax","- "+money(s.tax));text("net",money(s.net));if(a.photo_url){document.getElementById("topPhoto").src=a.photo_url}hide()}catch(e){console.error(e);show("error","เชื่อมต่อ Dashboard ไม่ได้: "+e.message)}}
+async function load(){const id=getAgentId();if(!id){location.href="agent-login.html";return}show("info","กำลังโหลดข้อมูลตัวแทน "+id+" ...");try{const d=await jsonp(API_URL+"?action=getDashboard&agent_id="+encodeURIComponent(id));if(!d||!d.ok){show("error",d&&d.message||"โหลดข้อมูลไม่สำเร็จ");if(d&&d.next_page&&d.next_page!=="agent-dashboard.html")setTimeout(()=>location.href=d.next_page,1800);return}const a=d.agent||{},s=d.summary||{},name=((a.first_name||"")+" "+(a.last_name||"")).trim()||"ตัวแทน SSB";text("topName",name);text("welcomeName",name);text("fullName",name);text("topRole",a.role||"Agent");text("role",a.role||"Agent");text("profileRole",a.role||"Agent");text("agentCode","AGENT ID: "+(a.agent_id||"-"));text("status",String(a.status||"-").toUpperCase());text("phone",a.phone||"-");text("email",a.email||"-");text("line",a.line||"-");text("manager",a.team_manager||"-");text("am",a.am||"-");text("bank",[a.bank_name,a.bank_account].filter(Boolean).join(" ")||"-");text("totalIncome",money(s.totalIncome));text("available",money(s.available));text("totalBonus",money(s.totalBonus));text("orderCount",(d.orders||[]).length);text("commission",money(s.commission));text("bonusDetail",money(s.totalBonus));text("tax","- "+money(s.tax));text("net",money(s.net));if(a.photo_url){document.getElementById("topPhoto").src=a.photo_url}hide()}catch(e){console.error(e);show("error","เชื่อมต่อ Dashboard ไม่ได้: "+e.message)}}
 document.getElementById("logoutBtn").onclick=()=>{["agent_id","agent_name","agent_role","agent_status","ssb_agent_id","ssb_current_agent_v1","ssb_agent_session","ssb_agent_session_v1"].forEach(k=>localStorage.removeItem(k));location.href="agent-login.html"};load();
 </script>
 </body>
