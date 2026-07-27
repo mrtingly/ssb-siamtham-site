@@ -4,6 +4,32 @@
   font-family: "Prompt", sans-serif;
 }
 
+html[data-i18n-page-title],
+html[data-i18n-page-title] body,
+html[data-i18n-page-title] button,
+html[data-i18n-page-title] input,
+html[data-i18n-page-title] select,
+html[data-i18n-page-title] textarea,
+html[data-i18n-page-title] table,
+html[data-i18n-page-title] th,
+html[data-i18n-page-title] td,
+html[data-i18n-page-title] dialog,
+html[data-i18n-page-title] fieldset,
+html[data-i18n-page-title] legend,
+html[data-i18n-page-title] label,
+html[data-i18n-page-title] .toast,
+html[data-i18n-page-title] .modal,
+html[data-i18n-page-title] .timer,
+html[data-i18n-page-title] .navigator,
+html[data-i18n-page-title] .nav-dot,
+html[data-i18n-page-title] .choice,
+html[data-i18n-page-title] .exam-card,
+html[data-i18n-page-title] .result-card,
+html[data-i18n-page-title] .state-card,
+html[data-i18n-page-title] .message {
+  font-family: "Prompt", sans-serif;
+}
+
 .sbos-lang-switch {
   display: flex;
   justify-content: center;

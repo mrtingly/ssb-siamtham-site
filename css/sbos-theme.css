@@ -107,6 +107,82 @@ body {
   background: linear-gradient(180deg, #151515 0%, #211d16 100%);
 }
 
+.sbos-auth-page body {
+  background:
+    radial-gradient(circle at 12% 0%, rgba(23, 105, 210, .12), transparent 320px),
+    linear-gradient(180deg, #f8fbff 0%, var(--sbos-bg) 100%);
+  color: var(--sbos-text);
+}
+
+.sbos-auth-page .login-card {
+  background: color-mix(in srgb, var(--sbos-surface) 94%, transparent);
+  border-color: var(--sbos-line);
+  color: var(--sbos-text);
+  box-shadow: var(--sbos-shadow);
+}
+
+.sbos-auth-page .sbos-lang-switch {
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.sbos-auth-page .sbos-lang-btn,
+.sbos-auth-page .sbos-theme-btn {
+  min-height: 34px;
+  border: 1px solid var(--sbos-line);
+  background: var(--sbos-surface);
+  color: var(--sbos-text);
+  box-shadow: none;
+}
+
+.sbos-auth-page .sbos-lang-btn[aria-pressed="true"],
+.sbos-auth-page .sbos-theme-btn[aria-pressed="true"] {
+  background: var(--sbos-primary);
+  border-color: var(--sbos-primary);
+  color: #fff;
+}
+
+.sbos-auth-page input,
+.sbos-auth-page textarea {
+  background: var(--sbos-surface);
+  border-color: var(--sbos-line);
+  color: var(--sbos-text);
+}
+
+[data-sbos-theme="dark"].sbos-auth-page body {
+  background:
+    radial-gradient(circle at 12% 0%, rgba(216, 173, 69, .12), transparent 320px),
+    linear-gradient(180deg, #151515 0%, #211d16 100%);
+}
+
+[data-sbos-theme="dark"].sbos-auth-page .login-card,
+[data-sbos-theme="dark"].sbos-auth-page .login-switch,
+[data-sbos-theme="dark"].sbos-auth-page .sbos-lang-btn,
+[data-sbos-theme="dark"].sbos-auth-page .sbos-theme-btn,
+[data-sbos-theme="dark"].sbos-auth-page input,
+[data-sbos-theme="dark"].sbos-auth-page textarea {
+  background: var(--sbos-surface);
+  border-color: var(--sbos-line);
+  color: var(--sbos-text);
+}
+
+[data-sbos-theme="dark"].sbos-auth-page .login-switch a,
+[data-sbos-theme="dark"].sbos-auth-page .register-link,
+[data-sbos-theme="dark"].sbos-auth-page label,
+[data-sbos-theme="dark"].sbos-auth-page p {
+  color: var(--sbos-text);
+}
+
+[data-sbos-theme="dark"].sbos-auth-page .sbos-lang-btn[aria-pressed="true"],
+[data-sbos-theme="dark"].sbos-auth-page .sbos-theme-btn[aria-pressed="true"],
+[data-sbos-theme="dark"].sbos-auth-page .login-switch a.active,
+[data-sbos-theme="dark"].sbos-auth-page button[type="submit"] {
+  background: var(--sbos-primary);
+  border-color: var(--sbos-primary);
+  color: #1c1710;
+}
+
 .agent-dashboard-page {
   --navy: #071a36;
   --navy2: #0b2c58;
