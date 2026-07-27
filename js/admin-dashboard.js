@@ -2,12 +2,24 @@
   const API_URL = "https://script.google.com/macros/s/AKfycbyKhWE-_SuKreCPyD4tsNmqNMQz2hZ8hQtrckk92mh8rszh1jaNEeuuFBGsPOLKfAziNg/exec";
   const PAGE_SIZE = 10;
   const REQUEST_TIMEOUT_MS = 30000;
+  const SEARCH_DEBOUNCE_MS = 280;
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const state = {
     agents: [],
     pendingAgents: [],
     currentPage: 1,
     searchQuery: "",
+    statusFilter: "",
+    searchTimer: null,
+    hasError: false,
+    lastSummary: {
+      total: 0,
+      wait_approval: 0,
+      approved: 0,
+      suspended: 0,
+      rejected: 0
+    },
     loading: {
       summary: false,
       pending: false,
@@ -126,6 +138,58 @@
     window.setTimeout(function () {
       toast.remove();
     }, 4200);
+
+    return toast;
+  }
+
+  function updateLiveState(stateName) {
+    if (!els.liveStatus) return;
+
+    els.liveStatus.className = "live-pill " + stateName;
+    if (stateName === "loading") {
+      els.liveStatus.textContent = "Syncing";
+      return;
+    }
+    if (stateName === "error") {
+      els.liveStatus.textContent = "Needs attention";
+      return;
+    }
+    els.liveStatus.textContent = "Live data";
+  }
+
+  function updateLastUpdated() {
+    if (!els.lastUpdated) return;
+
+    const time = new Date().toLocaleTimeString("th-TH", {
+      hour: "2-digit",
+      minute: "2-digit"
+    });
+    els.lastUpdated.textContent = "Last updated: " + time;
+  }
+
+  function animateNumber(element, fromValue, toValue) {
+    if (!element) return;
+
+    const from = Number(fromValue || 0);
+    const to = Number(toValue || 0);
+    if (prefersReducedMotion || from === to) {
+      setText(element, to);
+      return;
+    }
+
+    const startedAt = window.performance.now();
+    const duration = 640;
+
+    function step(now) {
+      const progress = Math.min(1, (now - startedAt) / duration);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      element.textContent = String(Math.round(from + (to - from) * eased));
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    }
+
+    window.requestAnimationFrame(step);
   }
 
   function isAnyLoading() {
@@ -134,6 +198,7 @@
 
   function setLoading(section, isLoading) {
     state.loading[section] = isLoading;
+    updateLiveState(isAnyLoading() ? "loading" : (state.hasError ? "error" : "ready"));
 
     if (section === "summary") {
       document.querySelectorAll(".summary-card").forEach(function (card) {
@@ -217,11 +282,20 @@
 
   function renderSummary(summary) {
     const safeSummary = summary || {};
-    setText(els.summaryTotal, Number(safeSummary.total || 0));
-    setText(els.summaryPending, Number(safeSummary.wait_approval || 0));
-    setText(els.summaryApproved, Number(safeSummary.approved || 0));
-    setText(els.summarySuspended, Number(safeSummary.suspended || 0));
-    setText(els.summaryRejected, Number(safeSummary.rejected || 0));
+    const nextSummary = {
+      total: Number(safeSummary.total || 0),
+      wait_approval: Number(safeSummary.wait_approval || 0),
+      approved: Number(safeSummary.approved || 0),
+      suspended: Number(safeSummary.suspended || 0),
+      rejected: Number(safeSummary.rejected || 0)
+    };
+
+    animateNumber(els.summaryTotal, state.lastSummary.total, nextSummary.total);
+    animateNumber(els.summaryPending, state.lastSummary.wait_approval, nextSummary.wait_approval);
+    animateNumber(els.summaryApproved, state.lastSummary.approved, nextSummary.approved);
+    animateNumber(els.summarySuspended, state.lastSummary.suspended, nextSummary.suspended);
+    animateNumber(els.summaryRejected, state.lastSummary.rejected, nextSummary.rejected);
+    state.lastSummary = nextSummary;
   }
 
   function renderPending() {
@@ -279,9 +353,17 @@
 
   function filteredAgents() {
     const query = state.searchQuery.trim().toLocaleLowerCase("th-TH");
-    if (!query) return state.agents.slice();
+    const status = state.statusFilter;
 
     return state.agents.filter(function (agent) {
+      if (status && normalizeStatus(agent.status) !== status) {
+        return false;
+      }
+
+      if (!query) {
+        return true;
+      }
+
       const searchable = [
         fullName(agent),
         agent.agent_id,
@@ -327,9 +409,11 @@
     const shownEnd = Math.min(start + PAGE_SIZE, filtered.length);
     setText(els.agentsMeta, `${filtered.length} รายการจากทั้งหมด ${state.agents.length} รายการ`);
     setText(els.paginationInfo, `แสดง ${shownStart}-${shownEnd} จาก ${filtered.length} รายการ`);
+    setText(els.searchResultCount, `${filtered.length} results`);
 
     if (els.prevPageButton) els.prevPageButton.disabled = state.currentPage <= 1;
     if (els.nextPageButton) els.nextPageButton.disabled = state.currentPage >= totalPages;
+    if (els.clearSearchButton) els.clearSearchButton.hidden = !state.searchQuery;
   }
 
   async function loadSummary() {
@@ -338,10 +422,13 @@
       const data = await jsonp("getAdminDashboard");
       renderSummary(data.summary);
       clearPageError();
+      updateLastUpdated();
       return true;
     } catch (error) {
+      state.hasError = true;
       showPageError("ไม่สามารถโหลดข้อมูลได้", "Dashboard Summary โหลดไม่สำเร็จ");
       showToast("error", "Dashboard Summary โหลดไม่สำเร็จ");
+      updateLiveState("error");
       return false;
     } finally {
       setLoading("summary", false);
@@ -357,11 +444,13 @@
       renderPending();
       return true;
     } catch (error) {
+      state.hasError = true;
       state.pendingAgents = [];
       renderPending();
       setHidden(els.pendingError, false);
       setText(els.pendingMeta, "Pending Agents โหลดไม่สำเร็จ");
       showToast("error", "Pending Agents โหลดไม่สำเร็จ");
+      updateLiveState("error");
       return false;
     } finally {
       setLoading("pending", false);
@@ -377,11 +466,13 @@
       renderAgents();
       return true;
     } catch (error) {
+      state.hasError = true;
       state.agents = [];
       renderAgents();
       setHidden(els.agentsError, false);
       setText(els.agentsMeta, "Agents โหลดไม่สำเร็จ");
       showToast("error", "Agents โหลดไม่สำเร็จ");
+      updateLiveState("error");
       return false;
     } finally {
       setLoading("agents", false);
@@ -389,6 +480,7 @@
   }
 
   async function refreshAgentData() {
+    state.hasError = false;
     const results = await Promise.all([
       loadSummary().catch(function () { return false; }),
       loadPending().catch(function () { return false; }),
@@ -399,7 +491,13 @@
       return result === false;
     });
 
-    if (!failed) clearPageError();
+    if (!failed) {
+      clearPageError();
+      state.hasError = false;
+      updateLiveState("ready");
+    } else {
+      updateLiveState("error");
+    }
     return !failed;
   }
 
@@ -426,12 +524,15 @@
 
     state.busyAgentIds.add(cleanAgentId);
     renderPending();
+    const loadingToast = showToast("loading", isApprove ? "กำลังอนุมัติตัวแทน..." : "กำลังปฏิเสธตัวแทน...");
 
     try {
       await jsonp(isApprove ? "approveAgent" : "rejectAgent", { agent_id: cleanAgentId });
+      if (loadingToast) loadingToast.remove();
       showToast("success", isApprove ? "อนุมัติตัวแทนเรียบร้อย" : "ปฏิเสธตัวแทนเรียบร้อย");
       await refreshAgentData();
     } catch (error) {
+      if (loadingToast) loadingToast.remove();
       showToast("error", error.message || "ไม่สามารถอัปเดตสถานะตัวแทนได้");
       await loadPending();
     } finally {
@@ -461,9 +562,36 @@
 
     if (els.agentSearch) {
       els.agentSearch.addEventListener("input", function (event) {
-        state.searchQuery = event.target.value || "";
+        window.clearTimeout(state.searchTimer);
+        const value = event.target.value || "";
+        state.searchTimer = window.setTimeout(function () {
+          state.searchQuery = value;
+          state.currentPage = 1;
+          renderAgents();
+        }, SEARCH_DEBOUNCE_MS);
+      });
+    }
+
+    if (els.clearSearchButton) {
+      els.clearSearchButton.addEventListener("click", function () {
+        if (els.agentSearch) els.agentSearch.value = "";
+        state.searchQuery = "";
         state.currentPage = 1;
         renderAgents();
+      });
+    }
+
+    if (els.statusFilter) {
+      els.statusFilter.addEventListener("change", function (event) {
+        state.statusFilter = event.target.value || "";
+        state.currentPage = 1;
+        renderAgents();
+      });
+    }
+
+    if (els.refreshButton) {
+      els.refreshButton.addEventListener("click", function () {
+        if (!isAnyLoading()) loadAll();
       });
     }
 
@@ -499,6 +627,9 @@
       "pageStatusTitle",
       "pageStatusText",
       "retryAllButton",
+      "refreshButton",
+      "liveStatus",
+      "lastUpdated",
       "summaryTotal",
       "summaryPending",
       "summaryApproved",
@@ -516,6 +647,9 @@
       "agentsEmpty",
       "retryAgentsButton",
       "agentSearch",
+      "clearSearchButton",
+      "statusFilter",
+      "searchResultCount",
       "agentsTableBody",
       "paginationInfo",
       "prevPageButton",

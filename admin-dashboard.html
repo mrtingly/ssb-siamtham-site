@@ -30,16 +30,21 @@
     <main class="admin-main">
       <header class="admin-topbar">
         <div>
-          <p>SBOS Admin Dashboard</p>
+          <p class="eyebrow">SBOS Admin Control Center</p>
           <h1>ระบบตัวแทน</h1>
+          <div class="live-row" aria-live="polite">
+            <span id="liveStatus" class="live-pill">Live data</span>
+            <span id="lastUpdated">Last updated: -</span>
+          </div>
         </div>
         <div class="admin-actions">
           <span id="adminName" class="admin-badge">Admin</span>
+          <button type="button" id="refreshButton" class="primary-btn" aria-label="Refresh SBOS dashboard data">Refresh</button>
           <button type="button" class="ghost-btn" onclick="adminLogout()" aria-label="Logout from admin dashboard">Logout</button>
         </div>
       </header>
 
-      <section class="status-panel" id="pageStatus" hidden>
+      <section class="status-panel" id="pageStatus" aria-live="polite" hidden>
         <div>
           <strong id="pageStatusTitle">ไม่สามารถโหลดข้อมูลได้</strong>
           <p id="pageStatusText">กรุณาลองใหม่อีกครั้ง</p>
@@ -48,23 +53,28 @@
       </section>
 
       <section class="summary-grid" aria-label="Dashboard Summary">
-        <article class="summary-card">
+        <article class="summary-card" data-kpi="total">
+          <div class="card-icon" aria-hidden="true">A</div>
           <span>ตัวแทนทั้งหมด</span>
           <strong id="summaryTotal">0</strong>
         </article>
-        <article class="summary-card warning">
+        <article class="summary-card warning" data-kpi="pending">
+          <div class="card-icon" aria-hidden="true">W</div>
           <span>รออนุมัติ</span>
           <strong id="summaryPending">0</strong>
         </article>
-        <article class="summary-card success">
+        <article class="summary-card success" data-kpi="approved">
+          <div class="card-icon" aria-hidden="true">OK</div>
           <span>อนุมัติแล้ว</span>
           <strong id="summaryApproved">0</strong>
         </article>
-        <article class="summary-card muted">
+        <article class="summary-card muted" data-kpi="suspended">
+          <div class="card-icon" aria-hidden="true">S</div>
           <span>ระงับ</span>
           <strong id="summarySuspended">0</strong>
         </article>
-        <article class="summary-card danger">
+        <article class="summary-card danger" data-kpi="rejected">
+          <div class="card-icon" aria-hidden="true">R</div>
           <span>ปฏิเสธ</span>
           <strong id="summaryRejected">0</strong>
         </article>
@@ -124,7 +134,22 @@
 
         <div class="toolbar">
           <label for="agentSearch">Search</label>
-          <input id="agentSearch" type="search" autocomplete="off" aria-label="Search agents by name, Agent ID, email, Facebook, Line, or phone" placeholder="ค้นหาชื่อ, Agent ID, Email, Facebook, Line หรือเบอร์โทร" />
+          <div class="search-control">
+            <input id="agentSearch" type="search" autocomplete="off" aria-label="Search agents by name, Agent ID, email, Facebook, Line, or phone" placeholder="ค้นหาชื่อ, Agent ID, Email, Facebook, Line หรือเบอร์โทร" />
+            <button type="button" id="clearSearchButton" class="clear-search" aria-label="Clear agent search" hidden>Clear</button>
+          </div>
+          <label for="statusFilter">Status</label>
+          <select id="statusFilter" aria-label="Filter agents by status">
+            <option value="">ทุกสถานะ</option>
+            <option value="REGISTERED">REGISTERED</option>
+            <option value="TRAINING">TRAINING</option>
+            <option value="EXAM">EXAM</option>
+            <option value="WAIT_APPROVAL">WAIT_APPROVAL</option>
+            <option value="APPROVED">APPROVED</option>
+            <option value="SUSPENDED">SUSPENDED</option>
+            <option value="REJECTED">REJECTED</option>
+          </select>
+          <span id="searchResultCount" class="result-count" aria-live="polite">0 results</span>
         </div>
 
         <div id="agentsLoading" class="table-loading">
