@@ -1,22 +1,34 @@
-const adminId = localStorage.getItem("admin_id");
-const adminRole = localStorage.getItem("admin_role");
+(function(){
+  const publicPages = new Set([
+    "admin-login.html",
+    "login.html"
+  ]);
 
-if(!adminId){
-  window.location.href = "login.html";
-}
+  const currentPage = (window.location.pathname.split("/").pop() || "index.html").toLowerCase();
 
-if(adminRole !== "Admin" && adminRole !== "Owner"){
-  localStorage.removeItem("admin_id");
-  localStorage.removeItem("admin_name");
-  localStorage.removeItem("admin_role");
+  window.adminLogout = function(){
+    localStorage.removeItem("admin_id");
+    localStorage.removeItem("admin_name");
+    localStorage.removeItem("admin_role");
 
-  window.location.href = "login.html";
-}
+    window.location.href = "admin-login.html";
+  };
 
-function adminLogout(){
-  localStorage.removeItem("admin_id");
-  localStorage.removeItem("admin_name");
-  localStorage.removeItem("admin_role");
+  if(publicPages.has(currentPage)) return;
 
-  window.location.href = "login.html";
-}
+  const adminId = localStorage.getItem("admin_id");
+  const adminRole = localStorage.getItem("admin_role");
+
+  if(!adminId){
+    window.location.href = "admin-login.html";
+    return;
+  }
+
+  if(adminRole !== "Admin" && adminRole !== "Owner"){
+    localStorage.removeItem("admin_id");
+    localStorage.removeItem("admin_name");
+    localStorage.removeItem("admin_role");
+
+    window.location.href = "admin-login.html";
+  }
+})();
