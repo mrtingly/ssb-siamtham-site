@@ -1,1 +1,179 @@
-<!DOCTYPE html><html lang="th"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SSBMS Admin ERP</title><link rel="icon" href="images/logo.png"><link rel="stylesheet" href="css/sbos-core.css"><style>body{background:#f5f7fa}.shell{display:grid;grid-template-columns:250px 1fr;min-height:100vh}.side{padding:22px 16px;background:#071a2f;color:#fff}.logo{display:flex;align-items:center;gap:11px;padding:0 7px 24px}.logo img{width:42px}.logo small{display:block;color:#9fb1c6}.menu{display:grid;gap:5px}.menu a{padding:12px 13px;border-radius:13px;color:#c7d2df;font-size:.78rem;font-weight:700}.menu a.active,.menu a:hover{background:rgba(255,255,255,.1);color:#fff}.main{min-width:0}.top{height:68px;padding:0 26px;background:#fff;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;justify-content:space-between}.content{max-width:1550px;margin:auto;padding:26px}.hero{padding:28px;border-radius:26px;background:linear-gradient(135deg,#05284d,#0b72ce);color:#fff}.hero h1{margin:0;font-size:clamp(2rem,5vw,4rem);letter-spacing:-.05em}.hero p{max-width:760px;color:#dbeafe;line-height:1.65}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:17px 0}.kpi{padding:18px;border-radius:20px;background:#fff;border:1px solid #e5e7eb}.kpi small{color:#6b7280}.kpi strong{display:block;margin-top:8px;font-size:1.8rem}.modules{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.module{padding:20px;border-radius:22px;background:#fff;border:1px solid #e5e7eb}.module h3{margin:0}.module p{color:#6b7280;font-size:.72rem;line-height:1.55}.module a{display:inline-block;margin-top:10px;padding:9px 12px;border-radius:999px;background:#eef6ff;color:#0672ce;font-size:.7rem;font-weight:800}@media(max-width:1000px){.shell{grid-template-columns:1fr}.side{display:none}.kpis{grid-template-columns:1fr 1fr}.modules{grid-template-columns:1fr 1fr}}@media(max-width:600px){.content{padding:12px}.kpis,.modules{grid-template-columns:1fr}}</style></head><body><div class="shell"><aside class="side"><div class="logo"><img src="images/logo.png" alt="SSBMS"><div><b>SSBMS Admin ERP</b><small>บริษัท สยามทำ จำกัด</small></div></div><nav class="menu"><a class="active" href="admin-dashboard.html">ภาพรวม</a><a href="admin-quotations.html">ใบเสนอราคา</a><a href="admin-orders.html">คำสั่งซื้อ</a><a href="admin-installation.html">งานติดตั้ง</a><a href="admin-agent.html">ตรวจตัวแทน</a><a href="admin-agents-list.html">รายชื่อตัวแทน</a><a href="admin-bonus.html">คอมมิชชันและโบนัส</a><a href="admin-withdraw.html">ถอนเงิน</a></nav></aside><main class="main"><header class="top"><div><b>สำนักงานใหญ่</b><small style="display:block;color:#6b7280">SSBMS Business Operating System</small></div><a href="agent-dashboard.html">Agent View</a></header><div class="content"><section class="hero"><h1>ทุกธุรกรรม<br>อยู่ในศูนย์กลางเดียว</h1><p>ตรวจใบเสนอราคาที่ลูกค้าเซ็น อนุมัติเป็นคำสั่งซื้อ จัดคิวติดตั้ง ติดตามการจัดส่ง และส่งมอบระบบ SSBMS</p></section><section class="kpis"><div class="kpi"><small>ใบเสนอราคารออนุมัติ</small><strong id="quotes">0</strong></div><div class="kpi"><small>คำสั่งซื้อกำลังดำเนินการ</small><strong id="orders">0</strong></div><div class="kpi"><small>งานติดตั้ง</small><strong id="jobs">0</strong></div><div class="kpi"><small>ส่งมอบแล้ว</small><strong id="done">0</strong></div></section><section class="modules"><article class="module"><h3>Quotation Center</h3><p>ตรวจลูกค้า ลายเซ็น ราคา และอนุมัติสร้างคำสั่งซื้อ</p><a href="admin-quotations.html">เปิดใบเสนอราคา</a></article><article class="module"><h3>Order Center</h3><p>ยืนยันชำระเงิน เริ่มติดตั้ง จัดส่ง และปิดงาน</p><a href="admin-orders.html">เปิดคำสั่งซื้อ</a></article><article class="module"><h3>Installation Center</h3><p>จัดการ SSBM, Safety Book, SIM, SPC และ QC</p><a href="admin-installation.html">เปิดงานติดตั้ง</a></article><article class="module"><h3>Agent Management</h3><p>ตรวจสอบ อนุมัติ และบริหารสถานะตัวแทน</p><a href="admin-agent.html">เปิดระบบตัวแทน</a></article><article class="module"><h3>Commission Center</h3><p>คอมมิชชัน โบนัส และการจ่ายผลตอบแทน</p><a href="admin-bonus.html">เปิดคอมมิชชัน</a></article><article class="module"><h3>Agent Orders</h3><p>ตรวจมุมมองคำสั่งซื้อที่ตัวแทนใช้งาน</p><a href="agent-orders.html">เปิด Agent Orders</a></article></section></div></main></div><script>const q=JSON.parse(localStorage.getItem('ssb_signed_quotes')||'[]'),o=JSON.parse(localStorage.getItem('ssb_orders')||'[]'),j=JSON.parse(localStorage.getItem('ssb_install_jobs')||'[]');document.getElementById('quotes').textContent=q.filter(x=>x.status==='customer_signed').length;document.getElementById('orders').textContent=o.filter(x=>!['completed','cancelled'].includes(x.status)).length;document.getElementById('jobs').textContent=j.filter(x=>!['completed','cancelled'].includes(x.status)).length;document.getElementById('done').textContent=o.filter(x=>x.status==='completed').length;</script><script src="js/admin-guard.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SBOS Admin Dashboard</title>
+  <link rel="icon" href="images/logo.png" />
+  <link rel="stylesheet" href="css/admin-dashboard.css" />
+</head>
+<body>
+  <div class="admin-page">
+    <aside class="admin-sidebar">
+      <div class="brand-box">
+        <img src="images/logo.png" alt="Siamtham" />
+        <div>
+          <strong>SBOS</strong>
+          <span>Agent Admin</span>
+        </div>
+      </div>
+
+      <nav class="side-menu" aria-label="Admin navigation">
+        <a class="active" href="admin-dashboard.html">Dashboard</a>
+        <a href="admin-agent.html">ตรวจตัวแทน</a>
+        <a href="admin-agents-list.html">รายชื่อตัวแทน</a>
+        <a href="admin-bonus.html">คอมมิชชันและโบนัส</a>
+        <a href="admin-withdraw.html">ถอนเงิน</a>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <header class="admin-topbar">
+        <div>
+          <p>SBOS Admin Dashboard</p>
+          <h1>ระบบตัวแทน</h1>
+        </div>
+        <div class="admin-actions">
+          <span id="adminName" class="admin-badge">Admin</span>
+          <button type="button" class="ghost-btn" onclick="adminLogout()" aria-label="Logout from admin dashboard">Logout</button>
+        </div>
+      </header>
+
+      <section class="status-panel" id="pageStatus" hidden>
+        <div>
+          <strong id="pageStatusTitle">ไม่สามารถโหลดข้อมูลได้</strong>
+          <p id="pageStatusText">กรุณาลองใหม่อีกครั้ง</p>
+        </div>
+        <button type="button" id="retryAllButton" class="primary-btn" aria-label="Retry loading all dashboard data">Retry</button>
+      </section>
+
+      <section class="summary-grid" aria-label="Dashboard Summary">
+        <article class="summary-card">
+          <span>ตัวแทนทั้งหมด</span>
+          <strong id="summaryTotal">0</strong>
+        </article>
+        <article class="summary-card warning">
+          <span>รออนุมัติ</span>
+          <strong id="summaryPending">0</strong>
+        </article>
+        <article class="summary-card success">
+          <span>อนุมัติแล้ว</span>
+          <strong id="summaryApproved">0</strong>
+        </article>
+        <article class="summary-card muted">
+          <span>ระงับ</span>
+          <strong id="summarySuspended">0</strong>
+        </article>
+        <article class="summary-card danger">
+          <span>ปฏิเสธ</span>
+          <strong id="summaryRejected">0</strong>
+        </article>
+      </section>
+
+      <section class="panel" aria-labelledby="pendingTitle">
+        <div class="panel-head">
+          <div>
+            <h2 id="pendingTitle">Pending Agents</h2>
+            <p id="pendingMeta">กำลังโหลดข้อมูล...</p>
+          </div>
+          <button type="button" id="retryPendingButton" class="secondary-btn" aria-label="Retry loading pending agents">Retry</button>
+        </div>
+
+        <div id="pendingLoading" class="table-loading">
+          <span class="spinner" aria-hidden="true"></span>
+          <span>กำลังโหลด Pending Agents</span>
+        </div>
+
+        <div id="pendingError" class="section-error" hidden>
+          <strong>ไม่สามารถโหลดข้อมูลได้</strong>
+          <p>Pending Agents โหลดไม่สำเร็จ</p>
+        </div>
+
+        <div id="pendingEmpty" class="empty-state" hidden>
+          <div class="empty-mark" aria-hidden="true">✓</div>
+          <strong>ไม่มีตัวแทนที่รออนุมัติ</strong>
+          <p>เมื่อมีตัวแทนสอบผ่านและรออนุมัติ รายการจะแสดงในตารางนี้</p>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">ชื่อ</th>
+                <th scope="col">Agent ID</th>
+                <th scope="col">เบอร์โทร</th>
+                <th scope="col">Email</th>
+                <th scope="col">วันที่สมัคร</th>
+                <th scope="col">สถานะ</th>
+                <th scope="col">จัดการ</th>
+              </tr>
+            </thead>
+            <tbody id="pendingTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="agentsTitle">
+        <div class="panel-head agents-head">
+          <div>
+            <h2 id="agentsTitle">Agents</h2>
+            <p id="agentsMeta">กำลังโหลดข้อมูล...</p>
+          </div>
+          <button type="button" id="retryAgentsButton" class="secondary-btn" aria-label="Retry loading agents">Retry</button>
+        </div>
+
+        <div class="toolbar">
+          <label for="agentSearch">Search</label>
+          <input id="agentSearch" type="search" autocomplete="off" aria-label="Search agents by name, Agent ID, email, Facebook, Line, or phone" placeholder="ค้นหาชื่อ, Agent ID, Email, Facebook, Line หรือเบอร์โทร" />
+        </div>
+
+        <div id="agentsLoading" class="table-loading">
+          <span class="spinner" aria-hidden="true"></span>
+          <span>กำลังโหลด Agents</span>
+        </div>
+
+        <div id="agentsError" class="section-error" hidden>
+          <strong>ไม่สามารถโหลดข้อมูลได้</strong>
+          <p>Agents โหลดไม่สำเร็จ</p>
+        </div>
+
+        <div id="agentsEmpty" class="empty-state" hidden>
+          <div class="empty-mark" aria-hidden="true">⌕</div>
+          <strong>ไม่พบข้อมูลตัวแทน</strong>
+          <p>ลองเปลี่ยนคำค้นหา หรือกด Retry เพื่อโหลดข้อมูลใหม่</p>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Agent ID</th>
+                <th scope="col">ชื่อ</th>
+                <th scope="col">เบอร์โทร</th>
+                <th scope="col">Email</th>
+                <th scope="col">Facebook</th>
+                <th scope="col">Line</th>
+                <th scope="col">สถานะ</th>
+              </tr>
+            </thead>
+            <tbody id="agentsTableBody"></tbody>
+          </table>
+        </div>
+
+        <div class="pagination">
+          <span id="paginationInfo">0 รายการ</span>
+          <div>
+            <button type="button" id="prevPageButton" class="secondary-btn" aria-label="Go to previous agents page">ก่อนหน้า</button>
+            <button type="button" id="nextPageButton" class="secondary-btn" aria-label="Go to next agents page">ถัดไป</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toastRegion" class="toast-region" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="js/admin-guard.js"></script>
+  <script src="js/admin-dashboard.js"></script>
+</body>
+</html>
