@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="th" data-i18n-page-title="exam.pageTitle">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -384,6 +384,8 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="css/sbos-typography.css">
+  <link rel="stylesheet" href="css/sbos-theme.css">
 </head>
 <body>
   <div class="shell">
@@ -391,29 +393,35 @@
       <div class="brand">
         <div class="logo" aria-hidden="true">SSB</div>
         <div>
-          <h1>SBOS Agent Certification Exam</h1>
-          <p>Siamtham Business Operating System</p>
+          <h1 data-i18n="exam.title">SBOS Agent Certification Exam</h1>
+          <p data-i18n="exam.company">Siamtham Business Operating System</p>
         </div>
       </div>
-      <button class="logout" id="logoutBtn" type="button" aria-label="Logout">Logout</button>
+      <div class="sbos-controls" aria-label="Display controls">
+        <button class="sbos-lang-btn" type="button" data-sbos-lang="th" aria-label="ภาษาไทย">TH</button>
+        <button class="sbos-lang-btn" type="button" data-sbos-lang="en" aria-label="English">EN</button>
+        <button class="sbos-theme-btn" type="button" data-sbos-theme-option="light" data-i18n="theme.light" data-i18n-aria-label="theme.lightLabel" aria-label="Use light mode">Light</button>
+        <button class="sbos-theme-btn" type="button" data-sbos-theme-option="dark" data-i18n="theme.dark" data-i18n-aria-label="theme.darkLabel" aria-label="Use dark mode">Dark</button>
+        <button class="logout" id="logoutBtn" type="button" data-i18n="exam.logout" data-i18n-aria-label="exam.logout" aria-label="Logout">Logout</button>
+      </div>
     </header>
 
     <div id="message" class="message" role="status" aria-live="polite"></div>
 
     <section class="hero" aria-labelledby="examTitle">
       <div>
-        <span class="eyebrow">Secure Exam</span>
-        <h2 id="examTitle">Complete the certification exam</h2>
-        <p id="examIntro">Questions are loaded securely from SBOS. Your score is calculated by the backend after submission.</p>
-        <div class="status-line" id="attemptStatus" aria-live="polite">Preparing exam...</div>
+        <span class="eyebrow" data-i18n="exam.secureBadge">Secure Exam</span>
+        <h2 id="examTitle" data-i18n="exam.subtitle">Complete the certification exam</h2>
+        <p id="examIntro" data-i18n="exam.intro">Questions are loaded securely from SBOS. Your score is calculated by the backend after submission.</p>
+        <div class="status-line" id="attemptStatus" aria-live="polite" data-i18n="exam.preparing">Preparing exam...</div>
       </div>
       <div class="timer" id="timerBox" aria-live="polite">
-        <small>Time remaining</small>
+        <small data-i18n="exam.timeRemaining">Time remaining</small>
         <strong id="timerText">--:--</strong>
       </div>
     </section>
 
-    <section class="state-card show" id="loadingCard" aria-label="Loading exam">
+    <section class="state-card show" id="loadingCard" data-i18n-aria-label="exam.loadingLabel" aria-label="Loading exam">
       <div class="skeleton" aria-hidden="true">
         <div class="skeleton-line short"></div>
         <div class="skeleton-line"></div>
@@ -423,34 +431,78 @@
     </section>
 
     <section class="state-card" id="errorCard" aria-live="assertive">
-      <h2 id="errorTitle">Unable to load exam</h2>
-      <p id="errorText">Please check your connection and try again.</p>
-      <button class="btn primary" id="retryBtn" type="button" aria-label="Retry loading exam">Retry</button>
+      <h2 id="errorTitle" data-i18n="exam.unableToLoad">Unable to load exam</h2>
+      <p id="errorText" data-i18n="exam.checkConnection">Please check your connection and try again.</p>
+      <button class="btn primary" id="retryBtn" type="button" data-i18n="exam.retry" data-i18n-aria-label="exam.retry" aria-label="Retry loading exam">Retry</button>
     </section>
 
-    <main class="exam-card" id="examCard" aria-label="Exam questions">
+    <main class="exam-card" id="examCard" data-i18n-aria-label="exam.questionsLabel" aria-label="Exam questions">
       <div class="meta">
         <span id="questionNumber">Question 1 of 1</span>
         <span id="answeredCount">Answered 0</span>
       </div>
       <div class="progress" aria-hidden="true"><div id="progressBar"></div></div>
-      <nav class="navigator" id="questionNav" aria-label="Question navigator"></nav>
+      <nav class="navigator" id="questionNav" data-i18n-aria-label="exam.questionNavigator" aria-label="Question navigator"></nav>
       <form id="examForm"></form>
       <div class="actions">
-        <button class="btn" id="prevBtn" type="button" aria-label="Previous question">Previous</button>
-        <button class="btn primary" id="nextBtn" type="button" aria-label="Next question">Next</button>
-        <button class="btn success submit" id="submitBtn" type="button" aria-label="Submit exam">Submit Exam</button>
+        <button class="btn" id="prevBtn" type="button" data-i18n="exam.previous" data-i18n-aria-label="exam.previous" aria-label="Previous question">Previous</button>
+        <button class="btn primary" id="nextBtn" type="button" data-i18n="exam.next" data-i18n-aria-label="exam.next" aria-label="Next question">Next</button>
+        <button class="btn success submit" id="submitBtn" type="button" data-i18n="exam.submit" data-i18n-aria-label="exam.submit" aria-label="Submit exam">Submit Exam</button>
       </div>
     </main>
 
     <section class="result-card" id="resultCard" aria-live="assertive">
       <div class="score" id="scoreText">--</div>
-      <h2 id="resultTitle">Exam result</h2>
+      <h2 id="resultTitle" data-i18n="exam.result">Exam result</h2>
       <p id="resultMessage"></p>
       <button class="btn primary" id="resultButton" type="button" aria-label="Continue">Continue</button>
     </section>
   </div>
 
+  <script>
+    (function () {
+      const KEY = "sbos_theme";
+      const OPTIONS = ["light", "dark"];
+      function normalize(value) {
+        const next = String(value || "").toLowerCase();
+        return OPTIONS.indexOf(next) !== -1 ? next : "light";
+      }
+      function preferredTheme() {
+        try {
+          const stored = localStorage.getItem(KEY);
+          if (stored) return normalize(stored);
+        } catch (error) {}
+        return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      function apply(theme) {
+        const next = normalize(theme || preferredTheme());
+        document.documentElement.setAttribute("data-sbos-theme", next);
+        document.querySelectorAll("[data-sbos-theme-option]").forEach(function (button) {
+          button.setAttribute("aria-pressed", button.getAttribute("data-sbos-theme-option") === next ? "true" : "false");
+        });
+        return next;
+      }
+      window.SBOSTheme = {
+        apply: apply,
+        getTheme: function () { return document.documentElement.getAttribute("data-sbos-theme") || apply(); },
+        setTheme: function (theme) {
+          const next = apply(theme);
+          try { localStorage.setItem(KEY, next); } catch (error) {}
+          return next;
+        }
+      };
+      document.addEventListener("DOMContentLoaded", function () {
+        apply();
+        document.querySelectorAll("[data-sbos-theme-option]").forEach(function (button) {
+          button.addEventListener("click", function () {
+            window.SBOSTheme.setTheme(button.getAttribute("data-sbos-theme-option"));
+          });
+        });
+      }, { once: true });
+      apply(preferredTheme());
+    })();
+  </script>
+  <script src="js/i18n.js"></script>
   <script src="js/agent-exam.js" defer></script>
 </body>
 </html>

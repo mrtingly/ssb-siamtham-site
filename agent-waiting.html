@@ -1,49 +1,79 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="th" data-i18n-page-title="waiting.pageTitle">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>รออนุมัติตัวแทน | SSBMS</title>
   <style>
     :root{--blue:#1769d2;--blue2:#0d4fa8;--ink:#102033;--muted:#64748b;--line:#dbe7f4;--ok:#16834f;--warn:#a15c00;--bg:#eef6ff;--shadow:0 18px 45px rgba(35,82,130,.14)}
-    *{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:system-ui,-apple-system,"Segoe UI","Noto Sans Thai",sans-serif;color:var(--ink);background:linear-gradient(180deg,#f8fbff,var(--bg));padding:18px}.shell{max-width:900px;margin:auto}.top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:22px}.brand{display:flex;gap:12px;align-items:center}.logo{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(145deg,#2f8cff,#0d57b8);color:#fff;font-weight:900}.brand h1{margin:0;font-size:1.2rem}.brand p{margin:3px 0 0;color:var(--muted);font-size:.88rem}.logout{border:1px solid var(--line);background:#fff;color:var(--blue2);font-weight:800;padding:10px 14px;border-radius:13px;cursor:pointer}.card{background:#fff;border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);padding:34px 24px;text-align:center}.icon{width:92px;height:92px;border-radius:50%;display:grid;place-items:center;margin:0 auto 18px;background:#fff7e8;color:var(--warn);font-size:2.5rem}.eyebrow{display:inline-flex;padding:7px 12px;border-radius:999px;background:#edf5ff;color:var(--blue2);font-size:.8rem;font-weight:900}.card h2{font-size:clamp(1.8rem,5vw,2.5rem);margin:15px 0 8px}.card>p{max-width:620px;margin:0 auto;color:var(--muted);line-height:1.75}.info{margin:26px auto 0;max-width:650px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.info div{padding:16px;border:1px solid var(--line);border-radius:17px;background:#f9fcff}.info span{display:block;color:var(--muted);font-size:.82rem}.info strong{display:block;margin-top:5px}.status{margin:22px auto 0;max-width:650px;padding:15px;border-radius:16px;background:#fff8e9;border:1px solid #f2d79a;color:#7e5300;font-weight:800}.actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:24px}.btn{border:1px solid var(--line);background:#fff;color:var(--ink);padding:12px 18px;border-radius:14px;font-weight:900;cursor:pointer;text-decoration:none}.btn.primary{background:var(--blue);color:#fff;border-color:var(--blue)}.message{display:none;margin-bottom:16px;padding:13px 15px;border-radius:14px;font-weight:700}.message.show{display:block}.message.err{background:#fff0f0;color:#8c1e1e;border:1px solid #ffd0d0}@media(max-width:650px){body{padding:10px}.card{padding:26px 16px}.info{grid-template-columns:1fr}.top{align-items:flex-start}.brand p{display:none}}
+    *{box-sizing:border-box}html,body{max-width:100%;overflow-x:hidden}body{margin:0;min-height:100vh;font-family:system-ui,-apple-system,"Segoe UI","Noto Sans Thai",sans-serif;color:var(--ink);background:linear-gradient(180deg,#f8fbff,var(--bg));padding:18px}.shell{max-width:900px;margin:auto}.top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:22px}.brand{display:flex;gap:12px;align-items:center;min-width:0}.logo{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(145deg,#2f8cff,#0d57b8);color:#fff;font-weight:900;flex:0 0 auto}.brand h1{margin:0;font-size:1.2rem}.brand p{margin:3px 0 0;color:var(--muted);font-size:.88rem}.logout{border:1px solid var(--line);background:#fff;color:var(--blue2);font-weight:800;padding:10px 14px;border-radius:13px;cursor:pointer}.card{background:#fff;border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);padding:34px 24px;text-align:center}.icon{width:92px;height:92px;border-radius:50%;display:grid;place-items:center;margin:0 auto 18px;background:#fff7e8;color:var(--warn);font-size:2.5rem}.eyebrow{display:inline-flex;padding:7px 12px;border-radius:999px;background:#edf5ff;color:var(--blue2);font-size:.8rem;font-weight:900}.card h2{font-size:clamp(1.8rem,5vw,2.5rem);margin:15px 0 8px}.card>p{max-width:620px;margin:0 auto;color:var(--muted);line-height:1.75}.info{margin:26px auto 0;max-width:650px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.info div{padding:16px;border:1px solid var(--line);border-radius:17px;background:#f9fcff}.info span{display:block;color:var(--muted);font-size:.82rem}.info strong{display:block;margin-top:5px}.status{margin:22px auto 0;max-width:650px;padding:15px;border-radius:16px;background:#fff8e9;border:1px solid #f2d79a;color:#7e5300;font-weight:800}.actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:24px}.btn{border:1px solid var(--line);background:#fff;color:var(--ink);padding:12px 18px;border-radius:14px;font-weight:900;cursor:pointer;text-decoration:none}.btn.primary{background:var(--blue);color:#fff;border-color:var(--blue)}.message{display:none;margin-bottom:16px;padding:13px 15px;border-radius:14px;font-weight:700}.message.show{display:block}.message.err{background:#fff0f0;color:#8c1e1e;border:1px solid #ffd0d0}@media(max-width:650px){body{padding:10px}.card{padding:26px 16px}.info{grid-template-columns:1fr}.top{align-items:flex-start;flex-wrap:wrap}.brand p{display:none}}
   </style>
+  <link rel="stylesheet" href="css/sbos-typography.css">
+  <link rel="stylesheet" href="css/sbos-theme.css">
 </head>
 <body>
   <div class="shell">
     <header class="top">
-      <div class="brand"><div class="logo">SSB</div><div><h1>ระบบตัวแทน SSB</h1><p>บริษัท สยามทำ จำกัด</p></div></div>
-      <button class="logout" id="logoutBtn">ออกจากระบบ</button>
+      <div class="brand"><div class="logo" aria-hidden="true">SSB</div><div><h1 data-i18n="waiting.title">ระบบตัวแทน SSB</h1><p data-i18n="waiting.company">บริษัท สยามทำ จำกัด</p></div></div>
+      <div class="sbos-controls" aria-label="Display controls">
+        <button class="sbos-lang-btn" type="button" data-sbos-lang="th" aria-label="ภาษาไทย">TH</button>
+        <button class="sbos-lang-btn" type="button" data-sbos-lang="en" aria-label="English">EN</button>
+        <button class="sbos-theme-btn" type="button" data-sbos-theme-option="light" data-i18n="theme.light" data-i18n-aria-label="theme.lightLabel" aria-label="ใช้โหมดสว่าง">Light</button>
+        <button class="sbos-theme-btn" type="button" data-sbos-theme-option="dark" data-i18n="theme.dark" data-i18n-aria-label="theme.darkLabel" aria-label="ใช้โหมดมืด">Dark</button>
+        <button class="logout" id="logoutBtn" type="button" data-i18n="waiting.logout" data-i18n-aria-label="waiting.logout" aria-label="ออกจากระบบ">ออกจากระบบ</button>
+      </div>
     </header>
-    <div id="message" class="message"></div>
+    <div id="message" class="message" role="status" aria-live="polite"></div>
     <main class="card">
-      <div class="icon">⏳</div>
-      <span class="eyebrow">ขั้นตอนสุดท้าย</span>
-      <h2>สอบผ่านแล้ว รอการอนุมัติ</h2>
-      <p>บริษัทได้รับผลการอบรมและผลการสอบของคุณแล้ว ขณะนี้อยู่ระหว่างการตรวจสอบข้อมูล เมื่อได้รับอนุมัติ ระบบจะเปิด Dashboard ตัวแทนให้อัตโนมัติ</p>
+      <div class="icon" aria-hidden="true">⏳</div>
+      <span class="eyebrow" data-i18n="waiting.badge">ขั้นตอนสุดท้าย</span>
+      <h2 data-i18n="waiting.heading">สอบผ่านแล้ว รอการอนุมัติ</h2>
+      <p data-i18n="waiting.subtitle">บริษัทได้รับผลการอบรมและผลการสอบของคุณแล้ว ขณะนี้อยู่ระหว่างการตรวจสอบข้อมูล เมื่อได้รับอนุมัติ ระบบจะเปิด Dashboard ตัวแทนให้อัตโนมัติ</p>
       <section class="info">
-        <div><span>รหัสตัวแทน</span><strong id="agentId">-</strong></div>
-        <div><span>คะแนนสอบ</span><strong id="examScore">-</strong></div>
-        <div><span>สถานะ</span><strong id="statusText">กำลังตรวจสอบ</strong></div>
+        <div><span data-i18n="waiting.agentId">รหัสตัวแทน</span><strong id="agentId">-</strong></div>
+        <div><span data-i18n="waiting.examScore">คะแนนสอบ</span><strong id="examScore">-</strong></div>
+        <div><span data-i18n="waiting.status">สถานะ</span><strong id="statusText" data-i18n="waiting.checking">กำลังตรวจสอบ</strong></div>
       </section>
-      <div class="status" id="statusBox">ระบบกำลังตรวจสอบสถานะล่าสุดจากบริษัท...</div>
+      <div class="status" id="statusBox" data-i18n="waiting.statusChecking" aria-live="polite">ระบบกำลังตรวจสอบสถานะล่าสุดจากบริษัท...</div>
       <div class="actions">
-        <button class="btn primary" id="refreshBtn">ตรวจสอบสถานะอีกครั้ง</button>
-        <a class="btn" href="index.html">กลับหน้าหลัก</a>
+        <button class="btn primary" id="refreshBtn" type="button" data-i18n="waiting.refresh" data-i18n-aria-label="waiting.refresh" aria-label="ตรวจสอบสถานะอีกครั้ง">ตรวจสอบสถานะอีกครั้ง</button>
+        <a class="btn" href="index.html" data-i18n="waiting.home">กลับหน้าหลัก</a>
       </div>
     </main>
   </div>
-<script>
+  <script>
+    (function () {
+      const KEY = "sbos_theme";
+      const OPTIONS = ["light", "dark"];
+      function normalize(value) { const next = String(value || "").toLowerCase(); return OPTIONS.indexOf(next) !== -1 ? next : "light"; }
+      function preferredTheme() { try { const stored = localStorage.getItem(KEY); if (stored) return normalize(stored); } catch (error) {} return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; }
+      function apply(theme) { const next = normalize(theme || preferredTheme()); document.documentElement.setAttribute("data-sbos-theme", next); document.querySelectorAll("[data-sbos-theme-option]").forEach(function (button) { button.setAttribute("aria-pressed", button.getAttribute("data-sbos-theme-option") === next ? "true" : "false"); }); return next; }
+      window.SBOSTheme = { apply: apply, getTheme: function () { return document.documentElement.getAttribute("data-sbos-theme") || apply(); }, setTheme: function (theme) { const next = apply(theme); try { localStorage.setItem(KEY, next); } catch (error) {} return next; } };
+      document.addEventListener("DOMContentLoaded", function () { apply(); document.querySelectorAll("[data-sbos-theme-option]").forEach(function (button) { button.addEventListener("click", function () { window.SBOSTheme.setTheme(button.getAttribute("data-sbos-theme-option")); }); }); }, { once: true });
+      apply(preferredTheme());
+    })();
+  </script>
+  <script src="js/i18n.js"></script>
+  <script>
 const API_URL="https://script.google.com/macros/s/AKfycbyKhWE-_SuKreCPyD4tsNmqNMQz2hZ8hQtrckk92mh8rszh1jaNEeuuFBGsPOLKfAziNg/exec";
 const SESSION_KEYS=["ssb_agent_session","ssb_agent_session_v1"];
+let statusBoxKey="waiting.statusChecking";
+function readyI18n(){return window.SBOSI18n&&window.SBOSI18n.ready?window.SBOSI18n.ready:Promise.resolve()}
+function t(key,fallback){const text=window.SBOSI18n&&window.SBOSI18n.t?window.SBOSI18n.t(key):key;return text===key&&fallback?fallback:text}
 function readJson(key){try{return JSON.parse(localStorage.getItem(key)||"null")}catch(e){return null}}
 function getSession(){for(const key of SESSION_KEYS){const value=readJson(key);if(value)return value}return null}
 function getAgentId(){const session=getSession();return session&&(session.agent_id||session.applicationId)||localStorage.getItem("agent_id")||localStorage.getItem("ssb_agent_id")||localStorage.getItem("ssb_current_agent_v1")||""}
 function showError(text){const box=document.getElementById("message");box.className="message show err";box.textContent=text}
-async function loadStatus(){const agentId=getAgentId();if(!agentId){showError("ไม่พบข้อมูลผู้เข้าสู่ระบบ กรุณาเข้าสู่ระบบใหม่");return}document.getElementById("agentId").textContent=agentId;document.getElementById("statusBox").textContent="กำลังตรวจสอบสถานะล่าสุด...";try{const url=API_URL+"?action=getAgentStatus&agent_id="+encodeURIComponent(agentId)+"&_="+Date.now();const res=await fetch(url);const data=await res.json();if(!data.ok)throw new Error(data.message||"ตรวจสอบสถานะไม่สำเร็จ");const status=String(data.status||"").toUpperCase();document.getElementById("examScore").textContent=Number(data.exam_score||0)+"%";document.getElementById("statusText").textContent=status;if(status==="APPROVED"){document.getElementById("statusBox").textContent="บัญชีได้รับอนุมัติแล้ว กำลังเปิด Dashboard...";setTimeout(()=>location.href="agent-dashboard.html",700);return}if(status==="EXAM"){location.href="agent-exam.html";return}if(status==="REGISTERED"||status==="TRAINING"){location.href="agent-learning.html";return}if(status==="REJECTED"){document.getElementById("statusBox").textContent="บัญชีไม่ได้รับการอนุมัติ กรุณาติดต่อบริษัท";return}if(status==="SUSPENDED"){document.getElementById("statusBox").textContent="บัญชีถูกระงับ กรุณาติดต่อบริษัท";return}document.getElementById("statusBox").textContent="ผลสอบถูกส่งให้บริษัทแล้ว กรุณารอการตรวจสอบและอนุมัติ"}catch(err){showError(err.message||"เชื่อมต่อระบบไม่ได้")}}
-document.getElementById("refreshBtn").onclick=loadStatus;
-document.getElementById("logoutBtn").onclick=()=>{["agent_id","agent_name","agent_role","agent_status","ssb_agent_id","ssb_current_agent_v1",...SESSION_KEYS].forEach(k=>localStorage.removeItem(k));location.href="agent-login.html"};
-loadStatus();
-</script>
+function setStatusBox(key,fallback){statusBoxKey=key;document.getElementById("statusBox").textContent=t(key,fallback)}
+async function loadStatus(){const agentId=getAgentId();if(!agentId){showError(t("waiting.sessionMissing","ไม่พบข้อมูลผู้เข้าสู่ระบบ กรุณาเข้าสู่ระบบใหม่"));return}document.getElementById("agentId").textContent=agentId;setStatusBox("waiting.refreshing","กำลังตรวจสอบสถานะล่าสุด...");try{const url=API_URL+"?action=getAgentStatus&agent_id="+encodeURIComponent(agentId)+"&_="+Date.now();const res=await fetch(url);const data=await res.json();if(!data.ok)throw new Error(data.message||t("waiting.checkFailed","ตรวจสอบสถานะไม่สำเร็จ"));const status=String(data.status||"").toUpperCase();document.getElementById("examScore").textContent=Number(data.exam_score||0)+"%";const statusText=document.getElementById("statusText");statusText.removeAttribute("data-i18n");statusText.textContent=status;if(status==="APPROVED"){setStatusBox("waiting.approved","บัญชีได้รับอนุมัติแล้ว กำลังเปิด Dashboard...");setTimeout(()=>location.href="agent-dashboard.html",700);return}if(status==="EXAM"){location.href="agent-exam.html";return}if(status==="REGISTERED"||status==="TRAINING"){location.href="agent-learning.html";return}if(status==="REJECTED"){setStatusBox("waiting.rejected","บัญชีไม่ได้รับการอนุมัติ กรุณาติดต่อบริษัท");return}if(status==="SUSPENDED"){setStatusBox("waiting.suspended","บัญชีถูกระงับ กรุณาติดต่อบริษัท");return}setStatusBox("waiting.waitingApproval","ผลสอบถูกส่งให้บริษัทแล้ว กรุณารอการตรวจสอบและอนุมัติ")}catch(err){showError(err.message||t("waiting.networkError","เชื่อมต่อระบบไม่ได้"))}}
+async function start(){
+  await readyI18n();
+  document.getElementById("refreshBtn").onclick=loadStatus;
+  document.getElementById("logoutBtn").onclick=()=>{["agent_id","agent_name","agent_role","agent_status","ssb_agent_id","ssb_current_agent_v1",...SESSION_KEYS].forEach(k=>localStorage.removeItem(k));location.href="agent-login.html"};
+  window.addEventListener("sbos:languagechange",function(){document.getElementById("statusBox").textContent=t(statusBoxKey,"ระบบกำลังตรวจสอบสถานะล่าสุดจากบริษัท...")});
+  loadStatus();
+}
+start();
+  </script>
 </body>
 </html>

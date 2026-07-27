@@ -25,9 +25,11 @@
 
   document.addEventListener("DOMContentLoaded", init);
 
-  function init() {
+  async function init() {
     cacheElements();
     bindBaseEvents();
+    bindLanguageRefresh();
+    await i18nReady();
 
     state.agentId = getAgentId();
     if (!state.agentId) {
@@ -36,6 +38,28 @@
     }
 
     loadExam();
+  }
+
+  function i18nReady() {
+    return window.SBOSI18n && window.SBOSI18n.ready ? window.SBOSI18n.ready : Promise.resolve();
+  }
+
+  function t(key, replacements, fallback) {
+    let text = window.SBOSI18n && window.SBOSI18n.t ? window.SBOSI18n.t(key) : (fallback || key);
+    if (text === key && fallback) text = fallback;
+    Object.keys(replacements || {}).forEach(function (name) {
+      text = text.replace(new RegExp("\\{" + name + "\\}", "g"), String(replacements[name]));
+    });
+    return text;
+  }
+
+  function bindLanguageRefresh() {
+    window.addEventListener("sbos:languagechange", function () {
+      if (state.questions.length > 0 && !state.submitted && !state.expired) {
+        renderExam();
+      }
+      updateActions();
+    });
   }
 
   function cacheElements() {
@@ -146,7 +170,7 @@
     hideResult();
     hideExam();
     showMessage("", "");
-    setAttemptStatus("Preparing secure attempt...");
+    setAttemptStatus(t("exam.preparing", null, "Preparing exam..."));
 
     try {
       const attempt = await api("startExamAttempt", { agent_id: state.agentId });
@@ -161,7 +185,7 @@
       state.expired = false;
       state.submitted = false;
 
-      setAttemptStatus(attempt.reused ? "Resumed active attempt." : "Secure attempt started.");
+      setAttemptStatus(attempt.reused ? t("exam.secureResumed") : t("exam.secureStarted"));
 
       const questionResult = await api("getExamQuestions", {
         agent_id: state.agentId,
@@ -182,15 +206,15 @@
       state.currentIndex = 0;
 
       if (state.questions.length === 0) {
-        throw new Error("No exam questions are available");
+        throw new Error(t("exam.noQuestions"));
       }
 
       renderExam();
       showExam();
       startTimer();
     } catch (error) {
-      showError("Unable to load exam", error.message || "Please check your connection and try again.");
-      setAttemptStatus("Connection problem. Your current draft was not changed.");
+      showError(t("exam.unableToLoad"), error.message || t("exam.checkConnection"));
+      setAttemptStatus(t("exam.connectionProblem"));
     } finally {
       setLoading(false);
     }
@@ -198,14 +222,14 @@
 
   function handleStartFailure(result) {
     const status = String(result.status || "").toUpperCase();
-    let message = result.message || "Unable to start exam";
+    let message = result.message || t("exam.unavailable");
 
     if (status && status !== "EXAM") {
-      message = "Your account is not currently in exam status.";
+      message = t("exam.invalidStatus");
     }
 
-    showError("Exam unavailable", message);
-    setAttemptStatus(status ? "Current status: " + status : "Invalid agent or exam status.");
+    showError(t("exam.unavailable"), message);
+    setAttemptStatus(status ? t("exam.currentStatus", { status: status }) : t("exam.invalidAgent"));
   }
 
   function normalizeQuestions(items) {
@@ -266,7 +290,7 @@
   function saveDraft() {
     if (!state.attemptId || state.submitted || state.expired) return;
     localStorage.setItem(draftKey(), JSON.stringify(state.answers));
-    setAttemptStatus("Draft saved locally.");
+    setAttemptStatus(t("exam.draftSaved"));
   }
 
   function clearDraft() {
@@ -290,7 +314,7 @@
       button.type = "button";
       button.className = "nav-dot";
       button.textContent = String(index + 1);
-      button.setAttribute("aria-label", "Go to question " + (index + 1));
+      button.setAttribute("aria-label", t("exam.goQuestion", { number: index + 1 }));
 
       if (index === state.currentIndex) button.classList.add("active");
       if (state.answers[question.question_id]) button.classList.add("answered");
@@ -333,7 +357,7 @@
       if (input.checked) {
         label.classList.add("selected");
       }
-      input.setAttribute("aria-label", "Choice " + choice.key + " for question " + (state.currentIndex + 1));
+      input.setAttribute("aria-label", t("exam.choiceLabel", { choice: choice.key, number: state.currentIndex + 1 }));
       input.addEventListener("change", function () {
         const safeChoice = sanitizeChoice(input.value);
         if (safeChoice) {
@@ -375,8 +399,8 @@
   function updateMeta() {
     const total = state.questions.length;
     const answered = countAnswered();
-    els.questionNumber.textContent = "Question " + (state.currentIndex + 1) + " of " + total;
-    els.answeredCount.textContent = "Answered " + answered + " of " + total;
+    els.questionNumber.textContent = t("exam.questionProgress", { current: state.currentIndex + 1, total: total });
+    els.answeredCount.textContent = t("exam.answeredCount", { answered: answered, total: total });
     els.progressBar.style.width = total ? ((state.currentIndex + 1) / total * 100) + "%" : "0%";
   }
 
@@ -385,7 +409,7 @@
     els.prevBtn.disabled = state.currentIndex <= 0 || state.submitting || state.expired;
     els.nextBtn.disabled = state.currentIndex >= lastIndex || state.submitting || state.expired;
     els.submitBtn.disabled = state.submitting || state.submitted || state.expired;
-    els.submitBtn.textContent = state.submitting ? "Submitting..." : "Submit Exam";
+    els.submitBtn.textContent = state.submitting ? t("exam.submitting") : t("exam.submit");
   }
 
   function countAnswered() {
@@ -430,7 +454,7 @@
     els.timerBox.classList.toggle("danger", remainingSeconds > 0 && remainingSeconds <= 60);
 
     if (remainingSeconds === 300) {
-      showMessage("warn", "Five minutes remaining.");
+      showMessage("warn", t("exam.fiveMinutes"));
     }
 
     if (remainingSeconds <= 0) {
@@ -443,18 +467,18 @@
     if (state.submitting || state.submitted) return;
 
     if (!autoSubmit && countAnswered() < state.questions.length) {
-      showMessage("warn", "Please answer all questions before submitting.");
+      showMessage("warn", t("exam.answerAll"));
       return;
     }
 
     if (!autoSubmit) {
-      const confirmed = window.confirm("Submit this exam now? You cannot change answers after submission.");
+      const confirmed = window.confirm(t("exam.confirmSubmit"));
       if (!confirmed) return;
     }
 
     state.submitting = true;
     updateActions();
-    setAttemptStatus(autoSubmit ? "Time is up. Submitting your saved answers..." : "Submitting answers...");
+    setAttemptStatus(autoSubmit ? t("exam.autoSubmitting") : t("exam.submittingAnswers"));
 
     try {
       const result = await api("submitExamAnswers", {
@@ -480,9 +504,9 @@
     } catch (error) {
       state.submitting = false;
       updateActions();
-      showMessage("err", error.message || "Unable to submit exam. Your draft remains on this device.");
-      showError("Submit failed", "Your answers are still saved locally. Please retry when the connection is stable.");
-      setAttemptStatus("Network problem during submit.");
+      showMessage("err", error.message || t("exam.submitFailedDetail"));
+      showError(t("exam.submitFailed"), t("exam.submitFailedDetail"));
+      setAttemptStatus(t("exam.networkSubmit"));
     }
   }
 
@@ -535,20 +559,20 @@
 
     const passed = result.passed === true;
     const score = result.score === null || result.score === undefined ? "--" : String(result.score) + "%";
-    const status = result.status ? " Status: " + result.status + "." : "";
+    const status = result.status ? t("exam.statusPrefix", { status: result.status }) : "";
 
     els.scoreText.textContent = score;
-    els.resultTitle.textContent = passed ? "Exam passed" : "Exam not passed";
+    els.resultTitle.textContent = passed ? t("exam.passed") : t("exam.failed");
     els.resultMessage.textContent = passed
-      ? "Your exam was verified by SBOS." + status
-      : "Your exam was verified by SBOS. Please review training and try again." + status;
-    els.resultButton.textContent = passed ? "Go to approval status" : "Review training";
+      ? t("exam.verifiedPassed") + status
+      : t("exam.verifiedFailed") + status;
+    els.resultButton.textContent = passed ? t("exam.goWaiting") : t("exam.reviewTraining");
     els.resultButton.onclick = function () {
       window.location.href = passed ? "agent-waiting.html" : "agent-learning.html";
     };
     els.resultCard.classList.add("show");
-    setAttemptStatus("Exam submitted and verified.");
-    showMessage("ok", "Exam result loaded from backend.");
+    setAttemptStatus(t("exam.submittedVerified"));
+    showMessage("ok", t("exam.resultLoaded"));
   }
 
   function showExpiredState(message) {
@@ -558,8 +582,8 @@
     clearDraft();
     updateActions();
     hideExam();
-    showError("Attempt expired", message || "This exam attempt has expired.");
-    setAttemptStatus("Attempt expired. Start a new attempt if SBOS allows it.");
+    showError(t("exam.expiredTitle"), message || t("exam.expiredDetail"));
+    setAttemptStatus(t("exam.expiredStatus"));
   }
 
   function isExpiredMessage(message) {

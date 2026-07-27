@@ -1,0 +1,158 @@
+:root {
+  --sbos-bg: #f6f9fd;
+  --sbos-surface: #ffffff;
+  --sbos-surface-alt: #eef6ff;
+  --sbos-text: #102033;
+  --sbos-muted: #64748b;
+  --sbos-line: #dbe7f4;
+  --sbos-primary: #1769d2;
+  --sbos-primary-hover: #0d4fa8;
+  --sbos-accent: #38a1ff;
+  --sbos-success: #16834f;
+  --sbos-warning: #a15c07;
+  --sbos-danger: #b42318;
+  --sbos-shadow: 0 18px 42px rgba(35, 82, 130, .12);
+  --sbos-radius: 24px;
+}
+
+[data-sbos-theme="dark"] {
+  --sbos-bg: #171717;
+  --sbos-surface: #242424;
+  --sbos-surface-alt: #2f2b22;
+  --sbos-text: #f7f0df;
+  --sbos-muted: #c8c0ad;
+  --sbos-line: #4a4030;
+  --sbos-primary: #d8ad45;
+  --sbos-primary-hover: #f0cb70;
+  --sbos-accent: #c9972e;
+  --sbos-success: #79c58d;
+  --sbos-warning: #edc15e;
+  --sbos-danger: #f18b7b;
+  --sbos-shadow: 0 18px 42px rgba(0, 0, 0, .32);
+}
+
+:root {
+  --blue: var(--sbos-primary);
+  --blue2: var(--sbos-primary-hover);
+  --blue-dark: var(--sbos-primary-hover);
+  --blue-soft: var(--sbos-surface-alt);
+  --soft: var(--sbos-surface-alt);
+  --ink: var(--sbos-text);
+  --muted: var(--sbos-muted);
+  --line: var(--sbos-line);
+  --ok: var(--sbos-success);
+  --warn: var(--sbos-warning);
+  --bad: var(--sbos-danger);
+  --surface: var(--sbos-surface);
+  --bg: var(--sbos-bg);
+  --shadow: var(--sbos-shadow);
+}
+
+body {
+  background: var(--sbos-bg);
+  color: var(--sbos-text);
+}
+
+.sbos-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sbos-controls .sbos-lang-btn {
+  margin: 0;
+  background: var(--sbos-surface);
+  border-color: var(--sbos-line);
+  color: var(--sbos-text);
+}
+
+.sbos-controls .sbos-lang-btn[aria-pressed="true"] {
+  background: var(--sbos-primary);
+  border-color: var(--sbos-primary);
+  color: #fff;
+}
+
+.sbos-theme-btn {
+  min-height: 34px;
+  border-radius: 999px;
+  border: 1px solid var(--sbos-line);
+  background: var(--sbos-surface);
+  color: var(--sbos-text);
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  padding: 6px 12px;
+  box-shadow: none;
+}
+
+.sbos-theme-btn[aria-pressed="true"] {
+  background: var(--sbos-primary);
+  border-color: var(--sbos-primary);
+  color: #fff;
+}
+
+[data-sbos-theme="dark"] .sbos-theme-btn[aria-pressed="true"] {
+  color: #1c1710;
+}
+
+.sbos-controls .sbos-lang-btn:focus-visible,
+.sbos-theme-btn:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--sbos-primary) 35%, transparent);
+  outline-offset: 2px;
+}
+
+[data-sbos-theme="dark"] body {
+  background: linear-gradient(180deg, #151515 0%, #211d16 100%);
+}
+
+[data-sbos-theme="dark"] .hero,
+[data-sbos-theme="dark"] .exam-card,
+[data-sbos-theme="dark"] .result-card,
+[data-sbos-theme="dark"] .state-card,
+[data-sbos-theme="dark"] .side,
+[data-sbos-theme="dark"] .main,
+[data-sbos-theme="dark"] .card,
+[data-sbos-theme="dark"] .content-card,
+[data-sbos-theme="dark"] .info div {
+  background: var(--sbos-surface);
+  border-color: var(--sbos-line);
+  color: var(--sbos-text);
+}
+
+[data-sbos-theme="dark"] .logo,
+[data-sbos-theme="dark"] .btn.primary {
+  background: var(--sbos-primary);
+  color: #1c1710;
+}
+
+[data-sbos-theme="dark"] .logout,
+[data-sbos-theme="dark"] .btn,
+[data-sbos-theme="dark"] .sbos-controls .sbos-lang-btn,
+[data-sbos-theme="dark"] .nav-dot,
+[data-sbos-theme="dark"] .choice {
+  background: var(--sbos-surface);
+  border-color: var(--sbos-line);
+  color: var(--sbos-text);
+}
+
+[data-sbos-theme="dark"] .choice.selected,
+[data-sbos-theme="dark"] .choice:has(input:checked),
+[data-sbos-theme="dark"] .nav-dot.active,
+[data-sbos-theme="dark"] .nav-dot.answered,
+[data-sbos-theme="dark"] .sbos-controls .sbos-lang-btn[aria-pressed="true"],
+[data-sbos-theme="dark"] .lesson-btn.active,
+[data-sbos-theme="dark"] .lesson-btn.done,
+[data-sbos-theme="dark"] .eyebrow {
+  background: var(--sbos-surface-alt);
+  border-color: var(--sbos-primary);
+  color: var(--sbos-primary-hover);
+}
+
+@media (max-width: 520px) {
+  .sbos-controls {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
