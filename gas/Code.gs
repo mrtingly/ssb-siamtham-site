@@ -3,7 +3,12 @@ const SHEET_NAMES = {
   income: "income",
   withdraws: "withdraws",
   bonus: "bonus",
-  orders: "orders"
+  orders: "orders",
+  trainingLessons: "training_lessons",
+  trainingProgress: "agent_training_progress",
+  examQuestions: "exam_questions",
+  examAttempts: "exam_attempts",
+  auditLogs: "audit_logs"
 };
 
 const AGENT_STATUS = {
@@ -17,6 +22,7 @@ const AGENT_STATUS = {
 };
 
 const EXAM_PASS_SCORE = 80;
+const SECURE_EXAM_DURATION_MINUTES = 30;
 
 /* =========================================================
    ROUTER
@@ -50,6 +56,22 @@ function doGet(e) {
 
       case "getAdminDashboard":
         result = getAdminDashboard(e.parameter);
+        break;
+
+      case "listTrainingLessons":
+        result = listTrainingLessons(e.parameter);
+        break;
+
+      case "getTrainingProgress":
+        result = getTrainingProgress(e.parameter);
+        break;
+
+      case "getExamQuestions":
+        result = getExamQuestions(e.parameter);
+        break;
+
+      case "getExamResult":
+        result = getExamResult(e.parameter);
         break;
 
       case "login":
@@ -137,6 +159,34 @@ function doPost(e) {
         result = getAdminDashboard(body);
         break;
 
+      case "listTrainingLessons":
+        result = listTrainingLessons(body);
+        break;
+
+      case "getTrainingProgress":
+        result = getTrainingProgress(body);
+        break;
+
+      case "completeTrainingLesson":
+        result = completeTrainingLesson(body);
+        break;
+
+      case "startExamAttempt":
+        result = startExamAttempt(body);
+        break;
+
+      case "getExamQuestions":
+        result = getExamQuestions(body);
+        break;
+
+      case "submitExamAnswers":
+        result = submitExamAnswers(body);
+        break;
+
+      case "getExamResult":
+        result = getExamResult(body);
+        break;
+
       case "requestWithdraw":
         result = requestWithdraw(body);
         break;
@@ -193,6 +243,34 @@ function getSheet(name) {
   return sheet;
 }
 
+function getOrCreateSheet(name, headers) {
+  const spreadsheet = SpreadsheetApp.getActive();
+  let sheet = spreadsheet.getSheetByName(name);
+
+  if (!sheet) {
+    sheet = spreadsheet.insertSheet(name);
+  }
+
+  const currentHeaders = getHeaders(sheet);
+
+  if (currentHeaders.length === 0) {
+    sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+    return sheet;
+  }
+
+  const missingHeaders = headers.filter(function (header) {
+    return currentHeaders.indexOf(header) === -1;
+  });
+
+  if (missingHeaders.length > 0) {
+    sheet
+      .getRange(1, currentHeaders.length + 1, 1, missingHeaders.length)
+      .setValues([missingHeaders]);
+  }
+
+  return sheet;
+}
+
 function getHeaders(sheet) {
   const lastColumn = sheet.getLastColumn();
 
@@ -233,7 +311,19 @@ function sheetToObjects(sheetName) {
       return obj;
     })
     .filter(function (obj) {
-      return String(obj.agent_id || obj.withdraw_id || obj.order_id || "").trim() !== "";
+      return [
+        obj.agent_id,
+        obj.withdraw_id,
+        obj.order_id,
+        obj.bonus_id,
+        obj.lesson_id,
+        obj.progress_id,
+        obj.question_id,
+        obj.attempt_id,
+        obj.audit_id
+      ].some(function (value) {
+        return String(value || "").trim() !== "";
+      });
     });
 }
 
@@ -367,6 +457,891 @@ function getNextPageByStatus(status) {
   }
 
   return "";
+}
+
+/* =========================================================
+   PHASE 2C-1 TRAINING + EXAM SECURITY HELPERS
+========================================================= */
+
+const TRAINING_LESSON_HEADERS = [
+  "lesson_id",
+  "lesson_order",
+  "title",
+  "subtitle",
+  "content",
+  "is_active",
+  "created_at",
+  "updated_at"
+];
+
+const TRAINING_PROGRESS_HEADERS = [
+  "progress_id",
+  "agent_id",
+  "lesson_id",
+  "lesson_order",
+  "status",
+  "completed_at",
+  "created_at",
+  "updated_at"
+];
+
+const EXAM_QUESTION_HEADERS = [
+  "question_id",
+  "question_order",
+  "question_text",
+  "choice_a",
+  "choice_b",
+  "choice_c",
+  "choice_d",
+  "correct_choice",
+  "is_active",
+  "created_at",
+  "updated_at"
+];
+
+const EXAM_ATTEMPT_HEADERS = [
+  "attempt_id",
+  "agent_id",
+  "status",
+  "started_at",
+  "expires_at",
+  "submitted_at",
+  "question_ids",
+  "answers_json",
+  "score",
+  "passed",
+  "created_at",
+  "updated_at"
+];
+
+const AUDIT_LOG_HEADERS = [
+  "audit_id",
+  "agent_id",
+  "actor_id",
+  "action",
+  "status",
+  "message",
+  "metadata_json",
+  "created_at"
+];
+
+const DEFAULT_TRAINING_LESSONS = [
+  {
+    lesson_id: "LESSON-001",
+    lesson_order: 1,
+    title: "Company and SBOS overview",
+    subtitle: "Understand the business, product promise, and agent role.",
+    content: "Company overview, SBOS workflow, agent responsibility, and customer trust."
+  },
+  {
+    lesson_id: "LESSON-002",
+    lesson_order: 2,
+    title: "Product knowledge",
+    subtitle: "Learn product components, benefits, limits, and approved messaging.",
+    content: "Product explanation, approved claims, customer use cases, and service boundaries."
+  },
+  {
+    lesson_id: "LESSON-003",
+    lesson_order: 3,
+    title: "Sales and customer service",
+    subtitle: "Follow a clear sales process from discovery to follow-up.",
+    content: "Customer discovery, quotation basics, order handoff, and after-sales care."
+  },
+  {
+    lesson_id: "LESSON-004",
+    lesson_order: 4,
+    title: "Ethics and compliance",
+    subtitle: "Protect customers and keep communication honest.",
+    content: "No false claims, no unauthorized fees, privacy care, and escalation rules."
+  },
+  {
+    lesson_id: "LESSON-005",
+    lesson_order: 5,
+    title: "Agent dashboard and compensation",
+    subtitle: "Understand dashboard access, income, team, withdrawal, and records.",
+    content: "Agent ID, referral flow, income status, bonus, team data, and dashboard usage."
+  }
+];
+
+const DEFAULT_EXAM_QUESTIONS = [
+  {
+    question_id: "EXAM-001",
+    question_order: 1,
+    question_text: "What is the most important responsibility of an SBOS agent?",
+    choices: ["Give accurate information and care for customers", "Guarantee every risk is removed", "Set prices without approval", "Ask customers for bank passwords"],
+    correct_choice: "A"
+  },
+  {
+    question_id: "EXAM-002",
+    question_order: 2,
+    question_text: "How should an agent explain product benefits?",
+    choices: ["Use approved facts and avoid exaggerated claims", "Promise impossible results", "Hide important conditions", "Add extra service fees freely"],
+    correct_choice: "A"
+  },
+  {
+    question_id: "EXAM-003",
+    question_order: 3,
+    question_text: "How should customer personal data be handled?",
+    choices: ["Use it only for approved business purposes", "Share it in public groups", "Send it to every team member", "Reuse it without consent"],
+    correct_choice: "A"
+  },
+  {
+    question_id: "EXAM-004",
+    question_order: 4,
+    question_text: "What should an agent do when a customer is unsure?",
+    choices: ["Explain clearly and allow time to decide", "Pressure the customer to pay", "Skip complex details", "Promise anything to close the sale"],
+    correct_choice: "A"
+  },
+  {
+    question_id: "EXAM-005",
+    question_order: 5,
+    question_text: "What is the right first step in a sales conversation?",
+    choices: ["Understand the customer's problem and needs", "Request payment immediately", "Ask for all personal documents", "Offer the most expensive product first"],
+    correct_choice: "A"
+  },
+  {
+    question_id: "EXAM-006",
+    question_order: 6,
+    question_text: "Which behavior matches SBOS agent ethics?",
+    choices: ["Do not collect unauthorized extra fees", "Change company prices alone", "Use customer data personally", "Create unsupported advertising claims"],
+    correct_choice: "A"
+  },
+  {
+    question_id: "EXAM-007",
+    question_order: 7,
+    question_text: "What should an agent do when unsure about product details?",
+    choices: ["Check with the company or responsible person first", "Guess an answer", "Use unverified information", "Avoid the customer"],
+    correct_choice: "A"
+  },
+  {
+    question_id: "EXAM-008",
+    question_order: 8,
+    question_text: "What is the agent dashboard used for?",
+    choices: ["Tracking agent data, sales, income, and related records", "Storing customer bank passwords", "Changing company data", "Approving yourself as admin"],
+    correct_choice: "A"
+  },
+  {
+    question_id: "EXAM-009",
+    question_order: 9,
+    question_text: "When does an agent receive full dashboard access?",
+    choices: ["After passing the exam and receiving admin approval", "Immediately after opening the website", "After entering only a name", "Before training"],
+    correct_choice: "A"
+  },
+  {
+    question_id: "EXAM-010",
+    question_order: 10,
+    question_text: "What happens after passing the exam?",
+    choices: ["The agent waits for admin review and approval", "Money is paid immediately", "The agent becomes a manager automatically", "Training data is deleted"],
+    correct_choice: "A"
+  }
+];
+
+function ensurePhase2C1Sheets() {
+  getOrCreateSheet(SHEET_NAMES.trainingLessons, TRAINING_LESSON_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.trainingProgress, TRAINING_PROGRESS_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.examQuestions, EXAM_QUESTION_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.examAttempts, EXAM_ATTEMPT_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.auditLogs, AUDIT_LOG_HEADERS);
+  seedTrainingLessons();
+  seedExamQuestions();
+}
+
+function seedTrainingLessons() {
+  const existing = sheetToObjects(SHEET_NAMES.trainingLessons);
+
+  if (existing.length > 0) {
+    return;
+  }
+
+  const now = new Date();
+
+  DEFAULT_TRAINING_LESSONS.forEach(function (lesson) {
+    appendObject(SHEET_NAMES.trainingLessons, {
+      lesson_id: lesson.lesson_id,
+      lesson_order: lesson.lesson_order,
+      title: lesson.title,
+      subtitle: lesson.subtitle,
+      content: lesson.content,
+      is_active: true,
+      created_at: now,
+      updated_at: now
+    });
+  });
+}
+
+function seedExamQuestions() {
+  const existing = sheetToObjects(SHEET_NAMES.examQuestions);
+
+  if (existing.length > 0) {
+    return;
+  }
+
+  const now = new Date();
+
+  DEFAULT_EXAM_QUESTIONS.forEach(function (question) {
+    appendObject(SHEET_NAMES.examQuestions, {
+      question_id: question.question_id,
+      question_order: question.question_order,
+      question_text: question.question_text,
+      choice_a: question.choices[0],
+      choice_b: question.choices[1],
+      choice_c: question.choices[2],
+      choice_d: question.choices[3],
+      correct_choice: question.correct_choice,
+      is_active: true,
+      created_at: now,
+      updated_at: now
+    });
+  });
+}
+
+function writeAuditLog(action, agentId, status, message, metadata) {
+  getOrCreateSheet(SHEET_NAMES.auditLogs, AUDIT_LOG_HEADERS);
+
+  appendObject(SHEET_NAMES.auditLogs, {
+    audit_id: makeId("AUDIT"),
+    agent_id: cleanString(agentId, 80),
+    actor_id: cleanString((metadata && metadata.actor_id) || "", 80),
+    action: cleanString(action, 120),
+    status: cleanString(status, 40),
+    message: cleanString(message, 500),
+    metadata_json: JSON.stringify(metadata || {}),
+    created_at: new Date()
+  });
+}
+
+function getActiveTrainingLessons() {
+  ensurePhase2C1Sheets();
+
+  return sheetToObjects(SHEET_NAMES.trainingLessons)
+    .filter(function (lesson) {
+      return booleanValue(lesson.is_active);
+    })
+    .sort(function (a, b) {
+      return Number(a.lesson_order || 0) - Number(b.lesson_order || 0);
+    });
+}
+
+function getActiveExamQuestions() {
+  ensurePhase2C1Sheets();
+
+  return sheetToObjects(SHEET_NAMES.examQuestions)
+    .filter(function (question) {
+      return booleanValue(question.is_active);
+    })
+    .sort(function (a, b) {
+      return Number(a.question_order || 0) - Number(b.question_order || 0);
+    });
+}
+
+function publicLesson(lesson) {
+  return {
+    lesson_id: cleanString(lesson.lesson_id, 80),
+    lesson_order: Number(lesson.lesson_order || 0),
+    title: cleanString(lesson.title, 300),
+    subtitle: cleanString(lesson.subtitle, 500),
+    content: cleanString(lesson.content, 3000),
+    is_active: booleanValue(lesson.is_active)
+  };
+}
+
+function publicExamQuestion(question) {
+  return {
+    question_id: cleanString(question.question_id, 80),
+    question_order: Number(question.question_order || 0),
+    question_text: cleanString(question.question_text, 1000),
+    choices: [
+      { key: "A", text: cleanString(question.choice_a, 1000) },
+      { key: "B", text: cleanString(question.choice_b, 1000) },
+      { key: "C", text: cleanString(question.choice_c, 1000) },
+      { key: "D", text: cleanString(question.choice_d, 1000) }
+    ]
+  };
+}
+
+function findAttempt(attemptId) {
+  const normalizedId = cleanString(attemptId, 120);
+
+  if (!normalizedId) {
+    return null;
+  }
+
+  ensurePhase2C1Sheets();
+
+  return sheetToObjects(SHEET_NAMES.examAttempts).find(function (attempt) {
+    return String(attempt.attempt_id || "").trim() === normalizedId;
+  }) || null;
+}
+
+function parseJsonValue(value, fallback) {
+  try {
+    return JSON.parse(String(value || ""));
+  } catch (err) {
+    return fallback;
+  }
+}
+
+function normalizeAnswerChoice(choice) {
+  const value = cleanString(choice, 5).toUpperCase();
+
+  if (["A", "B", "C", "D"].indexOf(value) !== -1) {
+    return value;
+  }
+
+  if (["0", "1", "2", "3"].indexOf(value) !== -1) {
+    return ["A", "B", "C", "D"][Number(value)];
+  }
+
+  return "";
+}
+
+function normalizeAnswers(bodyAnswers) {
+  if (!bodyAnswers) {
+    return {};
+  }
+
+  if (typeof bodyAnswers === "string") {
+    bodyAnswers = parseJsonValue(bodyAnswers, {});
+  }
+
+  if (Array.isArray(bodyAnswers)) {
+    return bodyAnswers.reduce(function (result, item) {
+      const questionId = cleanString(item && item.question_id, 80);
+      const choice = normalizeAnswerChoice(item && item.choice);
+
+      if (questionId && choice) {
+        result[questionId] = choice;
+      }
+
+      return result;
+    }, {});
+  }
+
+  return Object.keys(bodyAnswers || {}).reduce(function (result, questionId) {
+    const normalizedQuestionId = cleanString(questionId, 80);
+    const choice = normalizeAnswerChoice(bodyAnswers[questionId]);
+
+    if (normalizedQuestionId && choice) {
+      result[normalizedQuestionId] = choice;
+    }
+
+    return result;
+  }, {});
+}
+
+/* =========================================================
+   PHASE 2C-1 TRAINING API
+========================================================= */
+
+function listTrainingLessons(options) {
+  const params = options || {};
+  const agentId = validateAgentId(params.agent_id || "");
+  const lessons = getActiveTrainingLessons().map(publicLesson);
+  let progress = null;
+
+  if (agentId) {
+    progress = getTrainingProgress({ agent_id: agentId });
+  }
+
+  return {
+    ok: true,
+    total: lessons.length,
+    lessons: lessons,
+    progress: progress && progress.ok ? progress.progress : null
+  };
+}
+
+function getTrainingProgress(options) {
+  const params = options || {};
+  const agentId = validateAgentId(params.agent_id);
+
+  if (!agentId) {
+    return { ok: false, message: "Invalid agent_id" };
+  }
+
+  const agent = findAgent(agentId);
+
+  if (!agent) {
+    return { ok: false, message: "Agent not found" };
+  }
+
+  ensurePhase2C1Sheets();
+
+  const lessons = getActiveTrainingLessons();
+  const progressRows = sheetToObjects(SHEET_NAMES.trainingProgress)
+    .filter(function (item) {
+      return (
+        String(item.agent_id || "").trim() === agentId &&
+        String(item.status || "").trim().toUpperCase() === "COMPLETED"
+      );
+    });
+  const completedLessonIds = progressRows.reduce(function (result, item) {
+    result[String(item.lesson_id || "").trim()] = true;
+    return result;
+  }, {});
+  const completedCount = lessons.filter(function (lesson) {
+    return completedLessonIds[String(lesson.lesson_id || "").trim()];
+  }).length;
+  const progress = lessons.length
+    ? Math.round((completedCount / lessons.length) * 100)
+    : Number(agent.training_progress || 0);
+
+  return {
+    ok: true,
+    agent_id: agentId,
+    status: normalizeStatus(agent.status),
+    total_lessons: lessons.length,
+    completed_lessons: completedCount,
+    progress: Math.max(Number(agent.training_progress || 0), progress),
+    training_progress: Math.max(Number(agent.training_progress || 0), progress),
+    training_completed: booleanValue(agent.training_completed) || progress >= 100,
+    lessons: lessons.map(function (lesson) {
+      const lessonId = String(lesson.lesson_id || "").trim();
+
+      return {
+        lesson_id: lessonId,
+        lesson_order: Number(lesson.lesson_order || 0),
+        completed: Boolean(completedLessonIds[lessonId])
+      };
+    }),
+    next_page: getNextPageByStatus(agent.status)
+  };
+}
+
+function completeTrainingLesson(body) {
+  const agentId = validateAgentId(body && body.agent_id);
+
+  if (!agentId) {
+    return { ok: false, message: "Invalid agent_id" };
+  }
+
+  const agent = findAgent(agentId);
+
+  if (!agent) {
+    writeAuditLog("completeTrainingLesson", agentId, "FAILED", "Agent not found", {});
+    return { ok: false, message: "Agent not found" };
+  }
+
+  const currentStatus = normalizeStatus(agent.status);
+
+  if (
+    currentStatus !== AGENT_STATUS.REGISTERED &&
+    currentStatus !== AGENT_STATUS.TRAINING
+  ) {
+    writeAuditLog("completeTrainingLesson", agentId, "FAILED", "Invalid agent status", {
+      status: currentStatus
+    });
+    return {
+      ok: false,
+      message: "Agent status cannot update training",
+      status: currentStatus
+    };
+  }
+
+  ensurePhase2C1Sheets();
+
+  const lessons = getActiveTrainingLessons();
+  const requestedLessonId = cleanString(body.lesson_id, 80);
+  const requestedOrder = Number(body.lesson_order || 0);
+  const lesson = lessons.find(function (item) {
+    return requestedLessonId
+      ? String(item.lesson_id || "").trim() === requestedLessonId
+      : Number(item.lesson_order || 0) === requestedOrder;
+  });
+
+  if (!lesson) {
+    writeAuditLog("completeTrainingLesson", agentId, "FAILED", "Lesson not found", {
+      lesson_id: requestedLessonId,
+      lesson_order: requestedOrder
+    });
+    return { ok: false, message: "Lesson not found" };
+  }
+
+  const progressRows = sheetToObjects(SHEET_NAMES.trainingProgress)
+    .filter(function (item) {
+      return (
+        String(item.agent_id || "").trim() === agentId &&
+        String(item.status || "").trim().toUpperCase() === "COMPLETED"
+      );
+    });
+  const completedLessonIds = progressRows.reduce(function (result, item) {
+    result[String(item.lesson_id || "").trim()] = true;
+    return result;
+  }, {});
+  const lessonId = String(lesson.lesson_id || "").trim();
+  const completedCount = lessons.filter(function (item) {
+    return completedLessonIds[String(item.lesson_id || "").trim()];
+  }).length;
+  const expectedOrder = completedCount + 1;
+
+  if (completedLessonIds[lessonId]) {
+    return getTrainingProgress({ agent_id: agentId });
+  }
+
+  if (Number(lesson.lesson_order || 0) !== expectedOrder) {
+    writeAuditLog("completeTrainingLesson", agentId, "FAILED", "Lesson order violation", {
+      requested_order: Number(lesson.lesson_order || 0),
+      expected_order: expectedOrder
+    });
+    return {
+      ok: false,
+      message: "Lessons must be completed in order",
+      expected_lesson_order: expectedOrder
+    };
+  }
+
+  const now = new Date();
+
+  appendObject(SHEET_NAMES.trainingProgress, {
+    progress_id: makeId("TRN"),
+    agent_id: agentId,
+    lesson_id: lessonId,
+    lesson_order: Number(lesson.lesson_order || 0),
+    status: "COMPLETED",
+    completed_at: now,
+    created_at: now,
+    updated_at: now
+  });
+
+  const newCompletedCount = completedCount + 1;
+  const progress = lessons.length
+    ? Math.round((newCompletedCount / lessons.length) * 100)
+    : 100;
+  const updates = {
+    status: AGENT_STATUS.TRAINING,
+    training_progress: Math.min(100, progress)
+  };
+
+  if (progress >= 100) {
+    updates.status = AGENT_STATUS.EXAM;
+    updates.training_progress = 100;
+    updates.training_completed = true;
+    updates.training_completed_at = now;
+  }
+
+  updateRowFields(SHEET_NAMES.agents, agent._row, updates);
+  writeAuditLog("completeTrainingLesson", agentId, "SUCCESS", "Lesson completed", {
+    lesson_id: lessonId,
+    lesson_order: Number(lesson.lesson_order || 0),
+    progress: updates.training_progress
+  });
+
+  return {
+    ok: true,
+    agent_id: agentId,
+    lesson_id: lessonId,
+    lesson_order: Number(lesson.lesson_order || 0),
+    training_progress: updates.training_progress,
+    training_completed: updates.training_progress >= 100,
+    status: updates.status,
+    next_page: getNextPageByStatus(updates.status)
+  };
+}
+
+/* =========================================================
+   PHASE 2C-1 SECURE EXAM API
+========================================================= */
+
+function startExamAttempt(body) {
+  const agentId = validateAgentId(body && body.agent_id);
+
+  if (!agentId) {
+    return { ok: false, message: "Invalid agent_id" };
+  }
+
+  const agent = findAgent(agentId);
+
+  if (!agent) {
+    writeAuditLog("startExamAttempt", agentId, "FAILED", "Agent not found", {});
+    return { ok: false, message: "Agent not found" };
+  }
+
+  const status = normalizeStatus(agent.status);
+
+  if (status !== AGENT_STATUS.EXAM) {
+    writeAuditLog("startExamAttempt", agentId, "FAILED", "Invalid agent status", {
+      status: status
+    });
+    return {
+      ok: false,
+      message: "Agent status cannot start exam",
+      status: status
+    };
+  }
+
+  ensurePhase2C1Sheets();
+
+  const now = new Date();
+  const activeAttempt = sheetToObjects(SHEET_NAMES.examAttempts).find(function (attempt) {
+    const expiresAt = attempt.expires_at ? new Date(attempt.expires_at).getTime() : 0;
+
+    return (
+      String(attempt.agent_id || "").trim() === agentId &&
+      String(attempt.status || "").trim().toUpperCase() === "IN_PROGRESS" &&
+      expiresAt > now.getTime()
+    );
+  });
+
+  if (activeAttempt) {
+    return {
+      ok: true,
+      agent_id: agentId,
+      attempt_id: activeAttempt.attempt_id,
+      status: "IN_PROGRESS",
+      expires_at: activeAttempt.expires_at,
+      reused: true
+    };
+  }
+
+  const questions = getActiveExamQuestions();
+
+  if (questions.length === 0) {
+    return { ok: false, message: "No active exam questions" };
+  }
+
+  const attemptId = makeId("EXATT");
+  const expiresAt = new Date(now.getTime() + SECURE_EXAM_DURATION_MINUTES * 60 * 1000);
+
+  appendObject(SHEET_NAMES.examAttempts, {
+    attempt_id: attemptId,
+    agent_id: agentId,
+    status: "IN_PROGRESS",
+    started_at: now,
+    expires_at: expiresAt,
+    submitted_at: "",
+    question_ids: JSON.stringify(questions.map(function (question) {
+      return cleanString(question.question_id, 80);
+    })),
+    answers_json: "",
+    score: "",
+    passed: "",
+    created_at: now,
+    updated_at: now
+  });
+
+  writeAuditLog("startExamAttempt", agentId, "SUCCESS", "Exam attempt started", {
+    attempt_id: attemptId,
+    question_count: questions.length
+  });
+
+  return {
+    ok: true,
+    agent_id: agentId,
+    attempt_id: attemptId,
+    status: "IN_PROGRESS",
+    question_count: questions.length,
+    expires_at: expiresAt
+  };
+}
+
+function getExamQuestions(options) {
+  const params = options || {};
+  const agentId = validateAgentId(params.agent_id);
+  const attemptId = cleanString(params.attempt_id, 120);
+
+  if (!agentId || !attemptId) {
+    return { ok: false, message: "Missing agent_id or attempt_id" };
+  }
+
+  const attempt = findAttempt(attemptId);
+
+  if (!attempt || String(attempt.agent_id || "").trim() !== agentId) {
+    return { ok: false, message: "Exam attempt not found" };
+  }
+
+  if (String(attempt.status || "").trim().toUpperCase() !== "IN_PROGRESS") {
+    return { ok: false, message: "Exam attempt is not active" };
+  }
+
+  if (attempt.expires_at && new Date(attempt.expires_at).getTime() < new Date().getTime()) {
+    return { ok: false, message: "Exam attempt expired" };
+  }
+
+  const questionIds = parseJsonValue(attempt.question_ids, []);
+  const questionsById = getActiveExamQuestions().reduce(function (result, question) {
+    result[String(question.question_id || "").trim()] = question;
+    return result;
+  }, {});
+  const questions = questionIds
+    .map(function (questionId) {
+      return questionsById[String(questionId || "").trim()];
+    })
+    .filter(Boolean)
+    .map(publicExamQuestion);
+
+  return {
+    ok: true,
+    agent_id: agentId,
+    attempt_id: attemptId,
+    expires_at: attempt.expires_at,
+    total: questions.length,
+    questions: questions
+  };
+}
+
+function submitExamAnswers(body) {
+  const agentId = validateAgentId(body && body.agent_id);
+  const attemptId = cleanString(body && body.attempt_id, 120);
+
+  if (!agentId || !attemptId) {
+    return { ok: false, message: "Missing agent_id or attempt_id" };
+  }
+
+  const agent = findAgent(agentId);
+
+  if (!agent) {
+    writeAuditLog("submitExamAnswers", agentId, "FAILED", "Agent not found", {
+      attempt_id: attemptId
+    });
+    return { ok: false, message: "Agent not found" };
+  }
+
+  const currentStatus = normalizeStatus(agent.status);
+
+  if (currentStatus !== AGENT_STATUS.EXAM) {
+    writeAuditLog("submitExamAnswers", agentId, "FAILED", "Invalid agent status", {
+      attempt_id: attemptId,
+      status: currentStatus
+    });
+    return {
+      ok: false,
+      message: "Agent status cannot submit exam",
+      status: currentStatus
+    };
+  }
+
+  const attempt = findAttempt(attemptId);
+
+  if (!attempt || String(attempt.agent_id || "").trim() !== agentId) {
+    return { ok: false, message: "Exam attempt not found" };
+  }
+
+  if (String(attempt.status || "").trim().toUpperCase() !== "IN_PROGRESS") {
+    writeAuditLog("submitExamAnswers", agentId, "FAILED", "Duplicate exam submission", {
+      attempt_id: attemptId,
+      current_attempt_status: attempt.status
+    });
+    return { ok: false, message: "Exam attempt already submitted" };
+  }
+
+  if (attempt.expires_at && new Date(attempt.expires_at).getTime() < new Date().getTime()) {
+    updateRowFields(SHEET_NAMES.examAttempts, attempt._row, {
+      status: "EXPIRED",
+      updated_at: new Date()
+    });
+    writeAuditLog("submitExamAnswers", agentId, "FAILED", "Exam attempt expired", {
+      attempt_id: attemptId
+    });
+    return { ok: false, message: "Exam attempt expired" };
+  }
+
+  const answers = normalizeAnswers(body.answers);
+  const questionIds = parseJsonValue(attempt.question_ids, []);
+  const questionsById = getActiveExamQuestions().reduce(function (result, question) {
+    result[String(question.question_id || "").trim()] = question;
+    return result;
+  }, {});
+  let correctCount = 0;
+  const gradedAnswers = {};
+
+  questionIds.forEach(function (questionId) {
+    const normalizedQuestionId = cleanString(questionId, 80);
+    const question = questionsById[normalizedQuestionId];
+    const selected = normalizeAnswerChoice(answers[normalizedQuestionId]);
+    const correct = normalizeAnswerChoice(question && question.correct_choice);
+
+    gradedAnswers[normalizedQuestionId] = selected || "";
+
+    if (question && selected && selected === correct) {
+      correctCount += 1;
+    }
+  });
+
+  const totalQuestions = questionIds.length;
+  const score = clampScore(totalQuestions ? (correctCount / totalQuestions) * 100 : 0);
+  const passed = score >= EXAM_PASS_SCORE;
+  const nextStatus = passed ? AGENT_STATUS.WAIT_APPROVAL : AGENT_STATUS.EXAM;
+  const attempts = Number(agent.exam_attempts || 0) + 1;
+  const now = new Date();
+
+  updateRowFields(SHEET_NAMES.examAttempts, attempt._row, {
+    status: "SUBMITTED",
+    submitted_at: now,
+    answers_json: JSON.stringify(gradedAnswers),
+    score: score,
+    passed: passed,
+    updated_at: now
+  });
+
+  updateRowFields(SHEET_NAMES.agents, agent._row, {
+    exam_score: score,
+    exam_passed: passed,
+    exam_attempts: attempts,
+    exam_date: now,
+    status: nextStatus
+  });
+
+  writeAuditLog("submitExamAnswers", agentId, "SUCCESS", "Exam attempt submitted", {
+    attempt_id: attemptId,
+    score: score,
+    passed: passed,
+    total_questions: totalQuestions,
+    correct_count: correctCount
+  });
+
+  return {
+    ok: true,
+    agent_id: agentId,
+    attempt_id: attemptId,
+    score: score,
+    passed: passed,
+    pass_score: EXAM_PASS_SCORE,
+    attempts: attempts,
+    status: nextStatus,
+    next_page: getNextPageByStatus(nextStatus)
+  };
+}
+
+function getExamResult(options) {
+  const params = options || {};
+  const agentId = validateAgentId(params.agent_id);
+  const attemptId = cleanString(params.attempt_id || "", 120);
+
+  if (!agentId) {
+    return { ok: false, message: "Invalid agent_id" };
+  }
+
+  ensurePhase2C1Sheets();
+
+  let attempt = attemptId ? findAttempt(attemptId) : null;
+
+  if (!attempt) {
+    const attempts = sheetToObjects(SHEET_NAMES.examAttempts)
+      .filter(function (item) {
+        return String(item.agent_id || "").trim() === agentId;
+      })
+      .sort(function (a, b) {
+        return new Date(b.created_at || 0).getTime() - new Date(a.created_at || 0).getTime();
+      });
+
+    attempt = attempts[0] || null;
+  }
+
+  if (!attempt || String(attempt.agent_id || "").trim() !== agentId) {
+    return { ok: false, message: "Exam result not found" };
+  }
+
+  return {
+    ok: true,
+    agent_id: agentId,
+    attempt_id: attempt.attempt_id,
+    status: attempt.status,
+    started_at: attempt.started_at,
+    submitted_at: attempt.submitted_at,
+    score: attempt.score === "" ? null : clampScore(attempt.score),
+    passed: attempt.passed === "" ? null : booleanValue(attempt.passed),
+    pass_score: EXAM_PASS_SCORE
+  };
 }
 
 /* =========================================================
@@ -541,7 +1516,7 @@ function getAgent(agentId) {
 
   return {
     ok: true,
-    agent: agent
+    agent: publicAgent(agent)
   };
 }
 
@@ -646,44 +1621,59 @@ function updateTrainingProgress(body) {
   ) {
     return {
       ok: false,
-      message: "สถานะบัญชีไม่สามารถอัปเดตการอบรมได้",
+      message: "Agent status cannot update training",
       status: currentStatus
     };
   }
 
-  const progress = Math.max(
+  const requestedProgress = Math.max(
     0,
     Math.min(100, Number(body.progress || 0))
   );
+  const lessons = getActiveTrainingLessons();
+  const progressResult = getTrainingProgress({ agent_id: agent.agent_id });
+  const currentProgress = progressResult.ok
+    ? Number(progressResult.training_progress || 0)
+    : Number(agent.training_progress || 0);
+  const completedCount = progressResult.ok
+    ? Number(progressResult.completed_lessons || 0)
+    : Math.floor(currentProgress / Math.max(1, Math.round(100 / Math.max(1, lessons.length))));
+  const expectedProgress = lessons.length
+    ? Math.round(((completedCount + 1) / lessons.length) * 100)
+    : 100;
 
-  const updates = {
-    status: AGENT_STATUS.TRAINING,
-    training_progress: progress
-  };
-
-  if (progress >= 100) {
-    updates.status = AGENT_STATUS.EXAM;
-    updates.training_progress = 100;
-    updates.training_completed = true;
-    updates.training_completed_at = new Date();
+  if (requestedProgress <= currentProgress) {
+    return progressResult.ok
+      ? progressResult
+      : {
+          ok: true,
+          agent_id: agent.agent_id,
+          training_progress: currentProgress,
+          training_completed: booleanValue(agent.training_completed),
+          status: currentStatus,
+          next_page: getNextPageByStatus(currentStatus)
+        };
   }
 
-  updateRowFields(SHEET_NAMES.agents, agent._row, updates);
+  if (requestedProgress > expectedProgress || completedCount >= lessons.length) {
+    writeAuditLog("updateTrainingProgress", agent.agent_id, "FAILED", "Legacy progress order violation", {
+      requested_progress: requestedProgress,
+      current_progress: currentProgress,
+      expected_progress: expectedProgress
+    });
+    return {
+      ok: false,
+      message: "Training progress must follow lesson order",
+      expected_progress: expectedProgress,
+      current_progress: currentProgress
+    };
+  }
 
-  return {
-    ok: true,
-    message:
-      progress >= 100
-        ? "อบรมครบแล้ว ระบบเปิดการสอบให้คุณแล้ว"
-        : "บันทึกความคืบหน้าการอบรมแล้ว",
+  return completeTrainingLesson({
     agent_id: agent.agent_id,
-    training_progress: updates.training_progress,
-    training_completed: progress >= 100,
-    status: updates.status,
-    next_page: getNextPageByStatus(updates.status)
-  };
+    lesson_order: completedCount + 1
+  });
 }
-
 function completeTraining(body) {
   return updateTrainingProgress({
     agent_id: body.agent_id,
@@ -696,56 +1686,24 @@ function completeTraining(body) {
 ========================================================= */
 
 function submitExam(body) {
-  const agent = findAgent(body.agent_id);
-
-  if (!agent) {
-    return { ok: false, message: "Agent not found" };
+  if (body && body.attempt_id && body.answers) {
+    return submitExamAnswers(body);
   }
 
-  const status = normalizeStatus(agent.status);
+  const agentId = validateAgentId(body && body.agent_id);
 
-  if (status !== AGENT_STATUS.EXAM) {
-    return {
-      ok: false,
-      message: "บัญชียังไม่อยู่ในขั้นตอนการสอบ",
-      status: status
-    };
+  if (agentId) {
+    writeAuditLog("submitExam", agentId, "FAILED", "Legacy score submission rejected", {
+      reason: "Backend no longer trusts client-submitted scores"
+    });
   }
-
-  const score = Math.max(
-    0,
-    Math.min(100, Number(body.score || 0))
-  );
-
-  const attempts = Number(agent.exam_attempts || 0) + 1;
-  const passed = score >= EXAM_PASS_SCORE;
-  const newStatus = passed
-    ? AGENT_STATUS.WAIT_APPROVAL
-    : AGENT_STATUS.EXAM;
-
-  updateRowFields(SHEET_NAMES.agents, agent._row, {
-    exam_score: score,
-    exam_passed: passed,
-    exam_attempts: attempts,
-    exam_date: new Date(),
-    status: newStatus
-  });
 
   return {
-    ok: true,
-    passed: passed,
-    score: score,
-    pass_score: EXAM_PASS_SCORE,
-    attempts: attempts,
-    status: newStatus,
-    message:
-      passed
-        ? "สอบผ่านแล้ว กรุณารอการตรวจสอบและอนุมัติจากบริษัท"
-        : "คะแนนยังไม่ถึงเกณฑ์ กรุณาทบทวนบทเรียนและสอบใหม่",
-    next_page: getNextPageByStatus(newStatus)
+    ok: false,
+    message: "Secure exam submission requires attempt_id and answers",
+    code: "SECURE_EXAM_REQUIRED"
   };
 }
-
 /* =========================================================
    DASHBOARD
 ========================================================= */
@@ -831,6 +1789,32 @@ function getDashboard(agentId) {
     bonus: bonus,
     orders: orders
   };
+}
+
+function cleanString(value, maxLength) {
+  const limit = Math.max(1, Number(maxLength || 500));
+  return String(value === null || value === undefined ? "" : value)
+    .replace(/[\u0000-\u001f\u007f]/g, "")
+    .trim()
+    .slice(0, limit);
+}
+
+function validateAgentId(agentId) {
+  const normalizedId = cleanString(agentId, 80);
+
+  if (!normalizedId || !/^[A-Za-z0-9_-]+$/.test(normalizedId)) {
+    return "";
+  }
+
+  return normalizedId;
+}
+
+function clampScore(score) {
+  return Math.max(0, Math.min(100, Math.round(Number(score || 0))));
+}
+
+function makeId(prefix) {
+  return prefix + "-" + Date.now() + "-" + Math.floor(Math.random() * 100000);
 }
 
 /* =========================================================
