@@ -13,6 +13,8 @@
     statusFilter: "",
     searchTimer: null,
     hasError: false,
+    liveState: "ready",
+    lastUpdatedAt: null,
     lastSummary: {
       total: 0,
       wait_approval: 0,
@@ -32,6 +34,30 @@
 
   function byId(id) {
     return document.getElementById(id);
+  }
+
+  function i18nReady() {
+    return window.SBOSI18n && window.SBOSI18n.ready ? window.SBOSI18n.ready : Promise.resolve();
+  }
+
+  function t(key, fallback) {
+    if (window.SBOSI18n && typeof window.SBOSI18n.t === "function") {
+      const translated = window.SBOSI18n.t(key);
+      return translated === key && fallback ? fallback : translated;
+    }
+    return fallback || key;
+  }
+
+  function tf(key, values, fallback) {
+    let text = t(key, fallback);
+    Object.keys(values || {}).forEach(function (name) {
+      text = text.replace(new RegExp("\\{" + name + "\\}", "g"), String(values[name]));
+    });
+    return text;
+  }
+
+  function currentLocale() {
+    return window.SBOSI18n && window.SBOSI18n.getLanguage && window.SBOSI18n.getLanguage() === "en" ? "en-US" : "th-TH";
   }
 
   function valueText(value) {
@@ -63,6 +89,11 @@
     return valueText(status).toUpperCase().replace(/[^A-Z0-9]+/g, "_");
   }
 
+  function statusLabel(status) {
+    const normalized = normalizeStatus(status);
+    return t("adminDashboard.status." + normalized, normalized);
+  }
+
   function formatDate(value) {
     const raw = valueText(value);
     if (raw === "-") return "-";
@@ -70,7 +101,7 @@
     const date = new Date(raw);
     if (Number.isNaN(date.getTime())) return raw;
 
-    return date.toLocaleDateString("th-TH", {
+    return date.toLocaleDateString(currentLocale(), {
       year: "numeric",
       month: "short",
       day: "numeric"
@@ -111,7 +142,7 @@
     const normalized = normalizeStatus(status);
 
     badge.className = "status-badge " + normalized.toLowerCase();
-    badge.textContent = normalized;
+    badge.textContent = statusLabel(status);
     cell.appendChild(badge);
     return cell;
   }
@@ -128,7 +159,7 @@
   }
 
   function showToast(type, message) {
-    if (!els.toastRegion) return;
+    if (!els.toastRegion) return null;
 
     const toast = document.createElement("div");
     toast.className = "toast " + type;
@@ -145,26 +176,37 @@
   function updateLiveState(stateName) {
     if (!els.liveStatus) return;
 
+    state.liveState = stateName;
     els.liveStatus.className = "live-pill " + stateName;
     if (stateName === "loading") {
-      els.liveStatus.textContent = "Syncing";
+      els.liveStatus.textContent = t("adminDashboard.syncing", "Syncing");
       return;
     }
     if (stateName === "error") {
-      els.liveStatus.textContent = "Needs attention";
+      els.liveStatus.textContent = t("adminDashboard.needsAttention", "Needs attention");
       return;
     }
-    els.liveStatus.textContent = "Live data";
+    els.liveStatus.textContent = t("adminDashboard.liveData", "Live data");
   }
 
-  function updateLastUpdated() {
+  function renderLastUpdated() {
     if (!els.lastUpdated) return;
 
-    const time = new Date().toLocaleTimeString("th-TH", {
+    if (!state.lastUpdatedAt) {
+      els.lastUpdated.textContent = t("adminDashboard.lastUpdatedEmpty", "Last updated: -");
+      return;
+    }
+
+    const time = state.lastUpdatedAt.toLocaleTimeString(currentLocale(), {
       hour: "2-digit",
       minute: "2-digit"
     });
-    els.lastUpdated.textContent = "Last updated: " + time;
+    els.lastUpdated.textContent = tf("adminDashboard.lastUpdated", { time: time }, "Last updated: {time}");
+  }
+
+  function updateLastUpdated() {
+    state.lastUpdatedAt = new Date();
+    renderLastUpdated();
   }
 
   function animateNumber(element, fromValue, toValue) {
@@ -220,8 +262,8 @@
 
   function showPageError(title, message) {
     setHidden(els.pageStatus, false);
-    setText(els.pageStatusTitle, title || "ไม่สามารถโหลดข้อมูลได้");
-    setText(els.pageStatusText, message || "กรุณาลองใหม่อีกครั้ง");
+    setText(els.pageStatusTitle, title || t("adminDashboard.unableToLoad", "Unable to load data"));
+    setText(els.pageStatusText, message || t("adminDashboard.tryAgain", "Please try again."));
   }
 
   function clearPageError() {
@@ -241,7 +283,7 @@
       let settled = false;
       const timer = window.setTimeout(function () {
         cleanup();
-        reject(new Error("เชื่อมต่อ API เกินเวลาที่กำหนด"));
+        reject(new Error(t("adminDashboard.apiTimeout", "API request timed out")));
       }, REQUEST_TIMEOUT_MS);
 
       function cleanup() {
@@ -265,13 +307,13 @@
       script.src = API_URL + "?" + query.toString();
       script.onerror = function () {
         cleanup();
-        reject(new Error("ไม่สามารถโหลดข้อมูลได้"));
+        reject(new Error(t("adminDashboard.unableToLoad", "Unable to load data")));
       };
 
       document.body.appendChild(script);
     }).then(function (data) {
       if (!data || typeof data !== "object") {
-        throw new Error("API ส่งข้อมูลไม่ถูกต้อง");
+        throw new Error(t("adminDashboard.apiInvalid", "Invalid API response"));
       }
       if (data.ok === false) {
         throw new Error(data.message || "API Error");
@@ -303,8 +345,8 @@
 
     if (!state.pendingAgents.length) {
       setHidden(els.pendingEmpty, false);
-      els.pendingTableBody.appendChild(createEmptyRow(7, "ไม่มีตัวแทนที่รออนุมัติ"));
-      setText(els.pendingMeta, "0 รายการ");
+      els.pendingTableBody.appendChild(createEmptyRow(7, t("adminDashboard.pending.emptyRow", "No pending agents")));
+      setText(els.pendingMeta, tf("adminDashboard.pending.count", { count: 0 }, "{count} items"));
       return;
     }
 
@@ -331,16 +373,16 @@
       approveButton.dataset.action = "approve";
       approveButton.dataset.agentId = agentId;
       approveButton.disabled = busy;
-      approveButton.setAttribute("aria-label", "Approve agent " + agentId);
-      approveButton.textContent = busy ? "Working..." : "Approve";
+      approveButton.setAttribute("aria-label", tf("adminDashboard.aria.approveAgent", { agentId: agentId }, "Approve agent {agentId}"));
+      approveButton.textContent = busy ? t("adminDashboard.action.working", "Working...") : t("adminDashboard.action.approve", "Approve");
 
       rejectButton.type = "button";
       rejectButton.className = "action-btn reject";
       rejectButton.dataset.action = "reject";
       rejectButton.dataset.agentId = agentId;
       rejectButton.disabled = busy;
-      rejectButton.setAttribute("aria-label", "Reject agent " + agentId);
-      rejectButton.textContent = busy ? "Working..." : "Reject";
+      rejectButton.setAttribute("aria-label", tf("adminDashboard.aria.rejectAgent", { agentId: agentId }, "Reject agent {agentId}"));
+      rejectButton.textContent = busy ? t("adminDashboard.action.working", "Working...") : t("adminDashboard.action.reject", "Reject");
 
       actionWrap.append(approveButton, rejectButton);
       actionCell.appendChild(actionWrap);
@@ -348,7 +390,7 @@
       els.pendingTableBody.appendChild(row);
     });
 
-    setText(els.pendingMeta, `${state.pendingAgents.length} รายการ`);
+    setText(els.pendingMeta, tf("adminDashboard.pending.count", { count: state.pendingAgents.length }, "{count} items"));
   }
 
   function filteredAgents() {
@@ -389,7 +431,7 @@
 
     if (!pageRows.length) {
       setHidden(els.agentsEmpty, false);
-      els.agentsTableBody.appendChild(createEmptyRow(7, "ไม่พบข้อมูลตัวแทน"));
+      els.agentsTableBody.appendChild(createEmptyRow(7, t("adminDashboard.agents.emptyRow", "No agents found")));
     } else {
       setHidden(els.agentsEmpty, true);
       pageRows.forEach(function (agent) {
@@ -407,9 +449,16 @@
 
     const shownStart = filtered.length ? start + 1 : 0;
     const shownEnd = Math.min(start + PAGE_SIZE, filtered.length);
-    setText(els.agentsMeta, `${filtered.length} รายการจากทั้งหมด ${state.agents.length} รายการ`);
-    setText(els.paginationInfo, `แสดง ${shownStart}-${shownEnd} จาก ${filtered.length} รายการ`);
-    setText(els.searchResultCount, `${filtered.length} results`);
+    setText(els.agentsMeta, tf("adminDashboard.agents.meta", {
+      filtered: filtered.length,
+      total: state.agents.length
+    }, "{filtered} items from {total} total"));
+    setText(els.paginationInfo, filtered.length ? tf("adminDashboard.pagination", {
+      start: shownStart,
+      end: shownEnd,
+      total: filtered.length
+    }, "Showing {start}-{end} of {total}") : t("adminDashboard.paginationEmpty", "Showing 0-0 of 0"));
+    setText(els.searchResultCount, tf("adminDashboard.results", { count: filtered.length }, "{count} results"));
 
     if (els.prevPageButton) els.prevPageButton.disabled = state.currentPage <= 1;
     if (els.nextPageButton) els.nextPageButton.disabled = state.currentPage >= totalPages;
@@ -426,8 +475,8 @@
       return true;
     } catch (error) {
       state.hasError = true;
-      showPageError("ไม่สามารถโหลดข้อมูลได้", "Dashboard Summary โหลดไม่สำเร็จ");
-      showToast("error", "Dashboard Summary โหลดไม่สำเร็จ");
+      showPageError(t("adminDashboard.unableToLoad", "Unable to load data"), t("adminDashboard.tryAgain", "Please try again."));
+      showToast("error", t("adminDashboard.unableToLoad", "Unable to load data"));
       updateLiveState("error");
       return false;
     } finally {
@@ -448,8 +497,8 @@
       state.pendingAgents = [];
       renderPending();
       setHidden(els.pendingError, false);
-      setText(els.pendingMeta, "Pending Agents โหลดไม่สำเร็จ");
-      showToast("error", "Pending Agents โหลดไม่สำเร็จ");
+      setText(els.pendingMeta, t("adminDashboard.pending.error", "Pending Agents failed to load"));
+      showToast("error", t("adminDashboard.pending.error", "Pending Agents failed to load"));
       updateLiveState("error");
       return false;
     } finally {
@@ -470,8 +519,8 @@
       state.agents = [];
       renderAgents();
       setHidden(els.agentsError, false);
-      setText(els.agentsMeta, "Agents โหลดไม่สำเร็จ");
-      showToast("error", "Agents โหลดไม่สำเร็จ");
+      setText(els.agentsMeta, t("adminDashboard.agents.error", "Agents failed to load"));
+      showToast("error", t("adminDashboard.agents.error", "Agents failed to load"));
       updateLiveState("error");
       return false;
     } finally {
@@ -514,31 +563,38 @@
 
     const isApprove = action === "approve";
     const confirmed = window.confirm(isApprove
-      ? `ยืนยันอนุมัติตัวแทน ${cleanAgentId}?`
-      : `ยืนยันปฏิเสธตัวแทน ${cleanAgentId}?`);
+      ? tf("adminDashboard.confirmApprove", { agentId: cleanAgentId }, "Approve agent {agentId}?")
+      : tf("adminDashboard.confirmReject", { agentId: cleanAgentId }, "Reject agent {agentId}?"));
 
     if (!confirmed) {
-      showToast("warning", "ยกเลิกการดำเนินการ");
+      showToast("warning", t("adminDashboard.actionCancelled", "Action cancelled"));
       return;
     }
 
     state.busyAgentIds.add(cleanAgentId);
     renderPending();
-    const loadingToast = showToast("loading", isApprove ? "กำลังอนุมัติตัวแทน..." : "กำลังปฏิเสธตัวแทน...");
+    const loadingToast = showToast("loading", isApprove ? t("adminDashboard.approving", "Approving agent...") : t("adminDashboard.rejecting", "Rejecting agent..."));
 
     try {
       await jsonp(isApprove ? "approveAgent" : "rejectAgent", { agent_id: cleanAgentId });
       if (loadingToast) loadingToast.remove();
-      showToast("success", isApprove ? "อนุมัติตัวแทนเรียบร้อย" : "ปฏิเสธตัวแทนเรียบร้อย");
+      showToast("success", isApprove ? t("adminDashboard.approveSuccess", "Agent approved") : t("adminDashboard.rejectSuccess", "Agent rejected"));
       await refreshAgentData();
     } catch (error) {
       if (loadingToast) loadingToast.remove();
-      showToast("error", error.message || "ไม่สามารถอัปเดตสถานะตัวแทนได้");
+      showToast("error", error.message || t("adminDashboard.updateFailed", "Unable to update agent status"));
       await loadPending();
     } finally {
       state.busyAgentIds.delete(cleanAgentId);
       renderPending();
     }
+  }
+
+  function renderLocalizedDynamicText() {
+    updateLiveState(state.liveState);
+    renderLastUpdated();
+    renderPending();
+    renderAgents();
   }
 
   function bindEvents() {
@@ -578,6 +634,7 @@
         state.searchQuery = "";
         state.currentPage = 1;
         renderAgents();
+        if (els.agentSearch) els.agentSearch.focus();
       });
     }
 
@@ -614,10 +671,12 @@
         const button = event.target.closest("button[data-action][data-agent-id]");
         if (!button || button.disabled) return;
         updateAgentStatus(button.dataset.agentId, button.dataset.action).catch(function (error) {
-          showToast("error", error.message || "เกิดข้อผิดพลาด");
+          showToast("error", error.message || t("adminDashboard.genericError", "Something went wrong"));
         });
       });
     }
+
+    window.addEventListener("sbos:languagechange", renderLocalizedDynamicText);
   }
 
   function cacheElements() {
@@ -660,7 +719,8 @@
     });
   }
 
-  function init() {
+  async function init() {
+    await i18nReady();
     cacheElements();
     setText(els.adminName, localStorage.getItem("admin_name") || localStorage.getItem("admin_role") || "Admin");
     renderSummary({});

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="th" class="admin-dashboard-page" data-i18n-page-title="adminDashboard.pageTitle">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SBOS Admin Dashboard</title>
   <link rel="icon" href="images/logo.png" />
+  <link rel="stylesheet" href="css/sbos-typography.css" />
   <link rel="stylesheet" href="css/admin-dashboard.css" />
+  <link rel="stylesheet" href="css/sbos-theme.css" />
 </head>
 <body>
   <div class="admin-page">
@@ -13,69 +15,73 @@
       <div class="brand-box">
         <img src="images/logo.png" alt="Siamtham" />
         <div>
-          <strong>SBOS</strong>
-          <span>Agent Admin</span>
+          <strong data-i18n="adminDashboard.brandTitle">SBOS</strong>
+          <span data-i18n="adminDashboard.brandSubtitle">Agent Admin</span>
         </div>
       </div>
 
-      <nav class="side-menu" aria-label="Admin navigation">
-        <a class="active" href="admin-dashboard.html">Dashboard</a>
-        <a href="admin-agent.html">ตรวจตัวแทน</a>
-        <a href="admin-agents-list.html">รายชื่อตัวแทน</a>
-        <a href="admin-bonus.html">คอมมิชชันและโบนัส</a>
-        <a href="admin-withdraw.html">ถอนเงิน</a>
+      <nav class="side-menu" data-i18n-aria-label="adminDashboard.navLabel" aria-label="Admin navigation">
+        <a class="active" href="admin-dashboard.html" data-i18n="adminDashboard.nav.dashboard">Dashboard</a>
+        <a href="admin-agent.html" data-i18n="adminDashboard.nav.reviewAgent">Review Agent</a>
+        <a href="admin-agents-list.html" data-i18n="adminDashboard.nav.agents">Agents</a>
+        <a href="admin-bonus.html" data-i18n="adminDashboard.nav.bonus">Commission and Bonus</a>
+        <a href="admin-withdraw.html" data-i18n="adminDashboard.nav.withdrawal">Withdrawal</a>
       </nav>
     </aside>
 
     <main class="admin-main">
       <header class="admin-topbar">
         <div>
-          <p class="eyebrow">SBOS Admin Control Center</p>
-          <h1>ระบบตัวแทน</h1>
+          <p class="eyebrow" data-i18n="adminDashboard.eyebrow">SBOS Admin Control Center</p>
+          <h1 data-i18n="adminDashboard.title">Agent System</h1>
           <div class="live-row" aria-live="polite">
-            <span id="liveStatus" class="live-pill">Live data</span>
-            <span id="lastUpdated">Last updated: -</span>
+            <span id="liveStatus" class="live-pill" data-i18n="adminDashboard.liveData">Live data</span>
+            <span id="lastUpdated" data-i18n="adminDashboard.lastUpdatedEmpty">Last updated: -</span>
           </div>
         </div>
         <div class="admin-actions">
+          <button class="sbos-lang-btn" type="button" data-sbos-lang="th" aria-label="Thai language">TH</button>
+          <button class="sbos-lang-btn" type="button" data-sbos-lang="en" aria-label="English language">EN</button>
+          <button class="sbos-theme-btn" type="button" data-sbos-theme-option="light" data-i18n="theme.light" data-i18n-aria-label="theme.lightLabel" aria-label="Use light mode">Light</button>
+          <button class="sbos-theme-btn" type="button" data-sbos-theme-option="dark" data-i18n="theme.dark" data-i18n-aria-label="theme.darkLabel" aria-label="Use dark mode">Dark</button>
           <span id="adminName" class="admin-badge">Admin</span>
-          <button type="button" id="refreshButton" class="primary-btn" aria-label="Refresh SBOS dashboard data">Refresh</button>
-          <button type="button" class="ghost-btn" onclick="adminLogout()" aria-label="Logout from admin dashboard">Logout</button>
+          <button type="button" id="refreshButton" class="primary-btn" data-i18n="adminDashboard.refresh" data-i18n-aria-label="adminDashboard.refresh" aria-label="Refresh">Refresh</button>
+          <button type="button" class="ghost-btn" onclick="adminLogout()" data-i18n="adminDashboard.logout" data-i18n-aria-label="adminDashboard.logout" aria-label="Logout">Logout</button>
         </div>
       </header>
 
       <section class="status-panel" id="pageStatus" aria-live="polite" hidden>
         <div>
-          <strong id="pageStatusTitle">ไม่สามารถโหลดข้อมูลได้</strong>
-          <p id="pageStatusText">กรุณาลองใหม่อีกครั้ง</p>
+          <strong id="pageStatusTitle" data-i18n="adminDashboard.unableToLoad">Unable to load data</strong>
+          <p id="pageStatusText" data-i18n="adminDashboard.tryAgain">Please try again.</p>
         </div>
-        <button type="button" id="retryAllButton" class="primary-btn" aria-label="Retry loading all dashboard data">Retry</button>
+        <button type="button" id="retryAllButton" class="primary-btn" data-i18n="adminDashboard.retry" data-i18n-aria-label="adminDashboard.retry" aria-label="Retry">Retry</button>
       </section>
 
-      <section class="summary-grid" aria-label="Dashboard Summary">
+      <section class="summary-grid" data-i18n-aria-label="adminDashboard.summaryLabel" aria-label="Dashboard Summary">
         <article class="summary-card" data-kpi="total">
           <div class="card-icon" aria-hidden="true">A</div>
-          <span>ตัวแทนทั้งหมด</span>
+          <span data-i18n="adminDashboard.summary.total">Total Agents</span>
           <strong id="summaryTotal">0</strong>
         </article>
         <article class="summary-card warning" data-kpi="pending">
           <div class="card-icon" aria-hidden="true">W</div>
-          <span>รออนุมัติ</span>
+          <span data-i18n="adminDashboard.summary.pending">Awaiting Approval</span>
           <strong id="summaryPending">0</strong>
         </article>
         <article class="summary-card success" data-kpi="approved">
           <div class="card-icon" aria-hidden="true">OK</div>
-          <span>อนุมัติแล้ว</span>
+          <span data-i18n="adminDashboard.summary.approved">Approved</span>
           <strong id="summaryApproved">0</strong>
         </article>
         <article class="summary-card muted" data-kpi="suspended">
           <div class="card-icon" aria-hidden="true">S</div>
-          <span>ระงับ</span>
+          <span data-i18n="adminDashboard.summary.suspended">Suspended</span>
           <strong id="summarySuspended">0</strong>
         </article>
         <article class="summary-card danger" data-kpi="rejected">
           <div class="card-icon" aria-hidden="true">R</div>
-          <span>ปฏิเสธ</span>
+          <span data-i18n="adminDashboard.summary.rejected">Rejected</span>
           <strong id="summaryRejected">0</strong>
         </article>
       </section>
@@ -83,39 +89,39 @@
       <section class="panel" aria-labelledby="pendingTitle">
         <div class="panel-head">
           <div>
-            <h2 id="pendingTitle">Pending Agents</h2>
-            <p id="pendingMeta">กำลังโหลดข้อมูล...</p>
+            <h2 id="pendingTitle" data-i18n="adminDashboard.pending.title">Pending Agents</h2>
+            <p id="pendingMeta" data-i18n="adminDashboard.pending.loadingMeta">Loading data...</p>
           </div>
-          <button type="button" id="retryPendingButton" class="secondary-btn" aria-label="Retry loading pending agents">Retry</button>
+          <button type="button" id="retryPendingButton" class="secondary-btn" data-i18n="adminDashboard.retry" data-i18n-aria-label="adminDashboard.retry" aria-label="Retry">Retry</button>
         </div>
 
         <div id="pendingLoading" class="table-loading">
           <span class="spinner" aria-hidden="true"></span>
-          <span>กำลังโหลด Pending Agents</span>
+          <span data-i18n="adminDashboard.pending.loading">Loading Pending Agents</span>
         </div>
 
         <div id="pendingError" class="section-error" hidden>
-          <strong>ไม่สามารถโหลดข้อมูลได้</strong>
-          <p>Pending Agents โหลดไม่สำเร็จ</p>
+          <strong data-i18n="adminDashboard.unableToLoad">Unable to load data</strong>
+          <p data-i18n="adminDashboard.pending.error">Pending Agents failed to load</p>
         </div>
 
         <div id="pendingEmpty" class="empty-state" hidden>
-          <div class="empty-mark" aria-hidden="true">✓</div>
-          <strong>ไม่มีตัวแทนที่รออนุมัติ</strong>
-          <p>เมื่อมีตัวแทนสอบผ่านและรออนุมัติ รายการจะแสดงในตารางนี้</p>
+          <div class="empty-mark" aria-hidden="true">OK</div>
+          <strong data-i18n="adminDashboard.pending.emptyTitle">No pending agents</strong>
+          <p data-i18n="adminDashboard.pending.emptyText">Agents who passed the exam and await approval will appear here.</p>
         </div>
 
         <div class="table-wrap">
           <table>
             <thead>
               <tr>
-                <th scope="col">ชื่อ</th>
-                <th scope="col">Agent ID</th>
-                <th scope="col">เบอร์โทร</th>
-                <th scope="col">Email</th>
-                <th scope="col">วันที่สมัคร</th>
-                <th scope="col">สถานะ</th>
-                <th scope="col">จัดการ</th>
+                <th scope="col" data-i18n="adminDashboard.table.name">Name</th>
+                <th scope="col" data-i18n="adminDashboard.table.agentId">Agent ID</th>
+                <th scope="col" data-i18n="adminDashboard.table.phone">Phone</th>
+                <th scope="col" data-i18n="adminDashboard.table.email">Email</th>
+                <th scope="col" data-i18n="adminDashboard.table.createdAt">Registered</th>
+                <th scope="col" data-i18n="adminDashboard.table.status">Status</th>
+                <th scope="col" data-i18n="adminDashboard.table.actions">Actions</th>
               </tr>
             </thead>
             <tbody id="pendingTableBody"></tbody>
@@ -126,59 +132,59 @@
       <section class="panel" aria-labelledby="agentsTitle">
         <div class="panel-head agents-head">
           <div>
-            <h2 id="agentsTitle">Agents</h2>
-            <p id="agentsMeta">กำลังโหลดข้อมูล...</p>
+            <h2 id="agentsTitle" data-i18n="adminDashboard.agents.title">Agents</h2>
+            <p id="agentsMeta" data-i18n="adminDashboard.agents.loadingMeta">Loading data...</p>
           </div>
-          <button type="button" id="retryAgentsButton" class="secondary-btn" aria-label="Retry loading agents">Retry</button>
+          <button type="button" id="retryAgentsButton" class="secondary-btn" data-i18n="adminDashboard.retry" data-i18n-aria-label="adminDashboard.retry" aria-label="Retry">Retry</button>
         </div>
 
         <div class="toolbar">
-          <label for="agentSearch">Search</label>
+          <label for="agentSearch" data-i18n="adminDashboard.search">Search</label>
           <div class="search-control">
-            <input id="agentSearch" type="search" autocomplete="off" aria-label="Search agents by name, Agent ID, email, Facebook, Line, or phone" placeholder="ค้นหาชื่อ, Agent ID, Email, Facebook, Line หรือเบอร์โทร" />
-            <button type="button" id="clearSearchButton" class="clear-search" aria-label="Clear agent search" hidden>Clear</button>
+            <input id="agentSearch" type="search" autocomplete="off" data-i18n-aria-label="adminDashboard.searchLabel" data-i18n-placeholder="adminDashboard.searchPlaceholder" aria-label="Search agents by name, Agent ID, email, Facebook, Line, or phone" placeholder="Search name, Agent ID, Email, Facebook, Line, or phone" />
+            <button type="button" id="clearSearchButton" class="clear-search" data-i18n="adminDashboard.clear" data-i18n-aria-label="adminDashboard.clearSearch" aria-label="Clear agent search" hidden>Clear</button>
           </div>
-          <label for="statusFilter">Status</label>
-          <select id="statusFilter" aria-label="Filter agents by status">
-            <option value="">ทุกสถานะ</option>
-            <option value="REGISTERED">REGISTERED</option>
-            <option value="TRAINING">TRAINING</option>
-            <option value="EXAM">EXAM</option>
-            <option value="WAIT_APPROVAL">WAIT_APPROVAL</option>
-            <option value="APPROVED">APPROVED</option>
-            <option value="SUSPENDED">SUSPENDED</option>
-            <option value="REJECTED">REJECTED</option>
+          <label for="statusFilter" data-i18n="adminDashboard.status">Status</label>
+          <select id="statusFilter" data-i18n-aria-label="adminDashboard.status" aria-label="Filter agents by status">
+            <option value="" data-i18n="adminDashboard.allStatuses">All statuses</option>
+            <option value="REGISTERED" data-i18n="adminDashboard.status.REGISTERED">REGISTERED</option>
+            <option value="TRAINING" data-i18n="adminDashboard.status.TRAINING">TRAINING</option>
+            <option value="EXAM" data-i18n="adminDashboard.status.EXAM">EXAM</option>
+            <option value="WAIT_APPROVAL" data-i18n="adminDashboard.status.WAIT_APPROVAL">WAIT_APPROVAL</option>
+            <option value="APPROVED" data-i18n="adminDashboard.status.APPROVED">APPROVED</option>
+            <option value="SUSPENDED" data-i18n="adminDashboard.status.SUSPENDED">SUSPENDED</option>
+            <option value="REJECTED" data-i18n="adminDashboard.status.REJECTED">REJECTED</option>
           </select>
           <span id="searchResultCount" class="result-count" aria-live="polite">0 results</span>
         </div>
 
         <div id="agentsLoading" class="table-loading">
           <span class="spinner" aria-hidden="true"></span>
-          <span>กำลังโหลด Agents</span>
+          <span data-i18n="adminDashboard.agents.loading">Loading Agents</span>
         </div>
 
         <div id="agentsError" class="section-error" hidden>
-          <strong>ไม่สามารถโหลดข้อมูลได้</strong>
-          <p>Agents โหลดไม่สำเร็จ</p>
+          <strong data-i18n="adminDashboard.unableToLoad">Unable to load data</strong>
+          <p data-i18n="adminDashboard.agents.error">Agents failed to load</p>
         </div>
 
         <div id="agentsEmpty" class="empty-state" hidden>
-          <div class="empty-mark" aria-hidden="true">⌕</div>
-          <strong>ไม่พบข้อมูลตัวแทน</strong>
-          <p>ลองเปลี่ยนคำค้นหา หรือกด Retry เพื่อโหลดข้อมูลใหม่</p>
+          <div class="empty-mark" aria-hidden="true">-</div>
+          <strong data-i18n="adminDashboard.agents.emptyTitle">No agents found</strong>
+          <p data-i18n="adminDashboard.agents.emptyText">Try changing the search term or press Retry to load data again.</p>
         </div>
 
         <div class="table-wrap">
           <table>
             <thead>
               <tr>
-                <th scope="col">Agent ID</th>
-                <th scope="col">ชื่อ</th>
-                <th scope="col">เบอร์โทร</th>
-                <th scope="col">Email</th>
-                <th scope="col">Facebook</th>
-                <th scope="col">Line</th>
-                <th scope="col">สถานะ</th>
+                <th scope="col" data-i18n="adminDashboard.table.agentId">Agent ID</th>
+                <th scope="col" data-i18n="adminDashboard.table.name">Name</th>
+                <th scope="col" data-i18n="adminDashboard.table.phone">Phone</th>
+                <th scope="col" data-i18n="adminDashboard.table.email">Email</th>
+                <th scope="col" data-i18n="adminDashboard.table.facebook">Facebook</th>
+                <th scope="col" data-i18n="adminDashboard.table.line">Line</th>
+                <th scope="col" data-i18n="adminDashboard.table.status">Status</th>
               </tr>
             </thead>
             <tbody id="agentsTableBody"></tbody>
@@ -186,10 +192,10 @@
         </div>
 
         <div class="pagination">
-          <span id="paginationInfo">0 รายการ</span>
+          <span id="paginationInfo" data-i18n="adminDashboard.paginationEmpty">Showing 0-0 of 0</span>
           <div>
-            <button type="button" id="prevPageButton" class="secondary-btn" aria-label="Go to previous agents page">ก่อนหน้า</button>
-            <button type="button" id="nextPageButton" class="secondary-btn" aria-label="Go to next agents page">ถัดไป</button>
+            <button type="button" id="prevPageButton" class="secondary-btn" data-i18n="adminDashboard.previous" data-i18n-aria-label="adminDashboard.previous" aria-label="Previous">Previous</button>
+            <button type="button" id="nextPageButton" class="secondary-btn" data-i18n="adminDashboard.next" data-i18n-aria-label="adminDashboard.next" aria-label="Next">Next</button>
           </div>
         </div>
       </section>
@@ -199,6 +205,56 @@
   <div id="toastRegion" class="toast-region" aria-live="polite" aria-atomic="true"></div>
 
   <script src="js/admin-guard.js"></script>
+  <script>
+    (function () {
+      const STORAGE_KEY = "sbos_theme";
+      const THEMES = new Set(["light", "dark"]);
+
+      function normalizeTheme(value) {
+        const theme = String(value || "").trim().toLowerCase();
+        return THEMES.has(theme) ? theme : "light";
+      }
+
+      function applyTheme(theme) {
+        const activeTheme = normalizeTheme(theme);
+        document.documentElement.setAttribute("data-sbos-theme", activeTheme);
+        document.querySelectorAll("[data-sbos-theme-option]").forEach(function (button) {
+          const buttonTheme = normalizeTheme(button.getAttribute("data-sbos-theme-option"));
+          button.setAttribute("aria-pressed", buttonTheme === activeTheme ? "true" : "false");
+        });
+      }
+
+      function setTheme(theme) {
+        const activeTheme = normalizeTheme(theme);
+        try {
+          localStorage.setItem(STORAGE_KEY, activeTheme);
+        } catch (error) {
+          // Theme preference is non-critical.
+        }
+        applyTheme(activeTheme);
+      }
+
+      function getStoredTheme() {
+        try {
+          return normalizeTheme(localStorage.getItem(STORAGE_KEY));
+        } catch (error) {
+          return "light";
+        }
+      }
+
+      applyTheme(getStoredTheme());
+
+      document.addEventListener("DOMContentLoaded", function () {
+        applyTheme(getStoredTheme());
+        document.querySelectorAll("[data-sbos-theme-option]").forEach(function (button) {
+          button.addEventListener("click", function () {
+            setTheme(button.getAttribute("data-sbos-theme-option"));
+          });
+        });
+      }, { once: true });
+    })();
+  </script>
+  <script src="js/i18n.js"></script>
   <script src="js/admin-dashboard.js"></script>
 </body>
 </html>
