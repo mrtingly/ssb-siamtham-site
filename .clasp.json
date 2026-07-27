@@ -1,0 +1,17 @@
+{
+  "scriptId": "1ymdKucAYy1t3bpm_GZkYrlDAKqxAua_Zj-Xcp5xSgEmj6Ihp-LwgTzft",
+  "rootDir": "",
+  "projectId": "cd C:\\Users\\Dell\\Documents\\GitHub\\ssb-siamtham-site",
+  "scriptExtensions": [
+    ".js",
+    ".gs"
+  ],
+  "htmlExtensions": [
+    ".html"
+  ],
+  "jsonExtensions": [
+    ".json"
+  ],
+  "filePushOrder": [],
+  "skipSubdirectories": false
+}
