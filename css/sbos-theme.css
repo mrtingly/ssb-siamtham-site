@@ -107,6 +107,91 @@ body {
   background: linear-gradient(180deg, #151515 0%, #211d16 100%);
 }
 
+.agent-dashboard-page {
+  --navy: #071a36;
+  --navy2: #0b2c58;
+  --bg: var(--sbos-bg);
+  --card: var(--sbos-surface);
+  --text: var(--sbos-text);
+  --muted: var(--sbos-muted);
+  --line: var(--sbos-line);
+  --gold: #d9a63a;
+}
+
+.agent-dashboard-page .top-actions {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.agent-dashboard-page .top-actions .sbos-lang-btn,
+.agent-dashboard-page .top-actions .sbos-theme-btn {
+  flex: 0 0 auto;
+}
+
+[data-sbos-theme="dark"].agent-dashboard-page {
+  --navy: #111111;
+  --navy2: #211d16;
+  --bg: #171717;
+  --card: #242424;
+  --text: #f7f0df;
+  --muted: #c8c0ad;
+  --line: #4a4030;
+  --gold: #d8ad45;
+  --blue: #d8ad45;
+  --blue2: #f0cb70;
+  --sky: #2f2b22;
+  --green: #79c58d;
+  --danger: #f18b7b;
+}
+
+[data-sbos-theme="dark"].agent-dashboard-page body {
+  background: linear-gradient(180deg, #151515 0%, #211d16 100%);
+}
+
+[data-sbos-theme="dark"].agent-dashboard-page .topbar,
+[data-sbos-theme="dark"].agent-dashboard-page .kpi,
+[data-sbos-theme="dark"].agent-dashboard-page .action-card,
+[data-sbos-theme="dark"].agent-dashboard-page .panel,
+[data-sbos-theme="dark"].agent-dashboard-page .user-pill,
+[data-sbos-theme="dark"].agent-dashboard-page .bell,
+[data-sbos-theme="dark"].agent-dashboard-page .profile-grid div,
+[data-sbos-theme="dark"].agent-dashboard-page .notice {
+  background: var(--card);
+  border-color: var(--line);
+  color: var(--text);
+}
+
+[data-sbos-theme="dark"].agent-dashboard-page .sidebar {
+  background: linear-gradient(180deg, #0f0f0f, #241f17);
+  box-shadow: 18px 0 45px rgba(0, 0, 0, .24);
+}
+
+[data-sbos-theme="dark"].agent-dashboard-page .hero {
+  background: linear-gradient(125deg, #111111 0%, #2d271d 58%, #6f5420 100%);
+  box-shadow: 0 22px 55px rgba(0, 0, 0, .28);
+}
+
+[data-sbos-theme="dark"].agent-dashboard-page .agent-card,
+[data-sbos-theme="dark"].agent-dashboard-page .agent-meta div,
+[data-sbos-theme="dark"].agent-dashboard-page .hero-btn.ghost {
+  background: rgba(255, 255, 255, .08);
+  border-color: rgba(216, 173, 69, .28);
+}
+
+[data-sbos-theme="dark"].agent-dashboard-page .hero-btn.primary {
+  background: var(--gold);
+  color: #1c1710;
+}
+
+[data-sbos-theme="dark"].agent-dashboard-page .tag,
+[data-sbos-theme="dark"].agent-dashboard-page .kpi:after,
+[data-sbos-theme="dark"].agent-dashboard-page .kpi-icon,
+[data-sbos-theme="dark"].agent-dashboard-page .action-icon,
+[data-sbos-theme="dark"].agent-dashboard-page .income-row.total {
+  background: var(--sky);
+  color: var(--blue2);
+}
+
 [data-sbos-theme="dark"] .hero,
 [data-sbos-theme="dark"] .exam-card,
 [data-sbos-theme="dark"] .result-card,
@@ -154,5 +239,28 @@ body {
   .sbos-controls {
     width: 100%;
     justify-content: flex-start;
+  }
+}
+
+@media (max-width: 780px) {
+  .agent-dashboard-page .topbar {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .agent-dashboard-page .top-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 430px) {
+  .agent-dashboard-page .top-actions .sbos-lang-btn {
+    width: 48px;
+  }
+
+  .agent-dashboard-page .top-actions .sbos-theme-btn {
+    min-height: 34px;
+    padding-inline: 10px;
   }
 }
