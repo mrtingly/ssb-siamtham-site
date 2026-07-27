@@ -1,0 +1,34 @@
+@import url("https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap");
+
+:where(html, body, button, input, select, textarea, table, dialog, .toast, .modal) {
+  font-family: "Prompt", sans-serif;
+}
+
+.sbos-lang-switch {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.sbos-lang-btn {
+  width: 56px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid rgba(120, 210, 255, .28);
+  background: rgba(255, 255, 255, .08);
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+.sbos-lang-btn[aria-pressed="true"] {
+  background: linear-gradient(135deg, #1e6bff, #00d4ff);
+}
+
+.sbos-lang-btn:focus-visible {
+  outline: 3px solid rgba(95, 220, 255, .45);
+  outline-offset: 2px;
+}

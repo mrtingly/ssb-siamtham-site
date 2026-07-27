@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="th" data-i18n-page-title="login.pageTitle">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Agent Login | SSBMS</title>
+  <title>เข้าสู่ระบบตัวแทน | SSBMS</title>
 
   <link rel="icon" href="images/logo.png" />
   <link rel="stylesheet" href="css/agent-login.css" />
+  <link rel="stylesheet" href="css/sbos-typography.css" />
 </head>
 
 <body>
@@ -17,34 +18,48 @@
     <section class="login-card">
 
       <div class="login-switch">
-        <a class="active" href="agent-login.html">AGENT</a>
-        <a href="admin-login.html">ADMIN</a>
+        <a class="active" href="agent-login.html" data-i18n="common.agent">AGENT</a>
+        <a href="admin-login.html" data-i18n="common.admin">ADMIN</a>
       </div>
 
-      <img 
-        src="images/logo.png" 
+      <div class="sbos-lang-switch" aria-label="เลือกภาษา" data-i18n-aria-label="common.language.switchLabel">
+        <button class="sbos-lang-btn" type="button" data-sbos-lang="th" data-i18n-aria-label="common.language.thLabel">TH</button>
+        <button class="sbos-lang-btn" type="button" data-sbos-lang="en" data-i18n-aria-label="common.language.enLabel">EN</button>
+      </div>
+
+      <img
+        src="images/logo.png"
         class="login-logo"
         alt="SSBMS Logo"
       />
 
-      <h1>Agent Login</h1>
-      <p>เข้าสู่ระบบตัวแทน</p>
+      <h1 data-i18n="login.title">Agent Login</h1>
+      <p data-i18n="login.subtitle">เข้าสู่ระบบตัวแทน</p>
 
       <form class="login-form" onsubmit="doLogin(event)">
 
-        <input 
-          id="username"
-          type="text"
-          placeholder="Agent ID หรือ Email"
-          required
-        />
+        <label for="username">
+          <span data-i18n="login.usernameLabel">Agent ID หรือ Email</span>
+          <input
+            id="username"
+            type="text"
+            placeholder="Agent ID หรือ Email"
+            data-i18n-placeholder="login.usernamePlaceholder"
+            required
+          />
+        </label>
+
+        <label for="password">
+          <span data-i18n="login.passwordLabel">รหัสผ่าน</span>
+        </label>
 
         <div class="password-wrap">
 
-          <input 
+          <input
             id="password"
             type="password"
             placeholder="Password"
+            data-i18n-placeholder="login.passwordPlaceholder"
             required
           />
 
@@ -52,19 +67,21 @@
             type="button"
             class="show-pass-btn"
             onclick="togglePassword()"
+            aria-label="แสดงหรือซ่อนรหัสผ่าน"
+            data-i18n-aria-label="login.togglePassword"
           >
             👁
           </button>
 
         </div>
 
-        <button type="submit">
+        <button type="submit" data-i18n="login.submit" aria-label="เข้าสู่ระบบตัวแทน" data-i18n-aria-label="login.submitLabel">
           เข้าสู่ระบบ
         </button>
 
       </form>
 
-      <a href="agent-register.html" class="register-link">
+      <a href="agent-register.html" class="register-link" data-i18n="login.registerLink">
         สมัครตัวแทน
       </a>
 
@@ -72,6 +89,7 @@
 
   </main>
 
+  <script src="js/i18n.js"></script>
   <script src="js/login.js?v=20260726-2"></script>
 
 </body>

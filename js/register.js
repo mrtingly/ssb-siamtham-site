@@ -1,5 +1,9 @@
 const REGISTER_API_URL = "https://script.google.com/macros/s/AKfycbyKhWE-_SuKreCPyD4tsNmqNMQz2hZ8hQtrckk92mh8rszh1jaNEeuuFBGsPOLKfAziNg/exec";
 
+function t(key) {
+  return window.SBOSI18n ? window.SBOSI18n.t(key) : key;
+}
+
 async function submitRegister(event){
   event.preventDefault();
 
@@ -25,7 +29,7 @@ async function submitRegister(event){
   try{
     if(submitButton){
       submitButton.disabled = true;
-      submitButton.textContent = "กำลังสมัคร...";
+      submitButton.textContent = t("register.loading");
     }
 
     const res = await fetch(REGISTER_API_URL,{
@@ -37,19 +41,19 @@ async function submitRegister(event){
     const result = await res.json();
 
     if(result.ok){
-      alert(result.message || "สมัครสำเร็จ กรุณาเข้าสู่ระบบเพื่อเริ่มการอบรม");
+      alert(result.message || t("register.success"));
       window.location.href = "agent-login.html";
     }else{
-      alert(result.message || "สมัครไม่สำเร็จ");
+      alert(result.message || t("register.failed"));
     }
 
   }catch(err){
     console.error("Register error:",err);
-    alert("เชื่อมต่อระบบไม่ได้ กรุณาลองใหม่");
+    alert(t("register.networkError"));
   }finally{
     if(submitButton){
       submitButton.disabled = false;
-      submitButton.textContent = "สมัครตัวแทน";
+      submitButton.textContent = t("register.submit");
     }
   }
 }

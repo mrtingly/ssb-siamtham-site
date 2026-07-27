@@ -32,6 +32,10 @@ function togglePassword() {
   passwordInput.type = passwordInput.type === "password" ? "text" : "password";
 }
 
+function t(key) {
+  return window.SBOSI18n ? window.SBOSI18n.t(key) : key;
+}
+
 function clearOldAgentSession() {
   [
     "agent_id",
@@ -106,7 +110,7 @@ async function doLogin(e) {
   const password = passwordInput ? passwordInput.value.trim() : "";
 
   if (!username || !password) {
-    alert("กรุณากรอก Agent ID หรือ Email และ Password");
+    alert(t("login.missingCredentials"));
     return;
   }
 
@@ -117,13 +121,13 @@ async function doLogin(e) {
   try {
     if (submitButton) {
       submitButton.disabled = true;
-      submitButton.textContent = "กำลังเข้าสู่ระบบ...";
+      submitButton.textContent = t("login.loading");
     }
 
     const res = await jsonp(url);
 
     if (!res || !res.ok) {
-      alert((res && res.message) || "เข้าสู่ระบบไม่สำเร็จ");
+      alert((res && res.message) || t("login.failed"));
       return;
     }
 
@@ -132,11 +136,11 @@ async function doLogin(e) {
 
   } catch (err) {
     console.error("Agent login error:", err);
-    alert("เชื่อมต่อระบบไม่ได้ กรุณาลองใหม่อีกครั้ง");
+    alert(t("login.networkError"));
   } finally {
     if (submitButton) {
       submitButton.disabled = false;
-      submitButton.textContent = "เข้าสู่ระบบ";
+      submitButton.textContent = t("login.submit");
     }
   }
 }
