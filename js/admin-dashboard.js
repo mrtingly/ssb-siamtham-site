@@ -270,9 +270,16 @@
     setHidden(els.pageStatus, true);
   }
 
+  function adminAuthParams() {
+    return {
+      admin_id: localStorage.getItem("admin_id") || "",
+      admin_session_token: localStorage.getItem("admin_session_token") || ""
+    };
+  }
+
   function jsonp(action, params) {
     const callbackName = "sbos_admin_cb_" + Date.now() + "_" + Math.floor(Math.random() * 100000);
-    const query = new URLSearchParams(Object.assign({}, params || {}, {
+    const query = new URLSearchParams(Object.assign({}, params || {}, adminAuthParams(), {
       action: action,
       callback: callbackName,
       _: Date.now()

@@ -1,4 +1,11 @@
-const ADMIN_API_URL = "https://script.google.com/macros/s/AKfycbwxuLFd3Udc9m7OI3XtdvRFDK2pUpUB5mWo0M8d4YF5ak_m6xJ8BuCt8na2t75LpXi3Gw/exec";
+const ADMIN_API_URL = "https://script.google.com/macros/s/AKfycbyKhWE-_SuKreCPyD4tsNmqNMQz2hZ8hQtrckk92mh8rszh1jaNEeuuFBGsPOLKfAziNg/exec";
+
+function adminAuthQuery(){
+  return (
+    "&admin_id=" + encodeURIComponent(localStorage.getItem("admin_id") || "") +
+    "&admin_session_token=" + encodeURIComponent(localStorage.getItem("admin_session_token") || "")
+  );
+}
 
 function adminJsonp(url){
   return new Promise((resolve, reject)=>{
@@ -20,7 +27,7 @@ function adminJsonp(url){
 async function approveAgent(agentId){
   if(!confirm("ยืนยันอนุมัติตัวแทนนี้?")) return;
 
-  const url = `${ADMIN_API_URL}?action=approveAgent&agent_id=${encodeURIComponent(agentId)}`;
+  const url = `${ADMIN_API_URL}?action=approveAgent&agent_id=${encodeURIComponent(agentId)}${adminAuthQuery()}`;
   const res = await adminJsonp(url);
 
   alert(res.message || "อนุมัติเรียบร้อย");
@@ -30,7 +37,7 @@ async function approveAgent(agentId){
 async function rejectAgent(agentId){
   if(!confirm("ยืนยันไม่อนุมัติตัวแทนนี้?")) return;
 
-  const url = `${ADMIN_API_URL}?action=rejectAgent&agent_id=${encodeURIComponent(agentId)}`;
+  const url = `${ADMIN_API_URL}?action=rejectAgent&agent_id=${encodeURIComponent(agentId)}${adminAuthQuery()}`;
   const res = await adminJsonp(url);
 
   alert(res.message || "ไม่อนุมัติเรียบร้อย");
@@ -40,7 +47,7 @@ async function rejectAgent(agentId){
 async function markWithdrawPaid(withdrawId){
   if(!confirm("ยืนยันว่าจ่ายเงินรายการนี้แล้ว?")) return;
 
-  const url = `${ADMIN_API_URL}?action=markWithdrawPaid&withdraw_id=${encodeURIComponent(withdrawId)}`;
+  const url = `${ADMIN_API_URL}?action=markWithdrawPaid&withdraw_id=${encodeURIComponent(withdrawId)}${adminAuthQuery()}`;
   const res = await adminJsonp(url);
 
   alert(res.message || "บันทึกว่าจ่ายแล้ว");
@@ -50,7 +57,7 @@ async function markWithdrawPaid(withdrawId){
 async function rejectWithdraw(withdrawId){
   if(!confirm("ยืนยันปฏิเสธรายการถอนนี้?")) return;
 
-  const url = `${ADMIN_API_URL}?action=rejectWithdraw&withdraw_id=${encodeURIComponent(withdrawId)}`;
+  const url = `${ADMIN_API_URL}?action=rejectWithdraw&withdraw_id=${encodeURIComponent(withdrawId)}${adminAuthQuery()}`;
   const res = await adminJsonp(url);
 
   alert(res.message || "ปฏิเสธรายการถอนแล้ว");

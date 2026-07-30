@@ -1,4 +1,4 @@
-const ADMIN_LOGIN_API_URL = "https://script.google.com/macros/s/AKfycbwxuLFd3Udc9m7OI3XtdvRFDK2pUpUB5mWo0M8d4YF5ak_m6xJ8BuCt8na2t75LpXi3Gw/exec";
+const ADMIN_LOGIN_API_URL = "https://script.google.com/macros/s/AKfycbyKhWE-_SuKreCPyD4tsNmqNMQz2hZ8hQtrckk92mh8rszh1jaNEeuuFBGsPOLKfAziNg/exec";
 
 function adminJsonp(url){
   return new Promise((resolve, reject)=>{
@@ -38,14 +38,22 @@ async function adminLogin(event){
       return;
     }
 
-    if(result.role !== "Admin" && result.role !== "Owner"){
+    const normalizedRole = String(result.role || "").toUpperCase();
+    if(normalizedRole !== "ADMIN" && normalizedRole !== "OWNER"){
       alert("บัญชีนี้ไม่มีสิทธิ์เข้า Admin");
+      return;
+    }
+
+    if(!result.admin_session_token){
+      alert("Admin session could not be created. Please login again.");
       return;
     }
 
     localStorage.setItem("admin_id", result.agent_id);
     localStorage.setItem("admin_name", result.name);
     localStorage.setItem("admin_role", result.role);
+    localStorage.setItem("admin_session_token", result.admin_session_token);
+    localStorage.setItem("admin_session_expires_at", String(Date.now() + Number(result.admin_session_expires_in || 0) * 1000));
 
     window.location.href = "admin-dashboard.html";
 

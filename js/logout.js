@@ -17,6 +17,8 @@ function adminLogout(){
   localStorage.removeItem("admin_id");
   localStorage.removeItem("admin_name");
   localStorage.removeItem("admin_role");
+  localStorage.removeItem("admin_session_token");
+  localStorage.removeItem("admin_session_expires_at");
 
   window.location.href = "admin-login.html";
 }

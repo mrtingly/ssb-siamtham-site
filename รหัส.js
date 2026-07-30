@@ -30,6 +30,7 @@ const AGENT_STATUS = {
 
 const EXAM_PASS_SCORE = 80;
 const SECURE_EXAM_DURATION_MINUTES = 30;
+const ADMIN_SESSION_TTL_SECONDS = 21600;
 
 /* =========================================================
    ROUTER
@@ -141,23 +142,38 @@ function doGet(e) {
         break;
 
       case "approveAgent":
-        result = updateAgentStatus(e.parameter.agent_id, AGENT_STATUS.APPROVED);
+        {
+          const admin = requireAdminActor(e.parameter);
+          result = admin.ok ? updateAgentStatus(e.parameter.agent_id, AGENT_STATUS.APPROVED) : admin;
+        }
         break;
 
       case "rejectAgent":
-        result = updateAgentStatus(e.parameter.agent_id, AGENT_STATUS.REJECTED);
+        {
+          const admin = requireAdminActor(e.parameter);
+          result = admin.ok ? updateAgentStatus(e.parameter.agent_id, AGENT_STATUS.REJECTED) : admin;
+        }
         break;
 
       case "suspendAgent":
-        result = updateAgentStatus(e.parameter.agent_id, AGENT_STATUS.SUSPENDED);
+        {
+          const admin = requireAdminActor(e.parameter);
+          result = admin.ok ? updateAgentStatus(e.parameter.agent_id, AGENT_STATUS.SUSPENDED) : admin;
+        }
         break;
 
       case "markWithdrawPaid":
-        result = updateWithdrawStatus(e.parameter.withdraw_id, "PAID");
+        {
+          const admin = requireAdminActor(e.parameter);
+          result = admin.ok ? updateWithdrawStatus(e.parameter.withdraw_id, "PAID") : admin;
+        }
         break;
 
       case "rejectWithdraw":
-        result = updateWithdrawStatus(e.parameter.withdraw_id, "REJECTED");
+        {
+          const admin = requireAdminActor(e.parameter);
+          result = admin.ok ? updateWithdrawStatus(e.parameter.withdraw_id, "REJECTED") : admin;
+        }
         break;
 
       default:
@@ -251,7 +267,10 @@ function doPost(e) {
         break;
 
       case "createBonus":
-        result = createBonus(body);
+        {
+          const admin = requireAdminActor(body);
+          result = admin.ok ? createBonus(Object.assign({}, body, { created_by: admin.actor_id })) : admin;
+        }
         break;
 
       case "createCustomer":
@@ -311,23 +330,38 @@ function doPost(e) {
         break;
 
       case "approveAgent":
-        result = updateAgentStatus(body.agent_id, AGENT_STATUS.APPROVED);
+        {
+          const admin = requireAdminActor(body);
+          result = admin.ok ? updateAgentStatus(body.agent_id, AGENT_STATUS.APPROVED) : admin;
+        }
         break;
 
       case "rejectAgent":
-        result = updateAgentStatus(body.agent_id, AGENT_STATUS.REJECTED);
+        {
+          const admin = requireAdminActor(body);
+          result = admin.ok ? updateAgentStatus(body.agent_id, AGENT_STATUS.REJECTED) : admin;
+        }
         break;
 
       case "suspendAgent":
-        result = updateAgentStatus(body.agent_id, AGENT_STATUS.SUSPENDED);
+        {
+          const admin = requireAdminActor(body);
+          result = admin.ok ? updateAgentStatus(body.agent_id, AGENT_STATUS.SUSPENDED) : admin;
+        }
         break;
 
       case "markWithdrawPaid":
-        result = updateWithdrawStatus(body.withdraw_id, "PAID");
+        {
+          const admin = requireAdminActor(body);
+          result = admin.ok ? updateWithdrawStatus(body.withdraw_id, "PAID") : admin;
+        }
         break;
 
       case "rejectWithdraw":
-        result = updateWithdrawStatus(body.withdraw_id, "REJECTED");
+        {
+          const admin = requireAdminActor(body);
+          result = admin.ok ? updateWithdrawStatus(body.withdraw_id, "REJECTED") : admin;
+        }
         break;
 
       default:
@@ -1831,7 +1865,7 @@ function login(body) {
     };
   }
 
-  return {
+  const response = {
     ok: true,
     agent_id: user.agent_id,
     name: (
@@ -1848,6 +1882,13 @@ function login(body) {
     exam_attempts: Number(user.exam_attempts || 0),
     next_page: nextPage
   };
+
+  if (isAdminRole(user.role)) {
+    response.admin_session_token = createAdminSession(user);
+    response.admin_session_expires_in = ADMIN_SESSION_TTL_SECONDS;
+  }
+
+  return response;
 }
 
 /* =========================================================
@@ -2376,6 +2417,9 @@ function summarizeFinancials() {
 
 function listAgents(options) {
   const params = options || {};
+  const admin = requireAdminActor(params);
+  if (!admin.ok) return admin;
+
   const limit = Math.max(1, Math.min(500, Number(params.limit || 200)));
   const offset = Math.max(0, Number(params.offset || 0));
   const agents = filterAgents(sheetToObjects(SHEET_NAMES.agents), params)
@@ -2404,6 +2448,9 @@ function listPendingAgents(options) {
 
 function getAdminDashboard(options) {
   const params = options || {};
+  const admin = requireAdminActor(params);
+  if (!admin.ok) return admin;
+
   const agents = sheetToObjects(SHEET_NAMES.agents);
   const publicAgents = agents.map(publicAgent);
   const pendingAgents = publicAgents.filter(function (agent) {
@@ -2476,10 +2523,61 @@ function findApprovedAgent(agentId) {
   };
 }
 
-function requireAdminActor(body) {
-  const actor = cleanString(body && (body.actor_id || body.admin_id || body.actorId), 80).toUpperCase();
+function isAdminRole(role) {
+  const normalizedRole = cleanString(role, 40).toUpperCase();
+  return normalizedRole === "ADMIN" || normalizedRole === "OWNER";
+}
 
-  if (actor !== "ADMIN") {
+function createAdminSession(user) {
+  const token = "ADM-" + Utilities.getUuid();
+  const payload = {
+    agent_id: cleanString(user.agent_id, 80),
+    role: cleanString(user.role, 40),
+    created_at: new Date().toISOString()
+  };
+
+  CacheService
+    .getScriptCache()
+    .put("admin_session:" + token, JSON.stringify(payload), ADMIN_SESSION_TTL_SECONDS);
+
+  return token;
+}
+
+function verifyAdminSession(body) {
+  const token = cleanString(
+    body && (body.admin_session_token || body.adminToken || body.session_token || body.token),
+    200
+  );
+  const adminId = cleanString(body && (body.admin_id || body.actor_id || body.actorId), 80);
+
+  if (!token || !adminId) {
+    return {
+      ok: false,
+      message: "Admin session required"
+    };
+  }
+
+  const raw = CacheService.getScriptCache().get("admin_session:" + token);
+
+  if (!raw) {
+    return {
+      ok: false,
+      message: "Admin session expired or invalid"
+    };
+  }
+
+  const session = parseJsonValue(raw, {});
+
+  if (cleanString(session.agent_id, 80) !== adminId) {
+    return {
+      ok: false,
+      message: "Admin session mismatch"
+    };
+  }
+
+  const user = findAgent(adminId);
+
+  if (!user || !isAdminRole(user.role)) {
     return {
       ok: false,
       message: "Admin permission required"
@@ -2488,8 +2586,23 @@ function requireAdminActor(body) {
 
   return {
     ok: true,
-    actor_id: actor
+    actor_id: cleanString(user.agent_id, 80),
+    role: cleanString(user.role, 40),
+    user: user
   };
+}
+
+function requireAdminActor(body) {
+  const session = verifyAdminSession(body || {});
+
+  if (!session.ok) {
+    return {
+      ok: false,
+      message: session.message
+    };
+  }
+
+  return session;
 }
 
 function agentFullName(agent) {
@@ -2776,6 +2889,11 @@ function listProducts(params) {
   const query = cleanString(options.q || options.search, 200).toLowerCase();
   const status = normalizeSalesStatus(options.status || "");
   const includeInactive = booleanValue(options.include_inactive || options.includeInactive);
+  if (includeInactive) {
+    const admin = requireAdminActor(options);
+    if (!admin.ok) return admin;
+  }
+
   const products = sheetToObjects(SHEET_NAMES.products)
     .filter(function (product) {
       const normalizedStatus = normalizeSalesStatus(product.status || "ACTIVE");
@@ -2854,7 +2972,7 @@ function createProduct(body) {
 
   appendObject(SHEET_NAMES.products, product);
   writeAuditLog("createProduct", "", "SUCCESS", "Product created", {
-    actor_id: cleanString(body.actor_id || body.admin_id || "ADMIN", 80),
+    actor_id: admin.actor_id,
     product_id: product.product_id,
     sku: product.sku
   });
@@ -2883,7 +3001,7 @@ function updateProduct(body) {
 
   updateRowFields(SHEET_NAMES.products, product._row, updates);
   writeAuditLog("updateProduct", "", "SUCCESS", "Product updated", {
-    actor_id: cleanString(body.actor_id || body.admin_id || "ADMIN", 80),
+    actor_id: admin.actor_id,
     product_id: product.product_id
   });
 
@@ -2902,6 +3020,9 @@ function deleteProduct(body) {
 
 function listPricing(params) {
   ensureSalesSheets();
+  const admin = requireAdminActor(params || {});
+  if (!admin.ok) return admin;
+
   return {
     ok: true,
     total: sheetToObjects(SHEET_NAMES.productPricing).length,
@@ -2958,7 +3079,7 @@ function upsertPricing(body) {
   }
 
   writeAuditLog("upsertPricing", "", "SUCCESS", "Pricing updated", {
-    actor_id: cleanString(body.actor_id || body.admin_id || "ADMIN", 80),
+    actor_id: admin.actor_id,
     product_id: product.product_id,
     pricing_id: data.pricing_id
   });
@@ -3005,7 +3126,7 @@ function updateDepositPolicy(body) {
   }
 
   writeAuditLog("updateDepositPolicy", "", "SUCCESS", "Deposit policy updated", {
-    actor_id: cleanString(body.actor_id || body.admin_id || "ADMIN", 80),
+    actor_id: admin.actor_id,
     enabled: updates.enabled,
     deposit_percent: updates.deposit_percent
   });
@@ -3360,6 +3481,9 @@ function listCustomers(params) {
     if (!agentResult.ok) {
       return agentResult;
     }
+  } else {
+    const admin = requireAdminActor(options);
+    if (!admin.ok) return admin;
   }
 
   const customers = sheetToObjects(SHEET_NAMES.customers)
@@ -3710,6 +3834,9 @@ function listQuotations(params) {
     if (!agentResult.ok) {
       return agentResult;
     }
+  } else {
+    const admin = requireAdminActor(options);
+    if (!admin.ok) return admin;
   }
 
   const quotations = sheetToObjects(SHEET_NAMES.quotations)
@@ -3748,6 +3875,9 @@ function listQuotations(params) {
 
 function approveQuotation(body) {
   ensureSalesSheets();
+  const admin = requireAdminActor(body);
+  if (!admin.ok) return admin;
+
   const quotation = findQuotationById(body && (body.quotation_id || body.quoteId));
 
   if (!quotation) {
@@ -3777,7 +3907,7 @@ function approveQuotation(body) {
 
   updateRowFields(SHEET_NAMES.quotations, quotation._row, updates);
   writeAuditLog("approveQuotation", quotation.owner_agent_id || quotation.agent_id, "SUCCESS", "Quotation approved", {
-    actor_id: cleanString(body.actor_id || body.admin_id || "ADMIN", 80),
+    actor_id: admin.actor_id,
     quotation_id: quotation.quotation_id
   });
 
@@ -3791,6 +3921,9 @@ function approveQuotation(body) {
 
 function rejectQuotation(body) {
   ensureSalesSheets();
+  const admin = requireAdminActor(body);
+  if (!admin.ok) return admin;
+
   const quotation = findQuotationById(body && (body.quotation_id || body.quoteId));
 
   if (!quotation) {
@@ -3818,7 +3951,7 @@ function rejectQuotation(body) {
 
   updateRowFields(SHEET_NAMES.quotations, quotation._row, updates);
   writeAuditLog("rejectQuotation", quotation.owner_agent_id || quotation.agent_id, "SUCCESS", "Quotation rejected", {
-    actor_id: cleanString(body.actor_id || body.admin_id || "ADMIN", 80),
+    actor_id: admin.actor_id,
     quotation_id: quotation.quotation_id,
     reason: updates.rejected_reason
   });
@@ -3853,6 +3986,9 @@ function appendOrderStatusLog(order, fromStatus, toStatus, actorId, actorRole, n
 
 function createOrderFromQuotation(body) {
   ensureSalesSheets();
+  const admin = requireAdminActor(body);
+  if (!admin.ok) return admin;
+
   const quotation = findQuotationById(body && (body.quotation_id || body.quoteId));
 
   if (!quotation) {
@@ -3923,7 +4059,7 @@ function createOrderFromQuotation(body) {
       {
         status: ORDER_STATUS.PAYMENT_PENDING,
         at: now,
-        by: cleanString(body.actor_id || body.admin_id || "ADMIN", 80),
+        by: admin.actor_id,
         note: "Order created from approved quotation"
       }
     ]),
@@ -3942,9 +4078,9 @@ function createOrderFromQuotation(body) {
     order_id: order.order_id,
     updated_at: now
   });
-  appendOrderStatusLog(order, "", ORDER_STATUS.PAYMENT_PENDING, body.actor_id || body.admin_id || "ADMIN", "ADMIN", "Order created");
+  appendOrderStatusLog(order, "", ORDER_STATUS.PAYMENT_PENDING, admin.actor_id, admin.role, "Order created");
   writeAuditLog("createOrderFromQuotation", order.owner_agent_id, "SUCCESS", "Order created from quotation", {
-    actor_id: cleanString(body.actor_id || body.admin_id || "ADMIN", 80),
+    actor_id: admin.actor_id,
     quotation_id: quotation.quotation_id,
     order_id: order.order_id
   });
@@ -4002,6 +4138,9 @@ function listOrders(params) {
     if (!agentResult.ok) {
       return agentResult;
     }
+  } else {
+    const admin = requireAdminActor(options);
+    if (!admin.ok) return admin;
   }
 
   const orders = sheetToObjects(SHEET_NAMES.orders)
@@ -4081,6 +4220,9 @@ function listPayments(params) {
   if (agentId) {
     const agentResult = findApprovedAgent(agentId);
     if (!agentResult.ok) return agentResult;
+  } else {
+    const admin = requireAdminActor(options);
+    if (!admin.ok) return admin;
   }
 
   const payments = sheetToObjects(SHEET_NAMES.payments)
@@ -4232,7 +4374,7 @@ function reviewPayment(body) {
   const updates = {
     status: decision,
     reviewed_at: now,
-    reviewed_by: cleanString(body.actor_id || body.admin_id || "ADMIN", 80),
+    reviewed_by: admin.actor_id,
     note: cleanString(body.note || payment.note, 500),
     updated_at: now
   };
@@ -4293,8 +4435,9 @@ function reviewPayment(body) {
 
 function updateOrderStatus(body) {
   ensureSalesSheets();
+  let admin = null;
   if (!(body && body.internal)) {
-    const admin = requireAdminActor(body);
+    admin = requireAdminActor(body);
     if (!admin.ok) return admin;
   }
 
@@ -4345,7 +4488,7 @@ function updateOrderStatus(body) {
   timeline.push({
     status: nextStatus,
     at: now,
-    by: cleanString(body.actor_id || body.admin_id || "ADMIN", 80),
+    by: cleanString((admin && admin.actor_id) || body.actor_id || body.admin_id || "ADMIN", 80),
     note: cleanString(body.note, 500)
   });
 
@@ -4365,9 +4508,9 @@ function updateOrderStatus(body) {
   if (nextStatus === ORDER_STATUS.CANCELLED) updates.cancelled_at = now;
 
   updateRowFields(SHEET_NAMES.orders, order._row, updates);
-  appendOrderStatusLog(order, currentStatus, nextStatus, body.actor_id || body.admin_id || "ADMIN", "ADMIN", body.note);
+  appendOrderStatusLog(order, currentStatus, nextStatus, (admin && admin.actor_id) || body.actor_id || body.admin_id || "ADMIN", (admin && admin.role) || "ADMIN", body.note);
   writeAuditLog("updateOrderStatus", order.owner_agent_id || order.agent_id, "SUCCESS", "Order status updated", {
-    actor_id: cleanString(body.actor_id || body.admin_id || "ADMIN", 80),
+    actor_id: cleanString((admin && admin.actor_id) || body.actor_id || body.admin_id || "ADMIN", 80),
     order_id: order.order_id,
     from_status: currentStatus,
     to_status: nextStatus
