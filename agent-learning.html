@@ -78,6 +78,8 @@ function t(key,fallback){const text=window.SBOSI18n&&window.SBOSI18n.t?window.SB
 function readJson(key){try{return JSON.parse(localStorage.getItem(key)||"null")}catch(e){return null}}
 function getSession(){for(const key of SESSION_KEYS){const value=readJson(key);if(value)return value}return null}
 function getAgentId(){const session=getSession();return session&&(session.agent_id||session.applicationId)||localStorage.getItem("agent_id")||localStorage.getItem("ssb_current_agent_v1")||localStorage.getItem("ssb_agent_id")||""}
+function getAgentToken(){return localStorage.getItem("agent_session_token")||""}
+async function revokeSession(){const agentId=getAgentId(),token=getAgentToken();if(!agentId||!token)return;try{await fetch(API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"logoutAgent",agent_id:agentId,agent_session_token:token}),keepalive:true})}catch(e){}}
 function show(type,text){const box=document.getElementById("message");box.className="message show "+type;box.textContent=text}
 function jsonp(url){return new Promise((resolve,reject)=>{const callback="training_cb_"+Date.now()+"_"+Math.floor(Math.random()*10000);const script=document.createElement("script");const clean=()=>{try{delete window[callback]}catch(e){window[callback]=undefined}if(script.parentNode)script.remove()};window[callback]=data=>{clean();resolve(data)};script.onerror=()=>{clean();reject(new Error(t("training.networkError","เชื่อมต่อระบบไม่ได้")))};script.src=url+"&callback="+encodeURIComponent(callback)+"&_="+Date.now();document.body.appendChild(script)})}
 function routeStatus(status){const s=String(status||"").toUpperCase();if(s==="EXAM")location.replace("agent-exam.html");else if(s==="WAIT_APPROVAL"||s==="PENDING")location.replace("agent-waiting.html");else if(s==="APPROVED")location.replace("agent-dashboard.html");else if(s==="REJECTED"||s==="SUSPENDED")location.replace("agent-login.html")}
@@ -166,7 +168,7 @@ async function start(){
   document.getElementById("prevBtn").onclick=()=>{if(current>0){current--;render()}};
   document.getElementById("nextBtn").onclick=()=>{if(current<Math.min(completedCount,lessons.length-1)){current++;render()}};
   document.getElementById("goExamBtn").onclick=()=>location.href="agent-exam.html";
-  document.getElementById("logoutBtn").onclick=()=>{["agent_id","agent_name","agent_role","agent_status","ssb_agent_id","ssb_current_agent_v1",...SESSION_KEYS].forEach(key=>localStorage.removeItem(key));location.href="agent-login.html"};
+  document.getElementById("logoutBtn").onclick=async()=>{await revokeSession();["agent_id","agent_name","agent_role","agent_status","agent_session_token","agent_session_expires_at","ssb_agent_id","ssb_current_agent_v1",...SESSION_KEYS].forEach(key=>localStorage.removeItem(key));location.href="agent-login.html"};
   window.addEventListener("sbos:languagechange",render);
   const session=getSession();if(session&&session.name){const agentName=document.getElementById("agentName");agentName.removeAttribute("data-i18n");agentName.textContent=session.name}
   loadProgress();

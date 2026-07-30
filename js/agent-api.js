@@ -141,7 +141,18 @@ function setText(selector, value){
   if (element) element.textContent = value;
 }
 
-function logout(){
+async function logout(){
+  const auth = getCurrentAgentAuthParams();
+  if (auth.agent_id && auth.agent_session_token) {
+    try {
+      await apiPostJson({
+        action: "logoutAgent",
+        agent_id: auth.agent_id,
+        agent_session_token: auth.agent_session_token
+      });
+    } catch (error) {}
+  }
+
   [
     "agent_id", "agent_name", "agent_role", "agent_status",
     "agent_session_token", "agent_session_expires_at",

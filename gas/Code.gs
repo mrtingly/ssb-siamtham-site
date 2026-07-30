@@ -207,6 +207,14 @@ function doPost(e) {
         result = login(body);
         break;
 
+      case "logoutAgent":
+        result = logoutAgent(body);
+        break;
+
+      case "logoutAdmin":
+        result = logoutAdmin(body);
+        break;
+
       case "startTraining":
         result = startTraining(body);
         break;
@@ -2571,6 +2579,7 @@ function findApprovedAgent(agentId) {
 
 function createAgentSession(user) {
   const token = "AGT-" + Utilities.getUuid();
+  const tokenHash = hashSessionToken(token);
   const payload = {
     agent_id: cleanString(user.agent_id, 80),
     status: normalizeStatus(user.status),
@@ -2579,9 +2588,18 @@ function createAgentSession(user) {
 
   CacheService
     .getScriptCache()
-    .put("agent_session:" + token, JSON.stringify(payload), AGENT_SESSION_TTL_SECONDS);
+    .put("agent_session:" + tokenHash, JSON.stringify(payload), AGENT_SESSION_TTL_SECONDS);
 
   return token;
+}
+
+function hashSessionToken(token) {
+  const digest = Utilities.computeDigest(
+    Utilities.DigestAlgorithm.SHA_256,
+    cleanString(token, 240),
+    Utilities.Charset.UTF_8
+  );
+  return Utilities.base64EncodeWebSafe(digest).replace(/=+$/g, "");
 }
 
 function verifyAgentSession(body) {
@@ -2598,7 +2616,7 @@ function verifyAgentSession(body) {
     };
   }
 
-  const raw = CacheService.getScriptCache().get("agent_session:" + token);
+  const raw = CacheService.getScriptCache().get("agent_session:" + hashSessionToken(token));
 
   if (!raw) {
     return {
@@ -2626,11 +2644,51 @@ function verifyAgentSession(body) {
     };
   }
 
+  const currentStatus = normalizeStatus(agent.status);
+
+  if (currentStatus === AGENT_STATUS.REJECTED || currentStatus === AGENT_STATUS.SUSPENDED) {
+    return {
+      ok: false,
+      message: "Agent session expired or invalid",
+      status: currentStatus,
+      next_page: "agent-login.html"
+    };
+  }
+
   return {
     ok: true,
     agent_id: cleanString(agent.agent_id, 80),
-    status: normalizeStatus(agent.status),
+    status: currentStatus,
     agent: agent
+  };
+}
+
+function logoutAgent(body) {
+  const token = cleanString(
+    body && (body.agent_session_token || body.agentToken || body.session_token || body.token),
+    200
+  );
+  const agentId = cleanString(body && (body.agent_id || body.agentId), 80);
+
+  if (!token || !agentId) {
+    return {
+      ok: true,
+      revoked: false,
+      message: "No active agent session"
+    };
+  }
+
+  const session = verifyAgentSession({
+    agent_id: agentId,
+    agent_session_token: token
+  });
+
+  CacheService.getScriptCache().remove("agent_session:" + hashSessionToken(token));
+
+  return {
+    ok: true,
+    revoked: Boolean(session.ok),
+    message: "Agent session revoked"
   };
 }
 
@@ -2655,6 +2713,7 @@ function isAdminRole(role) {
 
 function createAdminSession(user) {
   const token = "ADM-" + Utilities.getUuid();
+  const tokenHash = hashSessionToken(token);
   const payload = {
     agent_id: cleanString(user.agent_id, 80),
     role: cleanString(user.role, 40),
@@ -2663,7 +2722,7 @@ function createAdminSession(user) {
 
   CacheService
     .getScriptCache()
-    .put("admin_session:" + token, JSON.stringify(payload), ADMIN_SESSION_TTL_SECONDS);
+    .put("admin_session:" + tokenHash, JSON.stringify(payload), ADMIN_SESSION_TTL_SECONDS);
 
   return token;
 }
@@ -2682,7 +2741,7 @@ function verifyAdminSession(body) {
     };
   }
 
-  const raw = CacheService.getScriptCache().get("admin_session:" + token);
+  const raw = CacheService.getScriptCache().get("admin_session:" + hashSessionToken(token));
 
   if (!raw) {
     return {
@@ -2714,6 +2773,35 @@ function verifyAdminSession(body) {
     actor_id: cleanString(user.agent_id, 80),
     role: cleanString(user.role, 40),
     user: user
+  };
+}
+
+function logoutAdmin(body) {
+  const token = cleanString(
+    body && (body.admin_session_token || body.adminToken || body.session_token || body.token),
+    200
+  );
+  const adminId = cleanString(body && (body.admin_id || body.actor_id || body.actorId), 80);
+
+  if (!token || !adminId) {
+    return {
+      ok: true,
+      revoked: false,
+      message: "No active admin session"
+    };
+  }
+
+  const session = verifyAdminSession({
+    admin_id: adminId,
+    admin_session_token: token
+  });
+
+  CacheService.getScriptCache().remove("admin_session:" + hashSessionToken(token));
+
+  return {
+    ok: true,
+    revoked: Boolean(session.ok),
+    message: "Admin session revoked"
   };
 }
 
@@ -3893,12 +3981,6 @@ function createQuotation(body) {
     };
   }
 
-  const customerResult = getOrCreateCustomerForQuotation(body, agent);
-
-  if (!customerResult.ok) {
-    return customerResult;
-  }
-
   if (
     !cleanString(body.product_id || body.productId || body.sku || body.model, 160) &&
     !existing
@@ -3907,6 +3989,21 @@ function createQuotation(body) {
       ok: false,
       message: "Quotation product model is required"
     };
+  }
+
+  const pricingPreflight = calculateBackendPricing(body || {});
+
+  if (!pricingPreflight.ok) {
+    return {
+      ok: false,
+      message: pricingPreflight.message || "Pricing calculation failed"
+    };
+  }
+
+  const customerResult = getOrCreateCustomerForQuotation(body, agent);
+
+  if (!customerResult.ok) {
+    return customerResult;
   }
 
   const quotation = buildQuotationData(body, agent, customerResult.customer, existing);

@@ -113,7 +113,7 @@
     }
   }
 
-  function getAgentId() {
+    function getAgentId() {
     const direct =
       localStorage.getItem("agent_id") ||
       localStorage.getItem("ssb_agent_id") ||
@@ -128,8 +128,12 @@
       }
     }
 
-    return "";
-  }
+      return "";
+    }
+
+    function getAgentToken() {
+      return localStorage.getItem("agent_session_token") || "";
+    }
 
   function sanitizeAgentId(value) {
     const text = String(value || "").trim();
@@ -632,13 +636,27 @@
     els.attemptStatus.textContent = text;
   }
 
-  function logout() {
+  async function logout() {
     window.clearInterval(state.timerId);
+    const agentId = getAgentId();
+    const token = getAgentToken();
+
+    if (agentId && token) {
+      try {
+        await api("logoutAgent", {
+          agent_id: agentId,
+          agent_session_token: token
+        });
+      } catch (error) {}
+    }
+
     [
       "agent_id",
       "agent_name",
       "agent_role",
       "agent_status",
+      "agent_session_token",
+      "agent_session_expires_at",
       "ssb_agent_id",
       "ssb_current_agent_v1",
       "ssb_agent_session",
