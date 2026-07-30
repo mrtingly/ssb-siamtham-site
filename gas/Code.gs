@@ -7,6 +7,10 @@ const SHEET_NAMES = {
   customers: "customers",
   quotations: "quotations",
   orderStatusLogs: "order_status_logs",
+  products: "products",
+  productPricing: "product_pricing",
+  depositPolicies: "deposit_policies",
+  payments: "payments",
   trainingLessons: "training_lessons",
   trainingProgress: "agent_training_progress",
   examQuestions: "exam_questions",
@@ -87,6 +91,30 @@ function doGet(e) {
 
       case "listOrderStatusLogs":
         result = listOrderStatusLogs(e.parameter);
+        break;
+
+      case "listProducts":
+        result = listProducts(e.parameter);
+        break;
+
+      case "getProduct":
+        result = getProduct(e.parameter);
+        break;
+
+      case "listPricing":
+        result = listPricing(e.parameter);
+        break;
+
+      case "getDepositPolicy":
+        result = getDepositPolicy(e.parameter);
+        break;
+
+      case "calculatePricing":
+        result = calculatePricing(e.parameter);
+        break;
+
+      case "listPayments":
+        result = listPayments(e.parameter);
         break;
 
       case "listTrainingLessons":
@@ -250,6 +278,38 @@ function doPost(e) {
         result = updateOrderStatus(body);
         break;
 
+      case "createProduct":
+        result = createProduct(body);
+        break;
+
+      case "updateProduct":
+        result = updateProduct(body);
+        break;
+
+      case "deleteProduct":
+        result = deleteProduct(body);
+        break;
+
+      case "upsertPricing":
+        result = upsertPricing(body);
+        break;
+
+      case "updateDepositPolicy":
+        result = updateDepositPolicy(body);
+        break;
+
+      case "calculatePricing":
+        result = calculatePricing(body);
+        break;
+
+      case "createPayment":
+        result = createPayment(body);
+        break;
+
+      case "reviewPayment":
+        result = reviewPayment(body);
+        break;
+
       case "approveAgent":
         result = updateAgentStatus(body.agent_id, AGENT_STATUS.APPROVED);
         break;
@@ -373,6 +433,10 @@ function sheetToObjects(sheetName) {
         obj.customer_id,
         obj.quotation_id,
         obj.status_log_id,
+        obj.product_id,
+        obj.pricing_id,
+        obj.policy_id,
+        obj.payment_id,
         obj.bonus_id,
         obj.lesson_id,
         obj.progress_id,
@@ -608,6 +672,9 @@ const QUOTATION_HEADERS = [
   "team_leader_id",
   "team_leader_name",
   "status",
+  "product_id",
+  "sku",
+  "collection",
   "brand",
   "series",
   "model",
@@ -616,11 +683,17 @@ const QUOTATION_HEADERS = [
   "price_date",
   "phone_price",
   "service_fee",
+  "promotion",
+  "discount",
   "subtotal",
   "vat_rate",
   "vat",
   "total",
   "grand_total",
+  "payment_option",
+  "deposit_percent",
+  "deposit_amount",
+  "balance_amount",
   "line_items_json",
   "customer_json",
   "signer_name",
@@ -649,6 +722,9 @@ const ORDER_HEADERS = [
   "customer_email",
   "customer_address",
   "status",
+  "product_id",
+  "sku",
+  "collection",
   "brand",
   "series",
   "model",
@@ -658,6 +734,12 @@ const ORDER_HEADERS = [
   "vat",
   "total",
   "grand_total",
+  "payment_option",
+  "deposit_percent",
+  "deposit_amount",
+  "balance_amount",
+  "paid_amount",
+  "payment_status",
   "line_items_json",
   "timeline_json",
   "created_at",
@@ -683,6 +765,64 @@ const ORDER_STATUS_LOG_HEADERS = [
   "created_at"
 ];
 
+const PRODUCT_HEADERS = [
+  "product_id",
+  "collection",
+  "brand",
+  "model",
+  "storage",
+  "color",
+  "sku",
+  "status",
+  "created_at",
+  "updated_at"
+];
+
+const PRODUCT_PRICING_HEADERS = [
+  "pricing_id",
+  "product_id",
+  "sku",
+  "product_price",
+  "service_fee",
+  "vat_rate",
+  "promotion",
+  "discount",
+  "status",
+  "effective_from",
+  "effective_to",
+  "created_at",
+  "updated_at"
+];
+
+const DEPOSIT_POLICY_HEADERS = [
+  "policy_id",
+  "enabled",
+  "deposit_percent",
+  "status",
+  "created_at",
+  "updated_at"
+];
+
+const PAYMENT_HEADERS = [
+  "payment_id",
+  "order_id",
+  "quotation_id",
+  "customer_id",
+  "owner_agent_id",
+  "team_leader_id",
+  "payment_type",
+  "amount",
+  "status",
+  "method",
+  "reference",
+  "note",
+  "submitted_at",
+  "reviewed_at",
+  "reviewed_by",
+  "created_at",
+  "updated_at"
+];
+
 const QUOTATION_STATUS = {
   DRAFT: "DRAFT",
   SUBMITTED: "SUBMITTED",
@@ -695,6 +835,8 @@ const ORDER_STATUS = {
   NEW: "NEW",
   PAYMENT_PENDING: "PAYMENT_PENDING",
   PAYMENT_REVIEW: "PAYMENT_REVIEW",
+  DEPOSIT_PAID: "DEPOSIT_PAID",
+  PAID_IN_FULL: "PAID_IN_FULL",
   PAID: "PAID",
   PREPARING: "PREPARING",
   READY_TO_INSTALL: "READY_TO_INSTALL",
@@ -706,7 +848,9 @@ const ORDER_STATUS = {
 const ORDER_STATUS_TRANSITIONS = {
   NEW: ["PAYMENT_PENDING", "CANCELLED"],
   PAYMENT_PENDING: ["PAYMENT_REVIEW", "PAID", "CANCELLED"],
-  PAYMENT_REVIEW: ["PAID", "PAYMENT_PENDING", "CANCELLED"],
+  PAYMENT_REVIEW: ["DEPOSIT_PAID", "PAID_IN_FULL", "PAID", "PAYMENT_PENDING", "CANCELLED"],
+  DEPOSIT_PAID: ["PREPARING", "PAYMENT_REVIEW", "CANCELLED"],
+  PAID_IN_FULL: ["PREPARING", "CANCELLED"],
   PAID: ["PREPARING", "CANCELLED"],
   PREPARING: ["READY_TO_INSTALL", "CANCELLED"],
   READY_TO_INSTALL: ["INSTALLING", "CANCELLED"],
@@ -714,6 +858,21 @@ const ORDER_STATUS_TRANSITIONS = {
   COMPLETED: [],
   CANCELLED: []
 };
+
+const DEFAULT_PRODUCTS = [
+  { collection: "Silver Galaxy A Series Collection", brand: "Samsung", model: "Galaxy A17 5G", storage: "128GB", color: "Black", sku: "SSB-SIL-A17-128-BLK", product_price: 7990 },
+  { collection: "Silver Galaxy A Series Collection", brand: "Samsung", model: "Galaxy A17 5G", storage: "256GB", color: "Black", sku: "SSB-SIL-A17-256-BLK", product_price: 8990 },
+  { collection: "Silver Galaxy A Series Collection", brand: "Samsung", model: "Galaxy A27 5G", storage: "256GB", color: "Light Blue", sku: "SSB-SIL-A27-256-LBL", product_price: 12990 },
+  { collection: "Gold Galaxy S Series Collection", brand: "Samsung", model: "Galaxy S26", storage: "256GB", color: "Navy", sku: "SSB-GLD-S26-256-NVY", product_price: 32900 },
+  { collection: "Gold Galaxy S Series Collection", brand: "Samsung", model: "Galaxy S26 Ultra", storage: "512GB", color: "Titanium Black", sku: "SSB-GLD-S26U-512-TBK", product_price: 48900 },
+  { collection: "Platinum Apple iPhone & iPad Collection", brand: "Apple", model: "iPhone 17", storage: "256GB", color: "Black", sku: "SSB-PLT-IP17-256-BLK", product_price: 32900 },
+  { collection: "Platinum Apple iPhone & iPad Collection", brand: "Apple", model: "iPhone 17 Pro", storage: "256GB", color: "Silver", sku: "SSB-PLT-IP17P-256-SLV", product_price: 43900 },
+  { collection: "Platinum Apple iPhone & iPad Collection", brand: "iPad", model: "iPad mini Cellular", storage: "256GB", color: "Blue", sku: "SSB-PLT-IPADM-256-BLU", product_price: 25900 }
+];
+
+const DEFAULT_SERVICE_FEE = 45000;
+const DEFAULT_VAT_RATE = 0.07;
+const DEFAULT_DEPOSIT_PERCENT = 30;
 
 const DEFAULT_TRAINING_LESSONS = [
   {
@@ -1899,6 +2058,7 @@ function submitExam(body) {
 ========================================================= */
 
 function getDashboard(agentId) {
+  ensureSalesSheets();
   const agentResult = getAgent(agentId);
 
   if (!agentResult.ok) {
@@ -1928,9 +2088,12 @@ function getDashboard(agentId) {
     return String(item.agent_id || "") === String(agentId || "");
   });
 
-  const orders = sheetToObjects(SHEET_NAMES.orders).filter(function (item) {
-    return String(item.agent_id || "") === String(agentId || "");
-  });
+  const orders = sheetToObjects(SHEET_NAMES.orders)
+    .filter(function (item) {
+      return String(item.agent_id || item.owner_agent_id || "") === String(agentId || "");
+    })
+    .map(publicOrder);
+  const orderSummary = summarizeOrders(orders);
 
   const totalIncome = sum(income, "net_amount");
   const available = sum(
@@ -1972,12 +2135,40 @@ function getDashboard(agentId) {
       totalBonus: totalBonus,
       commission: commission,
       tax: tax,
-      net: net
+      net: net,
+      orders: orderSummary.total,
+      depositPending: orderSummary.depositPending,
+      depositApproved: orderSummary.depositApproved,
+      paid: orderSummary.paid,
+      completed: orderSummary.completed,
+      cancelled: orderSummary.cancelled
     },
     income: income,
     withdraws: withdraws,
     bonus: bonus,
     orders: orders
+  };
+}
+
+function summarizeOrders(orders) {
+  const list = orders || [];
+  return {
+    total: list.length,
+    depositPending: list.filter(function (order) {
+      return [ORDER_STATUS.PAYMENT_PENDING, ORDER_STATUS.PAYMENT_REVIEW].indexOf(normalizeSalesStatus(order.status)) !== -1;
+    }).length,
+    depositApproved: list.filter(function (order) {
+      return normalizeSalesStatus(order.status) === ORDER_STATUS.DEPOSIT_PAID;
+    }).length,
+    paid: list.filter(function (order) {
+      return [ORDER_STATUS.PAID, ORDER_STATUS.PAID_IN_FULL].indexOf(normalizeSalesStatus(order.status)) !== -1;
+    }).length,
+    completed: list.filter(function (order) {
+      return normalizeSalesStatus(order.status) === ORDER_STATUS.COMPLETED;
+    }).length,
+    cancelled: list.filter(function (order) {
+      return normalizeSalesStatus(order.status) === ORDER_STATUS.CANCELLED;
+    }).length
   };
 }
 
@@ -2238,7 +2429,13 @@ function ensureSalesSheets() {
   getOrCreateSheet(SHEET_NAMES.quotations, QUOTATION_HEADERS);
   getOrCreateSheet(SHEET_NAMES.orders, ORDER_HEADERS);
   getOrCreateSheet(SHEET_NAMES.orderStatusLogs, ORDER_STATUS_LOG_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.products, PRODUCT_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.productPricing, PRODUCT_PRICING_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.depositPolicies, DEPOSIT_POLICY_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.payments, PAYMENT_HEADERS);
   getOrCreateSheet(SHEET_NAMES.auditLogs, AUDIT_LOG_HEADERS);
+  seedV3ProductCatalog();
+  seedDepositPolicy();
 }
 
 function normalizeSalesStatus(status) {
@@ -2279,12 +2476,547 @@ function findApprovedAgent(agentId) {
   };
 }
 
+function requireAdminActor(body) {
+  const actor = cleanString(body && (body.actor_id || body.admin_id || body.actorId), 80).toUpperCase();
+
+  if (actor !== "ADMIN") {
+    return {
+      ok: false,
+      message: "Admin permission required"
+    };
+  }
+
+  return {
+    ok: true,
+    actor_id: actor
+  };
+}
+
 function agentFullName(agent) {
   return (
     cleanString(agent.first_name, 120) +
     " " +
     cleanString(agent.last_name, 120)
   ).trim();
+}
+
+function seedV3ProductCatalog() {
+  const products = sheetToObjects(SHEET_NAMES.products);
+  const pricing = sheetToObjects(SHEET_NAMES.productPricing);
+  const now = new Date();
+
+  if (products.length === 0) {
+    DEFAULT_PRODUCTS.forEach(function (item) {
+      appendObject(SHEET_NAMES.products, {
+        product_id: makeId("PRD"),
+        collection: item.collection,
+        brand: item.brand,
+        model: item.model,
+        storage: item.storage,
+        color: item.color,
+        sku: item.sku,
+        status: "ACTIVE",
+        created_at: now,
+        updated_at: now
+      });
+    });
+  }
+
+  if (pricing.length === 0) {
+    sheetToObjects(SHEET_NAMES.products).forEach(function (product) {
+      const seed = DEFAULT_PRODUCTS.find(function (item) {
+        return cleanString(item.sku, 120) === cleanString(product.sku, 120);
+      });
+
+      appendObject(SHEET_NAMES.productPricing, {
+        pricing_id: makeId("PRICE"),
+        product_id: product.product_id,
+        sku: product.sku,
+        product_price: seed ? Number(seed.product_price || 0) : 0,
+        service_fee: DEFAULT_SERVICE_FEE,
+        vat_rate: DEFAULT_VAT_RATE,
+        promotion: "",
+        discount: 0,
+        status: "ACTIVE",
+        effective_from: now,
+        effective_to: "",
+        created_at: now,
+        updated_at: now
+      });
+    });
+  }
+}
+
+function seedDepositPolicy() {
+  if (sheetToObjects(SHEET_NAMES.depositPolicies).length > 0) {
+    return;
+  }
+
+  const now = new Date();
+  appendObject(SHEET_NAMES.depositPolicies, {
+    policy_id: makeId("DPP"),
+    enabled: true,
+    deposit_percent: DEFAULT_DEPOSIT_PERCENT,
+    status: "ACTIVE",
+    created_at: now,
+    updated_at: now
+  });
+}
+
+function publicProduct(product) {
+  return {
+    product_id: cleanString(product.product_id, 80),
+    collection: cleanString(product.collection, 180),
+    brand: cleanString(product.brand, 120),
+    model: cleanString(product.model, 160),
+    storage: cleanString(product.storage, 80),
+    color: cleanString(product.color, 120),
+    sku: cleanString(product.sku, 120),
+    status: normalizeSalesStatus(product.status || "ACTIVE"),
+    created_at: product.created_at || "",
+    updated_at: product.updated_at || ""
+  };
+}
+
+function publicPricing(pricing) {
+  return {
+    pricing_id: cleanString(pricing.pricing_id, 80),
+    product_id: cleanString(pricing.product_id, 80),
+    sku: cleanString(pricing.sku, 120),
+    product_price: Number(pricing.product_price || 0),
+    service_fee: Number(pricing.service_fee || 0),
+    vat_rate: Number(pricing.vat_rate || 0),
+    promotion: cleanString(pricing.promotion, 200),
+    discount: Number(pricing.discount || 0),
+    status: normalizeSalesStatus(pricing.status || "ACTIVE"),
+    effective_from: pricing.effective_from || "",
+    effective_to: pricing.effective_to || "",
+    created_at: pricing.created_at || "",
+    updated_at: pricing.updated_at || ""
+  };
+}
+
+function activeDepositPolicy() {
+  ensureSalesSheets();
+  const policies = sheetToObjects(SHEET_NAMES.depositPolicies)
+    .filter(function (policy) {
+      return normalizeSalesStatus(policy.status || "ACTIVE") === "ACTIVE";
+    });
+
+  return policies[policies.length - 1] || {
+    policy_id: "",
+    enabled: true,
+    deposit_percent: DEFAULT_DEPOSIT_PERCENT,
+    status: "ACTIVE"
+  };
+}
+
+function publicDepositPolicy(policy) {
+  const percent = Math.max(0, Math.min(100, Number(policy.deposit_percent || 0)));
+  return {
+    policy_id: cleanString(policy.policy_id, 80),
+    enabled: booleanValue(policy.enabled),
+    deposit_percent: percent,
+    status: normalizeSalesStatus(policy.status || "ACTIVE"),
+    created_at: policy.created_at || "",
+    updated_at: policy.updated_at || ""
+  };
+}
+
+function findProductById(productId) {
+  const normalizedId = cleanString(productId, 80);
+  if (!normalizedId) return null;
+  ensureSalesSheets();
+  return sheetToObjects(SHEET_NAMES.products).find(function (product) {
+    return cleanString(product.product_id, 80) === normalizedId;
+  }) || null;
+}
+
+function findProductForPricing(options) {
+  const productId = cleanString(options && (options.product_id || options.productId), 80);
+  const sku = cleanString(options && options.sku, 120).toLowerCase();
+  const brand = cleanString(options && options.brand, 120).toLowerCase();
+  const model = cleanString(options && options.model, 160).toLowerCase();
+  const storage = cleanString(options && options.storage, 80).toLowerCase();
+  const color = cleanString(options && options.color, 120).toLowerCase();
+
+  ensureSalesSheets();
+  return sheetToObjects(SHEET_NAMES.products).find(function (product) {
+    if (productId && cleanString(product.product_id, 80) === productId) return true;
+    if (sku && cleanString(product.sku, 120).toLowerCase() === sku) return true;
+    return (
+      model &&
+      cleanString(product.model, 160).toLowerCase() === model &&
+      (!brand || cleanString(product.brand, 120).toLowerCase() === brand) &&
+      (!storage || cleanString(product.storage, 80).toLowerCase() === storage) &&
+      (!color || cleanString(product.color, 120).toLowerCase() === color)
+    );
+  }) || null;
+}
+
+function activePricingForProduct(product) {
+  if (!product) return null;
+  ensureSalesSheets();
+  const productId = cleanString(product.product_id, 80);
+  const sku = cleanString(product.sku, 120);
+  const now = new Date();
+
+  const rows = sheetToObjects(SHEET_NAMES.productPricing)
+    .filter(function (pricing) {
+      if (normalizeSalesStatus(pricing.status || "ACTIVE") !== "ACTIVE") return false;
+      if (
+        cleanString(pricing.product_id, 80) !== productId &&
+        cleanString(pricing.sku, 120) !== sku
+      ) {
+        return false;
+      }
+
+      const from = pricing.effective_from ? new Date(pricing.effective_from) : null;
+      const to = pricing.effective_to ? new Date(pricing.effective_to) : null;
+      return (!from || from <= now) && (!to || to >= now);
+    });
+
+  return rows[rows.length - 1] || null;
+}
+
+function calculateBackendPricing(options) {
+  const product = findProductForPricing(options || {});
+
+  if (!product || normalizeSalesStatus(product.status || "ACTIVE") !== "ACTIVE") {
+    return {
+      ok: false,
+      message: "Active product not found"
+    };
+  }
+
+  const pricing = activePricingForProduct(product);
+
+  if (!pricing) {
+    return {
+      ok: false,
+      message: "Active pricing not found",
+      product: publicProduct(product)
+    };
+  }
+
+  const productPrice = Math.max(0, Number(pricing.product_price || 0));
+  const serviceFee = Math.max(0, Number(pricing.service_fee || DEFAULT_SERVICE_FEE));
+  const discount = Math.max(0, Number(pricing.discount || 0));
+  const vatRate = Math.max(0, Math.min(1, Number(pricing.vat_rate || DEFAULT_VAT_RATE)));
+  const subtotal = Math.max(0, productPrice + serviceFee - discount);
+  const vat = Math.max(0, subtotal * vatRate);
+  const grandTotal = Math.max(0, subtotal + vat);
+  const policy = publicDepositPolicy(activeDepositPolicy());
+  const requestedPaymentOption = normalizeSalesStatus((options && (options.payment_option || options.paymentOption)) || "DEPOSIT");
+  const paymentOption = requestedPaymentOption === "FULL" || requestedPaymentOption === "FULL_PAYMENT"
+    ? "FULL"
+    : (policy.enabled ? "DEPOSIT" : "FULL");
+  const depositPercent = paymentOption === "DEPOSIT" && policy.enabled ? policy.deposit_percent : 100;
+  const depositAmount = Math.round(grandTotal * depositPercent) / 100;
+  const balanceAmount = Math.max(0, grandTotal - depositAmount);
+  const lineItems = [
+    {
+      type: "DEVICE",
+      product_id: product.product_id,
+      sku: product.sku,
+      name: product.model,
+      description: [product.storage, product.color].filter(Boolean).join(" / "),
+      quantity: 1,
+      unit_price: productPrice,
+      total: productPrice
+    },
+    {
+      type: "SERVICE",
+      name: "SSBMS Installation Service",
+      description: "System setup and installation service",
+      quantity: 1,
+      unit_price: serviceFee,
+      total: serviceFee
+    }
+  ];
+
+  if (discount > 0) {
+    lineItems.push({
+      type: "DISCOUNT",
+      name: pricing.promotion || "Discount",
+      description: "Approved backend discount",
+      quantity: 1,
+      unit_price: -discount,
+      total: -discount
+    });
+  }
+
+  return {
+    ok: true,
+    product: publicProduct(product),
+    pricing: publicPricing(pricing),
+    policy: policy,
+    quote: {
+      product_price: productPrice,
+      service_fee: serviceFee,
+      promotion: cleanString(pricing.promotion, 200),
+      discount: discount,
+      subtotal: subtotal,
+      vat_rate: vatRate,
+      vat: vat,
+      total: grandTotal,
+      grand_total: grandTotal,
+      payment_option: paymentOption,
+      deposit_percent: depositPercent,
+      deposit_amount: depositAmount,
+      balance_amount: balanceAmount,
+      line_items: lineItems
+    }
+  };
+}
+
+function listProducts(params) {
+  ensureSalesSheets();
+  const options = params || {};
+  const query = cleanString(options.q || options.search, 200).toLowerCase();
+  const status = normalizeSalesStatus(options.status || "");
+  const includeInactive = booleanValue(options.include_inactive || options.includeInactive);
+  const products = sheetToObjects(SHEET_NAMES.products)
+    .filter(function (product) {
+      const normalizedStatus = normalizeSalesStatus(product.status || "ACTIVE");
+      if (!includeInactive && normalizedStatus !== "ACTIVE") return false;
+      if (status && normalizedStatus !== status) return false;
+      if (!query) return true;
+      return [
+        product.collection,
+        product.brand,
+        product.model,
+        product.storage,
+        product.color,
+        product.sku
+      ].join(" ").toLowerCase().indexOf(query) !== -1;
+    })
+    .map(function (product) {
+      const publicItem = publicProduct(product);
+      const pricing = activePricingForProduct(product);
+      publicItem.pricing = pricing ? publicPricing(pricing) : null;
+      return publicItem;
+    });
+
+  return {
+    ok: true,
+    total: products.length,
+    products: products
+  };
+}
+
+function getProduct(params) {
+  ensureSalesSheets();
+  const product = findProductForPricing(params || {});
+  if (!product) {
+    return { ok: false, message: "Product not found" };
+  }
+  const pricing = activePricingForProduct(product);
+  return {
+    ok: true,
+    product: publicProduct(product),
+    pricing: pricing ? publicPricing(pricing) : null
+  };
+}
+
+function createProduct(body) {
+  ensureSalesSheets();
+  const admin = requireAdminActor(body);
+  if (!admin.ok) return admin;
+
+  const sku = cleanString(body && body.sku, 120);
+  if (!sku) return { ok: false, message: "SKU is required" };
+
+  const duplicate = sheetToObjects(SHEET_NAMES.products).find(function (product) {
+    return cleanString(product.sku, 120).toLowerCase() === sku.toLowerCase();
+  });
+  if (duplicate) {
+    return { ok: false, message: "SKU already exists", product: publicProduct(duplicate) };
+  }
+
+  const now = new Date();
+  const product = {
+    product_id: makeId("PRD"),
+    collection: cleanString(body.collection, 180),
+    brand: cleanString(body.brand, 120),
+    model: cleanString(body.model, 160),
+    storage: cleanString(body.storage, 80),
+    color: cleanString(body.color, 120),
+    sku: sku,
+    status: normalizeSalesStatus(body.status || "ACTIVE") === "INACTIVE" ? "INACTIVE" : "ACTIVE",
+    created_at: now,
+    updated_at: now
+  };
+
+  if (!product.collection || !product.brand || !product.model || !product.storage || !product.color) {
+    return { ok: false, message: "Product information is incomplete" };
+  }
+
+  appendObject(SHEET_NAMES.products, product);
+  writeAuditLog("createProduct", "", "SUCCESS", "Product created", {
+    actor_id: cleanString(body.actor_id || body.admin_id || "ADMIN", 80),
+    product_id: product.product_id,
+    sku: product.sku
+  });
+
+  return { ok: true, product: publicProduct(product) };
+}
+
+function updateProduct(body) {
+  ensureSalesSheets();
+  const admin = requireAdminActor(body);
+  if (!admin.ok) return admin;
+
+  const product = findProductById(body && body.product_id);
+  if (!product) return { ok: false, message: "Product not found" };
+
+  const updates = {
+    collection: cleanString(body.collection || product.collection, 180),
+    brand: cleanString(body.brand || product.brand, 120),
+    model: cleanString(body.model || product.model, 160),
+    storage: cleanString(body.storage || product.storage, 80),
+    color: cleanString(body.color || product.color, 120),
+    sku: cleanString(body.sku || product.sku, 120),
+    status: normalizeSalesStatus(body.status || product.status || "ACTIVE") === "INACTIVE" ? "INACTIVE" : "ACTIVE",
+    updated_at: new Date()
+  };
+
+  updateRowFields(SHEET_NAMES.products, product._row, updates);
+  writeAuditLog("updateProduct", "", "SUCCESS", "Product updated", {
+    actor_id: cleanString(body.actor_id || body.admin_id || "ADMIN", 80),
+    product_id: product.product_id
+  });
+
+  return { ok: true, product: publicProduct(Object.assign({}, product, updates)) };
+}
+
+function deleteProduct(body) {
+  body = body || {};
+  body.status = "INACTIVE";
+  const result = updateProduct(body);
+  if (result.ok) {
+    result.message = "Product deactivated";
+  }
+  return result;
+}
+
+function listPricing(params) {
+  ensureSalesSheets();
+  return {
+    ok: true,
+    total: sheetToObjects(SHEET_NAMES.productPricing).length,
+    pricing: sheetToObjects(SHEET_NAMES.productPricing).map(publicPricing)
+  };
+}
+
+function upsertPricing(body) {
+  ensureSalesSheets();
+  const admin = requireAdminActor(body);
+  if (!admin.ok) return admin;
+
+  const product = findProductForPricing(body || {});
+  if (!product) return { ok: false, message: "Product not found for pricing" };
+  const productPrice = Number(body.product_price || body.productPrice || 0);
+  const serviceFee = Number(body.service_fee || body.serviceFee || DEFAULT_SERVICE_FEE);
+  const vatRate = Number(body.vat_rate || body.vatRate || DEFAULT_VAT_RATE);
+  const discount = Number(body.discount || 0);
+
+  if (productPrice < 0 || serviceFee < 0 || discount < 0 || vatRate < 0 || vatRate > 1) {
+    return {
+      ok: false,
+      message: "Invalid pricing values"
+    };
+  }
+
+  const existingId = cleanString(body.pricing_id || body.pricingId, 80);
+  const existing = existingId
+    ? sheetToObjects(SHEET_NAMES.productPricing).find(function (item) {
+        return cleanString(item.pricing_id, 80) === existingId;
+      })
+    : null;
+  const now = new Date();
+  const data = {
+    pricing_id: existing ? existing.pricing_id : makeId("PRICE"),
+    product_id: product.product_id,
+    sku: product.sku,
+    product_price: productPrice,
+    service_fee: serviceFee,
+    vat_rate: vatRate,
+    promotion: cleanString(body.promotion, 200),
+    discount: discount,
+    status: normalizeSalesStatus(body.status || "ACTIVE") === "INACTIVE" ? "INACTIVE" : "ACTIVE",
+    effective_from: body.effective_from || body.effectiveFrom || now,
+    effective_to: body.effective_to || body.effectiveTo || "",
+    created_at: existing ? existing.created_at : now,
+    updated_at: now
+  };
+
+  if (existing) {
+    updateRowFields(SHEET_NAMES.productPricing, existing._row, data);
+  } else {
+    appendObject(SHEET_NAMES.productPricing, data);
+  }
+
+  writeAuditLog("upsertPricing", "", "SUCCESS", "Pricing updated", {
+    actor_id: cleanString(body.actor_id || body.admin_id || "ADMIN", 80),
+    product_id: product.product_id,
+    pricing_id: data.pricing_id
+  });
+
+  return { ok: true, pricing: publicPricing(data) };
+}
+
+function getDepositPolicy(params) {
+  return {
+    ok: true,
+    policy: publicDepositPolicy(activeDepositPolicy())
+  };
+}
+
+function updateDepositPolicy(body) {
+  ensureSalesSheets();
+  const admin = requireAdminActor(body);
+  if (!admin.ok) return admin;
+
+  const current = activeDepositPolicy();
+  const now = new Date();
+  const percent = Number(body.deposit_percent || body.depositPercent || 0);
+
+  if (percent < 0 || percent > 100) {
+    return {
+      ok: false,
+      message: "Deposit percent must be between 0 and 100"
+    };
+  }
+  const updates = {
+    enabled: booleanValue(body.enabled),
+    deposit_percent: percent,
+    status: "ACTIVE",
+    updated_at: now
+  };
+
+  if (current && current._row) {
+    updateRowFields(SHEET_NAMES.depositPolicies, current._row, updates);
+    Object.assign(current, updates);
+  } else {
+    current.policy_id = makeId("DPP");
+    Object.assign(current, updates, { created_at: now });
+    appendObject(SHEET_NAMES.depositPolicies, current);
+  }
+
+  writeAuditLog("updateDepositPolicy", "", "SUCCESS", "Deposit policy updated", {
+    actor_id: cleanString(body.actor_id || body.admin_id || "ADMIN", 80),
+    enabled: updates.enabled,
+    deposit_percent: updates.deposit_percent
+  });
+
+  return { ok: true, policy: publicDepositPolicy(current) };
+}
+
+function calculatePricing(params) {
+  const result = calculateBackendPricing(params || {});
+  if (!result.ok) return result;
+  return result;
 }
 
 function publicCustomer(customer) {
@@ -2318,6 +3050,10 @@ function publicQuotation(quotation) {
     team_leader_id: cleanString(quotation.team_leader_id, 80),
     team_leader_name: cleanString(quotation.team_leader_name, 160),
     status: normalizeSalesStatus(quotation.status || QUOTATION_STATUS.DRAFT),
+    product_id: cleanString(quotation.product_id, 80),
+    productId: cleanString(quotation.product_id, 80),
+    sku: cleanString(quotation.sku, 120),
+    collection: cleanString(quotation.collection, 180),
     brand: cleanString(quotation.brand, 120),
     series: cleanString(quotation.series, 160),
     model: cleanString(quotation.model, 160),
@@ -2328,12 +3064,18 @@ function publicQuotation(quotation) {
     phonePrice: Number(quotation.phone_price || 0),
     service_fee: Number(quotation.service_fee || 0),
     serviceFee: Number(quotation.service_fee || 0),
+    promotion: cleanString(quotation.promotion, 200),
+    discount: Number(quotation.discount || 0),
     subtotal: Number(quotation.subtotal || 0),
     vat_rate: Number(quotation.vat_rate || 0),
     vat: Number(quotation.vat || 0),
     total: Number(quotation.total || quotation.grand_total || 0),
     grand_total: Number(quotation.grand_total || quotation.total || 0),
     grandTotal: Number(quotation.grand_total || quotation.total || 0),
+    payment_option: cleanString(quotation.payment_option, 40),
+    deposit_percent: Number(quotation.deposit_percent || 0),
+    deposit_amount: Number(quotation.deposit_amount || 0),
+    balance_amount: Number(quotation.balance_amount || 0),
     line_items: parseJsonValue(quotation.line_items_json, []),
     customer: parseJsonValue(quotation.customer_json, {}),
     signer_name: cleanString(quotation.signer_name, 200),
@@ -2379,6 +3121,10 @@ function publicOrder(order) {
       address: cleanString(order.customer_address, 500)
     },
     status: normalizeSalesStatus(order.status || ORDER_STATUS.NEW),
+    product_id: cleanString(order.product_id, 80),
+    productId: cleanString(order.product_id, 80),
+    sku: cleanString(order.sku, 120),
+    collection: cleanString(order.collection, 180),
     brand: cleanString(order.brand, 120),
     series: cleanString(order.series, 160),
     model: cleanString(order.model, 160),
@@ -2389,6 +3135,13 @@ function publicOrder(order) {
     total: Number(order.total || order.grand_total || 0),
     grand_total: Number(order.grand_total || order.total || 0),
     grandTotal: Number(order.grand_total || order.total || 0),
+    payment_option: cleanString(order.payment_option, 40),
+    deposit_percent: Number(order.deposit_percent || 0),
+    deposit_amount: Number(order.deposit_amount || 0),
+    balance_amount: Number(order.balance_amount || 0),
+    paid_amount: Number(order.paid_amount || 0),
+    payment_status: cleanString(order.payment_status || "PENDING", 80),
+    payment_summary: summarizePaymentsForOrder(order.order_id),
     line_items: parseJsonValue(order.line_items_json, []),
     timeline: parseJsonValue(order.timeline_json, []),
     created_at: order.created_at || "",
@@ -2400,6 +3153,54 @@ function publicOrder(order) {
     installing_at: order.installing_at || "",
     completed_at: order.completed_at || "",
     cancelled_at: order.cancelled_at || ""
+  };
+}
+
+function publicPayment(payment) {
+  return {
+    payment_id: cleanString(payment.payment_id, 80),
+    order_id: cleanString(payment.order_id, 80),
+    quotation_id: cleanString(payment.quotation_id, 80),
+    customer_id: cleanString(payment.customer_id, 80),
+    owner_agent_id: cleanString(payment.owner_agent_id, 80),
+    team_leader_id: cleanString(payment.team_leader_id, 80),
+    payment_type: normalizeSalesStatus(payment.payment_type || "DEPOSIT"),
+    amount: Number(payment.amount || 0),
+    status: normalizeSalesStatus(payment.status || "SUBMITTED"),
+    method: cleanString(payment.method, 120),
+    reference: cleanString(payment.reference, 180),
+    note: cleanString(payment.note, 500),
+    submitted_at: payment.submitted_at || "",
+    reviewed_at: payment.reviewed_at || "",
+    reviewed_by: cleanString(payment.reviewed_by, 80),
+    created_at: payment.created_at || "",
+    updated_at: payment.updated_at || ""
+  };
+}
+
+function paymentsForOrder(orderId) {
+  ensureSalesSheets();
+  const normalizedId = cleanString(orderId, 80);
+  if (!normalizedId) return [];
+  return sheetToObjects(SHEET_NAMES.payments).filter(function (payment) {
+    return cleanString(payment.order_id, 80) === normalizedId;
+  });
+}
+
+function summarizePaymentsForOrder(orderId) {
+  const payments = paymentsForOrder(orderId);
+  const approved = payments.filter(function (payment) {
+    return normalizeSalesStatus(payment.status || "") === "APPROVED";
+  });
+  const submitted = payments.filter(function (payment) {
+    return normalizeSalesStatus(payment.status || "") === "SUBMITTED";
+  });
+
+  return {
+    total_payments: payments.length,
+    approved_amount: sum(approved, "amount"),
+    submitted_amount: sum(submitted, "amount"),
+    latest_status: payments.length ? normalizeSalesStatus(payments[payments.length - 1].status || "") : "NONE"
   };
 }
 
@@ -2707,11 +3508,19 @@ function buildQuotationLineItems(body) {
 
 function buildQuotationData(body, agent, customer, existing) {
   const now = new Date();
-  const lineItems = buildQuotationLineItems(body);
-  const subtotal = Math.max(0, sum(lineItems, "total"));
-  const vatRate = Math.max(0, Number(body.vat_rate || body.vatRate || 0.07));
-  const vat = Math.max(0, subtotal * vatRate);
-  const total = Math.max(0, subtotal + vat);
+  const pricingResult = calculateBackendPricing(body || {});
+
+  if (!pricingResult.ok) {
+    throw new Error(pricingResult.message || "Pricing calculation failed");
+  }
+
+  const product = pricingResult.product;
+  const quote = pricingResult.quote;
+  const lineItems = quote.line_items;
+  const subtotal = quote.subtotal;
+  const vatRate = quote.vat_rate;
+  const vat = quote.vat;
+  const total = quote.grand_total;
   const requestedStatus = normalizeSalesStatus(body.status || (body.submit ? QUOTATION_STATUS.SUBMITTED : QUOTATION_STATUS.DRAFT));
   const status = requestedStatus === QUOTATION_STATUS.SUBMITTED
     ? QUOTATION_STATUS.SUBMITTED
@@ -2733,19 +3542,28 @@ function buildQuotationData(body, agent, customer, existing) {
     team_leader_id: cleanString(agent.team_manager, 80),
     team_leader_name: cleanString(agent.team_manager, 160),
     status: status,
-    brand: cleanString(body.brand, 120),
-    series: cleanString(body.series, 160),
-    model: cleanString(body.model, 160),
-    storage: cleanString(body.storage, 80),
-    color: cleanString(body.color, 120),
+    product_id: cleanString(product.product_id, 80),
+    sku: cleanString(product.sku, 120),
+    collection: cleanString(product.collection, 180),
+    brand: cleanString(product.brand, 120),
+    series: cleanString(body.series || product.collection, 160),
+    model: cleanString(product.model, 160),
+    storage: cleanString(product.storage, 80),
+    color: cleanString(product.color, 120),
     price_date: cleanString(body.price_date || body.priceDate, 80),
-    phone_price: Number(body.phone_price || body.phonePrice || 0),
-    service_fee: Number(body.service_fee || body.serviceFee || 45000),
+    phone_price: Number(quote.product_price || 0),
+    service_fee: Number(quote.service_fee || 0),
+    promotion: cleanString(quote.promotion, 200),
+    discount: Number(quote.discount || 0),
     subtotal: subtotal,
     vat_rate: vatRate,
     vat: vat,
     total: total,
     grand_total: total,
+    payment_option: cleanString(quote.payment_option, 40),
+    deposit_percent: Number(quote.deposit_percent || 0),
+    deposit_amount: Number(quote.deposit_amount || 0),
+    balance_amount: Number(quote.balance_amount || 0),
     line_items_json: JSON.stringify(lineItems),
     customer_json: JSON.stringify(customerPayload),
     signer_name: cleanString(body.signer_name || body.signerName, 200),
@@ -2815,7 +3633,10 @@ function createQuotation(body) {
     return customerResult;
   }
 
-  if (!cleanString(body.model, 160) && !existing) {
+  if (
+    !cleanString(body.product_id || body.productId || body.sku || body.model, 160) &&
+    !existing
+  ) {
     return {
       ok: false,
       message: "Quotation product model is required"
@@ -3079,6 +3900,9 @@ function createOrderFromQuotation(body) {
     customer_email: customer.email || "",
     customer_address: customer.address || "",
     status: ORDER_STATUS.PAYMENT_PENDING,
+    product_id: quotation.product_id,
+    sku: quotation.sku,
+    collection: quotation.collection,
     brand: quotation.brand,
     series: quotation.series,
     model: quotation.model,
@@ -3088,6 +3912,12 @@ function createOrderFromQuotation(body) {
     vat: Number(quotation.vat || 0),
     total: Number(quotation.total || quotation.grand_total || 0),
     grand_total: Number(quotation.grand_total || quotation.total || 0),
+    payment_option: quotation.payment_option || "DEPOSIT",
+    deposit_percent: Number(quotation.deposit_percent || 0),
+    deposit_amount: Number(quotation.deposit_amount || 0),
+    balance_amount: Number(quotation.balance_amount || 0),
+    paid_amount: 0,
+    payment_status: "PENDING",
     line_items_json: quotation.line_items_json,
     timeline_json: JSON.stringify([
       {
@@ -3241,8 +4071,233 @@ function listOrderStatusLogs(params) {
   };
 }
 
+function listPayments(params) {
+  ensureSalesSheets();
+  const options = params || {};
+  const agentId = validateAgentId(options.agent_id);
+  const orderId = cleanString(options.order_id || options.orderId, 80);
+  const status = normalizeSalesStatus(options.status || "");
+
+  if (agentId) {
+    const agentResult = findApprovedAgent(agentId);
+    if (!agentResult.ok) return agentResult;
+  }
+
+  const payments = sheetToObjects(SHEET_NAMES.payments)
+    .filter(function (payment) {
+      if (agentId && cleanString(payment.owner_agent_id, 80) !== agentId) return false;
+      if (orderId && cleanString(payment.order_id, 80) !== orderId) return false;
+      if (status && normalizeSalesStatus(payment.status || "") !== status) return false;
+      return true;
+    })
+    .map(publicPayment);
+
+  return {
+    ok: true,
+    total: payments.length,
+    payments: payments
+  };
+}
+
+function createPayment(body) {
+  ensureSalesSheets();
+  const order = findOrderById(body && (body.order_id || body.orderId));
+  if (!order) return { ok: false, message: "Order not found" };
+
+  const agentId = validateAgentId(body && body.agent_id);
+  if (agentId && cleanString(order.owner_agent_id || order.agent_id, 80) !== agentId) {
+    return { ok: false, message: "Payment access denied" };
+  }
+
+  if (agentId) {
+    const agentResult = findApprovedAgent(agentId);
+    if (!agentResult.ok) return agentResult;
+  }
+
+  const currentStatus = normalizeSalesStatus(order.status || "");
+  if ([ORDER_STATUS.COMPLETED, ORDER_STATUS.CANCELLED].indexOf(currentStatus) !== -1) {
+    return { ok: false, message: "Final order cannot accept payment", status: currentStatus };
+  }
+
+  const type = normalizeSalesStatus(body.payment_type || body.paymentType || order.payment_option || "DEPOSIT");
+  const allowedTypes = ["DEPOSIT", "FULL", "FULL_PAYMENT", "SECOND_PAYMENT", "INSTALLMENT"];
+  if (allowedTypes.indexOf(type) === -1) {
+    return { ok: false, message: "Invalid payment type" };
+  }
+
+  const amount = Math.max(0, Number(body.amount || 0));
+  const expectedAmount = type === "DEPOSIT"
+    ? Number(order.deposit_amount || 0)
+    : Number(order.grand_total || order.total || 0);
+  if (amount <= 0 || amount > Number(order.grand_total || order.total || 0)) {
+    return { ok: false, message: "Invalid payment amount" };
+  }
+
+  if (expectedAmount > 0 && amount < expectedAmount * 0.5) {
+    return { ok: false, message: "Payment amount is below allowed minimum" };
+  }
+
+  const reference = cleanString(body.reference || body.ref, 180);
+  const duplicatePayment = sheetToObjects(SHEET_NAMES.payments).find(function (item) {
+    return (
+      cleanString(item.order_id, 80) === cleanString(order.order_id, 80) &&
+      normalizeSalesStatus(item.payment_type || "") === (type === "FULL_PAYMENT" ? "FULL" : type) &&
+      reference &&
+      cleanString(item.reference, 180).toLowerCase() === reference.toLowerCase() &&
+      ["SUBMITTED", "APPROVED"].indexOf(normalizeSalesStatus(item.status || "")) !== -1
+    );
+  });
+
+  if (duplicatePayment) {
+    return {
+      ok: false,
+      message: "Duplicate payment reference",
+      payment: publicPayment(duplicatePayment)
+    };
+  }
+
+  const now = new Date();
+  const payment = {
+    payment_id: makeId("PAY"),
+    order_id: order.order_id,
+    quotation_id: order.quotation_id,
+    customer_id: order.customer_id,
+    owner_agent_id: order.owner_agent_id || order.agent_id,
+    team_leader_id: order.team_leader_id,
+    payment_type: type === "FULL_PAYMENT" ? "FULL" : type,
+    amount: amount,
+    status: "SUBMITTED",
+    method: cleanString(body.method || "TRANSFER", 120),
+    reference: reference,
+    note: cleanString(body.note, 500),
+    submitted_at: now,
+    reviewed_at: "",
+    reviewed_by: "",
+    created_at: now,
+    updated_at: now
+  };
+
+  appendObject(SHEET_NAMES.payments, payment);
+  if (currentStatus === ORDER_STATUS.PAYMENT_PENDING) {
+    updateOrderStatus({
+      order_id: order.order_id,
+      status: ORDER_STATUS.PAYMENT_REVIEW,
+      actor_id: agentId || payment.owner_agent_id,
+      note: "Payment submitted",
+      internal: true
+    });
+  }
+
+  writeAuditLog("createPayment", payment.owner_agent_id, "SUCCESS", "Payment submitted", {
+    actor_id: agentId || payment.owner_agent_id,
+    order_id: order.order_id,
+    payment_id: payment.payment_id,
+    payment_type: payment.payment_type,
+    amount: payment.amount
+  });
+
+  return {
+    ok: true,
+    payment: publicPayment(payment),
+    order: publicOrder(findOrderById(order.order_id) || order)
+  };
+}
+
+function reviewPayment(body) {
+  ensureSalesSheets();
+  const admin = requireAdminActor(body);
+  if (!admin.ok) return admin;
+
+  const paymentId = cleanString(body && (body.payment_id || body.paymentId), 80);
+  const payment = sheetToObjects(SHEET_NAMES.payments).find(function (item) {
+    return cleanString(item.payment_id, 80) === paymentId;
+  });
+
+  if (!payment) return { ok: false, message: "Payment not found" };
+
+  const currentStatus = normalizeSalesStatus(payment.status || "");
+  if (currentStatus !== "SUBMITTED") {
+    return { ok: false, message: "Payment already reviewed", status: currentStatus };
+  }
+
+  const decision = normalizeSalesStatus(body.status || body.decision || "APPROVED");
+  if (["APPROVED", "REJECTED"].indexOf(decision) === -1) {
+    return { ok: false, message: "Invalid payment review status" };
+  }
+
+  const order = findOrderById(payment.order_id);
+  if (!order) return { ok: false, message: "Order not found for payment" };
+
+  const now = new Date();
+  const updates = {
+    status: decision,
+    reviewed_at: now,
+    reviewed_by: cleanString(body.actor_id || body.admin_id || "ADMIN", 80),
+    note: cleanString(body.note || payment.note, 500),
+    updated_at: now
+  };
+
+  updateRowFields(SHEET_NAMES.payments, payment._row, updates);
+  Object.assign(payment, updates);
+
+  if (decision === "APPROVED") {
+    const summary = summarizePaymentsForOrder(order.order_id);
+    const grandTotal = Number(order.grand_total || order.total || 0);
+    const paymentType = normalizeSalesStatus(payment.payment_type || "");
+    const nextStatus = paymentType === "DEPOSIT" && summary.approved_amount < grandTotal
+      ? ORDER_STATUS.DEPOSIT_PAID
+      : ORDER_STATUS.PAID_IN_FULL;
+
+    updateRowFields(SHEET_NAMES.orders, order._row, {
+      paid_amount: Math.min(grandTotal, summary.approved_amount),
+      payment_status: nextStatus,
+      updated_at: now
+    });
+
+    updateOrderStatus({
+      order_id: order.order_id,
+      status: nextStatus,
+      actor_id: updates.reviewed_by,
+      note: "Payment approved",
+      internal: true
+    });
+  } else {
+    updateRowFields(SHEET_NAMES.orders, order._row, {
+      payment_status: "REJECTED",
+      updated_at: now
+    });
+    if (normalizeSalesStatus(order.status || "") === ORDER_STATUS.PAYMENT_REVIEW) {
+      updateOrderStatus({
+        order_id: order.order_id,
+        status: ORDER_STATUS.PAYMENT_PENDING,
+        actor_id: updates.reviewed_by,
+        note: "Payment rejected",
+        internal: true
+      });
+    }
+  }
+
+  writeAuditLog("reviewPayment", payment.owner_agent_id, "SUCCESS", "Payment reviewed", {
+    actor_id: updates.reviewed_by,
+    order_id: order.order_id,
+    payment_id: payment.payment_id,
+    decision: decision
+  });
+
+  return {
+    ok: true,
+    payment: publicPayment(payment),
+    order: publicOrder(findOrderById(order.order_id) || order)
+  };
+}
+
 function updateOrderStatus(body) {
   ensureSalesSheets();
+  if (!(body && body.internal)) {
+    const admin = requireAdminActor(body);
+    if (!admin.ok) return admin;
+  }
+
   const order = findOrderById(body && (body.order_id || body.orderId));
 
   if (!order) {
@@ -3300,7 +4355,11 @@ function updateOrderStatus(body) {
     updated_at: now
   };
 
-  if (nextStatus === ORDER_STATUS.PAID) updates.paid_at = now;
+  if (
+    nextStatus === ORDER_STATUS.PAID ||
+    nextStatus === ORDER_STATUS.PAID_IN_FULL ||
+    nextStatus === ORDER_STATUS.DEPOSIT_PAID
+  ) updates.paid_at = now;
   if (nextStatus === ORDER_STATUS.INSTALLING) updates.installing_at = now;
   if (nextStatus === ORDER_STATUS.COMPLETED) updates.completed_at = now;
   if (nextStatus === ORDER_STATUS.CANCELLED) updates.cancelled_at = now;
