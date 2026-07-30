@@ -17,6 +17,14 @@ const SHEET_NAMES = {
   walletLedger: "wallet_ledger",
   withdrawalRequests: "withdrawal_requests",
   financeAuditLogs: "finance_audit_logs",
+  organizationAreas: "organization_areas",
+  organizationTeams: "organization_teams",
+  organizationAssignments: "organization_assignments",
+  organizationRoleHistory: "organization_role_history",
+  organizationSnapshots: "organization_snapshots",
+  salesTargets: "sales_targets",
+  customerFollowups: "customer_followups",
+  organizationAuditLogs: "organization_audit_logs",
   trainingLessons: "training_lessons",
   trainingProgress: "agent_training_progress",
   examQuestions: "exam_questions",
@@ -150,6 +158,26 @@ function doGet(e) {
       case "getCommissionConfiguration":
       case "saveCommissionConfiguration":
       case "runFinanceIntegrityCheck":
+      case "getOrganizationDashboard":
+      case "listOrganizationAreas":
+      case "saveOrganizationArea":
+      case "listOrganizationTeams":
+      case "saveOrganizationTeam":
+      case "assignAgentToTeam":
+      case "assignManagerRole":
+      case "listOrganizationAssignments":
+      case "getTeamManagerDashboard":
+      case "getAreaManagerDashboard":
+      case "listScopedAgents":
+      case "listScopedCustomers":
+      case "listScopedOrders":
+      case "saveSalesTarget":
+      case "listSalesTargets":
+      case "saveCustomerFollowup":
+      case "completeCustomerFollowup":
+      case "listCustomerFollowups":
+      case "getOrganizationPerformance":
+      case "runOrganizationIntegrityCheck":
         result = protectedPostRequired(action);
         break;
 
@@ -489,6 +517,86 @@ function doPost(e) {
         result = runFinanceIntegrityCheck(body);
         break;
 
+      case "getOrganizationDashboard":
+        result = getOrganizationDashboard(body);
+        break;
+
+      case "listOrganizationAreas":
+        result = listOrganizationAreas(body);
+        break;
+
+      case "saveOrganizationArea":
+        result = saveOrganizationArea(body);
+        break;
+
+      case "listOrganizationTeams":
+        result = listOrganizationTeams(body);
+        break;
+
+      case "saveOrganizationTeam":
+        result = saveOrganizationTeam(body);
+        break;
+
+      case "assignAgentToTeam":
+        result = assignAgentToTeam(body);
+        break;
+
+      case "assignManagerRole":
+        result = assignManagerRole(body);
+        break;
+
+      case "listOrganizationAssignments":
+        result = listOrganizationAssignments(body);
+        break;
+
+      case "getTeamManagerDashboard":
+        result = getTeamManagerDashboard(body);
+        break;
+
+      case "getAreaManagerDashboard":
+        result = getAreaManagerDashboard(body);
+        break;
+
+      case "listScopedAgents":
+        result = listScopedAgents(body);
+        break;
+
+      case "listScopedCustomers":
+        result = listScopedCustomers(body);
+        break;
+
+      case "listScopedOrders":
+        result = listScopedOrders(body);
+        break;
+
+      case "saveSalesTarget":
+        result = saveSalesTarget(body);
+        break;
+
+      case "listSalesTargets":
+        result = listSalesTargets(body);
+        break;
+
+      case "saveCustomerFollowup":
+        result = saveCustomerFollowup(body);
+        break;
+
+      case "completeCustomerFollowup":
+        result = completeCustomerFollowup(body);
+        break;
+
+      case "listCustomerFollowups":
+        result = listCustomerFollowups(body);
+        break;
+
+      case "getOrganizationPerformance":
+        result = getOrganizationPerformance(body);
+        break;
+
+      case "runOrganizationIntegrityCheck":
+        result = runOrganizationIntegrityCheck(body);
+        break;
+
       case "approveAgent":
         {
           const admin = requireAdminActor(body);
@@ -642,6 +750,13 @@ function sheetToObjects(sheetName) {
         obj.ledger_id,
         obj.withdrawal_id,
         obj.log_id,
+        obj.area_id,
+        obj.team_id,
+        obj.assignment_id,
+        obj.role_history_id,
+        obj.snapshot_id,
+        obj.target_id,
+        obj.followup_id,
         obj.bonus_id,
         obj.lesson_id,
         obj.progress_id,
@@ -1171,6 +1286,139 @@ const FINANCE_AUDIT_LOG_HEADERS = [
   "actor_id",
   "reason",
   "metadata_json",
+  "created_at",
+  "is_test",
+  "qa_batch"
+];
+
+const ORGANIZATION_AREA_HEADERS = [
+  "area_id",
+  "area_code",
+  "area_name",
+  "description",
+  "status",
+  "created_at",
+  "updated_at",
+  "created_by",
+  "updated_by",
+  "is_test",
+  "qa_batch"
+];
+
+const ORGANIZATION_TEAM_HEADERS = [
+  "team_id",
+  "team_code",
+  "team_name",
+  "area_id",
+  "primary_team_manager_id",
+  "description",
+  "status",
+  "created_at",
+  "updated_at",
+  "created_by",
+  "updated_by",
+  "is_test",
+  "qa_batch"
+];
+
+const ORGANIZATION_ASSIGNMENT_HEADERS = [
+  "assignment_id",
+  "assignment_type",
+  "subject_agent_id",
+  "role",
+  "area_id",
+  "team_id",
+  "status",
+  "effective_from",
+  "effective_to",
+  "created_at",
+  "updated_at",
+  "created_by",
+  "updated_by",
+  "reason",
+  "is_test",
+  "qa_batch"
+];
+
+const ORGANIZATION_ROLE_HISTORY_HEADERS = [
+  "role_history_id",
+  "agent_id",
+  "previous_role",
+  "new_role",
+  "sales_enabled",
+  "effective_at",
+  "created_at",
+  "created_by",
+  "reason",
+  "is_test",
+  "qa_batch"
+];
+
+const ORGANIZATION_SNAPSHOT_HEADERS = [
+  "snapshot_id",
+  "entity_type",
+  "entity_id",
+  "sales_owner_agent_id",
+  "area_id",
+  "area_name",
+  "team_id",
+  "team_name",
+  "team_manager_id",
+  "area_manager_id",
+  "snapshot_at",
+  "source",
+  "is_test",
+  "qa_batch"
+];
+
+const SALES_TARGET_HEADERS = [
+  "target_id",
+  "target_type",
+  "agent_id",
+  "team_id",
+  "area_id",
+  "period",
+  "target_orders",
+  "target_revenue",
+  "status",
+  "created_at",
+  "updated_at",
+  "created_by",
+  "updated_by",
+  "is_test",
+  "qa_batch"
+];
+
+const CUSTOMER_FOLLOWUP_HEADERS = [
+  "followup_id",
+  "customer_id",
+  "order_id",
+  "owner_agent_id",
+  "team_id",
+  "area_id",
+  "title",
+  "note",
+  "due_at",
+  "status",
+  "completed_at",
+  "created_at",
+  "updated_at",
+  "created_by",
+  "updated_by",
+  "is_test",
+  "qa_batch"
+];
+
+const ORGANIZATION_AUDIT_LOG_HEADERS = [
+  "log_id",
+  "entity_type",
+  "entity_id",
+  "action",
+  "actor_role",
+  "actor_id",
+  "previous_value_json",
+  "new_value_json",
+  "message",
   "created_at",
   "is_test",
   "qa_batch"
@@ -2257,6 +2505,14 @@ function login(body) {
     next_page: nextPage
   };
 
+  const orgRole = normalizeOrgRole(user.role);
+  if (status === AGENT_STATUS.APPROVED && orgRole === ORG_ROLE.TEAM_MANAGER) {
+    response.next_page = "team-manager-dashboard.html";
+  }
+  if (status === AGENT_STATUS.APPROVED && orgRole === ORG_ROLE.AREA_MANAGER) {
+    response.next_page = "area-manager-dashboard.html";
+  }
+
   response.agent_session_token = createAgentSession(user);
   response.agent_session_expires_in = AGENT_SESSION_TTL_SECONDS;
 
@@ -2504,6 +2760,9 @@ function getDashboard(params) {
     };
   }
 
+  const organizationSnapshot = snapshotForAgent(agentId);
+  agentResult.agent.organization = organizationSnapshot;
+
   const income = sheetToObjects(SHEET_NAMES.income).filter(function (item) {
     return String(item.agent_id || "") === String(agentId || "");
   });
@@ -2589,7 +2848,11 @@ function getDashboard(params) {
       lifetimeEarned: Number(wallet.lifetime_earned || 0),
       lifetimeWithdrawn: Number(wallet.lifetime_withdrawn || 0),
       latestCommission: commissions.length ? publicCommission(commissions[commissions.length - 1]) : null,
-      latestWithdrawal: financeWithdrawals.length ? publicWithdrawal(financeWithdrawals[financeWithdrawals.length - 1]) : null
+      latestWithdrawal: financeWithdrawals.length ? publicWithdrawal(financeWithdrawals[financeWithdrawals.length - 1]) : null,
+      organizationTeamId: organizationSnapshot.team_id,
+      organizationTeamName: organizationSnapshot.team_name,
+      organizationAreaId: organizationSnapshot.area_id,
+      organizationAreaName: organizationSnapshot.area_name
     },
     income: income,
     withdraws: withdraws,
@@ -2892,8 +3155,20 @@ function ensureSalesSheets() {
   getOrCreateSheet(SHEET_NAMES.payments, PAYMENT_HEADERS);
   getOrCreateSheet(SHEET_NAMES.auditLogs, AUDIT_LOG_HEADERS);
   ensureFinanceSheets();
+  ensureOrganizationSheets();
   seedV3ProductCatalog();
   seedDepositPolicy();
+}
+
+function ensureOrganizationSheets() {
+  getOrCreateSheet(SHEET_NAMES.organizationAreas, ORGANIZATION_AREA_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.organizationTeams, ORGANIZATION_TEAM_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.organizationAssignments, ORGANIZATION_ASSIGNMENT_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.organizationRoleHistory, ORGANIZATION_ROLE_HISTORY_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.organizationSnapshots, ORGANIZATION_SNAPSHOT_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.salesTargets, SALES_TARGET_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.customerFollowups, CUSTOMER_FOLLOWUP_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.organizationAuditLogs, ORGANIZATION_AUDIT_LOG_HEADERS);
 }
 
 function ensureFinanceSheets() {
@@ -4741,6 +5016,7 @@ function createOrderFromQuotation(body) {
   };
 
   appendObject(SHEET_NAMES.orders, order);
+  appendOrganizationSnapshot("ORDER", order.order_id, order.owner_agent_id || order.agent_id, "createOrderFromQuotation", order);
   updateRowFields(SHEET_NAMES.quotations, quotation._row, {
     status: QUOTATION_STATUS.CONVERTED,
     order_id: order.order_id,
@@ -6215,6 +6491,921 @@ function updateWithdrawStatus(withdrawId, status) {
   if (next === "APPROVED") return approveWithdrawal(body);
   if (next === "REJECTED") return rejectWithdrawal(body);
   return financeError("INVALID_STATUS_TRANSITION", "Unsupported withdrawal status.");
+}
+
+/* =========================================================
+   SBOS V3-4 SINGLE SALES ORGANIZATION
+========================================================= */
+
+const ORG_ROLE = {
+  ADMIN: "ADMIN",
+  AREA_MANAGER: "AREA_MANAGER",
+  TEAM_MANAGER: "TEAM_MANAGER",
+  AGENT: "AGENT"
+};
+
+function normalizeOrgRole(role) {
+  const value = cleanString(role, 60).toUpperCase().replace(/\s+/g, "_");
+  if (value === "OWNER") return ORG_ROLE.ADMIN;
+  if (value === "AREA_MANAGER" || value === "AM") return ORG_ROLE.AREA_MANAGER;
+  if (value === "TEAM_MANAGER" || value === "TM" || value === "MANAGER") return ORG_ROLE.TEAM_MANAGER;
+  if (value === "ADMIN") return ORG_ROLE.ADMIN;
+  return ORG_ROLE.AGENT;
+}
+
+function isManagerRole(role) {
+  const normalized = normalizeOrgRole(role);
+  return normalized === ORG_ROLE.TEAM_MANAGER || normalized === ORG_ROLE.AREA_MANAGER;
+}
+
+function withOrganizationLock(fn) {
+  const lock = LockService.getScriptLock();
+  if (!lock.tryLock(15000)) {
+    return { ok: false, error: "ORG_LOCK_TIMEOUT", message: "Organization system is busy. Please try again." };
+  }
+  try {
+    return fn();
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function writeOrganizationAudit(entityType, entityId, action, actor, previousValue, newValue, message, seed) {
+  ensureOrganizationSheets();
+  appendObject(SHEET_NAMES.organizationAuditLogs, {
+    log_id: makeId("OAL"),
+    entity_type: cleanString(entityType, 80),
+    entity_id: cleanString(entityId, 120),
+    action: cleanString(action, 120),
+    actor_role: cleanString(actor && actor.role, 60),
+    actor_id: cleanString(actor && (actor.actor_id || actor.agent_id), 80),
+    previous_value_json: JSON.stringify(previousValue || {}),
+    new_value_json: JSON.stringify(newValue || {}),
+    message: cleanString(message, 500),
+    created_at: new Date(),
+    is_test: isQaRecord(seed || {}),
+    qa_batch: qaBatchFor(seed || {})
+  });
+}
+
+function publicOrganizationArea(row) {
+  return {
+    area_id: cleanString(row.area_id, 80),
+    area_code: cleanString(row.area_code, 80),
+    area_name: cleanString(row.area_name, 180),
+    description: cleanString(row.description, 500),
+    status: normalizeSalesStatus(row.status || "ACTIVE"),
+    created_at: row.created_at || "",
+    updated_at: row.updated_at || "",
+    is_test: booleanValue(row.is_test),
+    qa_batch: cleanString(row.qa_batch, 120)
+  };
+}
+
+function publicOrganizationTeam(row) {
+  const area = findAreaById(row.area_id);
+  return {
+    team_id: cleanString(row.team_id, 80),
+    team_code: cleanString(row.team_code, 80),
+    team_name: cleanString(row.team_name, 180),
+    area_id: cleanString(row.area_id, 80),
+    area_name: area ? cleanString(area.area_name, 180) : "",
+    primary_team_manager_id: cleanString(row.primary_team_manager_id, 80),
+    description: cleanString(row.description, 500),
+    status: normalizeSalesStatus(row.status || "ACTIVE"),
+    created_at: row.created_at || "",
+    updated_at: row.updated_at || "",
+    is_test: booleanValue(row.is_test),
+    qa_batch: cleanString(row.qa_batch, 120)
+  };
+}
+
+function publicOrganizationAssignment(row) {
+  return {
+    assignment_id: cleanString(row.assignment_id, 80),
+    assignment_type: normalizeSalesStatus(row.assignment_type || "AGENT_TEAM"),
+    subject_agent_id: cleanString(row.subject_agent_id, 80),
+    role: normalizeOrgRole(row.role),
+    area_id: cleanString(row.area_id, 80),
+    team_id: cleanString(row.team_id, 80),
+    status: normalizeSalesStatus(row.status || "ACTIVE"),
+    effective_from: row.effective_from || "",
+    effective_to: row.effective_to || "",
+    created_at: row.created_at || "",
+    updated_at: row.updated_at || "",
+    created_by: cleanString(row.created_by, 80),
+    updated_by: cleanString(row.updated_by, 80),
+    reason: cleanString(row.reason, 500),
+    is_test: booleanValue(row.is_test),
+    qa_batch: cleanString(row.qa_batch, 120)
+  };
+}
+
+function publicSalesTarget(row) {
+  return {
+    target_id: cleanString(row.target_id, 80),
+    target_type: normalizeSalesStatus(row.target_type || "AGENT"),
+    agent_id: cleanString(row.agent_id, 80),
+    team_id: cleanString(row.team_id, 80),
+    area_id: cleanString(row.area_id, 80),
+    period: cleanString(row.period, 40),
+    target_orders: Number(row.target_orders || 0),
+    target_revenue: Number(row.target_revenue || 0),
+    status: normalizeSalesStatus(row.status || "ACTIVE"),
+    created_at: row.created_at || "",
+    updated_at: row.updated_at || "",
+    is_test: booleanValue(row.is_test),
+    qa_batch: cleanString(row.qa_batch, 120)
+  };
+}
+
+function publicCustomerFollowup(row) {
+  return {
+    followup_id: cleanString(row.followup_id, 80),
+    customer_id: cleanString(row.customer_id, 80),
+    order_id: cleanString(row.order_id, 80),
+    owner_agent_id: cleanString(row.owner_agent_id, 80),
+    team_id: cleanString(row.team_id, 80),
+    area_id: cleanString(row.area_id, 80),
+    title: cleanString(row.title, 200),
+    note: cleanString(row.note, 800),
+    due_at: row.due_at || "",
+    status: normalizeSalesStatus(row.status || "OPEN"),
+    completed_at: row.completed_at || "",
+    created_at: row.created_at || "",
+    updated_at: row.updated_at || "",
+    is_test: booleanValue(row.is_test),
+    qa_batch: cleanString(row.qa_batch, 120)
+  };
+}
+
+function findAreaById(areaId) {
+  ensureOrganizationSheets();
+  const id = cleanString(areaId, 80);
+  if (!id) return null;
+  return sheetToObjects(SHEET_NAMES.organizationAreas).find(function (area) {
+    return cleanString(area.area_id, 80) === id;
+  }) || null;
+}
+
+function findTeamById(teamId) {
+  ensureOrganizationSheets();
+  const id = cleanString(teamId, 80);
+  if (!id) return null;
+  return sheetToObjects(SHEET_NAMES.organizationTeams).find(function (team) {
+    return cleanString(team.team_id, 80) === id;
+  }) || null;
+}
+
+function activeAssignments(type) {
+  ensureOrganizationSheets();
+  const normalizedType = normalizeSalesStatus(type || "");
+  return sheetToObjects(SHEET_NAMES.organizationAssignments).filter(function (assignment) {
+    if (normalizeSalesStatus(assignment.status || "ACTIVE") !== "ACTIVE") return false;
+    return !normalizedType || normalizeSalesStatus(assignment.assignment_type || "") === normalizedType;
+  });
+}
+
+function agentTeamAssignment(agentId) {
+  const id = validateAgentId(agentId);
+  if (!id) return null;
+  const rows = activeAssignments("AGENT_TEAM").filter(function (assignment) {
+    return cleanString(assignment.subject_agent_id, 80) === id;
+  });
+  return rows[rows.length - 1] || null;
+}
+
+function managerAssignments(agentId, role) {
+  const id = validateAgentId(agentId);
+  if (!id) return [];
+  const normalizedRole = normalizeOrgRole(role);
+  return activeAssignments(normalizedRole === ORG_ROLE.AREA_MANAGER ? "AREA_MANAGER" : "TEAM_MANAGER")
+    .filter(function (assignment) {
+      return cleanString(assignment.subject_agent_id, 80) === id && normalizeOrgRole(assignment.role) === normalizedRole;
+    });
+}
+
+function organizationRoleForAgent(agent) {
+  return normalizeOrgRole(agent && agent.role);
+}
+
+function requireOrganizationActor(body, allowedRoles) {
+  const admin = verifyAdminSession(body || {});
+  if (admin.ok) {
+    return { ok: true, actor_id: admin.actor_id, agent_id: admin.actor_id, role: ORG_ROLE.ADMIN, agent: admin.user, admin: true };
+  }
+  const session = verifyAgentSession(body || {});
+  if (!session.ok) {
+    return { ok: false, message: session.message, next_page: session.next_page };
+  }
+  const role = organizationRoleForAgent(session.agent);
+  const allowed = (allowedRoles || [ORG_ROLE.ADMIN, ORG_ROLE.AREA_MANAGER, ORG_ROLE.TEAM_MANAGER, ORG_ROLE.AGENT]).map(normalizeOrgRole);
+  if (allowed.indexOf(role) === -1) {
+    return { ok: false, message: "Organization permission required", role: role };
+  }
+  return { ok: true, actor_id: session.agent_id, agent_id: session.agent_id, role: role, agent: session.agent, admin: false };
+}
+
+function requireOrganizationAdmin(body) {
+  const admin = requireAdminActor(body || {});
+  if (!admin.ok) return admin;
+  return { ok: true, actor_id: admin.actor_id, agent_id: admin.actor_id, role: ORG_ROLE.ADMIN, agent: admin.user };
+}
+
+function scopedTeamIdsForActor(actor) {
+  if (!actor || actor.role === ORG_ROLE.ADMIN) {
+    return sheetToObjects(SHEET_NAMES.organizationTeams).map(function (team) { return cleanString(team.team_id, 80); });
+  }
+  if (actor.role === ORG_ROLE.TEAM_MANAGER) {
+    return managerAssignments(actor.agent_id, ORG_ROLE.TEAM_MANAGER).map(function (item) {
+      return cleanString(item.team_id, 80);
+    }).filter(Boolean);
+  }
+  if (actor.role === ORG_ROLE.AREA_MANAGER) {
+    const areaIds = managerAssignments(actor.agent_id, ORG_ROLE.AREA_MANAGER).map(function (item) {
+      return cleanString(item.area_id, 80);
+    });
+    return sheetToObjects(SHEET_NAMES.organizationTeams).filter(function (team) {
+      return areaIds.indexOf(cleanString(team.area_id, 80)) !== -1;
+    }).map(function (team) {
+      return cleanString(team.team_id, 80);
+    });
+  }
+  const assignment = agentTeamAssignment(actor.agent_id);
+  return assignment ? [cleanString(assignment.team_id, 80)] : [];
+}
+
+function scopedAreaIdsForActor(actor) {
+  if (!actor || actor.role === ORG_ROLE.ADMIN) {
+    return sheetToObjects(SHEET_NAMES.organizationAreas).map(function (area) { return cleanString(area.area_id, 80); });
+  }
+  if (actor.role === ORG_ROLE.AREA_MANAGER) {
+    return managerAssignments(actor.agent_id, ORG_ROLE.AREA_MANAGER).map(function (item) {
+      return cleanString(item.area_id, 80);
+    }).filter(Boolean);
+  }
+  const teamIds = scopedTeamIdsForActor(actor);
+  return sheetToObjects(SHEET_NAMES.organizationTeams).filter(function (team) {
+    return teamIds.indexOf(cleanString(team.team_id, 80)) !== -1;
+  }).map(function (team) {
+    return cleanString(team.area_id, 80);
+  }).filter(Boolean);
+}
+
+function agentIdsForTeamIds(teamIds) {
+  const ids = teamIds || [];
+  return activeAssignments("AGENT_TEAM").filter(function (assignment) {
+    return ids.indexOf(cleanString(assignment.team_id, 80)) !== -1;
+  }).map(function (assignment) {
+    return cleanString(assignment.subject_agent_id, 80);
+  });
+}
+
+function visibleAgentIdsForActor(actor) {
+  if (actor.role === ORG_ROLE.ADMIN) {
+    return sheetToObjects(SHEET_NAMES.agents).map(function (agent) { return cleanString(agent.agent_id, 80); });
+  }
+  if (actor.role === ORG_ROLE.AGENT) {
+    return [actor.agent_id];
+  }
+  return agentIdsForTeamIds(scopedTeamIdsForActor(actor));
+}
+
+function snapshotForAgent(agentId) {
+  const assignment = agentTeamAssignment(agentId);
+  const team = assignment ? findTeamById(assignment.team_id) : null;
+  const area = team ? findAreaById(team.area_id) : null;
+  const teamManager = team && team.primary_team_manager_id
+    ? cleanString(team.primary_team_manager_id, 80)
+    : "";
+  const areaManager = area
+    ? (managerAssignmentsForArea(area.area_id)[0] || "")
+    : "";
+  return {
+    sales_owner_agent_id: cleanString(agentId, 80),
+    area_id: area ? cleanString(area.area_id, 80) : "",
+    area_name: area ? cleanString(area.area_name, 180) : "",
+    team_id: team ? cleanString(team.team_id, 80) : "",
+    team_name: team ? cleanString(team.team_name, 180) : "",
+    team_manager_id: teamManager,
+    area_manager_id: areaManager,
+    organization_snapshot_at: new Date()
+  };
+}
+
+function managerAssignmentsForArea(areaId) {
+  const id = cleanString(areaId, 80);
+  return activeAssignments("AREA_MANAGER").filter(function (assignment) {
+    return cleanString(assignment.area_id, 80) === id;
+  }).map(function (assignment) {
+    return cleanString(assignment.subject_agent_id, 80);
+  });
+}
+
+function appendOrganizationSnapshot(entityType, entityId, agentId, source, seed) {
+  const snap = snapshotForAgent(agentId);
+  appendObject(SHEET_NAMES.organizationSnapshots, {
+    snapshot_id: makeId("OSS"),
+    entity_type: cleanString(entityType, 80),
+    entity_id: cleanString(entityId, 120),
+    sales_owner_agent_id: snap.sales_owner_agent_id,
+    area_id: snap.area_id,
+    area_name: snap.area_name,
+    team_id: snap.team_id,
+    team_name: snap.team_name,
+    team_manager_id: snap.team_manager_id,
+    area_manager_id: snap.area_manager_id,
+    snapshot_at: snap.organization_snapshot_at,
+    source: cleanString(source, 120),
+    is_test: isQaRecord(seed || {}),
+    qa_batch: qaBatchFor(seed || {})
+  });
+  return snap;
+}
+
+function listOrganizationAreas(body) {
+  ensureSalesSheets();
+  const actor = requireOrganizationActor(body, [ORG_ROLE.ADMIN, ORG_ROLE.AREA_MANAGER, ORG_ROLE.TEAM_MANAGER]);
+  if (!actor.ok) return actor;
+  const scoped = scopedAreaIdsForActor(actor);
+  const rows = sheetToObjects(SHEET_NAMES.organizationAreas).filter(function (area) {
+    return actor.role === ORG_ROLE.ADMIN || scoped.indexOf(cleanString(area.area_id, 80)) !== -1;
+  }).map(publicOrganizationArea);
+  return { ok: true, total: rows.length, areas: rows };
+}
+
+function saveOrganizationArea(body) {
+  return withOrganizationLock(function () {
+    ensureSalesSheets();
+    const admin = requireOrganizationAdmin(body);
+    if (!admin.ok) return admin;
+    const areaId = cleanString(body && body.area_id, 80);
+    const existing = areaId ? findAreaById(areaId) : null;
+    const now = new Date();
+    const data = {
+      area_id: existing ? existing.area_id : makeId("AREA"),
+      area_code: cleanString(body.area_code || body.areaCode || (existing && existing.area_code), 80),
+      area_name: cleanString(body.area_name || body.areaName || (existing && existing.area_name), 180),
+      description: cleanString(body.description || (existing && existing.description), 500),
+      status: normalizeSalesStatus(body.status || (existing && existing.status) || "ACTIVE") === "INACTIVE" ? "INACTIVE" : "ACTIVE",
+      created_at: existing ? existing.created_at : now,
+      updated_at: now,
+      created_by: existing ? existing.created_by : admin.actor_id,
+      updated_by: admin.actor_id,
+      is_test: booleanValue(body.is_test) || isQaRecord(body),
+      qa_batch: cleanString(body.qa_batch, 120)
+    };
+    if (!data.area_name) return { ok: false, message: "Area name is required" };
+    if (existing) updateRowFields(SHEET_NAMES.organizationAreas, existing._row, data); else appendObject(SHEET_NAMES.organizationAreas, data);
+    writeOrganizationAudit("AREA", data.area_id, existing ? "AREA_UPDATED" : "AREA_CREATED", admin, existing || {}, data, "Area saved", data);
+    return { ok: true, area: publicOrganizationArea(data) };
+  });
+}
+
+function listOrganizationTeams(body) {
+  ensureSalesSheets();
+  const actor = requireOrganizationActor(body, [ORG_ROLE.ADMIN, ORG_ROLE.AREA_MANAGER, ORG_ROLE.TEAM_MANAGER]);
+  if (!actor.ok) return actor;
+  const teamIds = scopedTeamIdsForActor(actor);
+  const areaId = cleanString(body && body.area_id, 80);
+  const rows = sheetToObjects(SHEET_NAMES.organizationTeams).filter(function (team) {
+    if (actor.role !== ORG_ROLE.ADMIN && teamIds.indexOf(cleanString(team.team_id, 80)) === -1) return false;
+    if (areaId && cleanString(team.area_id, 80) !== areaId) return false;
+    return true;
+  }).map(publicOrganizationTeam);
+  return { ok: true, total: rows.length, teams: rows };
+}
+
+function saveOrganizationTeam(body) {
+  return withOrganizationLock(function () {
+    ensureSalesSheets();
+    const admin = requireOrganizationAdmin(body);
+    if (!admin.ok) return admin;
+    const teamId = cleanString(body && body.team_id, 80);
+    const existing = teamId ? findTeamById(teamId) : null;
+    const areaId = cleanString(body.area_id || (existing && existing.area_id), 80);
+    if (areaId) {
+      const area = findAreaById(areaId);
+      if (!area || normalizeSalesStatus(area.status || "ACTIVE") !== "ACTIVE") {
+        return { ok: false, message: "Active area is required" };
+      }
+    }
+    const now = new Date();
+    const data = {
+      team_id: existing ? existing.team_id : makeId("TEAM"),
+      team_code: cleanString(body.team_code || body.teamCode || (existing && existing.team_code), 80),
+      team_name: cleanString(body.team_name || body.teamName || (existing && existing.team_name), 180),
+      area_id: areaId,
+      primary_team_manager_id: cleanString(body.primary_team_manager_id || body.manager_id || (existing && existing.primary_team_manager_id), 80),
+      description: cleanString(body.description || (existing && existing.description), 500),
+      status: normalizeSalesStatus(body.status || (existing && existing.status) || "ACTIVE") === "INACTIVE" ? "INACTIVE" : "ACTIVE",
+      created_at: existing ? existing.created_at : now,
+      updated_at: now,
+      created_by: existing ? existing.created_by : admin.actor_id,
+      updated_by: admin.actor_id,
+      is_test: booleanValue(body.is_test) || isQaRecord(body),
+      qa_batch: cleanString(body.qa_batch, 120)
+    };
+    if (!data.team_name) return { ok: false, message: "Team name is required" };
+    if (existing) updateRowFields(SHEET_NAMES.organizationTeams, existing._row, data); else appendObject(SHEET_NAMES.organizationTeams, data);
+    writeOrganizationAudit("TEAM", data.team_id, existing ? "TEAM_UPDATED" : "TEAM_CREATED", admin, existing || {}, data, "Team saved", data);
+    return { ok: true, team: publicOrganizationTeam(data) };
+  });
+}
+
+function closeActiveAssignments(type, subjectAgentId, admin, reason) {
+  activeAssignments(type).forEach(function (assignment) {
+    if (cleanString(assignment.subject_agent_id, 80) === cleanString(subjectAgentId, 80)) {
+      updateRowFields(SHEET_NAMES.organizationAssignments, assignment._row, {
+        status: "INACTIVE",
+        effective_to: new Date(),
+        updated_at: new Date(),
+        updated_by: admin.actor_id,
+        reason: cleanString(reason || assignment.reason, 500)
+      });
+    }
+  });
+}
+
+function assignAgentToTeam(body) {
+  return withOrganizationLock(function () {
+    ensureSalesSheets();
+    const admin = requireOrganizationAdmin(body);
+    if (!admin.ok) return admin;
+    const agentId = validateAgentId(body && body.agent_id);
+    const teamId = cleanString(body && body.team_id, 80);
+    if (!agentId || !teamId) return { ok: false, message: "agent_id and team_id are required" };
+    const agent = findAgent(agentId);
+    const team = findTeamById(teamId);
+    if (!agent) return { ok: false, message: "Agent not found" };
+    if (!team || normalizeSalesStatus(team.status || "ACTIVE") !== "ACTIVE") return { ok: false, message: "Active team is required" };
+    const existing = agentTeamAssignment(agentId);
+    if (existing && cleanString(existing.team_id, 80) === teamId) {
+      return { ok: true, duplicate: true, assignment: publicOrganizationAssignment(existing) };
+    }
+    closeActiveAssignments("AGENT_TEAM", agentId, admin, body.reason || "Agent moved to a new team");
+    const now = new Date();
+    const row = {
+      assignment_id: makeId("ASN"),
+      assignment_type: "AGENT_TEAM",
+      subject_agent_id: agentId,
+      role: ORG_ROLE.AGENT,
+      area_id: cleanString(team.area_id, 80),
+      team_id: teamId,
+      status: "ACTIVE",
+      effective_from: now,
+      effective_to: "",
+      created_at: now,
+      updated_at: now,
+      created_by: admin.actor_id,
+      updated_by: admin.actor_id,
+      reason: cleanString(body.reason || "Admin assignment", 500),
+      is_test: booleanValue(body.is_test) || isQaRecord(agent) || isQaRecord(body),
+      qa_batch: cleanString(body.qa_batch, 120) || qaBatchFor(agent)
+    };
+    appendObject(SHEET_NAMES.organizationAssignments, row);
+    writeOrganizationAudit("ASSIGNMENT", row.assignment_id, "AGENT_ASSIGNED_TO_TEAM", admin, existing || {}, row, "Agent assigned to team", row);
+    return { ok: true, assignment: publicOrganizationAssignment(row), snapshot: snapshotForAgent(agentId) };
+  });
+}
+
+function assignManagerRole(body) {
+  return withOrganizationLock(function () {
+    ensureSalesSheets();
+    const admin = requireOrganizationAdmin(body);
+    if (!admin.ok) return admin;
+    const agentId = validateAgentId(body && body.agent_id);
+    const newRole = normalizeOrgRole(body && body.role);
+    if (!agentId || [ORG_ROLE.TEAM_MANAGER, ORG_ROLE.AREA_MANAGER, ORG_ROLE.AGENT].indexOf(newRole) === -1) {
+      return { ok: false, message: "Valid agent_id and role are required" };
+    }
+    const agent = findAgent(agentId);
+    if (!agent) return { ok: false, message: "Agent not found" };
+    const areaId = cleanString(body && body.area_id, 80);
+    const teamId = cleanString(body && body.team_id, 80);
+    if (newRole === ORG_ROLE.TEAM_MANAGER && !teamId) return { ok: false, message: "team_id is required for Team Manager" };
+    if (newRole === ORG_ROLE.AREA_MANAGER && !areaId) return { ok: false, message: "area_id is required for Area Manager" };
+    if (teamId) {
+      const team = findTeamById(teamId);
+      if (!team || normalizeSalesStatus(team.status || "ACTIVE") !== "ACTIVE") return { ok: false, message: "Active team is required" };
+    }
+    if (areaId) {
+      const area = findAreaById(areaId);
+      if (!area || normalizeSalesStatus(area.status || "ACTIVE") !== "ACTIVE") return { ok: false, message: "Active area is required" };
+    }
+    const now = new Date();
+    const previousRole = cleanString(agent.role || "Agent", 60);
+    updateRowFields(SHEET_NAMES.agents, agent._row, { role: newRole });
+    appendObject(SHEET_NAMES.organizationRoleHistory, {
+      role_history_id: makeId("ORH"),
+      agent_id: agentId,
+      previous_role: previousRole,
+      new_role: newRole,
+      sales_enabled: true,
+      effective_at: now,
+      created_at: now,
+      created_by: admin.actor_id,
+      reason: cleanString(body.reason || "Role changed by Admin", 500),
+      is_test: booleanValue(body.is_test) || isQaRecord(agent) || isQaRecord(body),
+      qa_batch: cleanString(body.qa_batch, 120) || qaBatchFor(agent)
+    });
+    if (newRole === ORG_ROLE.TEAM_MANAGER) {
+      const existing = managerAssignments(agentId, ORG_ROLE.TEAM_MANAGER).filter(function (item) {
+        return cleanString(item.team_id, 80) === teamId;
+      })[0];
+      if (!existing) {
+        appendObject(SHEET_NAMES.organizationAssignments, {
+          assignment_id: makeId("ASN"),
+          assignment_type: "TEAM_MANAGER",
+          subject_agent_id: agentId,
+          role: ORG_ROLE.TEAM_MANAGER,
+          area_id: cleanString((findTeamById(teamId) || {}).area_id, 80),
+          team_id: teamId,
+          status: "ACTIVE",
+          effective_from: now,
+          effective_to: "",
+          created_at: now,
+          updated_at: now,
+          created_by: admin.actor_id,
+          updated_by: admin.actor_id,
+          reason: cleanString(body.reason || "Team Manager assignment", 500),
+          is_test: booleanValue(body.is_test) || isQaRecord(agent) || isQaRecord(body),
+          qa_batch: cleanString(body.qa_batch, 120) || qaBatchFor(agent)
+        });
+      }
+      const team = findTeamById(teamId);
+      if (team && !cleanString(team.primary_team_manager_id, 80)) {
+        updateRowFields(SHEET_NAMES.organizationTeams, team._row, { primary_team_manager_id: agentId, updated_at: now, updated_by: admin.actor_id });
+      }
+    }
+    if (newRole === ORG_ROLE.AREA_MANAGER) {
+      const existingArea = managerAssignments(agentId, ORG_ROLE.AREA_MANAGER).filter(function (item) {
+        return cleanString(item.area_id, 80) === areaId;
+      })[0];
+      if (!existingArea) {
+        appendObject(SHEET_NAMES.organizationAssignments, {
+          assignment_id: makeId("ASN"),
+          assignment_type: "AREA_MANAGER",
+          subject_agent_id: agentId,
+          role: ORG_ROLE.AREA_MANAGER,
+          area_id: areaId,
+          team_id: "",
+          status: "ACTIVE",
+          effective_from: now,
+          effective_to: "",
+          created_at: now,
+          updated_at: now,
+          created_by: admin.actor_id,
+          updated_by: admin.actor_id,
+          reason: cleanString(body.reason || "Area Manager assignment", 500),
+          is_test: booleanValue(body.is_test) || isQaRecord(agent) || isQaRecord(body),
+          qa_batch: cleanString(body.qa_batch, 120) || qaBatchFor(agent)
+        });
+      }
+    }
+    if (newRole === ORG_ROLE.AGENT) {
+      closeActiveAssignments("TEAM_MANAGER", agentId, admin, body.reason || "Manager role removed");
+      closeActiveAssignments("AREA_MANAGER", agentId, admin, body.reason || "Manager role removed");
+    }
+    writeOrganizationAudit("ROLE", agentId, "ROLE_CHANGED", admin, { role: previousRole }, { role: newRole, area_id: areaId, team_id: teamId }, "Role changed", agent);
+    return { ok: true, agent_id: agentId, previous_role: previousRole, role: newRole };
+  });
+}
+
+function listOrganizationAssignments(body) {
+  ensureSalesSheets();
+  const actor = requireOrganizationActor(body, [ORG_ROLE.ADMIN, ORG_ROLE.AREA_MANAGER, ORG_ROLE.TEAM_MANAGER]);
+  if (!actor.ok) return actor;
+  const teamIds = scopedTeamIdsForActor(actor);
+  const areaIds = scopedAreaIdsForActor(actor);
+  const type = normalizeSalesStatus(body && body.assignment_type);
+  const rows = sheetToObjects(SHEET_NAMES.organizationAssignments).filter(function (row) {
+    if (type && normalizeSalesStatus(row.assignment_type) !== type) return false;
+    if (actor.role === ORG_ROLE.ADMIN) return true;
+    const rowTeam = cleanString(row.team_id, 80);
+    const rowArea = cleanString(row.area_id, 80);
+    return (rowTeam && teamIds.indexOf(rowTeam) !== -1) || (rowArea && areaIds.indexOf(rowArea) !== -1);
+  }).map(publicOrganizationAssignment);
+  return { ok: true, total: rows.length, assignments: rows };
+}
+
+function enrichAgentOrganization(agent) {
+  const assignment = agentTeamAssignment(agent.agent_id);
+  const team = assignment ? findTeamById(assignment.team_id) : null;
+  const area = team ? findAreaById(team.area_id) : null;
+  const item = publicAgent(agent);
+  item.organization_role = normalizeOrgRole(agent.role);
+  item.team_id = team ? cleanString(team.team_id, 80) : "";
+  item.team_name = team ? cleanString(team.team_name, 180) : "";
+  item.area_id = area ? cleanString(area.area_id, 80) : "";
+  item.area_name = area ? cleanString(area.area_name, 180) : "";
+  return item;
+}
+
+function listScopedAgents(body) {
+  ensureSalesSheets();
+  const actor = requireOrganizationActor(body, [ORG_ROLE.ADMIN, ORG_ROLE.AREA_MANAGER, ORG_ROLE.TEAM_MANAGER, ORG_ROLE.AGENT]);
+  if (!actor.ok) return actor;
+  const visible = visibleAgentIdsForActor(actor);
+  const q = cleanString(body && (body.q || body.search), 200).toLowerCase();
+  const rows = sheetToObjects(SHEET_NAMES.agents).filter(function (agent) {
+    if (visible.indexOf(cleanString(agent.agent_id, 80)) === -1) return false;
+    if (!q) return true;
+    return [agent.agent_id, agent.first_name, agent.last_name, agent.email, agent.phone, agent.role].join(" ").toLowerCase().indexOf(q) !== -1;
+  }).map(enrichAgentOrganization);
+  return { ok: true, total: rows.length, agents: rows };
+}
+
+function listScopedCustomers(body) {
+  ensureSalesSheets();
+  const actor = requireOrganizationActor(body, [ORG_ROLE.ADMIN, ORG_ROLE.AREA_MANAGER, ORG_ROLE.TEAM_MANAGER, ORG_ROLE.AGENT]);
+  if (!actor.ok) return actor;
+  const visible = visibleAgentIdsForActor(actor);
+  const rows = sheetToObjects(SHEET_NAMES.customers).filter(function (customer) {
+    return visible.indexOf(cleanString(customer.owner_agent_id, 80)) !== -1;
+  }).map(publicCustomer);
+  return { ok: true, total: rows.length, customers: rows };
+}
+
+function listScopedOrders(body) {
+  ensureSalesSheets();
+  const actor = requireOrganizationActor(body, [ORG_ROLE.ADMIN, ORG_ROLE.AREA_MANAGER, ORG_ROLE.TEAM_MANAGER, ORG_ROLE.AGENT]);
+  if (!actor.ok) return actor;
+  const visible = visibleAgentIdsForActor(actor);
+  const rows = sheetToObjects(SHEET_NAMES.orders).filter(function (order) {
+    return visible.indexOf(cleanString(order.owner_agent_id || order.agent_id, 80)) !== -1;
+  }).map(publicOrder);
+  return { ok: true, total: rows.length, orders: rows };
+}
+
+function calculateOrganizationPerformance(actor) {
+  ensureSalesSheets();
+  const visible = visibleAgentIdsForActor(actor);
+  const orders = sheetToObjects(SHEET_NAMES.orders).filter(function (order) {
+    return visible.indexOf(cleanString(order.owner_agent_id || order.agent_id, 80)) !== -1;
+  });
+  const activeOrders = orders.filter(function (order) { return !isQaRecord(order); });
+  const paidStatuses = ["DEPOSIT_PAID", "PAID", "PAID_IN_FULL", "PREPARING", "READY_TO_INSTALL", "INSTALLING", "COMPLETED"];
+  const paidOrders = activeOrders.filter(function (order) {
+    return paidStatuses.indexOf(normalizeSalesStatus(order.status)) !== -1;
+  });
+  const completed = activeOrders.filter(function (order) {
+    return normalizeSalesStatus(order.status) === "COMPLETED";
+  });
+  const revenue = paidOrders.reduce(function (total, order) {
+    return total + Number(order.grand_total || order.total || 0);
+  }, 0);
+  const openFollowups = sheetToObjects(SHEET_NAMES.customerFollowups).filter(function (followup) {
+    return visible.indexOf(cleanString(followup.owner_agent_id, 80)) !== -1 && normalizeSalesStatus(followup.status || "OPEN") === "OPEN" && !isQaRecord(followup);
+  });
+  return {
+    agent_count: visible.length,
+    order_count: activeOrders.length,
+    paid_order_count: paidOrders.length,
+    completed_order_count: completed.length,
+    revenue: revenue,
+    open_followups: openFollowups.length,
+    qa_excluded: true
+  };
+}
+
+function getOrganizationDashboard(body) {
+  ensureSalesSheets();
+  const admin = requireOrganizationAdmin(body);
+  if (!admin.ok) return admin;
+  const areas = sheetToObjects(SHEET_NAMES.organizationAreas).map(publicOrganizationArea);
+  const teams = sheetToObjects(SHEET_NAMES.organizationTeams).map(publicOrganizationTeam);
+  const assignments = activeAssignments("").map(publicOrganizationAssignment);
+  const agents = sheetToObjects(SHEET_NAMES.agents);
+  const unassignedAgents = agents.filter(function (agent) {
+    return normalizeStatus(agent.status) === AGENT_STATUS.APPROVED && !isQaRecord(agent) && !agentTeamAssignment(agent.agent_id);
+  }).map(publicAgent);
+  const productionAreas = areas.filter(function (area) { return !area.is_test; });
+  const productionTeams = teams.filter(function (team) { return !team.is_test; });
+  const productionAssignments = assignments.filter(function (assignment) { return !assignment.is_test; });
+  return {
+    ok: true,
+    summary: {
+      areas: productionAreas.length,
+      active_areas: productionAreas.filter(function (area) { return area.status === "ACTIVE"; }).length,
+      teams: productionTeams.length,
+      active_teams: productionTeams.filter(function (team) { return team.status === "ACTIVE"; }).length,
+      assignments: productionAssignments.length,
+      unassigned_agents: unassignedAgents.length,
+      team_managers: productionAssignments.filter(function (item) { return item.assignment_type === "TEAM_MANAGER"; }).length,
+      area_managers: productionAssignments.filter(function (item) { return item.assignment_type === "AREA_MANAGER"; }).length,
+      qa_excluded: true
+    },
+    performance: calculateOrganizationPerformance({ role: ORG_ROLE.ADMIN }),
+    areas: areas,
+    teams: teams,
+    assignments: assignments,
+    unassigned_agents: unassignedAgents
+  };
+}
+
+function getTeamManagerDashboard(body) {
+  ensureSalesSheets();
+  const actor = requireOrganizationActor(body, [ORG_ROLE.TEAM_MANAGER, ORG_ROLE.ADMIN]);
+  if (!actor.ok) return actor;
+  return {
+    ok: true,
+    role: actor.role,
+    teams: listOrganizationTeams(body).teams || [],
+    agents: listScopedAgents(body).agents || [],
+    customers: listScopedCustomers(body).customers || [],
+    orders: listScopedOrders(body).orders || [],
+    followups: listCustomerFollowups(body).followups || [],
+    performance: calculateOrganizationPerformance(actor)
+  };
+}
+
+function getAreaManagerDashboard(body) {
+  ensureSalesSheets();
+  const actor = requireOrganizationActor(body, [ORG_ROLE.AREA_MANAGER, ORG_ROLE.ADMIN]);
+  if (!actor.ok) return actor;
+  return {
+    ok: true,
+    role: actor.role,
+    areas: listOrganizationAreas(body).areas || [],
+    teams: listOrganizationTeams(body).teams || [],
+    agents: listScopedAgents(body).agents || [],
+    orders: listScopedOrders(body).orders || [],
+    followups: listCustomerFollowups(body).followups || [],
+    performance: calculateOrganizationPerformance(actor)
+  };
+}
+
+function saveSalesTarget(body) {
+  return withOrganizationLock(function () {
+    ensureSalesSheets();
+    const admin = requireOrganizationAdmin(body);
+    if (!admin.ok) return admin;
+    const targetId = cleanString(body && body.target_id, 80);
+    const existing = targetId ? sheetToObjects(SHEET_NAMES.salesTargets).find(function (target) { return cleanString(target.target_id, 80) === targetId; }) : null;
+    const targetType = normalizeSalesStatus(body.target_type || "AGENT");
+    const now = new Date();
+    const data = {
+      target_id: existing ? existing.target_id : makeId("TGT"),
+      target_type: ["AGENT", "TEAM", "AREA"].indexOf(targetType) !== -1 ? targetType : "AGENT",
+      agent_id: validateAgentId(body.agent_id) || "",
+      team_id: cleanString(body.team_id, 80),
+      area_id: cleanString(body.area_id, 80),
+      period: cleanString(body.period || Utilities.formatDate(now, Session.getScriptTimeZone(), "yyyy-MM"), 40),
+      target_orders: Math.max(0, Number(body.target_orders || body.targetOrders || 0)),
+      target_revenue: Math.max(0, Number(body.target_revenue || body.targetRevenue || 0)),
+      status: normalizeSalesStatus(body.status || (existing && existing.status) || "ACTIVE") === "INACTIVE" ? "INACTIVE" : "ACTIVE",
+      created_at: existing ? existing.created_at : now,
+      updated_at: now,
+      created_by: existing ? existing.created_by : admin.actor_id,
+      updated_by: admin.actor_id,
+      is_test: booleanValue(body.is_test) || isQaRecord(body),
+      qa_batch: cleanString(body.qa_batch, 120)
+    };
+    if (existing) updateRowFields(SHEET_NAMES.salesTargets, existing._row, data); else appendObject(SHEET_NAMES.salesTargets, data);
+    writeOrganizationAudit("TARGET", data.target_id, existing ? "TARGET_UPDATED" : "TARGET_CREATED", admin, existing || {}, data, "Sales target saved", data);
+    return { ok: true, target: publicSalesTarget(data) };
+  });
+}
+
+function listSalesTargets(body) {
+  ensureSalesSheets();
+  const actor = requireOrganizationActor(body, [ORG_ROLE.ADMIN, ORG_ROLE.AREA_MANAGER, ORG_ROLE.TEAM_MANAGER, ORG_ROLE.AGENT]);
+  if (!actor.ok) return actor;
+  const teamIds = scopedTeamIdsForActor(actor);
+  const areaIds = scopedAreaIdsForActor(actor);
+  const rows = sheetToObjects(SHEET_NAMES.salesTargets).filter(function (target) {
+    if (actor.role === ORG_ROLE.ADMIN) return true;
+    if (cleanString(target.agent_id, 80) === actor.agent_id) return true;
+    if (teamIds.indexOf(cleanString(target.team_id, 80)) !== -1) return true;
+    if (areaIds.indexOf(cleanString(target.area_id, 80)) !== -1) return true;
+    return false;
+  }).map(publicSalesTarget);
+  return { ok: true, total: rows.length, targets: rows };
+}
+
+function saveCustomerFollowup(body) {
+  return withOrganizationLock(function () {
+    ensureSalesSheets();
+    const actor = requireOrganizationActor(body, [ORG_ROLE.ADMIN, ORG_ROLE.AREA_MANAGER, ORG_ROLE.TEAM_MANAGER, ORG_ROLE.AGENT]);
+    if (!actor.ok) return actor;
+    const customerId = cleanString(body && body.customer_id, 80);
+    const orderId = cleanString(body && body.order_id, 80);
+    let ownerAgentId = validateAgentId(body && body.owner_agent_id) || "";
+    if (customerId) {
+      const customer = findCustomerById(customerId);
+      if (!customer) return { ok: false, message: "Customer not found" };
+      ownerAgentId = cleanString(customer.owner_agent_id, 80);
+    }
+    if (orderId) {
+      const order = findOrderById(orderId);
+      if (!order) return { ok: false, message: "Order not found" };
+      ownerAgentId = cleanString(order.owner_agent_id || order.agent_id, 80);
+    }
+    if (!ownerAgentId) ownerAgentId = actor.agent_id;
+    if (visibleAgentIdsForActor(actor).indexOf(ownerAgentId) === -1) {
+      return { ok: false, message: "Follow-up scope denied" };
+    }
+    const snapshot = snapshotForAgent(ownerAgentId);
+    const followupId = cleanString(body && body.followup_id, 80);
+    const existing = followupId ? sheetToObjects(SHEET_NAMES.customerFollowups).find(function (item) { return cleanString(item.followup_id, 80) === followupId; }) : null;
+    const now = new Date();
+    const data = {
+      followup_id: existing ? existing.followup_id : makeId("FUP"),
+      customer_id: customerId,
+      order_id: orderId,
+      owner_agent_id: ownerAgentId,
+      team_id: snapshot.team_id,
+      area_id: snapshot.area_id,
+      title: cleanString(body.title || (existing && existing.title), 200),
+      note: cleanString(body.note || (existing && existing.note), 800),
+      due_at: body.due_at || body.dueAt || (existing && existing.due_at) || "",
+      status: normalizeSalesStatus(body.status || (existing && existing.status) || "OPEN"),
+      completed_at: existing ? existing.completed_at : "",
+      created_at: existing ? existing.created_at : now,
+      updated_at: now,
+      created_by: existing ? existing.created_by : actor.actor_id,
+      updated_by: actor.actor_id,
+      is_test: booleanValue(body.is_test) || isQaRecord(body),
+      qa_batch: cleanString(body.qa_batch, 120)
+    };
+    if (!data.title) return { ok: false, message: "Follow-up title is required" };
+    if (existing) updateRowFields(SHEET_NAMES.customerFollowups, existing._row, data); else appendObject(SHEET_NAMES.customerFollowups, data);
+    writeOrganizationAudit("FOLLOWUP", data.followup_id, existing ? "FOLLOWUP_UPDATED" : "FOLLOWUP_CREATED", actor, existing || {}, data, "Follow-up saved", data);
+    return { ok: true, followup: publicCustomerFollowup(data) };
+  });
+}
+
+function completeCustomerFollowup(body) {
+  return withOrganizationLock(function () {
+    ensureSalesSheets();
+    const actor = requireOrganizationActor(body, [ORG_ROLE.ADMIN, ORG_ROLE.AREA_MANAGER, ORG_ROLE.TEAM_MANAGER, ORG_ROLE.AGENT]);
+    if (!actor.ok) return actor;
+    const id = cleanString(body && body.followup_id, 80);
+    const row = sheetToObjects(SHEET_NAMES.customerFollowups).find(function (item) {
+      return cleanString(item.followup_id, 80) === id;
+    });
+    if (!row) return { ok: false, message: "Follow-up not found" };
+    if (visibleAgentIdsForActor(actor).indexOf(cleanString(row.owner_agent_id, 80)) === -1) {
+      return { ok: false, message: "Follow-up scope denied" };
+    }
+    const updates = {
+      status: "COMPLETED",
+      completed_at: new Date(),
+      updated_at: new Date(),
+      updated_by: actor.actor_id
+    };
+    updateRowFields(SHEET_NAMES.customerFollowups, row._row, updates);
+    writeOrganizationAudit("FOLLOWUP", id, "FOLLOWUP_COMPLETED", actor, row, Object.assign({}, row, updates), "Follow-up completed", row);
+    return { ok: true, followup: publicCustomerFollowup(Object.assign({}, row, updates)) };
+  });
+}
+
+function listCustomerFollowups(body) {
+  ensureSalesSheets();
+  const actor = requireOrganizationActor(body, [ORG_ROLE.ADMIN, ORG_ROLE.AREA_MANAGER, ORG_ROLE.TEAM_MANAGER, ORG_ROLE.AGENT]);
+  if (!actor.ok) return actor;
+  const visible = visibleAgentIdsForActor(actor);
+  const status = normalizeSalesStatus(body && body.status);
+  const rows = sheetToObjects(SHEET_NAMES.customerFollowups).filter(function (item) {
+    if (visible.indexOf(cleanString(item.owner_agent_id, 80)) === -1) return false;
+    if (status && normalizeSalesStatus(item.status || "OPEN") !== status) return false;
+    return true;
+  }).map(publicCustomerFollowup);
+  return { ok: true, total: rows.length, followups: rows };
+}
+
+function getOrganizationPerformance(body) {
+  ensureSalesSheets();
+  const actor = requireOrganizationActor(body, [ORG_ROLE.ADMIN, ORG_ROLE.AREA_MANAGER, ORG_ROLE.TEAM_MANAGER, ORG_ROLE.AGENT]);
+  if (!actor.ok) return actor;
+  return { ok: true, performance: calculateOrganizationPerformance(actor) };
+}
+
+function runOrganizationIntegrityCheck(body) {
+  ensureSalesSheets();
+  const admin = requireOrganizationAdmin(body);
+  if (!admin.ok) return admin;
+  const anomalies = [];
+  const activeAgentAssignments = {};
+  activeAssignments("AGENT_TEAM").forEach(function (assignment) {
+    const agentId = cleanString(assignment.subject_agent_id, 80);
+    activeAgentAssignments[agentId] = (activeAgentAssignments[agentId] || 0) + 1;
+  });
+  Object.keys(activeAgentAssignments).forEach(function (agentId) {
+    if (activeAgentAssignments[agentId] > 1) anomalies.push({ type: "DUPLICATE_ACTIVE_AGENT_ASSIGNMENT", agent_id: agentId, count: activeAgentAssignments[agentId] });
+  });
+  sheetToObjects(SHEET_NAMES.organizationTeams).forEach(function (team) {
+    const areaId = cleanString(team.area_id, 80);
+    if (areaId && !findAreaById(areaId)) anomalies.push({ type: "TEAM_AREA_NOT_FOUND", team_id: team.team_id, area_id: areaId });
+  });
+  sheetToObjects(SHEET_NAMES.commissions).forEach(function (commission) {
+    const order = findOrderById(commission.order_id);
+    if (order && cleanString(commission.agent_id, 80) !== cleanString(order.owner_agent_id || order.agent_id, 80)) {
+      anomalies.push({ type: "COMMISSION_OWNER_MISMATCH", commission_id: commission.commission_id, order_id: order.order_id });
+    }
+  });
+  return { ok: true, anomalies: anomalies, no_manager_commission: true, single_sales_only: true };
 }
 
 /* =========================================================

@@ -362,5 +362,16 @@
   "finance.status.reserved": "Reserved",
   "finance.status.paid": "Paid",
   "finance.status.rejected": "Rejected",
-  "finance.status.configRequired": "Config Required"
+  "finance.status.configRequired": "Config Required",
+  "organization.nav.organization": "Organization",
+  "organization.nav.areas": "Areas",
+  "organization.nav.teams": "Teams",
+  "organization.nav.assignments": "Assignments",
+  "organization.nav.performance": "Performance",
+  "organization.nav.targets": "Targets",
+  "organization.nav.followups": "Follow-ups",
+  "organization.role.teamManager": "Team Manager",
+  "organization.role.areaManager": "Area Manager",
+  "organization.singleSales": "Single Sales",
+  "organization.noManagerCommission": "No manager commission"
 }

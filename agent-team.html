@@ -1,15 +1,1 @@
-<!DOCTYPE html>
-<html lang="th">
-<head>
-<meta charset="UTF-8">
-<title>กำลังพัฒนา</title>
-</head>
-<body style="font-family:Prompt;text-align:center;padding:100px;">
-<h1>หน้านี้กำลังพัฒนา</h1>
-<a href="agent-dashboard.html">← กลับ Dashboard</a>
-
-  <script src="js/logout.js"></script>
-  <script src="js/agent-guard.js"></script>
-  
-</body>
-</html>
+<!DOCTYPE html><html lang="th"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SBOS V3-4 Agent Team</title><link rel="icon" href="images/logo.png"><link rel="stylesheet" href="css/sbos-typography.css"><link rel="stylesheet" href="css/sbos-organization.css"></head><body data-org-page="agent-team" data-org-role="agent"><div class="org-shell"><aside class="org-side"><div class="org-brand"><img src="images/logo.png" alt="Siamtham"><div><b>SBOS V3-4</b><span>My Team</span></div></div><nav class="org-menu"><a href="agent-dashboard.html">Dashboard</a><a class="active" href="agent-team.html">My Team</a><a href="agent-wallet.html">Wallet</a><a href="agent-commissions.html">Commissions</a><a href="agent-withdrawals.html">Withdrawals</a><a href="team-manager-dashboard.html">Team Manager</a><a href="area-manager-dashboard.html">Area Manager</a></nav></aside><main class="org-main"><header class="org-top"><div><h1>My Team</h1><p>ข้อมูลทีมและ Area จากฐานข้อมูลกลาง</p></div><button id="refreshButton" class="org-btn" type="button">Refresh</button></header><div class="org-content"><section class="org-hero"><h2>Single Sales Team Information</h2><p>SBOS V3-4 marker: ทีมใช้เพื่อการดูแลและติดตามงานเท่านั้น Commission ยังคงเป็นของ Agent เจ้าของยอดขาย</p></section><section class="org-grid"><article class="org-card"><span>Visible Agents</span><strong id="agentCount">0</strong></article><article class="org-card"><span>Targets</span><strong id="orderCount">0</strong></article><article class="org-card"><span>Team</span><strong id="revenueCount">-</strong></article><article class="org-card"><span>Open Follow-ups</span><strong id="followupCount">0</strong></article></section><section class="org-panel"><h3>My Assignment</h3><div class="org-table-wrap"><table class="org-table"><thead><tr><th>Agent ID</th><th>Name</th><th>Team</th><th>Area</th><th>Status</th></tr></thead><tbody id="agentsRows"></tbody></table></div></section><section class="org-panel"><h3>My Follow-ups</h3><div class="org-table-wrap"><table class="org-table"><thead><tr><th>ID</th><th>Title</th><th>Owner</th><th>Due</th><th>Status</th></tr></thead><tbody id="followupRows"></tbody></table></div></section></div></main></div><div id="orgToast" class="org-toast" role="status" aria-live="polite"></div><script src="js/agent-guard.js"></script><script src="js/sbos-organization.js"></script></body></html>
