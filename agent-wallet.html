@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Agent Wallet | SBOS</title>
+<link rel="icon" href="images/logo.png">
+<link rel="stylesheet" href="css/sbos-typography.css">
+<link rel="stylesheet" href="css/sbos-finance.css">
+</head>
+<body>
+<div class="finance-shell">
+  <aside class="finance-side"><div class="finance-brand"><img src="images/logo.png" alt="SBOS"><div><b>SBOS Agent</b><span>Finance Center</span></div></div><nav class="finance-menu"><a href="agent-dashboard.html">Dashboard</a><a class="active" href="agent-wallet.html">Wallet</a><a href="agent-commissions.html">Commissions</a><a href="agent-withdrawals.html">Withdrawals</a><a href="agent-orders.html">Orders</a></nav></aside>
+  <main class="finance-main"><header class="finance-top"><div><h1>Wallet Ledger</h1><p>ยอดเงินคำนวณจากรายการ ledger ฝั่ง Backend</p></div><button id="refresh" class="finance-action" type="button">Refresh</button></header>
+  <div class="finance-content"><section class="finance-hero"><h2>Available Wallet</h2><p>ตรวจสอบยอดที่ถอนได้ ยอดค้าง และประวัติการเคลื่อนไหว</p></section>
+  <section class="finance-grid"><div class="finance-card"><span>Available</span><strong id="available">฿0</strong></div><div class="finance-card"><span>Pending</span><strong id="pending">฿0</strong></div><div class="finance-card"><span>Reserved</span><strong id="reserved">฿0</strong></div><div class="finance-card"><span>Lifetime Earned</span><strong id="earned">฿0</strong></div></section>
+  <section class="finance-panel"><div class="finance-toolbar"><a class="finance-action" href="agent-withdrawals.html">Create Withdrawal</a><a class="finance-action secondary" href="agent-commissions.html">View Commissions</a></div><div class="finance-table-wrap"><table class="finance-table"><thead><tr><th>Date</th><th>Type</th><th>Direction</th><th>Bucket</th><th>Amount</th><th>Reference</th></tr></thead><tbody id="ledger"><tr><td colspan="6">Loading...</td></tr></tbody></table></div></section>
+  <div id="status" class="finance-status" role="status" aria-live="polite"></div></div></main>
+</div>
+<script src="js/agent-api.js"></script>
+<script src="js/agent-guard.js"></script>
+<script>
+"use strict";
+const setText=(id,value)=>{document.getElementById(id).textContent=value};
+function badge(value){return '<span class="finance-badge '+esc(String(value||'').toLowerCase())+'">'+esc(value||'-')+'</span>'}
+async function load(){const status=document.getElementById("status");status.textContent="Loading wallet...";const [walletData,ledgerData]=await Promise.all([agentFinancePost("getAgentWallet",{}),agentFinancePost("listAgentWalletLedger",{limit:100})]);if(!walletData.ok||!ledgerData.ok){status.textContent=(walletData.message||ledgerData.message||"Load failed");return}const wallet=walletData.wallet||{};setText("available",money(wallet.available_balance));setText("pending",money(wallet.pending_balance));setText("reserved",money(wallet.reserved_balance));setText("earned",money(wallet.lifetime_earned));const rows=ledgerData.ledger||[];document.getElementById("ledger").innerHTML=rows.length?rows.map(r=>'<tr><td>'+esc(formatDate(r.created_at))+'</td><td>'+badge(r.entry_type)+'</td><td>'+esc(r.direction)+'</td><td>'+esc(r.balance_bucket)+'</td><td>'+esc(money(r.amount))+'</td><td>'+esc(r.reference_id||"-")+'</td></tr>').join(""):'<tr><td colspan="6" class="finance-empty">No ledger entries</td></tr>';status.textContent="Updated";}
+document.getElementById("refresh").addEventListener("click",load);load();
+</script>
+</body>
+</html>

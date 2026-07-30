@@ -350,5 +350,17 @@
   "adminDashboard.status.WAIT_APPROVAL": "Awaiting Approval",
   "adminDashboard.status.APPROVED": "Approved",
   "adminDashboard.status.SUSPENDED": "Suspended",
-  "adminDashboard.status.REJECTED": "Rejected"
+  "adminDashboard.status.REJECTED": "Rejected",
+  "finance.nav.finance": "Finance",
+  "finance.nav.wallet": "Wallet",
+  "finance.nav.commissions": "Commissions",
+  "finance.nav.withdrawals": "Withdrawals",
+  "finance.nav.settings": "Commission Settings",
+  "finance.status.available": "Available",
+  "finance.status.pending": "Pending",
+  "finance.status.held": "Held",
+  "finance.status.reserved": "Reserved",
+  "finance.status.paid": "Paid",
+  "finance.status.rejected": "Rejected",
+  "finance.status.configRequired": "Config Required"
 }

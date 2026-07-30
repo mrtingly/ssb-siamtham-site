@@ -7,29 +7,9 @@ function money(value){
   });
 }
 
-function jsonp(url){
-  return new Promise((resolve, reject) => {
-    const callbackName = "cb_" + Date.now() + "_" + Math.floor(Math.random() * 10000);
-    const script = document.createElement("script");
-
-    const cleanup = () => {
-      try { delete window[callbackName]; } catch (error) { window[callbackName] = undefined; }
-      if (script.parentNode) script.parentNode.removeChild(script);
-    };
-
-    window[callbackName] = function(data){
-      cleanup();
-      resolve(data);
-    };
-
-    script.src = url + (url.includes("?") ? "&" : "?") + "callback=" + encodeURIComponent(callbackName) + "&_=" + Date.now();
-    script.async = true;
-    script.onerror = function(){
-      cleanup();
-      reject(new Error("JSONP request failed"));
-    };
-
-    document.body.appendChild(script);
+function esc(value){
+  return String(value === null || value === undefined ? "" : value).replace(/[&<>"']/g, function(char){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[char];
   });
 }
 
@@ -67,6 +47,21 @@ async function apiPostJson(payload){
   } catch (error) {
     return { ok: false, message: text || "Invalid API response" };
   }
+}
+
+async function agentFinancePost(action, payload){
+  const auth = getCurrentAgentAuthParams();
+  const result = await apiPostJson(Object.assign({
+    action: action,
+    agent_id: auth.agent_id,
+    agent_session_token: auth.agent_session_token
+  }, payload || {}));
+
+  if (result && result.next_page) {
+    window.location.href = result.next_page;
+  }
+
+  return result;
 }
 
 function routeByStatus(status){
@@ -275,4 +270,70 @@ async function loadBonusPage(agentId){
       <td>${item.status || "-"}</td>
       <td>${item.note || "-"}</td>
     </tr>`).join("") : `<tr><td colspan="6">ไม่มีโบนัส</td></tr>`;
+}
+async function loadIncomePageV3(agentId){
+  const data = await agentFinancePost("listAgentCommissions", { limit: 200 });
+  const walletData = await agentFinancePost("getAgentWallet", {});
+
+  if(!data || !data.ok || !walletData || !walletData.ok){
+    alert((data && data.message) || (walletData && walletData.message) || "โหลดรายได้ไม่สำเร็จ");
+    return;
+  }
+
+  const wallet = walletData.wallet || {};
+  const rows = data.commissions || [];
+  document.querySelectorAll(".commission").forEach(el => el.textContent = money(wallet.lifetime_earned));
+  document.querySelectorAll(".bonus-detail").forEach(el => el.textContent = money(0));
+  document.querySelectorAll(".tax").forEach(el => el.textContent = "- " + money(0));
+  document.querySelectorAll(".net").forEach(el => el.textContent = money(wallet.available_balance));
+
+  const tbody = document.querySelector("#incomeTable");
+  if (!tbody) return;
+  tbody.innerHTML = rows.length ? rows.map(item => `
+    <tr>
+      <td>${esc(item.commission_id || "-")}</td>
+      <td>${esc(item.milestone || item.commission_type || "-")}</td>
+      <td>${esc(money(item.released_amount || item.pending_amount || 0))}</td>
+      <td>${esc(money(0))}</td>
+      <td>${esc(money(item.released_amount || 0))}</td>
+      <td>${renderIncomeStatus(item.status)}</td>
+      <td>${esc(formatDate(item.available_at || item.created_at))}</td>
+    </tr>`).join("") : `<tr><td colspan="7">ยังไม่มีรายการคอมมิชชัน</td></tr>`;
+}
+
+async function loadWithdrawPageV3(agentId){
+  const walletData = await agentFinancePost("getAgentWallet", {});
+  const withdrawalData = await agentFinancePost("listAgentWithdrawals", {});
+
+  if(!walletData || !walletData.ok || !withdrawalData || !withdrawalData.ok){
+    alert((walletData && walletData.message) || (withdrawalData && withdrawalData.message) || "โหลดข้อมูลถอนไม่สำเร็จ");
+    return;
+  }
+
+  const wallet = walletData.wallet || {};
+  setText(".available", money(wallet.available_balance));
+
+  try {
+    const auth = getCurrentAgentAuthParams();
+    const dashboard = await apiPostJson({
+      action: "getDashboard",
+      agent_id: auth.agent_id,
+      agent_session_token: auth.agent_session_token
+    });
+    const agent = dashboard && dashboard.agent ? dashboard.agent : {};
+    setText(".bank-name", agent.bank_name || "-");
+    setText(".bank-account", agent.bank_account ? "****" + String(agent.bank_account).slice(-4) : "-");
+  } catch (error) {}
+
+  const tbody = document.querySelector("#withdrawTable");
+  if (!tbody) return;
+  const rows = withdrawalData.withdrawals || [];
+  tbody.innerHTML = rows.length ? rows.map(w => `
+    <tr>
+      <td>${esc(w.withdrawal_id || "-")}</td>
+      <td>${esc(money(w.requested_amount))}</td>
+      <td>${renderWithdrawStatus(w.status)}</td>
+      <td>${esc(formatDate(w.requested_at))}</td>
+      <td>${esc(formatDate(w.paid_at))}</td>
+    </tr>`).join("") : `<tr><td colspan="5">ยังไม่มีประวัติการถอนเงิน</td></tr>`;
 }

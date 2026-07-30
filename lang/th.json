@@ -350,5 +350,17 @@
   "adminDashboard.status.WAIT_APPROVAL": "รออนุมัติ",
   "adminDashboard.status.APPROVED": "อนุมัติแล้ว",
   "adminDashboard.status.SUSPENDED": "ระงับ",
-  "adminDashboard.status.REJECTED": "ปฏิเสธ"
+  "adminDashboard.status.REJECTED": "ปฏิเสธ",
+  "finance.nav.finance": "การเงิน",
+  "finance.nav.wallet": "กระเป๋าเงิน",
+  "finance.nav.commissions": "คอมมิชชัน",
+  "finance.nav.withdrawals": "ถอนเงิน",
+  "finance.nav.settings": "ตั้งค่าคอมมิชชัน",
+  "finance.status.available": "ถอนได้",
+  "finance.status.pending": "รอดำเนินการ",
+  "finance.status.held": "ระงับชั่วคราว",
+  "finance.status.reserved": "จองไว้",
+  "finance.status.paid": "จ่ายแล้ว",
+  "finance.status.rejected": "ปฏิเสธ",
+  "finance.status.configRequired": "ต้องตั้งค่า"
 }

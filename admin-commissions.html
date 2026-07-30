@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin Commissions | SBOS</title>
+<link rel="icon" href="images/logo.png">
+<link rel="stylesheet" href="css/sbos-typography.css">
+<link rel="stylesheet" href="css/sbos-finance.css">
+</head>
+<body>
+<div class="finance-shell">
+  <aside class="finance-side"><div class="finance-brand"><img src="images/logo.png" alt="SBOS"><div><b>SBOS Admin</b><span>Commission Control</span></div></div><nav class="finance-menu"><a href="admin-finance.html">Finance</a><a class="active" href="admin-commissions.html">Commissions</a><a href="admin-wallets.html">Wallets</a><a href="admin-withdraw.html">Withdrawals</a><a href="admin-commission-settings.html">Settings</a></nav></aside>
+  <main class="finance-main"><header class="finance-top"><div><h1>Commission Management</h1><p>Hold, release hold และ reverse พร้อมเหตุผล</p></div><button id="refresh" class="finance-action" type="button">Refresh</button></header><div class="finance-content"><section class="finance-panel"><div class="finance-toolbar"><input id="search" placeholder="Search ID, order, payment, agent"><select id="filter"><option value="">All</option><option>AVAILABLE</option><option>PENDING</option><option>HELD</option><option>REVERSED</option><option>CONFIG_REQUIRED</option></select><label><input id="qa" type="checkbox"> Include QA</label></div><div class="finance-table-wrap"><table class="finance-table"><thead><tr><th>ID</th><th>Agent</th><th>Order/Payment</th><th>Milestone</th><th>Amount</th><th>Status</th><th>Actions</th></tr></thead><tbody id="rows"><tr><td colspan="7">Loading...</td></tr></tbody></table></div></section><div id="status" class="finance-status"></div></div></main>
+</div>
+<script src="js/admin-actions.js"></script>
+<script src="js/admin-guard.js"></script>
+<script>
+"use strict";
+let list = [];
+function money(v){return "฿" + Number(v || 0).toLocaleString("th-TH", { maximumFractionDigits: 2 });}
+function esc(v){return String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));}
+function badge(v){return '<span class="finance-badge ' + esc(String(v || "").toLowerCase()) + '">' + esc(v || "-") + '</span>';}
+function actionButton(action, id, label, variant){
+  return '<button class="finance-action ' + variant + '" type="button" data-action="' + esc(action) + '" data-id="' + esc(id) + '">' + esc(label) + '</button>';
+}
+async function runAction(action, id){
+  const reason = prompt("Reason required") || "";
+  if ((action === "holdCommission" || action === "reverseCommission") && !reason.trim()) {
+    alert("Reason required");
+    return;
+  }
+  const result = await adminPost(action, { commission_id: id, reason: reason });
+  if (!result.ok) {
+    alert(result.message || "Action failed");
+    return;
+  }
+  await load();
+}
+function render(){
+  const q = search.value.toLowerCase();
+  const f = filter.value;
+  const filtered = list.filter(c => (!f || c.status === f) && [c.commission_id, c.agent_id, c.order_id, c.payment_id].join(" ").toLowerCase().includes(q));
+  rows.innerHTML = filtered.length ? filtered.map(c => {
+    const id = c.commission_id || "";
+    const actions = [
+      actionButton("holdCommission", id, "Hold", "warn"),
+      actionButton("releaseCommissionHold", id, "Release", "secondary"),
+      actionButton("reverseCommission", id, "Reverse", "danger")
+    ].join(" ");
+    return '<tr><td>' + esc(id) + '</td><td>' + esc(c.agent_id) + '</td><td>' + esc((c.order_id || "-") + " / " + (c.payment_id || "-")) + '</td><td>' + esc(c.milestone) + '</td><td>' + esc(money(c.released_amount || c.pending_amount)) + '</td><td>' + badge(c.status) + '</td><td>' + actions + '</td></tr>';
+  }).join("") : '<tr><td colspan="7" class="finance-empty">No commissions</td></tr>';
+}
+async function load(){
+  const data = await adminPost("listAllCommissions", { include_qa: qa.checked });
+  if (!data.ok) {
+    status.textContent = data.message || "Load failed";
+    return;
+  }
+  list = data.commissions || [];
+  render();
+  status.textContent = "Total " + list.length;
+}
+rows.addEventListener("click", event => {
+  const button = event.target.closest("button[data-action]");
+  if (!button) return;
+  runAction(button.dataset.action, button.dataset.id);
+});
+search.oninput = render;
+filter.onchange = render;
+qa.onchange = load;
+refresh.onclick = load;
+load();
+</script>
+</body>
+</html>

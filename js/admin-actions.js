@@ -34,6 +34,9 @@ async function adminPost(action, payload) {
   }
 }
 
+window.adminPost = adminPost;
+window.adminAuthPayload = adminAuthPayload;
+
 function handleAdminActionResult(result, successMessage) {
   if (!result || !result.ok) {
     const message = result && result.message ? result.message : "Admin action failed";
@@ -67,13 +70,27 @@ async function rejectAgent(agentId) {
 async function markWithdrawPaid(withdrawId) {
   if (!confirm("ยืนยันว่านำจ่ายรายการถอนนี้แล้ว?")) return;
 
-  const result = await adminPost("markWithdrawPaid", { withdraw_id: withdrawId });
+  const reference = prompt("Payment reference (optional)") || "";
+  const result = await adminPost("markWithdrawalPaid", {
+    withdrawal_id: withdrawId,
+    payment_reference: reference
+  });
   handleAdminActionResult(result, "บันทึกว่านำจ่ายแล้ว");
 }
 
 async function rejectWithdraw(withdrawId) {
   if (!confirm("ยืนยันปฏิเสธรายการถอนนี้?")) return;
 
-  const result = await adminPost("rejectWithdraw", { withdraw_id: withdrawId });
+  const reason = prompt("Reject reason") || "";
+
+  if (!reason.trim()) {
+    alert("Reject reason is required");
+    return;
+  }
+
+  const result = await adminPost("rejectWithdrawal", {
+    withdrawal_id: withdrawId,
+    reason: reason
+  });
   handleAdminActionResult(result, "ปฏิเสธรายการถอนแล้ว");
 }

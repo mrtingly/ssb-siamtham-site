@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Agent Withdrawals | SBOS</title>
+<link rel="icon" href="images/logo.png">
+<link rel="stylesheet" href="css/sbos-typography.css">
+<link rel="stylesheet" href="css/sbos-finance.css">
+</head>
+<body>
+<div class="finance-shell">
+  <aside class="finance-side"><div class="finance-brand"><img src="images/logo.png" alt="SBOS"><div><b>SBOS Agent</b><span>Withdrawal Center</span></div></div><nav class="finance-menu"><a href="agent-dashboard.html">Dashboard</a><a href="agent-wallet.html">Wallet</a><a href="agent-commissions.html">Commissions</a><a class="active" href="agent-withdrawals.html">Withdrawals</a><a href="agent-orders.html">Orders</a></nav></aside>
+  <main class="finance-main"><header class="finance-top"><div><h1>Withdrawals</h1><p>ส่งคำขอถอนเงินจาก Available Wallet</p></div><button id="refresh" class="finance-action" type="button">Refresh</button></header>
+  <div class="finance-content"><section class="finance-grid"><div class="finance-card"><span>Available</span><strong id="available">฿0</strong></div><div class="finance-card"><span>Reserved</span><strong id="reserved">฿0</strong></div><div class="finance-card"><span>Lifetime Withdrawn</span><strong id="withdrawn">฿0</strong></div><div class="finance-card"><span>Requests</span><strong id="total">0</strong></div></section>
+  <section class="finance-panel"><h3>Create Withdrawal</h3><form id="form" class="finance-form"><label>Amount<input id="amount" inputmode="decimal" placeholder="0.00"></label><label class="wide">Note<textarea id="note" placeholder="Optional note"></textarea></label><div><button id="submit" class="finance-action" type="submit">Submit Request</button></div></form></section>
+  <section class="finance-panel"><h3>History</h3><div class="finance-table-wrap"><table class="finance-table"><thead><tr><th>ID</th><th>Amount</th><th>Net</th><th>Status</th><th>Requested</th><th>Paid Ref</th><th>Reason</th></tr></thead><tbody id="rows"><tr><td colspan="7">Loading...</td></tr></tbody></table></div></section><div id="status" class="finance-status" role="status" aria-live="polite"></div></div></main>
+</div>
+<script src="js/agent-api.js"></script><script src="js/withdraw.js"></script><script src="js/agent-guard.js"></script>
+<script>
+"use strict";let wallet={};function badge(v){return '<span class="finance-badge '+esc(String(v||'').toLowerCase())+'">'+esc(v||'-')+'</span>'}
+async function load(){const [w,d]=await Promise.all([agentFinancePost("getAgentWallet",{}),agentFinancePost("listAgentWithdrawals",{})]);if(!w.ok||!d.ok){document.getElementById("status").textContent=w.message||d.message||"Load failed";return}wallet=w.wallet||{};document.getElementById("available").textContent=money(wallet.available_balance);document.getElementById("reserved").textContent=money(wallet.reserved_balance);document.getElementById("withdrawn").textContent=money(wallet.lifetime_withdrawn);const rows=d.withdrawals||[];document.getElementById("total").textContent=rows.length;document.getElementById("rows").innerHTML=rows.length?rows.map(r=>'<tr><td>'+esc(r.withdrawal_id)+'</td><td>'+esc(money(r.requested_amount))+'</td><td>'+esc(money(r.net_amount))+'</td><td>'+badge(r.status)+'</td><td>'+esc(formatDate(r.requested_at))+'</td><td>'+esc(r.payment_reference||"-")+'</td><td>'+esc(r.rejection_reason||"-")+'</td></tr>').join(""):'<tr><td colspan="7" class="finance-empty">No withdrawals</td></tr>';document.getElementById("status").textContent="Updated"}
+document.getElementById("form").addEventListener("submit",async e=>{e.preventDefault();const btn=document.getElementById("submit");if(btn.disabled)return;const amount=Number(String(document.getElementById("amount").value||"").replace(/,/g,""));if(!Number.isFinite(amount)||amount<=0||amount>Number(wallet.available_balance||0)){alert("Invalid amount or insufficient balance");return}if(!confirm("Confirm withdrawal request?"))return;btn.disabled=true;const key=["WITHDRAWAL_FORM",getCurrentAgentAuthParams().agent_id,Date.now()].join(":");const res=await agentFinancePost("createWithdrawalRequest",{amount:amount,note:document.getElementById("note").value,idempotency_key:key});btn.disabled=false;if(!res.ok){alert(res.message||"Withdrawal failed");return}document.getElementById("amount").value="";document.getElementById("note").value="";await load()});
+document.getElementById("refresh").addEventListener("click",load);load();
+</script>
+</body>
+</html>

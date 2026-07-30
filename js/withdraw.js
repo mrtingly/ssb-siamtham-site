@@ -1,42 +1,46 @@
-const WITHDRAW_API_URL = "https://script.google.com/macros/s/AKfycbwxuLFd3Udc9m7OI3XtdvRFDK2pUpUB5mWo0M8d4YF5ak_m6xJ8BuCt8na2t75LpXi3Gw/exec";
+"use strict";
 
-async function requestWithdraw(){
-  const agentId = localStorage.getItem("agent_id");
+async function requestWithdraw() {
+  const auth = getCurrentAgentAuthParams();
 
-  if(!agentId){
+  if (!auth.agent_id || !auth.agent_session_token) {
     alert("กรุณาเข้าสู่ระบบก่อน");
     window.location.href = "agent-login.html";
     return;
   }
 
   const amount = prompt("กรอกจำนวนเงินที่ต้องการถอน");
+  const numericAmount = Number(String(amount || "").replace(/,/g, ""));
 
-  if(!amount || isNaN(amount) || Number(amount) <= 0){
+  if (!amount || !Number.isFinite(numericAmount) || numericAmount <= 0) {
     alert("จำนวนเงินไม่ถูกต้อง");
     return;
   }
 
-  try{
-    const res = await fetch(WITHDRAW_API_URL,{
-      method:"POST",
-      body: JSON.stringify({
-        action:"requestWithdraw",
-        agent_id: agentId,
-        amount: Number(amount)
-      })
+  const idempotencyKey = [
+    "WITHDRAWAL_UI",
+    auth.agent_id,
+    Date.now(),
+    Math.floor(Math.random() * 100000)
+  ].join(":");
+
+  try {
+    const result = await apiPostJson({
+      action: "createWithdrawalRequest",
+      agent_id: auth.agent_id,
+      agent_session_token: auth.agent_session_token,
+      amount: numericAmount,
+      idempotency_key: idempotencyKey
     });
 
-    const result = await res.json();
-
-    if(result.ok){
+    if (result && result.ok) {
       alert("ส่งคำขอถอนเงินสำเร็จ");
       location.reload();
-    }else{
-      alert(result.message || "ถอนเงินไม่สำเร็จ");
+      return;
     }
 
-  }catch(err){
-    console.error(err);
+    alert((result && result.message) || "ถอนเงินไม่สำเร็จ");
+  } catch (error) {
     alert("ระบบขัดข้อง กรุณาลองใหม่");
   }
 }

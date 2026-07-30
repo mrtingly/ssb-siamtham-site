@@ -11,6 +11,12 @@ const SHEET_NAMES = {
   productPricing: "product_pricing",
   depositPolicies: "deposit_policies",
   payments: "payments",
+  commissionRules: "commission_rules",
+  commissions: "commissions",
+  walletAccounts: "wallet_accounts",
+  walletLedger: "wallet_ledger",
+  withdrawalRequests: "withdrawal_requests",
+  financeAuditLogs: "finance_audit_logs",
   trainingLessons: "training_lessons",
   trainingProgress: "agent_training_progress",
   examQuestions: "exam_questions",
@@ -117,6 +123,34 @@ function doGet(e) {
 
       case "listPayments":
         result = listPayments(e.parameter);
+        break;
+
+      case "getAgentCommissionSummary":
+      case "listAgentCommissions":
+      case "getAgentCommissionDetail":
+      case "getAgentWallet":
+      case "listAgentWalletLedger":
+      case "createWithdrawalRequest":
+      case "listAgentWithdrawals":
+      case "getAgentWithdrawalDetail":
+      case "getFinanceDashboard":
+      case "listAllCommissions":
+      case "getCommissionDetailAdmin":
+      case "holdCommission":
+      case "releaseCommissionHold":
+      case "reverseCommission":
+      case "listWalletAccountsAdmin":
+      case "getWalletAccountAdmin":
+      case "listWithdrawalsAdmin":
+      case "getWithdrawalDetailAdmin":
+      case "approveWithdrawal":
+      case "rejectWithdrawal":
+      case "markWithdrawalPaid":
+      case "createWalletAdjustment":
+      case "getCommissionConfiguration":
+      case "saveCommissionConfiguration":
+      case "runFinanceIntegrityCheck":
+        result = protectedPostRequired(action);
         break;
 
       case "listTrainingLessons":
@@ -355,6 +389,106 @@ function doPost(e) {
         result = reviewPayment(body);
         break;
 
+      case "getAgentCommissionSummary":
+        result = getAgentCommissionSummary(body);
+        break;
+
+      case "listAgentCommissions":
+        result = listAgentCommissions(body);
+        break;
+
+      case "getAgentCommissionDetail":
+        result = getAgentCommissionDetail(body);
+        break;
+
+      case "getAgentWallet":
+        result = getAgentWallet(body);
+        break;
+
+      case "listAgentWalletLedger":
+        result = listAgentWalletLedger(body);
+        break;
+
+      case "createWithdrawalRequest":
+        result = createWithdrawalRequest(body);
+        break;
+
+      case "listAgentWithdrawals":
+        result = listAgentWithdrawals(body);
+        break;
+
+      case "getAgentWithdrawalDetail":
+        result = getAgentWithdrawalDetail(body);
+        break;
+
+      case "getFinanceDashboard":
+        result = getFinanceDashboard(body);
+        break;
+
+      case "listAllCommissions":
+        result = listAllCommissions(body);
+        break;
+
+      case "getCommissionDetailAdmin":
+        result = getCommissionDetailAdmin(body);
+        break;
+
+      case "holdCommission":
+        result = holdCommission(body);
+        break;
+
+      case "releaseCommissionHold":
+        result = releaseCommissionHold(body);
+        break;
+
+      case "reverseCommission":
+        result = reverseCommission(body);
+        break;
+
+      case "listWalletAccountsAdmin":
+        result = listWalletAccountsAdmin(body);
+        break;
+
+      case "getWalletAccountAdmin":
+        result = getWalletAccountAdmin(body);
+        break;
+
+      case "listWithdrawalsAdmin":
+        result = listWithdrawalsAdmin(body);
+        break;
+
+      case "getWithdrawalDetailAdmin":
+        result = getWithdrawalDetailAdmin(body);
+        break;
+
+      case "approveWithdrawal":
+        result = approveWithdrawal(body);
+        break;
+
+      case "rejectWithdrawal":
+        result = rejectWithdrawal(body);
+        break;
+
+      case "markWithdrawalPaid":
+        result = markWithdrawalPaid(body);
+        break;
+
+      case "createWalletAdjustment":
+        result = createWalletAdjustment(body);
+        break;
+
+      case "getCommissionConfiguration":
+        result = getCommissionConfiguration(body);
+        break;
+
+      case "saveCommissionConfiguration":
+        result = saveCommissionConfiguration(body);
+        break;
+
+      case "runFinanceIntegrityCheck":
+        result = runFinanceIntegrityCheck(body);
+        break;
+
       case "approveAgent":
         {
           const admin = requireAdminActor(body);
@@ -379,14 +513,14 @@ function doPost(e) {
       case "markWithdrawPaid":
         {
           const admin = requireAdminActor(body);
-          result = admin.ok ? updateWithdrawStatus(body.withdraw_id, "PAID") : admin;
+          result = admin.ok ? updateWithdrawStatus(body, "PAID") : admin;
         }
         break;
 
       case "rejectWithdraw":
         {
           const admin = requireAdminActor(body);
-          result = admin.ok ? updateWithdrawStatus(body.withdraw_id, "REJECTED") : admin;
+          result = admin.ok ? updateWithdrawStatus(body, "REJECTED") : admin;
         }
         break;
 
@@ -502,6 +636,12 @@ function sheetToObjects(sheetName) {
         obj.pricing_id,
         obj.policy_id,
         obj.payment_id,
+        obj.rule_id,
+        obj.commission_id,
+        obj.wallet_id,
+        obj.ledger_id,
+        obj.withdrawal_id,
+        obj.log_id,
         obj.bonus_id,
         obj.lesson_id,
         obj.progress_id,
@@ -909,6 +1049,131 @@ const PAYMENT_HEADERS = [
   "reviewed_by",
   "created_at",
   "updated_at"
+];
+
+const COMMISSION_RULE_HEADERS = [
+  "rule_id",
+  "product_id",
+  "collection",
+  "commission_type",
+  "commission_value",
+  "commissionable_base",
+  "deposit_release_percent",
+  "final_release_percent",
+  "status",
+  "effective_from",
+  "effective_to",
+  "created_at",
+  "updated_at",
+  "created_by",
+  "updated_by",
+  "note"
+];
+
+const COMMISSION_HEADERS = [
+  "commission_id",
+  "idempotency_key",
+  "agent_id",
+  "customer_id",
+  "quotation_id",
+  "order_id",
+  "payment_id",
+  "product_id",
+  "commission_rule_id",
+  "commission_type",
+  "milestone",
+  "gross_order_amount",
+  "commissionable_amount",
+  "total_order_commission",
+  "released_amount",
+  "pending_amount",
+  "status",
+  "source_status",
+  "created_at",
+  "available_at",
+  "held_at",
+  "reversed_at",
+  "reference_commission_id",
+  "note",
+  "is_test",
+  "qa_batch"
+];
+
+const WALLET_ACCOUNT_HEADERS = [
+  "wallet_id",
+  "agent_id",
+  "status",
+  "currency",
+  "pending_balance",
+  "available_balance",
+  "held_balance",
+  "reserved_balance",
+  "lifetime_earned",
+  "lifetime_withdrawn",
+  "version",
+  "created_at",
+  "updated_at",
+  "is_test",
+  "qa_batch"
+];
+
+const WALLET_LEDGER_HEADERS = [
+  "ledger_id",
+  "wallet_id",
+  "agent_id",
+  "entry_type",
+  "direction",
+  "amount",
+  "balance_bucket",
+  "reference_type",
+  "reference_id",
+  "idempotency_key",
+  "status",
+  "note",
+  "created_by_type",
+  "created_by_id",
+  "created_at",
+  "is_test",
+  "qa_batch"
+];
+
+const WITHDRAWAL_REQUEST_HEADERS = [
+  "withdrawal_id",
+  "agent_id",
+  "wallet_id",
+  "requested_amount",
+  "fee_amount",
+  "net_amount",
+  "status",
+  "bank_account_reference",
+  "requested_at",
+  "reviewed_at",
+  "approved_at",
+  "rejected_at",
+  "paid_at",
+  "reviewer_admin_id",
+  "payment_reference",
+  "rejection_reason",
+  "idempotency_key",
+  "is_test",
+  "qa_batch"
+];
+
+const FINANCE_AUDIT_LOG_HEADERS = [
+  "log_id",
+  "entity_type",
+  "entity_id",
+  "action",
+  "previous_status",
+  "new_status",
+  "amount",
+  "actor_type",
+  "actor_id",
+  "reason",
+  "metadata_json",
+  "created_at",
+  "is_test",
+  "qa_batch"
 ];
 
 const QUOTATION_STATUS = {
@@ -2257,21 +2522,32 @@ function getDashboard(params) {
     })
     .map(publicOrder);
   const orderSummary = summarizeOrders(orders);
+  const walletResult = getWalletProjection(agentId);
+  const wallet = walletResult.wallet || {};
+  const commissions = sheetToObjects(SHEET_NAMES.commissions).filter(function (item) {
+    return cleanString(item.agent_id, 80) === cleanString(agentId, 80);
+  });
+  const financeWithdrawals = sheetToObjects(SHEET_NAMES.withdrawalRequests).filter(function (item) {
+    return cleanString(item.agent_id, 80) === cleanString(agentId, 80);
+  });
 
-  const totalIncome = sum(income, "net_amount");
-  const available = sum(
+  const legacyTotalIncome = sum(income, "net_amount");
+  const ledgerAvailable = Number(wallet.available_balance || 0);
+  const ledgerPending = Number(wallet.pending_balance || 0);
+  const totalIncome = Number(wallet.lifetime_earned || 0) || legacyTotalIncome;
+  const available = commissions.length ? ledgerAvailable : sum(
     income.filter(function (item) {
       return String(item.status || "") === "AVAILABLE";
     }),
     "net_amount"
   );
-  const waiting = sum(
+  const waiting = commissions.length ? ledgerPending : sum(
     income.filter(function (item) {
       return String(item.status || "") === "WAIT_7_DAYS";
     }),
     "net_amount"
   );
-  const withdrawn = sum(
+  const withdrawn = financeWithdrawals.length ? Number(wallet.lifetime_withdrawn || 0) : sum(
     withdraws.filter(function (item) {
       return String(item.status || "") === "PAID";
     }),
@@ -2283,7 +2559,7 @@ function getDashboard(params) {
     }),
     "amount"
   );
-  const commission = sum(income, "amount");
+  const commission = commissions.length ? totalIncome : sum(income, "amount");
   const tax = sum(income, "tax");
   const net = totalIncome + totalBonus - tax;
 
@@ -2305,9 +2581,21 @@ function getDashboard(params) {
       paid: orderSummary.paid,
       completed: orderSummary.completed,
       cancelled: orderSummary.cancelled
+      ,
+      commissionPending: Number(wallet.pending_balance || 0),
+      availableWallet: Number(wallet.available_balance || 0),
+      reservedWithdrawal: Number(wallet.reserved_balance || 0),
+      heldCommission: Number(wallet.held_balance || 0),
+      lifetimeEarned: Number(wallet.lifetime_earned || 0),
+      lifetimeWithdrawn: Number(wallet.lifetime_withdrawn || 0),
+      latestCommission: commissions.length ? publicCommission(commissions[commissions.length - 1]) : null,
+      latestWithdrawal: financeWithdrawals.length ? publicWithdrawal(financeWithdrawals[financeWithdrawals.length - 1]) : null
     },
     income: income,
     withdraws: withdraws,
+    commissions: commissions.map(publicCommission),
+    wallet: publicWallet(wallet),
+    finance_withdrawals: financeWithdrawals.map(publicWithdrawal),
     bonus: bonus,
     orders: orders
   };
@@ -2603,8 +2891,53 @@ function ensureSalesSheets() {
   getOrCreateSheet(SHEET_NAMES.depositPolicies, DEPOSIT_POLICY_HEADERS);
   getOrCreateSheet(SHEET_NAMES.payments, PAYMENT_HEADERS);
   getOrCreateSheet(SHEET_NAMES.auditLogs, AUDIT_LOG_HEADERS);
+  ensureFinanceSheets();
   seedV3ProductCatalog();
   seedDepositPolicy();
+}
+
+function ensureFinanceSheets() {
+  getOrCreateSheet(SHEET_NAMES.commissionRules, COMMISSION_RULE_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.commissions, COMMISSION_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.walletAccounts, WALLET_ACCOUNT_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.walletLedger, WALLET_LEDGER_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.withdrawalRequests, WITHDRAWAL_REQUEST_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.financeAuditLogs, FINANCE_AUDIT_LOG_HEADERS);
+  seedCommissionRulePlaceholders();
+}
+
+function seedCommissionRulePlaceholders() {
+  const products = sheetToObjects(SHEET_NAMES.products);
+  const existing = sheetToObjects(SHEET_NAMES.commissionRules);
+  const now = new Date();
+
+  products.forEach(function (product) {
+    const productId = cleanString(product.product_id, 80);
+    const exists = existing.some(function (rule) {
+      return cleanString(rule.product_id, 80) === productId;
+    });
+
+    if (!productId || exists) return;
+
+    appendObject(SHEET_NAMES.commissionRules, {
+      rule_id: makeId("CMR"),
+      product_id: productId,
+      collection: cleanString(product.collection, 180),
+      commission_type: "FIXED",
+      commission_value: 0,
+      commissionable_base: "GRAND_TOTAL",
+      deposit_release_percent: 0,
+      final_release_percent: 100,
+      status: "CONFIG_REQUIRED",
+      effective_from: now,
+      effective_to: "",
+      created_at: now,
+      updated_at: now,
+      created_by: "SYSTEM",
+      updated_by: "SYSTEM",
+      note: "Set commission rule before financial release."
+    });
+  });
 }
 
 function normalizeSalesStatus(status) {
@@ -4707,6 +5040,7 @@ function createPayment(body) {
 }
 
 function reviewPayment(body) {
+  return withFinanceLock(function () {
   ensureSalesSheets();
   const admin = requireAdminActor(body);
   if (!admin.ok) return admin;
@@ -4743,6 +5077,8 @@ function reviewPayment(body) {
   updateRowFields(SHEET_NAMES.payments, payment._row, updates);
   Object.assign(payment, updates);
 
+  var commissionResult = null;
+
   if (decision === "APPROVED") {
     const summary = summarizePaymentsForOrder(order.order_id);
     const grandTotal = Number(order.grand_total || order.total || 0);
@@ -4764,6 +5100,7 @@ function reviewPayment(body) {
       note: "Payment approved",
       internal: true
     });
+    commissionResult = createCommissionForApprovedPayment(payment, admin);
   } else {
     updateRowFields(SHEET_NAMES.orders, order._row, {
       payment_status: "REJECTED",
@@ -4790,8 +5127,10 @@ function reviewPayment(body) {
   return {
     ok: true,
     payment: publicPayment(payment),
-    order: publicOrder(findOrderById(order.order_id) || order)
+    order: publicOrder(findOrderById(order.order_id) || order),
+    commission_result: commissionResult
   };
+  });
 }
 
 function updateOrderStatus(body) {
@@ -4889,64 +5228,993 @@ function updateOrderStatus(body) {
    WITHDRAW
 ========================================================= */
 
-function requestWithdraw(body) {
-  const agentId = String(body.agent_id || "").trim();
-  const amount = Number(body.amount || 0);
+function financeError(code, message, extra) {
+  const response = Object.assign({
+    ok: false,
+    error: code,
+    message: message
+  }, extra || {});
+  return response;
+}
 
-  if (!agentId || amount <= 0) {
-    return {
-      ok: false,
-      message: "ข้อมูลถอนเงินไม่ถูกต้อง"
-    };
+function toSatang(value) {
+  if (value === "" || value === null || value === undefined) return 0;
+  const text = cleanString(value, 80).replace(/,/g, "");
+  if (!/^-?\d+(\.\d{1,2})?$/.test(text)) return NaN;
+  return Math.round(Number(text) * 100);
+}
+
+function fromSatang(value) {
+  return Math.round(Number(value || 0)) / 100;
+}
+
+function percentSatang(amountSatang, percent) {
+  return Math.round(Number(amountSatang || 0) * Math.max(0, Math.min(100, Number(percent || 0))) / 100);
+}
+
+function withFinanceLock(fn) {
+  const lock = LockService.getScriptLock();
+  if (!lock.tryLock(15000)) {
+    return financeError("FINANCE_LOCK_TIMEOUT", "Finance system is busy. Please try again.");
   }
 
-  appendObject(SHEET_NAMES.withdraws, {
-    withdraw_id: "WD-" + Date.now(),
-    agent_id: agentId,
-    amount: amount,
-    status: "PENDING",
-    request_date: new Date(),
-    paid_date: "",
-    note: String(body.note || "").trim()
-  });
+  try {
+    return fn();
+  } finally {
+    lock.releaseLock();
+  }
+}
 
+function isQaRecord(record) {
+  const values = [
+    record && record.is_test,
+    record && record.qa_batch,
+    record && record.record_environment,
+    record && record.agent_id,
+    record && record.owner_agent_id,
+    record && record.customer_id,
+    record && record.quotation_id,
+    record && record.order_id,
+    record && record.payment_id,
+    record && record.reference,
+    record && record.customer_name,
+    record && record.owner_agent_name,
+    record && record.note
+  ].join(" ").toUpperCase();
+  return booleanValue(record && record.is_test) || values.indexOf("QA_") !== -1 || values.indexOf("SANDBOX") !== -1 || values.indexOf("TEST") !== -1;
+}
+
+function qaBatchFor(record) {
+  return cleanString((record && record.qa_batch) || "", 120) || (isQaRecord(record || {}) ? "LEGACY_QA" : "");
+}
+
+function shouldExcludeFromFinance(record) {
+  return isQaRecord(record || {});
+}
+
+function writeFinanceAudit(entityType, entityId, action, previousStatus, newStatus, amount, actorType, actorId, reason, metadata, isTest, qaBatch) {
+  ensureFinanceSheets();
+  appendObject(SHEET_NAMES.financeAuditLogs, {
+    log_id: makeId("FAL"),
+    entity_type: cleanString(entityType, 80),
+    entity_id: cleanString(entityId, 120),
+    action: cleanString(action, 120),
+    previous_status: cleanString(previousStatus, 60),
+    new_status: cleanString(newStatus, 60),
+    amount: fromSatang(toSatang(amount || 0)),
+    actor_type: cleanString(actorType, 40),
+    actor_id: cleanString(actorId, 80),
+    reason: cleanString(reason, 500),
+    metadata_json: JSON.stringify(metadata || {}),
+    created_at: new Date(),
+    is_test: Boolean(isTest),
+    qa_batch: cleanString(qaBatch, 120)
+  });
+}
+
+function publicCommissionRule(rule) {
   return {
-    ok: true,
-    message: "ส่งคำขอถอนเงินเรียบร้อย"
+    rule_id: cleanString(rule.rule_id, 80),
+    product_id: cleanString(rule.product_id, 80),
+    collection: cleanString(rule.collection, 180),
+    commission_type: normalizeSalesStatus(rule.commission_type || "FIXED"),
+    commission_value: Number(rule.commission_value || 0),
+    commissionable_base: normalizeSalesStatus(rule.commissionable_base || "GRAND_TOTAL"),
+    deposit_release_percent: Number(rule.deposit_release_percent || 0),
+    final_release_percent: Number(rule.final_release_percent || 100),
+    status: normalizeSalesStatus(rule.status || "CONFIG_REQUIRED"),
+    effective_from: rule.effective_from || "",
+    effective_to: rule.effective_to || "",
+    created_at: rule.created_at || "",
+    updated_at: rule.updated_at || "",
+    note: cleanString(rule.note, 500)
   };
 }
 
-function updateWithdrawStatus(withdrawId, status) {
-  const normalizedId = String(withdrawId || "").trim();
+function publicCommission(row) {
+  return {
+    commission_id: cleanString(row.commission_id, 80),
+    idempotency_key: cleanString(row.idempotency_key, 220),
+    agent_id: cleanString(row.agent_id, 80),
+    customer_id: cleanString(row.customer_id, 80),
+    quotation_id: cleanString(row.quotation_id, 80),
+    order_id: cleanString(row.order_id, 80),
+    payment_id: cleanString(row.payment_id, 80),
+    product_id: cleanString(row.product_id, 80),
+    commission_rule_id: cleanString(row.commission_rule_id, 80),
+    commission_type: normalizeSalesStatus(row.commission_type),
+    milestone: normalizeSalesStatus(row.milestone),
+    gross_order_amount: Number(row.gross_order_amount || 0),
+    commissionable_amount: Number(row.commissionable_amount || 0),
+    total_order_commission: Number(row.total_order_commission || 0),
+    released_amount: Number(row.released_amount || 0),
+    pending_amount: Number(row.pending_amount || 0),
+    status: normalizeSalesStatus(row.status),
+    source_status: normalizeSalesStatus(row.source_status),
+    created_at: row.created_at || "",
+    available_at: row.available_at || "",
+    held_at: row.held_at || "",
+    reversed_at: row.reversed_at || "",
+    reference_commission_id: cleanString(row.reference_commission_id, 80),
+    note: cleanString(row.note, 500),
+    is_test: booleanValue(row.is_test),
+    qa_batch: cleanString(row.qa_batch, 120)
+  };
+}
 
-  if (!normalizedId) {
-    return { ok: false, message: "Missing withdraw_id" };
+function publicWallet(row) {
+  return {
+    wallet_id: cleanString(row.wallet_id, 80),
+    agent_id: cleanString(row.agent_id, 80),
+    status: normalizeSalesStatus(row.status || "ACTIVE"),
+    currency: cleanString(row.currency || "THB", 10),
+    pending_balance: Number(row.pending_balance || 0),
+    available_balance: Number(row.available_balance || 0),
+    held_balance: Number(row.held_balance || 0),
+    reserved_balance: Number(row.reserved_balance || 0),
+    lifetime_earned: Number(row.lifetime_earned || 0),
+    lifetime_withdrawn: Number(row.lifetime_withdrawn || 0),
+    version: Number(row.version || 0),
+    created_at: row.created_at || "",
+    updated_at: row.updated_at || "",
+    is_test: booleanValue(row.is_test),
+    qa_batch: cleanString(row.qa_batch, 120)
+  };
+}
+
+function publicLedger(row) {
+  return {
+    ledger_id: cleanString(row.ledger_id, 80),
+    wallet_id: cleanString(row.wallet_id, 80),
+    agent_id: cleanString(row.agent_id, 80),
+    entry_type: normalizeSalesStatus(row.entry_type),
+    direction: normalizeSalesStatus(row.direction),
+    amount: Number(row.amount || 0),
+    balance_bucket: normalizeSalesStatus(row.balance_bucket),
+    reference_type: normalizeSalesStatus(row.reference_type),
+    reference_id: cleanString(row.reference_id, 120),
+    idempotency_key: cleanString(row.idempotency_key, 220),
+    status: normalizeSalesStatus(row.status || "POSTED"),
+    note: cleanString(row.note, 500),
+    created_by_type: cleanString(row.created_by_type, 40),
+    created_by_id: cleanString(row.created_by_id, 80),
+    created_at: row.created_at || "",
+    is_test: booleanValue(row.is_test),
+    qa_batch: cleanString(row.qa_batch, 120)
+  };
+}
+
+function publicWithdrawal(row) {
+  return {
+    withdrawal_id: cleanString(row.withdrawal_id, 80),
+    agent_id: cleanString(row.agent_id, 80),
+    wallet_id: cleanString(row.wallet_id, 80),
+    requested_amount: Number(row.requested_amount || 0),
+    fee_amount: Number(row.fee_amount || 0),
+    net_amount: Number(row.net_amount || 0),
+    status: normalizeSalesStatus(row.status || "PENDING"),
+    bank_account_reference: cleanString(row.bank_account_reference, 120),
+    requested_at: row.requested_at || "",
+    reviewed_at: row.reviewed_at || "",
+    approved_at: row.approved_at || "",
+    rejected_at: row.rejected_at || "",
+    paid_at: row.paid_at || "",
+    payment_reference: cleanString(row.payment_reference, 160),
+    rejection_reason: cleanString(row.rejection_reason, 500),
+    is_test: booleanValue(row.is_test),
+    qa_batch: cleanString(row.qa_batch, 120)
+  };
+}
+
+function findWalletAccount(agentId) {
+  ensureFinanceSheets();
+  const normalizedId = validateAgentId(agentId);
+  if (!normalizedId) return null;
+  return sheetToObjects(SHEET_NAMES.walletAccounts).find(function (wallet) {
+    return cleanString(wallet.agent_id, 80) === normalizedId;
+  }) || null;
+}
+
+function ensureWalletAccount(agentId, seedRecord) {
+  ensureFinanceSheets();
+  const normalizedId = validateAgentId(agentId);
+  if (!normalizedId) throw new Error("Invalid agent_id");
+
+  let wallet = findWalletAccount(normalizedId);
+  if (wallet) return wallet;
+
+  const now = new Date();
+  wallet = {
+    wallet_id: makeId("WAL"),
+    agent_id: normalizedId,
+    status: "ACTIVE",
+    currency: "THB",
+    pending_balance: 0,
+    available_balance: 0,
+    held_balance: 0,
+    reserved_balance: 0,
+    lifetime_earned: 0,
+    lifetime_withdrawn: 0,
+    version: 1,
+    created_at: now,
+    updated_at: now,
+    is_test: isQaRecord(seedRecord || { agent_id: normalizedId }),
+    qa_batch: qaBatchFor(seedRecord || {})
+  };
+
+  appendObject(SHEET_NAMES.walletAccounts, wallet);
+  return wallet;
+}
+
+function appendLedgerEntry(data) {
+  ensureFinanceSheets();
+  const idempotencyKey = cleanString(data.idempotency_key, 220);
+  if (idempotencyKey) {
+    const existing = sheetToObjects(SHEET_NAMES.walletLedger).find(function (entry) {
+      return cleanString(entry.idempotency_key, 220) === idempotencyKey;
+    });
+    if (existing) return existing;
   }
 
-  const item = sheetToObjects(SHEET_NAMES.withdraws).find(function (withdraw) {
-    return String(withdraw.withdraw_id || "").trim() === normalizedId;
+  const wallet = ensureWalletAccount(data.agent_id, data);
+  const entry = {
+    ledger_id: makeId("LED"),
+    wallet_id: wallet.wallet_id,
+    agent_id: cleanString(data.agent_id, 80),
+    entry_type: normalizeSalesStatus(data.entry_type),
+    direction: normalizeSalesStatus(data.direction),
+    amount: fromSatang(toSatang(data.amount || 0)),
+    balance_bucket: normalizeSalesStatus(data.balance_bucket),
+    reference_type: normalizeSalesStatus(data.reference_type),
+    reference_id: cleanString(data.reference_id, 120),
+    idempotency_key: idempotencyKey,
+    status: "POSTED",
+    note: cleanString(data.note, 500),
+    created_by_type: cleanString(data.created_by_type || "SYSTEM", 40),
+    created_by_id: cleanString(data.created_by_id || "SYSTEM", 80),
+    created_at: new Date(),
+    is_test: Boolean(data.is_test),
+    qa_batch: cleanString(data.qa_batch, 120)
+  };
+
+  appendObject(SHEET_NAMES.walletLedger, entry);
+  updateWalletProjection(entry.agent_id);
+  return entry;
+}
+
+function calculateWalletProjection(agentId) {
+  const normalizedId = validateAgentId(agentId);
+  const projection = {
+    pending_balance: 0,
+    available_balance: 0,
+    held_balance: 0,
+    reserved_balance: 0,
+    lifetime_earned: 0,
+    lifetime_withdrawn: 0
+  };
+
+  sheetToObjects(SHEET_NAMES.walletLedger)
+    .filter(function (entry) {
+      return cleanString(entry.agent_id, 80) === normalizedId && normalizeSalesStatus(entry.status || "POSTED") === "POSTED";
+    })
+    .forEach(function (entry) {
+      const amount = toSatang(entry.amount || 0);
+      const signed = normalizeSalesStatus(entry.direction) === "DEBIT" ? -amount : amount;
+      const bucket = normalizeSalesStatus(entry.balance_bucket);
+      if (bucket === "PENDING") projection.pending_balance += signed;
+      if (bucket === "AVAILABLE") projection.available_balance += signed;
+      if (bucket === "HELD") projection.held_balance += signed;
+      if (bucket === "RESERVED") projection.reserved_balance += signed;
+      if (normalizeSalesStatus(entry.entry_type) === "COMMISSION_RELEASE" && normalizeSalesStatus(entry.direction) === "CREDIT") {
+        projection.lifetime_earned += amount;
+      }
+      if (normalizeSalesStatus(entry.entry_type) === "WITHDRAWAL_PAID" && normalizeSalesStatus(entry.direction) === "DEBIT") {
+        projection.lifetime_withdrawn += amount;
+      }
+    });
+
+  Object.keys(projection).forEach(function (key) {
+    projection[key] = fromSatang(projection[key]);
   });
 
-  if (!item) {
-    return { ok: false, message: "Withdraw not found" };
+  return projection;
+}
+
+function updateWalletProjection(agentId) {
+  const wallet = ensureWalletAccount(agentId, {});
+  const projection = calculateWalletProjection(agentId);
+  const hasNegative = projection.available_balance < 0 || projection.pending_balance < 0 || projection.held_balance < 0 || projection.reserved_balance < 0;
+
+  if (hasNegative) {
+    throw new Error("Finance integrity error: negative wallet balance");
   }
 
-  const updates = {
-    status: status
+  const updates = Object.assign({}, projection, {
+    version: Number(wallet.version || 0) + 1,
+    updated_at: new Date()
+  });
+  updateRowFields(SHEET_NAMES.walletAccounts, wallet._row, updates);
+  return Object.assign({}, wallet, updates);
+}
+
+function getWalletProjection(agentId) {
+  ensureFinanceSheets();
+  const wallet = ensureWalletAccount(agentId, {});
+  const updated = updateWalletProjection(agentId);
+  return { ok: true, wallet: updated || wallet };
+}
+
+function activeCommissionRuleForOrder(order) {
+  ensureFinanceSheets();
+  const productId = cleanString(order.product_id, 80);
+  const collection = cleanString(order.collection, 180).toLowerCase();
+  const now = new Date();
+  const rules = sheetToObjects(SHEET_NAMES.commissionRules).filter(function (rule) {
+    if (normalizeSalesStatus(rule.status || "") !== "ACTIVE") return false;
+    if (productId && cleanString(rule.product_id, 80) === productId) return true;
+    if (collection && cleanString(rule.collection, 180).toLowerCase() === collection && !cleanString(rule.product_id, 80)) return true;
+    return false;
+  }).filter(function (rule) {
+    const from = rule.effective_from ? new Date(rule.effective_from) : null;
+    const to = rule.effective_to ? new Date(rule.effective_to) : null;
+    return (!from || from <= now) && (!to || to >= now);
+  });
+  return rules[rules.length - 1] || null;
+}
+
+function commissionableBaseSatang(order, rule) {
+  const base = normalizeSalesStatus(rule.commissionable_base || "GRAND_TOTAL");
+  if (base === "SUBTOTAL") return toSatang(order.subtotal || 0);
+  if (base === "SERVICE_FEE") return 0;
+  if (base === "PRODUCT_PRICE") return toSatang(Math.max(0, Number(order.subtotal || 0) - Number(order.vat || 0)));
+  return toSatang(order.grand_total || order.total || 0);
+}
+
+function totalCommissionSatang(order, rule) {
+  const baseSatang = commissionableBaseSatang(order, rule);
+  const type = normalizeSalesStatus(rule.commission_type || "FIXED");
+  const value = Number(rule.commission_value || 0);
+  if (type === "PERCENT" || type === "PERCENTAGE") {
+    return percentSatang(baseSatang, value);
+  }
+  return toSatang(value);
+}
+
+function commissionIdempotencyKey(payment, agentId, milestone) {
+  return [
+    "COMMISSION",
+    cleanString(payment.payment_id, 80),
+    cleanString(agentId, 80),
+    normalizeSalesStatus(payment.payment_type || ""),
+    normalizeSalesStatus(milestone || "")
+  ].join(":");
+}
+
+function createCommissionForApprovedPayment(payment, actor) {
+  ensureSalesSheets();
+  ensureFinanceSheets();
+
+  if (normalizeSalesStatus(payment.status || "") !== "APPROVED") {
+    return { ok: true, skipped: true, reason: "PAYMENT_NOT_APPROVED" };
+  }
+
+  const order = findOrderById(payment.order_id);
+  if (!order) return financeError("NOT_FOUND", "Order not found for commission.");
+
+  const agentId = cleanString(order.owner_agent_id || order.agent_id || payment.owner_agent_id, 80);
+  const isTest = shouldExcludeFromFinance(order) || shouldExcludeFromFinance(payment);
+  const qaBatch = qaBatchFor(order) || qaBatchFor(payment);
+  const milestone = normalizeSalesStatus(payment.payment_type || "PAYMENT");
+  const existing = sheetToObjects(SHEET_NAMES.commissions).find(function (item) {
+    return cleanString(item.idempotency_key, 220) === commissionIdempotencyKey(payment, agentId, milestone);
+  });
+
+  if (existing) {
+    return { ok: true, duplicate: true, commission: publicCommission(existing) };
+  }
+
+  const rule = activeCommissionRuleForOrder(order);
+  const now = new Date();
+  const key = commissionIdempotencyKey(payment, agentId, milestone);
+
+  if (!rule) {
+    const missing = {
+      commission_id: makeId("COM"),
+      idempotency_key: key,
+      agent_id: agentId,
+      customer_id: order.customer_id,
+      quotation_id: order.quotation_id,
+      order_id: order.order_id,
+      payment_id: payment.payment_id,
+      product_id: order.product_id,
+      commission_rule_id: "",
+      commission_type: "CONFIG_REQUIRED",
+      milestone: milestone,
+      gross_order_amount: Number(order.grand_total || order.total || 0),
+      commissionable_amount: 0,
+      total_order_commission: 0,
+      released_amount: 0,
+      pending_amount: 0,
+      status: "CONFIG_REQUIRED",
+      source_status: "APPROVED",
+      created_at: now,
+      available_at: "",
+      held_at: "",
+      reversed_at: "",
+      reference_commission_id: "",
+      note: "Commission rule is required before release.",
+      is_test: isTest,
+      qa_batch: qaBatch
+    };
+    appendObject(SHEET_NAMES.commissions, missing);
+    writeFinanceAudit("COMMISSION", missing.commission_id, "COMMISSION_CONFIG_REQUIRED", "", "CONFIG_REQUIRED", 0, "ADMIN", actor.actor_id, "Missing active commission rule", { order_id: order.order_id, payment_id: payment.payment_id }, isTest, qaBatch);
+    return { ok: false, error: "COMMISSION_CONFIG_REQUIRED", message: "Commission configuration required.", commission: publicCommission(missing) };
+  }
+
+  const totalSatang = totalCommissionSatang(order, rule);
+  if (!isFinite(totalSatang) || totalSatang <= 0) {
+    return financeError("COMMISSION_CONFIG_REQUIRED", "Commission rule value must be greater than zero.");
+  }
+
+  const previousReleasedSatang = sheetToObjects(SHEET_NAMES.commissions)
+    .filter(function (item) {
+      return cleanString(item.order_id, 80) === cleanString(order.order_id, 80) &&
+        cleanString(item.agent_id, 80) === agentId &&
+        ["AVAILABLE", "PAID", "HELD"].indexOf(normalizeSalesStatus(item.status || "")) !== -1;
+    })
+    .reduce(function (sumValue, item) {
+      return sumValue + toSatang(item.released_amount || 0);
+    }, 0);
+  const paymentSummary = summarizePaymentsForOrder(order.order_id);
+  const grandTotalSatang = toSatang(order.grand_total || order.total || 0);
+  const approvedSatang = toSatang(paymentSummary.approved_amount || 0);
+  const desiredSatang = approvedSatang >= grandTotalSatang
+    ? totalSatang
+    : percentSatang(totalSatang, milestone === "DEPOSIT" ? rule.deposit_release_percent : rule.final_release_percent);
+  const releaseSatang = Math.max(0, Math.min(totalSatang - previousReleasedSatang, desiredSatang - previousReleasedSatang));
+  const status = releaseSatang > 0 ? "AVAILABLE" : "PENDING";
+  const commission = {
+    commission_id: makeId("COM"),
+    idempotency_key: key,
+    agent_id: agentId,
+    customer_id: order.customer_id,
+    quotation_id: order.quotation_id,
+    order_id: order.order_id,
+    payment_id: payment.payment_id,
+    product_id: order.product_id,
+    commission_rule_id: rule.rule_id,
+    commission_type: normalizeSalesStatus(rule.commission_type),
+    milestone: milestone,
+    gross_order_amount: Number(order.grand_total || order.total || 0),
+    commissionable_amount: fromSatang(commissionableBaseSatang(order, rule)),
+    total_order_commission: fromSatang(totalSatang),
+    released_amount: fromSatang(releaseSatang),
+    pending_amount: fromSatang(Math.max(0, totalSatang - previousReleasedSatang - releaseSatang)),
+    status: status,
+    source_status: "APPROVED",
+    created_at: now,
+    available_at: status === "AVAILABLE" ? now : "",
+    held_at: "",
+    reversed_at: "",
+    reference_commission_id: "",
+    note: "Created from approved payment.",
+    is_test: isTest,
+    qa_batch: qaBatch
   };
 
-  if (status === "PAID") {
-    updates.paid_date = new Date();
+  appendObject(SHEET_NAMES.commissions, commission);
+
+  if (releaseSatang > 0) {
+    appendLedgerEntry({
+      agent_id: agentId,
+      entry_type: "COMMISSION_RELEASE",
+      direction: "CREDIT",
+      amount: fromSatang(releaseSatang),
+      balance_bucket: "AVAILABLE",
+      reference_type: "COMMISSION",
+      reference_id: commission.commission_id,
+      idempotency_key: "LEDGER:" + key + ":AVAILABLE",
+      note: "Commission released from approved payment.",
+      created_by_type: "ADMIN",
+      created_by_id: actor.actor_id,
+      is_test: isTest,
+      qa_batch: qaBatch
+    });
   }
 
-  updateRowFields(SHEET_NAMES.withdraws, item._row, updates);
+  writeFinanceAudit("COMMISSION", commission.commission_id, "COMMISSION_CREATED", "", status, commission.released_amount, "ADMIN", actor.actor_id, "Payment approved", { order_id: order.order_id, payment_id: payment.payment_id }, isTest, qaBatch);
+  return { ok: true, commission: publicCommission(commission), wallet: publicWallet(findWalletAccount(agentId) || {}) };
+}
 
+function financeAgentSession(body) {
+  const session = requireAgentActor(body || {});
+  if (!session.ok) return session;
+  const agentResult = findApprovedAgent(session.agent_id);
+  if (!agentResult.ok) return agentResult;
+  return session;
+}
+
+function getAgentCommissionSummary(body) {
+  const session = financeAgentSession(body);
+  if (!session.ok) return session;
+  const commissions = sheetToObjects(SHEET_NAMES.commissions).filter(function (item) {
+    return cleanString(item.agent_id, 80) === session.agent_id;
+  });
+  const wallet = getWalletProjection(session.agent_id).wallet;
+  return { ok: true, data: { summary: publicWallet(wallet), total_commissions: commissions.length }, summary: publicWallet(wallet) };
+}
+
+function listAgentCommissions(body) {
+  const session = financeAgentSession(body);
+  if (!session.ok) return session;
+  const status = normalizeSalesStatus(body && body.status);
+  const q = cleanString(body && (body.q || body.search), 200).toLowerCase();
+  const limit = Math.max(1, Math.min(200, Number(body && body.limit || 100)));
+  const offset = Math.max(0, Number(body && body.offset || 0));
+  const rows = sheetToObjects(SHEET_NAMES.commissions).filter(function (item) {
+    if (cleanString(item.agent_id, 80) !== session.agent_id) return false;
+    if (status && normalizeSalesStatus(item.status) !== status) return false;
+    if (!q) return true;
+    return [item.commission_id, item.order_id, item.payment_id, item.product_id, item.milestone, item.status].join(" ").toLowerCase().indexOf(q) !== -1;
+  }).map(publicCommission);
+  return { ok: true, total: rows.length, limit: limit, offset: offset, commissions: rows.slice(offset, offset + limit) };
+}
+
+function getAgentCommissionDetail(body) {
+  const session = financeAgentSession(body);
+  if (!session.ok) return session;
+  const id = cleanString(body && (body.commission_id || body.commissionId), 80);
+  const row = sheetToObjects(SHEET_NAMES.commissions).find(function (item) {
+    return cleanString(item.commission_id, 80) === id && cleanString(item.agent_id, 80) === session.agent_id;
+  });
+  return row ? { ok: true, commission: publicCommission(row) } : financeError("NOT_FOUND", "Commission not found.");
+}
+
+function getAgentWallet(body) {
+  const session = financeAgentSession(body);
+  if (!session.ok) return session;
+  const wallet = getWalletProjection(session.agent_id).wallet;
+  return { ok: true, wallet: publicWallet(wallet) };
+}
+
+function listAgentWalletLedger(body) {
+  const session = financeAgentSession(body);
+  if (!session.ok) return session;
+  const limit = Math.max(1, Math.min(200, Number(body && body.limit || 100)));
+  const offset = Math.max(0, Number(body && body.offset || 0));
+  const rows = sheetToObjects(SHEET_NAMES.walletLedger).filter(function (item) {
+    return cleanString(item.agent_id, 80) === session.agent_id;
+  }).map(publicLedger).reverse();
+  return { ok: true, total: rows.length, limit: limit, offset: offset, ledger: rows.slice(offset, offset + limit) };
+}
+
+function maskedAgentBank(agent) {
+  const account = cleanString(agent.bank_account || agent.account_number, 80);
+  const tail = account.slice(-4);
+  return [cleanString(agent.bank_name, 120), tail ? "****" + tail : ""].filter(Boolean).join(" ");
+}
+
+function createWithdrawalRequest(body) {
+  return withFinanceLock(function () {
+    const session = financeAgentSession(body);
+    if (!session.ok) return session;
+    const agent = session.agent || findAgent(session.agent_id) || {};
+    const amountSatang = toSatang(body && body.amount);
+    if (!isFinite(amountSatang) || amountSatang <= 0) {
+      return financeError("INVALID_AMOUNT", "Withdrawal amount is invalid.");
+    }
+
+    const wallet = getWalletProjection(session.agent_id).wallet;
+    if (toSatang(wallet.available_balance) < amountSatang) {
+      return financeError("INSUFFICIENT_BALANCE", "Available balance is not enough.");
+    }
+
+    const idempotencyKey = cleanString(body && body.idempotency_key, 220) || "WITHDRAWAL:" + session.agent_id + ":" + amountSatang + ":" + Math.floor(Date.now() / 10000);
+    const existing = sheetToObjects(SHEET_NAMES.withdrawalRequests).find(function (item) {
+      return cleanString(item.idempotency_key, 220) === idempotencyKey;
+    });
+    if (existing) return { ok: true, duplicate: true, withdrawal: publicWithdrawal(existing), wallet: publicWallet(getWalletProjection(session.agent_id).wallet) };
+
+    const isTest = isQaRecord(agent) || isQaRecord(body || {});
+    const qaBatch = qaBatchFor(agent) || qaBatchFor(body || {});
+    const now = new Date();
+    const withdrawal = {
+      withdrawal_id: makeId("WDR"),
+      agent_id: session.agent_id,
+      wallet_id: wallet.wallet_id,
+      requested_amount: fromSatang(amountSatang),
+      fee_amount: 0,
+      net_amount: fromSatang(amountSatang),
+      status: "PENDING",
+      bank_account_reference: maskedAgentBank(agent),
+      requested_at: now,
+      reviewed_at: "",
+      approved_at: "",
+      rejected_at: "",
+      paid_at: "",
+      reviewer_admin_id: "",
+      payment_reference: "",
+      rejection_reason: "",
+      idempotency_key: idempotencyKey,
+      is_test: isTest,
+      qa_batch: qaBatch
+    };
+
+    appendObject(SHEET_NAMES.withdrawalRequests, withdrawal);
+    appendLedgerEntry({
+      agent_id: session.agent_id,
+      entry_type: "WITHDRAWAL_RESERVE",
+      direction: "DEBIT",
+      amount: withdrawal.requested_amount,
+      balance_bucket: "AVAILABLE",
+      reference_type: "WITHDRAWAL",
+      reference_id: withdrawal.withdrawal_id,
+      idempotency_key: "LEDGER:" + idempotencyKey + ":AVAILABLE",
+      note: "Withdrawal reservation.",
+      created_by_type: "AGENT",
+      created_by_id: session.agent_id,
+      is_test: isTest,
+      qa_batch: qaBatch
+    });
+    appendLedgerEntry({
+      agent_id: session.agent_id,
+      entry_type: "WITHDRAWAL_RESERVE",
+      direction: "CREDIT",
+      amount: withdrawal.requested_amount,
+      balance_bucket: "RESERVED",
+      reference_type: "WITHDRAWAL",
+      reference_id: withdrawal.withdrawal_id,
+      idempotency_key: "LEDGER:" + idempotencyKey + ":RESERVED",
+      note: "Withdrawal reservation.",
+      created_by_type: "AGENT",
+      created_by_id: session.agent_id,
+      is_test: isTest,
+      qa_batch: qaBatch
+    });
+    writeFinanceAudit("WITHDRAWAL", withdrawal.withdrawal_id, "WITHDRAWAL_REQUESTED", "", "PENDING", withdrawal.requested_amount, "AGENT", session.agent_id, cleanString(body && body.note, 500), {}, isTest, qaBatch);
+    return { ok: true, withdrawal: publicWithdrawal(withdrawal), wallet: publicWallet(getWalletProjection(session.agent_id).wallet) };
+  });
+}
+
+function listAgentWithdrawals(body) {
+  const session = financeAgentSession(body);
+  if (!session.ok) return session;
+  const rows = sheetToObjects(SHEET_NAMES.withdrawalRequests).filter(function (item) {
+    return cleanString(item.agent_id, 80) === session.agent_id;
+  }).map(publicWithdrawal).reverse();
+  return { ok: true, total: rows.length, withdrawals: rows };
+}
+
+function getAgentWithdrawalDetail(body) {
+  const session = financeAgentSession(body);
+  if (!session.ok) return session;
+  const id = cleanString(body && (body.withdrawal_id || body.withdrawalId), 80);
+  const row = sheetToObjects(SHEET_NAMES.withdrawalRequests).find(function (item) {
+    return cleanString(item.withdrawal_id, 80) === id && cleanString(item.agent_id, 80) === session.agent_id;
+  });
+  return row ? { ok: true, withdrawal: publicWithdrawal(row) } : financeError("NOT_FOUND", "Withdrawal not found.");
+}
+
+function financeAdminSession(body) {
+  const admin = requireAdminActor(body || {});
+  return admin.ok ? admin : financeError("FORBIDDEN", admin.message || "Admin permission required.");
+}
+
+function getFinanceDashboard(body) {
+  const admin = financeAdminSession(body);
+  if (!admin.ok) return admin;
+  ensureFinanceSheets();
+  const includeQa = booleanValue(body && body.include_qa);
+  const commissions = sheetToObjects(SHEET_NAMES.commissions).filter(function (item) { return includeQa || !isQaRecord(item); });
+  const wallets = sheetToObjects(SHEET_NAMES.walletAccounts).filter(function (item) { return includeQa || !isQaRecord(item); }).map(function (wallet) {
+    return publicWallet(updateWalletProjection(wallet.agent_id));
+  });
+  const withdrawals = sheetToObjects(SHEET_NAMES.withdrawalRequests).filter(function (item) { return includeQa || !isQaRecord(item); });
+  const anomalies = listFinanceAnomalies(includeQa);
   return {
     ok: true,
-    message: "Withdraw status updated",
-    withdraw_id: normalizedId,
-    status: status
+    summary: {
+      total_pending_commission: sum(commissions.filter(function (c) { return normalizeSalesStatus(c.status) === "PENDING"; }), "pending_amount"),
+      total_available_commission: sum(commissions.filter(function (c) { return normalizeSalesStatus(c.status) === "AVAILABLE"; }), "released_amount"),
+      total_wallet_liability: sum(wallets, "available_balance") + sum(wallets, "reserved_balance"),
+      total_reserved_withdrawal: sum(wallets, "reserved_balance"),
+      pending_withdrawals_count: withdrawals.filter(function (w) { return normalizeSalesStatus(w.status) === "PENDING"; }).length,
+      approved_not_paid_count: withdrawals.filter(function (w) { return normalizeSalesStatus(w.status) === "APPROVED"; }).length,
+      paid_total: sum(withdrawals.filter(function (w) { return normalizeSalesStatus(w.status) === "PAID"; }), "net_amount"),
+      commission_config_missing_count: commissions.filter(function (c) { return normalizeSalesStatus(c.status) === "CONFIG_REQUIRED"; }).length,
+      finance_anomaly_count: anomalies.length
+    },
+    recent_activity: sheetToObjects(SHEET_NAMES.financeAuditLogs).slice(-20).reverse(),
+    anomalies: anomalies
   };
+}
+
+function listAllCommissions(body) {
+  const admin = financeAdminSession(body);
+  if (!admin.ok) return admin;
+  const includeQa = booleanValue(body && body.include_qa);
+  const status = normalizeSalesStatus(body && body.status);
+  const q = cleanString(body && (body.q || body.search), 200).toLowerCase();
+  const rows = sheetToObjects(SHEET_NAMES.commissions).filter(function (item) {
+    if (!includeQa && isQaRecord(item)) return false;
+    if (status && normalizeSalesStatus(item.status) !== status) return false;
+    if (!q) return true;
+    return [item.commission_id, item.agent_id, item.order_id, item.payment_id, item.product_id, item.status].join(" ").toLowerCase().indexOf(q) !== -1;
+  }).map(publicCommission).reverse();
+  return { ok: true, total: rows.length, commissions: rows };
+}
+
+function getCommissionDetailAdmin(body) {
+  const admin = financeAdminSession(body);
+  if (!admin.ok) return admin;
+  const id = cleanString(body && (body.commission_id || body.commissionId), 80);
+  const row = sheetToObjects(SHEET_NAMES.commissions).find(function (item) {
+    return cleanString(item.commission_id, 80) === id;
+  });
+  return row ? { ok: true, commission: publicCommission(row) } : financeError("NOT_FOUND", "Commission not found.");
+}
+
+function updateCommissionStatus(body, action, nextStatus) {
+  return withFinanceLock(function () {
+    const admin = financeAdminSession(body);
+    if (!admin.ok) return admin;
+    const reason = cleanString(body && body.reason, 500);
+    if ((action === "HOLD" || action === "REVERSE") && !reason) return financeError("INVALID_REQUEST", "Reason is required.");
+    const id = cleanString(body && (body.commission_id || body.commissionId), 80);
+    const row = sheetToObjects(SHEET_NAMES.commissions).find(function (item) { return cleanString(item.commission_id, 80) === id; });
+    if (!row) return financeError("NOT_FOUND", "Commission not found.");
+    const current = normalizeSalesStatus(row.status);
+    const amount = Number(row.released_amount || 0);
+    const isTest = isQaRecord(row);
+    const qaBatch = qaBatchFor(row);
+    const transitions = {
+      HOLD: ["PENDING", "AVAILABLE"],
+      RELEASE_HOLD: ["HELD"],
+      REVERSE: ["PENDING", "AVAILABLE", "HELD"]
+    };
+    if (transitions[action].indexOf(current) === -1) return financeError("INVALID_STATUS_TRANSITION", "Invalid commission status transition.", { status: current });
+    if (action === "HOLD" && current === "AVAILABLE" && amount > 0) {
+      appendLedgerEntry({ agent_id: row.agent_id, entry_type: "COMMISSION_HOLD", direction: "DEBIT", amount: amount, balance_bucket: "AVAILABLE", reference_type: "COMMISSION", reference_id: row.commission_id, idempotency_key: "HOLD:" + row.commission_id + ":AVAILABLE", note: reason, created_by_type: "ADMIN", created_by_id: admin.actor_id, is_test: isTest, qa_batch: qaBatch });
+      appendLedgerEntry({ agent_id: row.agent_id, entry_type: "COMMISSION_HOLD", direction: "CREDIT", amount: amount, balance_bucket: "HELD", reference_type: "COMMISSION", reference_id: row.commission_id, idempotency_key: "HOLD:" + row.commission_id + ":HELD", note: reason, created_by_type: "ADMIN", created_by_id: admin.actor_id, is_test: isTest, qa_batch: qaBatch });
+    }
+    if (action === "RELEASE_HOLD" && amount > 0) {
+      appendLedgerEntry({ agent_id: row.agent_id, entry_type: "COMMISSION_UNHOLD", direction: "DEBIT", amount: amount, balance_bucket: "HELD", reference_type: "COMMISSION", reference_id: row.commission_id, idempotency_key: "UNHOLD:" + row.commission_id + ":HELD", note: reason, created_by_type: "ADMIN", created_by_id: admin.actor_id, is_test: isTest, qa_batch: qaBatch });
+      appendLedgerEntry({ agent_id: row.agent_id, entry_type: "COMMISSION_UNHOLD", direction: "CREDIT", amount: amount, balance_bucket: "AVAILABLE", reference_type: "COMMISSION", reference_id: row.commission_id, idempotency_key: "UNHOLD:" + row.commission_id + ":AVAILABLE", note: reason, created_by_type: "ADMIN", created_by_id: admin.actor_id, is_test: isTest, qa_batch: qaBatch });
+    }
+    if (action === "REVERSE" && amount > 0 && current !== "PENDING") {
+      appendLedgerEntry({ agent_id: row.agent_id, entry_type: "COMMISSION_REVERSAL", direction: "DEBIT", amount: amount, balance_bucket: current === "HELD" ? "HELD" : "AVAILABLE", reference_type: "COMMISSION", reference_id: row.commission_id, idempotency_key: "REVERSE:" + row.commission_id, note: reason, created_by_type: "ADMIN", created_by_id: admin.actor_id, is_test: isTest, qa_batch: qaBatch });
+    }
+    const updates = { status: nextStatus, note: reason || row.note };
+    if (nextStatus === "HELD") updates.held_at = new Date();
+    if (nextStatus === "REVERSED") updates.reversed_at = new Date();
+    updateRowFields(SHEET_NAMES.commissions, row._row, updates);
+    writeFinanceAudit("COMMISSION", row.commission_id, action, current, nextStatus, amount, "ADMIN", admin.actor_id, reason, {}, isTest, qaBatch);
+    return { ok: true, commission: publicCommission(Object.assign({}, row, updates)), wallet: publicWallet(getWalletProjection(row.agent_id).wallet) };
+  });
+}
+
+function holdCommission(body) { return updateCommissionStatus(body, "HOLD", "HELD"); }
+function releaseCommissionHold(body) { return updateCommissionStatus(body, "RELEASE_HOLD", "AVAILABLE"); }
+function reverseCommission(body) { return updateCommissionStatus(body, "REVERSE", "REVERSED"); }
+
+function listWalletAccountsAdmin(body) {
+  const admin = financeAdminSession(body);
+  if (!admin.ok) return admin;
+  const includeQa = booleanValue(body && body.include_qa);
+  const wallets = sheetToObjects(SHEET_NAMES.walletAccounts).filter(function (item) { return includeQa || !isQaRecord(item); }).map(function (wallet) {
+    return publicWallet(updateWalletProjection(wallet.agent_id));
+  });
+  return { ok: true, total: wallets.length, wallets: wallets };
+}
+
+function getWalletAccountAdmin(body) {
+  const admin = financeAdminSession(body);
+  if (!admin.ok) return admin;
+  const agentId = validateAgentId(body && body.agent_id);
+  if (!agentId) return financeError("INVALID_REQUEST", "Invalid agent_id.");
+  const wallet = getWalletProjection(agentId).wallet;
+  const ledger = sheetToObjects(SHEET_NAMES.walletLedger).filter(function (entry) { return cleanString(entry.agent_id, 80) === agentId; }).map(publicLedger).reverse();
+  return { ok: true, wallet: publicWallet(wallet), ledger: ledger };
+}
+
+function listWithdrawalsAdmin(body) {
+  const admin = financeAdminSession(body);
+  if (!admin.ok) return admin;
+  const includeQa = booleanValue(body && body.include_qa);
+  const status = normalizeSalesStatus(body && body.status);
+  const rows = sheetToObjects(SHEET_NAMES.withdrawalRequests).filter(function (item) {
+    if (!includeQa && isQaRecord(item)) return false;
+    if (status && normalizeSalesStatus(item.status) !== status) return false;
+    return true;
+  }).map(publicWithdrawal).reverse();
+  return { ok: true, total: rows.length, withdrawals: rows };
+}
+
+function getWithdrawalDetailAdmin(body) {
+  const admin = financeAdminSession(body);
+  if (!admin.ok) return admin;
+  const id = cleanString(body && (body.withdrawal_id || body.withdrawalId), 80);
+  const row = sheetToObjects(SHEET_NAMES.withdrawalRequests).find(function (item) { return cleanString(item.withdrawal_id, 80) === id; });
+  return row ? { ok: true, withdrawal: publicWithdrawal(row) } : financeError("NOT_FOUND", "Withdrawal not found.");
+}
+
+function transitionWithdrawal(body, action, nextStatus) {
+  return withFinanceLock(function () {
+    const admin = financeAdminSession(body);
+    if (!admin.ok) return admin;
+    const id = cleanString(body && (body.withdrawal_id || body.withdrawalId), 80);
+    const row = sheetToObjects(SHEET_NAMES.withdrawalRequests).find(function (item) { return cleanString(item.withdrawal_id, 80) === id; });
+    if (!row) return financeError("NOT_FOUND", "Withdrawal not found.");
+    const current = normalizeSalesStatus(row.status);
+    const amount = Number(row.requested_amount || 0);
+    const isTest = isQaRecord(row);
+    const qaBatch = qaBatchFor(row);
+    const reason = cleanString(body && (body.reason || body.rejection_reason), 500);
+    if (action === "REJECT" && !reason) return financeError("INVALID_REQUEST", "Reject reason is required.");
+    if (action === "APPROVE" && current !== "PENDING") return financeError("INVALID_STATUS_TRANSITION", "Only pending withdrawal can be approved.");
+    if (action === "REJECT" && ["PENDING", "APPROVED"].indexOf(current) === -1) return financeError("INVALID_STATUS_TRANSITION", "Withdrawal cannot be rejected.");
+    if (action === "PAID" && current !== "APPROVED") return financeError("INVALID_STATUS_TRANSITION", "Only approved withdrawal can be marked paid.");
+
+    const updates = { status: nextStatus, reviewed_at: new Date(), reviewer_admin_id: admin.actor_id };
+    if (action === "APPROVE") updates.approved_at = new Date();
+    if (action === "REJECT") {
+      updates.rejected_at = new Date();
+      updates.rejection_reason = reason;
+      appendLedgerEntry({ agent_id: row.agent_id, entry_type: "WITHDRAWAL_REJECTED", direction: "DEBIT", amount: amount, balance_bucket: "RESERVED", reference_type: "WITHDRAWAL", reference_id: row.withdrawal_id, idempotency_key: "REJECT:" + row.withdrawal_id + ":RESERVED", note: reason, created_by_type: "ADMIN", created_by_id: admin.actor_id, is_test: isTest, qa_batch: qaBatch });
+      appendLedgerEntry({ agent_id: row.agent_id, entry_type: "WITHDRAWAL_REJECTED", direction: "CREDIT", amount: amount, balance_bucket: "AVAILABLE", reference_type: "WITHDRAWAL", reference_id: row.withdrawal_id, idempotency_key: "REJECT:" + row.withdrawal_id + ":AVAILABLE", note: reason, created_by_type: "ADMIN", created_by_id: admin.actor_id, is_test: isTest, qa_batch: qaBatch });
+    }
+    if (action === "PAID") {
+      updates.paid_at = new Date();
+      updates.payment_reference = cleanString(body && body.payment_reference, 160);
+      appendLedgerEntry({ agent_id: row.agent_id, entry_type: "WITHDRAWAL_PAID", direction: "DEBIT", amount: amount, balance_bucket: "RESERVED", reference_type: "WITHDRAWAL", reference_id: row.withdrawal_id, idempotency_key: "PAID:" + row.withdrawal_id, note: updates.payment_reference, created_by_type: "ADMIN", created_by_id: admin.actor_id, is_test: isTest, qa_batch: qaBatch });
+    }
+    updateRowFields(SHEET_NAMES.withdrawalRequests, row._row, updates);
+    writeFinanceAudit("WITHDRAWAL", row.withdrawal_id, "WITHDRAWAL_" + action, current, nextStatus, amount, "ADMIN", admin.actor_id, reason || updates.payment_reference, {}, isTest, qaBatch);
+    return { ok: true, withdrawal: publicWithdrawal(Object.assign({}, row, updates)), wallet: publicWallet(getWalletProjection(row.agent_id).wallet) };
+  });
+}
+
+function approveWithdrawal(body) { return transitionWithdrawal(body, "APPROVE", "APPROVED"); }
+function rejectWithdrawal(body) { return transitionWithdrawal(body, "REJECT", "REJECTED"); }
+function markWithdrawalPaid(body) { return transitionWithdrawal(body, "PAID", "PAID"); }
+
+function createWalletAdjustment(body) {
+  return withFinanceLock(function () {
+    const admin = financeAdminSession(body);
+    if (!admin.ok) return admin;
+    const agentId = validateAgentId(body && body.agent_id);
+    const reason = cleanString(body && body.reason, 500);
+    const direction = normalizeSalesStatus(body && body.direction);
+    const amountSatang = toSatang(body && body.amount);
+    if (!agentId || !reason || ["CREDIT", "DEBIT"].indexOf(direction) === -1 || !isFinite(amountSatang) || amountSatang <= 0) {
+      return financeError("INVALID_REQUEST", "Adjustment requires agent, direction, amount, and reason.");
+    }
+    const wallet = getWalletProjection(agentId).wallet;
+    if (direction === "DEBIT" && toSatang(wallet.available_balance) < amountSatang) return financeError("INSUFFICIENT_BALANCE", "Adjustment debit exceeds available balance.");
+    const idempotencyKey = cleanString(body && body.idempotency_key, 220) || "ADJUSTMENT:" + agentId + ":" + direction + ":" + amountSatang + ":" + cleanString(body && body.reference, 120);
+    const entry = appendLedgerEntry({ agent_id: agentId, entry_type: "ADJUSTMENT", direction: direction, amount: fromSatang(amountSatang), balance_bucket: "AVAILABLE", reference_type: "ADJUSTMENT", reference_id: cleanString(body && body.reference, 120) || idempotencyKey, idempotency_key: idempotencyKey, note: reason, created_by_type: "ADMIN", created_by_id: admin.actor_id, is_test: isQaRecord(body || {}), qa_batch: qaBatchFor(body || {}) });
+    writeFinanceAudit("WALLET", agentId, "WALLET_ADJUSTED", "", direction, fromSatang(amountSatang), "ADMIN", admin.actor_id, reason, { ledger_id: entry.ledger_id }, isQaRecord(body || {}), qaBatchFor(body || {}));
+    return { ok: true, ledger: publicLedger(entry), wallet: publicWallet(getWalletProjection(agentId).wallet) };
+  });
+}
+
+function getCommissionConfiguration(body) {
+  const admin = financeAdminSession(body);
+  if (!admin.ok) return admin;
+  ensureFinanceSheets();
+  return { ok: true, rules: sheetToObjects(SHEET_NAMES.commissionRules).map(publicCommissionRule) };
+}
+
+function saveCommissionConfiguration(body) {
+  return withFinanceLock(function () {
+    const admin = financeAdminSession(body);
+    if (!admin.ok) return admin;
+    ensureFinanceSheets();
+    const productId = cleanString(body && (body.product_id || body.productId), 80);
+    const collection = cleanString(body && body.collection, 180);
+    const type = normalizeSalesStatus(body && body.commission_type || "FIXED");
+    const base = normalizeSalesStatus(body && body.commissionable_base || "GRAND_TOTAL");
+    const valueSatang = type === "FIXED" ? toSatang(body && body.commission_value) : Number(body && body.commission_value);
+    const depositPercent = Number(body && body.deposit_release_percent);
+    const finalPercent = Number(body && body.final_release_percent);
+    if ((!productId && !collection) || ["FIXED", "PERCENT", "PERCENTAGE"].indexOf(type) === -1 || !isFinite(valueSatang) || valueSatang < 0 || !isFinite(depositPercent) || !isFinite(finalPercent) || depositPercent < 0 || depositPercent > 100 || finalPercent < 0 || finalPercent > 100) {
+      return financeError("INVALID_REQUEST", "Invalid commission configuration.");
+    }
+    const status = normalizeSalesStatus(body && body.status || "ACTIVE");
+    const now = new Date();
+    const existingId = cleanString(body && body.rule_id, 80);
+    const rows = sheetToObjects(SHEET_NAMES.commissionRules);
+    const existing = rows.find(function (rule) {
+      return existingId ? cleanString(rule.rule_id, 80) === existingId : (productId && cleanString(rule.product_id, 80) === productId);
+    });
+    const rule = {
+      rule_id: existing ? existing.rule_id : makeId("CMR"),
+      product_id: productId,
+      collection: collection,
+      commission_type: type === "PERCENTAGE" ? "PERCENT" : type,
+      commission_value: type === "FIXED" ? fromSatang(valueSatang) : Number(body.commission_value || 0),
+      commissionable_base: base,
+      deposit_release_percent: depositPercent,
+      final_release_percent: finalPercent,
+      status: status,
+      effective_from: body.effective_from || (existing && existing.effective_from) || now,
+      effective_to: body.effective_to || "",
+      created_at: existing ? existing.created_at : now,
+      updated_at: now,
+      created_by: existing ? existing.created_by : admin.actor_id,
+      updated_by: admin.actor_id,
+      note: cleanString(body && body.note, 500)
+    };
+    if (existing) updateRowFields(SHEET_NAMES.commissionRules, existing._row, rule); else appendObject(SHEET_NAMES.commissionRules, rule);
+    writeFinanceAudit("COMMISSION_RULE", rule.rule_id, existing ? "COMMISSION_RULE_UPDATED" : "COMMISSION_RULE_CREATED", existing ? existing.status : "", rule.status, rule.commission_value, "ADMIN", admin.actor_id, cleanString(body && body.reason, 500), { product_id: productId, collection: collection }, false, "");
+    return { ok: true, rule: publicCommissionRule(rule) };
+  });
+}
+
+function listFinanceAnomalies(includeQa) {
+  ensureFinanceSheets();
+  const anomalies = [];
+  const wallets = sheetToObjects(SHEET_NAMES.walletAccounts).filter(function (wallet) { return includeQa || !isQaRecord(wallet); });
+  wallets.forEach(function (wallet) {
+    const projection = calculateWalletProjection(wallet.agent_id);
+    ["pending_balance", "available_balance", "held_balance", "reserved_balance"].forEach(function (key) {
+      if (Number(projection[key] || 0) < 0) {
+        anomalies.push({ type: "NEGATIVE_BALANCE", agent_id: wallet.agent_id, bucket: key, amount: projection[key] });
+      }
+      if (Math.abs(Number(projection[key] || 0) - Number(wallet[key] || 0)) > 0.01) {
+        anomalies.push({ type: "PROJECTION_MISMATCH", agent_id: wallet.agent_id, bucket: key, expected: projection[key], actual: Number(wallet[key] || 0) });
+      }
+    });
+  });
+  const keys = {};
+  sheetToObjects(SHEET_NAMES.walletLedger).forEach(function (entry) {
+    const key = cleanString(entry.idempotency_key, 220);
+    if (!key) return;
+    keys[key] = (keys[key] || 0) + 1;
+  });
+  Object.keys(keys).forEach(function (key) {
+    if (keys[key] > 1) anomalies.push({ type: "DUPLICATE_IDEMPOTENCY_KEY", idempotency_key: key, count: keys[key] });
+  });
+  return anomalies;
+}
+
+function runFinanceIntegrityCheck(body) {
+  const admin = financeAdminSession(body);
+  if (!admin.ok) return admin;
+  return { ok: true, anomalies: listFinanceAnomalies(booleanValue(body && body.include_qa)) };
+}
+
+function requestWithdraw(body) {
+  return createWithdrawalRequest(body || {});
+}
+
+function updateWithdrawStatus(withdrawId, status) {
+  const body = typeof withdrawId === "object" ? withdrawId : { withdrawal_id: withdrawId };
+  const next = normalizeSalesStatus(status || (body && body.status));
+  if (next === "PAID") return markWithdrawalPaid(body);
+  if (next === "APPROVED") return approveWithdrawal(body);
+  if (next === "REJECTED") return rejectWithdrawal(body);
+  return financeError("INVALID_STATUS_TRANSITION", "Unsupported withdrawal status.");
 }
 
 /* =========================================================

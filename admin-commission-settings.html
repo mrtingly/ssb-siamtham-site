@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Commission Settings | SBOS</title>
+<link rel="icon" href="images/logo.png">
+<link rel="stylesheet" href="css/sbos-typography.css">
+<link rel="stylesheet" href="css/sbos-finance.css">
+</head>
+<body>
+<div class="finance-shell">
+  <aside class="finance-side"><div class="finance-brand"><img src="images/logo.png" alt="SBOS"><div><b>SBOS Admin</b><span>Commission Settings</span></div></div><nav class="finance-menu"><a href="admin-finance.html">Finance</a><a href="admin-commissions.html">Commissions</a><a href="admin-wallets.html">Wallets</a><a href="admin-withdraw.html">Withdrawals</a><a class="active" href="admin-commission-settings.html">Settings</a><a href="admin-products.html">Products</a></nav></aside>
+  <main class="finance-main"><header class="finance-top"><div><h1>Commission Rules</h1><p>ตั้งค่าคอมมิชชันต่อ Product หรือ Collection</p></div><button id="refresh" class="finance-action" type="button">Refresh</button></header><div class="finance-content"><section class="finance-panel"><h3>Rule Form</h3><form id="form" class="finance-form"><label>Rule ID<input id="ruleId" placeholder="Leave blank for new"></label><label>Product ID<input id="productId"></label><label>Collection<input id="collection"></label><label>Type<select id="type"><option>FIXED</option><option>PERCENT</option></select></label><label>Value<input id="value" inputmode="decimal"></label><label>Base<select id="base"><option>GRAND_TOTAL</option><option>SUBTOTAL</option><option>PRODUCT_PRICE</option></select></label><label>Deposit Release %<input id="deposit" type="number" min="0" max="100" value="0"></label><label>Final Release %<input id="final" type="number" min="0" max="100" value="100"></label><label>Status<select id="ruleStatus"><option>ACTIVE</option><option>INACTIVE</option><option>CONFIG_REQUIRED</option></select></label><label class="wide">Reason<textarea id="reason"></textarea></label><div><button class="finance-action">Save Rule</button></div></form></section><section class="finance-panel"><h3>Rules</h3><div class="finance-table-wrap"><table class="finance-table"><thead><tr><th>Rule</th><th>Product</th><th>Collection</th><th>Type</th><th>Value</th><th>Release</th><th>Status</th></tr></thead><tbody id="rows"><tr><td colspan="7">Loading...</td></tr></tbody></table></div></section><div id="status" class="finance-status"></div></div></main>
+</div>
+<script src="js/admin-actions.js"></script>
+<script src="js/admin-guard.js"></script>
+<script>
+"use strict";
+let rules = [];
+function esc(v){return String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));}
+function badge(v){return '<span class="finance-badge ' + esc(String(v || "").toLowerCase()) + '">' + esc(v || "-") + '</span>';}
+function render(){
+  rows.innerHTML = rules.length ? rules.map(rule => {
+    return '<tr data-id="' + esc(rule.rule_id) + '"><td>' + esc(rule.rule_id) + '</td><td>' + esc(rule.product_id || "-") + '</td><td>' + esc(rule.collection || "-") + '</td><td>' + esc(rule.commission_type) + '</td><td>' + esc(rule.commission_value) + '</td><td>' + esc(rule.deposit_release_percent + "% / " + rule.final_release_percent + "%") + '</td><td>' + badge(rule.status) + '</td></tr>';
+  }).join("") : '<tr><td colspan="7" class="finance-empty">No rules</td></tr>';
+}
+function edit(id){
+  const rule = rules.find(item => item.rule_id === id);
+  if (!rule) return;
+  ruleId.value = rule.rule_id;
+  productId.value = rule.product_id;
+  collection.value = rule.collection;
+  type.value = rule.commission_type === "PERCENTAGE" ? "PERCENT" : rule.commission_type;
+  value.value = rule.commission_value;
+  base.value = rule.commissionable_base;
+  deposit.value = rule.deposit_release_percent;
+  final.value = rule.final_release_percent;
+  ruleStatus.value = rule.status;
+}
+async function load(){
+  const data = await adminPost("getCommissionConfiguration", {});
+  if (!data.ok) {
+    status.textContent = data.message || "Load failed";
+    return;
+  }
+  rules = data.rules || [];
+  render();
+  status.textContent = "Total " + rules.length;
+}
+form.onsubmit = async event => {
+  event.preventDefault();
+  const result = await adminPost("saveCommissionConfiguration", {
+    rule_id: ruleId.value,
+    product_id: productId.value,
+    collection: collection.value,
+    commission_type: type.value,
+    commission_value: value.value,
+    commissionable_base: base.value,
+    deposit_release_percent: deposit.value,
+    final_release_percent: final.value,
+    status: ruleStatus.value,
+    reason: reason.value
+  });
+  if (!result.ok) {
+    alert(result.message || "Save failed");
+    return;
+  }
+  form.reset();
+  deposit.value = 0;
+  final.value = 100;
+  await load();
+};
+rows.addEventListener("click", event => {
+  const row = event.target.closest("tr[data-id]");
+  if (row) edit(row.dataset.id);
+});
+refresh.onclick = load;
+load();
+</script>
+</body>
+</html>

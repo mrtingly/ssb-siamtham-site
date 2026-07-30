@@ -1,144 +1,92 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Withdraw | SSBMS</title>
-
-  <link rel="icon" href="images/logo.png" />
-  <link rel="stylesheet" href="css/admin-withdraw.css" />
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin Withdrawals | SBOS</title>
+<link rel="icon" href="images/logo.png">
+<link rel="stylesheet" href="css/sbos-typography.css">
+<link rel="stylesheet" href="css/sbos-finance.css">
 </head>
-
 <body>
-  <div class="admin-page">
-
-    <aside class="admin-sidebar">
-      <div class="brand">
-        <img src="images/logo.png" />
-        <div>
-          <strong>SSBMS</strong>
-          <span>Withdraw System</span>
-        </div>
-      </div>
-
-      <nav>
-        <a href="admin-dashboard.html">Dashboard</a>
-        <a href="admin-agent.html">ตรวจตัวแทน</a>
-        <a href="admin-agents-list.html">รายชื่อตัวแทน</a>
-        <a href="admin-bonus.html">โบนัส</a>
-        <a class="active" href="admin-withdraw.html">ถอนเงิน</a>
-      </nav>
-    </aside>
-
-    <main class="admin-main">
-
-      <header class="admin-head">
-        <div>
-          <h1>อนุมัติถอนเงิน</h1>
-          <p>ตรวจสอบและอนุมัติการถอนเงินของตัวแทน</p>
-        </div>
-      </header>
-
-      <!-- SUMMARY -->
-      <section class="summary-grid">
-        <div>
-          <span>คำขอทั้งหมด</span>
-          <strong>24</strong>
-        </div>
-
-        <div>
-          <span>รออนุมัติ</span>
-          <strong>12</strong>
-        </div>
-
-        <div>
-          <span>อนุมัติแล้ว</span>
-          <strong>8</strong>
-        </div>
-
-        <div>
-          <span>ปฏิเสธ</span>
-          <strong>4</strong>
-        </div>
-      </section>
-
-      <!-- FILTER -->
-      <section class="filter-bar">
-        <input type="text" placeholder="ค้นหาตัวแทน / รหัส / จำนวนเงิน" />
-
-        <select>
-          <option>ทุกสถานะ</option>
-          <option>PENDING</option>
-          <option>APPROVED</option>
-          <option>PAID</option>
-          <option>REJECTED</option>
-        </select>
-
-        <button>ค้นหา</button>
-      </section>
-
-      <!-- TABLE -->
-      <section class="withdraw-table-card">
-        <table>
-          <thead>
-            <tr>
-              <th>ตัวแทน</th>
-              <th>รหัส</th>
-              <th>จำนวนเงิน</th>
-              <th>บัญชี</th>
-              <th>วันที่</th>
-              <th>สถานะ</th>
-              <th>จัดการ</th>
-            </tr>
-          </thead>
-
-          <tbody>
-
-            <tr>
-              <td>รัตนชัย คำช่วง</td>
-              <td>AGT-0001</td>
-              <td>฿120,000</td>
-              <td>XXX-X-XXXXX-X</td>
-              <td>10/04/2026</td>
-              <td><span class="status pending">PENDING</span></td>
-              <td>
-                <div class="action-set">
-                 <button class="approve" onclick="markWithdrawPaid('WD-123456789')">
-                    อนุมัติ
-                 </button>
-                  
-                  <button class="reject" onclick="rejectWithdraw('WD-123456789')">
-                    ปฏิเสธ
-                  </button>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>สมชาย ตัวอย่าง</td>
-              <td>AGT-0002</td>
-              <td>฿45,000</td>
-              <td>XXX-X-XXXXX-X</td>
-              <td>08/04/2026</td>
-              <td><span class="status approved">APPROVED</span></td>
-              <td>
-                <div class="action-set">
-                  <button class="paid" onclick="markWithdrawPaid('WD-123456789')">
-                  จ่ายแล้ว
-                </button>
-                </div>
-              </td>
-            </tr>
-
-          </tbody>
-        </table>
-      </section>
-
-    </main>
-  </div>
-
-  <script src="js/admin-actions.js"></script>
-  <script src="js/admin-guard.js"></script>
-  
+<div class="finance-shell">
+  <aside class="finance-side"><div class="finance-brand"><img src="images/logo.png" alt="SBOS"><div><b>SBOS Admin</b><span>Withdrawal Queue</span></div></div><nav class="finance-menu"><a href="admin-dashboard.html">Dashboard</a><a href="admin-finance.html">Finance</a><a href="admin-commissions.html">Commissions</a><a href="admin-wallets.html">Wallets</a><a class="active" href="admin-withdraw.html">Withdrawals</a><a href="admin-commission-settings.html">Settings</a></nav></aside>
+  <main class="finance-main"><header class="finance-top"><div><h1>Withdrawal Management</h1><p>ตรวจคำขอถอน อนุมัติ ปฏิเสธ และบันทึกการจ่ายเงินจริง</p></div><button id="refresh" class="finance-action" type="button">Refresh</button></header><div class="finance-content"><section class="finance-grid"><div class="finance-card"><span>Total</span><strong id="total">0</strong></div><div class="finance-card"><span>Pending</span><strong id="pending">0</strong></div><div class="finance-card"><span>Approved</span><strong id="approved">0</strong></div><div class="finance-card"><span>Paid</span><strong id="paid">0</strong></div></section><section class="finance-panel"><div class="finance-toolbar"><input id="search" placeholder="Search withdrawal, agent, reference"><select id="filter"><option value="">All status</option><option>PENDING</option><option>APPROVED</option><option>PAID</option><option>REJECTED</option></select><label><input id="qa" type="checkbox"> Include QA</label></div><div class="finance-table-wrap"><table class="finance-table"><thead><tr><th>ID</th><th>Agent</th><th>Amount</th><th>Net</th><th>Bank</th><th>Status</th><th>Requested</th><th>Actions</th></tr></thead><tbody id="rows"><tr><td colspan="8">Loading...</td></tr></tbody></table></div></section><div id="status" class="finance-status" role="status" aria-live="polite"></div></div></main>
+</div>
+<script src="js/admin-actions.js"></script>
+<script src="js/admin-guard.js"></script>
+<script>
+"use strict";
+let withdrawals = [];
+function money(v){return "฿" + Number(v || 0).toLocaleString("th-TH", { maximumFractionDigits: 2 });}
+function esc(v){return String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));}
+function fmt(v){const d = new Date(v); return isNaN(d) ? "-" : d.toLocaleDateString("th-TH");}
+function badge(v){return '<span class="finance-badge ' + esc(String(v || "").toLowerCase()) + '">' + esc(v || "-") + '</span>';}
+function actionButton(type, id, label, variant){
+  return '<button class="finance-action ' + variant + '" type="button" data-action="' + esc(type) + '" data-id="' + esc(id) + '">' + esc(label) + '</button>';
+}
+async function runWithdrawalAction(type, id){
+  if (type === "approve" && !confirm("Approve this withdrawal?")) return;
+  if (type === "reject" && !confirm("Reject this withdrawal?")) return;
+  if (type === "paid" && !confirm("Mark this withdrawal as paid?")) return;
+  const payload = { withdrawal_id: id };
+  let api = "approveWithdrawal";
+  if (type === "reject") {
+    payload.reason = prompt("Reject reason") || "";
+    if (!payload.reason.trim()) {
+      alert("Reason required");
+      return;
+    }
+    api = "rejectWithdrawal";
+  }
+  if (type === "paid") {
+    payload.payment_reference = prompt("Payment reference") || "";
+    api = "markWithdrawalPaid";
+  }
+  const result = await adminPost(api, payload);
+  if (!result.ok) {
+    alert(result.message || "Action failed");
+    return;
+  }
+  await load();
+}
+function render(){
+  const q = search.value.toLowerCase();
+  const f = filter.value;
+  const filtered = withdrawals.filter(w => (!f || w.status === f) && [w.withdrawal_id, w.agent_id, w.payment_reference, w.bank_account_reference].join(" ").toLowerCase().includes(q));
+  total.textContent = withdrawals.length;
+  pending.textContent = withdrawals.filter(w => w.status === "PENDING").length;
+  approved.textContent = withdrawals.filter(w => w.status === "APPROVED").length;
+  paid.textContent = withdrawals.filter(w => w.status === "PAID").length;
+  rows.innerHTML = filtered.length ? filtered.map(w => {
+    const actions = [
+      w.status === "PENDING" ? actionButton("approve", w.withdrawal_id, "Approve", "") : "",
+      w.status === "PENDING" || w.status === "APPROVED" ? actionButton("reject", w.withdrawal_id, "Reject", "danger") : "",
+      w.status === "APPROVED" ? actionButton("paid", w.withdrawal_id, "Mark Paid", "") : ""
+    ].filter(Boolean).join(" ");
+    return '<tr><td>' + esc(w.withdrawal_id) + '</td><td>' + esc(w.agent_id) + '</td><td>' + esc(money(w.requested_amount)) + '</td><td>' + esc(money(w.net_amount)) + '</td><td>' + esc(w.bank_account_reference || "-") + '</td><td>' + badge(w.status) + '</td><td>' + esc(fmt(w.requested_at)) + '</td><td>' + actions + '</td></tr>';
+  }).join("") : '<tr><td colspan="8" class="finance-empty">No withdrawals</td></tr>';
+}
+async function load(){
+  status.textContent = "Loading...";
+  const data = await adminPost("listWithdrawalsAdmin", { include_qa: qa.checked });
+  if (!data.ok) {
+    status.textContent = data.message || "Load failed";
+    return;
+  }
+  withdrawals = data.withdrawals || [];
+  render();
+  status.textContent = "Updated";
+}
+rows.addEventListener("click", event => {
+  const button = event.target.closest("button[data-action]");
+  if (!button) return;
+  runWithdrawalAction(button.dataset.action, button.dataset.id);
+});
+search.oninput = render;
+filter.onchange = render;
+qa.onchange = load;
+refresh.onclick = load;
+load();
+</script>
 </body>
 </html>
