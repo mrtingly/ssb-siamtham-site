@@ -4,6 +4,9 @@ const SHEET_NAMES = {
   withdraws: "withdraws",
   bonus: "bonus",
   orders: "orders",
+  customers: "customers",
+  quotations: "quotations",
+  orderStatusLogs: "order_status_logs",
   trainingLessons: "training_lessons",
   trainingProgress: "agent_training_progress",
   examQuestions: "exam_questions",
@@ -56,6 +59,34 @@ function doGet(e) {
 
       case "getAdminDashboard":
         result = getAdminDashboard(e.parameter);
+        break;
+
+      case "getCustomer":
+        result = getCustomer(e.parameter);
+        break;
+
+      case "listCustomers":
+        result = listCustomers(e.parameter);
+        break;
+
+      case "getQuotation":
+        result = getQuotation(e.parameter);
+        break;
+
+      case "listQuotations":
+        result = listQuotations(e.parameter);
+        break;
+
+      case "getOrder":
+        result = getOrder(e.parameter);
+        break;
+
+      case "listOrders":
+        result = listOrders(e.parameter);
+        break;
+
+      case "listOrderStatusLogs":
+        result = listOrderStatusLogs(e.parameter);
         break;
 
       case "listTrainingLessons":
@@ -195,6 +226,30 @@ function doPost(e) {
         result = createBonus(body);
         break;
 
+      case "createCustomer":
+        result = createCustomer(body);
+        break;
+
+      case "createQuotation":
+        result = createQuotation(body);
+        break;
+
+      case "approveQuotation":
+        result = approveQuotation(body);
+        break;
+
+      case "rejectQuotation":
+        result = rejectQuotation(body);
+        break;
+
+      case "createOrderFromQuotation":
+        result = createOrderFromQuotation(body);
+        break;
+
+      case "updateOrderStatus":
+        result = updateOrderStatus(body);
+        break;
+
       case "approveAgent":
         result = updateAgentStatus(body.agent_id, AGENT_STATUS.APPROVED);
         break;
@@ -315,6 +370,9 @@ function sheetToObjects(sheetName) {
         obj.agent_id,
         obj.withdraw_id,
         obj.order_id,
+        obj.customer_id,
+        obj.quotation_id,
+        obj.status_log_id,
         obj.bonus_id,
         obj.lesson_id,
         obj.progress_id,
@@ -524,6 +582,138 @@ const AUDIT_LOG_HEADERS = [
   "metadata_json",
   "created_at"
 ];
+
+const CUSTOMER_HEADERS = [
+  "customer_id",
+  "owner_agent_id",
+  "team_leader_id",
+  "team_leader_name",
+  "customer_name",
+  "phone",
+  "email",
+  "line_id",
+  "tax_id",
+  "address",
+  "status",
+  "created_at",
+  "updated_at"
+];
+
+const QUOTATION_HEADERS = [
+  "quotation_id",
+  "customer_id",
+  "owner_agent_id",
+  "agent_id",
+  "owner_agent_name",
+  "team_leader_id",
+  "team_leader_name",
+  "status",
+  "brand",
+  "series",
+  "model",
+  "storage",
+  "color",
+  "price_date",
+  "phone_price",
+  "service_fee",
+  "subtotal",
+  "vat_rate",
+  "vat",
+  "total",
+  "grand_total",
+  "line_items_json",
+  "customer_json",
+  "signer_name",
+  "signature_data_url",
+  "user_agent",
+  "order_id",
+  "rejected_reason",
+  "created_at",
+  "updated_at",
+  "submitted_at",
+  "approved_at",
+  "rejected_at"
+];
+
+const ORDER_HEADERS = [
+  "order_id",
+  "quotation_id",
+  "customer_id",
+  "owner_agent_id",
+  "agent_id",
+  "owner_agent_name",
+  "team_leader_id",
+  "team_leader_name",
+  "customer_name",
+  "customer_phone",
+  "customer_email",
+  "customer_address",
+  "status",
+  "brand",
+  "series",
+  "model",
+  "storage",
+  "color",
+  "subtotal",
+  "vat",
+  "total",
+  "grand_total",
+  "line_items_json",
+  "timeline_json",
+  "created_at",
+  "updated_at",
+  "approved_at",
+  "paid_at",
+  "installing_at",
+  "completed_at",
+  "cancelled_at"
+];
+
+const ORDER_STATUS_LOG_HEADERS = [
+  "status_log_id",
+  "order_id",
+  "quotation_id",
+  "customer_id",
+  "owner_agent_id",
+  "from_status",
+  "to_status",
+  "actor_id",
+  "actor_role",
+  "note",
+  "created_at"
+];
+
+const QUOTATION_STATUS = {
+  DRAFT: "DRAFT",
+  SUBMITTED: "SUBMITTED",
+  APPROVED: "APPROVED",
+  REJECTED: "REJECTED",
+  CONVERTED: "CONVERTED"
+};
+
+const ORDER_STATUS = {
+  NEW: "NEW",
+  PAYMENT_PENDING: "PAYMENT_PENDING",
+  PAYMENT_REVIEW: "PAYMENT_REVIEW",
+  PAID: "PAID",
+  PREPARING: "PREPARING",
+  READY_TO_INSTALL: "READY_TO_INSTALL",
+  INSTALLING: "INSTALLING",
+  COMPLETED: "COMPLETED",
+  CANCELLED: "CANCELLED"
+};
+
+const ORDER_STATUS_TRANSITIONS = {
+  NEW: ["PAYMENT_PENDING", "CANCELLED"],
+  PAYMENT_PENDING: ["PAYMENT_REVIEW", "PAID", "CANCELLED"],
+  PAYMENT_REVIEW: ["PAID", "PAYMENT_PENDING", "CANCELLED"],
+  PAID: ["PREPARING", "CANCELLED"],
+  PREPARING: ["READY_TO_INSTALL", "CANCELLED"],
+  READY_TO_INSTALL: ["INSTALLING", "CANCELLED"],
+  INSTALLING: ["COMPLETED", "CANCELLED"],
+  COMPLETED: [],
+  CANCELLED: []
+};
 
 const DEFAULT_TRAINING_LESSONS = [
   {
@@ -2036,6 +2226,1099 @@ function getAdminDashboard(options) {
     statistics: summarizeFinancials(),
     pending_agents: pendingAgents.slice(0, recentLimit),
     recent_agents: publicAgents.slice(Math.max(0, publicAgents.length - recentLimit)).reverse()
+  };
+}
+
+/* =========================================================
+   SALES OPERATING SYSTEM V3-1
+========================================================= */
+
+function ensureSalesSheets() {
+  getOrCreateSheet(SHEET_NAMES.customers, CUSTOMER_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.quotations, QUOTATION_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.orders, ORDER_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.orderStatusLogs, ORDER_STATUS_LOG_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.auditLogs, AUDIT_LOG_HEADERS);
+}
+
+function normalizeSalesStatus(status) {
+  return cleanString(status, 60).toUpperCase();
+}
+
+function findApprovedAgent(agentId) {
+  const normalizedId = validateAgentId(agentId);
+
+  if (!normalizedId) {
+    return {
+      ok: false,
+      message: "Invalid agent_id"
+    };
+  }
+
+  const agent = findAgent(normalizedId);
+
+  if (!agent) {
+    return {
+      ok: false,
+      message: "Agent not found"
+    };
+  }
+
+  if (normalizeStatus(agent.status) !== AGENT_STATUS.APPROVED) {
+    return {
+      ok: false,
+      message: "Agent is not approved for sales actions",
+      status: normalizeStatus(agent.status),
+      next_page: getNextPageByStatus(agent.status)
+    };
+  }
+
+  return {
+    ok: true,
+    agent: agent
+  };
+}
+
+function agentFullName(agent) {
+  return (
+    cleanString(agent.first_name, 120) +
+    " " +
+    cleanString(agent.last_name, 120)
+  ).trim();
+}
+
+function publicCustomer(customer) {
+  return {
+    customer_id: cleanString(customer.customer_id, 80),
+    owner_agent_id: cleanString(customer.owner_agent_id, 80),
+    team_leader_id: cleanString(customer.team_leader_id, 80),
+    team_leader_name: cleanString(customer.team_leader_name, 160),
+    name: cleanString(customer.customer_name, 200),
+    customer_name: cleanString(customer.customer_name, 200),
+    phone: cleanString(customer.phone, 80),
+    email: cleanString(customer.email, 180),
+    line_id: cleanString(customer.line_id, 120),
+    tax_id: cleanString(customer.tax_id, 80),
+    address: cleanString(customer.address, 500),
+    status: cleanString(customer.status || "ACTIVE", 40),
+    created_at: customer.created_at || "",
+    updated_at: customer.updated_at || ""
+  };
+}
+
+function publicQuotation(quotation) {
+  return {
+    quotation_id: cleanString(quotation.quotation_id, 80),
+    quoteId: cleanString(quotation.quotation_id, 80),
+    customer_id: cleanString(quotation.customer_id, 80),
+    owner_agent_id: cleanString(quotation.owner_agent_id || quotation.agent_id, 80),
+    agent_id: cleanString(quotation.agent_id || quotation.owner_agent_id, 80),
+    owner_agent_name: cleanString(quotation.owner_agent_name, 200),
+    agentName: cleanString(quotation.owner_agent_name, 200),
+    team_leader_id: cleanString(quotation.team_leader_id, 80),
+    team_leader_name: cleanString(quotation.team_leader_name, 160),
+    status: normalizeSalesStatus(quotation.status || QUOTATION_STATUS.DRAFT),
+    brand: cleanString(quotation.brand, 120),
+    series: cleanString(quotation.series, 160),
+    model: cleanString(quotation.model, 160),
+    storage: cleanString(quotation.storage, 80),
+    color: cleanString(quotation.color, 120),
+    price_date: cleanString(quotation.price_date, 80),
+    phone_price: Number(quotation.phone_price || 0),
+    phonePrice: Number(quotation.phone_price || 0),
+    service_fee: Number(quotation.service_fee || 0),
+    serviceFee: Number(quotation.service_fee || 0),
+    subtotal: Number(quotation.subtotal || 0),
+    vat_rate: Number(quotation.vat_rate || 0),
+    vat: Number(quotation.vat || 0),
+    total: Number(quotation.total || quotation.grand_total || 0),
+    grand_total: Number(quotation.grand_total || quotation.total || 0),
+    grandTotal: Number(quotation.grand_total || quotation.total || 0),
+    line_items: parseJsonValue(quotation.line_items_json, []),
+    customer: parseJsonValue(quotation.customer_json, {}),
+    signer_name: cleanString(quotation.signer_name, 200),
+    signerName: cleanString(quotation.signer_name, 200),
+    signature_data_url: cleanString(quotation.signature_data_url, 120000),
+    signature: cleanString(quotation.signature_data_url, 120000),
+    order_id: cleanString(quotation.order_id, 80),
+    orderId: cleanString(quotation.order_id, 80),
+    rejected_reason: cleanString(quotation.rejected_reason, 500),
+    created_at: quotation.created_at || "",
+    createdAt: quotation.created_at || "",
+    updated_at: quotation.updated_at || "",
+    submitted_at: quotation.submitted_at || "",
+    signedAt: quotation.submitted_at || "",
+    approved_at: quotation.approved_at || "",
+    rejected_at: quotation.rejected_at || ""
+  };
+}
+
+function publicOrder(order) {
+  return {
+    order_id: cleanString(order.order_id, 80),
+    orderId: cleanString(order.order_id, 80),
+    quotation_id: cleanString(order.quotation_id, 80),
+    quoteId: cleanString(order.quotation_id, 80),
+    customer_id: cleanString(order.customer_id, 80),
+    owner_agent_id: cleanString(order.owner_agent_id || order.agent_id, 80),
+    agent_id: cleanString(order.agent_id || order.owner_agent_id, 80),
+    agentId: cleanString(order.agent_id || order.owner_agent_id, 80),
+    owner_agent_name: cleanString(order.owner_agent_name, 200),
+    agentName: cleanString(order.owner_agent_name, 200),
+    team_leader_id: cleanString(order.team_leader_id, 80),
+    team_leader_name: cleanString(order.team_leader_name, 160),
+    customer_name: cleanString(order.customer_name, 200),
+    customerName: cleanString(order.customer_name, 200),
+    customer_phone: cleanString(order.customer_phone, 80),
+    customer_email: cleanString(order.customer_email, 180),
+    customer_address: cleanString(order.customer_address, 500),
+    customer: {
+      name: cleanString(order.customer_name, 200),
+      phone: cleanString(order.customer_phone, 80),
+      email: cleanString(order.customer_email, 180),
+      address: cleanString(order.customer_address, 500)
+    },
+    status: normalizeSalesStatus(order.status || ORDER_STATUS.NEW),
+    brand: cleanString(order.brand, 120),
+    series: cleanString(order.series, 160),
+    model: cleanString(order.model, 160),
+    storage: cleanString(order.storage, 80),
+    color: cleanString(order.color, 120),
+    subtotal: Number(order.subtotal || 0),
+    vat: Number(order.vat || 0),
+    total: Number(order.total || order.grand_total || 0),
+    grand_total: Number(order.grand_total || order.total || 0),
+    grandTotal: Number(order.grand_total || order.total || 0),
+    line_items: parseJsonValue(order.line_items_json, []),
+    timeline: parseJsonValue(order.timeline_json, []),
+    created_at: order.created_at || "",
+    createdAt: order.created_at || "",
+    updated_at: order.updated_at || "",
+    updatedAt: order.updated_at || "",
+    approved_at: order.approved_at || "",
+    paid_at: order.paid_at || "",
+    installing_at: order.installing_at || "",
+    completed_at: order.completed_at || "",
+    cancelled_at: order.cancelled_at || ""
+  };
+}
+
+function findCustomerById(customerId) {
+  ensureSalesSheets();
+  const normalizedId = cleanString(customerId, 80);
+
+  return sheetToObjects(SHEET_NAMES.customers).find(function (customer) {
+    return cleanString(customer.customer_id, 80) === normalizedId;
+  }) || null;
+}
+
+function findQuotationById(quotationId) {
+  ensureSalesSheets();
+  const normalizedId = cleanString(quotationId, 80);
+
+  return sheetToObjects(SHEET_NAMES.quotations).find(function (quotation) {
+    return cleanString(quotation.quotation_id, 80) === normalizedId;
+  }) || null;
+}
+
+function findOrderById(orderId) {
+  ensureSalesSheets();
+  const normalizedId = cleanString(orderId, 80);
+
+  return sheetToObjects(SHEET_NAMES.orders).find(function (order) {
+    return cleanString(order.order_id, 80) === normalizedId;
+  }) || null;
+}
+
+function findDuplicateCustomer(agentId, phone, email) {
+  const normalizedPhone = cleanString(phone, 80).toLowerCase();
+  const normalizedEmail = cleanString(email, 180).toLowerCase();
+
+  if (!normalizedPhone && !normalizedEmail) {
+    return null;
+  }
+
+  return sheetToObjects(SHEET_NAMES.customers).find(function (customer) {
+    if (cleanString(customer.owner_agent_id, 80) !== agentId) {
+      return false;
+    }
+
+    const phoneMatches =
+      normalizedPhone &&
+      cleanString(customer.phone, 80).toLowerCase() === normalizedPhone;
+    const emailMatches =
+      normalizedEmail &&
+      cleanString(customer.email, 180).toLowerCase() === normalizedEmail;
+
+    return phoneMatches || emailMatches;
+  }) || null;
+}
+
+function createCustomer(body) {
+  ensureSalesSheets();
+
+  const agentResult = findApprovedAgent(body && body.agent_id);
+
+  if (!agentResult.ok) {
+    return agentResult;
+  }
+
+  const agent = agentResult.agent;
+  const agentId = cleanString(agent.agent_id, 80);
+  const name = cleanString(body.customer_name || body.name, 200);
+  const phone = cleanString(body.phone, 80);
+  const email = cleanString(body.email, 180);
+
+  if (!name) {
+    return {
+      ok: false,
+      message: "Customer name is required"
+    };
+  }
+
+  const duplicate = findDuplicateCustomer(agentId, phone, email);
+
+  if (duplicate) {
+    return {
+      ok: false,
+      message: "Customer already exists for this agent",
+      code: "DUPLICATE_CUSTOMER",
+      customer: publicCustomer(duplicate)
+    };
+  }
+
+  const now = new Date();
+  const customer = {
+    customer_id: makeId("CUS"),
+    owner_agent_id: agentId,
+    team_leader_id: cleanString(agent.team_manager, 80),
+    team_leader_name: cleanString(agent.team_manager, 160),
+    customer_name: name,
+    phone: phone,
+    email: email,
+    line_id: cleanString(body.line_id || body.lineId, 120),
+    tax_id: cleanString(body.tax_id || body.taxId, 80),
+    address: cleanString(body.address, 500),
+    status: "ACTIVE",
+    created_at: now,
+    updated_at: now
+  };
+
+  appendObject(SHEET_NAMES.customers, customer);
+  writeAuditLog("createCustomer", agentId, "SUCCESS", "Customer created", {
+    actor_id: agentId,
+    customer_id: customer.customer_id
+  });
+
+  return {
+    ok: true,
+    customer: publicCustomer(customer)
+  };
+}
+
+function getCustomer(params) {
+  ensureSalesSheets();
+  const customer = findCustomerById(params && params.customer_id);
+
+  if (!customer) {
+    return {
+      ok: false,
+      message: "Customer not found"
+    };
+  }
+
+  const requestedAgentId = validateAgentId(params && params.agent_id);
+
+  if (
+    requestedAgentId &&
+    cleanString(customer.owner_agent_id, 80) !== requestedAgentId
+  ) {
+    return {
+      ok: false,
+      message: "Customer access denied"
+    };
+  }
+
+  return {
+    ok: true,
+    customer: publicCustomer(customer)
+  };
+}
+
+function listCustomers(params) {
+  ensureSalesSheets();
+  const options = params || {};
+  const agentId = validateAgentId(options.agent_id);
+  const query = cleanString(options.q || options.search, 200).toLowerCase();
+  const limit = Math.max(1, Math.min(500, Number(options.limit || 200)));
+  const offset = Math.max(0, Number(options.offset || 0));
+
+  if (agentId) {
+    const agentResult = findApprovedAgent(agentId);
+
+    if (!agentResult.ok) {
+      return agentResult;
+    }
+  }
+
+  const customers = sheetToObjects(SHEET_NAMES.customers)
+    .filter(function (customer) {
+      if (agentId && cleanString(customer.owner_agent_id, 80) !== agentId) {
+        return false;
+      }
+
+      if (!query) {
+        return true;
+      }
+
+      return [
+        customer.customer_id,
+        customer.customer_name,
+        customer.phone,
+        customer.email,
+        customer.line_id
+      ].join(" ").toLowerCase().indexOf(query) !== -1;
+    })
+    .map(publicCustomer);
+
+  return {
+    ok: true,
+    total: customers.length,
+    limit: limit,
+    offset: offset,
+    customers: customers.slice(offset, offset + limit)
+  };
+}
+
+function getOrCreateCustomerForQuotation(body, agent) {
+  const agentId = cleanString(agent.agent_id, 80);
+  const providedId = cleanString(body.customer_id, 80);
+
+  if (providedId) {
+    const existing = findCustomerById(providedId);
+
+    if (!existing) {
+      return {
+        ok: false,
+        message: "Customer not found"
+      };
+    }
+
+    if (cleanString(existing.owner_agent_id, 80) !== agentId) {
+      return {
+        ok: false,
+        message: "Customer access denied"
+      };
+    }
+
+    const updates = {
+      customer_name: cleanString(body.customer_name || (body.customer && body.customer.name) || existing.customer_name, 200),
+      phone: cleanString(body.customer_phone || (body.customer && body.customer.phone) || existing.phone, 80),
+      email: cleanString(body.customer_email || (body.customer && body.customer.email) || existing.email, 180),
+      line_id: cleanString(body.customer_line_id || (body.customer && body.customer.line_id) || existing.line_id, 120),
+      tax_id: cleanString(body.customer_tax_id || (body.customer && (body.customer.tax_id || body.customer.taxId)) || existing.tax_id, 80),
+      address: cleanString(body.customer_address || (body.customer && body.customer.address) || existing.address, 500),
+      updated_at: new Date()
+    };
+
+    updateRowFields(SHEET_NAMES.customers, existing._row, updates);
+    Object.keys(updates).forEach(function (key) {
+      existing[key] = updates[key];
+    });
+
+    return {
+      ok: true,
+      customer: existing
+    };
+  }
+
+  const name = cleanString(body.customer_name || (body.customer && body.customer.name), 200);
+  const phone = cleanString(body.customer_phone || (body.customer && body.customer.phone), 80);
+  const email = cleanString(body.customer_email || (body.customer && body.customer.email), 180);
+  const duplicate = findDuplicateCustomer(agentId, phone, email);
+
+  if (duplicate) {
+    return {
+      ok: true,
+      customer: duplicate,
+      reused: true
+    };
+  }
+
+  const customerResult = createCustomer({
+    agent_id: agentId,
+    customer_name: name,
+    phone: phone,
+    email: email,
+    line_id: body.customer_line_id || (body.customer && body.customer.line_id),
+    tax_id: body.customer_tax_id || (body.customer && (body.customer.tax_id || body.customer.taxId)),
+    address: body.customer_address || (body.customer && body.customer.address)
+  });
+
+  if (!customerResult.ok) {
+    return customerResult;
+  }
+
+  return {
+    ok: true,
+    customer: findCustomerById(customerResult.customer.customer_id)
+  };
+}
+
+function buildQuotationLineItems(body) {
+  const lineItems = body.line_items && body.line_items.length
+    ? body.line_items
+    : [
+        {
+          type: "DEVICE",
+          name: cleanString(body.model, 160),
+          description: [
+            cleanString(body.storage, 80),
+            cleanString(body.color, 120)
+          ].filter(Boolean).join(" / "),
+          quantity: 1,
+          unit_price: Number(body.phone_price || body.phonePrice || 0),
+          total: Number(body.phone_price || body.phonePrice || 0)
+        },
+        {
+          type: "SERVICE",
+          name: "SSBMS Installation Service",
+          description: "System setup and installation service",
+          quantity: 1,
+          unit_price: Number(body.service_fee || body.serviceFee || 45000),
+          total: Number(body.service_fee || body.serviceFee || 45000)
+        }
+      ];
+
+  return lineItems.map(function (item) {
+    const quantity = Math.max(1, Number(item.quantity || 1));
+    const unitPrice = Math.max(0, Number(item.unit_price || item.unitPrice || 0));
+
+    return {
+      type: cleanString(item.type, 80),
+      name: cleanString(item.name, 200),
+      description: cleanString(item.description, 500),
+      quantity: quantity,
+      unit_price: unitPrice,
+      total: Math.max(0, Number(item.total || quantity * unitPrice))
+    };
+  });
+}
+
+function buildQuotationData(body, agent, customer, existing) {
+  const now = new Date();
+  const lineItems = buildQuotationLineItems(body);
+  const subtotal = Math.max(0, sum(lineItems, "total"));
+  const vatRate = Math.max(0, Number(body.vat_rate || body.vatRate || 0.07));
+  const vat = Math.max(0, subtotal * vatRate);
+  const total = Math.max(0, subtotal + vat);
+  const requestedStatus = normalizeSalesStatus(body.status || (body.submit ? QUOTATION_STATUS.SUBMITTED : QUOTATION_STATUS.DRAFT));
+  const status = requestedStatus === QUOTATION_STATUS.SUBMITTED
+    ? QUOTATION_STATUS.SUBMITTED
+    : QUOTATION_STATUS.DRAFT;
+  const customerPayload = {
+    name: cleanString(body.customer_name || (body.customer && body.customer.name) || customer.customer_name, 200),
+    phone: cleanString(body.customer_phone || (body.customer && body.customer.phone) || customer.phone, 80),
+    email: cleanString(body.customer_email || (body.customer && body.customer.email) || customer.email, 180),
+    tax_id: cleanString(body.customer_tax_id || (body.customer && (body.customer.tax_id || body.customer.taxId)) || customer.tax_id, 80),
+    address: cleanString(body.customer_address || (body.customer && body.customer.address) || customer.address, 500)
+  };
+
+  return {
+    quotation_id: existing ? existing.quotation_id : makeId("QT"),
+    customer_id: customer.customer_id,
+    owner_agent_id: agent.agent_id,
+    agent_id: agent.agent_id,
+    owner_agent_name: agentFullName(agent) || cleanString(body.agent_name || body.agentName, 200),
+    team_leader_id: cleanString(agent.team_manager, 80),
+    team_leader_name: cleanString(agent.team_manager, 160),
+    status: status,
+    brand: cleanString(body.brand, 120),
+    series: cleanString(body.series, 160),
+    model: cleanString(body.model, 160),
+    storage: cleanString(body.storage, 80),
+    color: cleanString(body.color, 120),
+    price_date: cleanString(body.price_date || body.priceDate, 80),
+    phone_price: Number(body.phone_price || body.phonePrice || 0),
+    service_fee: Number(body.service_fee || body.serviceFee || 45000),
+    subtotal: subtotal,
+    vat_rate: vatRate,
+    vat: vat,
+    total: total,
+    grand_total: total,
+    line_items_json: JSON.stringify(lineItems),
+    customer_json: JSON.stringify(customerPayload),
+    signer_name: cleanString(body.signer_name || body.signerName, 200),
+    signature_data_url: cleanString(body.signature_data_url || body.signature, 120000),
+    user_agent: cleanString(body.user_agent || body.userAgent, 500),
+    order_id: existing ? cleanString(existing.order_id, 80) : "",
+    rejected_reason: "",
+    created_at: existing ? existing.created_at : now,
+    updated_at: now,
+    submitted_at: status === QUOTATION_STATUS.SUBMITTED
+      ? (existing && existing.submitted_at ? existing.submitted_at : now)
+      : (existing ? existing.submitted_at : ""),
+    approved_at: existing ? existing.approved_at : "",
+    rejected_at: ""
+  };
+}
+
+function createQuotation(body) {
+  ensureSalesSheets();
+
+  const agentResult = findApprovedAgent(body && body.agent_id);
+
+  if (!agentResult.ok) {
+    return agentResult;
+  }
+
+  const agent = agentResult.agent;
+  const existingId = cleanString(body.quotation_id || body.quoteId, 80);
+  const existing = existingId ? findQuotationById(existingId) : null;
+
+  if (existingId && !existing) {
+    return {
+      ok: false,
+      message: "Quotation not found"
+    };
+  }
+
+  if (
+    existing &&
+    cleanString(existing.owner_agent_id || existing.agent_id, 80) !== cleanString(agent.agent_id, 80)
+  ) {
+    return {
+      ok: false,
+      message: "Quotation access denied"
+    };
+  }
+
+  if (
+    existing &&
+    [
+      QUOTATION_STATUS.SUBMITTED,
+      QUOTATION_STATUS.APPROVED,
+      QUOTATION_STATUS.CONVERTED,
+      QUOTATION_STATUS.REJECTED
+    ].indexOf(normalizeSalesStatus(existing.status)) !== -1
+  ) {
+    return {
+      ok: false,
+      message: "Quotation cannot be changed after submission",
+      status: normalizeSalesStatus(existing.status)
+    };
+  }
+
+  const customerResult = getOrCreateCustomerForQuotation(body, agent);
+
+  if (!customerResult.ok) {
+    return customerResult;
+  }
+
+  if (!cleanString(body.model, 160) && !existing) {
+    return {
+      ok: false,
+      message: "Quotation product model is required"
+    };
+  }
+
+  const quotation = buildQuotationData(body, agent, customerResult.customer, existing);
+
+  if (existing) {
+    updateRowFields(SHEET_NAMES.quotations, existing._row, quotation);
+  } else {
+    appendObject(SHEET_NAMES.quotations, quotation);
+  }
+
+  writeAuditLog("createQuotation", agent.agent_id, "SUCCESS", "Quotation saved", {
+    actor_id: agent.agent_id,
+    customer_id: quotation.customer_id,
+    quotation_id: quotation.quotation_id,
+    status: quotation.status
+  });
+
+  return {
+    ok: true,
+    quotation: publicQuotation(quotation),
+    customer: publicCustomer(customerResult.customer),
+    reused_customer: Boolean(customerResult.reused)
+  };
+}
+
+function getQuotation(params) {
+  ensureSalesSheets();
+  const quotation = findQuotationById(params && (params.quotation_id || params.quoteId));
+
+  if (!quotation) {
+    return {
+      ok: false,
+      message: "Quotation not found"
+    };
+  }
+
+  const agentId = validateAgentId(params && params.agent_id);
+
+  if (
+    agentId &&
+    cleanString(quotation.owner_agent_id || quotation.agent_id, 80) !== agentId
+  ) {
+    return {
+      ok: false,
+      message: "Quotation access denied"
+    };
+  }
+
+  return {
+    ok: true,
+    quotation: publicQuotation(quotation)
+  };
+}
+
+function listQuotations(params) {
+  ensureSalesSheets();
+  const options = params || {};
+  const agentId = validateAgentId(options.agent_id);
+  const status = normalizeSalesStatus(options.status || "");
+  const query = cleanString(options.q || options.search, 200).toLowerCase();
+  const limit = Math.max(1, Math.min(500, Number(options.limit || 200)));
+  const offset = Math.max(0, Number(options.offset || 0));
+
+  if (agentId) {
+    const agentResult = findApprovedAgent(agentId);
+
+    if (!agentResult.ok) {
+      return agentResult;
+    }
+  }
+
+  const quotations = sheetToObjects(SHEET_NAMES.quotations)
+    .filter(function (quotation) {
+      if (agentId && cleanString(quotation.owner_agent_id || quotation.agent_id, 80) !== agentId) {
+        return false;
+      }
+
+      if (status && normalizeSalesStatus(quotation.status) !== status) {
+        return false;
+      }
+
+      if (!query) {
+        return true;
+      }
+
+      return [
+        quotation.quotation_id,
+        quotation.customer_json,
+        quotation.owner_agent_name,
+        quotation.model,
+        quotation.storage,
+        quotation.color
+      ].join(" ").toLowerCase().indexOf(query) !== -1;
+    })
+    .map(publicQuotation);
+
+  return {
+    ok: true,
+    total: quotations.length,
+    limit: limit,
+    offset: offset,
+    quotations: quotations.slice(offset, offset + limit)
+  };
+}
+
+function approveQuotation(body) {
+  ensureSalesSheets();
+  const quotation = findQuotationById(body && (body.quotation_id || body.quoteId));
+
+  if (!quotation) {
+    return {
+      ok: false,
+      message: "Quotation not found"
+    };
+  }
+
+  const status = normalizeSalesStatus(quotation.status);
+
+  if (status !== QUOTATION_STATUS.SUBMITTED && status !== "CUSTOMER_SIGNED") {
+    return {
+      ok: false,
+      message: "Only submitted quotations can be approved",
+      status: status
+    };
+  }
+
+  const updates = {
+    status: QUOTATION_STATUS.APPROVED,
+    approved_at: new Date(),
+    rejected_at: "",
+    rejected_reason: "",
+    updated_at: new Date()
+  };
+
+  updateRowFields(SHEET_NAMES.quotations, quotation._row, updates);
+  writeAuditLog("approveQuotation", quotation.owner_agent_id || quotation.agent_id, "SUCCESS", "Quotation approved", {
+    actor_id: cleanString(body.actor_id || body.admin_id || "ADMIN", 80),
+    quotation_id: quotation.quotation_id
+  });
+
+  const updated = findQuotationById(quotation.quotation_id);
+
+  return {
+    ok: true,
+    quotation: publicQuotation(updated || quotation)
+  };
+}
+
+function rejectQuotation(body) {
+  ensureSalesSheets();
+  const quotation = findQuotationById(body && (body.quotation_id || body.quoteId));
+
+  if (!quotation) {
+    return {
+      ok: false,
+      message: "Quotation not found"
+    };
+  }
+
+  const status = normalizeSalesStatus(quotation.status);
+
+  if (status === QUOTATION_STATUS.CONVERTED) {
+    return {
+      ok: false,
+      message: "Converted quotation cannot be rejected"
+    };
+  }
+
+  const updates = {
+    status: QUOTATION_STATUS.REJECTED,
+    rejected_at: new Date(),
+    rejected_reason: cleanString(body.reason || body.note, 500),
+    updated_at: new Date()
+  };
+
+  updateRowFields(SHEET_NAMES.quotations, quotation._row, updates);
+  writeAuditLog("rejectQuotation", quotation.owner_agent_id || quotation.agent_id, "SUCCESS", "Quotation rejected", {
+    actor_id: cleanString(body.actor_id || body.admin_id || "ADMIN", 80),
+    quotation_id: quotation.quotation_id,
+    reason: updates.rejected_reason
+  });
+
+  const updated = findQuotationById(quotation.quotation_id);
+
+  return {
+    ok: true,
+    quotation: publicQuotation(updated || quotation)
+  };
+}
+
+function appendOrderStatusLog(order, fromStatus, toStatus, actorId, actorRole, note) {
+  const log = {
+    status_log_id: makeId("OSL"),
+    order_id: order.order_id,
+    quotation_id: order.quotation_id,
+    customer_id: order.customer_id,
+    owner_agent_id: order.owner_agent_id || order.agent_id,
+    from_status: cleanString(fromStatus, 80),
+    to_status: cleanString(toStatus, 80),
+    actor_id: cleanString(actorId, 80),
+    actor_role: cleanString(actorRole || "ADMIN", 80),
+    note: cleanString(note, 500),
+    created_at: new Date()
+  };
+
+  appendObject(SHEET_NAMES.orderStatusLogs, log);
+
+  return log;
+}
+
+function createOrderFromQuotation(body) {
+  ensureSalesSheets();
+  const quotation = findQuotationById(body && (body.quotation_id || body.quoteId));
+
+  if (!quotation) {
+    return {
+      ok: false,
+      message: "Quotation not found"
+    };
+  }
+
+  const status = normalizeSalesStatus(quotation.status);
+
+  if (status !== QUOTATION_STATUS.APPROVED && status !== QUOTATION_STATUS.CONVERTED) {
+    return {
+      ok: false,
+      message: "Order can be created from approved quotation only",
+      status: status
+    };
+  }
+
+  const existingOrder = sheetToObjects(SHEET_NAMES.orders).find(function (order) {
+    return cleanString(order.quotation_id, 80) === cleanString(quotation.quotation_id, 80);
+  });
+
+  if (existingOrder) {
+    return {
+      ok: true,
+      already_exists: true,
+      order: publicOrder(existingOrder)
+    };
+  }
+
+  const customer = parseJsonValue(quotation.customer_json, {});
+  const now = new Date();
+  const order = {
+    order_id: makeId("SO"),
+    quotation_id: quotation.quotation_id,
+    customer_id: quotation.customer_id,
+    owner_agent_id: quotation.owner_agent_id || quotation.agent_id,
+    agent_id: quotation.agent_id || quotation.owner_agent_id,
+    owner_agent_name: quotation.owner_agent_name,
+    team_leader_id: quotation.team_leader_id,
+    team_leader_name: quotation.team_leader_name,
+    customer_name: customer.name || "",
+    customer_phone: customer.phone || "",
+    customer_email: customer.email || "",
+    customer_address: customer.address || "",
+    status: ORDER_STATUS.PAYMENT_PENDING,
+    brand: quotation.brand,
+    series: quotation.series,
+    model: quotation.model,
+    storage: quotation.storage,
+    color: quotation.color,
+    subtotal: Number(quotation.subtotal || 0),
+    vat: Number(quotation.vat || 0),
+    total: Number(quotation.total || quotation.grand_total || 0),
+    grand_total: Number(quotation.grand_total || quotation.total || 0),
+    line_items_json: quotation.line_items_json,
+    timeline_json: JSON.stringify([
+      {
+        status: ORDER_STATUS.PAYMENT_PENDING,
+        at: now,
+        by: cleanString(body.actor_id || body.admin_id || "ADMIN", 80),
+        note: "Order created from approved quotation"
+      }
+    ]),
+    created_at: now,
+    updated_at: now,
+    approved_at: now,
+    paid_at: "",
+    installing_at: "",
+    completed_at: "",
+    cancelled_at: ""
+  };
+
+  appendObject(SHEET_NAMES.orders, order);
+  updateRowFields(SHEET_NAMES.quotations, quotation._row, {
+    status: QUOTATION_STATUS.CONVERTED,
+    order_id: order.order_id,
+    updated_at: now
+  });
+  appendOrderStatusLog(order, "", ORDER_STATUS.PAYMENT_PENDING, body.actor_id || body.admin_id || "ADMIN", "ADMIN", "Order created");
+  writeAuditLog("createOrderFromQuotation", order.owner_agent_id, "SUCCESS", "Order created from quotation", {
+    actor_id: cleanString(body.actor_id || body.admin_id || "ADMIN", 80),
+    quotation_id: quotation.quotation_id,
+    order_id: order.order_id
+  });
+
+  return {
+    ok: true,
+    order: publicOrder(order)
+  };
+}
+
+function getOrder(params) {
+  ensureSalesSheets();
+  const order = findOrderById(params && (params.order_id || params.orderId));
+
+  if (!order) {
+    return {
+      ok: false,
+      message: "Order not found"
+    };
+  }
+
+  const agentId = validateAgentId(params && params.agent_id);
+
+  if (
+    agentId &&
+    cleanString(order.owner_agent_id || order.agent_id, 80) !== agentId
+  ) {
+    return {
+      ok: false,
+      message: "Order access denied"
+    };
+  }
+
+  return {
+    ok: true,
+    order: publicOrder(order),
+    status_logs: listOrderStatusLogs({
+      order_id: order.order_id
+    }).logs
+  };
+}
+
+function listOrders(params) {
+  ensureSalesSheets();
+  const options = params || {};
+  const agentId = validateAgentId(options.agent_id);
+  const status = normalizeSalesStatus(options.status || "");
+  const query = cleanString(options.q || options.search, 200).toLowerCase();
+  const limit = Math.max(1, Math.min(500, Number(options.limit || 200)));
+  const offset = Math.max(0, Number(options.offset || 0));
+
+  if (agentId) {
+    const agentResult = findApprovedAgent(agentId);
+
+    if (!agentResult.ok) {
+      return agentResult;
+    }
+  }
+
+  const orders = sheetToObjects(SHEET_NAMES.orders)
+    .filter(function (order) {
+      if (agentId && cleanString(order.owner_agent_id || order.agent_id, 80) !== agentId) {
+        return false;
+      }
+
+      if (status && normalizeSalesStatus(order.status) !== status) {
+        return false;
+      }
+
+      if (!query) {
+        return true;
+      }
+
+      return [
+        order.order_id,
+        order.quotation_id,
+        order.customer_name,
+        order.customer_phone,
+        order.owner_agent_name,
+        order.agent_id,
+        order.model,
+        order.storage,
+        order.color
+      ].join(" ").toLowerCase().indexOf(query) !== -1;
+    })
+    .map(publicOrder);
+
+  return {
+    ok: true,
+    total: orders.length,
+    limit: limit,
+    offset: offset,
+    orders: orders.slice(offset, offset + limit)
+  };
+}
+
+function listOrderStatusLogs(params) {
+  ensureSalesSheets();
+  const orderId = cleanString(params && (params.order_id || params.orderId), 80);
+  const logs = sheetToObjects(SHEET_NAMES.orderStatusLogs)
+    .filter(function (log) {
+      return !orderId || cleanString(log.order_id, 80) === orderId;
+    })
+    .map(function (log) {
+      return {
+        status_log_id: cleanString(log.status_log_id, 80),
+        order_id: cleanString(log.order_id, 80),
+        quotation_id: cleanString(log.quotation_id, 80),
+        customer_id: cleanString(log.customer_id, 80),
+        owner_agent_id: cleanString(log.owner_agent_id, 80),
+        from_status: cleanString(log.from_status, 80),
+        to_status: cleanString(log.to_status, 80),
+        actor_id: cleanString(log.actor_id, 80),
+        actor_role: cleanString(log.actor_role, 80),
+        note: cleanString(log.note, 500),
+        created_at: log.created_at || ""
+      };
+    });
+
+  return {
+    ok: true,
+    total: logs.length,
+    logs: logs
+  };
+}
+
+function updateOrderStatus(body) {
+  ensureSalesSheets();
+  const order = findOrderById(body && (body.order_id || body.orderId));
+
+  if (!order) {
+    return {
+      ok: false,
+      message: "Order not found"
+    };
+  }
+
+  const currentStatus = normalizeSalesStatus(order.status || ORDER_STATUS.NEW);
+  const nextStatus = normalizeSalesStatus(body.status);
+  const allowed = Object.keys(ORDER_STATUS).map(function (key) {
+    return ORDER_STATUS[key];
+  });
+
+  if (allowed.indexOf(nextStatus) === -1) {
+    return {
+      ok: false,
+      message: "Invalid order status"
+    };
+  }
+
+  if (currentStatus === ORDER_STATUS.COMPLETED || currentStatus === ORDER_STATUS.CANCELLED) {
+    return {
+      ok: false,
+      message: "Final order status cannot be changed",
+      status: currentStatus
+    };
+  }
+
+  if (
+    currentStatus !== nextStatus &&
+    (ORDER_STATUS_TRANSITIONS[currentStatus] || []).indexOf(nextStatus) === -1
+  ) {
+    return {
+      ok: false,
+      message: "Invalid order status transition",
+      from_status: currentStatus,
+      to_status: nextStatus
+    };
+  }
+
+  const now = new Date();
+  const timeline = parseJsonValue(order.timeline_json, []);
+  timeline.push({
+    status: nextStatus,
+    at: now,
+    by: cleanString(body.actor_id || body.admin_id || "ADMIN", 80),
+    note: cleanString(body.note, 500)
+  });
+
+  const updates = {
+    status: nextStatus,
+    timeline_json: JSON.stringify(timeline),
+    updated_at: now
+  };
+
+  if (nextStatus === ORDER_STATUS.PAID) updates.paid_at = now;
+  if (nextStatus === ORDER_STATUS.INSTALLING) updates.installing_at = now;
+  if (nextStatus === ORDER_STATUS.COMPLETED) updates.completed_at = now;
+  if (nextStatus === ORDER_STATUS.CANCELLED) updates.cancelled_at = now;
+
+  updateRowFields(SHEET_NAMES.orders, order._row, updates);
+  appendOrderStatusLog(order, currentStatus, nextStatus, body.actor_id || body.admin_id || "ADMIN", "ADMIN", body.note);
+  writeAuditLog("updateOrderStatus", order.owner_agent_id || order.agent_id, "SUCCESS", "Order status updated", {
+    actor_id: cleanString(body.actor_id || body.admin_id || "ADMIN", 80),
+    order_id: order.order_id,
+    from_status: currentStatus,
+    to_status: nextStatus
+  });
+
+  const updated = findOrderById(order.order_id);
+
+  return {
+    ok: true,
+    order: publicOrder(updated || order)
   };
 }
 
