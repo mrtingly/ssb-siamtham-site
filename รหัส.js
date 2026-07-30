@@ -128,11 +128,11 @@ function doGet(e) {
         break;
 
       case "getExamQuestions":
-        result = getExamQuestions(e.parameter);
+        result = protectedPostRequired("getExamQuestions");
         break;
 
       case "getExamResult":
-        result = getExamResult(e.parameter);
+        result = protectedPostRequired("getExamResult");
         break;
 
       case "login":
@@ -143,38 +143,23 @@ function doGet(e) {
         break;
 
       case "approveAgent":
-        {
-          const admin = requireAdminActor(e.parameter);
-          result = admin.ok ? updateAgentStatus(e.parameter.agent_id, AGENT_STATUS.APPROVED) : admin;
-        }
+        result = protectedPostRequired("approveAgent");
         break;
 
       case "rejectAgent":
-        {
-          const admin = requireAdminActor(e.parameter);
-          result = admin.ok ? updateAgentStatus(e.parameter.agent_id, AGENT_STATUS.REJECTED) : admin;
-        }
+        result = protectedPostRequired("rejectAgent");
         break;
 
       case "suspendAgent":
-        {
-          const admin = requireAdminActor(e.parameter);
-          result = admin.ok ? updateAgentStatus(e.parameter.agent_id, AGENT_STATUS.SUSPENDED) : admin;
-        }
+        result = protectedPostRequired("suspendAgent");
         break;
 
       case "markWithdrawPaid":
-        {
-          const admin = requireAdminActor(e.parameter);
-          result = admin.ok ? updateWithdrawStatus(e.parameter.withdraw_id, "PAID") : admin;
-        }
+        result = protectedPostRequired("markWithdrawPaid");
         break;
 
       case "rejectWithdraw":
-        {
-          const admin = requireAdminActor(e.parameter);
-          result = admin.ok ? updateWithdrawStatus(e.parameter.withdraw_id, "REJECTED") : admin;
-        }
+        result = protectedPostRequired("rejectWithdraw");
         break;
 
       default:
@@ -194,7 +179,7 @@ function doGet(e) {
 function doPost(e) {
   try {
     const raw = e && e.postData ? e.postData.contents : "{}";
-    const body = JSON.parse(raw || "{}");
+    const body = parseRequestBody(raw);
     const action = String(body.action || "").trim();
     let result;
 
@@ -412,9 +397,14 @@ function doPost(e) {
     return json(result);
 
   } catch (err) {
+    if (err && err.publicError && err.response) {
+      return json(err.response);
+    }
+
     return json({
       ok: false,
-      message: err && err.message ? err.message : String(err)
+      error: "INTERNAL_ERROR",
+      message: "Unable to process request."
     });
   }
 }
@@ -560,6 +550,29 @@ function sum(rows, key) {
   return rows.reduce(function (total, row) {
     return total + Number(row[key] || 0);
   }, 0);
+}
+
+function parseRequestBody(raw) {
+  try {
+    return JSON.parse(raw || "{}");
+  } catch (error) {
+    throw {
+      publicError: true,
+      response: {
+        ok: false,
+        error: "INVALID_REQUEST",
+        message: "Invalid request."
+      }
+    };
+  }
+}
+
+function protectedPostRequired(action) {
+  return {
+    ok: false,
+    error: "POST_REQUIRED",
+    message: action + " requires POST request."
+  };
 }
 
 function json(data) {
@@ -1467,12 +1480,13 @@ function completeTrainingLesson(body) {
 ========================================================= */
 
 function startExamAttempt(body) {
-  const agentId = validateAgentId(body && body.agent_id);
+  const agentAuth = requireExamAgentActor(body || {});
 
-  if (!agentId) {
-    return { ok: false, message: "Invalid agent_id" };
+  if (!agentAuth.ok) {
+    return agentAuth;
   }
 
+  const agentId = agentAuth.agent_id;
   const agent = findAgent(agentId);
 
   if (!agent) {
@@ -1560,11 +1574,17 @@ function startExamAttempt(body) {
 
 function getExamQuestions(options) {
   const params = options || {};
-  const agentId = validateAgentId(params.agent_id);
+  const agentAuth = requireExamAgentActor(params);
+
+  if (!agentAuth.ok) {
+    return agentAuth;
+  }
+
+  const agentId = agentAuth.agent_id;
   const attemptId = cleanString(params.attempt_id, 120);
 
-  if (!agentId || !attemptId) {
-    return { ok: false, message: "Missing agent_id or attempt_id" };
+  if (!attemptId) {
+    return { ok: false, message: "Missing attempt_id" };
   }
 
   const attempt = findAttempt(attemptId);
@@ -1604,11 +1624,34 @@ function getExamQuestions(options) {
 }
 
 function submitExamAnswers(body) {
-  const agentId = validateAgentId(body && body.agent_id);
+  const agentAuth = requireExamAgentActor(body || {});
+
+  if (!agentAuth.ok) {
+    return agentAuth;
+  }
+
+  const agentId = agentAuth.agent_id;
   const attemptId = cleanString(body && body.attempt_id, 120);
 
-  if (!agentId || !attemptId) {
-    return { ok: false, message: "Missing agent_id or attempt_id" };
+  if (!attemptId) {
+    return { ok: false, message: "Missing attempt_id" };
+  }
+
+  if (
+    Object.prototype.hasOwnProperty.call(body || {}, "score") ||
+    Object.prototype.hasOwnProperty.call(body || {}, "exam_score") ||
+    Object.prototype.hasOwnProperty.call(body || {}, "passed") ||
+    Object.prototype.hasOwnProperty.call(body || {}, "pass") ||
+    Object.prototype.hasOwnProperty.call(body || {}, "exam_passed")
+  ) {
+    writeAuditLog("submitExamAnswers", agentId, "FAILED", "Client score/pass tampering rejected", {
+      attempt_id: attemptId
+    });
+    return {
+      ok: false,
+      message: "Exam score is calculated by backend only",
+      code: "CLIENT_SCORE_REJECTED"
+    };
   }
 
   const agent = findAgent(agentId);
@@ -1661,6 +1704,29 @@ function submitExamAnswers(body) {
 
   const answers = normalizeAnswers(body.answers);
   const questionIds = parseJsonValue(attempt.question_ids, []);
+  const allowedQuestionIds = questionIds.reduce(function (result, questionId) {
+    const normalizedQuestionId = cleanString(questionId, 80);
+    if (normalizedQuestionId) {
+      result[normalizedQuestionId] = true;
+    }
+    return result;
+  }, {});
+  const unexpectedQuestionIds = Object.keys(answers).filter(function (questionId) {
+    return !allowedQuestionIds[cleanString(questionId, 80)];
+  });
+
+  if (unexpectedQuestionIds.length > 0) {
+    writeAuditLog("submitExamAnswers", agentId, "FAILED", "Unexpected exam question submitted", {
+      attempt_id: attemptId,
+      question_count: unexpectedQuestionIds.length
+    });
+    return {
+      ok: false,
+      message: "Submitted answers contain invalid question_id",
+      code: "INVALID_QUESTION_ID"
+    };
+  }
+
   const questionsById = getActiveExamQuestions().reduce(function (result, question) {
     result[String(question.question_id || "").trim()] = question;
     return result;
@@ -1728,12 +1794,14 @@ function submitExamAnswers(body) {
 
 function getExamResult(options) {
   const params = options || {};
-  const agentId = validateAgentId(params.agent_id);
-  const attemptId = cleanString(params.attempt_id || "", 120);
+  const agentAuth = requireExamAgentActor(params);
 
-  if (!agentId) {
-    return { ok: false, message: "Invalid agent_id" };
+  if (!agentAuth.ok) {
+    return agentAuth;
   }
+
+  const agentId = agentAuth.agent_id;
+  const attemptId = cleanString(params.attempt_id || "", 120);
 
   ensurePhase2C1Sheets();
 
@@ -2700,6 +2768,25 @@ function requireAgentActor(body) {
       ok: false,
       message: session.message,
       next_page: session.next_page
+    };
+  }
+
+  return session;
+}
+
+function requireExamAgentActor(body) {
+  const session = requireAgentActor(body || {});
+
+  if (!session.ok) {
+    return session;
+  }
+
+  const requestedAgentId = validateAgentId(body && body.agent_id);
+
+  if (requestedAgentId && requestedAgentId !== session.agent_id) {
+    return {
+      ok: false,
+      message: "Agent session mismatch"
     };
   }
 

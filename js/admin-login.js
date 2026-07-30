@@ -1,50 +1,50 @@
 const ADMIN_LOGIN_API_URL = "https://script.google.com/macros/s/AKfycbyKhWE-_SuKreCPyD4tsNmqNMQz2hZ8hQtrckk92mh8rszh1jaNEeuuFBGsPOLKfAziNg/exec";
 
-function adminJsonp(url){
-  return new Promise((resolve, reject)=>{
-    const callbackName = "admin_login_cb_" + Date.now();
-
-    window[callbackName] = function(data){
-      resolve(data);
-      delete window[callbackName];
-      script.remove();
-    };
-
-    const script = document.createElement("script");
-    script.src = url + "&callback=" + callbackName;
-    script.onerror = reject;
-
-    document.body.appendChild(script);
+async function adminApiPost(payload) {
+  const response = await fetch(ADMIN_LOGIN_API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify(payload || {})
   });
+
+  if (!response.ok) {
+    return { ok: false, message: "Network error " + response.status };
+  }
+
+  const text = await response.text();
+
+  try {
+    return JSON.parse(text);
+  } catch (error) {
+    return { ok: false, message: "Invalid API response" };
+  }
 }
 
-async function adminLogin(event){
+async function adminLogin(event) {
   event.preventDefault();
 
   const username = document.querySelector("#admin_username").value.trim();
   const password = document.querySelector("#admin_password").value.trim();
 
-  const url =
-    ADMIN_LOGIN_API_URL +
-    "?action=login" +
-    "&username=" + encodeURIComponent(username) +
-    "&password=" + encodeURIComponent(password);
+  try {
+    const result = await adminApiPost({
+      action: "login",
+      username: username,
+      password: password
+    });
 
-  try{
-    const result = await adminJsonp(url);
-
-    if(!result.ok){
+    if (!result.ok) {
       alert(result.message || "เข้าสู่ระบบไม่สำเร็จ");
       return;
     }
 
     const normalizedRole = String(result.role || "").toUpperCase();
-    if(normalizedRole !== "ADMIN" && normalizedRole !== "OWNER"){
+    if (normalizedRole !== "ADMIN" && normalizedRole !== "OWNER") {
       alert("บัญชีนี้ไม่มีสิทธิ์เข้า Admin");
       return;
     }
 
-    if(!result.admin_session_token){
+    if (!result.admin_session_token) {
       alert("Admin session could not be created. Please login again.");
       return;
     }
@@ -57,8 +57,7 @@ async function adminLogin(event){
 
     window.location.href = "admin-dashboard.html";
 
-  }catch(err){
-    console.error(err);
+  } catch (error) {
     alert("เชื่อมต่อระบบไม่ได้");
   }
 }

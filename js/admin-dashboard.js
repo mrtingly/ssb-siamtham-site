@@ -277,47 +277,29 @@
     };
   }
 
-  function jsonp(action, params) {
-    const callbackName = "sbos_admin_cb_" + Date.now() + "_" + Math.floor(Math.random() * 100000);
-    const query = new URLSearchParams(Object.assign({}, params || {}, adminAuthParams(), {
-      action: action,
-      callback: callbackName,
-      _: Date.now()
-    }));
+  function apiRequest(action, params) {
+    const controller = new AbortController();
+    const timer = window.setTimeout(function () {
+      controller.abort();
+    }, REQUEST_TIMEOUT_MS);
 
-    return new Promise(function (resolve, reject) {
-      const script = document.createElement("script");
-      let settled = false;
-      const timer = window.setTimeout(function () {
-        cleanup();
-        reject(new Error(t("adminDashboard.apiTimeout", "API request timed out")));
-      }, REQUEST_TIMEOUT_MS);
-
-      function cleanup() {
-        if (settled) return;
-        settled = true;
-        window.clearTimeout(timer);
-        try {
-          delete window[callbackName];
-        } catch (error) {
-          window[callbackName] = undefined;
-        }
-        if (script.parentNode) script.parentNode.removeChild(script);
+    return fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(Object.assign({ action: action }, params || {}, adminAuthParams())),
+      signal: controller.signal
+    }).then(function (response) {
+      window.clearTimeout(timer);
+      if (!response.ok) {
+        throw new Error(t("adminDashboard.unableToLoad", "Unable to load data"));
       }
-
-      window[callbackName] = function (data) {
-        cleanup();
-        resolve(data);
-      };
-
-      script.async = true;
-      script.src = API_URL + "?" + query.toString();
-      script.onerror = function () {
-        cleanup();
-        reject(new Error(t("adminDashboard.unableToLoad", "Unable to load data")));
-      };
-
-      document.body.appendChild(script);
+      return response.json();
+    }).catch(function (error) {
+      window.clearTimeout(timer);
+      if (error && error.name === "AbortError") {
+        throw new Error(t("adminDashboard.apiTimeout", "API request timed out"));
+      }
+      throw error;
     }).then(function (data) {
       if (!data || typeof data !== "object") {
         throw new Error(t("adminDashboard.apiInvalid", "Invalid API response"));
@@ -475,7 +457,7 @@
   async function loadSummary() {
     setLoading("summary", true);
     try {
-      const data = await jsonp("getAdminDashboard");
+      const data = await apiRequest("getAdminDashboard");
       renderSummary(data.summary);
       clearPageError();
       updateLastUpdated();
@@ -495,7 +477,7 @@
     setLoading("pending", true);
     setHidden(els.pendingError, true);
     try {
-      const data = await jsonp("listPendingAgents");
+      const data = await apiRequest("listPendingAgents");
       state.pendingAgents = Array.isArray(data.agents) ? data.agents : [];
       renderPending();
       return true;
@@ -517,7 +499,7 @@
     setLoading("agents", true);
     setHidden(els.agentsError, true);
     try {
-      const data = await jsonp("listAgents", { limit: 500 });
+      const data = await apiRequest("listAgents", { limit: 500 });
       state.agents = Array.isArray(data.agents) ? data.agents : [];
       renderAgents();
       return true;
@@ -583,7 +565,7 @@
     const loadingToast = showToast("loading", isApprove ? t("adminDashboard.approving", "Approving agent...") : t("adminDashboard.rejecting", "Rejecting agent..."));
 
     try {
-      await jsonp(isApprove ? "approveAgent" : "rejectAgent", { agent_id: cleanAgentId });
+      await apiRequest(isApprove ? "approveAgent" : "rejectAgent", { agent_id: cleanAgentId });
       if (loadingToast) loadingToast.remove();
       showToast("success", isApprove ? t("adminDashboard.approveSuccess", "Agent approved") : t("adminDashboard.rejectSuccess", "Agent rejected"));
       await refreshAgentData();

@@ -1,65 +1,79 @@
 const ADMIN_API_URL = "https://script.google.com/macros/s/AKfycbyKhWE-_SuKreCPyD4tsNmqNMQz2hZ8hQtrckk92mh8rszh1jaNEeuuFBGsPOLKfAziNg/exec";
 
-function adminAuthQuery(){
-  return (
-    "&admin_id=" + encodeURIComponent(localStorage.getItem("admin_id") || "") +
-    "&admin_session_token=" + encodeURIComponent(localStorage.getItem("admin_session_token") || "")
-  );
+function adminAuthPayload() {
+  return {
+    admin_id: localStorage.getItem("admin_id") || "",
+    admin_session_token: localStorage.getItem("admin_session_token") || ""
+  };
 }
 
-function adminJsonp(url){
-  return new Promise((resolve, reject)=>{
-    const callbackName = "admin_cb_" + Date.now();
+async function adminPost(action, payload) {
+  const auth = adminAuthPayload();
 
-    window[callbackName] = function(data){
-      resolve(data);
-      delete window[callbackName];
-      script.remove();
-    };
+  if (!auth.admin_id || !auth.admin_session_token) {
+    window.location.href = "admin-login.html";
+    return { ok: false, message: "Admin session required" };
+  }
 
-    const script = document.createElement("script");
-    script.src = url + "&callback=" + callbackName;
-    script.onerror = reject;
-    document.body.appendChild(script);
+  const response = await fetch(ADMIN_API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify(Object.assign({ action: action }, payload || {}, auth))
   });
+
+  if (!response.ok) {
+    return { ok: false, message: "Network error " + response.status };
+  }
+
+  const text = await response.text();
+
+  try {
+    return JSON.parse(text);
+  } catch (error) {
+    return { ok: false, message: "Invalid API response" };
+  }
 }
 
-async function approveAgent(agentId){
-  if(!confirm("ยืนยันอนุมัติตัวแทนนี้?")) return;
+function handleAdminActionResult(result, successMessage) {
+  if (!result || !result.ok) {
+    const message = result && result.message ? result.message : "Admin action failed";
+    if (/session/i.test(message)) {
+      window.location.href = "admin-login.html";
+      return;
+    }
 
-  const url = `${ADMIN_API_URL}?action=approveAgent&agent_id=${encodeURIComponent(agentId)}${adminAuthQuery()}`;
-  const res = await adminJsonp(url);
+    alert(message);
+    return;
+  }
 
-  alert(res.message || "อนุมัติเรียบร้อย");
+  alert(result.message || successMessage);
   location.reload();
 }
 
-async function rejectAgent(agentId){
-  if(!confirm("ยืนยันไม่อนุมัติตัวแทนนี้?")) return;
+async function approveAgent(agentId) {
+  if (!confirm("ยืนยันอนุมัติตัวแทนนี้?")) return;
 
-  const url = `${ADMIN_API_URL}?action=rejectAgent&agent_id=${encodeURIComponent(agentId)}${adminAuthQuery()}`;
-  const res = await adminJsonp(url);
-
-  alert(res.message || "ไม่อนุมัติเรียบร้อย");
-  location.reload();
+  const result = await adminPost("approveAgent", { agent_id: agentId });
+  handleAdminActionResult(result, "อนุมัติเรียบร้อย");
 }
 
-async function markWithdrawPaid(withdrawId){
-  if(!confirm("ยืนยันว่าจ่ายเงินรายการนี้แล้ว?")) return;
+async function rejectAgent(agentId) {
+  if (!confirm("ยืนยันไม่อนุมัติตัวแทนนี้?")) return;
 
-  const url = `${ADMIN_API_URL}?action=markWithdrawPaid&withdraw_id=${encodeURIComponent(withdrawId)}${adminAuthQuery()}`;
-  const res = await adminJsonp(url);
-
-  alert(res.message || "บันทึกว่าจ่ายแล้ว");
-  location.reload();
+  const result = await adminPost("rejectAgent", { agent_id: agentId });
+  handleAdminActionResult(result, "ไม่อนุมัติเรียบร้อย");
 }
 
-async function rejectWithdraw(withdrawId){
-  if(!confirm("ยืนยันปฏิเสธรายการถอนนี้?")) return;
+async function markWithdrawPaid(withdrawId) {
+  if (!confirm("ยืนยันว่านำจ่ายรายการถอนนี้แล้ว?")) return;
 
-  const url = `${ADMIN_API_URL}?action=rejectWithdraw&withdraw_id=${encodeURIComponent(withdrawId)}${adminAuthQuery()}`;
-  const res = await adminJsonp(url);
+  const result = await adminPost("markWithdrawPaid", { withdraw_id: withdrawId });
+  handleAdminActionResult(result, "บันทึกว่านำจ่ายแล้ว");
+}
 
-  alert(res.message || "ปฏิเสธรายการถอนแล้ว");
-  location.reload();
+async function rejectWithdraw(withdrawId) {
+  if (!confirm("ยืนยันปฏิเสธรายการถอนนี้?")) return;
+
+  const result = await adminPost("rejectWithdraw", { withdraw_id: withdrawId });
+  handleAdminActionResult(result, "ปฏิเสธรายการถอนแล้ว");
 }

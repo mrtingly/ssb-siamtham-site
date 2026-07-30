@@ -32,7 +32,7 @@
     await i18nReady();
 
     state.agentId = getAgentId();
-    if (!state.agentId) {
+    if (!state.agentId || !getAgentToken()) {
       window.location.replace("agent-login.html");
       return;
     }
@@ -149,6 +149,13 @@
     return String(value || "").trim().replace(/[^A-Za-z0-9_-]/g, "").slice(0, 80);
   }
 
+  function authPayload() {
+    return {
+      agent_id: state.agentId || getAgentId(),
+      agent_session_token: getAgentToken()
+    };
+  }
+
   async function api(action, payload) {
     const response = await fetch(API_URL, {
       method: "POST",
@@ -177,7 +184,7 @@
     setAttemptStatus(t("exam.preparing", null, "Preparing exam..."));
 
     try {
-      const attempt = await api("startExamAttempt", { agent_id: state.agentId });
+      const attempt = await api("startExamAttempt", authPayload());
 
       if (!attempt.ok) {
         handleStartFailure(attempt);
@@ -192,7 +199,7 @@
       setAttemptStatus(attempt.reused ? t("exam.secureResumed") : t("exam.secureStarted"));
 
       const questionResult = await api("getExamQuestions", {
-        agent_id: state.agentId,
+        ...authPayload(),
         attempt_id: state.attemptId
       });
 
@@ -486,7 +493,7 @@
 
     try {
       const result = await api("submitExamAnswers", {
-        agent_id: state.agentId,
+        ...authPayload(),
         attempt_id: state.attemptId,
         answers: buildPayloadAnswers()
       });
@@ -500,7 +507,7 @@
       clearDraft();
 
       const verified = await api("getExamResult", {
-        agent_id: state.agentId,
+        ...authPayload(),
         attempt_id: state.attemptId
       });
 
@@ -524,7 +531,7 @@
 
     if (isAlreadySubmittedMessage(message)) {
       const verified = await api("getExamResult", {
-        agent_id: state.agentId,
+        ...authPayload(),
         attempt_id: state.attemptId
       });
 
