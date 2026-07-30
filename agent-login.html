@@ -40,6 +40,7 @@
       <p data-i18n="login.subtitle">เข้าสู่ระบบตัวแทน</p>
 
       <form class="login-form" onsubmit="doLogin(event)">
+        <div id="loginMessage" class="login-message" role="status" aria-live="polite" hidden></div>
 
         <label for="username">
           <span data-i18n="login.usernameLabel">Agent ID หรือ Email</span>

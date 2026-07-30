@@ -31,6 +31,7 @@ const AGENT_STATUS = {
 const EXAM_PASS_SCORE = 80;
 const SECURE_EXAM_DURATION_MINUTES = 30;
 const ADMIN_SESSION_TTL_SECONDS = 21600;
+const AGENT_SESSION_TTL_SECONDS = 21600;
 
 /* =========================================================
    ROUTER
@@ -51,7 +52,7 @@ function doGet(e) {
         break;
 
       case "getDashboard":
-        result = getDashboard(e.parameter.agent_id);
+        result = getDashboard(e.parameter);
         break;
 
       case "listAgents":
@@ -234,6 +235,10 @@ function doPost(e) {
         result = getAdminDashboard(body);
         break;
 
+      case "getDashboard":
+        result = getDashboard(body);
+        break;
+
       case "listTrainingLessons":
         result = listTrainingLessons(body);
         break;
@@ -277,8 +282,24 @@ function doPost(e) {
         result = createCustomer(body);
         break;
 
+      case "getCustomer":
+        result = getCustomer(body);
+        break;
+
+      case "listCustomers":
+        result = listCustomers(body);
+        break;
+
       case "createQuotation":
         result = createQuotation(body);
+        break;
+
+      case "getQuotation":
+        result = getQuotation(body);
+        break;
+
+      case "listQuotations":
+        result = listQuotations(body);
         break;
 
       case "approveQuotation":
@@ -291,6 +312,14 @@ function doPost(e) {
 
       case "createOrderFromQuotation":
         result = createOrderFromQuotation(body);
+        break;
+
+      case "getOrder":
+        result = getOrder(body);
+        break;
+
+      case "listOrders":
+        result = listOrders(body);
         break;
 
       case "updateOrderStatus":
@@ -323,6 +352,10 @@ function doPost(e) {
 
       case "createPayment":
         result = createPayment(body);
+        break;
+
+      case "listPayments":
+        result = listPayments(body);
         break;
 
       case "reviewPayment":
@@ -1883,6 +1916,9 @@ function login(body) {
     next_page: nextPage
   };
 
+  response.agent_session_token = createAgentSession(user);
+  response.agent_session_expires_in = AGENT_SESSION_TTL_SECONDS;
+
   if (isAdminRole(user.role)) {
     response.admin_session_token = createAdminSession(user);
     response.admin_session_expires_in = ADMIN_SESSION_TTL_SECONDS;
@@ -2098,8 +2134,18 @@ function submitExam(body) {
    DASHBOARD
 ========================================================= */
 
-function getDashboard(agentId) {
+function getDashboard(params) {
   ensureSalesSheets();
+  const options = typeof params === "object" && params !== null
+    ? params
+    : { agent_id: params };
+  const agentAuth = requireAgentActor(options);
+
+  if (!agentAuth.ok) {
+    return agentAuth;
+  }
+
+  const agentId = agentAuth.agent_id;
   const agentResult = getAgent(agentId);
 
   if (!agentResult.ok) {
@@ -2521,6 +2567,85 @@ function findApprovedAgent(agentId) {
     ok: true,
     agent: agent
   };
+}
+
+function createAgentSession(user) {
+  const token = "AGT-" + Utilities.getUuid();
+  const payload = {
+    agent_id: cleanString(user.agent_id, 80),
+    status: normalizeStatus(user.status),
+    created_at: new Date().toISOString()
+  };
+
+  CacheService
+    .getScriptCache()
+    .put("agent_session:" + token, JSON.stringify(payload), AGENT_SESSION_TTL_SECONDS);
+
+  return token;
+}
+
+function verifyAgentSession(body) {
+  const token = cleanString(
+    body && (body.agent_session_token || body.agentToken || body.session_token || body.token),
+    200
+  );
+  const agentId = cleanString(body && (body.agent_id || body.agentId), 80);
+
+  if (!token || !agentId) {
+    return {
+      ok: false,
+      message: "Agent session required"
+    };
+  }
+
+  const raw = CacheService.getScriptCache().get("agent_session:" + token);
+
+  if (!raw) {
+    return {
+      ok: false,
+      message: "Agent session expired or invalid",
+      next_page: "agent-login.html"
+    };
+  }
+
+  const session = parseJsonValue(raw, {});
+
+  if (cleanString(session.agent_id, 80) !== agentId) {
+    return {
+      ok: false,
+      message: "Agent session mismatch"
+    };
+  }
+
+  const agent = findAgent(agentId);
+
+  if (!agent) {
+    return {
+      ok: false,
+      message: "Agent not found"
+    };
+  }
+
+  return {
+    ok: true,
+    agent_id: cleanString(agent.agent_id, 80),
+    status: normalizeStatus(agent.status),
+    agent: agent
+  };
+}
+
+function requireAgentActor(body) {
+  const session = verifyAgentSession(body || {});
+
+  if (!session.ok) {
+    return {
+      ok: false,
+      message: session.message,
+      next_page: session.next_page
+    };
+  }
+
+  return session;
 }
 
 function isAdminRole(role) {
@@ -3378,8 +3503,10 @@ function findDuplicateCustomer(agentId, phone, email) {
 
 function createCustomer(body) {
   ensureSalesSheets();
+  const agentAuth = requireAgentActor(body || {});
+  if (!agentAuth.ok) return agentAuth;
 
-  const agentResult = findApprovedAgent(body && body.agent_id);
+  const agentResult = findApprovedAgent(agentAuth.agent_id);
 
   if (!agentResult.ok) {
     return agentResult;
@@ -3440,6 +3567,9 @@ function createCustomer(body) {
 
 function getCustomer(params) {
   ensureSalesSheets();
+  const agentAuth = requireAgentActor(params || {});
+  if (!agentAuth.ok) return agentAuth;
+
   const customer = findCustomerById(params && params.customer_id);
 
   if (!customer) {
@@ -3449,7 +3579,7 @@ function getCustomer(params) {
     };
   }
 
-  const requestedAgentId = validateAgentId(params && params.agent_id);
+  const requestedAgentId = agentAuth.agent_id;
 
   if (
     requestedAgentId &&
@@ -3476,6 +3606,12 @@ function listCustomers(params) {
   const offset = Math.max(0, Number(options.offset || 0));
 
   if (agentId) {
+    const agentAuth = requireAgentActor(options);
+    if (!agentAuth.ok) return agentAuth;
+    if (agentAuth.agent_id !== agentId) {
+      return { ok: false, message: "Agent session mismatch" };
+    }
+
     const agentResult = findApprovedAgent(agentId);
 
     if (!agentResult.ok) {
@@ -3572,6 +3708,7 @@ function getOrCreateCustomerForQuotation(body, agent) {
 
   const customerResult = createCustomer({
     agent_id: agentId,
+    agent_session_token: body.agent_session_token || body.agentToken || body.session_token || body.token,
     customer_name: name,
     phone: phone,
     email: email,
@@ -3707,8 +3844,13 @@ function buildQuotationData(body, agent, customer, existing) {
 
 function createQuotation(body) {
   ensureSalesSheets();
+  const agentAuth = requireAgentActor(body || {});
+  if (!agentAuth.ok) return agentAuth;
+  if (validateAgentId(body && body.agent_id) !== agentAuth.agent_id) {
+    return { ok: false, message: "Agent session mismatch" };
+  }
 
-  const agentResult = findApprovedAgent(body && body.agent_id);
+  const agentResult = findApprovedAgent(agentAuth.agent_id);
 
   if (!agentResult.ok) {
     return agentResult;
@@ -3792,6 +3934,9 @@ function createQuotation(body) {
 
 function getQuotation(params) {
   ensureSalesSheets();
+  const agentAuth = requireAgentActor(params || {});
+  if (!agentAuth.ok) return agentAuth;
+
   const quotation = findQuotationById(params && (params.quotation_id || params.quoteId));
 
   if (!quotation) {
@@ -3801,7 +3946,7 @@ function getQuotation(params) {
     };
   }
 
-  const agentId = validateAgentId(params && params.agent_id);
+  const agentId = agentAuth.agent_id;
 
   if (
     agentId &&
@@ -3829,6 +3974,12 @@ function listQuotations(params) {
   const offset = Math.max(0, Number(options.offset || 0));
 
   if (agentId) {
+    const agentAuth = requireAgentActor(options);
+    if (!agentAuth.ok) return agentAuth;
+    if (agentAuth.agent_id !== agentId) {
+      return { ok: false, message: "Agent session mismatch" };
+    }
+
     const agentResult = findApprovedAgent(agentId);
 
     if (!agentResult.ok) {
@@ -4093,6 +4244,9 @@ function createOrderFromQuotation(body) {
 
 function getOrder(params) {
   ensureSalesSheets();
+  const agentAuth = requireAgentActor(params || {});
+  if (!agentAuth.ok) return agentAuth;
+
   const order = findOrderById(params && (params.order_id || params.orderId));
 
   if (!order) {
@@ -4102,7 +4256,7 @@ function getOrder(params) {
     };
   }
 
-  const agentId = validateAgentId(params && params.agent_id);
+  const agentId = agentAuth.agent_id;
 
   if (
     agentId &&
@@ -4118,7 +4272,8 @@ function getOrder(params) {
     ok: true,
     order: publicOrder(order),
     status_logs: listOrderStatusLogs({
-      order_id: order.order_id
+      order_id: order.order_id,
+      internal: true
     }).logs
   };
 }
@@ -4133,6 +4288,12 @@ function listOrders(params) {
   const offset = Math.max(0, Number(options.offset || 0));
 
   if (agentId) {
+    const agentAuth = requireAgentActor(options);
+    if (!agentAuth.ok) return agentAuth;
+    if (agentAuth.agent_id !== agentId) {
+      return { ok: false, message: "Agent session mismatch" };
+    }
+
     const agentResult = findApprovedAgent(agentId);
 
     if (!agentResult.ok) {
@@ -4182,6 +4343,10 @@ function listOrders(params) {
 
 function listOrderStatusLogs(params) {
   ensureSalesSheets();
+  if (!(params && params.internal === true)) {
+    return { ok: false, message: "Order status log access denied" };
+  }
+
   const orderId = cleanString(params && (params.order_id || params.orderId), 80);
   const logs = sheetToObjects(SHEET_NAMES.orderStatusLogs)
     .filter(function (log) {
@@ -4218,6 +4383,12 @@ function listPayments(params) {
   const status = normalizeSalesStatus(options.status || "");
 
   if (agentId) {
+    const agentAuth = requireAgentActor(options);
+    if (!agentAuth.ok) return agentAuth;
+    if (agentAuth.agent_id !== agentId) {
+      return { ok: false, message: "Agent session mismatch" };
+    }
+
     const agentResult = findApprovedAgent(agentId);
     if (!agentResult.ok) return agentResult;
   } else {
@@ -4243,10 +4414,16 @@ function listPayments(params) {
 
 function createPayment(body) {
   ensureSalesSheets();
+  const agentAuth = requireAgentActor(body || {});
+  if (!agentAuth.ok) return agentAuth;
+
   const order = findOrderById(body && (body.order_id || body.orderId));
   if (!order) return { ok: false, message: "Order not found" };
 
   const agentId = validateAgentId(body && body.agent_id);
+  if (agentId !== agentAuth.agent_id) {
+    return { ok: false, message: "Agent session mismatch" };
+  }
   if (agentId && cleanString(order.owner_agent_id || order.agent_id, 80) !== agentId) {
     return { ok: false, message: "Payment access denied" };
   }

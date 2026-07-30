@@ -4,6 +4,8 @@ function logout(){
     "agent_name",
     "agent_role",
     "agent_status",
+    "agent_session_token",
+    "agent_session_expires_at",
     "ssb_agent_id",
     "ssb_current_agent_v1",
     "ssb_agent_session",

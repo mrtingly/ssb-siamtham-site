@@ -36,5 +36,25 @@
 
   if(!getAgentId()){
     window.location.href = "agent-login.html";
+    return;
+  }
+
+  const token = localStorage.getItem("agent_session_token");
+  const expiresAt = Number(localStorage.getItem("agent_session_expires_at") || 0);
+
+  if(!token || (expiresAt && Date.now() >= expiresAt)){
+    [
+      "agent_id",
+      "agent_name",
+      "agent_role",
+      "agent_status",
+      "agent_session_token",
+      "agent_session_expires_at",
+      "ssb_agent_id",
+      "ssb_current_agent_v1",
+      "ssb_agent_session",
+      "ssb_agent_session_v1"
+    ].forEach(key => localStorage.removeItem(key));
+    window.location.href = "agent-login.html";
   }
 })();

@@ -26,6 +26,19 @@ function jsonp(url) {
   });
 }
 
+async function apiPost(payload) {
+  const res = await fetch(API_URL, {
+    method: "POST",
+    body: JSON.stringify(payload)
+  });
+  const text = await res.text();
+  try {
+    return JSON.parse(text);
+  } catch (error) {
+    return { ok: false, message: text || "Invalid API response" };
+  }
+}
+
 function togglePassword() {
   const passwordInput = document.querySelector("#password");
   if (!passwordInput) return;
@@ -36,12 +49,33 @@ function t(key) {
   return window.SBOSI18n ? window.SBOSI18n.t(key) : key;
 }
 
+function showLoginMessage(message, type) {
+  const box = document.querySelector("#loginMessage");
+  if (!box) {
+    alert(message);
+    return;
+  }
+  box.hidden = false;
+  box.className = "login-message" + (type ? " " + type : "");
+  box.textContent = message;
+}
+
+function clearLoginMessage() {
+  const box = document.querySelector("#loginMessage");
+  if (!box) return;
+  box.hidden = true;
+  box.textContent = "";
+  box.className = "login-message";
+}
+
 function clearOldAgentSession() {
   [
     "agent_id",
     "agent_name",
     "agent_role",
     "agent_status",
+    "agent_session_token",
+    "agent_session_expires_at",
     "ssb_agent_id",
     "ssb_current_agent_v1",
     "ssb_agent_session",
@@ -65,6 +99,8 @@ function saveAgentSession(res, username) {
     exam_score: Number(res.exam_score || 0),
     exam_passed: res.exam_passed === true,
     exam_attempts: Number(res.exam_attempts || 0),
+    session_token: res.agent_session_token || "",
+    session_expires_at: Date.now() + Number(res.agent_session_expires_in || 0) * 1000,
     loginAt: new Date().toISOString()
   };
 
@@ -72,6 +108,10 @@ function saveAgentSession(res, username) {
   localStorage.setItem("agent_name", res.name || "");
   localStorage.setItem("agent_role", res.role || "Agent");
   localStorage.setItem("agent_status", status);
+  if (res.agent_session_token) {
+    localStorage.setItem("agent_session_token", res.agent_session_token);
+    localStorage.setItem("agent_session_expires_at", String(Date.now() + Number(res.agent_session_expires_in || 0) * 1000));
+  }
   localStorage.setItem("ssb_agent_id", res.agent_id);
   localStorage.setItem("ssb_current_agent_v1", res.agent_id);
   localStorage.setItem("ssb_agent_session", JSON.stringify(session));
@@ -79,6 +119,10 @@ function saveAgentSession(res, username) {
 }
 
 function routeByStatus(res) {
+  if (res && res.next_page) {
+    return res.next_page;
+  }
+
   const status = String(res.status || "").trim().toUpperCase();
 
   if (status === "REGISTERED" || status === "TRAINING") {
@@ -110,24 +154,30 @@ async function doLogin(e) {
   const password = passwordInput ? passwordInput.value.trim() : "";
 
   if (!username || !password) {
-    alert(t("login.missingCredentials"));
+    showLoginMessage(t("login.missingCredentials"), "error");
     return;
   }
-
-  const url = API_URL + "?action=login" +
-    "&username=" + encodeURIComponent(username) +
-    "&password=" + encodeURIComponent(password);
 
   try {
     if (submitButton) {
       submitButton.disabled = true;
       submitButton.textContent = t("login.loading");
     }
+    clearLoginMessage();
 
-    const res = await jsonp(url);
+    const res = await apiPost({
+      action: "login",
+      username,
+      password
+    });
 
     if (!res || !res.ok) {
-      alert((res && res.message) || t("login.failed"));
+      showLoginMessage((res && res.message) || t("login.failed"), "error");
+      return;
+    }
+
+    if (!res.agent_session_token) {
+      showLoginMessage(t("login.failed"), "error");
       return;
     }
 
@@ -135,8 +185,7 @@ async function doLogin(e) {
     window.location.replace(routeByStatus(res));
 
   } catch (err) {
-    console.error("Agent login error:", err);
-    alert(t("login.networkError"));
+    showLoginMessage(t("login.networkError"), "error");
   } finally {
     if (submitButton) {
       submitButton.disabled = false;

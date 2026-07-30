@@ -51,6 +51,22 @@ body{
   text-align:left;
 }
 
+.login-message{
+  padding:12px 14px;
+  border-radius:14px;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(127,220,255,.24);
+  color:#eaf7ff;
+  font-weight:700;
+  line-height:1.55;
+}
+
+.login-message.error{
+  background:rgba(255,75,95,.14);
+  border-color:rgba(255,150,160,.34);
+  color:#ffe8ec;
+}
+
 label{
   display:flex;
   flex-direction:column;

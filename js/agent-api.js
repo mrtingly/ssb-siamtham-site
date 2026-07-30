@@ -49,6 +49,26 @@ function getCurrentAgentId(){
   return "";
 }
 
+function getCurrentAgentAuthParams(){
+  return {
+    agent_id: getCurrentAgentId(),
+    agent_session_token: localStorage.getItem("agent_session_token") || ""
+  };
+}
+
+async function apiPostJson(payload){
+  const res = await fetch(API_URL, {
+    method: "POST",
+    body: JSON.stringify(payload)
+  });
+  const text = await res.text();
+  try {
+    return JSON.parse(text);
+  } catch (error) {
+    return { ok: false, message: text || "Invalid API response" };
+  }
+}
+
 function routeByStatus(status){
   const value = String(status || "").trim().toUpperCase();
   if (value === "REGISTERED" || value === "TRAINING") return "agent-learning.html";
@@ -59,10 +79,14 @@ function routeByStatus(status){
 }
 
 async function loadDashboard(agentId){
-  const url = `${API_URL}?action=getDashboard&agent_id=${encodeURIComponent(agentId)}`;
+  const auth = getCurrentAgentAuthParams();
 
   try{
-    const data = await jsonp(url);
+    const data = await apiPostJson({
+      action: "getDashboard",
+      agent_id: agentId,
+      agent_session_token: auth.agent_session_token
+    });
 
     if(!data || !data.ok){
       const nextPage = data && data.next_page ? data.next_page : routeByStatus(data && data.status);
@@ -108,7 +132,6 @@ async function loadDashboard(agentId){
     setText(".net", money(summary.net));
 
   }catch(err){
-    console.error("Dashboard error:", err);
     alert("เชื่อมต่อ Dashboard ไม่ได้ กรุณาลองใหม่อีกครั้ง");
   }
 }
@@ -121,6 +144,7 @@ function setText(selector, value){
 function logout(){
   [
     "agent_id", "agent_name", "agent_role", "agent_status",
+    "agent_session_token", "agent_session_expires_at",
     "ssb_agent_id", "ssb_current_agent_v1",
     "ssb_agent_session", "ssb_agent_session_v1"
   ].forEach(key => localStorage.removeItem(key));
@@ -128,7 +152,12 @@ function logout(){
 }
 
 async function loadWithdrawPage(agentId){
-  const data = await jsonp(`${API_URL}?action=getDashboard&agent_id=${encodeURIComponent(agentId)}`);
+  const auth = getCurrentAgentAuthParams();
+  const data = await apiPostJson({
+    action: "getDashboard",
+    agent_id: agentId,
+    agent_session_token: auth.agent_session_token
+  });
   if(!data || !data.ok){
     alert((data && data.message) || "โหลดข้อมูลไม่สำเร็จ");
     return;
@@ -168,7 +197,12 @@ function formatDate(value){
 }
 
 async function loadIncomePage(agentId){
-  const data = await jsonp(`${API_URL}?action=getDashboard&agent_id=${encodeURIComponent(agentId)}`);
+  const auth = getCurrentAgentAuthParams();
+  const data = await apiPostJson({
+    action: "getDashboard",
+    agent_id: agentId,
+    agent_session_token: auth.agent_session_token
+  });
   if(!data || !data.ok){
     alert((data && data.message) || "โหลดข้อมูลรายได้ไม่สำเร็จ");
     return;
@@ -203,7 +237,12 @@ function renderIncomeStatus(status){
 }
 
 async function loadBonusPage(agentId){
-  const data = await jsonp(`${API_URL}?action=getDashboard&agent_id=${encodeURIComponent(agentId)}`);
+  const auth = getCurrentAgentAuthParams();
+  const data = await apiPostJson({
+    action: "getDashboard",
+    agent_id: agentId,
+    agent_session_token: auth.agent_session_token
+  });
   if(!data || !data.ok){
     alert((data && data.message) || "โหลดโบนัสไม่สำเร็จ");
     return;
