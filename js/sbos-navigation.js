@@ -30,6 +30,7 @@ window.SBOS_NAV = {
     ["admin-performance.html", "Performance"],
     ["admin-sales-targets.html", "Targets"],
     ["admin-followups.html", "Follow-ups"],
+    ["admin-cms.html", "CMS"],
     ["admin-finance.html", "Finance"],
     ["admin-commissions.html", "Commissions"],
     ["admin-wallets.html", "Wallets"],

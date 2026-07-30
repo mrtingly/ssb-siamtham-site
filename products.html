@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!-- SBOS V3-5 marker: public product content page with static fallback. -->
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SBOS Products</title>
+  <link rel="icon" href="images/logo.png" />
+  <link rel="stylesheet" href="css/sbos-typography.css" />
+  <link rel="stylesheet" href="css/sbos-cms.css" />
+</head>
+<body>
+  <div class="cms-public-banner" data-cms-announcement hidden></div>
+  <main class="cms-content">
+    <section class="cms-hero"><h1>SBOS Products</h1><p>Product information is loaded from published CMS content while pricing remains controlled by the backend pricing engine.</p></section>
+    <section class="cms-panel">
+      <h2>Products</h2>
+      <div class="cms-public-grid" data-cms-public="PRODUCT_CONTENT" data-cms-action="cmsPublicProducts">
+        <article class="cms-public-card"><h3>Silver Galaxy A Series</h3><p>Affordable smartphone collection for everyday customers.</p><a href="agent-register.html">Register as Agent</a></article>
+        <article class="cms-public-card"><h3>Gold Galaxy S Series</h3><p>Premium Android collection with advanced performance.</p><a href="agent-register.html">Register as Agent</a></article>
+        <article class="cms-public-card"><h3>Platinum Apple iPhone & iPad</h3><p>Apple device collection for premium customer requirements.</p><a href="agent-register.html">Register as Agent</a></article>
+      </div>
+    </section>
+  </main>
+  <script src="js/sbos-cms-public.js"></script>
+</body>
+</html>

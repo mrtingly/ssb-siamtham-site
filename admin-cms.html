@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!-- SBOS V3-5 marker: CMS dashboard for lightweight business content management. -->
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SBOS CMS Dashboard</title>
+  <link rel="icon" href="images/logo.png" />
+  <link rel="stylesheet" href="css/sbos-typography.css" />
+  <link rel="stylesheet" href="css/sbos-cms.css" />
+</head>
+<body data-cms-page="dashboard">
+  <div class="cms-shell">
+    <aside class="cms-side">
+      <div class="cms-brand"><img src="images/logo.png" alt="Siamtham" /><div><strong>SBOS CMS</strong><span>V3-5 Content Control</span></div></div>
+      <nav class="cms-menu" aria-label="CMS navigation">
+        <a class="active" href="admin-cms.html">Dashboard</a>
+        <a href="admin-cms-home.html">Home</a>
+        <a href="admin-cms-products.html">Products</a>
+        <a href="admin-cms-collections.html">Collections</a>
+        <a href="admin-cms-promotions.html">Promotions</a>
+        <a href="admin-cms-banners.html">Banners</a>
+        <a href="admin-cms-faq.html">FAQ</a>
+        <a href="admin-cms-articles.html">Articles</a>
+        <a href="admin-cms-media.html">Media</a>
+        <a href="admin-cms-navigation.html">Navigation</a>
+        <a href="admin-cms-settings.html">Settings</a>
+        <a href="admin-cms-revisions.html">Integrity</a>
+        <a href="admin-cms-audit.html">Audit</a>
+      </nav>
+    </aside>
+    <main class="cms-main">
+      <header class="cms-top"><div><h1>SBOS Content Management</h1><p>Admin controlled content, public published-only APIs, and revision tracking.</p></div><button id="refreshButton" class="cms-btn" type="button">Refresh</button></header>
+      <section class="cms-content">
+        <div class="cms-hero"><h2>SBOS V3-5 CMS</h2><p>Manage business content without changing product pricing, finance, wallet, commission, or organization logic.</p></div>
+        <div class="cms-grid">
+          <article class="cms-card"><span>Total Content</span><strong id="contentsCount">0</strong></article>
+          <article class="cms-card"><span>Published</span><strong id="publishedCount">0</strong></article>
+          <article class="cms-card"><span>Draft</span><strong id="draftCount">0</strong></article>
+          <article class="cms-card"><span>Media</span><strong id="mediaCount">0</strong></article>
+        </div>
+        <section class="cms-panel"><h3>Recent Content</h3><div class="cms-table-wrap"><table class="cms-table"><thead><tr><th>Content ID</th><th>Type</th><th>Title</th><th>Status</th><th>Related</th></tr></thead><tbody id="contentRows"></tbody></table></div></section>
+      </section>
+    </main>
+  </div>
+  <div id="cmsToast" class="cms-toast" role="status" aria-live="polite"></div>
+  <script src="js/admin-guard.js"></script>
+  <script src="js/sbos-cms-admin.js"></script>
+</body>
+</html>

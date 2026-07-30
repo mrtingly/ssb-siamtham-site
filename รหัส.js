@@ -25,6 +25,14 @@ const SHEET_NAMES = {
   salesTargets: "sales_targets",
   customerFollowups: "customer_followups",
   organizationAuditLogs: "organization_audit_logs",
+  cmsContent: "cms_content",
+  cmsLocalizations: "cms_content_localizations",
+  cmsRevisions: "cms_revisions",
+  cmsMedia: "cms_media",
+  cmsPublicationJobs: "cms_publication_jobs",
+  cmsAuditLogs: "cms_audit_logs",
+  cmsSiteSettings: "cms_site_settings",
+  cmsNavigation: "cms_navigation",
   trainingLessons: "training_lessons",
   trainingProgress: "agent_training_progress",
   examQuestions: "exam_questions",
@@ -129,6 +137,38 @@ function doGet(e) {
         result = calculatePricing(e.parameter);
         break;
 
+      case "cmsPublicBundle":
+        result = cmsPublicBundle(e.parameter);
+        break;
+
+      case "cmsPublicContent":
+        result = cmsPublicContent(e.parameter);
+        break;
+
+      case "cmsPublicProducts":
+        result = cmsPublicProducts(e.parameter);
+        break;
+
+      case "cmsPublicCollections":
+        result = cmsPublicCollections(e.parameter);
+        break;
+
+      case "cmsPublicPromotions":
+        result = cmsPublicPromotions(e.parameter);
+        break;
+
+      case "cmsPublicBanners":
+        result = cmsPublicBanners(e.parameter);
+        break;
+
+      case "cmsPublicFaq":
+        result = cmsPublicFaq(e.parameter);
+        break;
+
+      case "cmsPublicArticles":
+        result = cmsPublicArticles(e.parameter);
+        break;
+
       case "listPayments":
         result = listPayments(e.parameter);
         break;
@@ -178,6 +218,20 @@ function doGet(e) {
       case "listCustomerFollowups":
       case "getOrganizationPerformance":
       case "runOrganizationIntegrityCheck":
+      case "cmsAdminDashboard":
+      case "cmsSaveContent":
+      case "cmsPublishContent":
+      case "cmsUnpublishContent":
+      case "cmsScheduleContent":
+      case "cmsRollbackRevision":
+      case "cmsRegisterMedia":
+      case "cmsSaveSiteSetting":
+      case "cmsSaveNavigationItem":
+      case "cmsIntegrityCheck":
+      case "cmsListContentAdmin":
+      case "cmsGetContentAdmin":
+      case "cmsListRevisions":
+      case "cmsListAuditLogs":
         result = protectedPostRequired(action);
         break;
 
@@ -597,6 +651,62 @@ function doPost(e) {
         result = runOrganizationIntegrityCheck(body);
         break;
 
+      case "cmsAdminDashboard":
+        result = cmsAdminDashboard(body);
+        break;
+
+      case "cmsSaveContent":
+        result = cmsSaveContent(body);
+        break;
+
+      case "cmsPublishContent":
+        result = cmsPublishContent(body);
+        break;
+
+      case "cmsUnpublishContent":
+        result = cmsUnpublishContent(body);
+        break;
+
+      case "cmsScheduleContent":
+        result = cmsScheduleContent(body);
+        break;
+
+      case "cmsRollbackRevision":
+        result = cmsRollbackRevision(body);
+        break;
+
+      case "cmsRegisterMedia":
+        result = cmsRegisterMedia(body);
+        break;
+
+      case "cmsSaveSiteSetting":
+        result = cmsSaveSiteSetting(body);
+        break;
+
+      case "cmsSaveNavigationItem":
+        result = cmsSaveNavigationItem(body);
+        break;
+
+      case "cmsIntegrityCheck":
+        result = cmsIntegrityCheck(body);
+        break;
+
+      case "cmsListContentAdmin":
+        result = cmsListContentAdmin(body);
+        break;
+
+      case "cmsGetContentAdmin":
+        result = cmsGetContentAdmin(body);
+        break;
+
+      case "cmsListRevisions":
+        result = cmsListRevisions(body);
+        break;
+
+      case "cmsListAuditLogs":
+        result = cmsListAuditLogs(body);
+        break;
+
       case "approveAgent":
         {
           const admin = requireAdminActor(body);
@@ -757,6 +867,13 @@ function sheetToObjects(sheetName) {
         obj.snapshot_id,
         obj.target_id,
         obj.followup_id,
+        obj.content_id,
+        obj.localization_id,
+        obj.revision_id,
+        obj.media_id,
+        obj.job_id,
+        obj.setting_id,
+        obj.nav_id,
         obj.bonus_id,
         obj.lesson_id,
         obj.progress_id,
@@ -1420,6 +1537,146 @@ const ORGANIZATION_AUDIT_LOG_HEADERS = [
   "new_value_json",
   "message",
   "created_at",
+  "is_test",
+  "qa_batch"
+];
+
+const CMS_CONTENT_HEADERS = [
+  "content_id",
+  "content_type",
+  "content_key",
+  "slug",
+  "parent_id",
+  "related_entity_type",
+  "related_entity_id",
+  "status",
+  "visibility",
+  "display_order",
+  "featured",
+  "publish_at",
+  "unpublish_at",
+  "current_revision",
+  "price_display_policy",
+  "availability_message",
+  "audience",
+  "placement",
+  "metadata_json",
+  "created_at",
+  "updated_at",
+  "created_by",
+  "updated_by",
+  "is_test",
+  "qa_batch"
+];
+
+const CMS_LOCALIZATION_HEADERS = [
+  "localization_id",
+  "content_id",
+  "locale",
+  "title",
+  "subtitle",
+  "summary",
+  "body",
+  "cta_label",
+  "cta_url",
+  "seo_title",
+  "seo_description",
+  "seo_keywords",
+  "image_alt",
+  "metadata_json",
+  "created_at",
+  "updated_at"
+];
+
+const CMS_REVISION_HEADERS = [
+  "revision_id",
+  "content_id",
+  "revision_number",
+  "snapshot_json",
+  "change_summary",
+  "created_by",
+  "created_at",
+  "status",
+  "is_test",
+  "qa_batch"
+];
+
+const CMS_MEDIA_HEADERS = [
+  "media_id",
+  "media_type",
+  "source_type",
+  "file_name",
+  "public_url",
+  "storage_reference",
+  "mime_type",
+  "file_size",
+  "width",
+  "height",
+  "alt_text_th",
+  "alt_text_en",
+  "checksum",
+  "status",
+  "created_by",
+  "created_at",
+  "updated_at",
+  "is_test",
+  "qa_batch"
+];
+
+const CMS_PUBLICATION_JOB_HEADERS = [
+  "job_id",
+  "content_id",
+  "action",
+  "scheduled_at",
+  "executed_at",
+  "status",
+  "attempt_count",
+  "last_error",
+  "created_by",
+  "created_at",
+  "is_test",
+  "qa_batch"
+];
+
+const CMS_AUDIT_LOG_HEADERS = [
+  "log_id",
+  "entity_type",
+  "entity_id",
+  "action",
+  "actor_id",
+  "previous_value_json",
+  "new_value_json",
+  "message",
+  "created_at",
+  "is_test",
+  "qa_batch"
+];
+
+const CMS_SITE_SETTING_HEADERS = [
+  "setting_id",
+  "setting_key",
+  "setting_value",
+  "locale",
+  "status",
+  "updated_at",
+  "updated_by",
+  "is_test",
+  "qa_batch"
+];
+
+const CMS_NAVIGATION_HEADERS = [
+  "nav_id",
+  "label_th",
+  "label_en",
+  "href",
+  "placement",
+  "display_order",
+  "status",
+  "audience",
+  "created_at",
+  "updated_at",
+  "created_by",
+  "updated_by",
   "is_test",
   "qa_batch"
 ];
@@ -3145,6 +3402,11 @@ function getAdminDashboard(options) {
 ========================================================= */
 
 function ensureSalesSheets() {
+  const cacheKey = "SBOS_SALES_SHEETS_READY_V3_5";
+  try {
+    const cache = CacheService.getScriptCache();
+    if (cache.get(cacheKey) === "1") return;
+  } catch (error) {}
   getOrCreateSheet(SHEET_NAMES.customers, CUSTOMER_HEADERS);
   getOrCreateSheet(SHEET_NAMES.quotations, QUOTATION_HEADERS);
   getOrCreateSheet(SHEET_NAMES.orders, ORDER_HEADERS);
@@ -3158,6 +3420,29 @@ function ensureSalesSheets() {
   ensureOrganizationSheets();
   seedV3ProductCatalog();
   seedDepositPolicy();
+  try {
+    CacheService.getScriptCache().put(cacheKey, "1", 21600);
+  } catch (error) {}
+}
+
+function ensureCmsSheets() {
+  const cacheKey = "SBOS_CMS_SHEETS_READY_V3_5";
+  try {
+    const cache = CacheService.getScriptCache();
+    if (cache.get(cacheKey) === "1") return;
+  } catch (error) {}
+  getOrCreateSheet(SHEET_NAMES.cmsContent, CMS_CONTENT_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.cmsLocalizations, CMS_LOCALIZATION_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.cmsRevisions, CMS_REVISION_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.cmsMedia, CMS_MEDIA_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.cmsPublicationJobs, CMS_PUBLICATION_JOB_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.cmsAuditLogs, CMS_AUDIT_LOG_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.cmsSiteSettings, CMS_SITE_SETTING_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.cmsNavigation, CMS_NAVIGATION_HEADERS);
+  seedCmsDefaults();
+  try {
+    CacheService.getScriptCache().put(cacheKey, "1", 21600);
+  } catch (error) {}
 }
 
 function ensureOrganizationSheets() {
@@ -7406,6 +7691,811 @@ function runOrganizationIntegrityCheck(body) {
     }
   });
   return { ok: true, anomalies: anomalies, no_manager_commission: true, single_sales_only: true };
+}
+
+/* =========================================================
+   SBOS V3-5 LIGHTWEIGHT BUSINESS CMS
+========================================================= */
+
+const CMS_STATUS = {
+  DRAFT: "DRAFT",
+  REVIEW: "REVIEW",
+  SCHEDULED: "SCHEDULED",
+  PUBLISHED: "PUBLISHED",
+  UNPUBLISHED: "UNPUBLISHED",
+  ARCHIVED: "ARCHIVED"
+};
+
+const CMS_CONTENT_TYPES = [
+  "SITE_SETTINGS",
+  "PAGE",
+  "PAGE_SECTION",
+  "BANNER",
+  "PROMOTION",
+  "COLLECTION_CONTENT",
+  "PRODUCT_CONTENT",
+  "FAQ",
+  "ARTICLE",
+  "ANNOUNCEMENT",
+  "CONTACT_INFORMATION",
+  "LEGAL_CONTENT",
+  "NAVIGATION_ITEM",
+  "FOOTER_CONTENT",
+  "MEDIA_ASSET"
+];
+
+const CMS_PRICE_POLICIES = [
+  "SHOW_PRICE",
+  "HIDE_PRICE",
+  "CONTACT_FOR_PRICE",
+  "STARTING_FROM",
+  "CHECK_CURRENT_PRICE",
+  "TEMPORARILY_UNAVAILABLE"
+];
+
+function cmsNormalizeType(type) {
+  const value = normalizeSalesStatus(type || "PAGE_SECTION");
+  return CMS_CONTENT_TYPES.indexOf(value) !== -1 ? value : "PAGE_SECTION";
+}
+
+function cmsNormalizeStatus(status) {
+  const value = normalizeSalesStatus(status || CMS_STATUS.DRAFT);
+  return Object.keys(CMS_STATUS).map(function (key) { return CMS_STATUS[key]; }).indexOf(value) !== -1 ? value : CMS_STATUS.DRAFT;
+}
+
+function cmsNormalizeLocale(locale) {
+  const value = cleanString(locale || "th", 10).toLowerCase();
+  return value === "en" ? "en" : "th";
+}
+
+function cmsIsPublished(row, now) {
+  const status = cmsNormalizeStatus(row.status);
+  if (status !== CMS_STATUS.PUBLISHED) return false;
+  if (isQaRecord(row)) return false;
+  const at = now || new Date();
+  const publishAt = row.publish_at ? new Date(row.publish_at) : null;
+  const unpublishAt = row.unpublish_at ? new Date(row.unpublish_at) : null;
+  return (!publishAt || publishAt <= at) && (!unpublishAt || unpublishAt > at);
+}
+
+function cmsWithLock(fn) {
+  const lock = LockService.getScriptLock();
+  if (!lock.tryLock(15000)) {
+    return { ok: false, error: "CMS_LOCK_TIMEOUT", message: "CMS is busy. Please try again." };
+  }
+  try {
+    return fn();
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function cmsSanitizeText(value, maxLength) {
+  return cleanString(value, maxLength || 2000)
+    .replace(/<\s*script/gi, "")
+    .replace(/on\w+\s*=/gi, "")
+    .replace(/javascript:/gi, "")
+    .replace(/data:/gi, "");
+}
+
+function cmsSafeSpreadsheetText(value, maxLength) {
+  const text = cmsSanitizeText(value, maxLength);
+  return /^[=+\-@]/.test(text) ? "'" + text : text;
+}
+
+function cmsSafeUrl(value) {
+  const url = cleanString(value, 1000);
+  if (!url) return "";
+  if (/^(https?:\/\/|\/|\.\/|images\/|css\/|js\/|agent-|admin-|what-|ssb-|contact\.html|index\.html|products\.html|collections\.html|promotions\.html|faq\.html|articles\.html)/i.test(url) && !/javascript:|data:|<|>|onerror=/i.test(url)) {
+    return url;
+  }
+  throw new Error("Unsafe URL");
+}
+
+function cmsValidateMetadata(raw) {
+  if (!raw) return "{}";
+  const value = typeof raw === "string" ? raw : JSON.stringify(raw);
+  const parsed = parseJsonValue(value, null);
+  if (parsed === null || Array.isArray(parsed)) throw new Error("Invalid metadata");
+  const text = JSON.stringify(parsed);
+  if (/<\s*script|javascript:|on\w+\s*=|<iframe/i.test(text)) throw new Error("Unsafe metadata");
+  return text;
+}
+
+function cmsWriteAudit(entityType, entityId, action, admin, previousValue, newValue, message, seed) {
+  ensureCmsSheets();
+  appendObject(SHEET_NAMES.cmsAuditLogs, {
+    log_id: makeId("CAL"),
+    entity_type: cleanString(entityType, 80),
+    entity_id: cleanString(entityId, 120),
+    action: cleanString(action, 120),
+    actor_id: cleanString(admin && admin.actor_id, 80),
+    previous_value_json: JSON.stringify(previousValue || {}),
+    new_value_json: JSON.stringify(newValue || {}),
+    message: cleanString(message, 500),
+    created_at: new Date(),
+    is_test: isQaRecord(seed || {}),
+    qa_batch: qaBatchFor(seed || {})
+  });
+}
+
+function cmsPublicLocalization(contentId, locale) {
+  const requested = cmsNormalizeLocale(locale);
+  const rows = sheetToObjects(SHEET_NAMES.cmsLocalizations).filter(function (item) {
+    return cleanString(item.content_id, 80) === cleanString(contentId, 80);
+  });
+  const local = rows.find(function (item) { return cmsNormalizeLocale(item.locale) === requested; }) ||
+    rows.find(function (item) { return cmsNormalizeLocale(item.locale) === "th"; }) ||
+    {};
+  return {
+    locale: cmsNormalizeLocale(local.locale || "th"),
+    title: cleanString(local.title, 300),
+    subtitle: cleanString(local.subtitle, 500),
+    summary: cleanString(local.summary, 1000),
+    body: cleanString(local.body, 8000),
+    cta_label: cleanString(local.cta_label, 120),
+    cta_url: cleanString(local.cta_url, 1000),
+    seo_title: cleanString(local.seo_title, 300),
+    seo_description: cleanString(local.seo_description, 500),
+    seo_keywords: cleanString(local.seo_keywords, 500),
+    image_alt: cleanString(local.image_alt, 300),
+    metadata: parseJsonValue(local.metadata_json, {})
+  };
+}
+
+function cmsPublicContentRow(row, locale) {
+  const local = cmsPublicLocalization(row.content_id, locale);
+  return {
+    content_id: cleanString(row.content_id, 80),
+    content_type: cmsNormalizeType(row.content_type),
+    content_key: cleanString(row.content_key, 180),
+    slug: cleanString(row.slug, 180),
+    parent_id: cleanString(row.parent_id, 80),
+    related_entity_type: cleanString(row.related_entity_type, 80),
+    related_entity_id: cleanString(row.related_entity_id, 80),
+    status: cmsNormalizeStatus(row.status),
+    visibility: normalizeSalesStatus(row.visibility || "PUBLIC"),
+    display_order: Number(row.display_order || 0),
+    featured: booleanValue(row.featured),
+    price_display_policy: normalizeSalesStatus(row.price_display_policy || "CHECK_CURRENT_PRICE"),
+    availability_message: cleanString(row.availability_message, 500),
+    audience: normalizeSalesStatus(row.audience || "PUBLIC"),
+    placement: normalizeSalesStatus(row.placement || ""),
+    metadata: parseJsonValue(row.metadata_json, {}),
+    localization: local,
+    updated_at: row.updated_at || ""
+  };
+}
+
+function cmsCreateRevision(contentId, admin, summary) {
+  const content = findCmsContent(contentId);
+  if (!content) return null;
+  const localizations = sheetToObjects(SHEET_NAMES.cmsLocalizations).filter(function (item) {
+    return cleanString(item.content_id, 80) === cleanString(contentId, 80);
+  });
+  const revisions = sheetToObjects(SHEET_NAMES.cmsRevisions).filter(function (item) {
+    return cleanString(item.content_id, 80) === cleanString(contentId, 80);
+  });
+  const nextNumber = revisions.reduce(function (max, item) {
+    return Math.max(max, Number(item.revision_number || 0));
+  }, 0) + 1;
+  const revision = {
+    revision_id: makeId("REV"),
+    content_id: contentId,
+    revision_number: nextNumber,
+    snapshot_json: JSON.stringify({ content: content, localizations: localizations }),
+    change_summary: cleanString(summary || "Content updated", 500),
+    created_by: admin.actor_id,
+    created_at: new Date(),
+    status: cmsNormalizeStatus(content.status),
+    is_test: isQaRecord(content),
+    qa_batch: qaBatchFor(content)
+  };
+  appendObject(SHEET_NAMES.cmsRevisions, revision);
+  updateRowFields(SHEET_NAMES.cmsContent, content._row, { current_revision: nextNumber });
+  return revision;
+}
+
+function seedCmsDefaults() {
+  const settings = sheetToObjects(SHEET_NAMES.cmsSiteSettings);
+  if (!settings.some(function (item) { return cleanString(item.setting_key, 120) === "company_name_th"; })) {
+    [
+      ["company_name_th", "บริษัท สยามทำ จำกัด", "th"],
+      ["company_name_en", "Siamtham Co., Ltd.", "en"],
+      ["short_company_name", "SBOS", "th"],
+      ["phone", "", "th"],
+      ["email", "", "th"],
+      ["announcement_bar", "SBOS V3-5 Lightweight Business CMS active", "th"],
+      ["default_seo_title", "SBOS", "th"],
+      ["default_seo_description", "Siamtham Business Operating System", "th"]
+    ].forEach(function (row) {
+      appendObject(SHEET_NAMES.cmsSiteSettings, {
+        setting_id: makeId("SET"),
+        setting_key: row[0],
+        setting_value: row[1],
+        locale: row[2],
+        status: "ACTIVE",
+        updated_at: new Date(),
+        updated_by: "SYSTEM",
+        is_test: false,
+        qa_batch: ""
+      });
+    });
+  }
+  if (sheetToObjects(SHEET_NAMES.cmsNavigation).length === 0) {
+    [
+      ["Home", "หน้าหลัก", "index.html", "PUBLIC_MAIN", 1],
+      ["Products", "สินค้า", "products.html", "PUBLIC_MAIN", 2],
+      ["Promotions", "โปรโมชัน", "promotions.html", "PUBLIC_MAIN", 3],
+      ["FAQ", "คำถามที่พบบ่อย", "faq.html", "PUBLIC_MAIN", 4],
+      ["Articles", "บทความ", "articles.html", "PUBLIC_MAIN", 5],
+      ["Contact", "ติดต่อเรา", "contact.html", "PUBLIC_MAIN", 6]
+    ].forEach(function (item) {
+      appendObject(SHEET_NAMES.cmsNavigation, {
+        nav_id: makeId("NAV"),
+        label_th: item[1],
+        label_en: item[0],
+        href: item[2],
+        placement: item[3],
+        display_order: item[4],
+        status: "ACTIVE",
+        audience: "PUBLIC",
+        created_at: new Date(),
+        updated_at: new Date(),
+        created_by: "SYSTEM",
+        updated_by: "SYSTEM",
+        is_test: false,
+        qa_batch: ""
+      });
+    });
+  }
+}
+
+function findCmsContent(contentId) {
+  ensureCmsSheets();
+  const id = cleanString(contentId, 80);
+  return sheetToObjects(SHEET_NAMES.cmsContent).find(function (item) {
+    return cleanString(item.content_id, 80) === id;
+  }) || null;
+}
+
+function cmsValidateRelated(type, relatedType, relatedId) {
+  const normalizedType = cmsNormalizeType(type);
+  const relType = normalizeSalesStatus(relatedType || "");
+  const relId = cleanString(relatedId, 80);
+  if (normalizedType === "PRODUCT_CONTENT") {
+    if (relType !== "PRODUCT" || !relId || !findProductById(relId)) throw new Error("Valid product reference is required");
+  }
+  if (normalizedType === "COLLECTION_CONTENT") {
+    const allowed = ["SILVER", "GOLD", "PLATINUM"];
+    if (relType !== "COLLECTION" || allowed.indexOf(relId.toUpperCase()) === -1) throw new Error("Valid collection reference is required");
+  }
+}
+
+function cmsSaveContent(body) {
+  return cmsWithLock(function () {
+    ensureCmsSheets();
+    ensureSalesSheets();
+    const admin = requireAdminActor(body);
+    if (!admin.ok) return admin;
+    const existingId = cleanString(body.content_id, 80);
+    const existing = existingId ? findCmsContent(existingId) : null;
+    const type = cmsNormalizeType(body.content_type || (existing && existing.content_type));
+    const relatedType = normalizeSalesStatus(body.related_entity_type || (existing && existing.related_entity_type));
+    const relatedId = cleanString(body.related_entity_id || (existing && existing.related_entity_id), 80);
+    try {
+      cmsValidateRelated(type, relatedType, relatedId);
+    } catch (error) {
+      return { ok: false, message: error.message };
+    }
+    const now = new Date();
+    const status = cmsNormalizeStatus(body.status || (existing && existing.status) || CMS_STATUS.DRAFT);
+    const slug = cleanString(body.slug || (existing && existing.slug) || body.content_key, 180).toLowerCase();
+    if (slug) {
+      const duplicateSlug = sheetToObjects(SHEET_NAMES.cmsContent).find(function (item) {
+        return cleanString(item.slug, 180).toLowerCase() === slug && cleanString(item.content_id, 80) !== existingId && !isQaRecord(item);
+      });
+      if (duplicateSlug) return { ok: false, message: "Duplicate slug" };
+    }
+    let metadataJson;
+    try {
+      metadataJson = cmsValidateMetadata(body.metadata_json || body.metadata || (existing && existing.metadata_json) || "{}");
+    } catch (error) {
+      return { ok: false, message: error.message };
+    }
+    let ctaUrl;
+    try {
+      ctaUrl = cmsSafeUrl(body.cta_url || "");
+    } catch (error) {
+      return { ok: false, message: "Unsafe CTA URL" };
+    }
+    const pricePolicy = normalizeSalesStatus(body.price_display_policy || (existing && existing.price_display_policy) || "CHECK_CURRENT_PRICE");
+    const content = {
+      content_id: existing ? existing.content_id : makeId("CMS"),
+      content_type: type,
+      content_key: cmsSafeSpreadsheetText(body.content_key || (existing && existing.content_key) || slug || makeId("KEY"), 180),
+      slug: slug,
+      parent_id: cleanString(body.parent_id || (existing && existing.parent_id), 80),
+      related_entity_type: relatedType,
+      related_entity_id: relatedId,
+      status: status,
+      visibility: normalizeSalesStatus(body.visibility || (existing && existing.visibility) || "PUBLIC"),
+      display_order: Number(body.display_order || (existing && existing.display_order) || 0),
+      featured: booleanValue(body.featured || (existing && existing.featured)),
+      publish_at: body.publish_at || (existing && existing.publish_at) || "",
+      unpublish_at: body.unpublish_at || (existing && existing.unpublish_at) || "",
+      current_revision: existing ? existing.current_revision : 0,
+      price_display_policy: CMS_PRICE_POLICIES.indexOf(pricePolicy) !== -1 ? pricePolicy : "CHECK_CURRENT_PRICE",
+      availability_message: cmsSafeSpreadsheetText(body.availability_message || (existing && existing.availability_message), 500),
+      audience: normalizeSalesStatus(body.audience || (existing && existing.audience) || "PUBLIC"),
+      placement: normalizeSalesStatus(body.placement || (existing && existing.placement) || ""),
+      metadata_json: metadataJson,
+      created_at: existing ? existing.created_at : now,
+      updated_at: now,
+      created_by: existing ? existing.created_by : admin.actor_id,
+      updated_by: admin.actor_id,
+      is_test: booleanValue(body.is_test) || isQaRecord(body),
+      qa_batch: cleanString(body.qa_batch, 120)
+    };
+    const localization = {
+      locale: cmsNormalizeLocale(body.locale || "th"),
+      title: cmsSafeSpreadsheetText(body.title, 300),
+      subtitle: cmsSafeSpreadsheetText(body.subtitle, 500),
+      summary: cmsSafeSpreadsheetText(body.summary, 1000),
+      body: cmsSafeSpreadsheetText(body.body, 8000),
+      cta_label: cmsSafeSpreadsheetText(body.cta_label, 120),
+      cta_url: ctaUrl,
+      seo_title: cmsSafeSpreadsheetText(body.seo_title, 300),
+      seo_description: cmsSafeSpreadsheetText(body.seo_description, 500),
+      seo_keywords: cmsSafeSpreadsheetText(body.seo_keywords, 500),
+      image_alt: cmsSafeSpreadsheetText(body.image_alt, 300),
+      metadata_json: cmsValidateMetadata(body.localization_metadata_json || "{}")
+    };
+    if (existing) {
+      cmsCreateRevision(existing.content_id, admin, body.change_summary || "Before content update");
+      updateRowFields(SHEET_NAMES.cmsContent, existing._row, content);
+    } else {
+      appendObject(SHEET_NAMES.cmsContent, content);
+    }
+    const localRows = sheetToObjects(SHEET_NAMES.cmsLocalizations);
+    const existingLocal = localRows.find(function (item) {
+      return cleanString(item.content_id, 80) === content.content_id && cmsNormalizeLocale(item.locale) === localization.locale;
+    });
+    const localData = Object.assign({
+      localization_id: existingLocal ? existingLocal.localization_id : makeId("LOC"),
+      content_id: content.content_id,
+      created_at: existingLocal ? existingLocal.created_at : now,
+      updated_at: now
+    }, localization);
+    if (existingLocal) updateRowFields(SHEET_NAMES.cmsLocalizations, existingLocal._row, localData); else appendObject(SHEET_NAMES.cmsLocalizations, localData);
+    const revision = cmsCreateRevision(content.content_id, admin, body.change_summary || "Content saved");
+    cmsWriteAudit("CONTENT", content.content_id, existing ? "CMS_CONTENT_UPDATED" : "CMS_CONTENT_CREATED", admin, existing || {}, content, "Content saved", content);
+    return { ok: true, content: cmsPublicContentRow(content, localization.locale), revision: revision };
+  });
+}
+
+function cmsChangeContentStatus(body, status, action) {
+  return cmsWithLock(function () {
+    ensureCmsSheets();
+    const admin = requireAdminActor(body);
+    if (!admin.ok) return admin;
+    const content = findCmsContent(body.content_id);
+    if (!content) return { ok: false, message: "Content not found" };
+    const next = cmsNormalizeStatus(status);
+    const now = new Date();
+    const updates = {
+      status: next,
+      publish_at: next === CMS_STATUS.PUBLISHED ? (content.publish_at || now) : (body.publish_at || content.publish_at || ""),
+      unpublish_at: body.unpublish_at || content.unpublish_at || "",
+      updated_at: now,
+      updated_by: admin.actor_id
+    };
+    updateRowFields(SHEET_NAMES.cmsContent, content._row, updates);
+    const updated = Object.assign({}, content, updates);
+    cmsCreateRevision(content.content_id, admin, action);
+    cmsWriteAudit("CONTENT", content.content_id, action, admin, { status: content.status }, updates, "Content status changed", updated);
+    return { ok: true, content: cmsPublicContentRow(updated, body.locale || "th") };
+  });
+}
+
+function cmsPublishContent(body) {
+  return cmsChangeContentStatus(body, CMS_STATUS.PUBLISHED, "CMS_CONTENT_PUBLISHED");
+}
+
+function cmsUnpublishContent(body) {
+  return cmsChangeContentStatus(body, CMS_STATUS.UNPUBLISHED, "CMS_CONTENT_UNPUBLISHED");
+}
+
+function cmsScheduleContent(body) {
+  return cmsWithLock(function () {
+    ensureCmsSheets();
+    const admin = requireAdminActor(body);
+    if (!admin.ok) return admin;
+    const content = findCmsContent(body.content_id);
+    if (!content) return { ok: false, message: "Content not found" };
+    const scheduledAt = body.scheduled_at || body.publish_at;
+    if (!scheduledAt || isNaN(new Date(scheduledAt).getTime())) return { ok: false, message: "Valid schedule date required" };
+    updateRowFields(SHEET_NAMES.cmsContent, content._row, { status: CMS_STATUS.SCHEDULED, publish_at: scheduledAt, updated_at: new Date(), updated_by: admin.actor_id });
+    appendObject(SHEET_NAMES.cmsPublicationJobs, {
+      job_id: makeId("JOB"),
+      content_id: content.content_id,
+      action: "PUBLISH",
+      scheduled_at: scheduledAt,
+      executed_at: "",
+      status: "SCHEDULED",
+      attempt_count: 0,
+      last_error: "",
+      created_by: admin.actor_id,
+      created_at: new Date(),
+      is_test: isQaRecord(content),
+      qa_batch: qaBatchFor(content)
+    });
+    cmsWriteAudit("CONTENT", content.content_id, "CMS_CONTENT_SCHEDULED", admin, { status: content.status }, { status: CMS_STATUS.SCHEDULED, publish_at: scheduledAt }, "Content scheduled", content);
+    return { ok: true, content_id: content.content_id, status: CMS_STATUS.SCHEDULED, publish_at: scheduledAt };
+  });
+}
+
+function cmsRollbackRevision(body) {
+  return cmsWithLock(function () {
+    ensureCmsSheets();
+    const admin = requireAdminActor(body);
+    if (!admin.ok) return admin;
+    const revisionId = cleanString(body.revision_id, 80);
+    const revision = sheetToObjects(SHEET_NAMES.cmsRevisions).find(function (item) {
+      return cleanString(item.revision_id, 80) === revisionId;
+    });
+    if (!revision) return { ok: false, message: "Revision not found" };
+    const snapshot = parseJsonValue(revision.snapshot_json, {});
+    const content = snapshot.content;
+    if (!content || !content.content_id) return { ok: false, message: "Invalid revision snapshot" };
+    const current = findCmsContent(content.content_id);
+    if (!current) return { ok: false, message: "Content not found" };
+    content.updated_at = new Date();
+    content.updated_by = admin.actor_id;
+    updateRowFields(SHEET_NAMES.cmsContent, current._row, content);
+    cmsWriteAudit("CONTENT", content.content_id, "CMS_REVISION_ROLLBACK", admin, current, content, "Revision rollback", content);
+    return { ok: true, content: cmsPublicContentRow(content, body.locale || "th") };
+  });
+}
+
+function cmsRegisterMedia(body) {
+  return cmsWithLock(function () {
+    ensureCmsSheets();
+    const admin = requireAdminActor(body);
+    if (!admin.ok) return admin;
+    let url;
+    try {
+      url = cmsSafeUrl(body.public_url || body.url);
+    } catch (error) {
+      return { ok: false, message: "Unsafe media URL" };
+    }
+    const media = {
+      media_id: makeId("MED"),
+      media_type: normalizeSalesStatus(body.media_type || "IMAGE"),
+      source_type: normalizeSalesStatus(body.source_type || "URL"),
+      file_name: cmsSafeSpreadsheetText(body.file_name || url.split("/").pop(), 200),
+      public_url: url,
+      storage_reference: cleanString(body.storage_reference, 500),
+      mime_type: cleanString(body.mime_type || "image/webp", 120),
+      file_size: Math.max(0, Number(body.file_size || 0)),
+      width: Math.max(0, Number(body.width || 0)),
+      height: Math.max(0, Number(body.height || 0)),
+      alt_text_th: cmsSafeSpreadsheetText(body.alt_text_th, 300),
+      alt_text_en: cmsSafeSpreadsheetText(body.alt_text_en, 300),
+      checksum: cleanString(body.checksum, 200),
+      status: normalizeSalesStatus(body.status || "ACTIVE"),
+      created_by: admin.actor_id,
+      created_at: new Date(),
+      updated_at: new Date(),
+      is_test: booleanValue(body.is_test) || isQaRecord(body),
+      qa_batch: cleanString(body.qa_batch, 120)
+    };
+    appendObject(SHEET_NAMES.cmsMedia, media);
+    cmsWriteAudit("MEDIA", media.media_id, "CMS_MEDIA_REGISTERED", admin, {}, media, "Media registered", media);
+    return { ok: true, media: media };
+  });
+}
+
+function cmsSaveSiteSetting(body) {
+  return cmsWithLock(function () {
+    ensureCmsSheets();
+    const admin = requireAdminActor(body);
+    if (!admin.ok) return admin;
+    const key = cleanString(body.setting_key || body.key, 120);
+    if (!key) return { ok: false, message: "setting_key is required" };
+    const locale = cmsNormalizeLocale(body.locale || "th");
+    const existing = sheetToObjects(SHEET_NAMES.cmsSiteSettings).find(function (item) {
+      return cleanString(item.setting_key, 120) === key && cmsNormalizeLocale(item.locale) === locale;
+    });
+    const row = {
+      setting_id: existing ? existing.setting_id : makeId("SET"),
+      setting_key: key,
+      setting_value: cmsSafeSpreadsheetText(body.setting_value || body.value, 3000),
+      locale: locale,
+      status: normalizeSalesStatus(body.status || "ACTIVE"),
+      updated_at: new Date(),
+      updated_by: admin.actor_id,
+      is_test: booleanValue(body.is_test) || isQaRecord(body),
+      qa_batch: cleanString(body.qa_batch, 120)
+    };
+    if (existing) updateRowFields(SHEET_NAMES.cmsSiteSettings, existing._row, row); else appendObject(SHEET_NAMES.cmsSiteSettings, row);
+    cmsWriteAudit("SETTING", key, "CMS_SETTING_SAVED", admin, existing || {}, row, "Setting saved", row);
+    return { ok: true, setting: row };
+  });
+}
+
+function cmsSaveNavigationItem(body) {
+  return cmsWithLock(function () {
+    ensureCmsSheets();
+    const admin = requireAdminActor(body);
+    if (!admin.ok) return admin;
+    let href;
+    try {
+      href = cmsSafeUrl(body.href);
+    } catch (error) {
+      return { ok: false, message: "Unsafe navigation URL" };
+    }
+    const existingId = cleanString(body.nav_id, 80);
+    const existing = existingId ? sheetToObjects(SHEET_NAMES.cmsNavigation).find(function (item) { return cleanString(item.nav_id, 80) === existingId; }) : null;
+    const now = new Date();
+    const row = {
+      nav_id: existing ? existing.nav_id : makeId("NAV"),
+      label_th: cmsSafeSpreadsheetText(body.label_th, 120),
+      label_en: cmsSafeSpreadsheetText(body.label_en, 120),
+      href: href,
+      placement: normalizeSalesStatus(body.placement || "PUBLIC_MAIN"),
+      display_order: Number(body.display_order || 0),
+      status: normalizeSalesStatus(body.status || "ACTIVE"),
+      audience: normalizeSalesStatus(body.audience || "PUBLIC"),
+      created_at: existing ? existing.created_at : now,
+      updated_at: now,
+      created_by: existing ? existing.created_by : admin.actor_id,
+      updated_by: admin.actor_id,
+      is_test: booleanValue(body.is_test) || isQaRecord(body),
+      qa_batch: cleanString(body.qa_batch, 120)
+    };
+    if (!row.label_th && !row.label_en) return { ok: false, message: "Navigation label is required" };
+    if (existing) updateRowFields(SHEET_NAMES.cmsNavigation, existing._row, row); else appendObject(SHEET_NAMES.cmsNavigation, row);
+    cmsWriteAudit("NAVIGATION", row.nav_id, existing ? "CMS_NAV_UPDATED" : "CMS_NAV_CREATED", admin, existing || {}, row, "Navigation saved", row);
+    return { ok: true, navigation: row };
+  });
+}
+
+function cmsListContentAdmin(body) {
+  ensureCmsSheets();
+  const admin = requireAdminActor(body);
+  if (!admin.ok) return admin;
+  const type = cmsNormalizeType(body.content_type || "");
+  const q = cleanString(body.q || body.search, 200).toLowerCase();
+  const rows = sheetToObjects(SHEET_NAMES.cmsContent).filter(function (item) {
+    if (body.content_type && cmsNormalizeType(item.content_type) !== type) return false;
+    if (!q) return true;
+    return [item.content_id, item.content_key, item.slug, item.content_type, item.status, item.related_entity_id].join(" ").toLowerCase().indexOf(q) !== -1;
+  }).map(function (row) { return cmsPublicContentRow(row, body.locale || "th"); });
+  return { ok: true, total: rows.length, contents: rows };
+}
+
+function cmsGetContentAdmin(body) {
+  ensureCmsSheets();
+  const admin = requireAdminActor(body);
+  if (!admin.ok) return admin;
+  const content = findCmsContent(body.content_id);
+  if (!content) return { ok: false, message: "Content not found" };
+  const localizations = sheetToObjects(SHEET_NAMES.cmsLocalizations).filter(function (item) {
+    return cleanString(item.content_id, 80) === cleanString(content.content_id, 80);
+  });
+  return { ok: true, content: content, public_content: cmsPublicContentRow(content, body.locale || "th"), localizations: localizations };
+}
+
+function cmsListRevisions(body) {
+  ensureCmsSheets();
+  const admin = requireAdminActor(body);
+  if (!admin.ok) return admin;
+  const contentId = cleanString(body.content_id, 80);
+  const rows = sheetToObjects(SHEET_NAMES.cmsRevisions).filter(function (item) {
+    return !contentId || cleanString(item.content_id, 80) === contentId;
+  }).map(function (item) {
+    return {
+      revision_id: item.revision_id,
+      content_id: item.content_id,
+      revision_number: Number(item.revision_number || 0),
+      change_summary: cleanString(item.change_summary, 500),
+      created_by: cleanString(item.created_by, 80),
+      created_at: item.created_at || "",
+      status: cmsNormalizeStatus(item.status),
+      is_test: booleanValue(item.is_test),
+      qa_batch: cleanString(item.qa_batch, 120)
+    };
+  });
+  return { ok: true, total: rows.length, revisions: rows };
+}
+
+function cmsListAuditLogs(body) {
+  ensureCmsSheets();
+  const admin = requireAdminActor(body);
+  if (!admin.ok) return admin;
+  const limit = Math.max(1, Math.min(300, Number(body.limit || 100)));
+  return { ok: true, logs: sheetToObjects(SHEET_NAMES.cmsAuditLogs).slice(-limit).reverse() };
+}
+
+function cmsAdminDashboard(body) {
+  ensureCmsSheets();
+  const admin = requireAdminActor(body);
+  if (!admin.ok) return admin;
+  const contents = sheetToObjects(SHEET_NAMES.cmsContent);
+  const media = sheetToObjects(SHEET_NAMES.cmsMedia);
+  const revisions = sheetToObjects(SHEET_NAMES.cmsRevisions);
+  const published = contents.filter(function (item) { return cmsIsPublished(item); });
+  const draft = contents.filter(function (item) { return cmsNormalizeStatus(item.status) === CMS_STATUS.DRAFT; });
+  return {
+    ok: true,
+    summary: {
+      contents: contents.length,
+      published: published.length,
+      draft: draft.length,
+      media: media.length,
+      revisions: revisions.length,
+      qa_excluded_public: true
+    },
+    recent_content: contents.slice(-20).reverse().map(function (row) { return cmsPublicContentRow(row, body.locale || "th"); })
+  };
+}
+
+function cmsPublicSettings(locale) {
+  const requested = cmsNormalizeLocale(locale);
+  const settings = {};
+  sheetToObjects(SHEET_NAMES.cmsSiteSettings).filter(function (item) {
+    return normalizeSalesStatus(item.status || "ACTIVE") === "ACTIVE" && !isQaRecord(item);
+  }).forEach(function (item) {
+    const key = cleanString(item.setting_key, 120);
+    const itemLocale = cmsNormalizeLocale(item.locale || "th");
+    if (itemLocale === "th" && settings[key] === undefined) settings[key] = cleanString(item.setting_value, 3000);
+    if (itemLocale === requested) settings[key] = cleanString(item.setting_value, 3000);
+  });
+  return settings;
+}
+
+function cmsPublicNavigation(locale, placement) {
+  const requested = cmsNormalizeLocale(locale);
+  const place = normalizeSalesStatus(placement || "PUBLIC_MAIN");
+  return sheetToObjects(SHEET_NAMES.cmsNavigation).filter(function (item) {
+    return normalizeSalesStatus(item.status || "ACTIVE") === "ACTIVE" && normalizeSalesStatus(item.placement || "PUBLIC_MAIN") === place && normalizeSalesStatus(item.audience || "PUBLIC") === "PUBLIC" && !isQaRecord(item);
+  }).sort(function (a, b) {
+    return Number(a.display_order || 0) - Number(b.display_order || 0);
+  }).map(function (item) {
+    return {
+      nav_id: cleanString(item.nav_id, 80),
+      label: requested === "en" ? (cleanString(item.label_en, 120) || cleanString(item.label_th, 120)) : cleanString(item.label_th, 120),
+      href: cleanString(item.href, 1000),
+      placement: normalizeSalesStatus(item.placement || "PUBLIC_MAIN"),
+      audience: "PUBLIC"
+    };
+  });
+}
+
+function cmsPublicList(type, params) {
+  const options = params || {};
+  const locale = cmsNormalizeLocale(options.locale || "th");
+  const contentType = cmsNormalizeType(type);
+  const placement = normalizeSalesStatus(options.placement || "");
+  const audience = normalizeSalesStatus(options.audience || "PUBLIC");
+  const now = new Date();
+  const rows = sheetToObjects(SHEET_NAMES.cmsContent).filter(function (item) {
+    if (cmsNormalizeType(item.content_type) !== contentType) return false;
+    if (!cmsIsPublished(item, now)) return false;
+    if (placement && normalizeSalesStatus(item.placement || "") !== placement) return false;
+    if (normalizeSalesStatus(item.audience || "PUBLIC") !== "PUBLIC" && normalizeSalesStatus(item.audience || "") !== audience) return false;
+    return true;
+  }).sort(function (a, b) {
+    return Number(a.display_order || 0) - Number(b.display_order || 0);
+  }).map(function (row) {
+    return cmsPublicContentRow(row, locale);
+  });
+  return rows;
+}
+
+function cmsPublicBundle(params) {
+  ensureCmsSheets();
+  const locale = cmsNormalizeLocale(params && params.locale);
+  return {
+    ok: true,
+    marker: "SBOS V3-5",
+    locale: locale,
+    settings: cmsPublicSettings(locale),
+    navigation: cmsPublicNavigation(locale, "PUBLIC_MAIN"),
+    banners: cmsPublicList("BANNER", Object.assign({}, params, { locale: locale })),
+    home_sections: cmsPublicList("PAGE_SECTION", Object.assign({}, params, { locale: locale })),
+    collections: cmsPublicList("COLLECTION_CONTENT", Object.assign({}, params, { locale: locale })),
+    products: cmsPublicProducts(params).products,
+    promotions: cmsPublicList("PROMOTION", Object.assign({}, params, { locale: locale })),
+    faq: cmsPublicList("FAQ", Object.assign({}, params, { locale: locale })).slice(0, 12),
+    articles: cmsPublicList("ARTICLE", Object.assign({}, params, { locale: locale })).slice(0, 12)
+  };
+}
+
+function cmsPublicContent(params) {
+  ensureCmsSheets();
+  const locale = cmsNormalizeLocale(params && params.locale);
+  const slug = cleanString(params && params.slug, 180).toLowerCase();
+  const id = cleanString(params && params.content_id, 80);
+  const row = sheetToObjects(SHEET_NAMES.cmsContent).find(function (item) {
+    if (!cmsIsPublished(item)) return false;
+    if (id && cleanString(item.content_id, 80) === id) return true;
+    return slug && cleanString(item.slug, 180).toLowerCase() === slug;
+  });
+  return row ? { ok: true, content: cmsPublicContentRow(row, locale) } : { ok: false, message: "Content not found" };
+}
+
+function cmsPublicProducts(params) {
+  ensureCmsSheets();
+  const locale = cmsNormalizeLocale(params && params.locale);
+  const productContents = cmsPublicList("PRODUCT_CONTENT", Object.assign({}, params, { locale: locale }));
+  const byProduct = {};
+  productContents.forEach(function (item) {
+    byProduct[item.related_entity_id] = item;
+  });
+  const products = sheetToObjects(SHEET_NAMES.products).filter(function (product) {
+    return normalizeSalesStatus(product.status || "ACTIVE") === "ACTIVE" && !isQaRecord(product);
+  }).map(function (product) {
+    return Object.assign({}, product, {
+      cms_content: byProduct[product.product_id] || null,
+      price_authority: "PRICING_ENGINE",
+      content_authority: "CMS"
+    });
+  });
+  return { ok: true, total: products.length, products: products };
+}
+
+function cmsPublicCollections(params) {
+  ensureCmsSheets();
+  return { ok: true, collections: cmsPublicList("COLLECTION_CONTENT", params || {}) };
+}
+
+function cmsPublicPromotions(params) {
+  ensureCmsSheets();
+  return { ok: true, promotions: cmsPublicList("PROMOTION", params || {}) };
+}
+
+function cmsPublicBanners(params) {
+  ensureCmsSheets();
+  return { ok: true, banners: cmsPublicList("BANNER", params || {}) };
+}
+
+function cmsPublicFaq(params) {
+  ensureCmsSheets();
+  return { ok: true, faq: cmsPublicList("FAQ", params || {}) };
+}
+
+function cmsPublicArticles(params) {
+  ensureCmsSheets();
+  return { ok: true, articles: cmsPublicList("ARTICLE", params || {}) };
+}
+
+function cmsIntegrityCheck(body) {
+  ensureSalesSheets();
+  const admin = requireAdminActor(body);
+  if (!admin.ok) return admin;
+  const anomalies = [];
+  const slugs = {};
+  sheetToObjects(SHEET_NAMES.cmsContent).forEach(function (item) {
+    const slug = cleanString(item.slug, 180).toLowerCase();
+    if (slug && !isQaRecord(item)) {
+      slugs[slug] = (slugs[slug] || 0) + 1;
+    }
+    if (cmsNormalizeType(item.content_type) === "PRODUCT_CONTENT" && !findProductById(item.related_entity_id)) {
+      anomalies.push({ type: "PRODUCT_REFERENCE_NOT_FOUND", content_id: item.content_id, product_id: item.related_entity_id });
+    }
+    if (cmsNormalizeStatus(item.status) === CMS_STATUS.PUBLISHED && isQaRecord(item)) {
+      anomalies.push({ type: "QA_CONTENT_PUBLISHED", content_id: item.content_id });
+    }
+    if (/commission|wallet/i.test(String(item.metadata_json || ""))) {
+      anomalies.push({ type: "FINANCE_MUTATION_REFERENCE", content_id: item.content_id });
+    }
+  });
+  Object.keys(slugs).forEach(function (slug) {
+    if (slugs[slug] > 1) anomalies.push({ type: "DUPLICATE_SLUG", slug: slug, count: slugs[slug] });
+  });
+  return { ok: true, anomalies: anomalies, public_draft_leak_protected: true, product_pricing_authoritative: true };
 }
 
 /* =========================================================
