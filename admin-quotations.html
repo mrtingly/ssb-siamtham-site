@@ -29,7 +29,7 @@ function withAdmin(params={}){return{...params,...adminAuth()}}
 let quotes=[];let selectedId=null;
 function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 async function apiGet(action,params={}){const query=new URLSearchParams({action,...params});const res=await fetch(API_URL+"?"+query.toString(),{cache:"no-store"});return res.json()}
-async function apiPost(payload){const res=await fetch(API_URL,{method:"POST",body:JSON.stringify(payload)});const text=await res.text();try{return JSON.parse(text)}catch(e){return{ok:false,message:text||"Invalid API response"}}}
+async function apiPost(payload){const res=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});const text=await res.text();try{return JSON.parse(text)}catch(e){return{ok:false,message:text||"Invalid API response"}}}
 function normStatus(s){return String(s||"").toUpperCase()}
 function statusLabel(s){s=normStatus(s);return s==="CONVERTED"?"สร้าง Order แล้ว":s==="APPROVED"?"อนุมัติแล้ว":s==="REJECTED"?"ไม่อนุมัติ":s==="DRAFT"?"ฉบับร่าง":"ลูกค้าเซ็นแล้ว"}function statusClass(s){s=normStatus(s);return s==="APPROVED"||s==="CONVERTED"?"approved":s==="REJECTED"?"rejected":s==="DRAFT"?"draft":"signed"}
 function row(label,value){return `<div class="row"><span>${esc(label)}</span><b>${esc(value||"-")}</b></div>`}

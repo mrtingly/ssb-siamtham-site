@@ -134,6 +134,23 @@ function doGet(e) {
         result = listProducts(e.parameter);
         break;
 
+      case "listCollections":
+        result = listCollections(e.parameter);
+        break;
+
+      case "listProductModels":
+        result = listProductModels(e.parameter);
+        break;
+
+      case "listProductVariants":
+      case "listProductOptions":
+        result = listProductVariants(e.parameter);
+        break;
+
+      case "resolveProductConfiguration":
+        result = resolveProductConfiguration(e.parameter);
+        break;
+
       case "getProduct":
         result = getProduct(e.parameter);
         break;
@@ -499,8 +516,29 @@ function doPost(e) {
         result = deleteProduct(body);
         break;
 
+      case "listCollections":
+        result = listCollections(body);
+        break;
+
+      case "listProductModels":
+        result = listProductModels(body);
+        break;
+
+      case "listProductVariants":
+      case "listProductOptions":
+        result = listProductVariants(body);
+        break;
+
+      case "resolveProductConfiguration":
+        result = resolveProductConfiguration(body);
+        break;
+
       case "upsertPricing":
         result = upsertPricing(body);
+        break;
+
+      case "runProductIntegrityCheck":
+        result = runProductIntegrityCheck(body);
         break;
 
       case "updateDepositPolicy":
@@ -5404,6 +5442,138 @@ function publicDepositPolicy(policy) {
   };
 }
 
+function catalogKey(parts) {
+  return (parts || []).map(function (part) {
+    return cleanString(part, 220).toLowerCase();
+  }).join("|");
+}
+
+function catalogId(prefix, parts) {
+  const key = catalogKey(parts);
+  let hash = 0;
+  for (let index = 0; index < key.length; index += 1) {
+    hash = ((hash << 5) - hash + key.charCodeAt(index)) | 0;
+  }
+  const safe = cleanString(parts && parts[parts.length - 1], 80)
+    .toUpperCase()
+    .replace(/[^A-Z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 28) || "ITEM";
+  return prefix + "-" + safe + "-" + Math.abs(hash).toString(36).toUpperCase();
+}
+
+function activeProductRows(includeInactive) {
+  ensureSalesSheets();
+  return sheetToObjects(SHEET_NAMES.products).filter(function (product) {
+    return includeInactive || normalizeSalesStatus(product.status || "ACTIVE") === "ACTIVE";
+  });
+}
+
+function productMatchesField(product, field, expected) {
+  const value = cleanString(expected, 220);
+  if (!value) return true;
+  return cleanString(product[field], 220).toLowerCase() === value.toLowerCase();
+}
+
+function safeSheetText(value, maxLength) {
+  const text = cleanString(value, maxLength);
+  return /^[=+\-@]/.test(text) ? "'" + text : text;
+}
+
+function productQuantity(options) {
+  const raw = options && (options.quantity || options.qty);
+  const quantity = raw === undefined || raw === "" ? 1 : Number(raw);
+  if (!isFinite(quantity) || Math.floor(quantity) !== quantity || quantity < 1 || quantity > 99) {
+    return {
+      ok: false,
+      message: "Invalid quantity"
+    };
+  }
+  return {
+    ok: true,
+    quantity: quantity
+  };
+}
+
+function pricingVersion(pricing) {
+  if (!pricing) return "";
+  return [
+    cleanString(pricing.pricing_id, 80),
+    pricing.updated_at || pricing.effective_from || pricing.created_at || ""
+  ].join("@");
+}
+
+function productDisplay(product) {
+  return {
+    collection_id: catalogId("COL", [product.collection]),
+    product_model_id: catalogId("MDL", [product.collection, product.brand, product.model]),
+    variant_id: catalogId("VAR", [product.collection, product.brand, product.model, product.storage]),
+    color_id: catalogId("CLR", [product.collection, product.brand, product.model, product.storage, product.color]),
+    product_id: cleanString(product.product_id, 80),
+    sku: cleanString(product.sku, 120),
+    collection: cleanString(product.collection, 180),
+    brand: cleanString(product.brand, 120),
+    model: cleanString(product.model, 160),
+    storage: cleanString(product.storage, 80),
+    color: cleanString(product.color, 120),
+    description: [product.model, product.storage, product.color].filter(Boolean).join(" / "),
+    status: normalizeSalesStatus(product.status || "ACTIVE")
+  };
+}
+
+function resolveProductSelection(options, requireExact) {
+  const params = options || {};
+  const includeInactive = booleanValue(params.include_inactive || params.includeInactive);
+  const products = activeProductRows(includeInactive);
+  const productId = cleanString(params.product_id || params.productId, 80);
+  const sku = cleanString(params.sku, 120);
+  let candidates = products;
+
+  if (productId) {
+    candidates = candidates.filter(function (product) {
+      return cleanString(product.product_id, 80) === productId;
+    });
+  }
+
+  if (sku) {
+    candidates = candidates.filter(function (product) {
+      return cleanString(product.sku, 120).toLowerCase() === sku.toLowerCase();
+    });
+  }
+
+  [
+    ["collection", params.collection || params.collection_id || params.collectionId],
+    ["brand", params.brand],
+    ["model", params.model || params.product_model || params.productModel],
+    ["storage", params.storage || params.storage_option || params.storageOption || params.variant || params.variant_id || params.variantId],
+    ["color", params.color || params.color_option || params.colorOption]
+  ].forEach(function (pair) {
+    if (cleanString(pair[1], 220)) {
+      candidates = candidates.filter(function (product) {
+        return productMatchesField(product, pair[0], pair[1]);
+      });
+    }
+  });
+
+  if (productId && candidates.length === 0) {
+    return { ok: false, message: "Invalid product configuration" };
+  }
+
+  if (requireExact && candidates.length !== 1) {
+    return {
+      ok: false,
+      message: candidates.length > 1 ? "Product configuration is ambiguous" : "Product configuration is not available",
+      matches: candidates.length
+    };
+  }
+
+  return {
+    ok: true,
+    product: candidates[0] || null,
+    matches: candidates
+  };
+}
+
 function findProductById(productId) {
   const normalizedId = cleanString(productId, 80);
   if (!normalizedId) return null;
@@ -5414,25 +5584,8 @@ function findProductById(productId) {
 }
 
 function findProductForPricing(options) {
-  const productId = cleanString(options && (options.product_id || options.productId), 80);
-  const sku = cleanString(options && options.sku, 120).toLowerCase();
-  const brand = cleanString(options && options.brand, 120).toLowerCase();
-  const model = cleanString(options && options.model, 160).toLowerCase();
-  const storage = cleanString(options && options.storage, 80).toLowerCase();
-  const color = cleanString(options && options.color, 120).toLowerCase();
-
-  ensureSalesSheets();
-  return sheetToObjects(SHEET_NAMES.products).find(function (product) {
-    if (productId && cleanString(product.product_id, 80) === productId) return true;
-    if (sku && cleanString(product.sku, 120).toLowerCase() === sku) return true;
-    return (
-      model &&
-      cleanString(product.model, 160).toLowerCase() === model &&
-      (!brand || cleanString(product.brand, 120).toLowerCase() === brand) &&
-      (!storage || cleanString(product.storage, 80).toLowerCase() === storage) &&
-      (!color || cleanString(product.color, 120).toLowerCase() === color)
-    );
-  }) || null;
+  const result = resolveProductSelection(options || {}, true);
+  return result.ok ? result.product : null;
 }
 
 function activePricingForProduct(product) {
@@ -5461,7 +5614,12 @@ function activePricingForProduct(product) {
 }
 
 function calculateBackendPricing(options) {
-  const product = findProductForPricing(options || {});
+  const quantityResult = productQuantity(options || {});
+  if (!quantityResult.ok) return quantityResult;
+
+  const resolved = resolveProductSelection(options || {}, true);
+  if (!resolved.ok) return resolved;
+  const product = resolved.product;
 
   if (!product || normalizeSalesStatus(product.status || "ACTIVE") !== "ACTIVE") {
     return {
@@ -5480,21 +5638,32 @@ function calculateBackendPricing(options) {
     };
   }
 
-  const productPrice = Math.max(0, Number(pricing.product_price || 0));
-  const serviceFee = Math.max(0, Number(pricing.service_fee || DEFAULT_SERVICE_FEE));
-  const discount = Math.max(0, Number(pricing.discount || 0));
+  const quantity = quantityResult.quantity;
+  const productPriceSatang = Math.max(0, toSatang(pricing.product_price || 0));
+  const serviceFeeSatang = Math.max(0, toSatang(pricing.service_fee || DEFAULT_SERVICE_FEE));
+  const discountSatang = Math.max(0, toSatang(pricing.discount || 0));
   const vatRate = Math.max(0, Math.min(1, Number(pricing.vat_rate || DEFAULT_VAT_RATE)));
-  const subtotal = Math.max(0, productPrice + serviceFee - discount);
-  const vat = Math.max(0, subtotal * vatRate);
-  const grandTotal = Math.max(0, subtotal + vat);
+  const unitPreVatSatang = Math.max(0, productPriceSatang + serviceFeeSatang - discountSatang);
+  const subtotalSatang = unitPreVatSatang * quantity;
+  const vatSatang = Math.max(0, Math.round(subtotalSatang * vatRate));
+  const grandTotalSatang = Math.max(0, subtotalSatang + vatSatang);
   const policy = publicDepositPolicy(activeDepositPolicy());
   const requestedPaymentOption = normalizeSalesStatus((options && (options.payment_option || options.paymentOption)) || "DEPOSIT");
   const paymentOption = requestedPaymentOption === "FULL" || requestedPaymentOption === "FULL_PAYMENT"
     ? "FULL"
     : (policy.enabled ? "DEPOSIT" : "FULL");
   const depositPercent = paymentOption === "DEPOSIT" && policy.enabled ? policy.deposit_percent : 100;
-  const depositAmount = Math.round(grandTotal * depositPercent) / 100;
-  const balanceAmount = Math.max(0, grandTotal - depositAmount);
+  const depositAmountSatang = percentSatang(grandTotalSatang, depositPercent);
+  const balanceAmountSatang = Math.max(0, grandTotalSatang - depositAmountSatang);
+  const productPrice = fromSatang(productPriceSatang);
+  const serviceFee = fromSatang(serviceFeeSatang);
+  const discount = fromSatang(discountSatang);
+  const unitPreVatAmount = fromSatang(unitPreVatSatang);
+  const subtotal = fromSatang(subtotalSatang);
+  const vat = fromSatang(vatSatang);
+  const grandTotal = fromSatang(grandTotalSatang);
+  const depositAmount = fromSatang(depositAmountSatang);
+  const balanceAmount = fromSatang(balanceAmountSatang);
   const lineItems = [
     {
       type: "DEVICE",
@@ -5502,17 +5671,17 @@ function calculateBackendPricing(options) {
       sku: product.sku,
       name: product.model,
       description: [product.storage, product.color].filter(Boolean).join(" / "),
-      quantity: 1,
+      quantity: quantity,
       unit_price: productPrice,
-      total: productPrice
+      total: fromSatang(productPriceSatang * quantity)
     },
     {
       type: "SERVICE",
       name: "SSBMS Installation Service",
       description: "System setup and installation service",
-      quantity: 1,
+      quantity: quantity,
       unit_price: serviceFee,
-      total: serviceFee
+      total: fromSatang(serviceFeeSatang * quantity)
     }
   ];
 
@@ -5521,33 +5690,220 @@ function calculateBackendPricing(options) {
       type: "DISCOUNT",
       name: pricing.promotion || "Discount",
       description: "Approved backend discount",
-      quantity: 1,
+      quantity: quantity,
       unit_price: -discount,
-      total: -discount
+      total: -fromSatang(discountSatang * quantity)
     });
   }
 
   return {
     ok: true,
-    product: publicProduct(product),
+    product: productDisplay(product),
     pricing: publicPricing(pricing),
     policy: policy,
+    pricing_version: pricingVersion(pricing),
+    calculated_at: new Date(),
     quote: {
+      product_id: cleanString(product.product_id, 80),
+      sku: cleanString(product.sku, 120),
+      quantity: quantity,
       product_price: productPrice,
       service_fee: serviceFee,
+      unit_pre_vat_amount: unitPreVatAmount,
       promotion: cleanString(pricing.promotion, 200),
       discount: discount,
       subtotal: subtotal,
+      taxable_amount: subtotal,
       vat_rate: vatRate,
       vat: vat,
+      vat_amount: vat,
       total: grandTotal,
       grand_total: grandTotal,
+      total_including_vat: grandTotal,
       payment_option: paymentOption,
       deposit_percent: depositPercent,
       deposit_amount: depositAmount,
       balance_amount: balanceAmount,
+      outstanding_balance: balanceAmount,
+      pricing_version: pricingVersion(pricing),
+      calculated_at: new Date(),
       line_items: lineItems
     }
+  };
+}
+
+function safeStartingPrice(product) {
+  const pricing = activePricingForProduct(product);
+  if (!pricing) return null;
+  const productSatang = Math.max(0, toSatang(pricing.product_price || 0));
+  const serviceSatang = Math.max(0, toSatang(pricing.service_fee || DEFAULT_SERVICE_FEE));
+  const discountSatang = Math.max(0, toSatang(pricing.discount || 0));
+  const preVatSatang = Math.max(0, productSatang + serviceSatang - discountSatang);
+  const vatRate = Math.max(0, Math.min(1, Number(pricing.vat_rate || DEFAULT_VAT_RATE)));
+  return fromSatang(preVatSatang + Math.round(preVatSatang * vatRate));
+}
+
+function listCollections(params) {
+  const options = params || {};
+  const includeInactive = booleanValue(options.include_inactive || options.includeInactive);
+  if (includeInactive) {
+    const admin = requireAdminActor(options);
+    if (!admin.ok) return admin;
+  }
+  const map = {};
+  activeProductRows(includeInactive).forEach(function (product) {
+    const key = catalogKey([product.collection]);
+    if (!key) return;
+    if (!map[key]) {
+      map[key] = {
+        collection_id: catalogId("COL", [product.collection]),
+        collection: cleanString(product.collection, 180),
+        brands: {},
+        active_sku_count: 0,
+        model_count: 0,
+        starting_price: null
+      };
+    }
+    map[key].brands[cleanString(product.brand, 120)] = true;
+    map[key].active_sku_count += normalizeSalesStatus(product.status || "ACTIVE") === "ACTIVE" ? 1 : 0;
+    const price = safeStartingPrice(product);
+    if (price !== null && (map[key].starting_price === null || price < map[key].starting_price)) {
+      map[key].starting_price = price;
+    }
+  });
+  const collections = Object.keys(map).map(function (key) {
+    const item = map[key];
+    item.brands = Object.keys(item.brands).filter(Boolean).sort();
+    item.model_count = listProductModels({ collection: item.collection }).total || 0;
+    return item;
+  }).sort(function (a, b) {
+    return a.collection.localeCompare(b.collection);
+  });
+  return { ok: true, total: collections.length, collections: collections };
+}
+
+function listProductModels(params) {
+  const options = params || {};
+  const includeInactive = booleanValue(options.include_inactive || options.includeInactive);
+  if (includeInactive) {
+    const admin = requireAdminActor(options);
+    if (!admin.ok) return admin;
+  }
+  const collection = cleanString(options.collection, 180).toLowerCase();
+  const brand = cleanString(options.brand, 120).toLowerCase();
+  const query = cleanString(options.q || options.search, 200).toLowerCase();
+  const map = {};
+  activeProductRows(includeInactive).forEach(function (product) {
+    if (collection && cleanString(product.collection, 180).toLowerCase() !== collection) return;
+    if (brand && cleanString(product.brand, 120).toLowerCase() !== brand) return;
+    if (query && [product.collection, product.brand, product.model, product.storage, product.color, product.sku].join(" ").toLowerCase().indexOf(query) === -1) return;
+    const key = catalogKey([product.collection, product.brand, product.model]);
+    if (!map[key]) {
+      map[key] = {
+        product_model_id: catalogId("MDL", [product.collection, product.brand, product.model]),
+        collection_id: catalogId("COL", [product.collection]),
+        collection: cleanString(product.collection, 180),
+        brand: cleanString(product.brand, 120),
+        model: cleanString(product.model, 160),
+        variant_count: 0,
+        color_count: 0,
+        sku_count: 0,
+        starting_price: null,
+        default_product_id: cleanString(product.product_id, 80),
+        default_sku: cleanString(product.sku, 120),
+        status: "ACTIVE",
+        storages: {},
+        colors: {}
+      };
+    }
+    map[key].sku_count += 1;
+    map[key].storages[cleanString(product.storage, 80)] = true;
+    map[key].colors[cleanString(product.color, 120)] = true;
+    const price = safeStartingPrice(product);
+    if (price !== null && (map[key].starting_price === null || price < map[key].starting_price)) {
+      map[key].starting_price = price;
+      map[key].default_product_id = cleanString(product.product_id, 80);
+      map[key].default_sku = cleanString(product.sku, 120);
+    }
+  });
+  const models = Object.keys(map).map(function (key) {
+    const item = map[key];
+    item.storage_options = Object.keys(item.storages).filter(Boolean).sort();
+    item.color_options = Object.keys(item.colors).filter(Boolean).sort();
+    item.variant_count = item.storage_options.length;
+    item.color_count = item.color_options.length;
+    delete item.storages;
+    delete item.colors;
+    return item;
+  }).sort(function (a, b) {
+    return [a.collection, a.brand, a.model].join(" ").localeCompare([b.collection, b.brand, b.model].join(" "));
+  });
+  return { ok: true, total: models.length, models: models };
+}
+
+function listProductVariants(params) {
+  const options = params || {};
+  const includeInactive = booleanValue(options.include_inactive || options.includeInactive);
+  if (includeInactive) {
+    const admin = requireAdminActor(options);
+    if (!admin.ok) return admin;
+  }
+  const collection = cleanString(options.collection, 180).toLowerCase();
+  const brand = cleanString(options.brand, 120).toLowerCase();
+  const model = cleanString(options.model || options.product_model || options.productModel, 160).toLowerCase();
+  const rows = activeProductRows(includeInactive).filter(function (product) {
+    if (collection && cleanString(product.collection, 180).toLowerCase() !== collection) return false;
+    if (brand && cleanString(product.brand, 120).toLowerCase() !== brand) return false;
+    if (model && cleanString(product.model, 160).toLowerCase() !== model) return false;
+    return true;
+  });
+  const variantMap = {};
+  rows.forEach(function (product) {
+    const key = catalogKey([product.collection, product.brand, product.model, product.storage]);
+    if (!variantMap[key]) {
+      variantMap[key] = {
+        variant_id: catalogId("VAR", [product.collection, product.brand, product.model, product.storage]),
+        collection: cleanString(product.collection, 180),
+        brand: cleanString(product.brand, 120),
+        model: cleanString(product.model, 160),
+        storage: cleanString(product.storage, 80),
+        colors: [],
+        sku_count: 0
+      };
+    }
+    variantMap[key].sku_count += 1;
+    variantMap[key].colors.push({
+      color: cleanString(product.color, 120),
+      product_id: cleanString(product.product_id, 80),
+      sku: cleanString(product.sku, 120),
+      status: normalizeSalesStatus(product.status || "ACTIVE"),
+      available: normalizeSalesStatus(product.status || "ACTIVE") === "ACTIVE"
+    });
+  });
+  const variants = Object.keys(variantMap).map(function (key) {
+    const item = variantMap[key];
+    item.colors.sort(function (a, b) { return a.color.localeCompare(b.color); });
+    return item;
+  }).sort(function (a, b) {
+    return a.storage.localeCompare(b.storage);
+  });
+  return { ok: true, total: variants.length, variants: variants };
+}
+
+function resolveProductConfiguration(params) {
+  const quantityResult = productQuantity(params || {});
+  if (!quantityResult.ok) return quantityResult;
+  const resolved = resolveProductSelection(params || {}, true);
+  if (!resolved.ok) return resolved;
+  const pricing = activePricingForProduct(resolved.product);
+  return {
+    ok: true,
+    configuration: productDisplay(resolved.product),
+    product: productDisplay(resolved.product),
+    availability: normalizeSalesStatus(resolved.product.status || "ACTIVE") === "ACTIVE" ? "AVAILABLE" : "INACTIVE",
+    pricing_eligible: Boolean(pricing),
+    pricing_version: pricingVersion(pricing),
+    quantity: quantityResult.quantity
   };
 }
 
@@ -5610,7 +5966,7 @@ function createProduct(body) {
   const admin = requireAdminActor(body);
   if (!admin.ok) return admin;
 
-  const sku = cleanString(body && body.sku, 120);
+  const sku = safeSheetText(body && body.sku, 120);
   if (!sku) return { ok: false, message: "SKU is required" };
 
   const duplicate = sheetToObjects(SHEET_NAMES.products).find(function (product) {
@@ -5623,11 +5979,11 @@ function createProduct(body) {
   const now = new Date();
   const product = {
     product_id: makeId("PRD"),
-    collection: cleanString(body.collection, 180),
-    brand: cleanString(body.brand, 120),
-    model: cleanString(body.model, 160),
-    storage: cleanString(body.storage, 80),
-    color: cleanString(body.color, 120),
+    collection: safeSheetText(body.collection, 180),
+    brand: safeSheetText(body.brand, 120),
+    model: safeSheetText(body.model, 160),
+    storage: safeSheetText(body.storage, 80),
+    color: safeSheetText(body.color, 120),
     sku: sku,
     status: normalizeSalesStatus(body.status || "ACTIVE") === "INACTIVE" ? "INACTIVE" : "ACTIVE",
     created_at: now,
@@ -5657,15 +6013,24 @@ function updateProduct(body) {
   if (!product) return { ok: false, message: "Product not found" };
 
   const updates = {
-    collection: cleanString(body.collection || product.collection, 180),
-    brand: cleanString(body.brand || product.brand, 120),
-    model: cleanString(body.model || product.model, 160),
-    storage: cleanString(body.storage || product.storage, 80),
-    color: cleanString(body.color || product.color, 120),
-    sku: cleanString(body.sku || product.sku, 120),
+    collection: safeSheetText(body.collection || product.collection, 180),
+    brand: safeSheetText(body.brand || product.brand, 120),
+    model: safeSheetText(body.model || product.model, 160),
+    storage: safeSheetText(body.storage || product.storage, 80),
+    color: safeSheetText(body.color || product.color, 120),
+    sku: safeSheetText(body.sku || product.sku, 120),
     status: normalizeSalesStatus(body.status || product.status || "ACTIVE") === "INACTIVE" ? "INACTIVE" : "ACTIVE",
     updated_at: new Date()
   };
+
+  const duplicate = sheetToObjects(SHEET_NAMES.products).find(function (item) {
+    return cleanString(item.product_id, 80) !== cleanString(product.product_id, 80) &&
+      cleanString(item.sku, 120).toLowerCase() === updates.sku.toLowerCase();
+  });
+
+  if (duplicate) {
+    return { ok: false, message: "SKU already exists", product: publicProduct(duplicate) };
+  }
 
   updateRowFields(SHEET_NAMES.products, product._row, updates);
   writeAuditLog("updateProduct", "", "SUCCESS", "Product updated", {
@@ -5731,7 +6096,7 @@ function upsertPricing(body) {
     product_price: productPrice,
     service_fee: serviceFee,
     vat_rate: vatRate,
-    promotion: cleanString(body.promotion, 200),
+    promotion: safeSheetText(body.promotion, 200),
     discount: discount,
     status: normalizeSalesStatus(body.status || "ACTIVE") === "INACTIVE" ? "INACTIVE" : "ACTIVE",
     effective_from: body.effective_from || body.effectiveFrom || now,
@@ -5753,6 +6118,83 @@ function upsertPricing(body) {
   });
 
   return { ok: true, pricing: publicPricing(data) };
+}
+
+function runProductIntegrityCheck(body) {
+  ensureSalesSheets();
+  const admin = requireAdminActor(body || {});
+  if (!admin.ok) return admin;
+
+  const products = sheetToObjects(SHEET_NAMES.products);
+  const pricingRows = sheetToObjects(SHEET_NAMES.productPricing);
+  const quotations = sheetToObjects(SHEET_NAMES.quotations);
+  const issues = [];
+  const byProductId = {};
+  const bySku = {};
+  const byConfiguration = {};
+
+  products.forEach(function (product) {
+    const productId = cleanString(product.product_id, 80);
+    const sku = cleanString(product.sku, 120);
+    const configKey = catalogKey([product.collection, product.brand, product.model, product.storage, product.color]);
+
+    if (!productId) issues.push({ severity: "HIGH", type: "MISSING_PRODUCT_ID", sku: sku });
+    if (!sku) issues.push({ severity: "HIGH", type: "MISSING_SKU", product_id: productId });
+    if (!cleanString(product.collection, 180)) issues.push({ severity: "MEDIUM", type: "MISSING_COLLECTION", product_id: productId, sku: sku });
+    if (!cleanString(product.model, 160)) issues.push({ severity: "MEDIUM", type: "MISSING_MODEL", product_id: productId, sku: sku });
+    if (!cleanString(product.storage, 80)) issues.push({ severity: "MEDIUM", type: "MISSING_VARIANT", product_id: productId, sku: sku });
+    if (!cleanString(product.color, 120)) issues.push({ severity: "LOW", type: "MISSING_COLOR", product_id: productId, sku: sku });
+
+    if (productId) {
+      byProductId[productId] = (byProductId[productId] || 0) + 1;
+    }
+    if (sku) {
+      bySku[sku.toLowerCase()] = (bySku[sku.toLowerCase()] || 0) + 1;
+    }
+    if (configKey) {
+      byConfiguration[configKey] = (byConfiguration[configKey] || 0) + 1;
+    }
+  });
+
+  Object.keys(byProductId).forEach(function (key) {
+    if (byProductId[key] > 1) issues.push({ severity: "HIGH", type: "DUPLICATE_PRODUCT_ID", product_id: key, count: byProductId[key] });
+  });
+  Object.keys(bySku).forEach(function (key) {
+    if (bySku[key] > 1) issues.push({ severity: "HIGH", type: "DUPLICATE_SKU", sku: key, count: bySku[key] });
+  });
+  Object.keys(byConfiguration).forEach(function (key) {
+    if (byConfiguration[key] > 1) issues.push({ severity: "HIGH", type: "DUPLICATE_CONFIGURATION", configuration_key: key, count: byConfiguration[key] });
+  });
+
+  pricingRows.forEach(function (pricing) {
+    const pricingId = cleanString(pricing.pricing_id, 80);
+    const product = findProductForPricing({ product_id: pricing.product_id, sku: pricing.sku, include_inactive: true });
+    const productPrice = toSatang(pricing.product_price || 0);
+    const serviceFee = toSatang(pricing.service_fee || 0);
+    const discount = toSatang(pricing.discount || 0);
+    if (!product) issues.push({ severity: "HIGH", type: "PRICING_ORPHAN_PRODUCT", pricing_id: pricingId, product_id: pricing.product_id, sku: pricing.sku });
+    if (!isFinite(productPrice) || productPrice < 0) issues.push({ severity: "HIGH", type: "INVALID_PRODUCT_PRICE", pricing_id: pricingId });
+    if (!isFinite(serviceFee) || serviceFee < 0) issues.push({ severity: "HIGH", type: "INVALID_SERVICE_FEE", pricing_id: pricingId });
+    if (!isFinite(discount) || discount < 0) issues.push({ severity: "MEDIUM", type: "INVALID_DISCOUNT", pricing_id: pricingId });
+    if (Number(pricing.vat_rate || 0) < 0 || Number(pricing.vat_rate || 0) > 1) issues.push({ severity: "HIGH", type: "INVALID_VAT_RATE", pricing_id: pricingId });
+  });
+
+  quotations.forEach(function (quotation) {
+    const status = normalizeSalesStatus(quotation.status || "");
+    if (["DRAFT", "SUBMITTED", "APPROVED"].indexOf(status) !== -1) {
+      const product = findProductById(quotation.product_id);
+      if (product && normalizeSalesStatus(product.status || "ACTIVE") !== "ACTIVE") {
+        issues.push({ severity: "MEDIUM", type: "ACTIVE_QUOTATION_INACTIVE_PRODUCT", quotation_id: quotation.quotation_id, product_id: quotation.product_id });
+      }
+    }
+  });
+
+  return {
+    ok: true,
+    total_issues: issues.length,
+    critical_or_high: issues.filter(function (issue) { return issue.severity === "HIGH" || issue.severity === "CRITICAL"; }).length,
+    issues: issues
+  };
 }
 
 function getDepositPolicy(params) {
@@ -5828,6 +6270,10 @@ function publicCustomer(customer) {
 }
 
 function publicQuotation(quotation) {
+  const quotationLineItems = parseJsonValue(quotation.line_items_json, []);
+  const deviceLine = quotationLineItems.find(function (item) {
+    return cleanString(item.type, 80).toUpperCase() === "DEVICE";
+  }) || {};
   return {
     quotation_id: cleanString(quotation.quotation_id, 80),
     quoteId: cleanString(quotation.quotation_id, 80),
@@ -5848,6 +6294,7 @@ function publicQuotation(quotation) {
     model: cleanString(quotation.model, 160),
     storage: cleanString(quotation.storage, 80),
     color: cleanString(quotation.color, 120),
+    quantity: Math.max(1, Number(deviceLine.quantity || 1)),
     price_date: cleanString(quotation.price_date, 80),
     phone_price: Number(quotation.phone_price || 0),
     phonePrice: Number(quotation.phone_price || 0),
@@ -5865,7 +6312,7 @@ function publicQuotation(quotation) {
     deposit_percent: Number(quotation.deposit_percent || 0),
     deposit_amount: Number(quotation.deposit_amount || 0),
     balance_amount: Number(quotation.balance_amount || 0),
-    line_items: parseJsonValue(quotation.line_items_json, []),
+    line_items: quotationLineItems,
     customer: parseJsonValue(quotation.customer_json, {}),
     signer_name: cleanString(quotation.signer_name, 200),
     signerName: cleanString(quotation.signer_name, 200),
@@ -5885,6 +6332,10 @@ function publicQuotation(quotation) {
 }
 
 function publicOrder(order) {
+  const orderLineItems = parseJsonValue(order.line_items_json, []);
+  const deviceLine = orderLineItems.find(function (item) {
+    return cleanString(item.type, 80).toUpperCase() === "DEVICE";
+  }) || {};
   return {
     order_id: cleanString(order.order_id, 80),
     orderId: cleanString(order.order_id, 80),
@@ -5919,6 +6370,7 @@ function publicOrder(order) {
     model: cleanString(order.model, 160),
     storage: cleanString(order.storage, 80),
     color: cleanString(order.color, 120),
+    quantity: Math.max(1, Number(deviceLine.quantity || 1)),
     subtotal: Number(order.subtotal || 0),
     vat: Number(order.vat || 0),
     total: Number(order.total || order.grand_total || 0),
@@ -5931,7 +6383,7 @@ function publicOrder(order) {
     paid_amount: Number(order.paid_amount || 0),
     payment_status: cleanString(order.payment_status || "PENDING", 80),
     payment_summary: summarizePaymentsForOrder(order.order_id),
-    line_items: parseJsonValue(order.line_items_json, []),
+    line_items: orderLineItems,
     timeline: parseJsonValue(order.timeline_json, []),
     created_at: order.created_at || "",
     createdAt: order.created_at || "",
