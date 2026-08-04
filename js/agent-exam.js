@@ -1,7 +1,7 @@
 "use strict";
 
 (function () {
-  const API_URL = "https://script.google.com/macros/s/AKfycbyKhWE-_SuKreCPyD4tsNmqNMQz2hZ8hQtrckk92mh8rszh1jaNEeuuFBGsPOLKfAziNg/exec";
+  const API_URL = window.getSbosApiEndpoint ? window.getSbosApiEndpoint() : "";
   const SESSION_KEYS = ["ssb_agent_session", "ssb_agent_session_v1"];
   const CHOICES = new Set(["A", "B", "C", "D"]);
   const AUTO_SAVE_DELAY = 250;

@@ -1,5 +1,5 @@
 function sbosApiUrl(){
-  return "https://script.google.com/macros/s/AKfycbyKhWE-_SuKreCPyD4tsNmqNMQz2hZ8hQtrckk92mh8rszh1jaNEeuuFBGsPOLKfAziNg/exec";
+  return window.getSbosApiEndpoint ? window.getSbosApiEndpoint() : "";
 }
 
 async function postLogout(payload){

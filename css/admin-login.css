@@ -106,6 +106,83 @@ body{
   font-weight:900;
 }
 
+.login-message{
+  padding:12px 14px;
+  border-radius:14px;
+  background:#eef6ff;
+  border:1px solid #b9d7ff;
+  color:#12345f;
+  font-weight:800;
+  line-height:1.55;
+}
+
+.login-message.error{
+  background:#fff1f3;
+  border-color:#f5a9b2;
+  color:#8a1020;
+}
+
+.login-message.success{
+  background:#ecfdf3;
+  border-color:#75d69b;
+  color:#05603a;
+}
+
+.login-form input::placeholder{
+  color:#61738d;
+  opacity:1;
+}
+
+.login-form button:disabled{
+  opacity:.66;
+  cursor:not-allowed;
+  transform:none;
+  box-shadow:none;
+}
+
+@media (prefers-color-scheme: dark){
+  body{
+    background:#171717;
+    color:#f7f0df;
+  }
+
+  .login-card{
+    background:#242424;
+    border-color:#4a4030;
+  }
+
+  .login-card h1,
+  .login-form label{
+    color:#f7f0df;
+  }
+
+  .login-card p{
+    color:#c8c0ad;
+  }
+
+  .login-form input{
+    background:#171717;
+    border-color:#4a4030;
+    color:#f7f0df;
+  }
+
+  .login-form input::placeholder{
+    color:#c8c0ad;
+  }
+
+  .login-message{
+    background:#203244;
+    border-color:#4b6d8f;
+    color:#eaf7ff;
+  }
+
+  .login-message.error{
+    background:#3b2025;
+    border-color:#b85f6c;
+    color:#ffdce2;
+  }
+}
+
 @media(max-width:600px){
 
   .login-card{

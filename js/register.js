@@ -1,4 +1,4 @@
-const REGISTER_API_URL = "https://script.google.com/macros/s/AKfycbyKhWE-_SuKreCPyD4tsNmqNMQz2hZ8hQtrckk92mh8rszh1jaNEeuuFBGsPOLKfAziNg/exec";
+const REGISTER_API_URL = window.getSbosApiEndpoint ? window.getSbosApiEndpoint() : "";
 
 function t(key) {
   return window.SBOSI18n ? window.SBOSI18n.t(key) : key;

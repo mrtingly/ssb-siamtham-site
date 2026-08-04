@@ -33,6 +33,19 @@ const SHEET_NAMES = {
   cmsAuditLogs: "cms_audit_logs",
   cmsSiteSettings: "cms_site_settings",
   cmsNavigation: "cms_navigation",
+  spcCases: "spc_cases",
+  spcCaseEvents: "spc_case_events",
+  spcOfficers: "spc_officers",
+  spcContactAttempts: "spc_contact_attempts",
+  spcChecklistTemplates: "spc_checklist_templates",
+  spcChecklistItems: "spc_checklist_items",
+  spcChecklistInstances: "spc_checklist_instances",
+  spcChecklistResults: "spc_checklist_results",
+  spcOrganizations: "spc_organizations",
+  spcVerificationHistory: "spc_verification_history",
+  spcAuditLogs: "spc_audit_logs",
+  spcSettings: "spc_settings",
+  spcPermissions: "spc_permissions",
   trainingLessons: "training_lessons",
   trainingProgress: "agent_training_progress",
   examQuestions: "exam_questions",
@@ -169,6 +182,18 @@ function doGet(e) {
         result = cmsPublicArticles(e.parameter);
         break;
 
+      case "spcGetCasePublicStatus":
+        result = spcGetCasePublicStatus(e.parameter);
+        break;
+
+      case "spcGetPublicOfficerVerification":
+        result = spcGetPublicOfficerVerification(e.parameter);
+        break;
+
+      case "spcVerifyContactCode":
+        result = spcVerifyContactCode(Object.assign({}, e.parameter, { consume: false }));
+        break;
+
       case "listPayments":
         result = listPayments(e.parameter);
         break;
@@ -232,6 +257,33 @@ function doGet(e) {
       case "cmsGetContentAdmin":
       case "cmsListRevisions":
       case "cmsListAuditLogs":
+      case "spcCreateCase":
+      case "spcAcknowledgeResult":
+      case "spcOfficerDashboard":
+      case "spcGetCaseDetail":
+      case "spcAcceptCase":
+      case "spcStartFirstCallback":
+      case "spcCompleteFirstCallback":
+      case "spcSubmitChecklistResult":
+      case "spcAddCaseEvent":
+      case "spcAddVerificationRecord":
+      case "spcSetWaitingForAgency":
+      case "spcScheduleFollowUp":
+      case "spcPrepareResult":
+      case "spcReportResult":
+      case "spcSupervisorDashboard":
+      case "spcAssignOfficer":
+      case "spcReassignCase":
+      case "spcReviewCase":
+      case "spcEscalateCase":
+      case "spcOverrideTransition":
+      case "spcAdminDashboard":
+      case "spcCreateOfficer":
+      case "spcUpdateOfficer":
+      case "spcManageChecklistTemplate":
+      case "spcManageOrganization":
+      case "spcViewAuditLogs":
+      case "spcRunIntegrityCheck":
         result = protectedPostRequired(action);
         break;
 
@@ -707,6 +759,126 @@ function doPost(e) {
         result = cmsListAuditLogs(body);
         break;
 
+      case "spcCreateCase":
+        result = spcCreateCase(body);
+        break;
+
+      case "spcGetCasePublicStatus":
+        result = spcGetCasePublicStatus(body);
+        break;
+
+      case "spcGetPublicOfficerVerification":
+        result = spcGetPublicOfficerVerification(body);
+        break;
+
+      case "spcVerifyContactCode":
+        result = spcVerifyContactCode(body);
+        break;
+
+      case "spcAcknowledgeResult":
+        result = spcAcknowledgeResult(body);
+        break;
+
+      case "spcOfficerDashboard":
+        result = spcOfficerDashboard(body);
+        break;
+
+      case "spcGetCaseDetail":
+        result = spcGetCaseDetail(body);
+        break;
+
+      case "spcAcceptCase":
+        result = spcAcceptCase(body);
+        break;
+
+      case "spcStartFirstCallback":
+        result = spcStartFirstCallback(body);
+        break;
+
+      case "spcCompleteFirstCallback":
+        result = spcCompleteFirstCallback(body);
+        break;
+
+      case "spcSubmitChecklistResult":
+        result = spcSubmitChecklistResult(body);
+        break;
+
+      case "spcAddCaseEvent":
+        result = spcAddCaseEvent(body);
+        break;
+
+      case "spcAddVerificationRecord":
+        result = spcAddVerificationRecord(body);
+        break;
+
+      case "spcSetWaitingForAgency":
+        result = spcSetWaitingForAgency(body);
+        break;
+
+      case "spcScheduleFollowUp":
+        result = spcScheduleFollowUp(body);
+        break;
+
+      case "spcPrepareResult":
+        result = spcPrepareResult(body);
+        break;
+
+      case "spcReportResult":
+        result = spcReportResult(body);
+        break;
+
+      case "spcSupervisorDashboard":
+        result = spcSupervisorDashboard(body);
+        break;
+
+      case "spcAssignOfficer":
+        result = spcAssignOfficer(body);
+        break;
+
+      case "spcReassignCase":
+        result = spcReassignCase(body);
+        break;
+
+      case "spcReviewCase":
+        result = spcReviewCase(body);
+        break;
+
+      case "spcEscalateCase":
+        result = spcEscalateCase(body);
+        break;
+
+      case "spcOverrideTransition":
+        result = spcOverrideTransition(body);
+        break;
+
+      case "spcAdminDashboard":
+        result = spcAdminDashboard(body);
+        break;
+
+      case "spcCreateOfficer":
+        result = spcCreateOfficer(body);
+        break;
+
+      case "spcUpdateOfficer":
+        result = spcUpdateOfficer(body);
+        break;
+
+      case "spcManageChecklistTemplate":
+        result = spcManageChecklistTemplate(body);
+        break;
+
+      case "spcManageOrganization":
+        result = spcManageOrganization(body);
+        break;
+
+      case "spcViewAuditLogs":
+        result = spcViewAuditLogs(body);
+        break;
+
+      case "spcRunIntegrityCheck":
+        result = spcRunIntegrityCheck(body);
+        break;
+
       case "approveAgent":
         {
           const admin = requireAdminActor(body);
@@ -874,6 +1046,18 @@ function sheetToObjects(sheetName) {
         obj.job_id,
         obj.setting_id,
         obj.nav_id,
+        obj.case_id,
+        obj.event_id,
+        obj.officer_id,
+        obj.contact_attempt_id,
+        obj.template_id,
+        obj.checklist_item_id,
+        obj.checklist_instance_id,
+        obj.result_id,
+        obj.organization_id,
+        obj.verification_id,
+        obj.permission_id,
+        obj.spc_audit_id,
         obj.bonus_id,
         obj.lesson_id,
         obj.progress_id,
@@ -954,12 +1138,22 @@ function json(data) {
 }
 
 function output(e, data) {
-  const callback =
+  const action =
+    e &&
+    e.parameter &&
+    e.parameter.action
+      ? String(e.parameter.action).trim()
+      : "";
+  let callback =
     e &&
     e.parameter &&
     e.parameter.callback
       ? String(e.parameter.callback).trim()
       : "";
+
+  if (action.indexOf("spc") === 0) {
+    callback = "";
+  }
 
   if (callback) {
     return ContentService
@@ -1680,6 +1874,284 @@ const CMS_NAVIGATION_HEADERS = [
   "is_test",
   "qa_batch"
 ];
+
+const SPC_CASE_HEADERS = [
+  "case_id",
+  "public_case_token",
+  "customer_name",
+  "customer_phone",
+  "customer_email",
+  "claimed_organization",
+  "claimed_person",
+  "incident_category",
+  "incident_description",
+  "risk_level",
+  "transaction_in_progress",
+  "amount_involved",
+  "source",
+  "status",
+  "assigned_officer_id",
+  "supervisor_id",
+  "accepted_at",
+  "sla_started_at",
+  "first_callback_due_at",
+  "first_callback_started_at",
+  "first_callback_completed_at",
+  "first_callback_sla_status",
+  "time_barrier_given_at",
+  "result_type",
+  "result_summary",
+  "result_reported_at",
+  "customer_acknowledged_at",
+  "closed_at",
+  "created_at",
+  "updated_at",
+  "is_test",
+  "qa_batch"
+];
+
+const SPC_CASE_EVENT_HEADERS = [
+  "event_id",
+  "case_id",
+  "event_type",
+  "from_status",
+  "to_status",
+  "actor_id",
+  "actor_role",
+  "officer_id",
+  "comment",
+  "evidence_json",
+  "created_at"
+];
+
+const SPC_OFFICER_HEADERS = [
+  "officer_id",
+  "agent_id",
+  "admin_id",
+  "officer_name",
+  "photo_url",
+  "department",
+  "role",
+  "status",
+  "official_profile_url",
+  "valid_from",
+  "valid_until",
+  "created_at",
+  "updated_at",
+  "created_by",
+  "is_test",
+  "qa_batch"
+];
+
+const SPC_CONTACT_ATTEMPT_HEADERS = [
+  "contact_attempt_id",
+  "case_id",
+  "officer_id",
+  "contact_method",
+  "verification_code",
+  "issued_at",
+  "expires_at",
+  "used_at",
+  "status",
+  "created_at",
+  "updated_at"
+];
+
+const SPC_CHECKLIST_TEMPLATE_HEADERS = [
+  "template_id",
+  "name",
+  "applicable_state",
+  "incident_category",
+  "version",
+  "status",
+  "created_at",
+  "updated_at"
+];
+
+const SPC_CHECKLIST_ITEM_HEADERS = [
+  "checklist_item_id",
+  "template_id",
+  "sequence",
+  "label",
+  "field_type",
+  "required",
+  "requires_evidence",
+  "blocking",
+  "validation_rule",
+  "status"
+];
+
+const SPC_CHECKLIST_INSTANCE_HEADERS = [
+  "checklist_instance_id",
+  "case_id",
+  "template_id",
+  "template_version",
+  "applicable_state",
+  "status",
+  "created_at",
+  "updated_at"
+];
+
+const SPC_CHECKLIST_RESULT_HEADERS = [
+  "result_id",
+  "checklist_instance_id",
+  "case_id",
+  "checklist_item_id",
+  "value",
+  "evidence_json",
+  "completed_by",
+  "completed_at",
+  "updated_at"
+];
+
+const SPC_ORGANIZATION_HEADERS = [
+  "organization_id",
+  "organization_name",
+  "organization_type",
+  "official_contact",
+  "official_url",
+  "status",
+  "created_at",
+  "updated_at",
+  "created_by"
+];
+
+const SPC_VERIFICATION_HISTORY_HEADERS = [
+  "verification_id",
+  "case_id",
+  "organization_id",
+  "organization_name",
+  "contact_method",
+  "contact_reference",
+  "verification_action",
+  "verification_result",
+  "evidence_json",
+  "recorded_by",
+  "recorded_at"
+];
+
+const SPC_AUDIT_LOG_HEADERS = [
+  "spc_audit_id",
+  "entity_type",
+  "entity_id",
+  "action",
+  "actor_id",
+  "actor_role",
+  "officer_id",
+  "customer_id",
+  "previous_state",
+  "current_state",
+  "request_id",
+  "browser",
+  "ip_or_unavailable",
+  "evidence_json",
+  "attachment_json",
+  "comment",
+  "created_at"
+];
+
+const SPC_SETTING_HEADERS = [
+  "setting_id",
+  "setting_key",
+  "setting_value",
+  "status",
+  "updated_at",
+  "updated_by"
+];
+
+const SPC_PERMISSION_HEADERS = [
+  "permission_id",
+  "actor_id",
+  "actor_type",
+  "officer_id",
+  "role",
+  "status",
+  "created_at",
+  "updated_at",
+  "created_by"
+];
+
+const SPC_STATUS = {
+  NEW: "NEW",
+  ACCEPTED: "ACCEPTED",
+  FIRST_CALLBACK_IN_PROGRESS: "FIRST_CALLBACK_IN_PROGRESS",
+  FIRST_CALLBACK_COMPLETED: "FIRST_CALLBACK_COMPLETED",
+  VERIFYING: "VERIFYING",
+  WAITING_FOR_AGENCY: "WAITING_FOR_AGENCY",
+  FOLLOW_UP_REQUIRED: "FOLLOW_UP_REQUIRED",
+  READY_TO_REPORT: "READY_TO_REPORT",
+  RESULT_REPORTED: "RESULT_REPORTED",
+  CUSTOMER_ACKNOWLEDGED: "CUSTOMER_ACKNOWLEDGED",
+  CLOSED: "CLOSED",
+  ESCALATED: "ESCALATED",
+  CANCELLED: "CANCELLED"
+};
+
+const SPC_ROLES = {
+  CUSTOMER: "CUSTOMER",
+  OFFICER: "OFFICER",
+  SUPERVISOR: "SUPERVISOR",
+  ADMIN: "ADMIN"
+};
+
+const SPC_RESULT_TYPES = {
+  CONFIRMED_FALSE: "CONFIRMED_FALSE",
+  CONFIRMED_TRUE: "CONFIRMED_TRUE",
+  UNABLE_TO_VERIFY: "UNABLE_TO_VERIFY",
+  PARTIALLY_VERIFIED: "PARTIALLY_VERIFIED"
+};
+
+const SPC_EVENT_TYPES = {
+  CASE_CREATED: "CASE_CREATED",
+  CASE_ACCEPTED: "CASE_ACCEPTED",
+  OFFICER_ASSIGNED: "OFFICER_ASSIGNED",
+  FIRST_CALLBACK_STARTED: "FIRST_CALLBACK_STARTED",
+  FIRST_CALLBACK_COMPLETED: "FIRST_CALLBACK_COMPLETED",
+  TIME_BARRIER_GIVEN: "TIME_BARRIER_GIVEN",
+  VERIFICATION_STARTED: "VERIFICATION_STARTED",
+  AGENCY_CONTACT_ATTEMPTED: "AGENCY_CONTACT_ATTEMPTED",
+  AGENCY_RESPONSE_RECEIVED: "AGENCY_RESPONSE_RECEIVED",
+  FOLLOW_UP_SCHEDULED: "FOLLOW_UP_SCHEDULED",
+  RESULT_PREPARED: "RESULT_PREPARED",
+  RESULT_REPORTED: "RESULT_REPORTED",
+  CUSTOMER_ACKNOWLEDGED: "CUSTOMER_ACKNOWLEDGED",
+  CASE_CLOSED: "CASE_CLOSED",
+  CASE_ESCALATED: "CASE_ESCALATED",
+  CASE_CANCELLED: "CASE_CANCELLED",
+  SUPERVISOR_OVERRIDE: "SUPERVISOR_OVERRIDE"
+};
+
+const SPC_TRANSITIONS = {
+  NEW: ["ACCEPTED", "CANCELLED", "ESCALATED"],
+  ACCEPTED: ["FIRST_CALLBACK_IN_PROGRESS", "CANCELLED", "ESCALATED"],
+  FIRST_CALLBACK_IN_PROGRESS: ["FIRST_CALLBACK_COMPLETED", "CANCELLED", "ESCALATED"],
+  FIRST_CALLBACK_COMPLETED: ["VERIFYING", "CANCELLED", "ESCALATED"],
+  VERIFYING: ["WAITING_FOR_AGENCY", "READY_TO_REPORT", "CANCELLED", "ESCALATED"],
+  WAITING_FOR_AGENCY: ["FOLLOW_UP_REQUIRED", "READY_TO_REPORT", "CANCELLED", "ESCALATED"],
+  FOLLOW_UP_REQUIRED: ["VERIFYING", "WAITING_FOR_AGENCY", "READY_TO_REPORT", "CANCELLED", "ESCALATED"],
+  READY_TO_REPORT: ["RESULT_REPORTED", "CANCELLED", "ESCALATED"],
+  RESULT_REPORTED: ["CUSTOMER_ACKNOWLEDGED", "ESCALATED"],
+  CUSTOMER_ACKNOWLEDGED: ["CLOSED"],
+  ESCALATED: ["VERIFYING", "WAITING_FOR_AGENCY", "READY_TO_REPORT", "CANCELLED"],
+  CANCELLED: [],
+  CLOSED: []
+};
+
+const SPC_ACTIVE_STATUSES = [
+  SPC_STATUS.NEW,
+  SPC_STATUS.ACCEPTED,
+  SPC_STATUS.FIRST_CALLBACK_IN_PROGRESS,
+  SPC_STATUS.FIRST_CALLBACK_COMPLETED,
+  SPC_STATUS.VERIFYING,
+  SPC_STATUS.WAITING_FOR_AGENCY,
+  SPC_STATUS.FOLLOW_UP_REQUIRED,
+  SPC_STATUS.READY_TO_REPORT,
+  SPC_STATUS.RESULT_REPORTED,
+  SPC_STATUS.CUSTOMER_ACKNOWLEDGED,
+  SPC_STATUS.ESCALATED
+];
+
+const SPC_PROHIBITED_PATTERN = /\b(otp|pin|password|passcode|cvv|banking password|screen sharing|remote control|anydesk|teamviewer|quick support|install app|money transfer|โอนเงิน|รหัสผ่าน|รหัส otp|รหัสโอทีพี|เลข cvv|แชร์หน้าจอ|ควบคุมเครื่อง|ติดตั้งแอป)\b/i;
 
 const QUOTATION_STATUS = {
   DRAFT: "DRAFT",
@@ -2700,38 +3172,43 @@ function registerAgent(body) {
 ========================================================= */
 
 function login(body) {
-  const username = String(body.username || "").trim();
-  const password = String(body.password || "").trim();
+  const username = String(body.username || body.agent_id || body.email || "").trim();
+  const password = String(body.password || "");
 
   if (!username || !password) {
-    return { ok: false, message: "กรุณากรอกข้อมูลให้ครบ" };
+    return { ok: false, code: "MISSING_CREDENTIALS", message: "กรุณากรอกข้อมูลให้ครบ" };
   }
 
   const agents = sheetToObjects(SHEET_NAMES.agents);
+  const normalizedUsername = username.toLowerCase();
 
   const user = agents.find(function (agent) {
     return (
       String(agent.agent_id || "").trim() === username ||
-      String(agent.email || "").trim().toLowerCase() === username.toLowerCase()
+      String(agent.email || "").trim().toLowerCase() === normalizedUsername
     );
   });
 
   if (!user) {
-    return { ok: false, message: "ไม่พบตัวแทน" };
+    return { ok: false, code: "ACCOUNT_NOT_FOUND", message: "ไม่พบตัวแทน" };
   }
 
-  if (String(user.password || "").trim() !== password) {
-    return { ok: false, message: "รหัสผ่านไม่ถูกต้อง" };
+  if (String(user.password || "") !== password) {
+    return { ok: false, code: "INVALID_PASSWORD", message: "รหัสผ่านไม่ถูกต้อง" };
   }
 
   const status = normalizeStatus(user.status);
 
   if (status === AGENT_STATUS.REJECTED) {
-    return { ok: false, message: "บัญชีนี้ไม่ได้รับการอนุมัติ" };
+    return { ok: false, code: "ACCOUNT_REJECTED", message: "บัญชีนี้ไม่ได้รับการอนุมัติ", status: status };
   }
 
   if (status === AGENT_STATUS.SUSPENDED) {
-    return { ok: false, message: "บัญชีนี้ถูกระงับ กรุณาติดต่อบริษัท" };
+    return { ok: false, code: "ACCOUNT_SUSPENDED", message: "บัญชีนี้ถูกระงับ กรุณาติดต่อบริษัท", status: status };
+  }
+
+  if (status === "INACTIVE") {
+    return { ok: false, code: "ACCOUNT_INACTIVE", message: "บัญชีนี้ยังไม่พร้อมใช้งาน", status: status };
   }
 
   const nextPage = getNextPageByStatus(status);
@@ -2739,6 +3216,7 @@ function login(body) {
   if (!nextPage) {
     return {
       ok: false,
+      code: "INVALID_ACCOUNT_STATUS",
       message: "สถานะบัญชีไม่ถูกต้อง กรุณาติดต่อผู้ดูแลระบบ",
       status: status
     };
@@ -3170,6 +3648,991 @@ function makeId(prefix) {
 }
 
 /* =========================================================
+   SIAMTHAM PROTECTION CENTER PHASE 2
+========================================================= */
+
+function ensureSpcSheets() {
+  const cacheKey = "SBOS_SPC_SHEETS_READY_P2";
+  try {
+    const cache = CacheService.getScriptCache();
+    if (cache.get(cacheKey) === "1") return;
+  } catch (error) {}
+
+  getOrCreateSheet(SHEET_NAMES.spcCases, SPC_CASE_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.spcCaseEvents, SPC_CASE_EVENT_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.spcOfficers, SPC_OFFICER_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.spcContactAttempts, SPC_CONTACT_ATTEMPT_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.spcChecklistTemplates, SPC_CHECKLIST_TEMPLATE_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.spcChecklistItems, SPC_CHECKLIST_ITEM_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.spcChecklistInstances, SPC_CHECKLIST_INSTANCE_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.spcChecklistResults, SPC_CHECKLIST_RESULT_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.spcOrganizations, SPC_ORGANIZATION_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.spcVerificationHistory, SPC_VERIFICATION_HISTORY_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.spcAuditLogs, SPC_AUDIT_LOG_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.spcSettings, SPC_SETTING_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.spcPermissions, SPC_PERMISSION_HEADERS);
+  seedSpcDefaults();
+
+  try {
+    CacheService.getScriptCache().put(cacheKey, "1", 21600);
+  } catch (error) {}
+}
+
+function seedSpcDefaults() {
+  const now = new Date();
+  const settings = sheetToObjects(SHEET_NAMES.spcSettings);
+  [
+    { setting_key: "first_callback_sla_minutes", setting_value: "15" },
+    { setting_key: "contact_code_ttl_minutes", setting_value: "15" }
+  ].forEach(function (setting) {
+    const exists = settings.some(function (row) {
+      return cleanString(row.setting_key, 120) === setting.setting_key;
+    });
+    if (!exists) {
+      appendObject(SHEET_NAMES.spcSettings, {
+        setting_id: makeId("SPCSET"),
+        setting_key: setting.setting_key,
+        setting_value: setting.setting_value,
+        status: "ACTIVE",
+        updated_at: now,
+        updated_by: "SYSTEM"
+      });
+    }
+  });
+
+  seedSpcChecklistTemplate("SPC-TPL-FIRST-CALLBACK-V1", "First Callback Checklist", SPC_STATUS.FIRST_CALLBACK_COMPLETED, [
+    "customer contact attempted",
+    "customer contact completed or outcome recorded",
+    "officer identity verification provided",
+    "customer informed of Time Barrier",
+    "customer warned not to transact",
+    "prohibited-data warning respected",
+    "incident summary recorded",
+    "missing information recorded",
+    "next action explained"
+  ]);
+  seedSpcChecklistTemplate("SPC-TPL-READY-REPORT-V1", "Ready To Report Checklist", SPC_STATUS.READY_TO_REPORT, [
+    "claimed organization recorded",
+    "verification attempt recorded",
+    "verification source recorded",
+    "verification result recorded",
+    "evidence references recorded",
+    "unresolved facts recorded",
+    "customer instruction prepared",
+    "required supervisor review completed when applicable"
+  ]);
+}
+
+function seedSpcChecklistTemplate(templateId, name, state, labels) {
+  const now = new Date();
+  const templates = sheetToObjects(SHEET_NAMES.spcChecklistTemplates);
+  const templateExists = templates.some(function (template) {
+    return cleanString(template.template_id, 120) === templateId;
+  });
+
+  if (!templateExists) {
+    appendObject(SHEET_NAMES.spcChecklistTemplates, {
+      template_id: templateId,
+      name: name,
+      applicable_state: state,
+      incident_category: "GENERAL",
+      version: 1,
+      status: "ACTIVE",
+      created_at: now,
+      updated_at: now
+    });
+  }
+
+  const items = sheetToObjects(SHEET_NAMES.spcChecklistItems);
+  labels.forEach(function (label, index) {
+    const exists = items.some(function (item) {
+      return cleanString(item.template_id, 120) === templateId && Number(item.sequence || 0) === index + 1;
+    });
+    if (!exists) {
+      appendObject(SHEET_NAMES.spcChecklistItems, {
+        checklist_item_id: templateId + "-I" + String(index + 1),
+        template_id: templateId,
+        sequence: index + 1,
+        label: label,
+        field_type: "CHECKBOX",
+        required: true,
+        requires_evidence: false,
+        blocking: true,
+        validation_rule: "",
+        status: "ACTIVE"
+      });
+    }
+  });
+}
+
+function spcSettingNumber(key, fallback) {
+  const row = sheetToObjects(SHEET_NAMES.spcSettings).find(function (setting) {
+    return cleanString(setting.setting_key, 120) === key && cleanString(setting.status, 40).toUpperCase() === "ACTIVE";
+  });
+  const value = row ? Number(row.setting_value || fallback) : Number(fallback);
+  return Number.isFinite(value) ? value : Number(fallback);
+}
+
+function spcNormalizeStatus(status) {
+  const value = cleanString(status, 80).toUpperCase();
+  return Object.keys(SPC_STATUS).map(function (key) { return SPC_STATUS[key]; }).indexOf(value) !== -1
+    ? value
+    : "";
+}
+
+function spcNormalizeRole(role) {
+  const value = cleanString(role, 80).toUpperCase();
+  return Object.keys(SPC_ROLES).map(function (key) { return SPC_ROLES[key]; }).indexOf(value) !== -1
+    ? value
+    : "";
+}
+
+function spcProhibitedWarning(text) {
+  return SPC_PROHIBITED_PATTERN.test(String(text || ""));
+}
+
+function spcSafeText(value, maxLength) {
+  return cleanString(value, maxLength || 1000)
+    .replace(SPC_PROHIBITED_PATTERN, "[REDACTED_SENSITIVE_REQUEST]");
+}
+
+function spcCaseById(caseId) {
+  const id = cleanString(caseId, 120);
+  return sheetToObjects(SHEET_NAMES.spcCases).find(function (row) {
+    return cleanString(row.case_id, 120) === id;
+  }) || null;
+}
+
+function spcCaseByToken(token) {
+  const publicToken = cleanString(token, 160);
+  return sheetToObjects(SHEET_NAMES.spcCases).find(function (row) {
+    return cleanString(row.public_case_token, 160) === publicToken;
+  }) || null;
+}
+
+function spcOfficerById(officerId) {
+  const id = cleanString(officerId, 120);
+  return sheetToObjects(SHEET_NAMES.spcOfficers).find(function (officer) {
+    return cleanString(officer.officer_id, 120) === id && cleanString(officer.status, 40).toUpperCase() === "ACTIVE";
+  }) || null;
+}
+
+function spcOfficerByActor(actorId) {
+  const id = cleanString(actorId, 120);
+  return sheetToObjects(SHEET_NAMES.spcOfficers).find(function (officer) {
+    return (
+      cleanString(officer.agent_id, 120) === id ||
+      cleanString(officer.admin_id, 120) === id ||
+      cleanString(officer.officer_id, 120) === id
+    ) && cleanString(officer.status, 40).toUpperCase() === "ACTIVE";
+  }) || null;
+}
+
+function spcGenerateCaseId(now) {
+  const year = Utilities.formatDate(now, Session.getScriptTimeZone(), "yyyy");
+  const prefix = "SPC-" + year + "-";
+  const existing = sheetToObjects(SHEET_NAMES.spcCases).filter(function (item) {
+    return cleanString(item.case_id, 80).indexOf(prefix) === 0;
+  });
+  return prefix + String(existing.length + 1).padStart(6, "0");
+}
+
+function spcPublicToken() {
+  return "SPCT-" + Utilities.getUuid().replace(/-/g, "") + Utilities.getUuid().replace(/-/g, "").slice(0, 12);
+}
+
+function spcActor(body) {
+  const admin = requireAdminActor(body || {});
+  if (admin.ok) {
+    const adminActorId = cleanString(admin.actor_id || (admin.user && admin.user.agent_id) || "ADMIN", 160);
+    return {
+      ok: true,
+      actor_id: adminActorId,
+      actor_role: SPC_ROLES.ADMIN,
+      admin: admin.user,
+      officer: spcOfficerByActor(adminActorId)
+    };
+  }
+
+  const agent = requireAgentActor(body || {});
+  if (!agent.ok) return agent;
+
+  const actorId = cleanString(agent.agent.agent_id, 120);
+  const permission = sheetToObjects(SHEET_NAMES.spcPermissions).find(function (row) {
+    return cleanString(row.actor_id, 120) === actorId && cleanString(row.status, 40).toUpperCase() === "ACTIVE";
+  });
+
+  if (!permission) {
+    return { ok: false, error: "SPC_FORBIDDEN", message: "No SPC permission." };
+  }
+
+  return {
+    ok: true,
+    actor_id: actorId,
+    actor_role: spcNormalizeRole(permission.role),
+    agent: agent.agent,
+    permission: permission,
+    officer: spcOfficerById(permission.officer_id) || spcOfficerByActor(actorId)
+  };
+}
+
+function spcRequireRole(body, roles) {
+  ensureSpcSheets();
+  const actor = spcActor(body || {});
+  if (!actor.ok) return actor;
+  if (roles.indexOf(actor.actor_role) === -1) {
+    return { ok: false, error: "SPC_FORBIDDEN", message: "SPC role not allowed." };
+  }
+  return actor;
+}
+
+function spcRequireAssigned(caseRow, actor) {
+  if ([SPC_ROLES.ADMIN, SPC_ROLES.SUPERVISOR].indexOf(actor.actor_role) !== -1) return { ok: true };
+  const officerId = actor.officer ? cleanString(actor.officer.officer_id, 120) : "";
+  if (!officerId || cleanString(caseRow.assigned_officer_id, 120) !== officerId) {
+    return { ok: false, error: "SPC_NOT_ASSIGNED", message: "Case is not assigned to this officer." };
+  }
+  return { ok: true };
+}
+
+function spcAudit(entityType, entityId, action, actor, previousState, currentState, comment, evidence) {
+  appendObject(SHEET_NAMES.spcAuditLogs, {
+    spc_audit_id: makeId("SPCAUD"),
+    entity_type: entityType,
+    entity_id: entityId,
+    action: action,
+    actor_id: actor && actor.actor_id ? actor.actor_id : "PUBLIC",
+    actor_role: actor && actor.actor_role ? actor.actor_role : SPC_ROLES.CUSTOMER,
+    officer_id: actor && actor.officer ? actor.officer.officer_id : "",
+    customer_id: "",
+    previous_state: previousState || "",
+    current_state: currentState || "",
+    request_id: makeId("REQ"),
+    browser: cleanString(evidence && evidence.browser, 240),
+    ip_or_unavailable: "UNAVAILABLE",
+    evidence_json: JSON.stringify(evidence || {}),
+    attachment_json: "[]",
+    comment: cleanString(comment, 1000),
+    created_at: new Date()
+  });
+}
+
+function spcCaseEvent(caseId, eventType, fromStatus, toStatus, actor, comment, evidence) {
+  appendObject(SHEET_NAMES.spcCaseEvents, {
+    event_id: makeId("SPCEVT"),
+    case_id: caseId,
+    event_type: eventType,
+    from_status: fromStatus || "",
+    to_status: toStatus || "",
+    actor_id: actor && actor.actor_id ? actor.actor_id : "PUBLIC",
+    actor_role: actor && actor.actor_role ? actor.actor_role : SPC_ROLES.CUSTOMER,
+    officer_id: actor && actor.officer ? actor.officer.officer_id : "",
+    comment: cleanString(comment, 1000),
+    evidence_json: JSON.stringify(evidence || {}),
+    created_at: new Date()
+  });
+}
+
+function spcCreateChecklistInstances(caseId) {
+  const now = new Date();
+  sheetToObjects(SHEET_NAMES.spcChecklistTemplates).forEach(function (template) {
+    if (cleanString(template.status, 40).toUpperCase() !== "ACTIVE") return;
+    appendObject(SHEET_NAMES.spcChecklistInstances, {
+      checklist_instance_id: makeId("SPCCLI"),
+      case_id: caseId,
+      template_id: cleanString(template.template_id, 120),
+      template_version: Number(template.version || 1),
+      applicable_state: cleanString(template.applicable_state, 80),
+      status: "ACTIVE",
+      created_at: now,
+      updated_at: now
+    });
+  });
+}
+
+function spcChecklistMissing(caseId, applicableState) {
+  const instances = sheetToObjects(SHEET_NAMES.spcChecklistInstances).filter(function (instance) {
+    return cleanString(instance.case_id, 120) === caseId &&
+      cleanString(instance.applicable_state, 80) === applicableState &&
+      cleanString(instance.status, 40).toUpperCase() === "ACTIVE";
+  });
+  const items = sheetToObjects(SHEET_NAMES.spcChecklistItems);
+  const results = sheetToObjects(SHEET_NAMES.spcChecklistResults);
+  const missing = [];
+  instances.forEach(function (instance) {
+    items.filter(function (item) {
+      return cleanString(item.template_id, 120) === cleanString(instance.template_id, 120) &&
+        booleanValue(item.required) &&
+        booleanValue(item.blocking) &&
+        cleanString(item.status, 40).toUpperCase() === "ACTIVE";
+    }).forEach(function (item) {
+      const completed = results.some(function (result) {
+        return cleanString(result.case_id, 120) === caseId &&
+          cleanString(result.checklist_instance_id, 120) === cleanString(instance.checklist_instance_id, 120) &&
+          cleanString(result.checklist_item_id, 120) === cleanString(item.checklist_item_id, 160) &&
+          String(result.value || "").trim() !== "";
+      });
+      if (!completed) missing.push(cleanString(item.label, 240));
+    });
+  });
+  return missing;
+}
+
+function spcVerificationCount(caseId) {
+  return sheetToObjects(SHEET_NAMES.spcVerificationHistory).filter(function (row) {
+    return cleanString(row.case_id, 120) === caseId;
+  }).length;
+}
+
+function spcValidateTransition(caseRow, toStatus, actor, options) {
+  const fromStatus = spcNormalizeStatus(caseRow.status);
+  const next = spcNormalizeStatus(toStatus);
+  if (!fromStatus || !next || (SPC_TRANSITIONS[fromStatus] || []).indexOf(next) === -1) {
+    return { ok: false, error: "SPC_INVALID_TRANSITION", message: "Invalid SPC state transition." };
+  }
+  if ([SPC_STATUS.CLOSED, SPC_STATUS.CANCELLED].indexOf(fromStatus) !== -1) {
+    return { ok: false, error: "SPC_CASE_LOCKED", message: "Closed or cancelled case cannot be mutated." };
+  }
+  if (next === SPC_STATUS.FIRST_CALLBACK_COMPLETED) {
+    const missingFirst = spcChecklistMissing(cleanString(caseRow.case_id, 120), SPC_STATUS.FIRST_CALLBACK_COMPLETED);
+    if (missingFirst.length > 0) return { ok: false, error: "SPC_CHECKLIST_REQUIRED", message: "First callback checklist is incomplete.", missing: missingFirst };
+  }
+  if (next === SPC_STATUS.READY_TO_REPORT) {
+    const missingReport = spcChecklistMissing(cleanString(caseRow.case_id, 120), SPC_STATUS.READY_TO_REPORT);
+    if (missingReport.length > 0) return { ok: false, error: "SPC_CHECKLIST_REQUIRED", message: "Ready-to-report checklist is incomplete.", missing: missingReport };
+    if (spcVerificationCount(cleanString(caseRow.case_id, 120)) < 1) return { ok: false, error: "SPC_VERIFICATION_REQUIRED", message: "Verification record is required." };
+  }
+  if (next === SPC_STATUS.CANCELLED && !cleanString(options && options.reason, 500)) {
+    return { ok: false, error: "SPC_REASON_REQUIRED", message: "Cancellation requires a reason." };
+  }
+  if (next === SPC_STATUS.CLOSED && fromStatus !== SPC_STATUS.CUSTOMER_ACKNOWLEDGED) {
+    return { ok: false, error: "SPC_RESULT_REQUIRED", message: "Case must be acknowledged before closing." };
+  }
+  return spcRequireAssigned(caseRow, actor);
+}
+
+function spcTransitionCase(body, toStatus, eventType, options) {
+  ensureSpcSheets();
+  const actor = spcRequireRole(body, [SPC_ROLES.OFFICER, SPC_ROLES.SUPERVISOR, SPC_ROLES.ADMIN]);
+  if (!actor.ok) return actor;
+
+  const lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+  try {
+    const caseRow = spcCaseById(body.case_id);
+    if (!caseRow) return { ok: false, error: "SPC_CASE_NOT_FOUND", message: "Case not found." };
+    const validation = spcValidateTransition(caseRow, toStatus, actor, options || {});
+    if (!validation.ok) return validation;
+
+    const now = new Date();
+    const fromStatus = spcNormalizeStatus(caseRow.status);
+    const fields = {
+      status: toStatus,
+      updated_at: now
+    };
+    if (toStatus === SPC_STATUS.FIRST_CALLBACK_IN_PROGRESS) fields.first_callback_started_at = now;
+    if (toStatus === SPC_STATUS.FIRST_CALLBACK_COMPLETED) {
+      fields.first_callback_completed_at = now;
+      fields.time_barrier_given_at = now;
+      fields.first_callback_sla_status = new Date(caseRow.first_callback_due_at).getTime() >= now.getTime() ? "ON_TIME" : "BREACHED";
+    }
+    if (toStatus === SPC_STATUS.RESULT_REPORTED) fields.result_reported_at = now;
+    if (toStatus === SPC_STATUS.CUSTOMER_ACKNOWLEDGED) fields.customer_acknowledged_at = now;
+    if (toStatus === SPC_STATUS.CLOSED) fields.closed_at = now;
+    Object.keys((options && options.fields) || {}).forEach(function (key) {
+      fields[key] = options.fields[key];
+    });
+
+    updateRowFields(SHEET_NAMES.spcCases, caseRow._row, fields);
+    spcCaseEvent(caseRow.case_id, eventType, fromStatus, toStatus, actor, options && options.comment, options && options.evidence);
+    spcAudit("SPC_CASE", caseRow.case_id, eventType, actor, fromStatus, toStatus, options && options.comment, options && options.evidence);
+    return { ok: true, case_id: caseRow.case_id, from_status: fromStatus, status: toStatus };
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function spcPublicCase(caseRow) {
+  const officer = spcOfficerById(caseRow.assigned_officer_id);
+  return {
+    case_id: caseRow.case_id,
+    customer_name: caseRow.customer_name,
+    submitted_at: caseRow.created_at,
+    status: caseRow.status,
+    current_instruction: "Do not transfer money, disclose credentials, install apps, share screens, or follow suspicious instructions while SPC verifies the facts.",
+    assigned_officer: officer ? spcPublicOfficer(officer) : null,
+    result_type: caseRow.result_type || "",
+    result_summary: caseRow.result_summary || "",
+    result_reported_at: caseRow.result_reported_at || ""
+  };
+}
+
+function spcPrivateCase(caseRow) {
+  const clone = {};
+  Object.keys(caseRow || {}).forEach(function (key) {
+    if (key !== "_row" && key !== "public_case_token") clone[key] = caseRow[key];
+  });
+  clone.events = sheetToObjects(SHEET_NAMES.spcCaseEvents).filter(function (event) {
+    return cleanString(event.case_id, 120) === cleanString(caseRow.case_id, 120);
+  });
+  clone.verifications = sheetToObjects(SHEET_NAMES.spcVerificationHistory).filter(function (item) {
+    return cleanString(item.case_id, 120) === cleanString(caseRow.case_id, 120);
+  });
+  clone.checklists = spcCaseChecklistPayload(cleanString(caseRow.case_id, 120));
+  return clone;
+}
+
+function spcPublicOfficer(officer) {
+  return {
+    officer_id: officer.officer_id,
+    officer_name: officer.officer_name,
+    photo_url: officer.photo_url,
+    department: officer.department,
+    official_profile_url: officer.official_profile_url,
+    valid_from: officer.valid_from,
+    valid_until: officer.valid_until,
+    status: officer.status
+  };
+}
+
+function spcCaseChecklistPayload(caseId) {
+  const instances = sheetToObjects(SHEET_NAMES.spcChecklistInstances).filter(function (instance) {
+    return cleanString(instance.case_id, 120) === caseId;
+  });
+  const items = sheetToObjects(SHEET_NAMES.spcChecklistItems);
+  const results = sheetToObjects(SHEET_NAMES.spcChecklistResults);
+  return instances.map(function (instance) {
+    const instanceId = cleanString(instance.checklist_instance_id, 120);
+    return {
+      checklist_instance_id: instanceId,
+      template_id: instance.template_id,
+      applicable_state: instance.applicable_state,
+      items: items.filter(function (item) {
+        return cleanString(item.template_id, 120) === cleanString(instance.template_id, 120) &&
+          cleanString(item.status, 40).toUpperCase() === "ACTIVE";
+      }).map(function (item) {
+        const result = results.find(function (row) {
+          return cleanString(row.checklist_instance_id, 120) === instanceId &&
+            cleanString(row.checklist_item_id, 160) === cleanString(item.checklist_item_id, 160);
+        });
+        return {
+          checklist_item_id: item.checklist_item_id,
+          sequence: Number(item.sequence || 0),
+          label: item.label,
+          field_type: item.field_type,
+          required: booleanValue(item.required),
+          requires_evidence: booleanValue(item.requires_evidence),
+          blocking: booleanValue(item.blocking),
+          value: result ? result.value : "",
+          evidence_json: result ? result.evidence_json : ""
+        };
+      })
+    };
+  });
+}
+
+function spcCreateCase(body) {
+  ensureSpcSheets();
+  const required = requireFields(body || {}, ["customer_name", "customer_phone", "incident_description"]);
+  if (!required.ok) return required;
+
+  const lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+  try {
+    const now = new Date();
+    const caseId = spcGenerateCaseId(now);
+    const dueAt = new Date(now.getTime() + spcSettingNumber("first_callback_sla_minutes", 15) * 60000);
+    const rawDescription = cleanString(body.incident_description, 3000);
+    const warning = spcProhibitedWarning(rawDescription);
+    appendObject(SHEET_NAMES.spcCases, {
+      case_id: caseId,
+      public_case_token: spcPublicToken(),
+      customer_name: spcSafeText(body.customer_name, 160),
+      customer_phone: spcSafeText(body.customer_phone, 80),
+      customer_email: spcSafeText(body.customer_email, 160),
+      claimed_organization: spcSafeText(body.claimed_organization, 180),
+      claimed_person: spcSafeText(body.claimed_person, 180),
+      incident_category: spcSafeText(body.incident_category || "GENERAL", 80),
+      incident_description: spcSafeText(rawDescription, 3000),
+      risk_level: spcSafeText(body.risk_level || "UNKNOWN", 80),
+      transaction_in_progress: booleanValue(body.transaction_in_progress),
+      amount_involved: Math.max(0, Number(body.amount_involved || 0)),
+      source: spcSafeText(body.source || "WEB", 80),
+      status: SPC_STATUS.NEW,
+      assigned_officer_id: "",
+      supervisor_id: "",
+      accepted_at: "",
+      sla_started_at: now,
+      first_callback_due_at: dueAt,
+      first_callback_started_at: "",
+      first_callback_completed_at: "",
+      first_callback_sla_status: "",
+      time_barrier_given_at: "",
+      result_type: "",
+      result_summary: "",
+      result_reported_at: "",
+      customer_acknowledged_at: "",
+      closed_at: "",
+      created_at: now,
+      updated_at: now,
+      is_test: booleanValue(body.is_test),
+      qa_batch: spcSafeText(body.qa_batch, 120)
+    });
+    spcCreateChecklistInstances(caseId);
+    const actor = { actor_id: "PUBLIC", actor_role: SPC_ROLES.CUSTOMER };
+    spcCaseEvent(caseId, SPC_EVENT_TYPES.CASE_CREATED, "", SPC_STATUS.NEW, actor, warning ? "Sensitive pattern detected and sanitized." : "", { sensitive_warning: warning });
+    spcAudit("SPC_CASE", caseId, SPC_EVENT_TYPES.CASE_CREATED, actor, "", SPC_STATUS.NEW, warning ? "Sensitive pattern detected and sanitized." : "", { sensitive_warning: warning });
+    return {
+      ok: true,
+      case_id: caseId,
+      public_case_token: spcCaseById(caseId).public_case_token,
+      first_callback_due_at: dueAt,
+      warning: warning ? "Sensitive request pattern was detected and sanitized." : ""
+    };
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function spcGetCasePublicStatus(body) {
+  ensureSpcSheets();
+  const caseRow = spcCaseByToken(body.public_case_token || body.token);
+  if (!caseRow) return { ok: false, error: "SPC_CASE_NOT_FOUND", message: "Case not found." };
+  return { ok: true, case: spcPublicCase(caseRow) };
+}
+
+function spcAcknowledgeResult(body) {
+  ensureSpcSheets();
+  const caseRow = spcCaseByToken(body.public_case_token || body.token);
+  if (!caseRow) return { ok: false, error: "SPC_CASE_NOT_FOUND", message: "Case not found." };
+  if (spcNormalizeStatus(caseRow.status) !== SPC_STATUS.RESULT_REPORTED) {
+    return { ok: false, error: "SPC_INVALID_TRANSITION", message: "Result is not ready for acknowledgement." };
+  }
+  const actor = { actor_id: "PUBLIC", actor_role: SPC_ROLES.CUSTOMER };
+  const now = new Date();
+  updateRowFields(SHEET_NAMES.spcCases, caseRow._row, {
+    status: SPC_STATUS.CUSTOMER_ACKNOWLEDGED,
+    customer_acknowledged_at: now,
+    updated_at: now
+  });
+  spcCaseEvent(caseRow.case_id, SPC_EVENT_TYPES.CUSTOMER_ACKNOWLEDGED, SPC_STATUS.RESULT_REPORTED, SPC_STATUS.CUSTOMER_ACKNOWLEDGED, actor, cleanString(body.comment, 500), {});
+  spcAudit("SPC_CASE", caseRow.case_id, SPC_EVENT_TYPES.CUSTOMER_ACKNOWLEDGED, actor, SPC_STATUS.RESULT_REPORTED, SPC_STATUS.CUSTOMER_ACKNOWLEDGED, cleanString(body.comment, 500), {});
+  return { ok: true, case_id: caseRow.case_id, status: SPC_STATUS.CUSTOMER_ACKNOWLEDGED };
+}
+
+function spcOfficerDashboard(body) {
+  const actor = spcRequireRole(body, [SPC_ROLES.OFFICER, SPC_ROLES.SUPERVISOR, SPC_ROLES.ADMIN]);
+  if (!actor.ok) return actor;
+  const officerId = actor.officer ? cleanString(actor.officer.officer_id, 120) : "";
+  const cases = sheetToObjects(SHEET_NAMES.spcCases).filter(function (row) {
+    if ([SPC_ROLES.ADMIN, SPC_ROLES.SUPERVISOR].indexOf(actor.actor_role) !== -1) return true;
+    return !row.assigned_officer_id || cleanString(row.assigned_officer_id, 120) === officerId;
+  });
+  return { ok: true, role: actor.actor_role, officer: actor.officer ? spcPublicOfficer(actor.officer) : null, summary: spcSummarizeCases(cases), cases: cases.map(spcPrivateCase) };
+}
+
+function spcSupervisorDashboard(body) {
+  const actor = spcRequireRole(body, [SPC_ROLES.SUPERVISOR, SPC_ROLES.ADMIN]);
+  if (!actor.ok) return actor;
+  const cases = sheetToObjects(SHEET_NAMES.spcCases);
+  return { ok: true, summary: spcSummarizeCases(cases), cases: cases.map(spcPrivateCase), officers: sheetToObjects(SHEET_NAMES.spcOfficers).map(spcPublicOfficer) };
+}
+
+function spcAdminDashboard(body) {
+  const actor = spcRequireRole(body, [SPC_ROLES.ADMIN]);
+  if (!actor.ok) return actor;
+  const cases = sheetToObjects(SHEET_NAMES.spcCases);
+  return { ok: true, summary: spcSummarizeCases(cases), recent_cases: cases.slice(Math.max(0, cases.length - 50)).reverse().map(spcPrivateCase), officers: sheetToObjects(SHEET_NAMES.spcOfficers).map(spcPublicOfficer) };
+}
+
+function spcSummarizeCases(cases) {
+  const summary = { total: cases.length, sla_breached: 0 };
+  Object.keys(SPC_STATUS).forEach(function (key) { summary[SPC_STATUS[key].toLowerCase()] = 0; });
+  cases.forEach(function (caseRow) {
+    const status = spcNormalizeStatus(caseRow.status);
+    if (summary[status.toLowerCase()] !== undefined) summary[status.toLowerCase()] += 1;
+    if (cleanString(caseRow.first_callback_sla_status, 40) === "BREACHED") summary.sla_breached += 1;
+  });
+  return summary;
+}
+
+function spcGetCaseDetail(body) {
+  const actor = spcRequireRole(body, [SPC_ROLES.OFFICER, SPC_ROLES.SUPERVISOR, SPC_ROLES.ADMIN]);
+  if (!actor.ok) return actor;
+  const caseRow = spcCaseById(body.case_id);
+  if (!caseRow) return { ok: false, error: "SPC_CASE_NOT_FOUND", message: "Case not found." };
+  const assigned = spcRequireAssigned(caseRow, actor);
+  if (!assigned.ok) return assigned;
+  return { ok: true, case: spcPrivateCase(caseRow) };
+}
+
+function spcAcceptCase(body) {
+  ensureSpcSheets();
+  const actor = spcRequireRole(body, [SPC_ROLES.OFFICER, SPC_ROLES.SUPERVISOR, SPC_ROLES.ADMIN]);
+  if (!actor.ok) return actor;
+  const officer = actor.officer || spcOfficerById(body.officer_id);
+  if (!officer) return { ok: false, error: "SPC_OFFICER_REQUIRED", message: "SPC officer record is required." };
+
+  const lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+  try {
+    const caseRow = spcCaseById(body.case_id);
+    if (!caseRow) return { ok: false, error: "SPC_CASE_NOT_FOUND", message: "Case not found." };
+    if (spcNormalizeStatus(caseRow.status) !== SPC_STATUS.NEW || cleanString(caseRow.assigned_officer_id, 120)) {
+      return { ok: false, error: "SPC_ALREADY_ACCEPTED", message: "Case was already accepted." };
+    }
+    const now = new Date();
+    updateRowFields(SHEET_NAMES.spcCases, caseRow._row, {
+      status: SPC_STATUS.ACCEPTED,
+      assigned_officer_id: officer.officer_id,
+      accepted_at: now,
+      updated_at: now
+    });
+    actor.officer = officer;
+    spcCaseEvent(caseRow.case_id, SPC_EVENT_TYPES.CASE_ACCEPTED, SPC_STATUS.NEW, SPC_STATUS.ACCEPTED, actor, cleanString(body.comment, 500), {});
+    spcAudit("SPC_CASE", caseRow.case_id, SPC_EVENT_TYPES.CASE_ACCEPTED, actor, SPC_STATUS.NEW, SPC_STATUS.ACCEPTED, "", {});
+    return { ok: true, case_id: caseRow.case_id, status: SPC_STATUS.ACCEPTED, assigned_officer_id: officer.officer_id };
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function spcStartFirstCallback(body) {
+  const actor = spcRequireRole(body, [SPC_ROLES.OFFICER, SPC_ROLES.SUPERVISOR, SPC_ROLES.ADMIN]);
+  if (!actor.ok) return actor;
+  const caseRow = spcCaseById(body.case_id);
+  if (!caseRow) return { ok: false, error: "SPC_CASE_NOT_FOUND", message: "Case not found." };
+  const assigned = spcRequireAssigned(caseRow, actor);
+  if (!assigned.ok) return assigned;
+
+  const now = new Date();
+  const ttl = spcSettingNumber("contact_code_ttl_minutes", 15);
+  const code = String(Math.floor(100000 + Math.random() * 900000));
+  const transition = spcTransitionCase(body, SPC_STATUS.FIRST_CALLBACK_IN_PROGRESS, SPC_EVENT_TYPES.FIRST_CALLBACK_STARTED, { comment: cleanString(body.comment, 500), evidence: { contact_method: body.contact_method } });
+  if (!transition.ok) return transition;
+  appendObject(SHEET_NAMES.spcContactAttempts, {
+    contact_attempt_id: makeId("SPCCON"),
+    case_id: caseRow.case_id,
+    officer_id: caseRow.assigned_officer_id,
+    contact_method: spcSafeText(body.contact_method || "PHONE", 80),
+    verification_code: code,
+    issued_at: now,
+    expires_at: new Date(now.getTime() + ttl * 60000),
+    used_at: "",
+    status: "ACTIVE",
+    created_at: now,
+    updated_at: now
+  });
+  return { ok: true, case_id: caseRow.case_id, status: SPC_STATUS.FIRST_CALLBACK_IN_PROGRESS, contact_verification_code: code };
+}
+
+function spcCompleteFirstCallback(body) {
+  const result = spcTransitionCase(body, SPC_STATUS.FIRST_CALLBACK_COMPLETED, SPC_EVENT_TYPES.FIRST_CALLBACK_COMPLETED, { comment: cleanString(body.comment, 500), evidence: { time_barrier: true } });
+  if (!result.ok) return result;
+  const verify = spcTransitionCase(body, SPC_STATUS.VERIFYING, SPC_EVENT_TYPES.VERIFICATION_STARTED, { comment: "Verification started after first callback." });
+  return verify.ok ? verify : result;
+}
+
+function spcSubmitChecklistResult(body) {
+  const actor = spcRequireRole(body, [SPC_ROLES.OFFICER, SPC_ROLES.SUPERVISOR, SPC_ROLES.ADMIN]);
+  if (!actor.ok) return actor;
+  const caseRow = spcCaseById(body.case_id);
+  if (!caseRow) return { ok: false, error: "SPC_CASE_NOT_FOUND", message: "Case not found." };
+  const assigned = spcRequireAssigned(caseRow, actor);
+  if (!assigned.ok) return assigned;
+  const instanceId = cleanString(body.checklist_instance_id, 120);
+  const itemId = cleanString(body.checklist_item_id, 160);
+  const instance = sheetToObjects(SHEET_NAMES.spcChecklistInstances).find(function (row) {
+    return cleanString(row.checklist_instance_id, 120) === instanceId && cleanString(row.case_id, 120) === cleanString(caseRow.case_id, 120);
+  });
+  if (!instance || !itemId) return { ok: false, error: "SPC_CHECKLIST_NOT_FOUND", message: "Checklist item not found." };
+  const now = new Date();
+  appendObject(SHEET_NAMES.spcChecklistResults, {
+    result_id: makeId("SPCCLR"),
+    checklist_instance_id: instanceId,
+    case_id: caseRow.case_id,
+    checklist_item_id: itemId,
+    value: spcSafeText(body.value || "DONE", 500),
+    evidence_json: JSON.stringify(body.evidence || {}),
+    completed_by: actor.actor_id,
+    completed_at: now,
+    updated_at: now
+  });
+  spcAudit("SPC_CHECKLIST", caseRow.case_id, "CHECKLIST_RESULT_SUBMITTED", actor, "", caseRow.status, "", { checklist_item_id: itemId });
+  return { ok: true, case_id: caseRow.case_id };
+}
+
+function spcAddCaseEvent(body) {
+  const actor = spcRequireRole(body, [SPC_ROLES.OFFICER, SPC_ROLES.SUPERVISOR, SPC_ROLES.ADMIN]);
+  if (!actor.ok) return actor;
+  const caseRow = spcCaseById(body.case_id);
+  if (!caseRow) return { ok: false, error: "SPC_CASE_NOT_FOUND", message: "Case not found." };
+  const assigned = spcRequireAssigned(caseRow, actor);
+  if (!assigned.ok) return assigned;
+  spcCaseEvent(caseRow.case_id, spcSafeText(body.event_type || "NOTE_ADDED", 80), caseRow.status, caseRow.status, actor, spcSafeText(body.comment, 1000), body.evidence || {});
+  spcAudit("SPC_CASE", caseRow.case_id, "CASE_EVENT_ADDED", actor, caseRow.status, caseRow.status, spcSafeText(body.comment, 1000), body.evidence || {});
+  return { ok: true };
+}
+
+function spcAddVerificationRecord(body) {
+  const actor = spcRequireRole(body, [SPC_ROLES.OFFICER, SPC_ROLES.SUPERVISOR, SPC_ROLES.ADMIN]);
+  if (!actor.ok) return actor;
+  const caseRow = spcCaseById(body.case_id);
+  if (!caseRow) return { ok: false, error: "SPC_CASE_NOT_FOUND", message: "Case not found." };
+  const assigned = spcRequireAssigned(caseRow, actor);
+  if (!assigned.ok) return assigned;
+  const now = new Date();
+  appendObject(SHEET_NAMES.spcVerificationHistory, {
+    verification_id: makeId("SPCVER"),
+    case_id: caseRow.case_id,
+    organization_id: spcSafeText(body.organization_id, 120),
+    organization_name: spcSafeText(body.organization_name || caseRow.claimed_organization, 180),
+    contact_method: spcSafeText(body.contact_method, 80),
+    contact_reference: spcSafeText(body.contact_reference, 240),
+    verification_action: spcSafeText(body.verification_action, 800),
+    verification_result: spcSafeText(body.verification_result, 800),
+    evidence_json: JSON.stringify(body.evidence || {}),
+    recorded_by: actor.actor_id,
+    recorded_at: now
+  });
+  spcCaseEvent(caseRow.case_id, SPC_EVENT_TYPES.AGENCY_RESPONSE_RECEIVED, caseRow.status, caseRow.status, actor, "Verification record added.", body.evidence || {});
+  spcAudit("SPC_VERIFICATION", caseRow.case_id, "VERIFICATION_RECORD_ADDED", actor, caseRow.status, caseRow.status, "", body.evidence || {});
+  return { ok: true };
+}
+
+function spcSetWaitingForAgency(body) {
+  return spcTransitionCase(body, SPC_STATUS.WAITING_FOR_AGENCY, SPC_EVENT_TYPES.AGENCY_CONTACT_ATTEMPTED, { comment: cleanString(body.comment || body.follow_up_note, 800), evidence: { follow_up_at: body.follow_up_at || "" } });
+}
+
+function spcScheduleFollowUp(body) {
+  return spcTransitionCase(body, SPC_STATUS.FOLLOW_UP_REQUIRED, SPC_EVENT_TYPES.FOLLOW_UP_SCHEDULED, { comment: cleanString(body.comment || body.follow_up_note, 800), evidence: { follow_up_at: body.follow_up_at || "" } });
+}
+
+function spcPrepareResult(body) {
+  const resultType = cleanString(body.result_type, 80).toUpperCase();
+  if (Object.keys(SPC_RESULT_TYPES).map(function (key) { return SPC_RESULT_TYPES[key]; }).indexOf(resultType) === -1) {
+    return { ok: false, error: "SPC_INVALID_RESULT_TYPE", message: "Invalid result type." };
+  }
+  return spcTransitionCase(body, SPC_STATUS.READY_TO_REPORT, SPC_EVENT_TYPES.RESULT_PREPARED, {
+    comment: spcSafeText(body.result_summary, 1500),
+    evidence: body.evidence || {},
+    fields: {
+      result_type: resultType,
+      result_summary: spcSafeText(body.result_summary, 1500)
+    }
+  });
+}
+
+function spcReportResult(body) {
+  return spcTransitionCase(body, SPC_STATUS.RESULT_REPORTED, SPC_EVENT_TYPES.RESULT_REPORTED, { comment: cleanString(body.comment, 800), evidence: body.evidence || {} });
+}
+
+function spcAssignOfficer(body) {
+  return spcAssignOfficerInternal(body, false);
+}
+
+function spcReassignCase(body) {
+  return spcAssignOfficerInternal(body, true);
+}
+
+function spcAssignOfficerInternal(body, reassign) {
+  const actor = spcRequireRole(body, [SPC_ROLES.SUPERVISOR, SPC_ROLES.ADMIN]);
+  if (!actor.ok) return actor;
+  const caseRow = spcCaseById(body.case_id);
+  const officer = spcOfficerById(body.officer_id);
+  if (!caseRow || !officer) return { ok: false, error: "SPC_NOT_FOUND", message: "Case or officer not found." };
+  if (!reassign && cleanString(caseRow.assigned_officer_id, 120)) {
+    return { ok: false, error: "SPC_ALREADY_ASSIGNED", message: "Case already has assigned officer." };
+  }
+  if (reassign && !cleanString(body.reason, 500)) {
+    return { ok: false, error: "SPC_REASON_REQUIRED", message: "Reassignment requires a reason." };
+  }
+  updateRowFields(SHEET_NAMES.spcCases, caseRow._row, { assigned_officer_id: officer.officer_id, status: caseRow.status === SPC_STATUS.NEW ? SPC_STATUS.ACCEPTED : caseRow.status, updated_at: new Date() });
+  spcCaseEvent(caseRow.case_id, SPC_EVENT_TYPES.OFFICER_ASSIGNED, caseRow.status, caseRow.status === SPC_STATUS.NEW ? SPC_STATUS.ACCEPTED : caseRow.status, actor, cleanString(body.reason || body.comment, 500), { officer_id: officer.officer_id });
+  spcAudit("SPC_CASE", caseRow.case_id, reassign ? "OFFICER_REASSIGNED" : "OFFICER_ASSIGNED", actor, caseRow.status, caseRow.status, cleanString(body.reason || body.comment, 500), { officer_id: officer.officer_id });
+  return { ok: true, case_id: caseRow.case_id, assigned_officer_id: officer.officer_id };
+}
+
+function spcReviewCase(body) {
+  const actor = spcRequireRole(body, [SPC_ROLES.SUPERVISOR, SPC_ROLES.ADMIN]);
+  if (!actor.ok) return actor;
+  const caseRow = spcCaseById(body.case_id);
+  if (!caseRow) return { ok: false, error: "SPC_CASE_NOT_FOUND", message: "Case not found." };
+  spcAudit("SPC_CASE", caseRow.case_id, "CASE_REVIEWED", actor, caseRow.status, caseRow.status, cleanString(body.comment, 1000), {});
+  return { ok: true };
+}
+
+function spcEscalateCase(body) {
+  return spcTransitionCase(body, SPC_STATUS.ESCALATED, SPC_EVENT_TYPES.CASE_ESCALATED, { comment: cleanString(body.reason || body.comment, 1000), evidence: {} });
+}
+
+function spcOverrideTransition(body) {
+  const actor = spcRequireRole(body, [SPC_ROLES.SUPERVISOR, SPC_ROLES.ADMIN]);
+  if (!actor.ok) return actor;
+  if (!cleanString(body.reason, 500)) return { ok: false, error: "SPC_REASON_REQUIRED", message: "Override requires reason." };
+  const caseRow = spcCaseById(body.case_id);
+  const next = spcNormalizeStatus(body.to_status);
+  if (!caseRow || !next) return { ok: false, error: "SPC_INVALID_OVERRIDE", message: "Invalid override." };
+  const now = new Date();
+  const updates = { status: next, updated_at: now };
+  if (next === SPC_STATUS.CLOSED) updates.closed_at = now;
+  updateRowFields(SHEET_NAMES.spcCases, caseRow._row, updates);
+  spcCaseEvent(caseRow.case_id, SPC_EVENT_TYPES.SUPERVISOR_OVERRIDE, caseRow.status, next, actor, cleanString(body.reason, 1000), {});
+  spcAudit("SPC_CASE", caseRow.case_id, SPC_EVENT_TYPES.SUPERVISOR_OVERRIDE, actor, caseRow.status, next, cleanString(body.reason, 1000), {});
+  return { ok: true, case_id: caseRow.case_id, status: next };
+}
+
+function spcCreateOfficer(body) {
+  const actor = spcRequireRole(body, [SPC_ROLES.ADMIN]);
+  if (!actor.ok) return actor;
+  const required = requireFields(body || {}, ["officer_name"]);
+  if (!required.ok) return required;
+  const now = new Date();
+  const officerId = cleanString(body.officer_id, 120) || makeId("SPCOFF");
+  appendObject(SHEET_NAMES.spcOfficers, {
+    officer_id: officerId,
+    agent_id: validateAgentId(body.agent_id),
+    admin_id: spcSafeText(body.admin_id, 160),
+    officer_name: spcSafeText(body.officer_name, 160),
+    photo_url: spcSafeText(body.photo_url, 500),
+    department: spcSafeText(body.department || "SPC", 120),
+    role: spcNormalizeRole(body.role) || SPC_ROLES.OFFICER,
+    status: "ACTIVE",
+    official_profile_url: spcSafeText(body.official_profile_url, 500),
+    valid_from: body.valid_from || now,
+    valid_until: body.valid_until || "",
+    created_at: now,
+    updated_at: now,
+    created_by: actor.actor_id,
+    is_test: booleanValue(body.is_test),
+    qa_batch: spcSafeText(body.qa_batch, 120)
+  });
+  const permissionActorId = validateAgentId(body.agent_id) || spcSafeText(body.admin_id, 160) || officerId;
+  appendObject(SHEET_NAMES.spcPermissions, {
+    permission_id: makeId("SPCPERM"),
+    actor_id: permissionActorId,
+    actor_type: validateAgentId(body.agent_id) ? "AGENT" : "ADMIN",
+    officer_id: officerId,
+    role: spcNormalizeRole(body.role) || SPC_ROLES.OFFICER,
+    status: "ACTIVE",
+    created_at: now,
+    updated_at: now,
+    created_by: actor.actor_id
+  });
+  spcAudit("SPC_OFFICER", officerId, "OFFICER_CREATED", actor, "", "ACTIVE", "", {});
+  return { ok: true, officer: spcPublicOfficer(spcOfficerById(officerId)) };
+}
+
+function spcUpdateOfficer(body) {
+  const actor = spcRequireRole(body, [SPC_ROLES.ADMIN]);
+  if (!actor.ok) return actor;
+  const officer = spcOfficerById(body.officer_id);
+  if (!officer) return { ok: false, error: "SPC_OFFICER_NOT_FOUND", message: "Officer not found." };
+  const fields = {
+    officer_name: spcSafeText(body.officer_name || officer.officer_name, 160),
+    photo_url: spcSafeText(body.photo_url || officer.photo_url, 500),
+    department: spcSafeText(body.department || officer.department, 120),
+    role: spcNormalizeRole(body.role) || officer.role,
+    status: spcSafeText(body.status || officer.status, 40),
+    official_profile_url: spcSafeText(body.official_profile_url || officer.official_profile_url, 500),
+    valid_from: body.valid_from || officer.valid_from,
+    valid_until: body.valid_until || officer.valid_until,
+    updated_at: new Date()
+  };
+  updateRowFields(SHEET_NAMES.spcOfficers, officer._row, fields);
+  spcAudit("SPC_OFFICER", officer.officer_id, "OFFICER_UPDATED", actor, officer.status, fields.status, "", {});
+  return { ok: true, officer: spcPublicOfficer(spcOfficerById(officer.officer_id)) };
+}
+
+function spcManageChecklistTemplate(body) {
+  const actor = spcRequireRole(body, [SPC_ROLES.ADMIN]);
+  if (!actor.ok) return actor;
+  return { ok: true, templates: sheetToObjects(SHEET_NAMES.spcChecklistTemplates), items: sheetToObjects(SHEET_NAMES.spcChecklistItems) };
+}
+
+function spcManageOrganization(body) {
+  const actor = spcRequireRole(body, [SPC_ROLES.ADMIN]);
+  if (!actor.ok) return actor;
+  if (cleanString(body.organization_name, 180)) {
+    const now = new Date();
+    appendObject(SHEET_NAMES.spcOrganizations, {
+      organization_id: makeId("SPCORG"),
+      organization_name: spcSafeText(body.organization_name, 180),
+      organization_type: spcSafeText(body.organization_type, 80),
+      official_contact: spcSafeText(body.official_contact, 240),
+      official_url: spcSafeText(body.official_url, 500),
+      status: "ACTIVE",
+      created_at: now,
+      updated_at: now,
+      created_by: actor.actor_id
+    });
+  }
+  return { ok: true, organizations: sheetToObjects(SHEET_NAMES.spcOrganizations) };
+}
+
+function spcViewAuditLogs(body) {
+  const actor = spcRequireRole(body, [SPC_ROLES.SUPERVISOR, SPC_ROLES.ADMIN]);
+  if (!actor.ok) return actor;
+  const limit = Math.max(1, Math.min(500, Number(body.limit || 100)));
+  const logs = sheetToObjects(SHEET_NAMES.spcAuditLogs).slice(-limit).reverse();
+  return { ok: true, audit_logs: logs };
+}
+
+function spcRunIntegrityCheck(body) {
+  const actor = spcRequireRole(body, [SPC_ROLES.ADMIN]);
+  if (!actor.ok) return actor;
+  const anomalies = [];
+  sheetToObjects(SHEET_NAMES.spcCases).forEach(function (caseRow) {
+    if (!caseRow.public_case_token) anomalies.push({ case_id: caseRow.case_id, issue: "MISSING_PUBLIC_TOKEN" });
+    if (!spcNormalizeStatus(caseRow.status)) anomalies.push({ case_id: caseRow.case_id, issue: "INVALID_STATUS" });
+    if (caseRow.status === SPC_STATUS.ACCEPTED && !caseRow.assigned_officer_id) anomalies.push({ case_id: caseRow.case_id, issue: "ACCEPTED_WITHOUT_OFFICER" });
+    if (caseRow.status === SPC_STATUS.RESULT_REPORTED && !caseRow.result_summary) anomalies.push({ case_id: caseRow.case_id, issue: "RESULT_WITHOUT_SUMMARY" });
+  });
+  return { ok: true, anomalies: anomalies, checked_at: new Date() };
+}
+
+function spcGetPublicOfficerVerification(body) {
+  ensureSpcSheets();
+  const caseRow = spcCaseByToken(body.public_case_token || body.token);
+  if (!caseRow) return { ok: false, error: "SPC_CASE_NOT_FOUND", message: "Case not found." };
+  const officer = spcOfficerById(caseRow.assigned_officer_id);
+  const attempts = sheetToObjects(SHEET_NAMES.spcContactAttempts).filter(function (attempt) {
+    return cleanString(attempt.case_id, 120) === cleanString(caseRow.case_id, 120);
+  }).map(function (attempt) {
+    return {
+      contact_attempt_id: attempt.contact_attempt_id,
+      contact_method: attempt.contact_method,
+      issued_at: attempt.issued_at,
+      expires_at: attempt.expires_at,
+      status: attempt.status
+    };
+  });
+  return { ok: true, case_id: caseRow.case_id, officer: officer ? spcPublicOfficer(officer) : null, contact_attempts: attempts };
+}
+
+function spcVerifyContactCode(body) {
+  ensureSpcSheets();
+  const code = cleanString(body.verification_code || body.code, 20);
+  const token = cleanString(body.public_case_token || body.token, 160);
+  const caseRow = spcCaseByToken(token);
+  if (!caseRow || !code) return { ok: false, error: "SPC_INVALID_CODE", message: "Invalid verification code." };
+  const attempt = sheetToObjects(SHEET_NAMES.spcContactAttempts).find(function (row) {
+    return cleanString(row.case_id, 120) === cleanString(caseRow.case_id, 120) &&
+      cleanString(row.verification_code, 20) === code &&
+      !row.used_at &&
+      cleanString(row.status, 40).toUpperCase() === "ACTIVE";
+  });
+  if (!attempt) return { ok: false, error: "SPC_INVALID_CODE", message: "Invalid or used verification code." };
+  if (new Date(attempt.expires_at).getTime() < new Date().getTime()) {
+    return { ok: false, error: "SPC_EXPIRED_CODE", message: "Verification code expired." };
+  }
+  if (booleanValue(body.consume)) {
+    updateRowFields(SHEET_NAMES.spcContactAttempts, attempt._row, { used_at: new Date(), status: "USED", updated_at: new Date() });
+  }
+  return { ok: true, case_id: caseRow.case_id, officer: spcPublicOfficer(spcOfficerById(attempt.officer_id) || {}) };
+}
+
+/* =========================================================
    ADMIN DASHBOARD
 ========================================================= */
 
@@ -3387,11 +4850,23 @@ function getAdminDashboard(options) {
     return agent.status === AGENT_STATUS.WAIT_APPROVAL;
   });
   const recentLimit = Math.max(1, Math.min(50, Number(params.recent_limit || params.limit || 10)));
+  const includeStatistics = String(params.include_statistics || "").trim().toLowerCase() === "true";
+  let statistics = {};
+
+  if (includeStatistics) {
+    try {
+      statistics = summarizeFinancials();
+    } catch (error) {
+      statistics = {
+        unavailable: true
+      };
+    }
+  }
 
   return {
     ok: true,
     summary: summarizeAgents(agents),
-    statistics: summarizeFinancials(),
+    statistics: statistics,
     pending_agents: pendingAgents.slice(0, recentLimit),
     recent_agents: publicAgents.slice(Math.max(0, publicAgents.length - recentLimit)).reverse()
   };

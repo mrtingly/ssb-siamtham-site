@@ -1,5 +1,5 @@
 (function () {
-  const API_URL = "https://script.google.com/macros/s/AKfycbyKhWE-_SuKreCPyD4tsNmqNMQz2hZ8hQtrckk92mh8rszh1jaNEeuuFBGsPOLKfAziNg/exec";
+  const API_URL = window.getSbosApiEndpoint ? window.getSbosApiEndpoint() : "";
   const PAGE_SIZE = 10;
   const REQUEST_TIMEOUT_MS = 30000;
   const SEARCH_DEBOUNCE_MS = 280;

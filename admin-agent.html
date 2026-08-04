@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="th">
 <head>
   <meta charset="UTF-8">
@@ -58,8 +58,8 @@
     </section>
   </main>
 </div>
-<script>
-const API_URL="https://script.google.com/macros/s/AKfycbyKhWE-_SuKreCPyD4tsNmqNMQz2hZ8hQtrckk92mh8rszh1jaNEeuuFBGsPOLKfAziNg/exec";
+<script src="js/sbos-api-config.js"></script><script>
+const API_URL=window.getSbosApiEndpoint?window.getSbosApiEndpoint():"";
 let currentAgentId="";
 function show(type,text){const box=document.getElementById("message");box.className="message show "+type;box.textContent=text}
 function clearMessage(){document.getElementById("message").className="message"}

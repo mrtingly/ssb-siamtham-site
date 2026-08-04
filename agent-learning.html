@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="th" data-i18n-page-title="training.pageTitle">
 <head>
   <meta charset="UTF-8">
@@ -45,7 +45,7 @@
       </section>
     </main>
   </div>
-  <script>
+  <script src="js/sbos-api-config.js"></script><script>
     (function () {
       const KEY = "sbos_theme";
       const OPTIONS = ["light", "dark"];
@@ -59,7 +59,7 @@
   </script>
   <script src="js/i18n.js"></script>
   <script>
-const API_URL="https://script.google.com/macros/s/AKfycbyKhWE-_SuKreCPyD4tsNmqNMQz2hZ8hQtrckk92mh8rszh1jaNEeuuFBGsPOLKfAziNg/exec";
+const API_URL=window.getSbosApiEndpoint?window.getSbosApiEndpoint():"";
 const SESSION_KEYS=["ssb_agent_session","ssb_agent_session_v1"];
 const lessons=[
 {titleKey:"training.lesson1.title",subtitleKey:"training.lesson1.subtitle",title:"บทที่ 1 แนะนำบริษัทและระบบ SSB",subtitle:"ทำความเข้าใจภาพรวมบริษัท ผลิตภัณฑ์ และบทบาทตัวแทน",html:"<h3>วัตถุประสงค์</h3><ul><li>รู้จักบริษัท สยามทำ จำกัด</li><li>เข้าใจภาพรวม SSB และ SSBMS</li><li>เข้าใจหน้าที่ของตัวแทน</li></ul><div class='video-box'>พื้นที่วิดีโออบรมบทที่ 1</div>"},

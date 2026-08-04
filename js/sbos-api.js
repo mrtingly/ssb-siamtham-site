@@ -1,7 +1,7 @@
 "use strict";
 window.SBOS_API={
-  endpoint:localStorage.getItem("sbos_apps_script_url")||"",
-  configure(url){this.endpoint=String(url||"").trim();localStorage.setItem("sbos_apps_script_url",this.endpoint)},
+  endpoint:window.getSbosApiEndpoint ? window.getSbosApiEndpoint() : "",
+  configure(){this.endpoint=window.getSbosApiEndpoint ? window.getSbosApiEndpoint() : "";return this.endpoint},
   async request(action,payload={}){
     if(!this.endpoint)throw new Error("ยังไม่ได้ตั้งค่า Google Apps Script Web App URL");
     const response=await fetch(this.endpoint,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action,payload,clientVersion:SBOS?.version||"1.0.0",sentAt:new Date().toISOString()})});

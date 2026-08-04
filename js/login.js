@@ -1,4 +1,4 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbyKhWE-_SuKreCPyD4tsNmqNMQz2hZ8hQtrckk92mh8rszh1jaNEeuuFBGsPOLKfAziNg/exec";
+const API_URL = window.getSbosApiEndpoint ? window.getSbosApiEndpoint() : "";
 
 function jsonp(url) {
   return new Promise((resolve, reject) => {
@@ -27,15 +27,50 @@ function jsonp(url) {
 }
 
 async function apiPost(payload) {
-  const res = await fetch(API_URL, {
-    method: "POST",
-    body: JSON.stringify(payload)
-  });
+  const controller = new AbortController();
+  const timeoutId = setTimeout(function () {
+    controller.abort();
+  }, 20000);
+
+  let res;
+  try {
+    res = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload || {}),
+      signal: controller.signal
+    });
+  } finally {
+    clearTimeout(timeoutId);
+  }
+
   const text = await res.text();
+  const contentType = res.headers.get("content-type") || "";
+
+  if (!res.ok) {
+    return {
+      ok: false,
+      code: "HTTP_ERROR",
+      message: "ไม่สามารถเชื่อมต่อระบบได้ (" + res.status + ")"
+    };
+  }
+
+  if (contentType.indexOf("text/html") !== -1 || /^\s*</.test(text)) {
+    return {
+      ok: false,
+      code: "NON_JSON_RESPONSE",
+      message: "ระบบยืนยันตัวตนไม่พร้อมใช้งาน กรุณาลองใหม่อีกครั้ง"
+    };
+  }
+
   try {
     return JSON.parse(text);
   } catch (error) {
-    return { ok: false, message: text || "Invalid API response" };
+    return {
+      ok: false,
+      code: "INVALID_JSON",
+      message: "Invalid API response"
+    };
   }
 }
 
@@ -185,7 +220,10 @@ async function doLogin(e) {
     window.location.replace(routeByStatus(res));
 
   } catch (err) {
-    showLoginMessage(t("login.networkError"), "error");
+    const message = err && err.name === "AbortError"
+      ? "ระบบใช้เวลาตอบสนองนานเกินไป กรุณาลองใหม่อีกครั้ง"
+      : t("login.networkError");
+    showLoginMessage(message, "error");
   } finally {
     if (submitButton) {
       submitButton.disabled = false;
@@ -193,3 +231,10 @@ async function doLogin(e) {
     }
   }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.querySelector("#agentLoginForm");
+  const toggleButton = document.querySelector(".show-pass-btn");
+  if (form) form.addEventListener("submit", doLogin);
+  if (toggleButton) toggleButton.addEventListener("click", togglePassword);
+});

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="th">
 <head>
 <meta charset="UTF-8">
@@ -23,9 +23,9 @@
 <section class="stats"><div class="stat"><small>ทั้งหมด</small><strong id="allCount">0</strong></div><div class="stat"><small>รอดำเนินการ</small><strong id="pendingCount">0</strong></div><div class="stat"><small>กำลังติดตั้ง</small><strong id="installCount">0</strong></div><div class="stat"><small>สำเร็จแล้ว</small><strong id="completeCount">0</strong></div></section>
 <section class="panel"><div class="toolbar"><input id="search" type="search" placeholder="ค้นหาเลขที่ ลูกค้า รุ่น หรือสี"><select id="filter"><option value="all">ทุกสถานะ</option><option value="waiting_payment">รอชำระเงิน/รอตรวจ</option><option value="deposit_paid">ชำระมัดจำแล้ว</option><option value="paid_in_full">ชำระเต็มจำนวนแล้ว</option><option value="approved">กำลังเตรียมงาน</option><option value="installing">กำลังติดตั้ง</option><option value="shipping">กำลังจัดส่ง</option><option value="completed">ส่งมอบแล้ว</option><option value="cancelled">ยกเลิก</option></select></div><div class="error" id="errorBox"></div><div id="orders" class="orders"></div></section>
 </main>
-<script>
+<script src="js/sbos-api-config.js"></script><script>
 'use strict';
-const API_URL="https://script.google.com/macros/s/AKfycbyKhWE-_SuKreCPyD4tsNmqNMQz2hZ8hQtrckk92mh8rszh1jaNEeuuFBGsPOLKfAziNg/exec";
+const API_URL=window.getSbosApiEndpoint?window.getSbosApiEndpoint():"";
 const $=s=>document.querySelector(s);
 const money=v=>'฿'+Number(v||0).toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2});
 const normalizeStatus=s=>({PAYMENT_PENDING:'waiting_payment',PAYMENT_REVIEW:'waiting_payment',DEPOSIT_PAID:'deposit_paid',PAID_IN_FULL:'paid_in_full',PAID:'paid_in_full',PREPARING:'approved',READY_TO_INSTALL:'approved',INSTALLING:'installing',COMPLETED:'completed',CANCELLED:'cancelled',pending_payment:'waiting_payment'}[String(s||'').toUpperCase()]||String(s||'waiting_payment').toLowerCase());

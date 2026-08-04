@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="th">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -15,7 +15,7 @@
   <section class="finance-panel"><h3>Create Withdrawal</h3><form id="form" class="finance-form"><label>Amount<input id="amount" inputmode="decimal" placeholder="0.00"></label><label class="wide">Note<textarea id="note" placeholder="Optional note"></textarea></label><div><button id="submit" class="finance-action" type="submit">Submit Request</button></div></form></section>
   <section class="finance-panel"><h3>History</h3><div class="finance-table-wrap"><table class="finance-table"><thead><tr><th>ID</th><th>Amount</th><th>Net</th><th>Status</th><th>Requested</th><th>Paid Ref</th><th>Reason</th></tr></thead><tbody id="rows"><tr><td colspan="7">Loading...</td></tr></tbody></table></div></section><div id="status" class="finance-status" role="status" aria-live="polite"></div></div></main>
 </div>
-<script src="js/agent-api.js"></script><script src="js/withdraw.js"></script><script src="js/agent-guard.js"></script>
+<script src="js/sbos-api-config.js"></script><script src="js/agent-api.js"></script><script src="js/withdraw.js"></script><script src="js/agent-guard.js"></script>
 <script>
 "use strict";let wallet={};function badge(v){return '<span class="finance-badge '+esc(String(v||'').toLowerCase())+'">'+esc(v||'-')+'</span>'}
 async function load(){const [w,d]=await Promise.all([agentFinancePost("getAgentWallet",{}),agentFinancePost("listAgentWithdrawals",{})]);if(!w.ok||!d.ok){document.getElementById("status").textContent=w.message||d.message||"Load failed";return}wallet=w.wallet||{};document.getElementById("available").textContent=money(wallet.available_balance);document.getElementById("reserved").textContent=money(wallet.reserved_balance);document.getElementById("withdrawn").textContent=money(wallet.lifetime_withdrawn);const rows=d.withdrawals||[];document.getElementById("total").textContent=rows.length;document.getElementById("rows").innerHTML=rows.length?rows.map(r=>'<tr><td>'+esc(r.withdrawal_id)+'</td><td>'+esc(money(r.requested_amount))+'</td><td>'+esc(money(r.net_amount))+'</td><td>'+badge(r.status)+'</td><td>'+esc(formatDate(r.requested_at))+'</td><td>'+esc(r.payment_reference||"-")+'</td><td>'+esc(r.rejection_reason||"-")+'</td></tr>').join(""):'<tr><td colspan="7" class="finance-empty">No withdrawals</td></tr>';document.getElementById("status").textContent="Updated"}

@@ -1,4 +1,4 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbyKhWE-_SuKreCPyD4tsNmqNMQz2hZ8hQtrckk92mh8rszh1jaNEeuuFBGsPOLKfAziNg/exec";
+const API_URL = window.getSbosApiEndpoint ? window.getSbosApiEndpoint() : "";
 
 function money(value){
   return "฿" + Number(value || 0).toLocaleString("th-TH", {

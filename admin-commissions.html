@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="th">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -12,7 +12,7 @@
   <aside class="finance-side"><div class="finance-brand"><img src="images/logo.png" alt="SBOS"><div><b>SBOS Admin</b><span>Commission Control</span></div></div><nav class="finance-menu"><a href="admin-finance.html">Finance</a><a class="active" href="admin-commissions.html">Commissions</a><a href="admin-wallets.html">Wallets</a><a href="admin-withdraw.html">Withdrawals</a><a href="admin-commission-settings.html">Settings</a></nav></aside>
   <main class="finance-main"><header class="finance-top"><div><h1>Commission Management</h1><p>Hold, release hold และ reverse พร้อมเหตุผล</p></div><button id="refresh" class="finance-action" type="button">Refresh</button></header><div class="finance-content"><section class="finance-panel"><div class="finance-toolbar"><input id="search" placeholder="Search ID, order, payment, agent"><select id="filter"><option value="">All</option><option>AVAILABLE</option><option>PENDING</option><option>HELD</option><option>REVERSED</option><option>CONFIG_REQUIRED</option></select><label><input id="qa" type="checkbox"> Include QA</label></div><div class="finance-table-wrap"><table class="finance-table"><thead><tr><th>ID</th><th>Agent</th><th>Order/Payment</th><th>Milestone</th><th>Amount</th><th>Status</th><th>Actions</th></tr></thead><tbody id="rows"><tr><td colspan="7">Loading...</td></tr></tbody></table></div></section><div id="status" class="finance-status"></div></div></main>
 </div>
-<script src="js/admin-actions.js"></script>
+<script src="js/sbos-api-config.js"></script><script src="js/admin-actions.js"></script>
 <script src="js/admin-guard.js"></script>
 <script>
 "use strict";

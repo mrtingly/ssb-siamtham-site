@@ -1,6 +1,6 @@
 "use strict";
 
-const SBOS_ORG_API_URL = "https://script.google.com/macros/s/AKfycbyKhWE-_SuKreCPyD4tsNmqNMQz2hZ8hQtrckk92mh8rszh1jaNEeuuFBGsPOLKfAziNg/exec";
+const SBOS_ORG_API_URL = window.getSbosApiEndpoint ? window.getSbosApiEndpoint() : "";
 
 function orgEsc(value){
   return String(value === null || value === undefined ? "" : value).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));

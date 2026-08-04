@@ -1,7 +1,7 @@
 "use strict";
 // SBOS V3-5 marker: public CMS renderer reads published content without admin token.
 
-const SBOS_CMS_PUBLIC_API = "https://script.google.com/macros/s/AKfycbyKhWE-_SuKreCPyD4tsNmqNMQz2hZ8hQtrckk92mh8rszh1jaNEeuuFBGsPOLKfAziNg/exec";
+const SBOS_CMS_PUBLIC_API = window.getSbosApiEndpoint ? window.getSbosApiEndpoint() : "";
 
 async function cmsPublicGet(action, params = {}) {
   const query = new URLSearchParams(Object.assign({ action }, params));

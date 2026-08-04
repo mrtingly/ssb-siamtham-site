@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="th">
 <head>
   <meta charset="UTF-8" />
@@ -19,7 +19,9 @@
       <h1>Admin Login</h1>
       <p>เข้าสู่ระบบผู้ดูแล / Owner</p>
 
-      <form class="login-form" onsubmit="adminLogin(event)">
+      <form class="login-form" id="adminLoginForm">
+        <div id="adminLoginMessage" class="login-message" role="status" aria-live="polite" hidden></div>
+
         <label>
           Email / Admin ID
           <input id="admin_username" type="text" required />
@@ -39,7 +41,7 @@
   </main>
 
   <script src="js/logout.js"></script>
-  <script src="js/admin-login.js"></script>
+  <script src="js/sbos-api-config.js"></script><script src="js/admin-login.js"></script>
 
 </body>
 </html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="th">
 <head>
 <meta charset="UTF-8">
@@ -27,10 +27,10 @@
 <div class="signed-stamp" id="signedStamp">✓ ลูกค้ายืนยันการสั่งซื้อแล้ว เอกสารฉบับนี้ถูกล็อก</div>
 <div class="finalactions"><button class="btn secondary" id="backBtn">กลับไปแก้สินค้า</button><button class="btn primary" id="confirmBtn">ยืนยันและลงนามสั่งซื้อ</button></div><div class="locknote">เมื่อลูกค้ากดยืนยัน ระบบจะบันทึกเลขที่เอกสาร วัน–เวลา ลายเซ็น และข้อมูลเบราว์เซอร์ไว้ในเครื่อง พร้อมเปลี่ยนสถานะเป็น “ลูกค้ายืนยันแล้ว”</div></section>
 </div></section></main>
-<script>
+<script src="js/sbos-api-config.js"></script><script>
 "use strict";
 const $=s=>document.querySelector(s);const money=v=>"฿"+Number(v||0).toLocaleString("th-TH",{minimumFractionDigits:2,maximumFractionDigits:2});
-const API_URL="https://script.google.com/macros/s/AKfycbyKhWE-_SuKreCPyD4tsNmqNMQz2hZ8hQtrckk92mh8rszh1jaNEeuuFBGsPOLKfAziNg/exec";
+const API_URL=window.getSbosApiEndpoint?window.getSbosApiEndpoint():"";
 const params=new URLSearchParams(location.search);let draft={},quoteId=params.get("quotation_id")||params.get("quoteId")||"";let signed=false,hasInk=false;
 function getAgentId(){const direct=localStorage.getItem("agent_id")||localStorage.getItem("ssb_agent_id")||localStorage.getItem("ssb_current_agent_v1");if(direct)return direct;for(const key of ["ssb_agent_session","ssb_agent_session_v1"]){try{const s=JSON.parse(localStorage.getItem(key)||"null");if(s&&(s.agent_id||s.applicationId))return s.agent_id||s.applicationId}catch(e){}}return ""}
 function getAgentToken(){return localStorage.getItem("agent_session_token")||""}
