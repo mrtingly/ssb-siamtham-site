@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPC Case Detail</title>
+  <link rel="stylesheet" href="css/spc.css">
+</head>
+<body class="spc-page">
+  <main class="spc-shell">
+    <header class="spc-header">
+      <div>
+        <p class="spc-kicker">SPC Workflow</p>
+        <h1 class="spc-title">Case Detail</h1>
+        <p class="spc-subtitle">หน้าทดสอบ workflow ขั้นต่ำ ทุก transition ถูกตรวจที่ backend และต้องผ่าน checklist/evidence ตามสถานะ</p>
+      </div>
+      <a class="spc-button secondary" href="spc-officer-dashboard.html" aria-label="Back to SPC officer dashboard">กลับ Dashboard</a>
+    </header>
+
+    <section id="caseDetail" class="spc-card">
+      <div class="spc-grid">
+        <div><p class="spc-label">Case ID</p><p id="detailCaseId"></p></div>
+        <div><p class="spc-label">Status</p><p id="detailStatus" class="spc-status"></p></div>
+        <div><p class="spc-label">Customer</p><p id="detailCustomer"></p></div>
+        <div><p class="spc-label">Phone</p><p id="detailPhone"></p></div>
+      </div>
+      <p class="spc-label">Claimed Organization</p>
+      <p id="detailOrg"></p>
+      <p class="spc-label">Incident</p>
+      <p id="detailDescription"></p>
+    </section>
+
+    <section class="spc-card">
+      <h2>Workflow Actions</h2>
+      <div class="spc-actions">
+        <button id="startCallback" class="spc-button" type="button" aria-label="Start first callback">Start Callback</button>
+        <button id="completeCallback" class="spc-button" type="button" aria-label="Complete first callback">Complete Callback</button>
+        <button id="waitingAgency" class="spc-button secondary" type="button" aria-label="Set waiting for agency">Waiting Agency</button>
+        <button id="scheduleFollowUp" class="spc-button secondary" type="button" aria-label="Schedule follow up">Follow Up</button>
+      </div>
+      <div class="spc-field">
+        <label for="workNote">Note / Follow-up</label>
+        <textarea id="workNote"></textarea>
+      </div>
+    </section>
+
+    <section class="spc-card">
+      <h2>Checklist</h2>
+      <div id="checklistWrap" class="spc-list"></div>
+    </section>
+
+    <section class="spc-card">
+      <h2>Verification Record</h2>
+      <div class="spc-grid">
+        <div class="spc-field"><label for="organizationName">Organization</label><input id="organizationName"></div>
+        <div class="spc-field"><label for="contactMethod">Contact Method</label><input id="contactMethod"></div>
+      </div>
+      <div class="spc-field"><label for="verificationAction">Verification Action</label><textarea id="verificationAction"></textarea></div>
+      <div class="spc-field"><label for="verificationResult">Verification Result</label><textarea id="verificationResult"></textarea></div>
+      <button id="addVerification" class="spc-button" type="button" aria-label="Add verification record">Add Verification</button>
+    </section>
+
+    <section class="spc-card">
+      <h2>Result</h2>
+      <div class="spc-field">
+        <label for="resultType">Result Type</label>
+        <select id="resultType">
+          <option value="CONFIRMED_FALSE">CONFIRMED_FALSE</option>
+          <option value="CONFIRMED_TRUE">CONFIRMED_TRUE</option>
+          <option value="UNABLE_TO_VERIFY">UNABLE_TO_VERIFY</option>
+          <option value="PARTIALLY_VERIFIED">PARTIALLY_VERIFIED</option>
+        </select>
+      </div>
+      <div class="spc-field"><label for="resultSummary">Summary / Customer Instruction</label><textarea id="resultSummary"></textarea></div>
+      <div class="spc-actions">
+        <button id="prepareResult" class="spc-button" type="button" aria-label="Prepare SPC result">Prepare Result</button>
+        <button id="reportResult" class="spc-button" type="button" aria-label="Report SPC result">Report Result</button>
+      </div>
+    </section>
+
+    <p id="spcMessage" class="spc-message" aria-live="polite"></p>
+  </main>
+  <script src="js/sbos-api-config.js"></script><script src="js/spc-api.js"></script>
+  <script src="js/spc-officer.js"></script>
+</body>
+</html>

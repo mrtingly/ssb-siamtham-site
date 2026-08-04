@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPC Request | Siamtham Protection Center</title>
+  <link rel="stylesheet" href="css/spc.css">
+</head>
+<body class="spc-page">
+  <main class="spc-shell">
+    <header class="spc-header">
+      <div>
+        <p class="spc-kicker">Siamtham Protection Center</p>
+        <h1 class="spc-title">แจ้งเคสให้ SPC ตรวจสอบข้อเท็จจริง</h1>
+        <p class="spc-subtitle">หลังส่งคำขอแล้ว SPC จะรับผิดชอบขั้นตอนตรวจสอบข้อเท็จจริงแทนคุณ ระหว่างนี้ห้ามโอนเงิน ห้ามแจ้ง OTP/PIN/รหัสผ่าน/CVV ห้ามติดตั้งแอป และห้ามแชร์หน้าจอหรือให้ควบคุมเครื่อง</p>
+      </div>
+      <a class="spc-button secondary" href="spc-case-status.html" aria-label="ตรวจสอบสถานะเคส SPC">ตรวจสถานะเคส</a>
+    </header>
+
+    <section class="spc-card spc-warning" aria-label="SPC safety warning">
+      <strong>SPC จะไม่ขอ OTP, PIN, password, CVV, การโอนเงิน, การแชร์หน้าจอ, remote control หรือให้ติดตั้งแอปไม่รู้จัก</strong>
+    </section>
+
+    <form id="spcRequestForm" class="spc-card">
+      <div class="spc-grid">
+        <div class="spc-field">
+          <label for="customer_name">ชื่อผู้ติดต่อ</label>
+          <input id="customer_name" name="customer_name" autocomplete="name" required>
+        </div>
+        <div class="spc-field">
+          <label for="customer_phone">เบอร์โทรศัพท์</label>
+          <input id="customer_phone" name="customer_phone" inputmode="tel" autocomplete="tel" required>
+        </div>
+        <div class="spc-field">
+          <label for="customer_email">อีเมล</label>
+          <input id="customer_email" name="customer_email" type="email" autocomplete="email">
+        </div>
+        <div class="spc-field">
+          <label for="incident_category">ประเภทเหตุการณ์</label>
+          <select id="incident_category" name="incident_category">
+            <option value="GENERAL">ทั่วไป</option>
+            <option value="PAYMENT">การชำระเงิน</option>
+            <option value="ACCOUNT">บัญชี/ตัวตน</option>
+            <option value="DELIVERY">จัดส่ง/ติดตั้ง</option>
+          </select>
+        </div>
+        <div class="spc-field">
+          <label for="claimed_organization">องค์กรที่ถูกอ้างถึง</label>
+          <input id="claimed_organization" name="claimed_organization">
+        </div>
+        <div class="spc-field">
+          <label for="claimed_person">บุคคลที่ถูกอ้างถึง</label>
+          <input id="claimed_person" name="claimed_person">
+        </div>
+        <div class="spc-field">
+          <label for="risk_level">ระดับความเสี่ยง</label>
+          <select id="risk_level" name="risk_level">
+            <option value="UNKNOWN">ยังไม่ทราบ</option>
+            <option value="LOW">ต่ำ</option>
+            <option value="MEDIUM">กลาง</option>
+            <option value="HIGH">สูง</option>
+          </select>
+        </div>
+        <div class="spc-field">
+          <label for="amount_involved">จำนวนเงินที่เกี่ยวข้อง</label>
+          <input id="amount_involved" name="amount_involved" type="number" min="0" step="0.01">
+        </div>
+      </div>
+      <div class="spc-field">
+        <label for="incident_description">รายละเอียดเหตุการณ์</label>
+        <textarea id="incident_description" name="incident_description" required></textarea>
+      </div>
+      <label class="spc-field">
+        <span class="spc-label">กำลังมีธุรกรรมเกิดขึ้นหรือไม่</span>
+        <input type="checkbox" name="transaction_in_progress">
+      </label>
+      <div class="spc-actions">
+        <button class="spc-button" type="submit" aria-label="ส่งคำขอให้ SPC ตรวจสอบ">ส่งคำขอ</button>
+        <input id="publicToken" class="spc-field" readonly aria-label="รหัสติดตามเคส">
+      </div>
+      <p id="spcMessage" class="spc-message" aria-live="polite"></p>
+    </form>
+  </main>
+  <script src="js/sbos-api-config.js"></script><script src="js/spc-api.js"></script>
+  <script src="js/spc-request.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPC Case Status</title>
+  <link rel="stylesheet" href="css/spc.css">
+</head>
+<body class="spc-page">
+  <main class="spc-shell">
+    <header class="spc-header">
+      <div>
+        <p class="spc-kicker">SPC Case Status</p>
+        <h1 class="spc-title">ตรวจสอบสถานะเคส SPC</h1>
+        <p class="spc-subtitle">ใช้รหัสติดตามที่ได้รับหลังส่งคำขอเท่านั้น หน้านี้แสดงเฉพาะข้อมูลที่ปลอดภัยสำหรับลูกค้า</p>
+      </div>
+      <a class="spc-button secondary" href="spc-request.html" aria-label="กลับไปหน้าแจ้งเคส SPC">แจ้งเคสใหม่</a>
+    </header>
+
+    <form id="spcStatusForm" class="spc-card">
+      <div class="spc-field">
+        <label for="public_case_token">รหัสติดตามเคส</label>
+        <input id="public_case_token" name="public_case_token" required>
+      </div>
+      <button class="spc-button" type="submit" aria-label="ตรวจสอบสถานะเคส SPC">ตรวจสอบสถานะ</button>
+      <p id="spcMessage" class="spc-message" aria-live="polite"></p>
+    </form>
+
+    <section id="statusCard" class="spc-card" hidden>
+      <div class="spc-grid">
+        <div>
+          <p class="spc-label">หมายเลขเคส</p>
+          <p id="caseNumber"></p>
+        </div>
+        <div>
+          <p class="spc-label">สถานะ</p>
+          <p id="caseStatus" class="spc-status"></p>
+        </div>
+        <div>
+          <p class="spc-label">ส่งคำขอเมื่อ</p>
+          <p id="caseSubmittedAt"></p>
+        </div>
+        <div>
+          <p class="spc-label">เจ้าหน้าที่</p>
+          <p><span id="officerName"></span> <span id="officerId"></span></p>
+        </div>
+      </div>
+      <h2>คำแนะนำปัจจุบัน</h2>
+      <p id="caseInstruction"></p>
+      <h2>ผลการตรวจสอบ</h2>
+      <p id="caseResult"></p>
+    </section>
+  </main>
+  <script src="js/sbos-api-config.js"></script><script src="js/spc-api.js"></script>
+  <script src="js/spc-request.js"></script>
+</body>
+</html>

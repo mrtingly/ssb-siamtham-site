@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPC Officer Dashboard</title>
+  <link rel="stylesheet" href="css/spc.css">
+</head>
+<body class="spc-page">
+  <main class="spc-shell">
+    <header class="spc-header">
+      <div>
+        <p class="spc-kicker">SPC Officer</p>
+        <h1 class="spc-title">Officer Dashboard</h1>
+        <p class="spc-subtitle">คิวเคส SPC สำหรับเจ้าหน้าที่ แสดง NEW, เคสที่รับผิดชอบ, SLA callback และสถานะที่ต้องติดตาม</p>
+      </div>
+      <button id="refreshOfficerDashboard" class="spc-button secondary" type="button" aria-label="Refresh SPC officer dashboard">Refresh</button>
+    </header>
+
+    <section class="spc-grid">
+      <div class="spc-card"><p class="spc-label">ทั้งหมด</p><strong id="summaryTotal">0</strong></div>
+      <div class="spc-card"><p class="spc-label">NEW</p><strong id="summaryNew">0</strong></div>
+      <div class="spc-card"><p class="spc-label">Waiting Agency</p><strong id="summaryWaiting">0</strong></div>
+      <div class="spc-card"><p class="spc-label">Ready To Report</p><strong id="summaryReady">0</strong></div>
+    </section>
+
+    <section class="spc-card">
+      <h2>Case Queue</h2>
+      <div id="caseList" class="spc-list" aria-live="polite"></div>
+      <p id="spcMessage" class="spc-message" aria-live="polite"></p>
+    </section>
+  </main>
+  <script src="js/sbos-api-config.js"></script><script src="js/spc-api.js"></script>
+  <script src="js/spc-officer.js"></script>
+</body>
+</html>

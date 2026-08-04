@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPC Admin</title>
+  <link rel="stylesheet" href="css/spc.css">
+  <script src="js/admin-guard.js"></script>
+</head>
+<body class="spc-page">
+  <main class="spc-shell">
+    <header class="spc-header">
+      <div>
+        <p class="spc-kicker">SPC Administration</p>
+        <h1 class="spc-title">Siamtham Protection Center</h1>
+        <p class="spc-subtitle">Admin console ขั้นต่ำสำหรับ Phase 2: officers, permissions, case overview และ integrity check</p>
+      </div>
+      <button id="refreshSpcAdmin" class="spc-button secondary" type="button" aria-label="Refresh SPC admin">Refresh</button>
+    </header>
+
+    <section class="spc-grid">
+      <div class="spc-card"><p class="spc-label">Cases</p><strong id="summaryTotal">0</strong></div>
+      <div class="spc-card"><p class="spc-label">NEW</p><strong id="summaryNew">0</strong></div>
+      <div class="spc-card"><p class="spc-label">Escalated</p><strong id="summaryEscalated">0</strong></div>
+      <div class="spc-card"><p class="spc-label">SLA Breached</p><strong id="summaryBreached">0</strong></div>
+    </section>
+
+    <section class="spc-card">
+      <h2>Create Officer / Permission</h2>
+      <form id="officerForm">
+        <div class="spc-grid">
+          <div class="spc-field"><label for="officer_name">Officer Name</label><input id="officer_name" name="officer_name" required></div>
+          <div class="spc-field"><label for="agent_id">Agent ID</label><input id="agent_id" name="agent_id"></div>
+          <div class="spc-field"><label for="admin_id">Admin ID / Email</label><input id="admin_id" name="admin_id"></div>
+          <div class="spc-field"><label for="department">Department</label><input id="department" name="department" value="SPC"></div>
+          <div class="spc-field">
+            <label for="role">Role</label>
+            <select id="role" name="role">
+              <option value="OFFICER">OFFICER</option>
+              <option value="SUPERVISOR">SUPERVISOR</option>
+              <option value="ADMIN">ADMIN</option>
+            </select>
+          </div>
+          <div class="spc-field"><label for="official_profile_url">Official Profile URL</label><input id="official_profile_url" name="official_profile_url"></div>
+        </div>
+        <button class="spc-button" type="submit" aria-label="Create SPC officer">Create Officer</button>
+      </form>
+    </section>
+
+    <section class="spc-card">
+      <h2>Recent Cases</h2>
+      <div class="spc-table-wrap">
+        <table class="spc-table">
+          <thead>
+            <tr>
+              <th scope="col">Case</th>
+              <th scope="col">Customer</th>
+              <th scope="col">Status</th>
+              <th scope="col">Officer</th>
+              <th scope="col">Callback Due</th>
+            </tr>
+          </thead>
+          <tbody id="caseRows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="spc-card">
+      <h2>Officers</h2>
+      <div class="spc-table-wrap">
+        <table class="spc-table">
+          <thead>
+            <tr>
+              <th scope="col">Officer ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Department</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody id="officerRows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="spc-card">
+      <h2>Integrity</h2>
+      <button id="runIntegrity" class="spc-button" type="button" aria-label="Run SPC integrity check">Run Integrity Check</button>
+      <ul id="integrityList"></ul>
+    </section>
+
+    <p id="spcMessage" class="spc-message" aria-live="polite"></p>
+  </main>
+  <script src="js/sbos-api-config.js"></script><script src="js/spc-api.js"></script>
+  <script src="js/spc-admin.js"></script>
+</body>
+</html>
