@@ -1538,7 +1538,9 @@ const CUSTOMER_HEADERS = [
   "address",
   "status",
   "created_at",
-  "updated_at"
+  "updated_at",
+  "is_test",
+  "qa_batch"
 ];
 
 const QUOTATION_HEADERS = [
@@ -1588,7 +1590,9 @@ const QUOTATION_HEADERS = [
   "updated_at",
   "submitted_at",
   "approved_at",
-  "rejected_at"
+  "rejected_at",
+  "is_test",
+  "qa_batch"
 ];
 
 const ORDER_HEADERS = [
@@ -1636,7 +1640,9 @@ const ORDER_HEADERS = [
   "paid_at",
   "installing_at",
   "completed_at",
-  "cancelled_at"
+  "cancelled_at",
+  "is_test",
+  "qa_batch"
 ];
 
 const ORDER_STATUS_LOG_HEADERS = [
@@ -1650,7 +1656,9 @@ const ORDER_STATUS_LOG_HEADERS = [
   "actor_id",
   "actor_role",
   "note",
-  "created_at"
+  "created_at",
+  "is_test",
+  "qa_batch"
 ];
 
 const PRODUCT_HEADERS = [
@@ -1708,7 +1716,9 @@ const PAYMENT_HEADERS = [
   "reviewed_at",
   "reviewed_by",
   "created_at",
-  "updated_at"
+  "updated_at",
+  "is_test",
+  "qa_batch"
 ];
 
 const COMMISSION_RULE_HEADERS = [
@@ -2694,7 +2704,28 @@ const ACCOUNTING_SEED_ACCOUNTS = [
   ["5400", "SIM Cost Allocation", "EXPENSE", "DEBIT"],
   ["5500", "Central Commission Pool", "EXPENSE", "DEBIT"],
   ["5600", "Agent SIM Income", "EXPENSE", "DEBIT"],
-  ["5700", "Agent SPC Income", "EXPENSE", "DEBIT"]
+  ["5700", "Agent SPC Income", "EXPENSE", "DEBIT"],
+  ["CUSTOMER_RECEIVABLE", "Customer Receivable", "ASSET", "DEBIT"],
+  ["CASH_RECEIVED", "Cash Received", "ASSET", "DEBIT"],
+  ["PAYMENT_CLEARING", "Payment Clearing", "ASSET", "DEBIT"],
+  ["OUTPUT_VAT_PAYABLE", "Output VAT Payable", "LIABILITY", "CREDIT"],
+  ["PRODUCT_DEVICE_ALLOCATION", "Product Device Allocation", "EXPENSE", "DEBIT"],
+  ["SYSTEM_SETUP_ALLOCATION", "System Setup Allocation", "EXPENSE", "DEBIT"],
+  ["SAFETY_BOOK_ALLOCATION", "Safety Book Allocation", "EXPENSE", "DEBIT"],
+  ["FINGERPRINT_ALLOCATION", "Fingerprint Allocation", "EXPENSE", "DEBIT"],
+  ["SIGNAL_PROTECTION_ALLOCATION", "Signal Protection Allocation", "EXPENSE", "DEBIT"],
+  ["ASSEMBLY_ALLOCATION", "Assembly Allocation", "EXPENSE", "DEBIT"],
+  ["ANNUAL_SIM_ALLOCATION", "Annual SIM Allocation", "EXPENSE", "DEBIT"],
+  ["OPERATION_ALLOCATION", "Operation Allocation", "EXPENSE", "DEBIT"],
+  ["SPC_ALLOCATION", "SPC Allocation", "EXPENSE", "DEBIT"],
+  ["CENTRAL_COMMISSION_POOL", "Central Commission Pool", "EXPENSE", "DEBIT"],
+  ["AGENT_SALES_COMMISSION", "Agent Sales Commission", "EXPENSE", "DEBIT"],
+  ["TEAM_MANAGER_RETAINED_COMMISSION", "Team Manager Retained Commission", "EXPENSE", "DEBIT"],
+  ["AGENT_SIM_INCOME", "Agent SIM Income", "EXPENSE", "DEBIT"],
+  ["AGENT_SPC_INCOME", "Agent SPC Income", "EXPENSE", "DEBIT"],
+  ["COMPANY_REVENUE_ALLOCATION", "Company Revenue Allocation", "REVENUE", "CREDIT"],
+  ["SALES_BEFORE_VAT_CONTROL", "Sales Before VAT Control", "REVENUE", "CREDIT"],
+  ["SALES_TOTAL_INCL_VAT_CONTROL", "Sales Total Incl VAT Control", "REVENUE", "CREDIT"]
 ];
 
 const DEFAULT_TRAINING_LESSONS = [
@@ -7223,7 +7254,9 @@ function createCustomer(body) {
     address: cleanString(body.address, 500),
     status: "ACTIVE",
     created_at: now,
-    updated_at: now
+    updated_at: now,
+    is_test: booleanValue(body.is_test) || isQaRecord(body || {}),
+    qa_batch: cleanString(body.qa_batch, 120)
   };
 
   appendObject(SHEET_NAMES.customers, customer);
@@ -7387,7 +7420,9 @@ function getOrCreateCustomerForQuotation(body, agent) {
     email: email,
     line_id: body.customer_line_id || (body.customer && body.customer.line_id),
     tax_id: body.customer_tax_id || (body.customer && (body.customer.tax_id || body.customer.taxId)),
-    address: body.customer_address || (body.customer && body.customer.address)
+    address: body.customer_address || (body.customer && body.customer.address),
+    is_test: booleanValue(body.is_test) || isQaRecord(body || {}),
+    qa_batch: cleanString(body.qa_batch, 120)
   });
 
   if (!customerResult.ok) {
@@ -7509,7 +7544,9 @@ function buildQuotationData(body, agent, customer, existing) {
       ? (existing && existing.submitted_at ? existing.submitted_at : now)
       : (existing ? existing.submitted_at : ""),
     approved_at: existing ? existing.approved_at : "",
-    rejected_at: ""
+    rejected_at: "",
+    is_test: booleanValue(body.is_test) || isQaRecord(body || {}) || isQaRecord(customer || {}),
+    qa_batch: cleanString(body.qa_batch, 120) || qaBatchFor(customer || {})
   };
 }
 
@@ -7796,6 +7833,7 @@ function rejectQuotation(body) {
 }
 
 function appendOrderStatusLog(order, fromStatus, toStatus, actorId, actorRole, note) {
+  const isTest = isQaRecord(order || {});
   const log = {
     status_log_id: makeId("OSL"),
     order_id: order.order_id,
@@ -7807,7 +7845,9 @@ function appendOrderStatusLog(order, fromStatus, toStatus, actorId, actorRole, n
     actor_id: cleanString(actorId, 80),
     actor_role: cleanString(actorRole || "ADMIN", 80),
     note: cleanString(note, 500),
-    created_at: new Date()
+    created_at: new Date(),
+    is_test: isTest,
+    qa_batch: qaBatchFor(order || {})
   };
 
   appendObject(SHEET_NAMES.orderStatusLogs, log);
@@ -7837,6 +7877,11 @@ function createOrderFromQuotation(body) {
       message: "Order can be created from approved quotation only",
       status: status
     };
+  }
+
+  const quotationSnapshot = parseJsonValue(quotation.pricing_snapshot_json, {});
+  if (!quotationSnapshot || !quotationSnapshot.pricing_version_id || !quotationSnapshot.components) {
+    return financeError("ORDER_PRICING_SNAPSHOT_REQUIRED", "Order requires a complete pricing snapshot before creation.");
   }
 
   const existingOrder = sheetToObjects(SHEET_NAMES.orders).find(function (order) {
@@ -7905,7 +7950,9 @@ function createOrderFromQuotation(body) {
     paid_at: "",
     installing_at: "",
     completed_at: "",
-    cancelled_at: ""
+    cancelled_at: "",
+    is_test: isQaRecord(quotation),
+    qa_batch: qaBatchFor(quotation)
   };
 
   appendObject(SHEET_NAMES.orders, order);
@@ -8179,7 +8226,9 @@ function createPayment(body) {
     reviewed_at: "",
     reviewed_by: "",
     created_at: now,
-    updated_at: now
+    updated_at: now,
+    is_test: isQaRecord(body || {}) || isQaRecord(order),
+    qa_batch: cleanString(body.qa_batch, 120) || qaBatchFor(order)
   };
 
   appendObject(SHEET_NAMES.payments, payment);
@@ -8223,6 +8272,30 @@ function reviewPayment(body) {
 
   const currentStatus = normalizeSalesStatus(payment.status || "");
   if (currentStatus !== "SUBMITTED") {
+    const decision = normalizeSalesStatus(body.status || body.decision || "APPROVED");
+    if (currentStatus === "APPROVED" && decision === "APPROVED") {
+      const order = findOrderById(payment.order_id);
+      if (!order) return { ok: false, message: "Order not found for payment" };
+      if (!hasCompletePricingSnapshot(order)) {
+        return financeError("ORDER_PRICING_SNAPSHOT_REQUIRED", "Payment approval requires a complete order pricing snapshot.");
+      }
+      const accountingResult = postApprovedPaymentAccountingInternal(payment, { actor_id: cleanString(body.admin_id || body.actor_id || "ADMIN", 80) });
+      const commissionResult = usesV37Compensation(order)
+        ? { ok: true, skipped: true, reason: "V3_7_COMPENSATION_ENGINE_ACTIVE" }
+        : createCommissionForApprovedPayment(payment, { actor_id: cleanString(body.admin_id || body.actor_id || "ADMIN", 80) });
+      const compensationResult = postTeamCompensationForApprovedPayment(payment, { actor_id: cleanString(body.admin_id || body.actor_id || "ADMIN", 80) });
+      return {
+        ok: true,
+        duplicate: true,
+        message: "Payment already approved; financial postings verified.",
+        status: currentStatus,
+        payment: publicPayment(payment),
+        order: publicOrder(order),
+        commission_result: commissionResult,
+        accounting_result: accountingResult,
+        compensation_result: compensationResult
+      };
+    }
     return { ok: false, message: "Payment already reviewed", status: currentStatus };
   }
 
@@ -8233,6 +8306,10 @@ function reviewPayment(body) {
 
   const order = findOrderById(payment.order_id);
   if (!order) return { ok: false, message: "Order not found for payment" };
+
+  if (decision === "APPROVED" && !hasCompletePricingSnapshot(order)) {
+    return financeError("ORDER_PRICING_SNAPSHOT_REQUIRED", "Payment approval requires a complete order pricing snapshot.");
+  }
 
   const now = new Date();
   const updates = {
@@ -8272,7 +8349,9 @@ function reviewPayment(body) {
       internal: true
     });
     accountingResult = postApprovedPaymentAccountingInternal(payment, admin);
-    commissionResult = createCommissionForApprovedPayment(payment, admin);
+    commissionResult = usesV37Compensation(order)
+      ? { ok: true, skipped: true, reason: "V3_7_COMPENSATION_ENGINE_ACTIVE" }
+      : createCommissionForApprovedPayment(payment, admin);
     compensationResult = postTeamCompensationForApprovedPayment(payment, admin);
   } else {
     updateRowFields(SHEET_NAMES.orders, order._row, {
@@ -8703,6 +8782,9 @@ function calculateWalletProjection(agentId) {
       if (normalizeSalesStatus(entry.entry_type) === "COMMISSION_RELEASE" && normalizeSalesStatus(entry.direction) === "CREDIT") {
         projection.lifetime_earned += amount;
       }
+      if (normalizeSalesStatus(entry.entry_type) === "COMMISSION_REVERSAL" && normalizeSalesStatus(entry.direction) === "DEBIT") {
+        projection.lifetime_earned -= amount;
+      }
       if (normalizeSalesStatus(entry.entry_type) === "WITHDRAWAL_PAID" && normalizeSalesStatus(entry.direction) === "DEBIT") {
         projection.lifetime_withdrawn += amount;
       }
@@ -9101,14 +9183,45 @@ function getFinanceDashboard(body) {
   ensureFinanceSheets();
   const includeQa = booleanValue(body && body.include_qa);
   const commissions = sheetToObjects(SHEET_NAMES.commissions).filter(function (item) { return includeQa || !isQaRecord(item); });
-  const wallets = sheetToObjects(SHEET_NAMES.walletAccounts).filter(function (item) { return includeQa || !isQaRecord(item); }).map(function (wallet) {
+  const accountingLedger = sheetToObjects(SHEET_NAMES.accountingLedger).filter(function (item) { return includeQa || !isQaRecord(item); });
+  const companyRevenue = sheetToObjects(SHEET_NAMES.companyRevenueLedger).filter(function (item) { return includeQa || !isQaRecord(item); });
+  const expenseAllocations = sheetToObjects(SHEET_NAMES.expenseAllocationLedger).filter(function (item) { return includeQa || !isQaRecord(item); });
+  const vatRows = sheetToObjects(SHEET_NAMES.vatLedger).filter(function (item) { return includeQa || !isQaRecord(item); });
+  const wallets = sheetToObjects(SHEET_NAMES.walletAccounts).filter(function (item) {
+    if (!existingAgentId(item.agent_id)) return false;
+    return includeQa || !isQaRecord(item);
+  }).map(function (wallet) {
     return publicWallet(updateWalletProjection(wallet.agent_id));
   });
   const withdrawals = sheetToObjects(SHEET_NAMES.withdrawalRequests).filter(function (item) { return includeQa || !isQaRecord(item); });
   const anomalies = listFinanceAnomalies(includeQa);
+  const byComponent = function (rows, component) {
+    return sum(rows.filter(function (row) {
+      return cleanString(row.component, 120) === component && normalizeSalesStatus(row.status || "POSTED") === "POSTED";
+    }), "amount");
+  };
+  const commissionByType = function (type) {
+    return sum(commissions.filter(function (row) {
+      return normalizeSalesStatus(row.commission_type || "") === type && normalizeSalesStatus(row.status || "") === "AVAILABLE";
+    }), "released_amount");
+  };
   return {
     ok: true,
     summary: {
+      approved_payments_total: byComponent(accountingLedger, "cash_received"),
+      sales_before_vat: byComponent(accountingLedger, "bundle_revenue"),
+      sales_total_including_vat: byComponent(accountingLedger, "cash_received"),
+      output_vat_payable: sum(vatRows.filter(function (row) { return normalizeSalesStatus(row.status || "POSTED") === "POSTED"; }), "vat_amount"),
+      company_revenue_allocation: sum(companyRevenue.filter(function (row) { return normalizeSalesStatus(row.status || "POSTED") === "POSTED"; }), "amount"),
+      product_service_allocations: sum(expenseAllocations.filter(function (row) {
+        const component = cleanString(row.component, 120);
+        return normalizeSalesStatus(row.status || "POSTED") === "POSTED" && component !== "central_commission_pool";
+      }), "amount"),
+      central_commission_pool: byComponent(expenseAllocations, "central_commission_pool"),
+      agent_sales_commission: commissionByType("SALES_COMMISSION"),
+      team_manager_retained_commission: commissionByType("TEAM_MANAGER_RETAINED_COMMISSION"),
+      agent_sim_income: commissionByType("SIM_INCOME"),
+      agent_spc_income: commissionByType("SPC_INCOME"),
       total_pending_commission: sum(commissions.filter(function (c) { return normalizeSalesStatus(c.status) === "PENDING"; }), "pending_amount"),
       total_available_commission: sum(commissions.filter(function (c) { return normalizeSalesStatus(c.status) === "AVAILABLE"; }), "released_amount"),
       total_wallet_liability: sum(wallets, "available_balance") + sum(wallets, "reserved_balance"),
@@ -9116,6 +9229,9 @@ function getFinanceDashboard(body) {
       pending_withdrawals_count: withdrawals.filter(function (w) { return normalizeSalesStatus(w.status) === "PENDING"; }).length,
       approved_not_paid_count: withdrawals.filter(function (w) { return normalizeSalesStatus(w.status) === "APPROVED"; }).length,
       paid_total: sum(withdrawals.filter(function (w) { return normalizeSalesStatus(w.status) === "PAID"; }), "net_amount"),
+      reversal_count: accountingLedger.filter(function (row) {
+        return cleanString(row.component, 120).indexOf("reversal:") === 0;
+      }).length,
       commission_config_missing_count: commissions.filter(function (c) { return normalizeSalesStatus(c.status) === "CONFIG_REQUIRED"; }).length,
       finance_anomaly_count: anomalies.length
     },
@@ -9196,7 +9312,10 @@ function listWalletAccountsAdmin(body) {
   const admin = financeAdminSession(body);
   if (!admin.ok) return admin;
   const includeQa = booleanValue(body && body.include_qa);
-  const wallets = sheetToObjects(SHEET_NAMES.walletAccounts).filter(function (item) { return includeQa || !isQaRecord(item); }).map(function (wallet) {
+  const wallets = sheetToObjects(SHEET_NAMES.walletAccounts).filter(function (item) {
+    if (!existingAgentId(item.agent_id)) return false;
+    return includeQa || !isQaRecord(item);
+  }).map(function (wallet) {
     return publicWallet(updateWalletProjection(wallet.agent_id));
   });
   return { ok: true, total: wallets.length, wallets: wallets };
@@ -9349,7 +9468,10 @@ function saveCommissionConfiguration(body) {
 function listFinanceAnomalies(includeQa) {
   ensureFinanceSheets();
   const anomalies = [];
-  const wallets = sheetToObjects(SHEET_NAMES.walletAccounts).filter(function (wallet) { return includeQa || !isQaRecord(wallet); });
+  const wallets = sheetToObjects(SHEET_NAMES.walletAccounts).filter(function (wallet) {
+    if (!existingAgentId(wallet.agent_id)) return false;
+    return includeQa || !isQaRecord(wallet);
+  });
   wallets.forEach(function (wallet) {
     const projection = calculateWalletProjection(wallet.agent_id);
     ["pending_balance", "available_balance", "held_balance", "reserved_balance"].forEach(function (key) {
@@ -9363,6 +9485,7 @@ function listFinanceAnomalies(includeQa) {
   });
   const keys = {};
   sheetToObjects(SHEET_NAMES.walletLedger).forEach(function (entry) {
+    if (!includeQa && isQaRecord(entry)) return;
     const key = cleanString(entry.idempotency_key, 220);
     if (!key) return;
     keys[key] = (keys[key] || 0) + 1;
@@ -9677,6 +9800,22 @@ function appendTypedAccountingLedger(sheetName, idField, prefix, data) {
   return row;
 }
 
+function hasCompletePricingSnapshot(order) {
+  const snapshot = parseJsonValue(order && order.pricing_snapshot_json, {});
+  return Boolean(snapshot && snapshot.pricing_version_id && snapshot.components);
+}
+
+function usesV37Compensation(order) {
+  const snapshot = parseJsonValue(order && order.pricing_snapshot_json, {});
+  return Boolean(snapshot && snapshot.pricing_version_id && snapshot.components &&
+    isFinite(toSatang((snapshot.components || {}).central_commission_pool || 0)));
+}
+
+function existingAgentId(agentId) {
+  const id = validateAgentId(agentId);
+  return id && findAgent(id) ? id : "";
+}
+
 function pricingSnapshotForOrder(order) {
   const snapshot = parseJsonValue(order.pricing_snapshot_json, {});
   if (snapshot && snapshot.pricing_version_id) return snapshot;
@@ -9699,6 +9838,7 @@ function postApprovedPaymentAccountingInternal(payment, actor) {
   if (normalizeSalesStatus(payment.status || "") !== "APPROVED") return { ok: true, skipped: true, reason: "PAYMENT_NOT_APPROVED" };
   const order = findOrderById(payment.order_id);
   if (!order) return financeError("NOT_FOUND", "Order not found for accounting.");
+  if (!hasCompletePricingSnapshot(order)) return financeError("ORDER_PRICING_SNAPSHOT_REQUIRED", "Accounting posting requires a complete order pricing snapshot.");
   const snapshot = pricingSnapshotForOrder(order);
   const paymentSatang = Math.max(0, toSatang(payment.amount || 0));
   const totalSatang = Math.max(1, toSatang(order.grand_total || order.total || snapshot.selling_price_including_vat || 0));
@@ -9885,6 +10025,7 @@ function runAccountingReconciliation(body) {
   ensureFinanceSheets();
   const includeQa = booleanValue(body && body.include_qa);
   const issues = [];
+  const legacyIssues = [];
   const ledgerKeys = {};
   sheetToObjects(SHEET_NAMES.accountingLedger).forEach(function (entry) {
     if (!includeQa && isQaRecord(entry)) return;
@@ -9894,22 +10035,85 @@ function runAccountingReconciliation(body) {
   Object.keys(ledgerKeys).forEach(function (key) {
     if (ledgerKeys[key] > 1) issues.push({ severity: "CRITICAL", type: "DUPLICATE_ACCOUNTING_IDEMPOTENCY_KEY", idempotency_key: key, count: ledgerKeys[key] });
   });
+  const orders = sheetToObjects(SHEET_NAMES.orders);
+  const journals = sheetToObjects(SHEET_NAMES.accountingJournals);
+  const allocations = sheetToObjects(SHEET_NAMES.teamCommissionAllocations);
+  const commissions = sheetToObjects(SHEET_NAMES.commissions);
+  const payments = sheetToObjects(SHEET_NAMES.payments);
   sheetToObjects(SHEET_NAMES.orders).forEach(function (order) {
     if (!includeQa && isQaRecord(order)) return;
     const status = normalizeSalesStatus(order.status || "");
+    const isLegacy = !hasCompletePricingSnapshot(order);
     if (["DEPOSIT_PAID", "PAID", "PAID_IN_FULL", "PREPARING", "READY_TO_INSTALL", "INSTALLING", "COMPLETED"].indexOf(status) !== -1) {
       const approved = summarizePaymentsForOrder(order.order_id).approved_amount;
       if (approved > 0) {
-        const journal = sheetToObjects(SHEET_NAMES.accountingJournals).find(function (row) { return cleanString(row.order_id, 80) === cleanString(order.order_id, 80); });
-        if (!journal) issues.push({ severity: "HIGH", type: "MISSING_ACCOUNTING_POSTING", order_id: order.order_id });
+        const journal = journals.find(function (row) { return cleanString(row.order_id, 80) === cleanString(order.order_id, 80); });
+        if (!journal) {
+          const target = isLegacy ? legacyIssues : issues;
+          target.push({
+            severity: isLegacy ? "MEDIUM" : "HIGH",
+            type: isLegacy ? "LEGACY_REVIEW_REQUIRED" : "MISSING_ACCOUNTING_POSTING",
+            order_id: order.order_id,
+            original_type: "MISSING_ACCOUNTING_POSTING"
+          });
+        }
       }
     }
-    if (!cleanString(order.pricing_snapshot_json, 200000)) {
-      issues.push({ severity: "MEDIUM", type: "LEGACY_ORDER_MISSING_PRICING_SNAPSHOT", order_id: order.order_id });
+    if (isLegacy) {
+      legacyIssues.push({
+        severity: "MEDIUM",
+        type: "LEGACY_ORDER_MISSING_PRICING_SNAPSHOT",
+        classification: "LEGACY_REVIEW_REQUIRED",
+        order_id: order.order_id,
+        original_total: Number(order.grand_total || order.total || 0),
+        available_fields: Object.keys(order).filter(function (key) { return cleanString(order[key], 200000); }),
+        missing_fields: ["pricing_snapshot_json"]
+      });
+    } else {
+      const snapshot = pricingSnapshotForOrder(order);
+      const componentSatang = Object.keys(snapshot.components || {}).reduce(function (total, key) {
+        return total + Math.max(0, toSatang(snapshot.components[key] || 0));
+      }, 0);
+      const beforeVatSatang = toSatang(snapshot.selling_price_before_vat || order.subtotal || 0);
+      const vatSatang = toSatang(snapshot.vat_amount || order.vat || 0);
+      const totalSatang = toSatang(snapshot.selling_price_including_vat || order.grand_total || order.total || 0);
+      if (componentSatang !== beforeVatSatang) {
+        issues.push({ severity: "HIGH", type: "ORDER_PRICING_COMPONENT_MISMATCH", order_id: order.order_id, expected: fromSatang(beforeVatSatang), actual: fromSatang(componentSatang) });
+      }
+      if (beforeVatSatang + vatSatang !== totalSatang) {
+        issues.push({ severity: "HIGH", type: "ORDER_PRICING_VAT_MISMATCH", order_id: order.order_id, expected: fromSatang(beforeVatSatang + vatSatang), actual: fromSatang(totalSatang) });
+      }
+      const allocation = allocations.find(function (row) {
+        return cleanString(row.order_id, 80) === cleanString(order.order_id, 80) && normalizeSalesStatus(row.status || "ALLOCATED") !== "REVERSED";
+      });
+      if (allocation) {
+        const centralSatang = toSatang(allocation.central_commission_pool || 0);
+        const distributedSatang = toSatang(allocation.member_commission || 0) + toSatang(allocation.manager_retained_commission || 0);
+        if (centralSatang !== distributedSatang && cleanString(allocation.team_manager_id, 80)) {
+          issues.push({ severity: "HIGH", type: "CENTRAL_POOL_DISTRIBUTION_MISMATCH", order_id: order.order_id, expected: fromSatang(centralSatang), actual: fromSatang(distributedSatang) });
+        }
+      }
+      ["SIM_INCOME", "SPC_INCOME"].forEach(function (component) {
+        const count = commissions.filter(function (row) {
+          return cleanString(row.order_id, 80) === cleanString(order.order_id, 80) &&
+            normalizeSalesStatus(row.commission_type || "") === component &&
+            normalizeSalesStatus(row.status || "") !== "REVERSED";
+        }).length;
+        if (count > 1) issues.push({ severity: "HIGH", type: "DUPLICATE_" + component, order_id: order.order_id, count: count });
+      });
     }
   });
+  payments.forEach(function (payment) {
+    if (!includeQa && isQaRecord(payment)) return;
+    if (normalizeSalesStatus(payment.status || "") !== "APPROVED") return;
+    const order = orders.find(function (item) { return cleanString(item.order_id, 80) === cleanString(payment.order_id, 80); });
+    if (order && !hasCompletePricingSnapshot(order)) return;
+    const journalKey = ["ACCT", payment.order_id, payment.payment_id, "APPROVED_PAYMENT"].join(":");
+    const journal = journals.find(function (row) { return cleanString(row.idempotency_key, 220) === journalKey; });
+    if (!journal) issues.push({ severity: "HIGH", type: "APPROVED_PAYMENT_WITHOUT_ACCOUNTING_POSTING", order_id: payment.order_id, payment_id: payment.payment_id });
+  });
   const runAt = new Date();
-  issues.forEach(function (issue) {
+  issues.concat(legacyIssues).forEach(function (issue) {
     appendObject(SHEET_NAMES.accountingReconciliation, {
       reconciliation_id: makeId("REC"),
       run_at: runAt,
@@ -9925,13 +10129,176 @@ function runAccountingReconciliation(body) {
       qa_batch: ""
     });
   });
-  return { ok: true, report_only: true, total_issues: issues.length, critical_or_high: issues.filter(function (i) { return i.severity === "HIGH" || i.severity === "CRITICAL"; }).length, issues: issues };
+  return {
+    ok: true,
+    report_only: true,
+    total_issues: issues.length + legacyIssues.length,
+    critical_or_high: issues.filter(function (i) { return i.severity === "HIGH" || i.severity === "CRITICAL"; }).length,
+    new_system: {
+      total_issues: issues.length,
+      critical_or_high: issues.filter(function (i) { return i.severity === "HIGH" || i.severity === "CRITICAL"; }).length,
+      issues: issues
+    },
+    legacy_backlog: {
+      total_issues: legacyIssues.length,
+      status: legacyIssues.length ? "LEGACY_REVIEW_REQUIRED" : "LEGACY_RECONCILED",
+      issues: legacyIssues
+    },
+    issues: issues.concat(legacyIssues)
+  };
 }
 
 function reverseAccountingPosting(body) {
-  const admin = financeAdminSession(body || {});
-  if (!admin.ok) return admin;
-  return financeError("MANUAL_REVERSAL_REQUIRED", "Accounting reversals are report-only in V3-7 and require an explicit approved adjustment workflow.");
+  return withFinanceLock(function () {
+    const admin = financeAdminSession(body || {});
+    if (!admin.ok) return admin;
+    const paymentId = cleanString(body && (body.payment_id || body.paymentId), 80);
+    const orderId = cleanString(body && (body.order_id || body.orderId), 80);
+    const reason = cleanString(body && body.reason, 500);
+    if (!paymentId && !orderId) return financeError("INVALID_REQUEST", "Reversal requires payment_id or order_id.");
+    if (!reason) return financeError("INVALID_REQUEST", "Reversal reason is required.");
+
+    const order = orderId ? findOrderById(orderId) : null;
+    const payment = paymentId ? sheetToObjects(SHEET_NAMES.payments).find(function (row) {
+      return cleanString(row.payment_id, 80) === paymentId;
+    }) : null;
+    const resolvedOrder = order || (payment ? findOrderById(payment.order_id) : null);
+    if (!resolvedOrder) return financeError("NOT_FOUND", "Order not found for reversal.");
+
+    const qaAllowed = isQaRecord(body || {}) || isQaRecord(resolvedOrder) || (payment && isQaRecord(payment));
+    if (!qaAllowed) {
+      return financeError("QA_ONLY_REVERSAL_REQUIRED", "Automated reversal is restricted to QA/test transactions.");
+    }
+
+    const targetOrderId = cleanString(resolvedOrder.order_id, 80);
+    const targetPaymentId = payment ? cleanString(payment.payment_id, 80) : paymentId;
+    const qaBatch = qaBatchFor(body || {}) || qaBatchFor(resolvedOrder) || qaBatchFor(payment || {});
+    const reverseKey = ["REVERSAL", targetOrderId, targetPaymentId || "ALL"].join(":");
+    const existingJournal = sheetToObjects(SHEET_NAMES.accountingJournals).find(function (row) {
+      return cleanString(row.idempotency_key, 220) === reverseKey;
+    });
+
+    const journal = existingJournal || {
+      journal_id: makeId("AJR"),
+      journal_type: "REVERSAL",
+      source_type: targetPaymentId ? "PAYMENT" : "ORDER",
+      source_id: targetPaymentId || targetOrderId,
+      order_id: targetOrderId,
+      payment_id: targetPaymentId,
+      status: "POSTED",
+      posted_at: new Date(),
+      created_by: admin.actor_id,
+      note: reason,
+      idempotency_key: reverseKey,
+      is_test: true,
+      qa_batch: qaBatch
+    };
+    if (!existingJournal) appendObject(SHEET_NAMES.accountingJournals, journal);
+
+    let accountingReversed = 0;
+    sheetToObjects(SHEET_NAMES.accountingLedger).filter(function (entry) {
+      if (cleanString(entry.order_id, 80) !== targetOrderId) return false;
+      if (targetPaymentId && cleanString(entry.payment_id, 80) !== targetPaymentId) return false;
+      if (cleanString(entry.component, 120).indexOf("reversal:") === 0) return false;
+      return normalizeSalesStatus(entry.status || "POSTED") === "POSTED";
+    }).forEach(function (entry) {
+      const key = "REVERSAL:" + cleanString(entry.idempotency_key, 220);
+      const row = appendAccountingLedgerEntry({
+        journal_id: journal.journal_id,
+        account_code: entry.account_code,
+        direction: normalizeSalesStatus(entry.direction) === "DEBIT" ? "CREDIT" : "DEBIT",
+        amount: Number(entry.amount || 0),
+        order_id: targetOrderId,
+        payment_id: cleanString(entry.payment_id, 80),
+        product_id: entry.product_id,
+        sku: entry.sku,
+        pricing_version_id: entry.pricing_version_id,
+        component: "reversal:" + cleanString(entry.component, 100),
+        idempotency_key: key,
+        created_by: admin.actor_id,
+        is_test: true,
+        qa_batch: qaBatch
+      });
+      if (cleanString(row.idempotency_key, 220) === key) accountingReversed += 1;
+    });
+
+    let commissionReversed = 0;
+    const affectedAgents = {};
+    sheetToObjects(SHEET_NAMES.commissions).filter(function (commission) {
+      if (cleanString(commission.order_id, 80) !== targetOrderId) return false;
+      if (targetPaymentId && cleanString(commission.payment_id, 80) !== targetPaymentId) return false;
+      return ["AVAILABLE", "HELD", "PENDING", "REVERSED"].indexOf(normalizeSalesStatus(commission.status || "")) !== -1;
+    }).forEach(function (commission) {
+      const amount = Number(commission.released_amount || 0);
+      const current = normalizeSalesStatus(commission.status || "");
+      const reversalLedgerKey = "REVERSAL:LEDGER:" + cleanString(commission.commission_id, 80);
+      const hasReversalLedger = sheetToObjects(SHEET_NAMES.walletLedger).some(function (entry) {
+        return cleanString(entry.idempotency_key, 220) === reversalLedgerKey;
+      });
+      if (amount > 0 && current !== "PENDING" && !hasReversalLedger) {
+        appendLedgerEntry({
+          agent_id: commission.agent_id,
+          entry_type: "COMMISSION_REVERSAL",
+          direction: "DEBIT",
+          amount: amount,
+          balance_bucket: current === "HELD" ? "HELD" : "AVAILABLE",
+          reference_type: "COMMISSION",
+          reference_id: commission.commission_id,
+          idempotency_key: reversalLedgerKey,
+          note: reason,
+          created_by_type: "ADMIN",
+          created_by_id: admin.actor_id,
+          is_test: true,
+          qa_batch: qaBatch
+        });
+      }
+      if (current !== "REVERSED") {
+        updateRowFields(SHEET_NAMES.commissions, commission._row, {
+          status: "REVERSED",
+          reversed_at: new Date(),
+          note: cleanString((commission.note || "") + " | Reversed: " + reason, 500)
+        });
+      }
+      affectedAgents[cleanString(commission.agent_id, 80)] = true;
+      commissionReversed += 1;
+    });
+
+    sheetToObjects(SHEET_NAMES.teamCommissionAllocations).forEach(function (allocation) {
+      if (cleanString(allocation.order_id, 80) !== targetOrderId) return;
+      if (targetPaymentId && cleanString(allocation.payment_id, 80) !== targetPaymentId) return;
+      if (normalizeSalesStatus(allocation.status || "") === "REVERSED") return;
+      updateRowFields(SHEET_NAMES.teamCommissionAllocations, allocation._row, { status: "REVERSED" });
+    });
+
+    Object.keys(affectedAgents).forEach(function (agentId) {
+      if (existingAgentId(agentId)) updateWalletProjection(agentId);
+    });
+
+    writeAccountingAudit("REVERSAL", targetPaymentId || targetOrderId, "ACCOUNTING_REVERSAL_POSTED", "SUCCESS", admin.actor_id, reason, {
+      order_id: targetOrderId,
+      payment_id: targetPaymentId,
+      accounting_reversed: accountingReversed,
+      commissions_reversed: commissionReversed,
+      is_test: true,
+      qa_batch: qaBatch
+    });
+    writeFinanceAudit("REVERSAL", targetPaymentId || targetOrderId, "FINANCE_REVERSAL_POSTED", "", "REVERSED", 0, "ADMIN", admin.actor_id, reason, {
+      order_id: targetOrderId,
+      payment_id: targetPaymentId,
+      accounting_reversed: accountingReversed,
+      commissions_reversed: commissionReversed
+    }, true, qaBatch);
+
+    return {
+      ok: true,
+      duplicate: Boolean(existingJournal),
+      journal: publicAccountingJournal(journal),
+      accounting_reversed: accountingReversed,
+      commissions_reversed: commissionReversed,
+      order_id: targetOrderId,
+      payment_id: targetPaymentId
+    };
+  });
 }
 
 function rebuildSafeProjection(body) {
@@ -10227,12 +10594,18 @@ function calculateOrderCompensationSnapshot(order) {
   const centralPoolSatang = Math.max(0, toSatang((snapshot.components || {}).central_commission_pool || 0) * quantity);
   const agreement = activeAgreementForOrder(order);
   const memberSatang = calculateAgreementCommissionSatang(order, agreement, centralPoolSatang);
-  const managerId = cleanString(order.team_leader_id, 80) || cleanString((agentTeamAssignment(order.owner_agent_id || order.agent_id) || {}).team_manager_id, 80);
+  const assignment = agentTeamAssignment(order.owner_agent_id || order.agent_id) || {};
+  const assignedTeam = assignment.team_id ? findTeamById(assignment.team_id) : null;
+  const orderManagerId = existingAgentId(order.team_leader_id);
+  const managerId = orderManagerId ||
+    existingAgentId((assignedTeam && assignedTeam.primary_team_manager_id) || "") ||
+    existingAgentId(agreement && agreement.team_manager_id);
   return {
     pricing_version_id: cleanString(snapshot.pricing_version_id, 80),
     central_pool: fromSatang(centralPoolSatang),
     member_commission: fromSatang(memberSatang),
     manager_retained_commission: fromSatang(Math.max(0, centralPoolSatang - memberSatang)),
+    unassigned_central_commission: managerId ? 0 : fromSatang(Math.max(0, centralPoolSatang - memberSatang)),
     team_manager_id: managerId,
     agreement_id: agreement ? cleanString(agreement.agreement_id, 80) : "",
     sim_income: Number(readFinanceSetting("agent_sim_income", DEFAULT_SIM_INCOME)),
@@ -10261,9 +10634,11 @@ function postTeamCompensationForApprovedPayment(payment, actor) {
   const simSatang = toSatang(comp.sim_income || 0);
   const spcSatang = toSatang(comp.spc_income || 0);
   const memberSatang = toSatang(comp.member_commission || 0);
+  const managerSatang = comp.team_manager_id ? toSatang(comp.manager_retained_commission || 0) : 0;
   appendV37Commission(order, payment, agentId, "SIM_INCOME", simSatang, actor, "Agent SIM income from SSBMS bundle.");
   appendV37Commission(order, payment, agentId, "SPC_INCOME", spcSatang, actor, "Agent SPC income from SSBMS bundle.");
   appendV37Commission(order, payment, agentId, "SALES_COMMISSION", memberSatang, actor, "Agent sales commission from central commission pool.");
+  appendV37Commission(order, payment, comp.team_manager_id, "TEAM_MANAGER_RETAINED_COMMISSION", managerSatang, actor, "Team manager retained commission from central commission pool.");
   const allocationKey = ["TEAMPOOL", order.order_id].join(":");
   const existing = sheetToObjects(SHEET_NAMES.teamCommissionAllocations).find(function (row) { return cleanString(row.idempotency_key, 220) === allocationKey; });
   if (!existing) {
@@ -10286,6 +10661,13 @@ function postTeamCompensationForApprovedPayment(payment, actor) {
       idempotency_key: allocationKey,
       is_test: isTest,
       qa_batch: qaBatch
+    });
+  } else if (cleanString(existing.team_manager_id, 80) !== cleanString(comp.team_manager_id, 80)) {
+    updateRowFields(SHEET_NAMES.teamCommissionAllocations, existing._row, {
+      team_manager_id: comp.team_manager_id,
+      member_commission: comp.member_commission,
+      manager_retained_commission: comp.manager_retained_commission,
+      status: "ALLOCATED"
     });
   }
   return { ok: true, compensation: comp, duplicate: Boolean(existing) };
@@ -11290,11 +11672,13 @@ function runOrganizationIntegrityCheck(body) {
   });
   sheetToObjects(SHEET_NAMES.commissions).forEach(function (commission) {
     const order = findOrderById(commission.order_id);
-    if (order && cleanString(commission.agent_id, 80) !== cleanString(order.owner_agent_id || order.agent_id, 80)) {
+    const commissionType = normalizeSalesStatus(commission.commission_type || "");
+    const allowedManagerCommission = commissionType === "TEAM_MANAGER_RETAINED_COMMISSION";
+    if (order && !allowedManagerCommission && cleanString(commission.agent_id, 80) !== cleanString(order.owner_agent_id || order.agent_id, 80)) {
       anomalies.push({ type: "COMMISSION_OWNER_MISMATCH", commission_id: commission.commission_id, order_id: order.order_id });
     }
   });
-  return { ok: true, anomalies: anomalies, no_manager_commission: true, single_sales_only: true };
+  return { ok: true, anomalies: anomalies, no_manager_commission: false, single_sales_only: true };
 }
 
 /* =========================================================

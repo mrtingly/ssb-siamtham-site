@@ -1,4 +1,235 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="th">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin Finance | SBOS</title><link rel="icon" href="images/logo.png"><link rel="stylesheet" href="css/sbos-typography.css"><link rel="stylesheet" href="css/sbos-finance.css"></head>
-<body><div class="finance-shell"><aside class="finance-side"><div class="finance-brand"><img src="images/logo.png" alt="SBOS"><div><b>SBOS Admin</b><span>Finance OS</span></div></div><nav class="finance-menu"><a href="admin-dashboard.html">Dashboard</a><a class="active" href="admin-finance.html">Finance</a><a href="admin-commissions.html">Commissions</a><a href="admin-wallets.html">Wallets</a><a href="admin-withdraw.html">Withdrawals</a><a href="admin-commission-settings.html">Settings</a><a href="admin-orders.html">Orders</a></nav></aside><main class="finance-main"><header class="finance-top"><div><h1>Finance Dashboard</h1><p>Commission, wallet liability และ withdrawal queue</p></div><button id="refresh" class="finance-action">Refresh</button></header><div class="finance-content"><section class="finance-grid"><div class="finance-card"><span>Pending Commission</span><strong id="pending">฿0</strong></div><div class="finance-card"><span>Available Commission</span><strong id="available">฿0</strong></div><div class="finance-card"><span>Wallet Liability</span><strong id="liability">฿0</strong></div><div class="finance-card"><span>Reserved Withdrawal</span><strong id="reserved">฿0</strong></div><div class="finance-card"><span>Pending Withdrawals</span><strong id="withdrawals">0</strong></div><div class="finance-card"><span>Approved Not Paid</span><strong id="approved">0</strong></div><div class="finance-card"><span>Config Missing</span><strong id="missing">0</strong></div><div class="finance-card"><span>Anomalies</span><strong id="anomalies">0</strong></div></section><section class="finance-panel"><h3>Recent Activity</h3><div class="finance-table-wrap"><table class="finance-table"><thead><tr><th>Date</th><th>Entity</th><th>Action</th><th>Status</th><th>Amount</th><th>Actor</th></tr></thead><tbody id="activity"><tr><td colspan="6">Loading...</td></tr></tbody></table></div></section><div id="status" class="finance-status" role="status" aria-live="polite"></div></div></main></div><script src="js/sbos-api-config.js"></script><script src="js/admin-actions.js"></script><script src="js/admin-guard.js"></script><script>"use strict";function money(v){return "฿"+Number(v||0).toLocaleString("th-TH",{maximumFractionDigits:2})}function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]))}function fmt(v){const d=new Date(v);return isNaN(d)?"-":d.toLocaleString("th-TH")}async function load(){const d=await adminPost("getFinanceDashboard",{});if(!d.ok){status.textContent=d.message||"Load failed";return}const s=d.summary||{};pending.textContent=money(s.total_pending_commission);available.textContent=money(s.total_available_commission);liability.textContent=money(s.total_wallet_liability);reserved.textContent=money(s.total_reserved_withdrawal);withdrawals.textContent=s.pending_withdrawals_count||0;approved.textContent=s.approved_not_paid_count||0;missing.textContent=s.commission_config_missing_count||0;anomalies.textContent=s.finance_anomaly_count||0;activity.innerHTML=(d.recent_activity||[]).length?(d.recent_activity||[]).map(a=>'<tr><td>'+esc(fmt(a.created_at))+'</td><td>'+esc(a.entity_type+" "+a.entity_id)+'</td><td>'+esc(a.action)+'</td><td>'+esc((a.previous_status||"-")+" → "+(a.new_status||"-"))+'</td><td>'+esc(money(a.amount))+'</td><td>'+esc(a.actor_type+" "+a.actor_id)+'</td></tr>').join(""):'<tr><td colspan="6" class="finance-empty">No activity</td></tr>';status.textContent="Updated"}refresh.onclick=load;load();</script></body></html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin Finance | SBOS</title>
+  <link rel="icon" href="images/logo.png">
+  <link rel="stylesheet" href="css/sbos-typography.css">
+  <link rel="stylesheet" href="css/sbos-finance.css">
+</head>
+<body>
+  <div class="finance-shell">
+    <aside class="finance-side">
+      <div class="finance-brand">
+        <img src="images/logo.png" alt="SBOS">
+        <div>
+          <b>SBOS Admin</b>
+          <span>Finance OS</span>
+        </div>
+      </div>
+      <nav class="finance-menu">
+        <a href="admin-dashboard.html">Dashboard</a>
+        <a class="active" href="admin-finance.html">Finance</a>
+        <a href="admin-commissions.html">Commissions</a>
+        <a href="admin-wallets.html">Wallets</a>
+        <a href="admin-withdraw.html">Withdrawals</a>
+        <a href="admin-commission-settings.html">Settings</a>
+        <a href="admin-orders.html">Orders</a>
+      </nav>
+    </aside>
+
+    <main class="finance-main">
+      <header class="finance-top">
+        <div>
+          <h1>Finance Dashboard</h1>
+          <p>Authoritative ledger, commission, wallet liability และ reconciliation</p>
+        </div>
+        <div class="finance-toolbar compact">
+          <label class="finance-check"><input id="includeQa" type="checkbox"> Include QA</label>
+          <button id="reconcile" class="finance-action secondary" type="button">Reconcile</button>
+          <button id="refresh" class="finance-action" type="button">Refresh</button>
+        </div>
+      </header>
+
+      <div class="finance-content">
+        <section class="finance-grid">
+          <div class="finance-card"><span>Approved Payments</span><strong id="approvedPayments">฿0</strong></div>
+          <div class="finance-card"><span>Sales Before VAT</span><strong id="salesBeforeVat">฿0</strong></div>
+          <div class="finance-card"><span>Output VAT</span><strong id="outputVat">฿0</strong></div>
+          <div class="finance-card"><span>Sales Incl. VAT</span><strong id="salesInclVat">฿0</strong></div>
+          <div class="finance-card"><span>Company Allocation</span><strong id="companyAllocation">฿0</strong></div>
+          <div class="finance-card"><span>Central Commission Pool</span><strong id="centralPool">฿0</strong></div>
+          <div class="finance-card"><span>Agent Sales Commission</span><strong id="agentSalesCommission">฿0</strong></div>
+          <div class="finance-card"><span>Manager Retained</span><strong id="managerRetained">฿0</strong></div>
+          <div class="finance-card"><span>Agent SIM Income</span><strong id="simIncome">฿0</strong></div>
+          <div class="finance-card"><span>Agent SPC Income</span><strong id="spcIncome">฿0</strong></div>
+          <div class="finance-card"><span>Wallet Liability</span><strong id="liability">฿0</strong></div>
+          <div class="finance-card"><span>Reversals</span><strong id="reversals">0</strong></div>
+          <div class="finance-card"><span>Pending Commission</span><strong id="pending">฿0</strong></div>
+          <div class="finance-card"><span>Available Commission</span><strong id="available">฿0</strong></div>
+          <div class="finance-card"><span>Pending Withdrawals</span><strong id="withdrawals">0</strong></div>
+          <div class="finance-card"><span>Anomalies</span><strong id="anomalies">0</strong></div>
+        </section>
+
+        <section class="finance-panel">
+          <h3>Reconciliation</h3>
+          <div class="finance-table-wrap">
+            <table class="finance-table">
+              <thead>
+                <tr>
+                  <th scope="col">Scope</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Issues</th>
+                  <th scope="col">Critical / High</th>
+                </tr>
+              </thead>
+              <tbody id="reconciliation">
+                <tr><td colspan="4">Run reconciliation to verify ledger integrity.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="finance-panel">
+          <h3>Recent Activity</h3>
+          <div class="finance-table-wrap">
+            <table class="finance-table">
+              <thead>
+                <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">Entity</th>
+                  <th scope="col">Action</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Amount</th>
+                  <th scope="col">Actor</th>
+                </tr>
+              </thead>
+              <tbody id="activity">
+                <tr><td colspan="6">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <div id="status" class="finance-status" role="status" aria-live="polite"></div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/sbos-api-config.js"></script>
+  <script src="js/admin-actions.js"></script>
+  <script src="js/admin-guard.js"></script>
+  <script>
+    "use strict";
+
+    const money = (value) => "฿" + Number(value || 0).toLocaleString("th-TH", { maximumFractionDigits: 2 });
+    const refreshButton = document.getElementById("refresh");
+    const reconcileButton = document.getElementById("reconcile");
+    const includeQaInput = document.getElementById("includeQa");
+    const statusBox = document.getElementById("status");
+    const text = (id, value) => {
+      const element = document.getElementById(id);
+      if (element) element.textContent = value;
+    };
+    const fmt = (value) => {
+      const date = new Date(value);
+      return Number.isNaN(date.getTime()) ? "-" : date.toLocaleString("th-TH");
+    };
+    const cell = (value) => {
+      const td = document.createElement("td");
+      td.textContent = value == null || value === "" ? "-" : String(value);
+      return td;
+    };
+
+    function renderActivity(rows) {
+      const tbody = document.getElementById("activity");
+      tbody.textContent = "";
+      if (!rows || !rows.length) {
+        const tr = document.createElement("tr");
+        const td = cell("No activity");
+        td.colSpan = 6;
+        td.className = "finance-empty";
+        tr.appendChild(td);
+        tbody.appendChild(tr);
+        return;
+      }
+      rows.forEach((item) => {
+        const tr = document.createElement("tr");
+        tr.appendChild(cell(fmt(item.created_at)));
+        tr.appendChild(cell([item.entity_type, item.entity_id].filter(Boolean).join(" ")));
+        tr.appendChild(cell(item.action));
+        tr.appendChild(cell([(item.previous_status || "-"), (item.new_status || "-")].join(" -> ")));
+        tr.appendChild(cell(money(item.amount)));
+        tr.appendChild(cell([item.actor_type, item.actor_id].filter(Boolean).join(" ")));
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderReconciliation(report) {
+      const tbody = document.getElementById("reconciliation");
+      tbody.textContent = "";
+      const rows = [
+        ["New System", report && report.new_system ? "REPORT_ONLY" : "NOT_RUN", report && report.new_system ? report.new_system.total_issues : "-", report && report.new_system ? report.new_system.critical_or_high : "-"],
+        ["Legacy Backlog", report && report.legacy_backlog ? report.legacy_backlog.status : "NOT_RUN", report && report.legacy_backlog ? report.legacy_backlog.total_issues : "-", "-"]
+      ];
+      rows.forEach((row) => {
+        const tr = document.createElement("tr");
+        row.forEach((value) => tr.appendChild(cell(value)));
+        tbody.appendChild(tr);
+      });
+    }
+
+    async function load() {
+      statusBox.textContent = "Loading finance data...";
+      refreshButton.disabled = true;
+      reconcileButton.disabled = true;
+      try {
+        const data = await adminPost("getFinanceDashboard", { include_qa: includeQaInput.checked });
+        if (!data.ok) {
+          statusBox.textContent = data.message || "Load failed";
+          return;
+        }
+        const summary = data.summary || {};
+        text("approvedPayments", money(summary.approved_payments_total));
+        text("salesBeforeVat", money(summary.sales_before_vat));
+        text("outputVat", money(summary.output_vat_payable));
+        text("salesInclVat", money(summary.sales_total_including_vat));
+        text("companyAllocation", money(summary.company_revenue_allocation));
+        text("centralPool", money(summary.central_commission_pool));
+        text("agentSalesCommission", money(summary.agent_sales_commission));
+        text("managerRetained", money(summary.team_manager_retained_commission));
+        text("simIncome", money(summary.agent_sim_income));
+        text("spcIncome", money(summary.agent_spc_income));
+        text("pending", money(summary.total_pending_commission));
+        text("available", money(summary.total_available_commission));
+        text("liability", money(summary.total_wallet_liability));
+        text("withdrawals", summary.pending_withdrawals_count || 0);
+        text("anomalies", summary.finance_anomaly_count || 0);
+        text("reversals", summary.reversal_count || 0);
+        renderActivity(data.recent_activity || []);
+        statusBox.textContent = "Updated";
+      } catch (error) {
+        statusBox.textContent = "Unable to load finance data.";
+      } finally {
+        refreshButton.disabled = false;
+        reconcileButton.disabled = false;
+      }
+    }
+
+    async function runReconciliation() {
+      statusBox.textContent = "Running reconciliation...";
+      reconcileButton.disabled = true;
+      try {
+        const report = await adminPost("runAccountingReconciliation", { include_qa: includeQaInput.checked });
+        if (!report.ok) {
+          statusBox.textContent = report.message || "Reconciliation failed";
+          return;
+        }
+        renderReconciliation(report);
+        statusBox.textContent = "Reconciliation completed";
+        await load();
+      } catch (error) {
+        statusBox.textContent = "Unable to run reconciliation.";
+      } finally {
+        reconcileButton.disabled = false;
+      }
+    }
+
+    refreshButton.addEventListener("click", load);
+    reconcileButton.addEventListener("click", runReconciliation);
+    includeQaInput.addEventListener("change", load);
+    load();
+  </script>
+</body>
+</html>
