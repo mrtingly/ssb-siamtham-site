@@ -7,6 +7,8 @@ const SHEET_NAMES = {
   customers: "customers",
   quotations: "quotations",
   orderStatusLogs: "order_status_logs",
+  productCollections: "product_collections",
+  productModels: "product_models",
   products: "products",
   productPricing: "product_pricing",
   depositPolicies: "deposit_policies",
@@ -151,8 +153,16 @@ function doGet(e) {
         result = listCollections(e.parameter);
         break;
 
+      case "getCollection":
+        result = getCollection(e.parameter);
+        break;
+
       case "listProductModels":
         result = listProductModels(e.parameter);
+        break;
+
+      case "getProductModel":
+        result = getProductModel(e.parameter);
         break;
 
       case "listProductVariants":
@@ -549,6 +559,10 @@ function doPost(e) {
         result = updateOrderStatus(body);
         break;
 
+      case "listProducts":
+        result = listProducts(body);
+        break;
+
       case "createProduct":
         result = createProduct(body);
         break;
@@ -561,12 +575,56 @@ function doPost(e) {
         result = deleteProduct(body);
         break;
 
+      case "createCollection":
+        result = createCollection(body);
+        break;
+
+      case "updateCollection":
+        result = updateCollection(body);
+        break;
+
+      case "setCollectionStatus":
+        result = setCollectionStatus(body);
+        break;
+
+      case "createProductModel":
+        result = createProductModel(body);
+        break;
+
+      case "updateProductModel":
+        result = updateProductModel(body);
+        break;
+
+      case "setProductModelStatus":
+        result = setProductModelStatus(body);
+        break;
+
+      case "createProductVariant":
+        result = createProductVariant(body);
+        break;
+
+      case "updateProductVariant":
+        result = updateProductVariant(body);
+        break;
+
+      case "setProductVariantStatus":
+        result = setProductVariantStatus(body);
+        break;
+
       case "listCollections":
         result = listCollections(body);
         break;
 
+      case "getCollection":
+        result = getCollection(body);
+        break;
+
       case "listProductModels":
         result = listProductModels(body);
+        break;
+
+      case "getProductModel":
+        result = getProductModel(body);
         break;
 
       case "listProductVariants":
@@ -1233,6 +1291,8 @@ function sheetToObjects(sheetName) {
         obj.customer_id,
         obj.quotation_id,
         obj.status_log_id,
+        obj.collection_id,
+        obj.model_id,
         obj.product_id,
         obj.pricing_id,
         obj.policy_id,
@@ -1666,12 +1726,64 @@ const PRODUCT_HEADERS = [
   "collection",
   "brand",
   "model",
+  "model_id",
   "storage",
+  "memory_label",
   "color",
+  "color_code",
+  "color_hex",
   "sku",
+  "image_url",
+  "asset_key",
+  "display_order",
   "status",
   "created_at",
-  "updated_at"
+  "updated_at",
+  "created_by",
+  "updated_by",
+  "is_test",
+  "qa_batch"
+];
+
+const PRODUCT_COLLECTION_HEADERS = [
+  "collection_id",
+  "collection_name",
+  "short_name",
+  "brand",
+  "series",
+  "description",
+  "theme_key",
+  "image_url",
+  "asset_key",
+  "display_order",
+  "status",
+  "created_at",
+  "updated_at",
+  "created_by",
+  "updated_by",
+  "is_test",
+  "qa_batch"
+];
+
+const PRODUCT_MODEL_HEADERS = [
+  "model_id",
+  "collection_id",
+  "collection_name",
+  "brand",
+  "series",
+  "model_name",
+  "model_code",
+  "description",
+  "image_url",
+  "asset_key",
+  "display_order",
+  "status",
+  "created_at",
+  "updated_at",
+  "created_by",
+  "updated_by",
+  "is_test",
+  "qa_batch"
 ];
 
 const PRODUCT_PRICING_HEADERS = [
@@ -5401,7 +5513,7 @@ function getAdminDashboard(options) {
 ========================================================= */
 
 function ensureSalesSheets() {
-  const cacheKey = "SBOS_SALES_SHEETS_READY_V3_5";
+  const cacheKey = "SBOS_SALES_SHEETS_READY_V3_7C_1";
   try {
     const cache = CacheService.getScriptCache();
     if (cache.get(cacheKey) === "1") return;
@@ -5410,6 +5522,8 @@ function ensureSalesSheets() {
   getOrCreateSheet(SHEET_NAMES.quotations, QUOTATION_HEADERS);
   getOrCreateSheet(SHEET_NAMES.orders, ORDER_HEADERS);
   getOrCreateSheet(SHEET_NAMES.orderStatusLogs, ORDER_STATUS_LOG_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.productCollections, PRODUCT_COLLECTION_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.productModels, PRODUCT_MODEL_HEADERS);
   getOrCreateSheet(SHEET_NAMES.products, PRODUCT_HEADERS);
   getOrCreateSheet(SHEET_NAMES.productPricing, PRODUCT_PRICING_HEADERS);
   getOrCreateSheet(SHEET_NAMES.depositPolicies, DEPOSIT_POLICY_HEADERS);
@@ -5418,6 +5532,7 @@ function ensureSalesSheets() {
   ensureFinanceSheets();
   ensureOrganizationSheets();
   seedV3ProductCatalog();
+  seedProductCatalogMetadata();
   seedDepositPolicy();
   try {
     CacheService.getScriptCache().put(cacheKey, "1", 21600);
@@ -6087,6 +6202,101 @@ function seedV3ProductCatalog() {
   }
 }
 
+function seedProductCatalogMetadata() {
+  const products = sheetToObjects(SHEET_NAMES.products);
+  const existingCollections = sheetToObjects(SHEET_NAMES.productCollections);
+  const existingModels = sheetToObjects(SHEET_NAMES.productModels);
+  const now = new Date();
+  const collections = {};
+  const models = {};
+
+  existingCollections.forEach(function (row) {
+    const key = catalogKey([row.collection_name]);
+    if (key) collections[key] = true;
+    const expectedTheme = inferredThemeKey(row.collection_name, row.brand);
+    const currentTheme = cleanString(row.theme_key, 40).toLowerCase();
+    if (
+      key &&
+      expectedTheme &&
+      currentTheme !== expectedTheme &&
+      cleanString(row.created_by, 80).toUpperCase() === "SYSTEM"
+    ) {
+      updateRowFields(SHEET_NAMES.productCollections, row._row, {
+        theme_key: expectedTheme,
+        updated_at: now,
+        updated_by: "SYSTEM"
+      });
+    }
+  });
+
+  existingModels.forEach(function (row) {
+    const key = catalogKey([row.collection_name, row.brand, row.model_name]);
+    if (key) models[key] = cleanString(row.model_id, 80);
+  });
+
+  products.forEach(function (product) {
+    const collectionName = cleanString(product.collection, 180);
+    const brand = cleanString(product.brand, 120);
+    const modelName = cleanString(product.model, 160);
+    const collectionKey = catalogKey([collectionName]);
+    const modelKey = catalogKey([collectionName, brand, modelName]);
+    if (collectionName && !collections[collectionKey]) {
+      appendObject(SHEET_NAMES.productCollections, {
+        collection_id: catalogId("COL", [collectionName]),
+        collection_name: collectionName,
+        short_name: collectionName.split(" ")[0] || collectionName,
+        brand: brand,
+        series: "",
+        description: "",
+        theme_key: inferredThemeKey(collectionName, brand),
+        image_url: "",
+        asset_key: "",
+        display_order: 999,
+        status: "ACTIVE",
+        created_at: now,
+        updated_at: now,
+        created_by: "SYSTEM",
+        updated_by: "SYSTEM",
+        is_test: isQaRecord(product),
+        qa_batch: qaBatchFor(product)
+      });
+      collections[collectionKey] = true;
+    }
+    if (collectionName && brand && modelName && !models[modelKey]) {
+      const modelId = catalogId("MDL", [collectionName, brand, modelName]);
+      appendObject(SHEET_NAMES.productModels, {
+        model_id: modelId,
+        collection_id: catalogId("COL", [collectionName]),
+        collection_name: collectionName,
+        brand: brand,
+        series: "",
+        model_name: modelName,
+        model_code: "",
+        description: "",
+        image_url: "",
+        asset_key: "",
+        display_order: 999,
+        status: "ACTIVE",
+        created_at: now,
+        updated_at: now,
+        created_by: "SYSTEM",
+        updated_by: "SYSTEM",
+        is_test: isQaRecord(product),
+        qa_batch: qaBatchFor(product)
+      });
+      models[modelKey] = modelId;
+    }
+    if (!cleanString(product.model_id, 80) && models[modelKey]) {
+      updateRowFields(SHEET_NAMES.products, product._row, {
+        model_id: models[modelKey],
+        memory_label: cleanString(product.memory_label || product.storage, 80),
+        updated_at: product.updated_at || now,
+        updated_by: product.updated_by || "SYSTEM"
+      });
+    }
+  });
+}
+
 function seedDepositPolicy() {
   if (sheetToObjects(SHEET_NAMES.depositPolicies).length > 0) {
     return;
@@ -6106,15 +6316,27 @@ function seedDepositPolicy() {
 function publicProduct(product) {
   return {
     product_id: cleanString(product.product_id, 80),
+    collection_id: catalogId("COL", [product.collection]),
     collection: cleanString(product.collection, 180),
     brand: cleanString(product.brand, 120),
+    product_model_id: cleanString(product.model_id, 80) || catalogId("MDL", [product.collection, product.brand, product.model]),
+    model_id: cleanString(product.model_id, 80) || catalogId("MDL", [product.collection, product.brand, product.model]),
     model: cleanString(product.model, 160),
     storage: cleanString(product.storage, 80),
+    memory_label: cleanString(product.memory_label || product.storage, 80),
     color: cleanString(product.color, 120),
+    color_name: cleanString(product.color, 120),
+    color_code: cleanString(product.color_code, 80),
+    color_hex: cleanString(product.color_hex, 40),
     sku: cleanString(product.sku, 120),
+    image_url: cleanString(product.image_url, 500),
+    asset_key: cleanString(product.asset_key, 180),
+    display_order: catalogDisplayOrder(product.display_order),
     status: normalizeSalesStatus(product.status || "ACTIVE"),
     created_at: product.created_at || "",
-    updated_at: product.updated_at || ""
+    updated_at: product.updated_at || "",
+    is_test: booleanValue(product.is_test),
+    qa_batch: cleanString(product.qa_batch, 120)
   };
 }
 
@@ -6163,6 +6385,162 @@ function publicDepositPolicy(policy) {
   };
 }
 
+function normalizeCatalogStatus(status) {
+  const normalized = normalizeSalesStatus(status || "ACTIVE");
+  return ["ACTIVE", "INACTIVE", "ARCHIVED"].indexOf(normalized) !== -1 ? normalized : "ACTIVE";
+}
+
+function normalizeThemeKey(value) {
+  const key = cleanString(value, 40).toLowerCase();
+  if (["silver", "gold", "platinum"].indexOf(key) !== -1) return key;
+  if (key.indexOf("gold") !== -1 || key.indexOf("galaxy s") !== -1) return "gold";
+  if (key.indexOf("platinum") !== -1 || key.indexOf("apple") !== -1 || key.indexOf("iphone") !== -1 || key.indexOf("ipad") !== -1) return "platinum";
+  return "silver";
+}
+
+function inferredThemeKey(collectionName, brand) {
+  return normalizeThemeKey([collectionName, brand].filter(Boolean).join(" "));
+}
+
+function catalogDisplayOrder(value) {
+  const number = Number(value);
+  return isFinite(number) ? number : 999;
+}
+
+function publicCollection(row) {
+  return {
+    collection_id: cleanString(row.collection_id, 80),
+    collection_name: cleanString(row.collection_name || row.collection, 180),
+    collection: cleanString(row.collection_name || row.collection, 180),
+    short_name: cleanString(row.short_name, 80),
+    brand: cleanString(row.brand, 120),
+    series: cleanString(row.series, 160),
+    description: cleanString(row.description, 500),
+    theme_key: normalizeThemeKey(row.theme_key || row.collection_name || row.collection || row.brand),
+    image_url: cleanString(row.image_url, 500),
+    asset_key: cleanString(row.asset_key, 180),
+    display_order: catalogDisplayOrder(row.display_order),
+    status: normalizeCatalogStatus(row.status || "ACTIVE"),
+    created_at: row.created_at || "",
+    updated_at: row.updated_at || "",
+    is_test: booleanValue(row.is_test),
+    qa_batch: cleanString(row.qa_batch, 120)
+  };
+}
+
+function publicProductModel(row) {
+  return {
+    product_model_id: cleanString(row.model_id || row.product_model_id, 80),
+    model_id: cleanString(row.model_id || row.product_model_id, 80),
+    collection_id: cleanString(row.collection_id, 80),
+    collection: cleanString(row.collection_name || row.collection, 180),
+    collection_name: cleanString(row.collection_name || row.collection, 180),
+    brand: cleanString(row.brand, 120),
+    series: cleanString(row.series, 160),
+    model: cleanString(row.model_name || row.model, 160),
+    model_name: cleanString(row.model_name || row.model, 160),
+    model_code: cleanString(row.model_code, 80),
+    description: cleanString(row.description, 500),
+    image_url: cleanString(row.image_url, 500),
+    asset_key: cleanString(row.asset_key, 180),
+    display_order: catalogDisplayOrder(row.display_order),
+    status: normalizeCatalogStatus(row.status || "ACTIVE"),
+    created_at: row.created_at || "",
+    updated_at: row.updated_at || "",
+    is_test: booleanValue(row.is_test),
+    qa_batch: cleanString(row.qa_batch, 120)
+  };
+}
+
+function collectionRows() {
+  ensureSalesSheets();
+  return sheetToObjects(SHEET_NAMES.productCollections);
+}
+
+function modelRows() {
+  ensureSalesSheets();
+  return sheetToObjects(SHEET_NAMES.productModels);
+}
+
+function findCollectionRow(params) {
+  const input = params || {};
+  const id = cleanString(input.collection_id || input.collectionId, 80);
+  const name = cleanString(input.collection_name || input.collection || input.name, 180).toLowerCase();
+  return collectionRows().find(function (row) {
+    return (id && cleanString(row.collection_id, 80) === id) ||
+      (name && cleanString(row.collection_name, 180).toLowerCase() === name);
+  }) || null;
+}
+
+function findModelRow(params) {
+  const input = params || {};
+  const id = cleanString(input.model_id || input.product_model_id || input.productModelId, 80);
+  const collectionId = cleanString(input.collection_id || input.collectionId, 80);
+  const collectionName = cleanString(input.collection_name || input.collection, 180).toLowerCase();
+  const brand = cleanString(input.brand, 120).toLowerCase();
+  const modelName = cleanString(input.model_name || input.model || input.product_model || input.productModel, 160).toLowerCase();
+  return modelRows().find(function (row) {
+    if (id && cleanString(row.model_id, 80) === id) return true;
+    if (!modelName) return false;
+    if (collectionId && cleanString(row.collection_id, 80) !== collectionId) return false;
+    if (collectionName && cleanString(row.collection_name, 180).toLowerCase() !== collectionName) return false;
+    if (brand && cleanString(row.brand, 120).toLowerCase() !== brand) return false;
+    return cleanString(row.model_name, 160).toLowerCase() === modelName;
+  }) || null;
+}
+
+function collectionStatusIndex() {
+  const index = {};
+  collectionRows().forEach(function (row) {
+    const item = publicCollection(row);
+    if (item.collection) index[item.collection.toLowerCase()] = item.status;
+    if (item.collection_id) index[item.collection_id] = item.status;
+  });
+  return index;
+}
+
+function modelStatusIndex() {
+  const index = {};
+  modelRows().forEach(function (row) {
+    const item = publicProductModel(row);
+    const key = catalogKey([item.collection, item.brand, item.model]);
+    if (key) index[key] = item.status;
+    if (item.model_id) index[item.model_id] = item.status;
+  });
+  return index;
+}
+
+function isProductVisibleByParentStatus(product, collections, models) {
+  const collectionName = cleanString(product.collection, 180).toLowerCase();
+  const modelId = cleanString(product.model_id, 80);
+  const modelKey = catalogKey([product.collection, product.brand, product.model]);
+  const collectionStatus = collections[collectionName] || collections[cleanString(product.collection_id, 80)] || "ACTIVE";
+  const modelStatus = models[modelId] || models[modelKey] || "ACTIVE";
+  return normalizeCatalogStatus(collectionStatus) === "ACTIVE" && normalizeCatalogStatus(modelStatus) === "ACTIVE";
+}
+
+function withCatalogLock(fn) {
+  const lock = LockService.getScriptLock();
+  lock.waitLock(30000);
+  try {
+    return fn();
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function writeCatalogAudit(action, entityType, entityId, admin, beforeValue, afterValue, reason) {
+  writeAuditLog(action, "", "SUCCESS", "Catalog mutation", {
+    actor: admin && admin.actor_id,
+    role: admin && admin.role,
+    entity_type: entityType,
+    entity_id: entityId,
+    before: beforeValue || {},
+    after: afterValue || {},
+    reason: cleanString(reason, 500)
+  });
+}
+
 function catalogKey(parts) {
   return (parts || []).map(function (part) {
     return cleanString(part, 220).toLowerCase();
@@ -6185,8 +6563,12 @@ function catalogId(prefix, parts) {
 
 function activeProductRows(includeInactive) {
   ensureSalesSheets();
+  const collections = collectionStatusIndex();
+  const models = modelStatusIndex();
   return sheetToObjects(SHEET_NAMES.products).filter(function (product) {
-    return includeInactive || normalizeSalesStatus(product.status || "ACTIVE") === "ACTIVE";
+    if (includeInactive) return true;
+    if (normalizeCatalogStatus(product.status || "ACTIVE") !== "ACTIVE") return false;
+    return isProductVisibleByParentStatus(product, collections, models);
   });
 }
 
@@ -6227,16 +6609,24 @@ function pricingVersion(pricing) {
 function productDisplay(product) {
   return {
     collection_id: catalogId("COL", [product.collection]),
-    product_model_id: catalogId("MDL", [product.collection, product.brand, product.model]),
+    product_model_id: cleanString(product.model_id, 80) || catalogId("MDL", [product.collection, product.brand, product.model]),
     variant_id: catalogId("VAR", [product.collection, product.brand, product.model, product.storage]),
     color_id: catalogId("CLR", [product.collection, product.brand, product.model, product.storage, product.color]),
     product_id: cleanString(product.product_id, 80),
     sku: cleanString(product.sku, 120),
     collection: cleanString(product.collection, 180),
     brand: cleanString(product.brand, 120),
+    model_id: cleanString(product.model_id, 80) || catalogId("MDL", [product.collection, product.brand, product.model]),
     model: cleanString(product.model, 160),
     storage: cleanString(product.storage, 80),
+    memory_label: cleanString(product.memory_label || product.storage, 80),
     color: cleanString(product.color, 120),
+    color_name: cleanString(product.color, 120),
+    color_code: cleanString(product.color_code, 80),
+    color_hex: cleanString(product.color_hex, 40),
+    image_url: cleanString(product.image_url, 500),
+    asset_key: cleanString(product.asset_key, 180),
+    display_order: catalogDisplayOrder(product.display_order),
     description: [product.model, product.storage, product.color].filter(Boolean).join(" / "),
     status: normalizeSalesStatus(product.status || "ACTIVE")
   };
@@ -6454,13 +6844,36 @@ function listCollections(params) {
     if (!admin.ok) return admin;
   }
   const map = {};
+  collectionRows().forEach(function (row) {
+    const item = publicCollection(row);
+    if (!includeInactive && item.status !== "ACTIVE") return;
+    const key = catalogKey([item.collection]);
+    if (!key) return;
+    map[key] = Object.assign({}, item, {
+      brands: {},
+      active_sku_count: 0,
+      model_count: 0,
+      starting_price: null
+    });
+  });
   activeProductRows(includeInactive).forEach(function (product) {
+    if (!includeInactive && !activePricingAllocationForProduct(product)) return;
     const key = catalogKey([product.collection]);
     if (!key) return;
     if (!map[key]) {
       map[key] = {
         collection_id: catalogId("COL", [product.collection]),
+        collection_name: cleanString(product.collection, 180),
         collection: cleanString(product.collection, 180),
+        short_name: cleanString(product.collection, 80),
+        brand: cleanString(product.brand, 120),
+        series: "",
+        description: "",
+        theme_key: normalizeThemeKey(product.collection || product.brand),
+        image_url: "",
+        asset_key: "",
+        display_order: 999,
+        status: "ACTIVE",
         brands: {},
         active_sku_count: 0,
         model_count: 0,
@@ -6480,7 +6893,7 @@ function listCollections(params) {
     item.model_count = listProductModels({ collection: item.collection }).total || 0;
     return item;
   }).sort(function (a, b) {
-    return a.collection.localeCompare(b.collection);
+    return catalogDisplayOrder(a.display_order) - catalogDisplayOrder(b.display_order) || a.collection.localeCompare(b.collection);
   });
   return { ok: true, total: collections.length, collections: collections };
 }
@@ -6496,25 +6909,67 @@ function listProductModels(params) {
   const brand = cleanString(options.brand, 120).toLowerCase();
   const query = cleanString(options.q || options.search, 200).toLowerCase();
   const map = {};
+  const collectionIndex = {};
+  collectionRows().forEach(function (row) {
+    const item = publicCollection(row);
+    collectionIndex[item.collection.toLowerCase()] = item;
+  });
+  modelRows().forEach(function (row) {
+    const item = publicProductModel(row);
+    const parent = collectionIndex[item.collection.toLowerCase()];
+    if (!includeInactive && item.status !== "ACTIVE") return;
+    if (!includeInactive && parent && parent.status !== "ACTIVE") return;
+    if (collection && item.collection.toLowerCase() !== collection) return;
+    if (brand && item.brand.toLowerCase() !== brand) return;
+    if (query && [item.collection, item.brand, item.model, item.model_code].join(" ").toLowerCase().indexOf(query) === -1) return;
+    const key = catalogKey([item.collection, item.brand, item.model]);
+    if (!key) return;
+    map[key] = Object.assign({}, item, {
+      theme_key: parent ? parent.theme_key : normalizeThemeKey(item.collection || item.brand),
+      collection_image_url: parent ? parent.image_url : "",
+      collection_asset_key: parent ? parent.asset_key : "",
+      variant_count: 0,
+      color_count: 0,
+      sku_count: 0,
+      starting_price: null,
+      default_product_id: "",
+      default_sku: "",
+      storages: {},
+      colors: {}
+    });
+  });
   activeProductRows(includeInactive).forEach(function (product) {
     if (collection && cleanString(product.collection, 180).toLowerCase() !== collection) return;
     if (brand && cleanString(product.brand, 120).toLowerCase() !== brand) return;
     if (query && [product.collection, product.brand, product.model, product.storage, product.color, product.sku].join(" ").toLowerCase().indexOf(query) === -1) return;
+    const allocation = activePricingAllocationForProduct(product);
+    if (!includeInactive && !allocation) return;
     const key = catalogKey([product.collection, product.brand, product.model]);
     if (!map[key]) {
       map[key] = {
-        product_model_id: catalogId("MDL", [product.collection, product.brand, product.model]),
+        product_model_id: cleanString(product.model_id, 80) || catalogId("MDL", [product.collection, product.brand, product.model]),
+        model_id: cleanString(product.model_id, 80) || catalogId("MDL", [product.collection, product.brand, product.model]),
         collection_id: catalogId("COL", [product.collection]),
         collection: cleanString(product.collection, 180),
+        collection_name: cleanString(product.collection, 180),
         brand: cleanString(product.brand, 120),
         model: cleanString(product.model, 160),
+        model_name: cleanString(product.model, 160),
+        model_code: "",
+        description: "",
+        image_url: cleanString(product.image_url, 500),
+        asset_key: cleanString(product.asset_key, 180),
+        theme_key: collectionIndex[cleanString(product.collection, 180).toLowerCase()] ? collectionIndex[cleanString(product.collection, 180).toLowerCase()].theme_key : normalizeThemeKey(product.collection || product.brand),
+        collection_image_url: collectionIndex[cleanString(product.collection, 180).toLowerCase()] ? collectionIndex[cleanString(product.collection, 180).toLowerCase()].image_url : "",
+        collection_asset_key: collectionIndex[cleanString(product.collection, 180).toLowerCase()] ? collectionIndex[cleanString(product.collection, 180).toLowerCase()].asset_key : "",
+        display_order: catalogDisplayOrder(product.display_order),
         variant_count: 0,
         color_count: 0,
         sku_count: 0,
         starting_price: null,
         default_product_id: cleanString(product.product_id, 80),
         default_sku: cleanString(product.sku, 120),
-        status: "ACTIVE",
+        status: normalizeCatalogStatus(product.status || "ACTIVE"),
         storages: {},
         colors: {}
       };
@@ -6539,7 +6994,8 @@ function listProductModels(params) {
     delete item.colors;
     return item;
   }).sort(function (a, b) {
-    return [a.collection, a.brand, a.model].join(" ").localeCompare([b.collection, b.brand, b.model].join(" "));
+    return catalogDisplayOrder(a.display_order) - catalogDisplayOrder(b.display_order) ||
+      [a.collection, a.brand, a.model].join(" ").localeCompare([b.collection, b.brand, b.model].join(" "));
   });
   return { ok: true, total: models.length, models: models };
 }
@@ -6555,6 +7011,7 @@ function listProductVariants(params) {
   const brand = cleanString(options.brand, 120).toLowerCase();
   const model = cleanString(options.model || options.product_model || options.productModel, 160).toLowerCase();
   const rows = activeProductRows(includeInactive).filter(function (product) {
+    if (!includeInactive && !activePricingAllocationForProduct(product)) return false;
     if (collection && cleanString(product.collection, 180).toLowerCase() !== collection) return false;
     if (brand && cleanString(product.brand, 120).toLowerCase() !== brand) return false;
     if (model && cleanString(product.model, 160).toLowerCase() !== model) return false;
@@ -6566,10 +7023,12 @@ function listProductVariants(params) {
     if (!variantMap[key]) {
       variantMap[key] = {
         variant_id: catalogId("VAR", [product.collection, product.brand, product.model, product.storage]),
+        model_id: cleanString(product.model_id, 80) || catalogId("MDL", [product.collection, product.brand, product.model]),
         collection: cleanString(product.collection, 180),
         brand: cleanString(product.brand, 120),
         model: cleanString(product.model, 160),
         storage: cleanString(product.storage, 80),
+        memory_label: cleanString(product.memory_label || product.storage, 80),
         colors: [],
         sku_count: 0
       };
@@ -6577,6 +7036,11 @@ function listProductVariants(params) {
     variantMap[key].sku_count += 1;
     variantMap[key].colors.push({
       color: cleanString(product.color, 120),
+      color_name: cleanString(product.color, 120),
+      color_code: cleanString(product.color_code, 80),
+      color_hex: cleanString(product.color_hex, 40),
+      image_url: cleanString(product.image_url, 500),
+      asset_key: cleanString(product.asset_key, 180),
       product_id: cleanString(product.product_id, 80),
       sku: cleanString(product.sku, 120),
       status: normalizeSalesStatus(product.status || "ACTIVE"),
@@ -6593,19 +7057,221 @@ function listProductVariants(params) {
   return { ok: true, total: variants.length, variants: variants };
 }
 
+function getCollection(params) {
+  const row = findCollectionRow(params || {});
+  if (!row) return { ok: false, message: "Collection not found" };
+  return { ok: true, collection: publicCollection(row) };
+}
+
+function getProductModel(params) {
+  const row = findModelRow(params || {});
+  if (!row) return { ok: false, message: "Product model not found" };
+  return { ok: true, model: publicProductModel(row) };
+}
+
+function createCollection(body) {
+  return withCatalogLock(function () {
+    const admin = requireAdminActor(body || {});
+    if (!admin.ok) return admin;
+    ensureSalesSheets();
+    const name = safeSheetText(body.collection_name || body.collection || body.name, 180);
+    if (!name) return { ok: false, message: "Collection name is required" };
+    const duplicate = findCollectionRow({ collection_name: name });
+    if (duplicate) return { ok: false, message: "Collection already exists", collection: publicCollection(duplicate) };
+    const now = new Date();
+    const row = {
+      collection_id: makeId("COL"),
+      collection_name: name,
+      short_name: safeSheetText(body.short_name || name, 80),
+      brand: safeSheetText(body.brand, 120),
+      series: safeSheetText(body.series, 160),
+      description: safeSheetText(body.description, 500),
+      theme_key: normalizeThemeKey(body.theme_key || name),
+      image_url: safeSheetText(body.image_url, 500),
+      asset_key: safeSheetText(body.asset_key, 180),
+      display_order: catalogDisplayOrder(body.display_order),
+      status: normalizeCatalogStatus(body.status || "ACTIVE"),
+      created_at: now,
+      updated_at: now,
+      created_by: admin.actor_id,
+      updated_by: admin.actor_id,
+      is_test: isQaRecord(body || {}),
+      qa_batch: qaBatchFor(body || {})
+    };
+    appendObject(SHEET_NAMES.productCollections, row);
+    writeCatalogAudit("createCollection", "COLLECTION", row.collection_id, admin, null, publicCollection(row), body.reason);
+    return { ok: true, collection: publicCollection(row) };
+  });
+}
+
+function updateCollection(body) {
+  return withCatalogLock(function () {
+    const admin = requireAdminActor(body || {});
+    if (!admin.ok) return admin;
+    ensureSalesSheets();
+    const row = findCollectionRow(body || {});
+    if (!row) return { ok: false, message: "Collection not found" };
+    const beforeValue = publicCollection(row);
+    const updates = {
+      collection_name: safeSheetText(body.collection_name || body.collection || row.collection_name, 180),
+      short_name: safeSheetText(body.short_name || row.short_name, 80),
+      brand: safeSheetText(body.brand || row.brand, 120),
+      series: safeSheetText(body.series || row.series, 160),
+      description: safeSheetText(body.description || row.description, 500),
+      theme_key: normalizeThemeKey(body.theme_key || row.theme_key),
+      image_url: safeSheetText(body.image_url || row.image_url, 500),
+      asset_key: safeSheetText(body.asset_key || row.asset_key, 180),
+      display_order: catalogDisplayOrder(body.display_order !== undefined ? body.display_order : row.display_order),
+      status: normalizeCatalogStatus(body.status || row.status),
+      updated_at: new Date(),
+      updated_by: admin.actor_id
+    };
+    const renamed = cleanString(updates.collection_name, 180) !== cleanString(row.collection_name, 180);
+    if (renamed && findCollectionRow({ collection_name: updates.collection_name })) {
+      return { ok: false, message: "Collection name already exists" };
+    }
+    updateRowFields(SHEET_NAMES.productCollections, row._row, updates);
+    if (renamed) {
+      modelRows().forEach(function (model) {
+        if (cleanString(model.collection_name, 180).toLowerCase() === cleanString(row.collection_name, 180).toLowerCase()) {
+          updateRowFields(SHEET_NAMES.productModels, model._row, {
+            collection_name: updates.collection_name,
+            collection_id: updates.collection_id || row.collection_id,
+            updated_at: new Date(),
+            updated_by: admin.actor_id
+          });
+        }
+      });
+      sheetToObjects(SHEET_NAMES.products).forEach(function (product) {
+        if (cleanString(product.collection, 180).toLowerCase() === cleanString(row.collection_name, 180).toLowerCase()) {
+          updateRowFields(SHEET_NAMES.products, product._row, {
+            collection: updates.collection_name,
+            updated_at: new Date(),
+            updated_by: admin.actor_id
+          });
+        }
+      });
+    }
+    const updated = Object.assign({}, row, updates);
+    writeCatalogAudit("updateCollection", "COLLECTION", row.collection_id, admin, beforeValue, publicCollection(updated), body.reason);
+    return { ok: true, collection: publicCollection(updated) };
+  });
+}
+
+function setCollectionStatus(body) {
+  body = Object.assign({}, body || {}, { status: body && body.status });
+  return updateCollection(body);
+}
+
+function createProductModel(body) {
+  return withCatalogLock(function () {
+    const admin = requireAdminActor(body || {});
+    if (!admin.ok) return admin;
+    ensureSalesSheets();
+    const collection = findCollectionRow(body || {});
+    const collectionName = safeSheetText((collection && collection.collection_name) || body.collection_name || body.collection, 180);
+    const brand = safeSheetText(body.brand || (collection && collection.brand), 120);
+    const modelName = safeSheetText(body.model_name || body.model, 160);
+    if (!collectionName || !brand || !modelName) return { ok: false, message: "Collection, brand and model are required" };
+    const duplicate = findModelRow({ collection: collectionName, brand: brand, model: modelName });
+    if (duplicate) return { ok: false, message: "Product model already exists", model: publicProductModel(duplicate) };
+    const now = new Date();
+    const row = {
+      model_id: makeId("MDL"),
+      collection_id: collection ? collection.collection_id : catalogId("COL", [collectionName]),
+      collection_name: collectionName,
+      brand: brand,
+      series: safeSheetText(body.series || (collection && collection.series), 160),
+      model_name: modelName,
+      model_code: safeSheetText(body.model_code || body.modelCode, 80),
+      description: safeSheetText(body.description, 500),
+      image_url: safeSheetText(body.image_url, 500),
+      asset_key: safeSheetText(body.asset_key, 180),
+      display_order: catalogDisplayOrder(body.display_order),
+      status: normalizeCatalogStatus(body.status || "ACTIVE"),
+      created_at: now,
+      updated_at: now,
+      created_by: admin.actor_id,
+      updated_by: admin.actor_id,
+      is_test: isQaRecord(body || {}),
+      qa_batch: qaBatchFor(body || {})
+    };
+    appendObject(SHEET_NAMES.productModels, row);
+    writeCatalogAudit("createProductModel", "MODEL", row.model_id, admin, null, publicProductModel(row), body.reason);
+    return { ok: true, model: publicProductModel(row) };
+  });
+}
+
+function updateProductModel(body) {
+  return withCatalogLock(function () {
+    const admin = requireAdminActor(body || {});
+    if (!admin.ok) return admin;
+    ensureSalesSheets();
+    const row = findModelRow(body || {});
+    if (!row) return { ok: false, message: "Product model not found" };
+    const collection = findCollectionRow(body || {}) || findCollectionRow({ collection_id: row.collection_id, collection_name: row.collection_name });
+    const beforeValue = publicProductModel(row);
+    const updates = {
+      collection_id: collection ? collection.collection_id : cleanString(row.collection_id, 80),
+      collection_name: safeSheetText((collection && collection.collection_name) || body.collection_name || body.collection || row.collection_name, 180),
+      brand: safeSheetText(body.brand || row.brand, 120),
+      series: safeSheetText(body.series || row.series, 160),
+      model_name: safeSheetText(body.model_name || body.model || row.model_name, 160),
+      model_code: safeSheetText(body.model_code || body.modelCode || row.model_code, 80),
+      description: safeSheetText(body.description || row.description, 500),
+      image_url: safeSheetText(body.image_url || row.image_url, 500),
+      asset_key: safeSheetText(body.asset_key || row.asset_key, 180),
+      display_order: catalogDisplayOrder(body.display_order !== undefined ? body.display_order : row.display_order),
+      status: normalizeCatalogStatus(body.status || row.status),
+      updated_at: new Date(),
+      updated_by: admin.actor_id
+    };
+    const renamed = catalogKey([updates.collection_name, updates.brand, updates.model_name]) !== catalogKey([row.collection_name, row.brand, row.model_name]);
+    if (renamed && findModelRow({ collection: updates.collection_name, brand: updates.brand, model: updates.model_name })) {
+      return { ok: false, message: "Product model already exists" };
+    }
+    updateRowFields(SHEET_NAMES.productModels, row._row, updates);
+    if (renamed) {
+      sheetToObjects(SHEET_NAMES.products).forEach(function (product) {
+        const sameModelId = cleanString(product.model_id, 80) && cleanString(product.model_id, 80) === cleanString(row.model_id, 80);
+        const sameNames = catalogKey([product.collection, product.brand, product.model]) === catalogKey([row.collection_name, row.brand, row.model_name]);
+        if (sameModelId || sameNames) {
+          updateRowFields(SHEET_NAMES.products, product._row, {
+            collection: updates.collection_name,
+            brand: updates.brand,
+            model_id: row.model_id,
+            model: updates.model_name,
+            updated_at: new Date(),
+            updated_by: admin.actor_id
+          });
+        }
+      });
+    }
+    const updated = Object.assign({}, row, updates);
+    writeCatalogAudit("updateProductModel", "MODEL", row.model_id, admin, beforeValue, publicProductModel(updated), body.reason);
+    return { ok: true, model: publicProductModel(updated) };
+  });
+}
+
+function setProductModelStatus(body) {
+  body = Object.assign({}, body || {}, { status: body && body.status });
+  return updateProductModel(body);
+}
+
 function resolveProductConfiguration(params) {
   const quantityResult = productQuantity(params || {});
   if (!quantityResult.ok) return quantityResult;
   const resolved = resolveProductSelection(params || {}, true);
   if (!resolved.ok) return resolved;
-  const pricing = activePricingForProduct(resolved.product);
+  const allocation = activePricingAllocationForProduct(resolved.product);
+  const legacyPricing = activePricingForProduct(resolved.product);
   return {
     ok: true,
     configuration: productDisplay(resolved.product),
     product: productDisplay(resolved.product),
     availability: normalizeSalesStatus(resolved.product.status || "ACTIVE") === "ACTIVE" ? "AVAILABLE" : "INACTIVE",
-    pricing_eligible: Boolean(pricing),
-    pricing_version: pricingVersion(pricing),
+    pricing_eligible: Boolean(allocation),
+    pricing_version: allocation ? cleanString(allocation.pricing_version_id, 80) : pricingVersion(legacyPricing),
     quantity: quantityResult.quantity
   };
 }
@@ -6623,8 +7289,10 @@ function listProducts(params) {
 
   const products = sheetToObjects(SHEET_NAMES.products)
     .filter(function (product) {
-      const normalizedStatus = normalizeSalesStatus(product.status || "ACTIVE");
+      const normalizedStatus = normalizeCatalogStatus(product.status || "ACTIVE");
       if (!includeInactive && normalizedStatus !== "ACTIVE") return false;
+      if (!includeInactive && !isProductVisibleByParentStatus(product, collectionStatusIndex(), modelStatusIndex())) return false;
+      if (!includeInactive && !activePricingAllocationForProduct(product)) return false;
       if (status && normalizedStatus !== status) return false;
       if (!query) return true;
       return [
@@ -6669,6 +7337,7 @@ function getProduct(params) {
 }
 
 function createProduct(body) {
+  return withCatalogLock(function () {
   ensureSalesSheets();
   const admin = requireAdminActor(body);
   if (!admin.ok) return admin;
@@ -6683,18 +7352,31 @@ function createProduct(body) {
     return { ok: false, message: "SKU already exists", product: publicProduct(duplicate) };
   }
 
+  const modelRow = findModelRow(body || {});
+  const collectionRow = findCollectionRow(body || {}) || (modelRow ? findCollectionRow({ collection_id: modelRow.collection_id, collection_name: modelRow.collection_name }) : null);
   const now = new Date();
   const product = {
     product_id: makeId("PRD"),
-    collection: safeSheetText(body.collection, 180),
-    brand: safeSheetText(body.brand, 120),
-    model: safeSheetText(body.model, 160),
-    storage: safeSheetText(body.storage, 80),
-    color: safeSheetText(body.color, 120),
+    collection: safeSheetText((collectionRow && collectionRow.collection_name) || (modelRow && modelRow.collection_name) || body.collection_name || body.collection, 180),
+    brand: safeSheetText(body.brand || (modelRow && modelRow.brand) || (collectionRow && collectionRow.brand), 120),
+    model_id: cleanString((modelRow && modelRow.model_id) || body.model_id || body.product_model_id, 80),
+    model: safeSheetText((modelRow && modelRow.model_name) || body.model_name || body.model, 160),
+    storage: safeSheetText(body.storage || body.memory_label, 80),
+    memory_label: safeSheetText(body.memory_label || body.storage, 80),
+    color: safeSheetText(body.color_name || body.color, 120),
+    color_code: safeSheetText(body.color_code, 80),
+    color_hex: safeSheetText(body.color_hex, 40),
     sku: sku,
-    status: normalizeSalesStatus(body.status || "ACTIVE") === "INACTIVE" ? "INACTIVE" : "ACTIVE",
+    image_url: safeSheetText(body.image_url, 500),
+    asset_key: safeSheetText(body.asset_key, 180),
+    display_order: catalogDisplayOrder(body.display_order),
+    status: normalizeCatalogStatus(body.status || "ACTIVE"),
     created_at: now,
-    updated_at: now
+    updated_at: now,
+    created_by: admin.actor_id,
+    updated_by: admin.actor_id,
+    is_test: isQaRecord(body || {}),
+    qa_batch: qaBatchFor(body || {})
   };
 
   if (!product.collection || !product.brand || !product.model || !product.storage || !product.color) {
@@ -6707,27 +7389,41 @@ function createProduct(body) {
     product_id: product.product_id,
     sku: product.sku
   });
+  writeCatalogAudit("createProductVariant", "VARIANT", product.product_id, admin, null, publicProduct(product), body.reason);
 
   return { ok: true, product: publicProduct(product) };
+  });
 }
 
 function updateProduct(body) {
+  return withCatalogLock(function () {
   ensureSalesSheets();
   const admin = requireAdminActor(body);
   if (!admin.ok) return admin;
 
   const product = findProductById(body && body.product_id);
   if (!product) return { ok: false, message: "Product not found" };
+  const beforeValue = publicProduct(product);
+  const modelRow = findModelRow(body || {});
+  const collectionRow = findCollectionRow(body || {}) || (modelRow ? findCollectionRow({ collection_id: modelRow.collection_id, collection_name: modelRow.collection_name }) : null);
 
   const updates = {
-    collection: safeSheetText(body.collection || product.collection, 180),
-    brand: safeSheetText(body.brand || product.brand, 120),
-    model: safeSheetText(body.model || product.model, 160),
-    storage: safeSheetText(body.storage || product.storage, 80),
-    color: safeSheetText(body.color || product.color, 120),
+    collection: safeSheetText((collectionRow && collectionRow.collection_name) || (modelRow && modelRow.collection_name) || body.collection_name || body.collection || product.collection, 180),
+    brand: safeSheetText(body.brand || (modelRow && modelRow.brand) || (collectionRow && collectionRow.brand) || product.brand, 120),
+    model_id: cleanString((modelRow && modelRow.model_id) || body.model_id || body.product_model_id || product.model_id, 80),
+    model: safeSheetText((modelRow && modelRow.model_name) || body.model_name || body.model || product.model, 160),
+    storage: safeSheetText(body.storage || body.memory_label || product.storage, 80),
+    memory_label: safeSheetText(body.memory_label || body.storage || product.memory_label || product.storage, 80),
+    color: safeSheetText(body.color_name || body.color || product.color, 120),
+    color_code: safeSheetText(body.color_code || product.color_code, 80),
+    color_hex: safeSheetText(body.color_hex || product.color_hex, 40),
     sku: safeSheetText(body.sku || product.sku, 120),
-    status: normalizeSalesStatus(body.status || product.status || "ACTIVE") === "INACTIVE" ? "INACTIVE" : "ACTIVE",
-    updated_at: new Date()
+    image_url: safeSheetText(body.image_url || product.image_url, 500),
+    asset_key: safeSheetText(body.asset_key || product.asset_key, 180),
+    display_order: catalogDisplayOrder(body.display_order !== undefined ? body.display_order : product.display_order),
+    status: normalizeCatalogStatus(body.status || product.status || "ACTIVE"),
+    updated_at: new Date(),
+    updated_by: admin.actor_id
   };
 
   const duplicate = sheetToObjects(SHEET_NAMES.products).find(function (item) {
@@ -6744,8 +7440,10 @@ function updateProduct(body) {
     actor_id: admin.actor_id,
     product_id: product.product_id
   });
+  writeCatalogAudit("updateProductVariant", "VARIANT", product.product_id, admin, beforeValue, publicProduct(Object.assign({}, product, updates)), body.reason);
 
   return { ok: true, product: publicProduct(Object.assign({}, product, updates)) };
+  });
 }
 
 function deleteProduct(body) {
@@ -6756,6 +7454,18 @@ function deleteProduct(body) {
     result.message = "Product deactivated";
   }
   return result;
+}
+
+function createProductVariant(body) {
+  return createProduct(body || {});
+}
+
+function updateProductVariant(body) {
+  return updateProduct(body || {});
+}
+
+function setProductVariantStatus(body) {
+  return updateProduct(Object.assign({}, body || {}, { status: body && body.status }));
 }
 
 function listPricing(params) {
@@ -6834,16 +7544,43 @@ function runProductIntegrityCheck(body) {
 
   const products = sheetToObjects(SHEET_NAMES.products);
   const pricingRows = sheetToObjects(SHEET_NAMES.productPricing);
+  const allocationRows = sheetToObjects(SHEET_NAMES.pricingAllocationVersions);
+  const collections = collectionRows();
+  const models = modelRows();
   const quotations = sheetToObjects(SHEET_NAMES.quotations);
   const issues = [];
   const byProductId = {};
   const bySku = {};
   const byConfiguration = {};
+  const collectionByName = {};
+  const modelByKey = {};
+
+  collections.forEach(function (collection) {
+    const item = publicCollection(collection);
+    if (!item.collection_id) issues.push({ severity: "HIGH", type: "MISSING_COLLECTION_ID", collection: item.collection });
+    if (!item.collection) issues.push({ severity: "HIGH", type: "MISSING_COLLECTION_NAME", collection_id: item.collection_id });
+    collectionByName[item.collection.toLowerCase()] = item;
+  });
+
+  models.forEach(function (model) {
+    const item = publicProductModel(model);
+    const key = catalogKey([item.collection, item.brand, item.model]);
+    if (!item.model_id) issues.push({ severity: "HIGH", type: "MISSING_MODEL_ID", model: item.model });
+    if (!item.collection) issues.push({ severity: "HIGH", type: "MODEL_WITHOUT_COLLECTION", model_id: item.model_id });
+    if (item.collection && collectionByName[item.collection.toLowerCase()] && collectionByName[item.collection.toLowerCase()].status === "ARCHIVED" && item.status === "ACTIVE") {
+      issues.push({ severity: "HIGH", type: "ARCHIVED_COLLECTION_WITH_ACTIVE_MODEL", collection_id: item.collection_id, model_id: item.model_id });
+    }
+    if (key) modelByKey[key] = item;
+  });
 
   products.forEach(function (product) {
     const productId = cleanString(product.product_id, 80);
     const sku = cleanString(product.sku, 120);
     const configKey = catalogKey([product.collection, product.brand, product.model, product.storage, product.color]);
+    const statusValue = normalizeCatalogStatus(product.status || "ACTIVE");
+    const modelKey = catalogKey([product.collection, product.brand, product.model]);
+    const collectionMeta = collectionByName[cleanString(product.collection, 180).toLowerCase()];
+    const modelMeta = modelByKey[modelKey];
 
     if (!productId) issues.push({ severity: "HIGH", type: "MISSING_PRODUCT_ID", sku: sku });
     if (!sku) issues.push({ severity: "HIGH", type: "MISSING_SKU", product_id: productId });
@@ -6851,6 +7588,9 @@ function runProductIntegrityCheck(body) {
     if (!cleanString(product.model, 160)) issues.push({ severity: "MEDIUM", type: "MISSING_MODEL", product_id: productId, sku: sku });
     if (!cleanString(product.storage, 80)) issues.push({ severity: "MEDIUM", type: "MISSING_VARIANT", product_id: productId, sku: sku });
     if (!cleanString(product.color, 120)) issues.push({ severity: "LOW", type: "MISSING_COLOR", product_id: productId, sku: sku });
+    if (statusValue === "ACTIVE" && !activePricingAllocationForProduct(product)) issues.push({ severity: "HIGH", type: "ACTIVE_VARIANT_WITHOUT_ACTIVE_PRICING", product_id: productId, sku: sku });
+    if (statusValue === "ACTIVE" && collectionMeta && collectionMeta.status === "ARCHIVED") issues.push({ severity: "HIGH", type: "ARCHIVED_COLLECTION_WITH_ACTIVE_VARIANT", product_id: productId, sku: sku });
+    if (statusValue === "ACTIVE" && modelMeta && modelMeta.status === "ARCHIVED") issues.push({ severity: "HIGH", type: "ARCHIVED_MODEL_WITH_ACTIVE_VARIANT", product_id: productId, sku: sku });
 
     if (productId) {
       byProductId[productId] = (byProductId[productId] || 0) + 1;
@@ -6884,6 +7624,26 @@ function runProductIntegrityCheck(body) {
     if (!isFinite(serviceFee) || serviceFee < 0) issues.push({ severity: "HIGH", type: "INVALID_SERVICE_FEE", pricing_id: pricingId });
     if (!isFinite(discount) || discount < 0) issues.push({ severity: "MEDIUM", type: "INVALID_DISCOUNT", pricing_id: pricingId });
     if (Number(pricing.vat_rate || 0) < 0 || Number(pricing.vat_rate || 0) > 1) issues.push({ severity: "HIGH", type: "INVALID_VAT_RATE", pricing_id: pricingId });
+  });
+
+  allocationRows.forEach(function (allocation) {
+    if (normalizeCatalogStatus(allocation.status || "") !== "ACTIVE") return;
+    const product = findProductById(allocation.product_id) || findProductForPricing({ sku: allocation.sku, include_inactive: true });
+    if (!product) issues.push({ severity: "HIGH", type: "ACTIVE_PRICING_WITHOUT_VARIANT", pricing_version_id: allocation.pricing_version_id, sku: allocation.sku });
+    pricingAllocationIssues(allocation).forEach(function (issue) {
+      issues.push(Object.assign({ severity: "HIGH", pricing_version_id: allocation.pricing_version_id, sku: allocation.sku }, issue));
+    });
+  });
+
+  models.forEach(function (model) {
+    const item = publicProductModel(model);
+    const hasActiveVariant = products.some(function (product) {
+      return normalizeCatalogStatus(product.status || "ACTIVE") === "ACTIVE" &&
+        catalogKey([product.collection, product.brand, product.model]) === catalogKey([item.collection, item.brand, item.model]);
+    });
+    if (item.status === "ACTIVE" && !hasActiveVariant) {
+      issues.push({ severity: "MEDIUM", type: "ACTIVE_MODEL_WITHOUT_ACTIVE_VARIANT", model_id: item.model_id, model: item.model });
+    }
   });
 
   quotations.forEach(function (quotation) {
@@ -9643,6 +10403,7 @@ function runPricingIntegrityCheck(body) {
   if (!admin.ok) return admin;
   ensureSalesSheets();
   const issues = [];
+  const activeKeys = {};
   sheetToObjects(SHEET_NAMES.products).forEach(function (product) {
     if (normalizeSalesStatus(product.status || "ACTIVE") !== "ACTIVE") return;
     if (!activePricingAllocationForProduct(product)) {
@@ -9650,9 +10411,16 @@ function runPricingIntegrityCheck(body) {
     }
   });
   sheetToObjects(SHEET_NAMES.pricingAllocationVersions).forEach(function (row) {
+    if (normalizeSalesStatus(row.status || "") === "ACTIVE") {
+      const key = cleanString(row.product_id, 80) || cleanString(row.sku, 120).toLowerCase();
+      activeKeys[key] = (activeKeys[key] || 0) + 1;
+    }
     pricingAllocationIssues(row).forEach(function (issue) {
       issues.push(Object.assign({ severity: "HIGH", pricing_version_id: row.pricing_version_id, sku: row.sku }, issue));
     });
+  });
+  Object.keys(activeKeys).forEach(function (key) {
+    if (activeKeys[key] > 1) issues.push({ severity: "HIGH", type: "DUPLICATE_ACTIVE_PRICING_VERSION", key: key, count: activeKeys[key] });
   });
   return { ok: true, total_issues: issues.length, critical_or_high: issues.filter(function (i) { return i.severity === "HIGH" || i.severity === "CRITICAL"; }).length, issues: issues };
 }

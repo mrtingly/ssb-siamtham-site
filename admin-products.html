@@ -1,42 +1,245 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Product & Pricing Allocation | SSBMS Admin</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Product Management Console | SSBMS Admin</title>
 <link rel="icon" href="images/logo.png">
 <link rel="stylesheet" href="css/sbos-typography.css">
 <style>
-body{margin:0;background:#f5f7fa;color:#1d1d1f}*{box-sizing:border-box}a{text-decoration:none;color:inherit}button,input,select,textarea{font:inherit}.shell{display:grid;grid-template-columns:250px 1fr;min-height:100vh}.side{padding:22px 16px;background:#071a2f;color:#fff}.logo{display:flex;gap:11px;align-items:center;padding:0 7px 24px}.logo img{width:42px}.logo small{display:block;color:#9fb1c6}.menu{display:grid;gap:5px}.menu a{padding:12px 13px;border-radius:13px;color:#c7d2df;font-size:.78rem;font-weight:700}.menu a.active,.menu a:hover{background:rgba(255,255,255,.1);color:#fff}.main{min-width:0}.top{min-height:68px;background:#fff;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 26px}.content{padding:26px;max-width:1580px;margin:auto}.hero{padding:25px;border-radius:24px;background:linear-gradient(135deg,#05284d,#0b72ce);color:#fff}.hero h1{margin:0;font-size:clamp(2rem,4.5vw,3.6rem)}.hero p{margin:10px 0 0;color:#dbeafe;line-height:1.65}.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(420px,.95fr);gap:16px;margin-top:16px;align-items:start}.panel{background:#fff;border:1px solid #e5e7eb;border-radius:22px;overflow:hidden;box-shadow:0 18px 48px rgba(18,39,66,.07)}.panel h2{margin:0;padding:16px;border-bottom:1px solid #edf0f3;font-size:1rem}.form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:16px;border-bottom:1px solid #edf0f3}.form label{display:grid;gap:6px;font-size:.72rem;font-weight:800;color:#4f5b67}.form input,.form select,.form textarea{min-width:0;height:42px;border:1px solid #d8dde5;border-radius:12px;padding:0 11px;background:#fff}.form textarea{height:72px;padding-top:10px;resize:vertical}.wide{grid-column:1/-1}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:0;border-radius:999px;padding:10px 13px;font-size:.7rem;font-weight:850;cursor:pointer}.primary{background:#0672ce;color:#fff}.muted{background:#eef2f6;color:#44515f}.danger{background:#fff0ef;color:#b42318}.success{background:#eaf8f1;color:#147a46}.toolbar{padding:14px;display:flex;gap:8px;border-bottom:1px solid #edf0f3;flex-wrap:wrap}.toolbar input{height:42px;border:1px solid #d8dde5;border-radius:12px;padding:0 11px;flex:1;min-width:220px}.list{display:grid}.item{display:grid;grid-template-columns:1.1fr .8fr .8fr .8fr;gap:12px;padding:14px;border-bottom:1px solid #edf0f3;font-size:.74rem;align-items:center}.item b{display:block}.item small{display:block;color:#6b7280;margin-top:4px}.badge{display:inline-flex;padding:6px 9px;border-radius:999px;background:#eaf8f1;color:#147a46;font-size:.64rem;font-weight:800}.inactive{background:#fff0ef;color:#b42318}.notice{padding:12px;margin:16px;border-radius:14px;background:#fff7e8;color:#77500d;font-size:.74rem;line-height:1.55}.totals{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:16px}.total-card{border:1px solid #e5e7eb;border-radius:16px;padding:13px;background:#fbfdff}.total-card span{display:block;color:#667085;font-size:.68rem}.total-card b{display:block;margin-top:4px}.toast{position:fixed;right:18px;bottom:18px;z-index:100;padding:13px 15px;border-radius:14px;background:#071a2f;color:#fff;display:none}.toast.show{display:block}.toast.err{background:#9f1d1d}@media(max-width:1100px){.shell{grid-template-columns:1fr}.side{display:none}.grid{grid-template-columns:1fr}.item{grid-template-columns:1fr 1fr}}@media(max-width:640px){.content{padding:12px}.form,.item,.totals{grid-template-columns:1fr}.wide{grid-column:auto}.toolbar input{min-width:0;width:100%}.top{align-items:flex-start;flex-direction:column}}
+:root{--bg:#f5f7fb;--card:#fff;--ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--blue:#0672ce;--blue2:#004f9f;--green:#147a46;--red:#b42318;--amber:#9a6400;--shadow:0 22px 70px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html,body{max-width:100%;overflow-x:hidden}body{margin:0;background:var(--bg);color:var(--ink)}a{text-decoration:none;color:inherit}button,input,select,textarea{font:inherit}button{cursor:pointer}
+.shell{display:grid;grid-template-columns:252px minmax(0,1fr);min-height:100vh}.side{background:#071a2f;color:#fff;padding:22px 16px}.logo{display:flex;gap:11px;align-items:center;padding:0 7px 24px}.logo img{width:42px;height:42px;object-fit:contain}.logo small{display:block;color:#9fb1c6}.menu{display:grid;gap:5px}.menu a{padding:12px 13px;border-radius:13px;color:#c7d2df;font-size:.78rem;font-weight:750}.menu a.active,.menu a:hover{background:rgba(255,255,255,.1);color:#fff}
+.main{min-width:0}.top{min-height:68px;background:rgba(255,255,255,.9);border-bottom:1px solid var(--line);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 26px;position:sticky;top:0;z-index:20}.top small{display:block;color:var(--muted);margin-top:3px}.top-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.content{padding:26px;max-width:1580px;margin:auto}.hero{padding:28px;border-radius:28px;background:radial-gradient(circle at 80% 20%,rgba(6,114,206,.2),transparent 32%),linear-gradient(135deg,#05284d,#0b72ce);color:#fff;box-shadow:var(--shadow)}.hero h1{margin:0;font-size:clamp(2rem,4vw,3.7rem);line-height:1.05}.hero p{margin:10px 0 0;color:#dbeafe;line-height:1.65;max-width:980px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.tab{border:1px solid var(--line);border-radius:999px;background:#fff;color:#334155;padding:10px 14px;font-size:.74rem;font-weight:850}.tab.active{background:var(--blue);border-color:var(--blue);color:#fff}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(390px,.72fr);gap:16px;align-items:start}.panel{background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);overflow:hidden}.panel-head{padding:16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;align-items:center}.panel-head b{display:block}.panel-head span{display:block;color:var(--muted);font-size:.72rem;margin-top:4px}.toolbar{display:flex;gap:8px;flex-wrap:wrap;padding:14px;border-bottom:1px solid var(--line)}.toolbar input,.toolbar select{height:42px;border:1px solid #d8dde5;border-radius:12px;padding:0 11px;background:#fff;min-width:160px}.toolbar input{flex:1;min-width:220px}
+.list{display:grid}.group{border-bottom:1px solid var(--line)}.group-title{padding:12px 14px;background:#f8fafc;color:#334155;font-size:.72rem;font-weight:900;text-transform:uppercase}.row{display:grid;grid-template-columns:1.15fr .78fr .78fr .7fr .7fr;gap:12px;align-items:center;padding:14px;border-top:1px solid #edf2f7;font-size:.74rem}.row:hover{background:#fbfdff}.row b{display:block}.row small{display:block;color:var(--muted);margin-top:4px}.badge{display:inline-flex;align-items:center;width:max-content;max-width:100%;padding:6px 9px;border-radius:999px;background:#eaf8f1;color:var(--green);font-size:.65rem;font-weight:900}.badge.inactive{background:#fff7e8;color:var(--amber)}.badge.archived{background:#fff0ef;color:var(--red)}
+.form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:16px}.form label{display:grid;gap:6px;font-size:.72rem;font-weight:850;color:#44515f}.form input,.form select,.form textarea{min-width:0;height:42px;border:1px solid #d8dde5;border-radius:12px;padding:0 11px;background:#fff}.form textarea{height:74px;padding-top:10px;resize:vertical}.wide{grid-column:1/-1}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:0;border-radius:999px;padding:10px 13px;font-size:.7rem;font-weight:900}.primary{background:var(--blue);color:#fff}.muted{background:#eef2f6;color:#44515f}.danger{background:#fff0ef;color:var(--red)}.success{background:#eaf8f1;color:var(--green)}.btn:disabled{opacity:.55;cursor:not-allowed}
+.preview{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 16px 16px}.metric{border:1px solid var(--line);border-radius:16px;padding:13px;background:#fbfdff}.metric span{display:block;color:var(--muted);font-size:.68rem}.metric b{display:block;margin-top:4px}.notice{margin:16px;padding:13px;border-radius:14px;background:#fff7e8;color:#77500d;font-size:.74rem;line-height:1.55}.notice.err{background:#fff0ef;color:var(--red)}.notice.ok{background:#edf8f1;color:var(--green)}.hidden{display:none!important}.toast{position:fixed;right:18px;bottom:18px;z-index:100;padding:13px 15px;border-radius:14px;background:#071a2f;color:#fff;display:none;box-shadow:0 18px 44px rgba(2,6,23,.22)}.toast.show{display:block}.toast.err{background:#9f1d1d}.toast.ok{background:#14532d}
+@media(max-width:1120px){.shell{grid-template-columns:1fr}.side{display:none}.layout{grid-template-columns:1fr}.row{grid-template-columns:1fr 1fr}.top{align-items:flex-start;flex-direction:column}}@media(max-width:680px){.content{padding:12px}.hero{padding:22px}.form,.preview,.row{grid-template-columns:1fr}.wide{grid-column:auto}.toolbar input,.toolbar select{min-width:0;width:100%}.panel{border-radius:18px}.top{padding:12px}.actions .btn{min-height:42px;flex:1}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
 </style>
 </head>
-<body><div class="shell"><aside class="side"><div class="logo"><img src="images/logo.png" alt="SSBMS"><div><b>SSBMS Admin</b><small>บริษัท สยามทำ จำกัด</small></div></div><nav class="menu"><a href="admin-dashboard.html">ภาพรวม</a><a class="active" href="admin-products.html">สินค้าและราคา</a><a href="admin-quotations.html">ใบเสนอราคา</a><a href="admin-orders.html">คำสั่งซื้อ / ชำระเงิน</a><a href="admin-finance.html">การเงิน</a></nav></aside><main class="main"><header class="top"><div><b>Product & Pricing Allocation</b><small style="display:block;color:#6b7280">Backend-controlled SSBMS bundle pricing</small></div><a href="admin-orders.html">Order Center</a></header><div class="content"><section class="hero"><h1>จัดการชุดระบบ SSBMS และ Pricing Allocation</h1><p>ราคาขายรวม VAT มาจาก allocation version ต่อ SKU เท่านั้น ไม่ใช้สูตร device + fixed service fee เดิม</p></section><section class="grid"><div class="panel"><h2>Product Catalog</h2><div class="toolbar"><input id="search" placeholder="ค้นหา SKU, รุ่น, collection"><button class="btn muted" id="refresh" type="button">Refresh</button><button class="btn muted" id="integrity" type="button">Integrity Check</button></div><div id="models" class="notice">กำลังโหลด Model grouping...</div><div id="products" class="list"></div></div><aside class="panel"><h2>Product Form</h2><div class="form"><label class="wide">Collection<input id="collection" placeholder="Silver Galaxy A Series Collection"></label><label>Brand<input id="brand" placeholder="Samsung"></label><label>Model<input id="model" placeholder="Galaxy A17 5G"></label><label>Storage<input id="storage" placeholder="256GB"></label><label>Color<input id="color" placeholder="Black"></label><label>SKU<input id="sku" placeholder="SSB-SIL-A17-256-BLK"></label><label>Status<select id="status"><option value="ACTIVE">Active</option><option value="INACTIVE">Inactive</option></select></label><div class="actions wide"><button class="btn primary" id="saveProduct" type="button">Save Product</button><button class="btn muted" id="clearForm" type="button">Clear</button><button class="btn danger" id="deleteProduct" type="button">Deactivate</button></div></div><h2>Pricing Allocation Version</h2><div class="form" id="pricingForm"><label>ราคาสินค้า<input data-component="device_price" type="number" min="0" step="1" value="0"></label><label>ค่าตั้งค่า<input data-component="setup_fee" type="number" min="0" step="1" value="0"></label><label>กล่อง / Safety Book<input data-component="safety_book_cost" type="number" min="0" step="1" value="0"></label><label>สแกนนิ้ว<input data-component="fingerprint_cost" type="number" min="0" step="1" value="0"></label><label>แผ่นกันสัญญาณ<input data-component="signal_shield_cost" type="number" min="0" step="1" value="0"></label><label>ค่าประกอบ<input data-component="assembly_cost" type="number" min="0" step="1" value="0"></label><label>ซิมรายปี<input data-component="annual_sim_cost" type="number" min="0" step="1" value="0"></label><label>ค่าดำเนินการ<input data-component="operation_cost" type="number" min="0" step="1" value="0"></label><label>SPC<input data-component="spc_cost" type="number" min="0" step="1" value="0"></label><label>คอมมิชชั่นกลาง<input data-component="central_commission_pool" type="number" min="0" step="1" value="0"></label><label>ค่าบริษัท<input data-component="company_revenue_allocation" type="number" min="0" step="1" value="0"></label><label>VAT Rate<input id="vatRate" type="number" min="0" max="1" step="0.01" value="0.07"></label><label class="wide">Reason<textarea id="changeReason" placeholder="เหตุผลการเปลี่ยนราคา"></textarea></label><div class="actions wide"><button class="btn primary" id="saveAllocation" type="button">Save Draft Version</button><button class="btn success" id="activateAllocation" type="button">Activate Version</button><button class="btn muted" id="validateAllocation" type="button">Validate</button></div></div><div class="totals"><div class="total-card"><span>ก่อน VAT</span><b id="beforeVat">฿0</b></div><div class="total-card"><span>VAT</span><b id="vatAmount">฿0</b></div><div class="total-card"><span>รวม VAT</span><b id="includingVat">฿0</b></div></div><h2>Deposit Policy</h2><div class="form"><label>Enabled<select id="depositEnabled"><option value="true">Enabled</option><option value="false">Disabled</option></select></label><label>Deposit Percent<input id="depositPercent" type="number" min="0" max="100" step="1"></label><div class="actions wide"><button class="btn primary" id="savePolicy" type="button">Save Policy</button></div></div><div class="notice">Agent/Customer จะเห็นเฉพาะราคาขายที่ปลอดภัย รายละเอียด cost, commission และ company allocation อยู่เฉพาะ Admin/Finance API</div></aside></section></div></main></div><div class="toast" id="toast"></div>
-<script src="js/sbos-api-config.js"></script><script>
-'use strict';
-const API_URL=window.getSbosApiEndpoint?window.getSbosApiEndpoint():'';
-const $=s=>document.querySelector(s),$$=s=>Array.from(document.querySelectorAll(s));
-const components=['device_price','setup_fee','safety_book_cost','fingerprint_cost','signal_shield_cost','assembly_cost','annual_sim_cost','operation_cost','spc_cost','central_commission_pool','company_revenue_allocation'];
-let products=[],models=[],current=null,currentAllocation=null;
-function adminAuth(){return{admin_id:localStorage.getItem('admin_id')||'',admin_session_token:localStorage.getItem('admin_session_token')||''}}
-function withAdmin(params={}){return{...params,...adminAuth()}}
-function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function money(v){return '฿'+Number(v||0).toLocaleString('th-TH',{maximumFractionDigits:2})}
-function toast(msg,type='ok'){const el=$('#toast');el.textContent=msg;el.className='toast show '+(type==='err'?'err':'');setTimeout(()=>el.className='toast',2600)}
-async function apiGet(action,params={}){const q=new URLSearchParams({action,...params});const res=await fetch(API_URL+'?'+q.toString(),{cache:'no-store'});return res.json()}
-async function apiPost(payload){const res=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});const text=await res.text();try{return JSON.parse(text)}catch(e){return{ok:false,message:text||'Invalid API response'}}}
-function productForm(){return{product_id:current&&current.product_id,collection:$('#collection').value.trim(),brand:$('#brand').value.trim(),model:$('#model').value.trim(),storage:$('#storage').value.trim(),color:$('#color').value.trim(),sku:$('#sku').value.trim(),status:$('#status').value,...adminAuth()}}
-function allocationForm(){const data={product_id:current&&current.product_id,sku:$('#sku').value.trim(),vat_rate:Number($('#vatRate').value||0.07),change_reason:$('#changeReason').value.trim(),...adminAuth()};components.forEach(key=>{data[key]=Number((document.querySelector(`[data-component="${key}"]`)||{}).value||0)});return data}
-function updateTotals(){const sum=components.reduce((total,key)=>total+Number((document.querySelector(`[data-component="${key}"]`)||{}).value||0),0);const vat=sum*Number($('#vatRate').value||0);$('#beforeVat').textContent=money(sum);$('#vatAmount').textContent=money(vat);$('#includingVat').textContent=money(sum+vat)}
-function setForm(p){current=p||null;currentAllocation=p&&p.pricing_allocation||null;$('#collection').value=p&&p.collection||'';$('#brand').value=p&&p.brand||'';$('#model').value=p&&p.model||'';$('#storage').value=p&&p.storage||'';$('#color').value=p&&p.color||'';$('#sku').value=p&&p.sku||'';$('#status').value=p&&p.status||'ACTIVE';components.forEach(key=>{const input=document.querySelector(`[data-component="${key}"]`);if(input)input.value=currentAllocation&&currentAllocation[key]!==undefined?currentAllocation[key]:0});$('#vatRate').value=currentAllocation&&currentAllocation.vat_rate!==undefined?currentAllocation.vat_rate:0.07;$('#changeReason').value='';updateTotals()}
-function renderModels(){const q=$('#search').value.trim().toLowerCase();const list=models.filter(m=>!q||[m.collection,m.brand,m.model,(m.storage_options||[]).join(' '),(m.color_options||[]).join(' ')].join(' ').toLowerCase().includes(q));$('#models').innerHTML=list.length?'<b>Model grouping</b><br>'+list.map(m=>`${esc(m.collection)} / ${esc(m.model)} · ${esc(m.sku_count)} SKU · เริ่มต้น ${esc(money(m.starting_price||0))}`).join('<br>'):'ไม่พบ Model grouping'}
-function render(){renderModels();const q=$('#search').value.trim().toLowerCase();const list=products.filter(p=>!q||[p.collection,p.brand,p.model,p.storage,p.color,p.sku].join(' ').toLowerCase().includes(q));$('#products').innerHTML=list.length?list.map(p=>`<div class="item"><div><b>${esc(p.model)}</b><small>${esc([p.collection,p.storage,p.color].filter(Boolean).join(' / '))}</small></div><div><b>${esc(p.sku)}</b><small>${esc(p.brand)}</small></div><div><span class="badge ${p.status==='INACTIVE'?'inactive':''}">${esc(p.status)}</span><small>${p.pricing_allocation?money(p.pricing_allocation.selling_price_including_vat):'No allocation'}</small></div><div class="actions"><button class="btn muted" onclick="editProduct('${esc(p.product_id)}')">Edit</button></div></div>`).join(''):'<div class="notice">ไม่พบสินค้า</div>'}
-window.editProduct=id=>setForm(products.find(p=>p.product_id===id));
-async function load(){const [productData,modelData,policyData]=await Promise.all([apiPost({action:'listProducts',...withAdmin({include_inactive:'true'})}),apiPost({action:'listProductModels',...withAdmin({include_inactive:'true'})}),apiGet('getDepositPolicy')]);if(!productData||!productData.ok)throw new Error(productData&&productData.message||'โหลดสินค้าไม่สำเร็จ');products=Array.isArray(productData.products)?productData.products:[];models=modelData&&modelData.ok&&Array.isArray(modelData.models)?modelData.models:[];const policy=policyData&&policyData.policy||{};$('#depositEnabled').value=String(Boolean(policy.enabled));$('#depositPercent').value=Number(policy.deposit_percent||0);render()}
-$('#saveProduct').onclick=async()=>{try{const data=productForm();const res=data.product_id?await apiPost({action:'updateProduct',...data}):await apiPost({action:'createProduct',...data});if(!res||!res.ok)throw new Error(res&&res.message||'บันทึกสินค้าไม่สำเร็จ');toast('บันทึกสินค้าแล้ว');setForm(res.product||null);await load()}catch(err){toast(err.message||'บันทึกไม่สำเร็จ','err')}};
-$('#saveAllocation').onclick=async()=>{try{if(!current)return toast('กรุณาเลือกสินค้า','err');const res=await apiPost({action:'savePricingAllocationVersion',...allocationForm(),status:'DRAFT'});if(!res||!res.ok)throw new Error(res&&res.message||'บันทึก allocation ไม่สำเร็จ');currentAllocation=res.allocation;toast('บันทึก Draft Pricing Version แล้ว');await load()}catch(err){toast(err.message||'บันทึก allocation ไม่สำเร็จ','err')}};
-$('#activateAllocation').onclick=async()=>{try{if(!currentAllocation||!currentAllocation.pricing_version_id)return toast('กรุณาบันทึก Draft ก่อน','err');if(!confirm('Activate pricing version นี้?'))return;const res=await apiPost({action:'activatePricingVersion',pricing_version_id:currentAllocation.pricing_version_id,...adminAuth()});if(!res||!res.ok)throw new Error(res&&res.message||'Activate ไม่สำเร็จ');toast('Activate Pricing Version แล้ว');await load()}catch(err){toast(err.message||'Activate ไม่สำเร็จ','err')}};
-$('#validateAllocation').onclick=async()=>{try{if(!current)return toast('กรุณาเลือกสินค้า','err');const res=await apiPost({action:'validatePricingAllocation',...allocationForm()});if(!res||!res.ok)throw new Error(res&&res.message||'Validate failed');toast(res.valid?'Allocation ถูกต้อง':`พบ ${res.issues.length} issues`,res.valid?'ok':'err')}catch(err){toast(err.message||'Validate failed','err')}};
-$('#deleteProduct').onclick=async()=>{if(!current)return toast('กรุณาเลือกสินค้า','err');if(!confirm('Deactivate product?'))return;try{const res=await apiPost({action:'deleteProduct',product_id:current.product_id,...adminAuth()});if(!res||!res.ok)throw new Error(res&&res.message||'Deactivate ไม่สำเร็จ');toast('ปิดสินค้าแล้ว');setForm(null);await load()}catch(err){toast(err.message||'Deactivate ไม่สำเร็จ','err')}};
-$('#savePolicy').onclick=async()=>{try{const res=await apiPost({action:'updateDepositPolicy',enabled:$('#depositEnabled').value==='true',deposit_percent:Number($('#depositPercent').value||0),...adminAuth()});if(!res||!res.ok)throw new Error(res&&res.message||'บันทึก policy ไม่สำเร็จ');toast('บันทึก Deposit Policy แล้ว');await load()}catch(err){toast(err.message||'บันทึก policy ไม่สำเร็จ','err')}};
-$('#integrity').onclick=async()=>{try{const [productCheck,pricingCheck]=await Promise.all([apiPost({action:'runProductIntegrityCheck',...adminAuth()}),apiPost({action:'runPricingIntegrityCheck',...adminAuth()})]);if(!productCheck||!productCheck.ok)throw new Error(productCheck&&productCheck.message||'Product integrity failed');if(!pricingCheck||!pricingCheck.ok)throw new Error(pricingCheck&&pricingCheck.message||'Pricing integrity failed');toast(`Integrity: Product ${productCheck.total_issues||0}, Pricing ${pricingCheck.total_issues||0}`)}catch(err){toast(err.message||'Integrity check failed','err')}};
-components.forEach(key=>{const input=document.querySelector(`[data-component="${key}"]`);if(input)input.addEventListener('input',updateTotals)});$('#vatRate').addEventListener('input',updateTotals);$('#clearForm').onclick=()=>setForm(null);$('#refresh').onclick=()=>load().catch(err=>toast(err.message,'err'));$('#search').oninput=render;load().catch(err=>toast(err.message,'err'));
-</script></body></html>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="logo"><img src="images/logo.png" alt="SSBMS"><div><b>SSBMS Admin</b><small>Siamtham Operating System</small></div></div>
+    <nav class="menu">
+      <a href="admin-dashboard.html">Dashboard</a>
+      <a class="active" href="admin-products.html">Products & Pricing</a>
+      <a href="admin-quotations.html">Quotations</a>
+      <a href="admin-orders.html">Orders / Payments</a>
+      <a href="admin-finance.html">Finance</a>
+    </nav>
+  </aside>
+  <main class="main">
+    <header class="top">
+      <div><b>Product Management Console</b><small id="lastUpdated">Live backend catalog</small></div>
+      <div class="top-actions"><button class="btn muted" id="refresh" type="button" aria-label="Refresh product catalog">Refresh</button><a class="btn muted" href="agent-products.html">Agent Configurator</a></div>
+    </header>
+    <div class="content">
+      <section class="hero"><h1>Admin controlled SSBMS catalog</h1><p>Manage Collections, Models, exact SKU variants and pricing versions from backend data. Agent configurator reads the active catalog automatically without frontend source edits.</p></section>
+      <nav class="tabs" aria-label="Product management sections">
+        <button class="tab active" data-tab="collections" type="button">Collections</button>
+        <button class="tab" data-tab="models" type="button">Models</button>
+        <button class="tab" data-tab="variants" type="button">Variants / SKU</button>
+        <button class="tab" data-tab="pricing" type="button">Pricing</button>
+        <button class="tab" data-tab="integrity" type="button">Integrity Check</button>
+      </nav>
+      <section class="layout">
+        <div class="panel">
+          <div class="panel-head"><div><b id="listTitle">Collections</b><span id="listMeta">Loading...</span></div></div>
+          <div class="toolbar">
+            <input id="search" type="search" placeholder="Search collection, model, SKU, storage, color">
+            <select id="filterCollection" aria-label="Filter collection"><option value="all">All Collections</option></select>
+            <select id="filterStatus" aria-label="Filter status"><option value="all">All Status</option><option>ACTIVE</option><option>INACTIVE</option><option>ARCHIVED</option></select>
+          </div>
+          <div id="list" class="list"><div class="notice">Loading catalog...</div></div>
+        </div>
+        <aside class="panel">
+          <div class="panel-head"><div><b id="formTitle">Collection Form</b><span id="formMeta">Create or edit backend catalog data</span></div></div>
+          <form class="form" id="collectionForm">
+            <label class="wide">Collection Name<input id="collectionName" required></label>
+            <label>Short Name<input id="collectionShort"></label>
+            <label>Brand<input id="collectionBrand"></label>
+            <label>Series<input id="collectionSeries"></label>
+            <label>Theme<select id="collectionTheme"><option value="silver">silver</option><option value="gold">gold</option><option value="platinum">platinum</option></select></label>
+            <label>Display Order<input id="collectionOrder" type="number" step="1"></label>
+            <label>Status<select id="collectionStatus"><option>ACTIVE</option><option>INACTIVE</option><option>ARCHIVED</option></select></label>
+            <label class="wide">Image URL / Asset<input id="collectionImage"></label>
+            <label class="wide">Description<textarea id="collectionDescription"></textarea></label>
+            <div class="actions wide"><button class="btn primary" type="submit">Save Collection</button><button class="btn muted" type="button" id="clearCollection">Clear</button></div>
+          </form>
+          <form class="form hidden" id="modelForm">
+            <label class="wide">Collection<select id="modelCollection"></select></label>
+            <label>Brand<input id="modelBrand" required></label>
+            <label>Series<input id="modelSeries"></label>
+            <label>Model Name<input id="modelName" required></label>
+            <label>Model Code<input id="modelCode"></label>
+            <label>Display Order<input id="modelOrder" type="number" step="1"></label>
+            <label>Status<select id="modelStatus"><option>ACTIVE</option><option>INACTIVE</option><option>ARCHIVED</option></select></label>
+            <label class="wide">Image URL / Asset<input id="modelImage"></label>
+            <label class="wide">Description<textarea id="modelDescription"></textarea></label>
+            <div class="actions wide"><button class="btn primary" type="submit">Save Model</button><button class="btn muted" type="button" id="clearModel">Clear</button></div>
+          </form>
+          <form class="form hidden" id="variantForm">
+            <label class="wide">Model<select id="variantModel"></select></label>
+            <label>Storage<input id="variantStorage" required placeholder="256GB"></label>
+            <label>Memory Label<input id="variantMemory" placeholder="256GB"></label>
+            <label>Color Name<input id="variantColor" required placeholder="Black"></label>
+            <label>Color Code<input id="variantColorCode" placeholder="BLK"></label>
+            <label>Color Hex<input id="variantColorHex" placeholder="#111827"></label>
+            <label class="wide">SKU<input id="variantSku" required placeholder="SSB-SIL-A57-512-BLK"></label>
+            <label>Display Order<input id="variantOrder" type="number" step="1"></label>
+            <label>Status<select id="variantStatus"><option>ACTIVE</option><option>INACTIVE</option><option>ARCHIVED</option></select></label>
+            <label class="wide">Image URL / Asset<input id="variantImage"></label>
+            <div class="actions wide"><button class="btn primary" type="submit">Save Variant</button><button class="btn muted" type="button" id="clearVariant">Clear</button></div>
+          </form>
+          <form class="form hidden" id="pricingForm">
+            <label class="wide">Variant / SKU<select id="pricingProduct"></select></label>
+            <label>Device Price<input data-component="device_price" type="number" min="0" step="1" value="0"></label>
+            <label>Setup Fee<input data-component="setup_fee" type="number" min="0" step="1" value="0"></label>
+            <label>Safety Book / Box<input data-component="safety_book_cost" type="number" min="0" step="1" value="0"></label>
+            <label>Fingerprint<input data-component="fingerprint_cost" type="number" min="0" step="1" value="0"></label>
+            <label>Signal Shield<input data-component="signal_shield_cost" type="number" min="0" step="1" value="0"></label>
+            <label>Assembly<input data-component="assembly_cost" type="number" min="0" step="1" value="0"></label>
+            <label>Annual SIM<input data-component="annual_sim_cost" type="number" min="0" step="1" value="0"></label>
+            <label>Operation<input data-component="operation_cost" type="number" min="0" step="1" value="0"></label>
+            <label>SPC<input data-component="spc_cost" type="number" min="0" step="1" value="0"></label>
+            <label>Central Commission<input data-component="central_commission_pool" type="number" min="0" step="1" value="0"></label>
+            <label>Company Revenue<input data-component="company_revenue_allocation" type="number" min="0" step="1" value="0"></label>
+            <label>VAT Rate<input id="vatRate" type="number" min="0" max="1" step="0.01" value="0.07"></label>
+            <label class="wide">Reason<textarea id="priceReason"></textarea></label>
+            <div class="actions wide"><button class="btn muted" type="button" id="validatePricing">Validate</button><button class="btn primary" type="button" id="savePricing">Save Draft Version</button><button class="btn success" type="button" id="activatePricing">Activate Draft</button></div>
+          </form>
+          <div class="preview hidden" id="pricePreview"><div class="metric"><span>Before VAT</span><b id="beforeVat">฿0</b></div><div class="metric"><span>VAT</span><b id="vatAmount">฿0</b></div><div class="metric"><span>Final incl. VAT</span><b id="includingVat">฿0</b></div></div>
+          <div class="notice hidden" id="integrityPanel">Run integrity check to inspect catalog health.</div>
+          <div class="actions hidden" id="integrityActions" style="padding:0 16px 16px"><button class="btn primary" id="runIntegrity" type="button">Run Product Integrity Check</button></div>
+        </aside>
+      </section>
+    </div>
+  </main>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="js/admin-guard.js"></script>
+<script src="js/sbos-api-config.js"></script>
+<script>
+"use strict";
+const API_URL=window.getSbosApiEndpoint?window.getSbosApiEndpoint():"";
+const $=selector=>document.querySelector(selector);
+const $$=selector=>Array.from(document.querySelectorAll(selector));
+const components=["device_price","setup_fee","safety_book_cost","fingerprint_cost","signal_shield_cost","assembly_cost","annual_sim_cost","operation_cost","spc_cost","central_commission_pool","company_revenue_allocation"];
+const state={tab:"collections",collections:[],models:[],products:[],selectedCollection:null,selectedModel:null,selectedProduct:null,draftAllocation:null,busy:false};
+function auth(){return{admin_id:localStorage.getItem("admin_id")||"",admin_session_token:localStorage.getItem("admin_session_token")||""}}
+function money(value){return "฿"+Number(value||0).toLocaleString("th-TH",{minimumFractionDigits:0,maximumFractionDigits:2})}
+function norm(value){return String(value||"").trim()}
+function low(value){return norm(value).toLowerCase()}
+function statusClass(status){const value=norm(status||"ACTIVE").toUpperCase();return value==="ARCHIVED"?"archived":value==="INACTIVE"?"inactive":""}
+function toast(message,type="ok"){const el=$("#toast");el.textContent=message;el.className="toast show "+type;clearTimeout(window.__toastTimer);window.__toastTimer=setTimeout(()=>{el.className="toast"},2800)}
+async function apiPost(payload){const response=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});const text=await response.text();try{return JSON.parse(text)}catch(error){return{ok:false,message:text||"Invalid API response"}}}
+async function apiGet(action,params={}){const query=new URLSearchParams({action,...params});const response=await fetch(API_URL+"?"+query.toString(),{cache:"no-store"});const text=await response.text();try{return JSON.parse(text)}catch(error){return{ok:false,message:text||"Invalid API response"}}}
+function setBusy(flag){state.busy=Boolean(flag);$$("button").forEach(button=>{if(!button.classList.contains("tab"))button.disabled=state.busy})}
+function option(select,value,label){const item=document.createElement("option");item.value=value;item.textContent=label;select.appendChild(item)}
+function collectionNameById(id){const row=state.collections.find(item=>item.collection_id===id);return row?row.collection_name||row.collection:""}
+function modelById(id){return state.models.find(item=>(item.model_id||item.product_model_id)===id)}
+function selectedPricingProduct(){return state.products.find(item=>item.product_id===$("#pricingProduct").value)||null}
+function rebuildSelects(){
+  const filter=$("#filterCollection"),modelCollection=$("#modelCollection"),variantModel=$("#variantModel"),pricingProduct=$("#pricingProduct");
+  const currentFilter=filter.value||"all";
+  const currentModelCollection=modelCollection.value||(state.selectedModel&&state.selectedModel.collection_id)||"";
+  const currentVariantModel=variantModel.value||(state.selectedProduct&&(state.selectedProduct.model_id||state.selectedProduct.product_model_id))||"";
+  const currentPricingProduct=pricingProduct.value||(state.selectedProduct&&state.selectedProduct.product_id)||"";
+  [filter,modelCollection,variantModel,pricingProduct].forEach(select=>{select.textContent=""});
+  option(filter,"all","All Collections");
+  state.collections.forEach(item=>{option(filter,item.collection_name||item.collection,item.collection_name||item.collection)});
+  state.collections.forEach(item=>{option(modelCollection,item.collection_id,item.collection_name||item.collection)});
+  state.models.forEach(item=>{option(variantModel,item.model_id||item.product_model_id,[item.collection,item.brand,item.model].filter(Boolean).join(" / "))});
+  state.products.forEach(item=>{option(pricingProduct,item.product_id,[item.sku,item.model,item.storage,item.color].filter(Boolean).join(" / "))});
+  filter.value=Array.from(filter.options).some(item=>item.value===currentFilter)?currentFilter:"all";
+  if(currentModelCollection)modelCollection.value=currentModelCollection;
+  if(currentVariantModel)variantModel.value=currentVariantModel;
+  if(currentPricingProduct)pricingProduct.value=currentPricingProduct;
+}
+function passesFilters(row,fields){
+  const q=low($("#search").value);
+  const collection=$("#filterCollection").value;
+  const status=$("#filterStatus").value;
+  if(collection!=="all"&&norm(row.collection||row.collection_name)!==collection)return false;
+  if(status!=="all"&&norm(row.status).toUpperCase()!==status)return false;
+  if(!q)return true;
+  return fields.map(value=>low(value)).join(" ").includes(q);
+}
+function badge(status){const span=document.createElement("span");span.className="badge "+statusClass(status);span.textContent=norm(status||"ACTIVE").toUpperCase();return span}
+function row(cells,onEdit){
+  const item=document.createElement("div");item.className="row";
+  cells.forEach(cell=>{const div=document.createElement("div");if(cell instanceof Node)div.appendChild(cell);else div.textContent=cell;item.appendChild(div)});
+  const actions=document.createElement("div");actions.className="actions";const edit=document.createElement("button");edit.type="button";edit.className="btn muted";edit.textContent="Edit";edit.addEventListener("click",onEdit);actions.appendChild(edit);item.appendChild(actions);return item;
+}
+function renderCollections(){
+  $("#listTitle").textContent="Collections";const box=$("#list");box.textContent="";
+  const list=state.collections.filter(item=>passesFilters(item,[item.collection_name,item.short_name,item.brand,item.series,item.status]));
+  $("#listMeta").textContent=`${list.length} collections`;
+  if(!list.length){box.appendChild(empty("No collections found"));return}
+  list.forEach(item=>box.appendChild(row([item.collection_name||"-",[item.brand,item.series].filter(Boolean).join(" / ")||"-",item.theme_key||"-",badge(item.status)],()=>setCollectionForm(item))));
+}
+function renderModels(){
+  $("#listTitle").textContent="Models";const box=$("#list");box.textContent="";
+  const list=state.models.filter(item=>passesFilters(item,[item.collection,item.brand,item.model,item.model_code,item.status]));
+  $("#listMeta").textContent=`${list.length} models`;
+  if(!list.length){box.appendChild(empty("No models found"));return}
+  const groups={};list.forEach(item=>{const key=item.collection||"No Collection";(groups[key]=groups[key]||[]).push(item)});
+  Object.keys(groups).sort().forEach(key=>{box.appendChild(groupTitle(key));groups[key].forEach(item=>box.appendChild(row([item.model||"-",item.brand||"-",`${item.sku_count||0} SKU / ${item.variant_count||0} storage`,badge(item.status)],()=>setModelForm(item))))});
+}
+function renderVariants(){
+  $("#listTitle").textContent="Variants / SKU";const box=$("#list");box.textContent="";
+  const list=state.products.filter(item=>passesFilters(item,[item.collection,item.brand,item.model,item.storage,item.color,item.sku,item.status]));
+  $("#listMeta").textContent=`${list.length} SKU variants`;
+  if(!list.length){box.appendChild(empty("No variants found"));return}
+  const groups={};list.forEach(item=>{const key=[item.collection,item.model].filter(Boolean).join(" / ")||"No Model";(groups[key]=groups[key]||[]).push(item)});
+  Object.keys(groups).sort().forEach(key=>{box.appendChild(groupTitle(key));groups[key].forEach(item=>{const price=item.pricing_allocation?money(item.pricing_allocation.selling_price_including_vat):"No active price";box.appendChild(row([item.sku||"-",[item.storage,item.color].filter(Boolean).join(" / ")||"-",price,badge(item.status)],()=>setVariantForm(item)))})});
+}
+function renderPricing(){
+  $("#listTitle").textContent="Pricing";renderVariants();
+}
+function renderIntegrity(){
+  $("#listTitle").textContent="Integrity Check";$("#listMeta").textContent="Product and pricing health";const box=$("#list");box.textContent="";box.appendChild(empty("Use the Integrity Check button to run backend validation."));
+}
+function groupTitle(text){const div=document.createElement("div");div.className="group-title";div.textContent=text;return div}
+function empty(text){const div=document.createElement("div");div.className="notice";div.textContent=text;return div}
+function render(){rebuildSelects();$$("#collectionForm,#modelForm,#variantForm,#pricingForm,#pricePreview,#integrityPanel,#integrityActions").forEach(el=>el.classList.add("hidden"));const formMap={collections:"#collectionForm",models:"#modelForm",variants:"#variantForm",pricing:"#pricingForm"};if(formMap[state.tab])$(formMap[state.tab]).classList.remove("hidden");if(state.tab==="pricing"){$("#pricingForm").classList.remove("hidden");$("#pricePreview").classList.remove("hidden")}if(state.tab==="integrity"){$("#integrityPanel").classList.remove("hidden");$("#integrityActions").classList.remove("hidden")}$$(".tab").forEach(btn=>btn.classList.toggle("active",btn.dataset.tab===state.tab));if(state.tab==="collections")renderCollections();else if(state.tab==="models")renderModels();else if(state.tab==="variants")renderVariants();else if(state.tab==="pricing")renderPricing();else renderIntegrity();updateTotals()}
+function setCollectionForm(item){state.selectedCollection=item||null;$("#collectionName").value=item?(item.collection_name||item.collection||""):"";$("#collectionShort").value=item?item.short_name||"":"";$("#collectionBrand").value=item?item.brand||"":"";$("#collectionSeries").value=item?item.series||"":"";$("#collectionTheme").value=item?item.theme_key||"silver":"silver";$("#collectionImage").value=item?item.image_url||item.asset_key||"":"";$("#collectionOrder").value=item?item.display_order||"":"";$("#collectionStatus").value=item?item.status||"ACTIVE":"ACTIVE";$("#collectionDescription").value=item?item.description||"":""}
+function setModelForm(item){state.tab="models";state.selectedModel=item||null;$("#modelCollection").value=item?item.collection_id||"":$("#modelCollection").value;$("#modelBrand").value=item?item.brand||"":"";$("#modelSeries").value=item?item.series||"":"";$("#modelName").value=item?item.model||item.model_name||"":"";$("#modelCode").value=item?item.model_code||"":"";$("#modelImage").value=item?item.image_url||item.asset_key||"":"";$("#modelOrder").value=item?item.display_order||"":"";$("#modelStatus").value=item?item.status||"ACTIVE":"ACTIVE";$("#modelDescription").value=item?item.description||"":"";render()}
+function setVariantForm(item){state.tab="variants";state.selectedProduct=item||null;$("#variantModel").value=item?item.model_id||item.product_model_id||"":$("#variantModel").value;$("#variantStorage").value=item?item.storage||"":"";$("#variantMemory").value=item?item.memory_label||item.storage||"":"";$("#variantColor").value=item?item.color||item.color_name||"":"";$("#variantColorCode").value=item?item.color_code||"":"";$("#variantColorHex").value=item?item.color_hex||"":"";$("#variantSku").value=item?item.sku||"":"";$("#variantImage").value=item?item.image_url||item.asset_key||"":"";$("#variantOrder").value=item?item.display_order||"":"";$("#variantStatus").value=item?item.status||"ACTIVE":"ACTIVE";render()}
+function setPricingFromProduct(product){state.selectedProduct=product||selectedPricingProduct();state.draftAllocation=null;const allocation=state.selectedProduct&&state.selectedProduct.pricing_allocation;components.forEach(key=>{const input=document.querySelector(`[data-component="${key}"]`);input.value=allocation&&allocation[key]!==undefined?allocation[key]:0});$("#vatRate").value=allocation&&allocation.vat_rate!==undefined?allocation.vat_rate:0.07;$("#priceReason").value="";updateTotals()}
+function collectionPayload(){return{collection_id:state.selectedCollection&&state.selectedCollection.collection_id,collection_name:$("#collectionName").value,short_name:$("#collectionShort").value,brand:$("#collectionBrand").value,series:$("#collectionSeries").value,theme_key:$("#collectionTheme").value,image_url:$("#collectionImage").value,display_order:$("#collectionOrder").value,status:$("#collectionStatus").value,description:$("#collectionDescription").value,...auth()}}
+function modelPayload(){const collection=state.collections.find(item=>item.collection_id===$("#modelCollection").value)||{};return{model_id:state.selectedModel&&(state.selectedModel.model_id||state.selectedModel.product_model_id),collection_id:collection.collection_id,collection_name:collection.collection_name||collection.collection,brand:$("#modelBrand").value,series:$("#modelSeries").value,model_name:$("#modelName").value,model_code:$("#modelCode").value,image_url:$("#modelImage").value,display_order:$("#modelOrder").value,status:$("#modelStatus").value,description:$("#modelDescription").value,...auth()}}
+function variantPayload(){const model=modelById($("#variantModel").value)||{};return{product_id:state.selectedProduct&&state.selectedProduct.product_id,model_id:model.model_id||model.product_model_id,collection_id:model.collection_id,collection:model.collection,brand:model.brand,model:model.model,storage:$("#variantStorage").value,memory_label:$("#variantMemory").value,color:$("#variantColor").value,color_code:$("#variantColorCode").value,color_hex:$("#variantColorHex").value,sku:$("#variantSku").value,image_url:$("#variantImage").value,display_order:$("#variantOrder").value,status:$("#variantStatus").value,...auth()}}
+function pricingPayload(){const product=selectedPricingProduct();const data={product_id:product&&product.product_id,sku:product&&product.sku,vat_rate:Number($("#vatRate").value||0.07),change_reason:$("#priceReason").value,...auth()};components.forEach(key=>{data[key]=Number((document.querySelector(`[data-component="${key}"]`)||{}).value||0)});return data}
+function updateTotals(){const sum=components.reduce((total,key)=>total+Number((document.querySelector(`[data-component="${key}"]`)||{}).value||0),0);const vat=sum*Number($("#vatRate").value||0);$("#beforeVat").textContent=money(sum);$("#vatAmount").textContent=money(vat);$("#includingVat").textContent=money(sum+vat)}
+async function load(){setBusy(true);try{const [collections,models,products]=await Promise.all([apiPost({action:"listCollections",include_inactive:"true",...auth()}),apiPost({action:"listProductModels",include_inactive:"true",...auth()}),apiPost({action:"listProducts",include_inactive:"true",...auth()})]);if(!collections.ok)throw new Error(collections.message||"Cannot load collections");if(!models.ok)throw new Error(models.message||"Cannot load models");if(!products.ok)throw new Error(products.message||"Cannot load products");state.collections=collections.collections||[];state.models=models.models||[];state.products=products.products||[];$("#lastUpdated").textContent="Last updated "+new Date().toLocaleTimeString("th-TH");render()}catch(error){toast(error.message||"Load failed","err")}finally{setBusy(false)}}
+$("#collectionForm").addEventListener("submit",async event=>{event.preventDefault();setBusy(true);try{const payload=collectionPayload();const action=payload.collection_id?"updateCollection":"createCollection";const result=await apiPost({action,...payload});if(!result.ok)throw new Error(result.message||"Save collection failed");toast("Collection saved");setCollectionForm(null);await load()}catch(error){toast(error.message||"Save collection failed","err")}finally{setBusy(false)}});
+$("#modelForm").addEventListener("submit",async event=>{event.preventDefault();setBusy(true);try{const payload=modelPayload();const action=payload.model_id?"updateProductModel":"createProductModel";const result=await apiPost({action,...payload});if(!result.ok)throw new Error(result.message||"Save model failed");toast("Model saved");state.selectedModel=null;await load()}catch(error){toast(error.message||"Save model failed","err")}finally{setBusy(false)}});
+$("#variantForm").addEventListener("submit",async event=>{event.preventDefault();setBusy(true);try{const payload=variantPayload();const action=payload.product_id?"updateProductVariant":"createProductVariant";const result=await apiPost({action,...payload});if(!result.ok)throw new Error(result.message||"Save variant failed");toast("Variant saved");state.selectedProduct=null;await load()}catch(error){toast(error.message||"Save variant failed","err")}finally{setBusy(false)}});
+$("#validatePricing").addEventListener("click",async()=>{try{const result=await apiPost({action:"validatePricingAllocation",...pricingPayload()});if(!result.ok)throw new Error(result.message||"Validate failed");toast(result.valid?"Pricing is balanced":`Pricing has ${result.issues.length} issue(s)`,result.valid?"ok":"err")}catch(error){toast(error.message||"Validate failed","err")}});
+$("#savePricing").addEventListener("click",async()=>{setBusy(true);try{const result=await apiPost({action:"savePricingAllocationVersion",...pricingPayload(),status:"DRAFT"});if(!result.ok)throw new Error(result.message||"Save pricing failed");state.draftAllocation=result.allocation;toast("Draft pricing version saved");await load()}catch(error){toast(error.message||"Save pricing failed","err")}finally{setBusy(false)}});
+$("#activatePricing").addEventListener("click",async()=>{const id=state.draftAllocation&&state.draftAllocation.pricing_version_id;if(!id)return toast("Save a draft pricing version first","err");if(!confirm("Activate this pricing version for future quotations?"))return;setBusy(true);try{const result=await apiPost({action:"activatePricingVersion",pricing_version_id:id,...auth()});if(!result.ok)throw new Error(result.message||"Activate pricing failed");toast("Pricing version activated");state.draftAllocation=null;await load()}catch(error){toast(error.message||"Activate pricing failed","err")}finally{setBusy(false)}});
+$("#integrityPanel").addEventListener("click",event=>event.preventDefault());
+$("#refresh").addEventListener("click",load);
+$("#search").addEventListener("input",render);
+$("#filterCollection").addEventListener("change",render);
+$("#filterStatus").addEventListener("change",render);
+$("#pricingProduct").addEventListener("change",()=>setPricingFromProduct(selectedPricingProduct()));
+components.forEach(key=>document.querySelector(`[data-component="${key}"]`).addEventListener("input",updateTotals));
+$("#vatRate").addEventListener("input",updateTotals);
+$("#clearCollection").addEventListener("click",()=>setCollectionForm(null));
+$("#clearModel").addEventListener("click",()=>setModelForm(null));
+$("#clearVariant").addEventListener("click",()=>setVariantForm(null));
+$$(".tab").forEach(button=>button.addEventListener("click",()=>{state.tab=button.dataset.tab;if(state.tab==="pricing")setPricingFromProduct(selectedPricingProduct());render()}));
+async function runIntegrity(){setBusy(true);try{const [product,pricing]=await Promise.all([apiPost({action:"runProductIntegrityCheck",...auth()}),apiPost({action:"runPricingIntegrityCheck",...auth()})]);if(!product.ok)throw new Error(product.message||"Product integrity failed");if(!pricing.ok)throw new Error(pricing.message||"Pricing integrity failed");const panel=$("#integrityPanel");panel.className="notice "+((product.critical_or_high||0)+(pricing.critical_or_high||0)?"err":"ok");panel.textContent=`Product issues: ${product.total_issues||0}; Pricing issues: ${pricing.total_issues||0}; Critical/High: ${(product.critical_or_high||0)+(pricing.critical_or_high||0)}`;toast("Integrity check complete",(product.critical_or_high||0)+(pricing.critical_or_high||0)?"err":"ok")}catch(error){toast(error.message||"Integrity check failed","err")}finally{setBusy(false)}}
+document.querySelector('[data-tab="integrity"]').addEventListener("click",runIntegrity);
+$("#runIntegrity").addEventListener("click",runIntegrity);
+load();
+</script>
+</body>
+</html>
