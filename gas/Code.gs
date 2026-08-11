@@ -17,6 +17,19 @@ const SHEET_NAMES = {
   walletLedger: "wallet_ledger",
   withdrawalRequests: "withdrawal_requests",
   financeAuditLogs: "finance_audit_logs",
+  pricingAllocationVersions: "pricing_allocation_versions",
+  accountingAccounts: "accounting_accounts",
+  accountingJournals: "accounting_journals",
+  accountingLedger: "accounting_ledger",
+  companyRevenueLedger: "company_revenue_ledger",
+  expenseAllocationLedger: "expense_allocation_ledger",
+  vatLedger: "vat_ledger",
+  accountingReconciliation: "accounting_reconciliation",
+  accountingAuditLogs: "accounting_audit_logs",
+  agentCompensationAgreements: "agent_compensation_agreements",
+  agentCompensationTiers: "agent_compensation_tiers",
+  teamCommissionAllocations: "team_commission_allocations",
+  financeSettings: "finance_settings",
   organizationAreas: "organization_areas",
   organizationTeams: "organization_teams",
   organizationAssignments: "organization_assignments",
@@ -240,6 +253,38 @@ function doGet(e) {
       case "getCommissionConfiguration":
       case "saveCommissionConfiguration":
       case "runFinanceIntegrityCheck":
+      case "getPricingAllocation":
+      case "savePricingAllocationVersion":
+      case "activatePricingVersion":
+      case "listPricingVersions":
+      case "validatePricingAllocation":
+      case "runPricingIntegrityCheck":
+      case "listChartOfAccounts":
+      case "createAccountingAccount":
+      case "updateAccountingAccount":
+      case "listAccountingJournals":
+      case "getAccountingJournal":
+      case "listGeneralLedger":
+      case "listVatLedger":
+      case "listCompanyRevenue":
+      case "listExpenseAllocations":
+      case "runAccountingReconciliation":
+      case "listAgentCompensationAgreements":
+      case "createAgentCompensationAgreement":
+      case "updateAgentCompensationAgreement":
+      case "approveAgentCompensationAgreement":
+      case "listTierPlans":
+      case "createTierPlan":
+      case "updateTierPlan":
+      case "calculateOrderCompensation":
+      case "listMyIncome":
+      case "listTeamCommissionSummary":
+      case "listTeamMemberIncome":
+      case "listManagerCommission":
+      case "postApprovedPaymentAccounting":
+      case "reverseAccountingPosting":
+      case "rebuildSafeProjection":
+      case "runAccountingIntegrityCheck":
       case "getOrganizationDashboard":
       case "listOrganizationAreas":
       case "saveOrganizationArea":
@@ -661,6 +706,134 @@ function doPost(e) {
         result = runFinanceIntegrityCheck(body);
         break;
 
+      case "getPricingAllocation":
+        result = getPricingAllocation(body);
+        break;
+
+      case "savePricingAllocationVersion":
+        result = savePricingAllocationVersion(body);
+        break;
+
+      case "activatePricingVersion":
+        result = activatePricingVersion(body);
+        break;
+
+      case "listPricingVersions":
+        result = listPricingVersions(body);
+        break;
+
+      case "validatePricingAllocation":
+        result = validatePricingAllocation(body);
+        break;
+
+      case "runPricingIntegrityCheck":
+        result = runPricingIntegrityCheck(body);
+        break;
+
+      case "listChartOfAccounts":
+        result = listChartOfAccounts(body);
+        break;
+
+      case "createAccountingAccount":
+        result = createAccountingAccount(body);
+        break;
+
+      case "updateAccountingAccount":
+        result = updateAccountingAccount(body);
+        break;
+
+      case "listAccountingJournals":
+        result = listAccountingJournals(body);
+        break;
+
+      case "getAccountingJournal":
+        result = getAccountingJournal(body);
+        break;
+
+      case "listGeneralLedger":
+        result = listGeneralLedger(body);
+        break;
+
+      case "listVatLedger":
+        result = listVatLedger(body);
+        break;
+
+      case "listCompanyRevenue":
+        result = listCompanyRevenue(body);
+        break;
+
+      case "listExpenseAllocations":
+        result = listExpenseAllocations(body);
+        break;
+
+      case "runAccountingReconciliation":
+        result = runAccountingReconciliation(body);
+        break;
+
+      case "listAgentCompensationAgreements":
+        result = listAgentCompensationAgreements(body);
+        break;
+
+      case "createAgentCompensationAgreement":
+        result = createAgentCompensationAgreement(body);
+        break;
+
+      case "updateAgentCompensationAgreement":
+        result = updateAgentCompensationAgreement(body);
+        break;
+
+      case "approveAgentCompensationAgreement":
+        result = approveAgentCompensationAgreement(body);
+        break;
+
+      case "listTierPlans":
+        result = listTierPlans(body);
+        break;
+
+      case "createTierPlan":
+        result = createTierPlan(body);
+        break;
+
+      case "updateTierPlan":
+        result = updateTierPlan(body);
+        break;
+
+      case "calculateOrderCompensation":
+        result = calculateOrderCompensation(body);
+        break;
+
+      case "listMyIncome":
+        result = listMyIncome(body);
+        break;
+
+      case "listTeamCommissionSummary":
+        result = listTeamCommissionSummary(body);
+        break;
+
+      case "listTeamMemberIncome":
+        result = listTeamMemberIncome(body);
+        break;
+
+      case "listManagerCommission":
+        result = listManagerCommission(body);
+        break;
+
+      case "postApprovedPaymentAccounting":
+        result = postApprovedPaymentAccounting(body);
+        break;
+
+      case "reverseAccountingPosting":
+        result = reverseAccountingPosting(body);
+        break;
+
+      case "rebuildSafeProjection":
+        result = rebuildSafeProjection(body);
+        break;
+
+      case "runAccountingIntegrityCheck":
+        result = runAccountingReconciliation(body);
+        break;
+
       case "getOrganizationDashboard":
         result = getOrganizationDashboard(body);
         break;
@@ -1069,6 +1242,19 @@ function sheetToObjects(sheetName) {
         obj.wallet_id,
         obj.ledger_id,
         obj.withdrawal_id,
+        obj.pricing_version_id,
+        obj.account_id,
+        obj.journal_id,
+        obj.ledger_entry_id,
+        obj.company_revenue_id,
+        obj.expense_allocation_id,
+        obj.vat_ledger_id,
+        obj.reconciliation_id,
+        obj.accounting_audit_id,
+        obj.agreement_id,
+        obj.tier_plan_id,
+        obj.allocation_id,
+        obj.setting_id,
         obj.log_id,
         obj.area_id,
         obj.team_id,
@@ -1373,6 +1559,8 @@ const QUOTATION_HEADERS = [
   "storage",
   "color",
   "price_date",
+  "quantity",
+  "pricing_version_id",
   "phone_price",
   "service_fee",
   "promotion",
@@ -1387,6 +1575,9 @@ const QUOTATION_HEADERS = [
   "deposit_amount",
   "balance_amount",
   "line_items_json",
+  "pricing_snapshot_json",
+  "accounting_snapshot_json",
+  "compensation_snapshot_json",
   "customer_json",
   "signer_name",
   "signature_data_url",
@@ -1422,6 +1613,8 @@ const ORDER_HEADERS = [
   "model",
   "storage",
   "color",
+  "quantity",
+  "pricing_version_id",
   "subtotal",
   "vat",
   "total",
@@ -1433,6 +1626,9 @@ const ORDER_HEADERS = [
   "paid_amount",
   "payment_status",
   "line_items_json",
+  "pricing_snapshot_json",
+  "accounting_snapshot_json",
+  "compensation_snapshot_json",
   "timeline_json",
   "created_at",
   "updated_at",
@@ -1621,6 +1817,233 @@ const WITHDRAWAL_REQUEST_HEADERS = [
   "idempotency_key",
   "is_test",
   "qa_batch"
+];
+
+const PRICING_ALLOCATION_VERSION_HEADERS = [
+  "pricing_version_id",
+  "product_id",
+  "sku",
+  "effective_from",
+  "effective_until",
+  "status",
+  "device_price",
+  "setup_fee",
+  "safety_book_cost",
+  "fingerprint_cost",
+  "signal_shield_cost",
+  "assembly_cost",
+  "annual_sim_cost",
+  "operation_cost",
+  "spc_cost",
+  "central_commission_pool",
+  "company_revenue_allocation",
+  "selling_price_before_vat",
+  "vat_rate",
+  "vat_amount",
+  "selling_price_including_vat",
+  "deposit_policy_id",
+  "created_by",
+  "approved_by",
+  "change_reason",
+  "created_at",
+  "updated_at",
+  "is_test",
+  "qa_batch"
+];
+
+const ACCOUNTING_ACCOUNT_HEADERS = [
+  "account_id",
+  "account_code",
+  "account_name",
+  "account_type",
+  "normal_balance",
+  "status",
+  "created_at",
+  "updated_at",
+  "created_by"
+];
+
+const ACCOUNTING_JOURNAL_HEADERS = [
+  "journal_id",
+  "journal_type",
+  "source_type",
+  "source_id",
+  "order_id",
+  "payment_id",
+  "status",
+  "posted_at",
+  "created_by",
+  "note",
+  "idempotency_key",
+  "is_test",
+  "qa_batch"
+];
+
+const ACCOUNTING_LEDGER_HEADERS = [
+  "ledger_entry_id",
+  "journal_id",
+  "account_code",
+  "account_name",
+  "direction",
+  "amount",
+  "currency",
+  "order_id",
+  "payment_id",
+  "product_id",
+  "sku",
+  "pricing_version_id",
+  "component",
+  "idempotency_key",
+  "status",
+  "created_at",
+  "created_by",
+  "is_test",
+  "qa_batch"
+];
+
+const COMPANY_REVENUE_LEDGER_HEADERS = [
+  "company_revenue_id",
+  "order_id",
+  "payment_id",
+  "pricing_version_id",
+  "component",
+  "amount",
+  "status",
+  "created_at",
+  "idempotency_key",
+  "is_test",
+  "qa_batch"
+];
+
+const EXPENSE_ALLOCATION_LEDGER_HEADERS = [
+  "expense_allocation_id",
+  "order_id",
+  "payment_id",
+  "pricing_version_id",
+  "component",
+  "amount",
+  "status",
+  "created_at",
+  "idempotency_key",
+  "is_test",
+  "qa_batch"
+];
+
+const VAT_LEDGER_HEADERS = [
+  "vat_ledger_id",
+  "order_id",
+  "payment_id",
+  "pricing_version_id",
+  "vat_rate",
+  "vat_amount",
+  "status",
+  "created_at",
+  "idempotency_key",
+  "is_test",
+  "qa_batch"
+];
+
+const ACCOUNTING_RECONCILIATION_HEADERS = [
+  "reconciliation_id",
+  "run_at",
+  "status",
+  "issue_type",
+  "severity",
+  "entity_type",
+  "entity_id",
+  "message",
+  "metadata_json",
+  "created_by",
+  "is_test",
+  "qa_batch"
+];
+
+const ACCOUNTING_AUDIT_LOG_HEADERS = [
+  "accounting_audit_id",
+  "entity_type",
+  "entity_id",
+  "action",
+  "status",
+  "actor_id",
+  "message",
+  "metadata_json",
+  "created_at",
+  "is_test",
+  "qa_batch"
+];
+
+const AGENT_COMPENSATION_AGREEMENT_HEADERS = [
+  "agreement_id",
+  "agent_id",
+  "team_manager_id",
+  "team_id",
+  "collection",
+  "model",
+  "sku",
+  "agreement_type",
+  "value",
+  "tier_plan_id",
+  "status",
+  "effective_from",
+  "effective_until",
+  "approved_by",
+  "created_by",
+  "change_reason",
+  "created_at",
+  "updated_at",
+  "is_test",
+  "qa_batch"
+];
+
+const AGENT_COMPENSATION_TIER_HEADERS = [
+  "tier_plan_id",
+  "tier_name",
+  "tier_type",
+  "min_quantity",
+  "max_quantity",
+  "min_sales_amount",
+  "max_sales_amount",
+  "commission_type",
+  "commission_value",
+  "status",
+  "effective_from",
+  "effective_until",
+  "created_by",
+  "approved_by",
+  "created_at",
+  "updated_at",
+  "is_test",
+  "qa_batch"
+];
+
+const TEAM_COMMISSION_ALLOCATION_HEADERS = [
+  "allocation_id",
+  "order_id",
+  "payment_id",
+  "agent_id",
+  "team_manager_id",
+  "team_id",
+  "pricing_version_id",
+  "central_commission_pool",
+  "member_commission",
+  "manager_retained_commission",
+  "sim_income",
+  "spc_income",
+  "status",
+  "created_at",
+  "idempotency_key",
+  "is_test",
+  "qa_batch"
+];
+
+const FINANCE_SETTING_HEADERS = [
+  "setting_id",
+  "setting_key",
+  "setting_value",
+  "status",
+  "created_at",
+  "updated_at",
+  "updated_by"
 ];
 
 const FINANCE_AUDIT_LOG_HEADERS = [
@@ -2238,9 +2661,41 @@ const DEFAULT_PRODUCTS = [
   { collection: "Platinum Apple iPhone & iPad Collection", brand: "iPad", model: "iPad mini Cellular", storage: "256GB", color: "Blue", sku: "SSB-PLT-IPADM-256-BLU", product_price: 25900 }
 ];
 
-const DEFAULT_SERVICE_FEE = 45000;
+const DEFAULT_SERVICE_FEE = 0;
 const DEFAULT_VAT_RATE = 0.07;
 const DEFAULT_DEPOSIT_PERCENT = 30;
+const DEFAULT_SIM_INCOME = 500;
+const DEFAULT_SPC_INCOME = 500;
+
+const PRICING_ALLOCATION_COMPONENTS = [
+  "device_price",
+  "setup_fee",
+  "safety_book_cost",
+  "fingerprint_cost",
+  "signal_shield_cost",
+  "assembly_cost",
+  "annual_sim_cost",
+  "operation_cost",
+  "spc_cost",
+  "central_commission_pool",
+  "company_revenue_allocation"
+];
+
+const ACCOUNTING_SEED_ACCOUNTS = [
+  ["1000", "Cash / Bank", "ASSET", "DEBIT"],
+  ["2000", "VAT Payable", "LIABILITY", "CREDIT"],
+  ["3000", "Deferred Revenue", "LIABILITY", "CREDIT"],
+  ["4000", "SSBMS Bundle Revenue", "REVENUE", "CREDIT"],
+  ["4100", "Company Revenue Allocation", "REVENUE", "CREDIT"],
+  ["5000", "Device Cost Allocation", "EXPENSE", "DEBIT"],
+  ["5100", "Setup Cost Allocation", "EXPENSE", "DEBIT"],
+  ["5200", "Safety Book Cost Allocation", "EXPENSE", "DEBIT"],
+  ["5300", "SPC Cost Allocation", "EXPENSE", "DEBIT"],
+  ["5400", "SIM Cost Allocation", "EXPENSE", "DEBIT"],
+  ["5500", "Central Commission Pool", "EXPENSE", "DEBIT"],
+  ["5600", "Agent SIM Income", "EXPENSE", "DEBIT"],
+  ["5700", "Agent SPC Income", "EXPENSE", "DEBIT"]
+];
 
 const DEFAULT_TRAINING_LESSONS = [
   {
@@ -4976,7 +5431,22 @@ function ensureFinanceSheets() {
   getOrCreateSheet(SHEET_NAMES.walletLedger, WALLET_LEDGER_HEADERS);
   getOrCreateSheet(SHEET_NAMES.withdrawalRequests, WITHDRAWAL_REQUEST_HEADERS);
   getOrCreateSheet(SHEET_NAMES.financeAuditLogs, FINANCE_AUDIT_LOG_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.pricingAllocationVersions, PRICING_ALLOCATION_VERSION_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.accountingAccounts, ACCOUNTING_ACCOUNT_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.accountingJournals, ACCOUNTING_JOURNAL_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.accountingLedger, ACCOUNTING_LEDGER_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.companyRevenueLedger, COMPANY_REVENUE_LEDGER_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.expenseAllocationLedger, EXPENSE_ALLOCATION_LEDGER_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.vatLedger, VAT_LEDGER_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.accountingReconciliation, ACCOUNTING_RECONCILIATION_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.accountingAuditLogs, ACCOUNTING_AUDIT_LOG_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.agentCompensationAgreements, AGENT_COMPENSATION_AGREEMENT_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.agentCompensationTiers, AGENT_COMPENSATION_TIER_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.teamCommissionAllocations, TEAM_COMMISSION_ALLOCATION_HEADERS);
+  getOrCreateSheet(SHEET_NAMES.financeSettings, FINANCE_SETTING_HEADERS);
   seedCommissionRulePlaceholders();
+  seedAccountingDefaults();
+  seedPricingAllocationVersions();
 }
 
 function seedCommissionRulePlaceholders() {
@@ -5009,6 +5479,226 @@ function seedCommissionRulePlaceholders() {
       created_by: "SYSTEM",
       updated_by: "SYSTEM",
       note: "Set commission rule before financial release."
+    });
+  });
+}
+
+function readFinanceSetting(key, fallback) {
+  ensureFinanceSheets();
+  const normalized = cleanString(key, 120);
+  const row = sheetToObjects(SHEET_NAMES.financeSettings).find(function (item) {
+    return cleanString(item.setting_key, 120) === normalized &&
+      normalizeSalesStatus(item.status || "ACTIVE") === "ACTIVE";
+  });
+  return row ? cleanString(row.setting_value, 500) : fallback;
+}
+
+function seedFinanceSetting(key, value) {
+  const rows = sheetToObjects(SHEET_NAMES.financeSettings);
+  const exists = rows.some(function (item) {
+    return cleanString(item.setting_key, 120) === key;
+  });
+  if (exists) return;
+  const now = new Date();
+  appendObject(SHEET_NAMES.financeSettings, {
+    setting_id: makeId("FSET"),
+    setting_key: key,
+    setting_value: String(value),
+    status: "ACTIVE",
+    created_at: now,
+    updated_at: now,
+    updated_by: "SYSTEM"
+  });
+}
+
+function seedAccountingDefaults() {
+  const accountRows = sheetToObjects(SHEET_NAMES.accountingAccounts);
+  const existingCodes = {};
+  accountRows.forEach(function (row) {
+    existingCodes[cleanString(row.account_code, 40)] = true;
+  });
+  const now = new Date();
+  ACCOUNTING_SEED_ACCOUNTS.forEach(function (item) {
+    if (existingCodes[item[0]]) return;
+    appendObject(SHEET_NAMES.accountingAccounts, {
+      account_id: makeId("ACC"),
+      account_code: item[0],
+      account_name: item[1],
+      account_type: item[2],
+      normal_balance: item[3],
+      status: "ACTIVE",
+      created_at: now,
+      updated_at: now,
+      created_by: "SYSTEM"
+    });
+  });
+  seedFinanceSetting("agent_sim_income", DEFAULT_SIM_INCOME);
+  seedFinanceSetting("agent_spc_income", DEFAULT_SPC_INCOME);
+  seedFinanceSetting("manager_direct_sale_policy", "MANAGER_RETAINS_CENTRAL_POOL");
+}
+
+function pricingAllocationTotalsSatang(row) {
+  const totals = {
+    components: 0,
+    beforeVat: Math.max(0, toSatang(row.selling_price_before_vat || 0)),
+    vat: Math.max(0, toSatang(row.vat_amount || 0)),
+    includingVat: Math.max(0, toSatang(row.selling_price_including_vat || 0))
+  };
+  PRICING_ALLOCATION_COMPONENTS.forEach(function (key) {
+    const value = Math.max(0, toSatang(row[key] || 0));
+    totals.components += isFinite(value) ? value : NaN;
+  });
+  return totals;
+}
+
+function pricingAllocationIssues(row) {
+  const issues = [];
+  const totals = pricingAllocationTotalsSatang(row || {});
+  const vatRate = Math.max(0, Math.min(1, Number(row && row.vat_rate || DEFAULT_VAT_RATE)));
+  PRICING_ALLOCATION_COMPONENTS.forEach(function (key) {
+    const amount = toSatang(row && row[key] || 0);
+    if (!isFinite(amount) || amount < 0) issues.push({ type: "INVALID_COMPONENT", component: key });
+  });
+  if (!isFinite(totals.components)) issues.push({ type: "INVALID_COMPONENT_SUM" });
+  if (totals.components !== totals.beforeVat) {
+    issues.push({
+      type: "COMPONENT_SUM_MISMATCH",
+      expected: fromSatang(totals.beforeVat),
+      actual: fromSatang(totals.components)
+    });
+  }
+  const expectedVat = Math.round(totals.beforeVat * vatRate);
+  if (Math.abs(expectedVat - totals.vat) > 1) {
+    issues.push({
+      type: "VAT_MISMATCH",
+      expected: fromSatang(expectedVat),
+      actual: fromSatang(totals.vat)
+    });
+  }
+  if (totals.beforeVat + totals.vat !== totals.includingVat) {
+    issues.push({
+      type: "TOTAL_MISMATCH",
+      expected: fromSatang(totals.beforeVat + totals.vat),
+      actual: fromSatang(totals.includingVat)
+    });
+  }
+  return issues;
+}
+
+function publicPricingAllocation(row, includeInternal) {
+  const safe = {
+    pricing_version_id: cleanString(row.pricing_version_id, 80),
+    product_id: cleanString(row.product_id, 80),
+    sku: cleanString(row.sku, 120),
+    effective_from: row.effective_from || "",
+    effective_until: row.effective_until || "",
+    status: normalizeSalesStatus(row.status || "DRAFT"),
+    selling_price_before_vat: Number(row.selling_price_before_vat || 0),
+    vat_rate: Number(row.vat_rate || 0),
+    vat_amount: Number(row.vat_amount || 0),
+    selling_price_including_vat: Number(row.selling_price_including_vat || 0),
+    deposit_policy_id: cleanString(row.deposit_policy_id, 80),
+    created_at: row.created_at || "",
+    updated_at: row.updated_at || "",
+    is_test: booleanValue(row.is_test),
+    qa_batch: cleanString(row.qa_batch, 120)
+  };
+  if (includeInternal) {
+    PRICING_ALLOCATION_COMPONENTS.forEach(function (key) {
+      safe[key] = Number(row[key] || 0);
+    });
+    safe.created_by = cleanString(row.created_by, 80);
+    safe.approved_by = cleanString(row.approved_by, 80);
+    safe.change_reason = cleanString(row.change_reason, 500);
+    safe.integrity_issues = pricingAllocationIssues(row);
+  }
+  return safe;
+}
+
+function allocationSnapshot(row, quantity) {
+  const safe = publicPricingAllocation(row, true);
+  safe.quantity = Math.max(1, Number(quantity || 1));
+  safe.components = {};
+  PRICING_ALLOCATION_COMPONENTS.forEach(function (key) {
+    safe.components[key] = Number(row[key] || 0);
+  });
+  return safe;
+}
+
+function activePricingAllocationForProduct(product) {
+  if (!product) return null;
+  ensureSalesSheets();
+  const productId = cleanString(product.product_id, 80);
+  const sku = cleanString(product.sku, 120);
+  const now = new Date();
+  const rows = sheetToObjects(SHEET_NAMES.pricingAllocationVersions)
+    .filter(function (row) {
+      if (normalizeSalesStatus(row.status || "") !== "ACTIVE") return false;
+      if (cleanString(row.product_id, 80) !== productId && cleanString(row.sku, 120) !== sku) return false;
+      const from = row.effective_from ? new Date(row.effective_from) : null;
+      const until = row.effective_until ? new Date(row.effective_until) : null;
+      return (!from || from <= now) && (!until || until >= now);
+    });
+  return rows[rows.length - 1] || null;
+}
+
+function seedPricingAllocationVersions() {
+  const products = sheetToObjects(SHEET_NAMES.products);
+  const pricingRows = sheetToObjects(SHEET_NAMES.productPricing);
+  const allocations = sheetToObjects(SHEET_NAMES.pricingAllocationVersions);
+  const now = new Date();
+  products.forEach(function (product) {
+    const productId = cleanString(product.product_id, 80);
+    const sku = cleanString(product.sku, 120);
+    const exists = allocations.some(function (row) {
+      return normalizeSalesStatus(row.status || "") === "ACTIVE" &&
+        (cleanString(row.product_id, 80) === productId || cleanString(row.sku, 120) === sku);
+    });
+    if (!productId || !sku || exists) return;
+    const pricing = pricingRows.filter(function (row) {
+      return normalizeSalesStatus(row.status || "ACTIVE") === "ACTIVE" &&
+        (cleanString(row.product_id, 80) === productId || cleanString(row.sku, 120) === sku);
+    }).pop();
+    if (!pricing) return;
+    const productPriceSatang = Math.max(0, toSatang(pricing.product_price || 0));
+    const setupSatang = Math.max(0, toSatang(pricing.service_fee || 0));
+    const discountSatang = Math.max(0, toSatang(pricing.discount || 0));
+    const beforeVatSatang = Math.max(0, productPriceSatang + setupSatang - discountSatang);
+    const vatRate = Math.max(0, Math.min(1, Number(pricing.vat_rate || DEFAULT_VAT_RATE)));
+    const vatSatang = Math.round(beforeVatSatang * vatRate);
+    const policy = sheetToObjects(SHEET_NAMES.depositPolicies).filter(function (item) {
+      return normalizeSalesStatus(item.status || "ACTIVE") === "ACTIVE";
+    }).pop() || {};
+    appendObject(SHEET_NAMES.pricingAllocationVersions, {
+      pricing_version_id: makeId("PAV"),
+      product_id: productId,
+      sku: sku,
+      effective_from: now,
+      effective_until: "",
+      status: "ACTIVE",
+      device_price: fromSatang(productPriceSatang),
+      setup_fee: fromSatang(Math.max(0, setupSatang - discountSatang)),
+      safety_book_cost: 0,
+      fingerprint_cost: 0,
+      signal_shield_cost: 0,
+      assembly_cost: 0,
+      annual_sim_cost: 0,
+      operation_cost: 0,
+      spc_cost: 0,
+      central_commission_pool: 0,
+      company_revenue_allocation: 0,
+      selling_price_before_vat: fromSatang(beforeVatSatang),
+      vat_rate: vatRate,
+      vat_amount: fromSatang(vatSatang),
+      selling_price_including_vat: fromSatang(beforeVatSatang + vatSatang),
+      deposit_policy_id: cleanString(policy.policy_id, 80),
+      created_by: "SYSTEM",
+      approved_by: "SYSTEM",
+      change_reason: "V3-7 migration from legacy product_pricing without changing public price.",
+      created_at: now,
+      updated_at: now,
+      is_test: isQaRecord(product),
+      qa_batch: qaBatchFor(product)
     });
   });
 }
@@ -5201,7 +5891,7 @@ function requireExamAgentActor(body) {
 
 function isAdminRole(role) {
   const normalizedRole = cleanString(role, 40).toUpperCase();
-  return normalizedRole === "ADMIN" || normalizedRole === "OWNER";
+  return ["ADMIN", "OWNER", "FINANCE_ADMIN", "MARKETING_MANAGER"].indexOf(normalizedRole) !== -1;
 }
 
 function createAdminSession(user) {
@@ -5628,24 +6318,22 @@ function calculateBackendPricing(options) {
     };
   }
 
-  const pricing = activePricingForProduct(product);
+  const allocation = activePricingAllocationForProduct(product);
 
-  if (!pricing) {
+  if (!allocation) {
     return {
       ok: false,
-      message: "Active pricing not found",
+      message: "Active pricing allocation not found",
       product: publicProduct(product)
     };
   }
 
   const quantity = quantityResult.quantity;
-  const productPriceSatang = Math.max(0, toSatang(pricing.product_price || 0));
-  const serviceFeeSatang = Math.max(0, toSatang(pricing.service_fee || DEFAULT_SERVICE_FEE));
-  const discountSatang = Math.max(0, toSatang(pricing.discount || 0));
-  const vatRate = Math.max(0, Math.min(1, Number(pricing.vat_rate || DEFAULT_VAT_RATE)));
-  const unitPreVatSatang = Math.max(0, productPriceSatang + serviceFeeSatang - discountSatang);
+  const unitPreVatSatang = Math.max(0, toSatang(allocation.selling_price_before_vat || 0));
+  const vatRate = Math.max(0, Math.min(1, Number(allocation.vat_rate || DEFAULT_VAT_RATE)));
+  const unitVatSatang = Math.max(0, toSatang(allocation.vat_amount || 0)) || Math.round(unitPreVatSatang * vatRate);
   const subtotalSatang = unitPreVatSatang * quantity;
-  const vatSatang = Math.max(0, Math.round(subtotalSatang * vatRate));
+  const vatSatang = Math.max(0, unitVatSatang * quantity);
   const grandTotalSatang = Math.max(0, subtotalSatang + vatSatang);
   const policy = publicDepositPolicy(activeDepositPolicy());
   const requestedPaymentOption = normalizeSalesStatus((options && (options.payment_option || options.paymentOption)) || "DEPOSIT");
@@ -5655,9 +6343,9 @@ function calculateBackendPricing(options) {
   const depositPercent = paymentOption === "DEPOSIT" && policy.enabled ? policy.deposit_percent : 100;
   const depositAmountSatang = percentSatang(grandTotalSatang, depositPercent);
   const balanceAmountSatang = Math.max(0, grandTotalSatang - depositAmountSatang);
-  const productPrice = fromSatang(productPriceSatang);
-  const serviceFee = fromSatang(serviceFeeSatang);
-  const discount = fromSatang(discountSatang);
+  const productPrice = fromSatang(unitPreVatSatang);
+  const serviceFee = 0;
+  const discount = 0;
   const unitPreVatAmount = fromSatang(unitPreVatSatang);
   const subtotal = fromSatang(subtotalSatang);
   const vat = fromSatang(vatSatang);
@@ -5666,42 +6354,28 @@ function calculateBackendPricing(options) {
   const balanceAmount = fromSatang(balanceAmountSatang);
   const lineItems = [
     {
-      type: "DEVICE",
+      type: "SSBMS_BUNDLE",
       product_id: product.product_id,
       sku: product.sku,
-      name: product.model,
-      description: [product.storage, product.color].filter(Boolean).join(" / "),
+      name: "SSBMS System Bundle - " + cleanString(product.model, 160),
+      description: [
+        "การตั้งค่าและติดตั้งระบบ SSBMS",
+        product.storage,
+        product.color
+      ].filter(Boolean).join(" / "),
       quantity: quantity,
-      unit_price: productPrice,
-      total: fromSatang(productPriceSatang * quantity)
-    },
-    {
-      type: "SERVICE",
-      name: "SSBMS Installation Service",
-      description: "System setup and installation service",
-      quantity: quantity,
-      unit_price: serviceFee,
-      total: fromSatang(serviceFeeSatang * quantity)
+      unit_price: unitPreVatAmount,
+      total: subtotal
     }
   ];
-
-  if (discount > 0) {
-    lineItems.push({
-      type: "DISCOUNT",
-      name: pricing.promotion || "Discount",
-      description: "Approved backend discount",
-      quantity: quantity,
-      unit_price: -discount,
-      total: -fromSatang(discountSatang * quantity)
-    });
-  }
 
   return {
     ok: true,
     product: productDisplay(product),
-    pricing: publicPricing(pricing),
+    pricing: publicPricingAllocation(allocation, false),
+    pricing_allocation: publicPricingAllocation(allocation, false),
     policy: policy,
-    pricing_version: pricingVersion(pricing),
+    pricing_version: cleanString(allocation.pricing_version_id, 80),
     calculated_at: new Date(),
     quote: {
       product_id: cleanString(product.product_id, 80),
@@ -5710,7 +6384,7 @@ function calculateBackendPricing(options) {
       product_price: productPrice,
       service_fee: serviceFee,
       unit_pre_vat_amount: unitPreVatAmount,
-      promotion: cleanString(pricing.promotion, 200),
+      promotion: "",
       discount: discount,
       subtotal: subtotal,
       taxable_amount: subtotal,
@@ -5725,22 +6399,20 @@ function calculateBackendPricing(options) {
       deposit_amount: depositAmount,
       balance_amount: balanceAmount,
       outstanding_balance: balanceAmount,
-      pricing_version: pricingVersion(pricing),
+      pricing_version: cleanString(allocation.pricing_version_id, 80),
+      pricing_version_id: cleanString(allocation.pricing_version_id, 80),
       calculated_at: new Date(),
-      line_items: lineItems
+      line_items: lineItems,
+      bundle_warning: "สินค้านี้เป็นชุดระบบ SSBMS ไม่ใช่โทรศัพท์มือถือเพียงอย่างเดียว",
+      pricing_snapshot: allocationSnapshot(allocation, quantity)
     }
   };
 }
 
 function safeStartingPrice(product) {
-  const pricing = activePricingForProduct(product);
-  if (!pricing) return null;
-  const productSatang = Math.max(0, toSatang(pricing.product_price || 0));
-  const serviceSatang = Math.max(0, toSatang(pricing.service_fee || DEFAULT_SERVICE_FEE));
-  const discountSatang = Math.max(0, toSatang(pricing.discount || 0));
-  const preVatSatang = Math.max(0, productSatang + serviceSatang - discountSatang);
-  const vatRate = Math.max(0, Math.min(1, Number(pricing.vat_rate || DEFAULT_VAT_RATE)));
-  return fromSatang(preVatSatang + Math.round(preVatSatang * vatRate));
+  const allocation = activePricingAllocationForProduct(product);
+  if (!allocation) return null;
+  return Number(allocation.selling_price_including_vat || 0);
 }
 
 function listCollections(params) {
@@ -5935,8 +6607,10 @@ function listProducts(params) {
     })
     .map(function (product) {
       const publicItem = publicProduct(product);
-      const pricing = activePricingForProduct(product);
-      publicItem.pricing = pricing ? publicPricing(pricing) : null;
+      const allocation = activePricingAllocationForProduct(product);
+      const legacyPricing = activePricingForProduct(product);
+      publicItem.pricing = allocation ? publicPricingAllocation(allocation, false) : (legacyPricing ? publicPricing(legacyPricing) : null);
+      publicItem.pricing_allocation = allocation ? publicPricingAllocation(allocation, includeInactive) : null;
       return publicItem;
     });
 
@@ -5954,10 +6628,12 @@ function getProduct(params) {
     return { ok: false, message: "Product not found" };
   }
   const pricing = activePricingForProduct(product);
+  const allocation = activePricingAllocationForProduct(product);
   return {
     ok: true,
     product: publicProduct(product),
-    pricing: pricing ? publicPricing(pricing) : null
+    pricing: allocation ? publicPricingAllocation(allocation, false) : (pricing ? publicPricing(pricing) : null),
+    pricing_allocation: allocation ? publicPricingAllocation(allocation, true) : null
   };
 }
 
@@ -6272,7 +6948,7 @@ function publicCustomer(customer) {
 function publicQuotation(quotation) {
   const quotationLineItems = parseJsonValue(quotation.line_items_json, []);
   const deviceLine = quotationLineItems.find(function (item) {
-    return cleanString(item.type, 80).toUpperCase() === "DEVICE";
+    return ["DEVICE", "SSBMS_BUNDLE"].indexOf(cleanString(item.type, 80).toUpperCase()) !== -1;
   }) || {};
   return {
     quotation_id: cleanString(quotation.quotation_id, 80),
@@ -6294,7 +6970,8 @@ function publicQuotation(quotation) {
     model: cleanString(quotation.model, 160),
     storage: cleanString(quotation.storage, 80),
     color: cleanString(quotation.color, 120),
-    quantity: Math.max(1, Number(deviceLine.quantity || 1)),
+    quantity: Math.max(1, Number(quotation.quantity || deviceLine.quantity || 1)),
+    pricing_version_id: cleanString(quotation.pricing_version_id, 80),
     price_date: cleanString(quotation.price_date, 80),
     phone_price: Number(quotation.phone_price || 0),
     phonePrice: Number(quotation.phone_price || 0),
@@ -6334,7 +7011,7 @@ function publicQuotation(quotation) {
 function publicOrder(order) {
   const orderLineItems = parseJsonValue(order.line_items_json, []);
   const deviceLine = orderLineItems.find(function (item) {
-    return cleanString(item.type, 80).toUpperCase() === "DEVICE";
+    return ["DEVICE", "SSBMS_BUNDLE"].indexOf(cleanString(item.type, 80).toUpperCase()) !== -1;
   }) || {};
   return {
     order_id: cleanString(order.order_id, 80),
@@ -6370,7 +7047,8 @@ function publicOrder(order) {
     model: cleanString(order.model, 160),
     storage: cleanString(order.storage, 80),
     color: cleanString(order.color, 120),
-    quantity: Math.max(1, Number(deviceLine.quantity || 1)),
+    quantity: Math.max(1, Number(order.quantity || deviceLine.quantity || 1)),
+    pricing_version_id: cleanString(order.pricing_version_id, 80),
     subtotal: Number(order.subtotal || 0),
     vat: Number(order.vat || 0),
     total: Number(order.total || order.grand_total || 0),
@@ -6727,23 +7405,16 @@ function buildQuotationLineItems(body) {
     ? body.line_items
     : [
         {
-          type: "DEVICE",
-          name: cleanString(body.model, 160),
+          type: "SSBMS_BUNDLE",
+          name: cleanString(body.model || "SSBMS System Bundle", 160),
           description: [
+            "การตั้งค่าและติดตั้งระบบ SSBMS",
             cleanString(body.storage, 80),
             cleanString(body.color, 120)
           ].filter(Boolean).join(" / "),
           quantity: 1,
           unit_price: Number(body.phone_price || body.phonePrice || 0),
           total: Number(body.phone_price || body.phonePrice || 0)
-        },
-        {
-          type: "SERVICE",
-          name: "SSBMS Installation Service",
-          description: "System setup and installation service",
-          quantity: 1,
-          unit_price: Number(body.service_fee || body.serviceFee || 45000),
-          total: Number(body.service_fee || body.serviceFee || 45000)
         }
       ];
 
@@ -6807,6 +7478,8 @@ function buildQuotationData(body, agent, customer, existing) {
     storage: cleanString(product.storage, 80),
     color: cleanString(product.color, 120),
     price_date: cleanString(body.price_date || body.priceDate, 80),
+    quantity: Math.max(1, Number(quote.quantity || 1)),
+    pricing_version_id: cleanString(quote.pricing_version_id || quote.pricing_version, 80),
     phone_price: Number(quote.product_price || 0),
     service_fee: Number(quote.service_fee || 0),
     promotion: cleanString(quote.promotion, 200),
@@ -6821,6 +7494,9 @@ function buildQuotationData(body, agent, customer, existing) {
     deposit_amount: Number(quote.deposit_amount || 0),
     balance_amount: Number(quote.balance_amount || 0),
     line_items_json: JSON.stringify(lineItems),
+    pricing_snapshot_json: JSON.stringify(quote.pricing_snapshot || {}),
+    accounting_snapshot_json: JSON.stringify({ status: "UNPOSTED", created_at: now }),
+    compensation_snapshot_json: JSON.stringify({ status: "UNALLOCATED", created_at: now }),
     customer_json: JSON.stringify(customerPayload),
     signer_name: cleanString(body.signer_name || body.signerName, 200),
     signature_data_url: cleanString(body.signature_data_url || body.signature, 120000),
@@ -7199,6 +7875,8 @@ function createOrderFromQuotation(body) {
     model: quotation.model,
     storage: quotation.storage,
     color: quotation.color,
+    quantity: Math.max(1, Number(quotation.quantity || 1)),
+    pricing_version_id: cleanString(quotation.pricing_version_id, 80),
     subtotal: Number(quotation.subtotal || 0),
     vat: Number(quotation.vat || 0),
     total: Number(quotation.total || quotation.grand_total || 0),
@@ -7210,6 +7888,9 @@ function createOrderFromQuotation(body) {
     paid_amount: 0,
     payment_status: "PENDING",
     line_items_json: quotation.line_items_json,
+    pricing_snapshot_json: quotation.pricing_snapshot_json,
+    accounting_snapshot_json: quotation.accounting_snapshot_json,
+    compensation_snapshot_json: quotation.compensation_snapshot_json,
     timeline_json: JSON.stringify([
       {
         status: ORDER_STATUS.PAYMENT_PENDING,
@@ -7566,6 +8247,8 @@ function reviewPayment(body) {
   Object.assign(payment, updates);
 
   var commissionResult = null;
+  var accountingResult = null;
+  var compensationResult = null;
 
   if (decision === "APPROVED") {
     const summary = summarizePaymentsForOrder(order.order_id);
@@ -7588,7 +8271,9 @@ function reviewPayment(body) {
       note: "Payment approved",
       internal: true
     });
+    accountingResult = postApprovedPaymentAccountingInternal(payment, admin);
     commissionResult = createCommissionForApprovedPayment(payment, admin);
+    compensationResult = postTeamCompensationForApprovedPayment(payment, admin);
   } else {
     updateRowFields(SHEET_NAMES.orders, order._row, {
       payment_status: "REJECTED",
@@ -7616,7 +8301,9 @@ function reviewPayment(body) {
     ok: true,
     payment: publicPayment(payment),
     order: publicOrder(findOrderById(order.order_id) || order),
-    commission_result: commissionResult
+    commission_result: commissionResult,
+    accounting_result: accountingResult,
+    compensation_result: compensationResult
   };
   });
 }
@@ -8690,6 +9377,996 @@ function runFinanceIntegrityCheck(body) {
   const admin = financeAdminSession(body);
   if (!admin.ok) return admin;
   return { ok: true, anomalies: listFinanceAnomalies(booleanValue(body && body.include_qa)) };
+}
+
+function pricingAdminSession(body) {
+  const admin = financeAdminSession(body);
+  if (!admin.ok) return admin;
+  return admin;
+}
+
+function getPricingAllocation(body) {
+  const admin = pricingAdminSession(body || {});
+  if (!admin.ok) return admin;
+  ensureSalesSheets();
+  const product = findProductForPricing(body || {});
+  if (!product) return financeError("NOT_FOUND", "Product not found for pricing allocation.");
+  const allocation = activePricingAllocationForProduct(product);
+  return {
+    ok: true,
+    product: publicProduct(product),
+    allocation: allocation ? publicPricingAllocation(allocation, true) : null
+  };
+}
+
+function normalizeAllocationBody(body, product, existing, admin) {
+  const now = new Date();
+  const data = {
+    pricing_version_id: existing ? existing.pricing_version_id : makeId("PAV"),
+    product_id: product.product_id,
+    sku: product.sku,
+    effective_from: body.effective_from || body.effectiveFrom || now,
+    effective_until: body.effective_until || body.effectiveUntil || "",
+    status: normalizeSalesStatus(body.status || "DRAFT"),
+    deposit_policy_id: cleanString(body.deposit_policy_id || body.depositPolicyId || activeDepositPolicy().policy_id, 80),
+    created_by: existing ? existing.created_by : admin.actor_id,
+    approved_by: existing ? existing.approved_by : "",
+    change_reason: safeSheetText(body.change_reason || body.reason || "Pricing allocation updated", 500),
+    created_at: existing ? existing.created_at : now,
+    updated_at: now,
+    is_test: booleanValue(body.is_test) || isQaRecord(body),
+    qa_batch: cleanString(body.qa_batch, 120)
+  };
+  PRICING_ALLOCATION_COMPONENTS.forEach(function (key) {
+    data[key] = fromSatang(Math.max(0, toSatang(body[key] || 0)));
+  });
+  const beforeVatSatang = PRICING_ALLOCATION_COMPONENTS.reduce(function (total, key) {
+    return total + Math.max(0, toSatang(data[key] || 0));
+  }, 0);
+  const vatRate = Math.max(0, Math.min(1, Number(body.vat_rate || body.vatRate || DEFAULT_VAT_RATE)));
+  const vatSatang = Math.round(beforeVatSatang * vatRate);
+  data.selling_price_before_vat = fromSatang(beforeVatSatang);
+  data.vat_rate = vatRate;
+  data.vat_amount = fromSatang(vatSatang);
+  data.selling_price_including_vat = fromSatang(beforeVatSatang + vatSatang);
+  return data;
+}
+
+function savePricingAllocationVersion(body) {
+  return withFinanceLock(function () {
+    const admin = pricingAdminSession(body || {});
+    if (!admin.ok) return admin;
+    ensureSalesSheets();
+    const product = findProductForPricing(body || {});
+    if (!product) return financeError("NOT_FOUND", "Product not found for pricing allocation.");
+    const id = cleanString(body && (body.pricing_version_id || body.pricingVersionId), 80);
+    const existing = id ? sheetToObjects(SHEET_NAMES.pricingAllocationVersions).find(function (row) {
+      return cleanString(row.pricing_version_id, 80) === id;
+    }) : null;
+    const data = normalizeAllocationBody(body || {}, product, existing, admin);
+    const issues = pricingAllocationIssues(data);
+    if (issues.length) {
+      return financeError("PRICING_INTEGRITY_ERROR", "Pricing allocation does not reconcile.", { issues: issues });
+    }
+    if (normalizeSalesStatus(data.status) === "ACTIVE") data.status = "DRAFT";
+    if (existing) updateRowFields(SHEET_NAMES.pricingAllocationVersions, existing._row, data); else appendObject(SHEET_NAMES.pricingAllocationVersions, data);
+    writeAccountingAudit("PRICING_ALLOCATION", data.pricing_version_id, existing ? "PRICING_VERSION_UPDATED" : "PRICING_VERSION_CREATED", "SUCCESS", admin.actor_id, "Pricing allocation saved", data);
+    return { ok: true, allocation: publicPricingAllocation(data, true) };
+  });
+}
+
+function activatePricingVersion(body) {
+  return withFinanceLock(function () {
+    const admin = pricingAdminSession(body || {});
+    if (!admin.ok) return admin;
+    ensureSalesSheets();
+    const id = cleanString(body && (body.pricing_version_id || body.pricingVersionId), 80);
+    const row = sheetToObjects(SHEET_NAMES.pricingAllocationVersions).find(function (item) {
+      return cleanString(item.pricing_version_id, 80) === id;
+    });
+    if (!row) return financeError("NOT_FOUND", "Pricing version not found.");
+    const issues = pricingAllocationIssues(row);
+    if (issues.length) return financeError("PRICING_INTEGRITY_ERROR", "Pricing allocation does not reconcile.", { issues: issues });
+    sheetToObjects(SHEET_NAMES.pricingAllocationVersions).forEach(function (item) {
+      if (
+        cleanString(item.pricing_version_id, 80) !== id &&
+        normalizeSalesStatus(item.status || "") === "ACTIVE" &&
+        (cleanString(item.product_id, 80) === cleanString(row.product_id, 80) || cleanString(item.sku, 120) === cleanString(row.sku, 120))
+      ) {
+        updateRowFields(SHEET_NAMES.pricingAllocationVersions, item._row, {
+          status: "INACTIVE",
+          effective_until: new Date(),
+          updated_at: new Date()
+        });
+      }
+    });
+    const updates = {
+      status: "ACTIVE",
+      approved_by: admin.actor_id,
+      updated_at: new Date()
+    };
+    updateRowFields(SHEET_NAMES.pricingAllocationVersions, row._row, updates);
+    const updated = Object.assign({}, row, updates);
+    writeAccountingAudit("PRICING_ALLOCATION", id, "PRICING_VERSION_ACTIVATED", "SUCCESS", admin.actor_id, "Pricing allocation activated", updated);
+    return { ok: true, allocation: publicPricingAllocation(updated, true) };
+  });
+}
+
+function listPricingVersions(body) {
+  const admin = pricingAdminSession(body || {});
+  if (!admin.ok) return admin;
+  ensureSalesSheets();
+  const productId = cleanString(body && body.product_id, 80);
+  const sku = cleanString(body && body.sku, 120).toLowerCase();
+  const rows = sheetToObjects(SHEET_NAMES.pricingAllocationVersions).filter(function (row) {
+    if (productId && cleanString(row.product_id, 80) !== productId) return false;
+    if (sku && cleanString(row.sku, 120).toLowerCase() !== sku) return false;
+    return true;
+  }).map(function (row) { return publicPricingAllocation(row, true); }).reverse();
+  return { ok: true, total: rows.length, pricing_versions: rows };
+}
+
+function validatePricingAllocation(body) {
+  const admin = pricingAdminSession(body || {});
+  if (!admin.ok) return admin;
+  const product = findProductForPricing(body || {});
+  const row = product ? normalizeAllocationBody(body || {}, product, null, admin) : (body || {});
+  const issues = pricingAllocationIssues(row);
+  return { ok: true, valid: issues.length === 0, issues: issues, allocation: publicPricingAllocation(row, true) };
+}
+
+function runPricingIntegrityCheck(body) {
+  const admin = pricingAdminSession(body || {});
+  if (!admin.ok) return admin;
+  ensureSalesSheets();
+  const issues = [];
+  sheetToObjects(SHEET_NAMES.products).forEach(function (product) {
+    if (normalizeSalesStatus(product.status || "ACTIVE") !== "ACTIVE") return;
+    if (!activePricingAllocationForProduct(product)) {
+      issues.push({ severity: "HIGH", type: "MISSING_ACTIVE_PRICING_ALLOCATION", product_id: product.product_id, sku: product.sku });
+    }
+  });
+  sheetToObjects(SHEET_NAMES.pricingAllocationVersions).forEach(function (row) {
+    pricingAllocationIssues(row).forEach(function (issue) {
+      issues.push(Object.assign({ severity: "HIGH", pricing_version_id: row.pricing_version_id, sku: row.sku }, issue));
+    });
+  });
+  return { ok: true, total_issues: issues.length, critical_or_high: issues.filter(function (i) { return i.severity === "HIGH" || i.severity === "CRITICAL"; }).length, issues: issues };
+}
+
+function writeAccountingAudit(entityType, entityId, action, status, actorId, message, metadata) {
+  ensureFinanceSheets();
+  appendObject(SHEET_NAMES.accountingAuditLogs, {
+    accounting_audit_id: makeId("AAU"),
+    entity_type: cleanString(entityType, 80),
+    entity_id: cleanString(entityId, 120),
+    action: cleanString(action, 120),
+    status: cleanString(status || "SUCCESS", 60),
+    actor_id: cleanString(actorId, 80),
+    message: cleanString(message, 500),
+    metadata_json: JSON.stringify(metadata || {}),
+    created_at: new Date(),
+    is_test: isQaRecord(metadata || {}),
+    qa_batch: qaBatchFor(metadata || {})
+  });
+}
+
+function publicAccountingAccount(row) {
+  return {
+    account_id: cleanString(row.account_id, 80),
+    account_code: cleanString(row.account_code, 40),
+    account_name: cleanString(row.account_name, 160),
+    account_type: normalizeSalesStatus(row.account_type),
+    normal_balance: normalizeSalesStatus(row.normal_balance),
+    status: normalizeSalesStatus(row.status || "ACTIVE"),
+    created_at: row.created_at || "",
+    updated_at: row.updated_at || ""
+  };
+}
+
+function listChartOfAccounts(body) {
+  const admin = financeAdminSession(body || {});
+  if (!admin.ok) return admin;
+  ensureFinanceSheets();
+  const rows = sheetToObjects(SHEET_NAMES.accountingAccounts).map(publicAccountingAccount);
+  return { ok: true, total: rows.length, accounts: rows };
+}
+
+function saveAccountingAccount(body, existing) {
+  const code = cleanString(body && body.account_code, 40);
+  if (!code) return financeError("INVALID_REQUEST", "account_code is required.");
+  const now = new Date();
+  return {
+    account_id: existing ? existing.account_id : makeId("ACC"),
+    account_code: code,
+    account_name: safeSheetText(body.account_name || (existing && existing.account_name), 160),
+    account_type: normalizeSalesStatus(body.account_type || (existing && existing.account_type) || "EXPENSE"),
+    normal_balance: normalizeSalesStatus(body.normal_balance || (existing && existing.normal_balance) || "DEBIT"),
+    status: normalizeSalesStatus(body.status || (existing && existing.status) || "ACTIVE") === "INACTIVE" ? "INACTIVE" : "ACTIVE",
+    created_at: existing ? existing.created_at : now,
+    updated_at: now,
+    created_by: existing ? existing.created_by : cleanString(body.created_by || "ADMIN", 80)
+  };
+}
+
+function createAccountingAccount(body) {
+  const admin = financeAdminSession(body || {});
+  if (!admin.ok) return admin;
+  ensureFinanceSheets();
+  const code = cleanString(body && body.account_code, 40);
+  const duplicate = sheetToObjects(SHEET_NAMES.accountingAccounts).find(function (row) { return cleanString(row.account_code, 40) === code; });
+  if (duplicate) return financeError("DUPLICATE_ACCOUNT", "Account code already exists.");
+  const row = saveAccountingAccount(Object.assign({}, body, { created_by: admin.actor_id }), null);
+  appendObject(SHEET_NAMES.accountingAccounts, row);
+  writeAccountingAudit("ACCOUNT", row.account_code, "ACCOUNT_CREATED", "SUCCESS", admin.actor_id, "Accounting account created", row);
+  return { ok: true, account: publicAccountingAccount(row) };
+}
+
+function updateAccountingAccount(body) {
+  const admin = financeAdminSession(body || {});
+  if (!admin.ok) return admin;
+  ensureFinanceSheets();
+  const id = cleanString(body && (body.account_id || body.accountId), 80);
+  const code = cleanString(body && body.account_code, 40);
+  const existing = sheetToObjects(SHEET_NAMES.accountingAccounts).find(function (row) {
+    return (id && cleanString(row.account_id, 80) === id) || (code && cleanString(row.account_code, 40) === code);
+  });
+  if (!existing) return financeError("NOT_FOUND", "Account not found.");
+  const row = saveAccountingAccount(body || {}, existing);
+  updateRowFields(SHEET_NAMES.accountingAccounts, existing._row, row);
+  writeAccountingAudit("ACCOUNT", row.account_code, "ACCOUNT_UPDATED", "SUCCESS", admin.actor_id, "Accounting account updated", row);
+  return { ok: true, account: publicAccountingAccount(row) };
+}
+
+function accountNameByCode(code) {
+  const row = sheetToObjects(SHEET_NAMES.accountingAccounts).find(function (account) {
+    return cleanString(account.account_code, 40) === cleanString(code, 40);
+  });
+  return row ? cleanString(row.account_name, 160) : "";
+}
+
+function appendAccountingLedgerEntry(data) {
+  ensureFinanceSheets();
+  const key = cleanString(data.idempotency_key, 220);
+  if (key) {
+    const existing = sheetToObjects(SHEET_NAMES.accountingLedger).find(function (entry) {
+      return cleanString(entry.idempotency_key, 220) === key;
+    });
+    if (existing) return existing;
+  }
+  const accountCode = cleanString(data.account_code, 40);
+  const row = {
+    ledger_entry_id: makeId("ALED"),
+    journal_id: cleanString(data.journal_id, 80),
+    account_code: accountCode,
+    account_name: accountNameByCode(accountCode),
+    direction: normalizeSalesStatus(data.direction),
+    amount: fromSatang(Math.max(0, toSatang(data.amount || 0))),
+    currency: "THB",
+    order_id: cleanString(data.order_id, 80),
+    payment_id: cleanString(data.payment_id, 80),
+    product_id: cleanString(data.product_id, 80),
+    sku: cleanString(data.sku, 120),
+    pricing_version_id: cleanString(data.pricing_version_id, 80),
+    component: cleanString(data.component, 120),
+    idempotency_key: key,
+    status: "POSTED",
+    created_at: new Date(),
+    created_by: cleanString(data.created_by || "SYSTEM", 80),
+    is_test: Boolean(data.is_test),
+    qa_batch: cleanString(data.qa_batch, 120)
+  };
+  appendObject(SHEET_NAMES.accountingLedger, row);
+  return row;
+}
+
+function appendTypedAccountingLedger(sheetName, idField, prefix, data) {
+  const key = cleanString(data.idempotency_key, 220);
+  if (key) {
+    const existing = sheetToObjects(sheetName).find(function (row) {
+      return cleanString(row.idempotency_key, 220) === key;
+    });
+    if (existing) return existing;
+  }
+  const row = Object.assign({}, data);
+  row[idField] = makeId(prefix);
+  row.amount = fromSatang(Math.max(0, toSatang(row.amount || 0)));
+  row.status = row.status || "POSTED";
+  row.created_at = row.created_at || new Date();
+  appendObject(sheetName, row);
+  return row;
+}
+
+function pricingSnapshotForOrder(order) {
+  const snapshot = parseJsonValue(order.pricing_snapshot_json, {});
+  if (snapshot && snapshot.pricing_version_id) return snapshot;
+  return {
+    pricing_version_id: cleanString(order.pricing_version_id, 80) || "LEGACY",
+    product_id: cleanString(order.product_id, 80),
+    sku: cleanString(order.sku, 120),
+    quantity: Math.max(1, Number(order.quantity || 1)),
+    selling_price_before_vat: Number(order.subtotal || 0),
+    vat_amount: Number(order.vat || 0),
+    selling_price_including_vat: Number(order.grand_total || order.total || 0),
+    components: {},
+    legacy: true
+  };
+}
+
+function postApprovedPaymentAccountingInternal(payment, actor) {
+  ensureSalesSheets();
+  ensureFinanceSheets();
+  if (normalizeSalesStatus(payment.status || "") !== "APPROVED") return { ok: true, skipped: true, reason: "PAYMENT_NOT_APPROVED" };
+  const order = findOrderById(payment.order_id);
+  if (!order) return financeError("NOT_FOUND", "Order not found for accounting.");
+  const snapshot = pricingSnapshotForOrder(order);
+  const paymentSatang = Math.max(0, toSatang(payment.amount || 0));
+  const totalSatang = Math.max(1, toSatang(order.grand_total || order.total || snapshot.selling_price_including_vat || 0));
+  const ratio = Math.min(1, paymentSatang / totalSatang);
+  const isTest = shouldExcludeFromFinance(order) || shouldExcludeFromFinance(payment);
+  const qaBatch = qaBatchFor(order) || qaBatchFor(payment);
+  const journalKey = ["ACCT", order.order_id, payment.payment_id, "APPROVED_PAYMENT"].join(":");
+  const existingJournal = sheetToObjects(SHEET_NAMES.accountingJournals).find(function (row) {
+    return cleanString(row.idempotency_key, 220) === journalKey;
+  });
+  const journal = existingJournal || {
+    journal_id: makeId("AJR"),
+    journal_type: "APPROVED_PAYMENT",
+    source_type: "PAYMENT",
+    source_id: payment.payment_id,
+    order_id: order.order_id,
+    payment_id: payment.payment_id,
+    status: "POSTED",
+    posted_at: new Date(),
+    created_by: actor.actor_id || "SYSTEM",
+    note: "Approved payment accounting posting",
+    idempotency_key: journalKey,
+    is_test: isTest,
+    qa_batch: qaBatch
+  };
+  if (!existingJournal) appendObject(SHEET_NAMES.accountingJournals, journal);
+
+  appendAccountingLedgerEntry({
+    journal_id: journal.journal_id,
+    account_code: "1000",
+    direction: "DEBIT",
+    amount: fromSatang(paymentSatang),
+    order_id: order.order_id,
+    payment_id: payment.payment_id,
+    product_id: order.product_id,
+    sku: order.sku,
+    pricing_version_id: snapshot.pricing_version_id,
+    component: "cash_received",
+    idempotency_key: journalKey + ":1000",
+    created_by: actor.actor_id,
+    is_test: isTest,
+    qa_batch: qaBatch
+  });
+
+  const revenueSatang = Math.round(toSatang(snapshot.selling_price_before_vat || order.subtotal || 0) * ratio);
+  const vatSatang = Math.round(toSatang(snapshot.vat_amount || order.vat || 0) * ratio);
+  appendAccountingLedgerEntry({ journal_id: journal.journal_id, account_code: "4000", direction: "CREDIT", amount: fromSatang(revenueSatang), order_id: order.order_id, payment_id: payment.payment_id, product_id: order.product_id, sku: order.sku, pricing_version_id: snapshot.pricing_version_id, component: "bundle_revenue", idempotency_key: journalKey + ":4000", created_by: actor.actor_id, is_test: isTest, qa_batch: qaBatch });
+  appendAccountingLedgerEntry({ journal_id: journal.journal_id, account_code: "2000", direction: "CREDIT", amount: fromSatang(vatSatang), order_id: order.order_id, payment_id: payment.payment_id, product_id: order.product_id, sku: order.sku, pricing_version_id: snapshot.pricing_version_id, component: "vat", idempotency_key: journalKey + ":2000", created_by: actor.actor_id, is_test: isTest, qa_batch: qaBatch });
+
+  const componentAccountMap = {
+    device_price: ["5000", SHEET_NAMES.expenseAllocationLedger],
+    setup_fee: ["5100", SHEET_NAMES.expenseAllocationLedger],
+    safety_book_cost: ["5200", SHEET_NAMES.expenseAllocationLedger],
+    fingerprint_cost: ["5100", SHEET_NAMES.expenseAllocationLedger],
+    signal_shield_cost: ["5100", SHEET_NAMES.expenseAllocationLedger],
+    assembly_cost: ["5100", SHEET_NAMES.expenseAllocationLedger],
+    annual_sim_cost: ["5400", SHEET_NAMES.expenseAllocationLedger],
+    operation_cost: ["5100", SHEET_NAMES.expenseAllocationLedger],
+    spc_cost: ["5300", SHEET_NAMES.expenseAllocationLedger],
+    central_commission_pool: ["5500", SHEET_NAMES.expenseAllocationLedger],
+    company_revenue_allocation: ["4100", SHEET_NAMES.companyRevenueLedger]
+  };
+  const components = snapshot.components || {};
+  Object.keys(componentAccountMap).forEach(function (component) {
+    const amountSatang = Math.round(toSatang(components[component] || 0) * Number(snapshot.quantity || 1) * ratio);
+    if (amountSatang <= 0) return;
+    const accountCode = componentAccountMap[component][0];
+    appendAccountingLedgerEntry({ journal_id: journal.journal_id, account_code: accountCode, direction: accountCode === "4100" ? "CREDIT" : "DEBIT", amount: fromSatang(amountSatang), order_id: order.order_id, payment_id: payment.payment_id, product_id: order.product_id, sku: order.sku, pricing_version_id: snapshot.pricing_version_id, component: component, idempotency_key: journalKey + ":" + component, created_by: actor.actor_id, is_test: isTest, qa_batch: qaBatch });
+    appendTypedAccountingLedger(componentAccountMap[component][1], componentAccountMap[component][1] === SHEET_NAMES.companyRevenueLedger ? "company_revenue_id" : "expense_allocation_id", componentAccountMap[component][1] === SHEET_NAMES.companyRevenueLedger ? "CREV" : "EAL", { order_id: order.order_id, payment_id: payment.payment_id, pricing_version_id: snapshot.pricing_version_id, component: component, amount: fromSatang(amountSatang), status: "POSTED", idempotency_key: journalKey + ":typed:" + component, is_test: isTest, qa_batch: qaBatch });
+  });
+  appendTypedAccountingLedger(SHEET_NAMES.vatLedger, "vat_ledger_id", "VAT", { order_id: order.order_id, payment_id: payment.payment_id, pricing_version_id: snapshot.pricing_version_id, vat_rate: Number(snapshot.vat_rate || DEFAULT_VAT_RATE), vat_amount: fromSatang(vatSatang), status: "POSTED", idempotency_key: journalKey + ":VAT", is_test: isTest, qa_batch: qaBatch });
+  writeAccountingAudit("PAYMENT", payment.payment_id, "PAYMENT_ACCOUNTING_POSTED", "SUCCESS", actor.actor_id, "Approved payment posted to accounting ledger", { order_id: order.order_id, payment_id: payment.payment_id, journal_id: journal.journal_id, is_test: isTest, qa_batch: qaBatch });
+  return { ok: true, journal_id: journal.journal_id, duplicate: Boolean(existingJournal) };
+}
+
+function postApprovedPaymentAccounting(body) {
+  return withFinanceLock(function () {
+    const admin = financeAdminSession(body || {});
+    if (!admin.ok) return admin;
+    const paymentId = cleanString(body && (body.payment_id || body.paymentId), 80);
+    const payment = sheetToObjects(SHEET_NAMES.payments).find(function (row) {
+      return cleanString(row.payment_id, 80) === paymentId;
+    });
+    if (!payment) return financeError("NOT_FOUND", "Payment not found.");
+    return postApprovedPaymentAccountingInternal(payment, admin);
+  });
+}
+
+function publicAccountingJournal(row) {
+  return {
+    journal_id: cleanString(row.journal_id, 80),
+    journal_type: normalizeSalesStatus(row.journal_type),
+    source_type: normalizeSalesStatus(row.source_type),
+    source_id: cleanString(row.source_id, 120),
+    order_id: cleanString(row.order_id, 80),
+    payment_id: cleanString(row.payment_id, 80),
+    status: normalizeSalesStatus(row.status || "POSTED"),
+    posted_at: row.posted_at || "",
+    note: cleanString(row.note, 500),
+    is_test: booleanValue(row.is_test),
+    qa_batch: cleanString(row.qa_batch, 120)
+  };
+}
+
+function publicAccountingLedger(row) {
+  return {
+    ledger_entry_id: cleanString(row.ledger_entry_id, 80),
+    journal_id: cleanString(row.journal_id, 80),
+    account_code: cleanString(row.account_code, 40),
+    account_name: cleanString(row.account_name, 160),
+    direction: normalizeSalesStatus(row.direction),
+    amount: Number(row.amount || 0),
+    currency: cleanString(row.currency || "THB", 10),
+    order_id: cleanString(row.order_id, 80),
+    payment_id: cleanString(row.payment_id, 80),
+    product_id: cleanString(row.product_id, 80),
+    sku: cleanString(row.sku, 120),
+    pricing_version_id: cleanString(row.pricing_version_id, 80),
+    component: cleanString(row.component, 120),
+    status: normalizeSalesStatus(row.status || "POSTED"),
+    created_at: row.created_at || "",
+    is_test: booleanValue(row.is_test),
+    qa_batch: cleanString(row.qa_batch, 120)
+  };
+}
+
+function listAccountingJournals(body) {
+  const admin = financeAdminSession(body || {});
+  if (!admin.ok) return admin;
+  const includeQa = booleanValue(body && body.include_qa);
+  const rows = sheetToObjects(SHEET_NAMES.accountingJournals).filter(function (row) {
+    return includeQa || !isQaRecord(row);
+  }).map(publicAccountingJournal).reverse();
+  return { ok: true, total: rows.length, journals: rows };
+}
+
+function getAccountingJournal(body) {
+  const admin = financeAdminSession(body || {});
+  if (!admin.ok) return admin;
+  const id = cleanString(body && (body.journal_id || body.journalId), 80);
+  const journal = sheetToObjects(SHEET_NAMES.accountingJournals).find(function (row) { return cleanString(row.journal_id, 80) === id; });
+  if (!journal) return financeError("NOT_FOUND", "Journal not found.");
+  const entries = sheetToObjects(SHEET_NAMES.accountingLedger).filter(function (entry) { return cleanString(entry.journal_id, 80) === id; }).map(publicAccountingLedger);
+  return { ok: true, journal: publicAccountingJournal(journal), entries: entries };
+}
+
+function listGeneralLedger(body) {
+  const admin = financeAdminSession(body || {});
+  if (!admin.ok) return admin;
+  const includeQa = booleanValue(body && body.include_qa);
+  const accountCode = cleanString(body && body.account_code, 40);
+  const rows = sheetToObjects(SHEET_NAMES.accountingLedger).filter(function (row) {
+    if (!includeQa && isQaRecord(row)) return false;
+    if (accountCode && cleanString(row.account_code, 40) !== accountCode) return false;
+    return true;
+  }).map(publicAccountingLedger).reverse();
+  return { ok: true, total: rows.length, ledger: rows };
+}
+
+function listVatLedger(body) {
+  const admin = financeAdminSession(body || {});
+  if (!admin.ok) return admin;
+  const rows = sheetToObjects(SHEET_NAMES.vatLedger).filter(function (row) { return booleanValue(body && body.include_qa) || !isQaRecord(row); });
+  return { ok: true, total: rows.length, vat_ledger: rows.reverse() };
+}
+
+function listCompanyRevenue(body) {
+  const admin = financeAdminSession(body || {});
+  if (!admin.ok) return admin;
+  const rows = sheetToObjects(SHEET_NAMES.companyRevenueLedger).filter(function (row) { return booleanValue(body && body.include_qa) || !isQaRecord(row); });
+  return { ok: true, total: rows.length, company_revenue: rows.reverse() };
+}
+
+function listExpenseAllocations(body) {
+  const admin = financeAdminSession(body || {});
+  if (!admin.ok) return admin;
+  const rows = sheetToObjects(SHEET_NAMES.expenseAllocationLedger).filter(function (row) { return booleanValue(body && body.include_qa) || !isQaRecord(row); });
+  return { ok: true, total: rows.length, expense_allocations: rows.reverse() };
+}
+
+function runAccountingReconciliation(body) {
+  const admin = financeAdminSession(body || {});
+  if (!admin.ok) return admin;
+  ensureFinanceSheets();
+  const includeQa = booleanValue(body && body.include_qa);
+  const issues = [];
+  const ledgerKeys = {};
+  sheetToObjects(SHEET_NAMES.accountingLedger).forEach(function (entry) {
+    if (!includeQa && isQaRecord(entry)) return;
+    const key = cleanString(entry.idempotency_key, 220);
+    if (key) ledgerKeys[key] = (ledgerKeys[key] || 0) + 1;
+  });
+  Object.keys(ledgerKeys).forEach(function (key) {
+    if (ledgerKeys[key] > 1) issues.push({ severity: "CRITICAL", type: "DUPLICATE_ACCOUNTING_IDEMPOTENCY_KEY", idempotency_key: key, count: ledgerKeys[key] });
+  });
+  sheetToObjects(SHEET_NAMES.orders).forEach(function (order) {
+    if (!includeQa && isQaRecord(order)) return;
+    const status = normalizeSalesStatus(order.status || "");
+    if (["DEPOSIT_PAID", "PAID", "PAID_IN_FULL", "PREPARING", "READY_TO_INSTALL", "INSTALLING", "COMPLETED"].indexOf(status) !== -1) {
+      const approved = summarizePaymentsForOrder(order.order_id).approved_amount;
+      if (approved > 0) {
+        const journal = sheetToObjects(SHEET_NAMES.accountingJournals).find(function (row) { return cleanString(row.order_id, 80) === cleanString(order.order_id, 80); });
+        if (!journal) issues.push({ severity: "HIGH", type: "MISSING_ACCOUNTING_POSTING", order_id: order.order_id });
+      }
+    }
+    if (!cleanString(order.pricing_snapshot_json, 200000)) {
+      issues.push({ severity: "MEDIUM", type: "LEGACY_ORDER_MISSING_PRICING_SNAPSHOT", order_id: order.order_id });
+    }
+  });
+  const runAt = new Date();
+  issues.forEach(function (issue) {
+    appendObject(SHEET_NAMES.accountingReconciliation, {
+      reconciliation_id: makeId("REC"),
+      run_at: runAt,
+      status: "REPORT_ONLY",
+      issue_type: issue.type,
+      severity: issue.severity,
+      entity_type: issue.order_id ? "ORDER" : "LEDGER",
+      entity_id: issue.order_id || issue.idempotency_key || "",
+      message: issue.type,
+      metadata_json: JSON.stringify(issue),
+      created_by: admin.actor_id,
+      is_test: false,
+      qa_batch: ""
+    });
+  });
+  return { ok: true, report_only: true, total_issues: issues.length, critical_or_high: issues.filter(function (i) { return i.severity === "HIGH" || i.severity === "CRITICAL"; }).length, issues: issues };
+}
+
+function reverseAccountingPosting(body) {
+  const admin = financeAdminSession(body || {});
+  if (!admin.ok) return admin;
+  return financeError("MANUAL_REVERSAL_REQUIRED", "Accounting reversals are report-only in V3-7 and require an explicit approved adjustment workflow.");
+}
+
+function rebuildSafeProjection(body) {
+  const admin = financeAdminSession(body || {});
+  if (!admin.ok) return admin;
+  return runAccountingReconciliation(body || {});
+}
+
+function publicCompensationAgreement(row) {
+  return {
+    agreement_id: cleanString(row.agreement_id, 80),
+    agent_id: cleanString(row.agent_id, 80),
+    team_manager_id: cleanString(row.team_manager_id, 80),
+    team_id: cleanString(row.team_id, 80),
+    collection: cleanString(row.collection, 180),
+    model: cleanString(row.model, 160),
+    sku: cleanString(row.sku, 120),
+    agreement_type: normalizeSalesStatus(row.agreement_type || "FIXED_PER_UNIT"),
+    value: Number(row.value || 0),
+    tier_plan_id: cleanString(row.tier_plan_id, 80),
+    status: normalizeSalesStatus(row.status || "DRAFT"),
+    effective_from: row.effective_from || "",
+    effective_until: row.effective_until || "",
+    approved_by: cleanString(row.approved_by, 80),
+    created_at: row.created_at || "",
+    updated_at: row.updated_at || "",
+    is_test: booleanValue(row.is_test),
+    qa_batch: cleanString(row.qa_batch, 120)
+  };
+}
+
+function publicTierPlan(row) {
+  return {
+    tier_plan_id: cleanString(row.tier_plan_id, 80),
+    tier_name: cleanString(row.tier_name, 160),
+    tier_type: normalizeSalesStatus(row.tier_type || "TIER_BY_QUANTITY"),
+    min_quantity: Number(row.min_quantity || 0),
+    max_quantity: Number(row.max_quantity || 0),
+    min_sales_amount: Number(row.min_sales_amount || 0),
+    max_sales_amount: Number(row.max_sales_amount || 0),
+    commission_type: normalizeSalesStatus(row.commission_type || "FIXED_PER_UNIT"),
+    commission_value: Number(row.commission_value || 0),
+    status: normalizeSalesStatus(row.status || "DRAFT"),
+    effective_from: row.effective_from || "",
+    effective_until: row.effective_until || "",
+    created_at: row.created_at || "",
+    updated_at: row.updated_at || "",
+    is_test: booleanValue(row.is_test),
+    qa_batch: cleanString(row.qa_batch, 120)
+  };
+}
+
+function listAgentCompensationAgreements(body) {
+  const admin = financeAdminSession(body || {});
+  if (!admin.ok) return admin;
+  const agentId = validateAgentId(body && body.agent_id);
+  const rows = sheetToObjects(SHEET_NAMES.agentCompensationAgreements).filter(function (row) {
+    return !agentId || cleanString(row.agent_id, 80) === agentId;
+  }).map(publicCompensationAgreement).reverse();
+  return { ok: true, total: rows.length, agreements: rows };
+}
+
+function saveCompensationAgreement(body, existing, admin) {
+  const now = new Date();
+  const type = normalizeSalesStatus(body.agreement_type || (existing && existing.agreement_type) || "FIXED_PER_UNIT");
+  const allowed = ["FIXED_PER_UNIT", "PERCENT_OF_CENTRAL_POOL", "TIER_BY_QUANTITY", "TIER_BY_SALES_AMOUNT"];
+  if (allowed.indexOf(type) === -1) throw new Error("Invalid agreement_type");
+  const agentId = validateAgentId(body.agent_id || (existing && existing.agent_id));
+  if (!agentId) throw new Error("Invalid agent_id");
+  return {
+    agreement_id: existing ? existing.agreement_id : makeId("AGR"),
+    agent_id: agentId,
+    team_manager_id: cleanString(body.team_manager_id || (existing && existing.team_manager_id), 80),
+    team_id: cleanString(body.team_id || (existing && existing.team_id), 80),
+    collection: safeSheetText(body.collection || (existing && existing.collection), 180),
+    model: safeSheetText(body.model || (existing && existing.model), 160),
+    sku: safeSheetText(body.sku || (existing && existing.sku), 120),
+    agreement_type: type,
+    value: Math.max(0, Number(body.value || (existing && existing.value) || 0)),
+    tier_plan_id: cleanString(body.tier_plan_id || (existing && existing.tier_plan_id), 80),
+    status: normalizeSalesStatus(body.status || (existing && existing.status) || "DRAFT"),
+    effective_from: body.effective_from || (existing && existing.effective_from) || now,
+    effective_until: body.effective_until || (existing && existing.effective_until) || "",
+    approved_by: existing ? existing.approved_by : "",
+    created_by: existing ? existing.created_by : admin.actor_id,
+    change_reason: safeSheetText(body.change_reason || body.reason || "Compensation agreement saved", 500),
+    created_at: existing ? existing.created_at : now,
+    updated_at: now,
+    is_test: booleanValue(body.is_test) || isQaRecord(body),
+    qa_batch: cleanString(body.qa_batch, 120)
+  };
+}
+
+function createAgentCompensationAgreement(body) {
+  const admin = financeAdminSession(body || {});
+  if (!admin.ok) return admin;
+  try {
+    const row = saveCompensationAgreement(body || {}, null, admin);
+    appendObject(SHEET_NAMES.agentCompensationAgreements, row);
+    writeFinanceAudit("COMPENSATION_AGREEMENT", row.agreement_id, "AGREEMENT_CREATED", "", row.status, row.value, "ADMIN", admin.actor_id, row.change_reason, row, row.is_test, row.qa_batch);
+    return { ok: true, agreement: publicCompensationAgreement(row) };
+  } catch (error) {
+    return financeError("INVALID_REQUEST", error.message || "Invalid compensation agreement.");
+  }
+}
+
+function updateAgentCompensationAgreement(body) {
+  const admin = financeAdminSession(body || {});
+  if (!admin.ok) return admin;
+  const id = cleanString(body && (body.agreement_id || body.agreementId), 80);
+  const existing = sheetToObjects(SHEET_NAMES.agentCompensationAgreements).find(function (row) { return cleanString(row.agreement_id, 80) === id; });
+  if (!existing) return financeError("NOT_FOUND", "Compensation agreement not found.");
+  try {
+    const row = saveCompensationAgreement(body || {}, existing, admin);
+    if (normalizeSalesStatus(row.status) === "ACTIVE") row.status = "DRAFT";
+    updateRowFields(SHEET_NAMES.agentCompensationAgreements, existing._row, row);
+    writeFinanceAudit("COMPENSATION_AGREEMENT", row.agreement_id, "AGREEMENT_UPDATED", existing.status, row.status, row.value, "ADMIN", admin.actor_id, row.change_reason, row, row.is_test, row.qa_batch);
+    return { ok: true, agreement: publicCompensationAgreement(row) };
+  } catch (error) {
+    return financeError("INVALID_REQUEST", error.message || "Invalid compensation agreement.");
+  }
+}
+
+function approveAgentCompensationAgreement(body) {
+  const admin = financeAdminSession(body || {});
+  if (!admin.ok) return admin;
+  const id = cleanString(body && (body.agreement_id || body.agreementId), 80);
+  const row = sheetToObjects(SHEET_NAMES.agentCompensationAgreements).find(function (item) { return cleanString(item.agreement_id, 80) === id; });
+  if (!row) return financeError("NOT_FOUND", "Compensation agreement not found.");
+  const updates = { status: "ACTIVE", approved_by: admin.actor_id, updated_at: new Date() };
+  updateRowFields(SHEET_NAMES.agentCompensationAgreements, row._row, updates);
+  writeFinanceAudit("COMPENSATION_AGREEMENT", row.agreement_id, "AGREEMENT_APPROVED", row.status, "ACTIVE", row.value, "ADMIN", admin.actor_id, cleanString(body && body.reason, 500), row, isQaRecord(row), qaBatchFor(row));
+  return { ok: true, agreement: publicCompensationAgreement(Object.assign({}, row, updates)) };
+}
+
+function listTierPlans(body) {
+  const admin = financeAdminSession(body || {});
+  if (!admin.ok) return admin;
+  const rows = sheetToObjects(SHEET_NAMES.agentCompensationTiers).map(publicTierPlan).reverse();
+  return { ok: true, total: rows.length, tier_plans: rows };
+}
+
+function saveTierPlan(body, existing, admin) {
+  const now = new Date();
+  return {
+    tier_plan_id: existing ? existing.tier_plan_id : makeId("TIER"),
+    tier_name: safeSheetText(body.tier_name || (existing && existing.tier_name), 160),
+    tier_type: normalizeSalesStatus(body.tier_type || (existing && existing.tier_type) || "TIER_BY_QUANTITY"),
+    min_quantity: Math.max(0, Number(body.min_quantity || (existing && existing.min_quantity) || 0)),
+    max_quantity: Math.max(0, Number(body.max_quantity || (existing && existing.max_quantity) || 0)),
+    min_sales_amount: Math.max(0, Number(body.min_sales_amount || (existing && existing.min_sales_amount) || 0)),
+    max_sales_amount: Math.max(0, Number(body.max_sales_amount || (existing && existing.max_sales_amount) || 0)),
+    commission_type: normalizeSalesStatus(body.commission_type || (existing && existing.commission_type) || "FIXED_PER_UNIT"),
+    commission_value: Math.max(0, Number(body.commission_value || (existing && existing.commission_value) || 0)),
+    status: normalizeSalesStatus(body.status || (existing && existing.status) || "DRAFT"),
+    effective_from: body.effective_from || (existing && existing.effective_from) || now,
+    effective_until: body.effective_until || (existing && existing.effective_until) || "",
+    created_by: existing ? existing.created_by : admin.actor_id,
+    approved_by: existing ? existing.approved_by : "",
+    created_at: existing ? existing.created_at : now,
+    updated_at: now,
+    is_test: booleanValue(body.is_test) || isQaRecord(body),
+    qa_batch: cleanString(body.qa_batch, 120)
+  };
+}
+
+function createTierPlan(body) {
+  const admin = financeAdminSession(body || {});
+  if (!admin.ok) return admin;
+  const row = saveTierPlan(body || {}, null, admin);
+  appendObject(SHEET_NAMES.agentCompensationTiers, row);
+  return { ok: true, tier_plan: publicTierPlan(row) };
+}
+
+function updateTierPlan(body) {
+  const admin = financeAdminSession(body || {});
+  if (!admin.ok) return admin;
+  const id = cleanString(body && (body.tier_plan_id || body.tierPlanId), 80);
+  const existing = sheetToObjects(SHEET_NAMES.agentCompensationTiers).find(function (row) { return cleanString(row.tier_plan_id, 80) === id; });
+  if (!existing) return financeError("NOT_FOUND", "Tier plan not found.");
+  const row = saveTierPlan(body || {}, existing, admin);
+  updateRowFields(SHEET_NAMES.agentCompensationTiers, existing._row, row);
+  return { ok: true, tier_plan: publicTierPlan(row) };
+}
+
+function activeAgreementForOrder(order) {
+  const now = new Date();
+  const agentId = cleanString(order.owner_agent_id || order.agent_id, 80);
+  const rows = sheetToObjects(SHEET_NAMES.agentCompensationAgreements).filter(function (row) {
+    if (normalizeSalesStatus(row.status || "") !== "ACTIVE") return false;
+    if (cleanString(row.agent_id, 80) !== agentId) return false;
+    if (cleanString(row.sku, 120) && cleanString(row.sku, 120) !== cleanString(order.sku, 120)) return false;
+    if (cleanString(row.model, 160) && cleanString(row.model, 160) !== cleanString(order.model, 160)) return false;
+    if (cleanString(row.collection, 180) && cleanString(row.collection, 180) !== cleanString(order.collection, 180)) return false;
+    const from = row.effective_from ? new Date(row.effective_from) : null;
+    const until = row.effective_until ? new Date(row.effective_until) : null;
+    return (!from || from <= now) && (!until || until >= now);
+  });
+  return rows[rows.length - 1] || null;
+}
+
+function calculateAgreementCommissionSatang(order, agreement, centralPoolSatang) {
+  if (!agreement) return 0;
+  const quantity = Math.max(1, Number(order.quantity || 1));
+  const type = normalizeSalesStatus(agreement.agreement_type || "");
+  if (type === "FIXED_PER_UNIT") return Math.min(centralPoolSatang, toSatang(agreement.value || 0) * quantity);
+  if (type === "PERCENT_OF_CENTRAL_POOL") return Math.min(centralPoolSatang, percentSatang(centralPoolSatang, Number(agreement.value || 0)));
+  if (type === "TIER_BY_QUANTITY" || type === "TIER_BY_SALES_AMOUNT") {
+    const tiers = sheetToObjects(SHEET_NAMES.agentCompensationTiers).filter(function (tier) {
+      if (normalizeSalesStatus(tier.status || "") !== "ACTIVE") return false;
+      if (cleanString(tier.tier_plan_id, 80) !== cleanString(agreement.tier_plan_id, 80)) return false;
+      if (type === "TIER_BY_QUANTITY") {
+        const minQ = Number(tier.min_quantity || 0);
+        const maxQ = Number(tier.max_quantity || 0);
+        return quantity >= minQ && (!maxQ || quantity <= maxQ);
+      }
+      const total = Number(order.grand_total || order.total || 0);
+      const minA = Number(tier.min_sales_amount || 0);
+      const maxA = Number(tier.max_sales_amount || 0);
+      return total >= minA && (!maxA || total <= maxA);
+    });
+    const tier = tiers[tiers.length - 1];
+    if (!tier) return 0;
+    const tierType = normalizeSalesStatus(tier.commission_type || "FIXED_PER_UNIT");
+    if (tierType === "PERCENT_OF_CENTRAL_POOL" || tierType === "PERCENT") return Math.min(centralPoolSatang, percentSatang(centralPoolSatang, Number(tier.commission_value || 0)));
+    return Math.min(centralPoolSatang, toSatang(tier.commission_value || 0) * quantity);
+  }
+  return 0;
+}
+
+function compensationIdempotencyKey(order, payment, component, agentId) {
+  return ["V37COMP", cleanString(order.order_id, 80), cleanString(agentId, 80), component].join(":");
+}
+
+function appendV37Commission(order, payment, agentId, component, amountSatang, actor, note) {
+  if (amountSatang <= 0) return null;
+  const key = compensationIdempotencyKey(order, payment, component, agentId);
+  const existing = sheetToObjects(SHEET_NAMES.commissions).find(function (row) { return cleanString(row.idempotency_key, 220) === key; });
+  if (existing) return existing;
+  const now = new Date();
+  const isTest = shouldExcludeFromFinance(order) || shouldExcludeFromFinance(payment);
+  const qaBatch = qaBatchFor(order) || qaBatchFor(payment);
+  const commission = {
+    commission_id: makeId("COM"),
+    idempotency_key: key,
+    agent_id: agentId,
+    customer_id: order.customer_id,
+    quotation_id: order.quotation_id,
+    order_id: order.order_id,
+    payment_id: payment.payment_id,
+    product_id: order.product_id,
+    commission_rule_id: "V3-7",
+    commission_type: component,
+    milestone: normalizeSalesStatus(payment.payment_type || "PAYMENT"),
+    gross_order_amount: Number(order.grand_total || order.total || 0),
+    commissionable_amount: Number(order.grand_total || order.total || 0),
+    total_order_commission: fromSatang(amountSatang),
+    released_amount: fromSatang(amountSatang),
+    pending_amount: 0,
+    status: "AVAILABLE",
+    source_status: "APPROVED",
+    created_at: now,
+    available_at: now,
+    held_at: "",
+    reversed_at: "",
+    reference_commission_id: "",
+    note: cleanString(note || "V3-7 compensation from approved payment.", 500),
+    is_test: isTest,
+    qa_batch: qaBatch
+  };
+  appendObject(SHEET_NAMES.commissions, commission);
+  appendLedgerEntry({
+    agent_id: agentId,
+    entry_type: "COMMISSION_RELEASE",
+    direction: "CREDIT",
+    amount: fromSatang(amountSatang),
+    balance_bucket: "AVAILABLE",
+    reference_type: "COMMISSION",
+    reference_id: commission.commission_id,
+    idempotency_key: "LEDGER:" + key,
+    note: component,
+    created_by_type: "ADMIN",
+    created_by_id: actor.actor_id,
+    is_test: isTest,
+    qa_batch: qaBatch
+  });
+  return commission;
+}
+
+function calculateOrderCompensationSnapshot(order) {
+  const snapshot = pricingSnapshotForOrder(order);
+  const quantity = Math.max(1, Number(snapshot.quantity || order.quantity || 1));
+  const centralPoolSatang = Math.max(0, toSatang((snapshot.components || {}).central_commission_pool || 0) * quantity);
+  const agreement = activeAgreementForOrder(order);
+  const memberSatang = calculateAgreementCommissionSatang(order, agreement, centralPoolSatang);
+  const managerId = cleanString(order.team_leader_id, 80) || cleanString((agentTeamAssignment(order.owner_agent_id || order.agent_id) || {}).team_manager_id, 80);
+  return {
+    pricing_version_id: cleanString(snapshot.pricing_version_id, 80),
+    central_pool: fromSatang(centralPoolSatang),
+    member_commission: fromSatang(memberSatang),
+    manager_retained_commission: fromSatang(Math.max(0, centralPoolSatang - memberSatang)),
+    team_manager_id: managerId,
+    agreement_id: agreement ? cleanString(agreement.agreement_id, 80) : "",
+    sim_income: Number(readFinanceSetting("agent_sim_income", DEFAULT_SIM_INCOME)),
+    spc_income: Number(readFinanceSetting("agent_spc_income", DEFAULT_SPC_INCOME))
+  };
+}
+
+function calculateOrderCompensation(body) {
+  const admin = financeAdminSession(body || {});
+  if (!admin.ok) return admin;
+  const order = findOrderById(body && (body.order_id || body.orderId));
+  if (!order) return financeError("NOT_FOUND", "Order not found.");
+  return { ok: true, compensation: calculateOrderCompensationSnapshot(order) };
+}
+
+function postTeamCompensationForApprovedPayment(payment, actor) {
+  ensureSalesSheets();
+  ensureFinanceSheets();
+  if (normalizeSalesStatus(payment.status || "") !== "APPROVED") return { ok: true, skipped: true, reason: "PAYMENT_NOT_APPROVED" };
+  const order = findOrderById(payment.order_id);
+  if (!order) return financeError("NOT_FOUND", "Order not found for compensation.");
+  const agentId = cleanString(order.owner_agent_id || order.agent_id, 80);
+  const isTest = shouldExcludeFromFinance(order) || shouldExcludeFromFinance(payment);
+  const qaBatch = qaBatchFor(order) || qaBatchFor(payment);
+  const comp = calculateOrderCompensationSnapshot(order);
+  const simSatang = toSatang(comp.sim_income || 0);
+  const spcSatang = toSatang(comp.spc_income || 0);
+  const memberSatang = toSatang(comp.member_commission || 0);
+  appendV37Commission(order, payment, agentId, "SIM_INCOME", simSatang, actor, "Agent SIM income from SSBMS bundle.");
+  appendV37Commission(order, payment, agentId, "SPC_INCOME", spcSatang, actor, "Agent SPC income from SSBMS bundle.");
+  appendV37Commission(order, payment, agentId, "SALES_COMMISSION", memberSatang, actor, "Agent sales commission from central commission pool.");
+  const allocationKey = ["TEAMPOOL", order.order_id].join(":");
+  const existing = sheetToObjects(SHEET_NAMES.teamCommissionAllocations).find(function (row) { return cleanString(row.idempotency_key, 220) === allocationKey; });
+  if (!existing) {
+    const assignment = agentTeamAssignment(agentId) || {};
+    appendObject(SHEET_NAMES.teamCommissionAllocations, {
+      allocation_id: makeId("TCA"),
+      order_id: order.order_id,
+      payment_id: payment.payment_id,
+      agent_id: agentId,
+      team_manager_id: comp.team_manager_id,
+      team_id: cleanString(assignment.team_id, 80),
+      pricing_version_id: comp.pricing_version_id,
+      central_commission_pool: comp.central_pool,
+      member_commission: comp.member_commission,
+      manager_retained_commission: comp.manager_retained_commission,
+      sim_income: comp.sim_income,
+      spc_income: comp.spc_income,
+      status: "ALLOCATED",
+      created_at: new Date(),
+      idempotency_key: allocationKey,
+      is_test: isTest,
+      qa_batch: qaBatch
+    });
+  }
+  return { ok: true, compensation: comp, duplicate: Boolean(existing) };
+}
+
+function listMyIncome(body) {
+  return listAgentCommissions(body || {});
+}
+
+function teamManagerActor(body) {
+  return requireOrganizationActor(body || {}, [ORG_ROLE.ADMIN, ORG_ROLE.TEAM_MANAGER]);
+}
+
+function visibleTeamCommissionRows(actor) {
+  const teamIds = scopedTeamIdsForActor(actor);
+  return sheetToObjects(SHEET_NAMES.teamCommissionAllocations).filter(function (row) {
+    if (actor.role === ORG_ROLE.ADMIN) return true;
+    return teamIds.indexOf(cleanString(row.team_id, 80)) !== -1 ||
+      cleanString(row.team_manager_id, 80) === cleanString(actor.agent_id, 80);
+  });
+}
+
+function publicTeamCommissionAllocation(row, includeMemberDetail) {
+  const item = {
+    allocation_id: cleanString(row.allocation_id, 80),
+    order_id: cleanString(row.order_id, 80),
+    payment_id: cleanString(row.payment_id, 80),
+    team_manager_id: cleanString(row.team_manager_id, 80),
+    team_id: cleanString(row.team_id, 80),
+    pricing_version_id: cleanString(row.pricing_version_id, 80),
+    central_commission_pool: Number(row.central_commission_pool || 0),
+    member_commission: Number(row.member_commission || 0),
+    manager_retained_commission: Number(row.manager_retained_commission || 0),
+    status: normalizeSalesStatus(row.status || "ALLOCATED"),
+    created_at: row.created_at || "",
+    is_test: booleanValue(row.is_test),
+    qa_batch: cleanString(row.qa_batch, 120)
+  };
+  if (includeMemberDetail) {
+    item.agent_id = cleanString(row.agent_id, 80);
+    item.sim_income = Number(row.sim_income || 0);
+    item.spc_income = Number(row.spc_income || 0);
+  }
+  return item;
+}
+
+function listTeamCommissionSummary(body) {
+  const actor = teamManagerActor(body || {});
+  if (!actor.ok) return actor;
+  const rows = visibleTeamCommissionRows(actor).filter(function (row) { return booleanValue(body && body.include_qa) || !isQaRecord(row); });
+  return {
+    ok: true,
+    total: rows.length,
+    summary: {
+      central_commission_pool: sum(rows, "central_commission_pool"),
+      member_commission: sum(rows, "member_commission"),
+      manager_retained_commission: sum(rows, "manager_retained_commission"),
+      sim_income: sum(rows, "sim_income"),
+      spc_income: sum(rows, "spc_income")
+    },
+    allocations: rows.map(function (row) { return publicTeamCommissionAllocation(row, true); }).reverse()
+  };
+}
+
+function listTeamMemberIncome(body) {
+  const actor = teamManagerActor(body || {});
+  if (!actor.ok) return actor;
+  const rows = visibleTeamCommissionRows(actor).filter(function (row) { return booleanValue(body && body.include_qa) || !isQaRecord(row); });
+  return { ok: true, total: rows.length, member_income: rows.map(function (row) { return publicTeamCommissionAllocation(row, true); }).reverse() };
+}
+
+function listManagerCommission(body) {
+  const actor = teamManagerActor(body || {});
+  if (!actor.ok) return actor;
+  const rows = visibleTeamCommissionRows(actor).filter(function (row) { return booleanValue(body && body.include_qa) || !isQaRecord(row); });
+  return {
+    ok: true,
+    total: rows.length,
+    manager_commission: rows.map(function (row) { return publicTeamCommissionAllocation(row, false); }).reverse(),
+    summary: { retained_commission: sum(rows, "manager_retained_commission") }
+  };
 }
 
 function requestWithdraw(body) {
