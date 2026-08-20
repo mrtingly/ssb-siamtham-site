@@ -9022,11 +9022,18 @@ function reviewPayment(body) {
   ensureSalesSheets();
   const admin = requireAdminActor(body);
   if (!admin.ok) return admin;
+  const reviewStartedAt = Date.now();
+  const reviewTiming = [];
+  function markReviewPhase(phase) {
+    reviewTiming.push({ phase: phase, elapsed_ms: Date.now() - reviewStartedAt });
+  }
+  markReviewPhase("auth");
 
   const paymentId = cleanString(body && (body.payment_id || body.paymentId), 80);
   const payment = sheetToObjects(SHEET_NAMES.payments).find(function (item) {
     return cleanString(item.payment_id, 80) === paymentId;
   });
+  markReviewPhase("payment_lookup");
 
   if (!payment) return { ok: false, message: "Payment not found" };
 
@@ -9040,10 +9047,12 @@ function reviewPayment(body) {
         return financeError("ORDER_PRICING_SNAPSHOT_REQUIRED", "Payment approval requires a complete order pricing snapshot.");
       }
       const accountingResult = postApprovedPaymentAccountingInternal(payment, { actor_id: cleanString(body.admin_id || body.actor_id || "ADMIN", 80) });
+      markReviewPhase("accounting_verify");
       const commissionResult = usesV37Compensation(order)
         ? { ok: true, skipped: true, reason: "V3_7_COMPENSATION_ENGINE_ACTIVE" }
         : createCommissionForApprovedPayment(payment, { actor_id: cleanString(body.admin_id || body.actor_id || "ADMIN", 80) });
       const compensationResult = postTeamCompensationForApprovedPayment(payment, { actor_id: cleanString(body.admin_id || body.actor_id || "ADMIN", 80) });
+      markReviewPhase("compensation_verify");
       return {
         ok: true,
         duplicate: true,
@@ -9053,7 +9062,8 @@ function reviewPayment(body) {
         order: publicOrder(order),
         commission_result: commissionResult,
         accounting_result: accountingResult,
-        compensation_result: compensationResult
+        compensation_result: compensationResult,
+        timing_ms: reviewTiming
       };
     }
     return { ok: false, message: "Payment already reviewed", status: currentStatus };
@@ -9066,6 +9076,7 @@ function reviewPayment(body) {
 
   const order = findOrderById(payment.order_id);
   if (!order) return { ok: false, message: "Order not found for payment" };
+  markReviewPhase("order_lookup");
 
   if (decision === "APPROVED" && !hasCompletePricingSnapshot(order)) {
     return financeError("ORDER_PRICING_SNAPSHOT_REQUIRED", "Payment approval requires a complete order pricing snapshot.");
@@ -9082,6 +9093,7 @@ function reviewPayment(body) {
 
   updateRowFields(SHEET_NAMES.payments, payment._row, updates);
   Object.assign(payment, updates);
+  markReviewPhase("payment_update");
 
   var commissionResult = null;
   var accountingResult = null;
@@ -9100,6 +9112,7 @@ function reviewPayment(body) {
       payment_status: nextStatus,
       updated_at: now
     });
+    markReviewPhase("order_payment_update");
 
     updateOrderStatus({
       order_id: order.order_id,
@@ -9108,11 +9121,14 @@ function reviewPayment(body) {
       note: "Payment approved",
       internal: true
     });
+    markReviewPhase("order_status_update");
     accountingResult = postApprovedPaymentAccountingInternal(payment, admin);
+    markReviewPhase("accounting_posting");
     commissionResult = usesV37Compensation(order)
       ? { ok: true, skipped: true, reason: "V3_7_COMPENSATION_ENGINE_ACTIVE" }
       : createCommissionForApprovedPayment(payment, admin);
     compensationResult = postTeamCompensationForApprovedPayment(payment, admin);
+    markReviewPhase("compensation_posting");
   } else {
     updateRowFields(SHEET_NAMES.orders, order._row, {
       payment_status: "REJECTED",
@@ -9135,6 +9151,7 @@ function reviewPayment(body) {
     payment_id: payment.payment_id,
     decision: decision
   });
+  markReviewPhase("audit_log");
 
   return {
     ok: true,
@@ -9142,7 +9159,8 @@ function reviewPayment(body) {
     order: publicOrder(findOrderById(order.order_id) || order),
     commission_result: commissionResult,
     accounting_result: accountingResult,
-    compensation_result: compensationResult
+    compensation_result: compensationResult,
+    timing_ms: reviewTiming
   };
   });
 }
@@ -9277,6 +9295,15 @@ function withFinanceLock(fn) {
   } finally {
     lock.releaseLock();
   }
+}
+
+function sheetIdempotencyMap(sheetName) {
+  const map = {};
+  sheetToObjects(sheetName).forEach(function (row) {
+    const key = cleanString(row.idempotency_key, 220);
+    if (key) map[key] = row;
+  });
+  return map;
 }
 
 function isQaRecord(record) {
@@ -9480,13 +9507,17 @@ function ensureWalletAccount(agentId, seedRecord) {
   return wallet;
 }
 
-function appendLedgerEntry(data) {
+function appendLedgerEntry(data, options) {
   ensureFinanceSheets();
+  const opts = options || {};
+  const keyMap = opts.key_map || opts.keyMap || null;
   const idempotencyKey = cleanString(data.idempotency_key, 220);
   if (idempotencyKey) {
-    const existing = sheetToObjects(SHEET_NAMES.walletLedger).find(function (entry) {
-      return cleanString(entry.idempotency_key, 220) === idempotencyKey;
-    });
+    const existing = keyMap
+      ? keyMap[idempotencyKey]
+      : sheetToObjects(SHEET_NAMES.walletLedger).find(function (entry) {
+        return cleanString(entry.idempotency_key, 220) === idempotencyKey;
+      });
     if (existing) return existing;
   }
 
@@ -9512,7 +9543,8 @@ function appendLedgerEntry(data) {
   };
 
   appendObject(SHEET_NAMES.walletLedger, entry);
-  updateWalletProjection(entry.agent_id);
+  if (keyMap && idempotencyKey) keyMap[idempotencyKey] = entry;
+  if (!opts.skip_projection && !opts.skipProjection) updateWalletProjection(entry.agent_id);
   return entry;
 }
 
@@ -10516,13 +10548,17 @@ function accountNameByCode(code) {
   return row ? cleanString(row.account_name, 160) : "";
 }
 
-function appendAccountingLedgerEntry(data) {
+function appendAccountingLedgerEntry(data, options) {
   ensureFinanceSheets();
+  const opts = options || {};
+  const keyMap = opts.key_map || opts.keyMap || null;
   const key = cleanString(data.idempotency_key, 220);
   if (key) {
-    const existing = sheetToObjects(SHEET_NAMES.accountingLedger).find(function (entry) {
-      return cleanString(entry.idempotency_key, 220) === key;
-    });
+    const existing = keyMap
+      ? keyMap[key]
+      : sheetToObjects(SHEET_NAMES.accountingLedger).find(function (entry) {
+        return cleanString(entry.idempotency_key, 220) === key;
+      });
     if (existing) return existing;
   }
   const accountCode = cleanString(data.account_code, 40);
@@ -10548,15 +10584,20 @@ function appendAccountingLedgerEntry(data) {
     qa_batch: cleanString(data.qa_batch, 120)
   };
   appendObject(SHEET_NAMES.accountingLedger, row);
+  if (keyMap && key) keyMap[key] = row;
   return row;
 }
 
-function appendTypedAccountingLedger(sheetName, idField, prefix, data) {
+function appendTypedAccountingLedger(sheetName, idField, prefix, data, options) {
+  const opts = options || {};
+  const keyMap = opts.key_map || opts.keyMap || null;
   const key = cleanString(data.idempotency_key, 220);
   if (key) {
-    const existing = sheetToObjects(sheetName).find(function (row) {
-      return cleanString(row.idempotency_key, 220) === key;
-    });
+    const existing = keyMap
+      ? keyMap[key]
+      : sheetToObjects(sheetName).find(function (row) {
+        return cleanString(row.idempotency_key, 220) === key;
+      });
     if (existing) return existing;
   }
   const row = Object.assign({}, data);
@@ -10565,6 +10606,7 @@ function appendTypedAccountingLedger(sheetName, idField, prefix, data) {
   row.status = row.status || "POSTED";
   row.created_at = row.created_at || new Date();
   appendObject(sheetName, row);
+  if (keyMap && key) keyMap[key] = row;
   return row;
 }
 
@@ -10614,6 +10656,12 @@ function postApprovedPaymentAccountingInternal(payment, actor) {
   const isTest = shouldExcludeFromFinance(order) || shouldExcludeFromFinance(payment);
   const qaBatch = qaBatchFor(order) || qaBatchFor(payment);
   const journalKey = ["ACCT", order.order_id, payment.payment_id, "APPROVED_PAYMENT"].join(":");
+  const accountingLedgerKeys = sheetIdempotencyMap(SHEET_NAMES.accountingLedger);
+  const typedLedgerKeys = {};
+  function typedLedgerKeyMap(sheetName) {
+    if (!typedLedgerKeys[sheetName]) typedLedgerKeys[sheetName] = sheetIdempotencyMap(sheetName);
+    return typedLedgerKeys[sheetName];
+  }
   const existingJournal = sheetToObjects(SHEET_NAMES.accountingJournals).find(function (row) {
     return cleanString(row.idempotency_key, 220) === journalKey;
   });
@@ -10649,12 +10697,12 @@ function postApprovedPaymentAccountingInternal(payment, actor) {
     created_by: actor.actor_id,
     is_test: isTest,
     qa_batch: qaBatch
-  });
+  }, { key_map: accountingLedgerKeys });
 
   const revenueSatang = Math.round(toSatang(snapshot.selling_price_before_vat || order.subtotal || 0) * ratio);
   const vatSatang = Math.round(toSatang(snapshot.vat_amount || order.vat || 0) * ratio);
-  appendAccountingLedgerEntry({ journal_id: journal.journal_id, account_code: "4000", direction: "CREDIT", amount: fromSatang(revenueSatang), order_id: order.order_id, payment_id: payment.payment_id, product_id: order.product_id, sku: order.sku, pricing_version_id: snapshot.pricing_version_id, component: "bundle_revenue", idempotency_key: journalKey + ":4000", created_by: actor.actor_id, is_test: isTest, qa_batch: qaBatch });
-  appendAccountingLedgerEntry({ journal_id: journal.journal_id, account_code: "2000", direction: "CREDIT", amount: fromSatang(vatSatang), order_id: order.order_id, payment_id: payment.payment_id, product_id: order.product_id, sku: order.sku, pricing_version_id: snapshot.pricing_version_id, component: "vat", idempotency_key: journalKey + ":2000", created_by: actor.actor_id, is_test: isTest, qa_batch: qaBatch });
+  appendAccountingLedgerEntry({ journal_id: journal.journal_id, account_code: "4000", direction: "CREDIT", amount: fromSatang(revenueSatang), order_id: order.order_id, payment_id: payment.payment_id, product_id: order.product_id, sku: order.sku, pricing_version_id: snapshot.pricing_version_id, component: "bundle_revenue", idempotency_key: journalKey + ":4000", created_by: actor.actor_id, is_test: isTest, qa_batch: qaBatch }, { key_map: accountingLedgerKeys });
+  appendAccountingLedgerEntry({ journal_id: journal.journal_id, account_code: "2000", direction: "CREDIT", amount: fromSatang(vatSatang), order_id: order.order_id, payment_id: payment.payment_id, product_id: order.product_id, sku: order.sku, pricing_version_id: snapshot.pricing_version_id, component: "vat", idempotency_key: journalKey + ":2000", created_by: actor.actor_id, is_test: isTest, qa_batch: qaBatch }, { key_map: accountingLedgerKeys });
 
   const componentAccountMap = {
     device_price: ["5000", SHEET_NAMES.expenseAllocationLedger],
@@ -10674,10 +10722,10 @@ function postApprovedPaymentAccountingInternal(payment, actor) {
     const amountSatang = Math.round(toSatang(components[component] || 0) * Number(snapshot.quantity || 1) * ratio);
     if (amountSatang <= 0) return;
     const accountCode = componentAccountMap[component][0];
-    appendAccountingLedgerEntry({ journal_id: journal.journal_id, account_code: accountCode, direction: accountCode === "4100" ? "CREDIT" : "DEBIT", amount: fromSatang(amountSatang), order_id: order.order_id, payment_id: payment.payment_id, product_id: order.product_id, sku: order.sku, pricing_version_id: snapshot.pricing_version_id, component: component, idempotency_key: journalKey + ":" + component, created_by: actor.actor_id, is_test: isTest, qa_batch: qaBatch });
-    appendTypedAccountingLedger(componentAccountMap[component][1], componentAccountMap[component][1] === SHEET_NAMES.companyRevenueLedger ? "company_revenue_id" : "expense_allocation_id", componentAccountMap[component][1] === SHEET_NAMES.companyRevenueLedger ? "CREV" : "EAL", { order_id: order.order_id, payment_id: payment.payment_id, pricing_version_id: snapshot.pricing_version_id, component: component, amount: fromSatang(amountSatang), status: "POSTED", idempotency_key: journalKey + ":typed:" + component, is_test: isTest, qa_batch: qaBatch });
+    appendAccountingLedgerEntry({ journal_id: journal.journal_id, account_code: accountCode, direction: accountCode === "4100" ? "CREDIT" : "DEBIT", amount: fromSatang(amountSatang), order_id: order.order_id, payment_id: payment.payment_id, product_id: order.product_id, sku: order.sku, pricing_version_id: snapshot.pricing_version_id, component: component, idempotency_key: journalKey + ":" + component, created_by: actor.actor_id, is_test: isTest, qa_batch: qaBatch }, { key_map: accountingLedgerKeys });
+    appendTypedAccountingLedger(componentAccountMap[component][1], componentAccountMap[component][1] === SHEET_NAMES.companyRevenueLedger ? "company_revenue_id" : "expense_allocation_id", componentAccountMap[component][1] === SHEET_NAMES.companyRevenueLedger ? "CREV" : "EAL", { order_id: order.order_id, payment_id: payment.payment_id, pricing_version_id: snapshot.pricing_version_id, component: component, amount: fromSatang(amountSatang), status: "POSTED", idempotency_key: journalKey + ":typed:" + component, is_test: isTest, qa_batch: qaBatch }, { key_map: typedLedgerKeyMap(componentAccountMap[component][1]) });
   });
-  appendTypedAccountingLedger(SHEET_NAMES.vatLedger, "vat_ledger_id", "VAT", { order_id: order.order_id, payment_id: payment.payment_id, pricing_version_id: snapshot.pricing_version_id, vat_rate: Number(snapshot.vat_rate || DEFAULT_VAT_RATE), vat_amount: fromSatang(vatSatang), status: "POSTED", idempotency_key: journalKey + ":VAT", is_test: isTest, qa_batch: qaBatch });
+  appendTypedAccountingLedger(SHEET_NAMES.vatLedger, "vat_ledger_id", "VAT", { order_id: order.order_id, payment_id: payment.payment_id, pricing_version_id: snapshot.pricing_version_id, vat_rate: Number(snapshot.vat_rate || DEFAULT_VAT_RATE), vat_amount: fromSatang(vatSatang), status: "POSTED", idempotency_key: journalKey + ":VAT", is_test: isTest, qa_batch: qaBatch }, { key_map: typedLedgerKeyMap(SHEET_NAMES.vatLedger) });
   writeAccountingAudit("PAYMENT", payment.payment_id, "PAYMENT_ACCOUNTING_POSTED", "SUCCESS", actor.actor_id, "Approved payment posted to accounting ledger", { order_id: order.order_id, payment_id: payment.payment_id, journal_id: journal.journal_id, is_test: isTest, qa_batch: qaBatch });
   return { ok: true, journal_id: journal.journal_id, duplicate: Boolean(existingJournal) };
 }
@@ -10942,6 +10990,13 @@ function reverseAccountingPosting(body) {
     const targetPaymentId = payment ? cleanString(payment.payment_id, 80) : paymentId;
     const qaBatch = qaBatchFor(body || {}) || qaBatchFor(resolvedOrder) || qaBatchFor(payment || {});
     const reverseKey = ["REVERSAL", targetOrderId, targetPaymentId || "ALL"].join(":");
+    const accountingLedgerRows = sheetToObjects(SHEET_NAMES.accountingLedger);
+    const accountingLedgerKeys = {};
+    accountingLedgerRows.forEach(function (entry) {
+      const key = cleanString(entry.idempotency_key, 220);
+      if (key) accountingLedgerKeys[key] = entry;
+    });
+    const walletLedgerKeys = sheetIdempotencyMap(SHEET_NAMES.walletLedger);
     const existingJournal = sheetToObjects(SHEET_NAMES.accountingJournals).find(function (row) {
       return cleanString(row.idempotency_key, 220) === reverseKey;
     });
@@ -10964,7 +11019,7 @@ function reverseAccountingPosting(body) {
     if (!existingJournal) appendObject(SHEET_NAMES.accountingJournals, journal);
 
     let accountingReversed = 0;
-    sheetToObjects(SHEET_NAMES.accountingLedger).filter(function (entry) {
+    accountingLedgerRows.filter(function (entry) {
       if (cleanString(entry.order_id, 80) !== targetOrderId) return false;
       if (targetPaymentId && cleanString(entry.payment_id, 80) !== targetPaymentId) return false;
       if (cleanString(entry.component, 120).indexOf("reversal:") === 0) return false;
@@ -10986,7 +11041,7 @@ function reverseAccountingPosting(body) {
         created_by: admin.actor_id,
         is_test: true,
         qa_batch: qaBatch
-      });
+      }, { key_map: accountingLedgerKeys });
       if (cleanString(row.idempotency_key, 220) === key) accountingReversed += 1;
     });
 
@@ -11000,9 +11055,7 @@ function reverseAccountingPosting(body) {
       const amount = Number(commission.released_amount || 0);
       const current = normalizeSalesStatus(commission.status || "");
       const reversalLedgerKey = "REVERSAL:LEDGER:" + cleanString(commission.commission_id, 80);
-      const hasReversalLedger = sheetToObjects(SHEET_NAMES.walletLedger).some(function (entry) {
-        return cleanString(entry.idempotency_key, 220) === reversalLedgerKey;
-      });
+      const hasReversalLedger = Boolean(walletLedgerKeys[reversalLedgerKey]);
       if (amount > 0 && current !== "PENDING" && !hasReversalLedger) {
         appendLedgerEntry({
           agent_id: commission.agent_id,
@@ -11018,7 +11071,7 @@ function reverseAccountingPosting(body) {
           created_by_id: admin.actor_id,
           is_test: true,
           qa_batch: qaBatch
-        });
+        }, { key_map: walletLedgerKeys, skip_projection: true });
       }
       if (current !== "REVERSED") {
         updateRowFields(SHEET_NAMES.commissions, commission._row, {
@@ -11301,10 +11354,15 @@ function compensationIdempotencyKey(order, payment, component, agentId) {
   return ["V37COMP", cleanString(order.order_id, 80), cleanString(agentId, 80), component].join(":");
 }
 
-function appendV37Commission(order, payment, agentId, component, amountSatang, actor, note) {
+function appendV37Commission(order, payment, agentId, component, amountSatang, actor, note, options) {
   if (amountSatang <= 0) return null;
+  const opts = options || {};
+  const commissionKeyMap = opts.commission_key_map || opts.commissionKeyMap || null;
+  const walletLedgerKeyMap = opts.wallet_ledger_key_map || opts.walletLedgerKeyMap || null;
   const key = compensationIdempotencyKey(order, payment, component, agentId);
-  const existing = sheetToObjects(SHEET_NAMES.commissions).find(function (row) { return cleanString(row.idempotency_key, 220) === key; });
+  const existing = commissionKeyMap
+    ? commissionKeyMap[key]
+    : sheetToObjects(SHEET_NAMES.commissions).find(function (row) { return cleanString(row.idempotency_key, 220) === key; });
   if (existing) return existing;
   const now = new Date();
   const isTest = shouldExcludeFromFinance(order) || shouldExcludeFromFinance(payment);
@@ -11338,6 +11396,7 @@ function appendV37Commission(order, payment, agentId, component, amountSatang, a
     qa_batch: qaBatch
   };
   appendObject(SHEET_NAMES.commissions, commission);
+  if (commissionKeyMap) commissionKeyMap[key] = commission;
   appendLedgerEntry({
     agent_id: agentId,
     entry_type: "COMMISSION_RELEASE",
@@ -11352,7 +11411,8 @@ function appendV37Commission(order, payment, agentId, component, amountSatang, a
     created_by_id: actor.actor_id,
     is_test: isTest,
     qa_batch: qaBatch
-  });
+  }, { key_map: walletLedgerKeyMap, skip_projection: Boolean(walletLedgerKeyMap) });
+  if (opts.affected_agents) opts.affected_agents[cleanString(agentId, 80)] = true;
   return commission;
 }
 
@@ -11403,10 +11463,18 @@ function postTeamCompensationForApprovedPayment(payment, actor) {
   const spcSatang = toSatang(comp.spc_income || 0);
   const memberSatang = toSatang(comp.member_commission || 0);
   const managerSatang = comp.team_manager_id ? toSatang(comp.manager_retained_commission || 0) : 0;
-  appendV37Commission(order, payment, agentId, "SIM_INCOME", simSatang, actor, "Agent SIM income from SSBMS bundle.");
-  appendV37Commission(order, payment, agentId, "SPC_INCOME", spcSatang, actor, "Agent SPC income from SSBMS bundle.");
-  appendV37Commission(order, payment, agentId, "SALES_COMMISSION", memberSatang, actor, "Agent sales commission from central commission pool.");
-  appendV37Commission(order, payment, comp.team_manager_id, "TEAM_MANAGER_RETAINED_COMMISSION", managerSatang, actor, "Team manager retained commission from central commission pool.");
+  const commissionKeys = sheetIdempotencyMap(SHEET_NAMES.commissions);
+  const walletLedgerKeys = sheetIdempotencyMap(SHEET_NAMES.walletLedger);
+  const affectedAgents = {};
+  const commissionOptions = {
+    commission_key_map: commissionKeys,
+    wallet_ledger_key_map: walletLedgerKeys,
+    affected_agents: affectedAgents
+  };
+  appendV37Commission(order, payment, agentId, "SIM_INCOME", simSatang, actor, "Agent SIM income from SSBMS bundle.", commissionOptions);
+  appendV37Commission(order, payment, agentId, "SPC_INCOME", spcSatang, actor, "Agent SPC income from SSBMS bundle.", commissionOptions);
+  appendV37Commission(order, payment, agentId, "SALES_COMMISSION", memberSatang, actor, "Agent sales commission from central commission pool.", commissionOptions);
+  appendV37Commission(order, payment, comp.team_manager_id, "TEAM_MANAGER_RETAINED_COMMISSION", managerSatang, actor, "Team manager retained commission from central commission pool.", commissionOptions);
   const allocationKey = ["TEAMPOOL", order.order_id].join(":");
   const existing = sheetToObjects(SHEET_NAMES.teamCommissionAllocations).find(function (row) { return cleanString(row.idempotency_key, 220) === allocationKey; });
   if (!existing) {
@@ -11438,6 +11506,9 @@ function postTeamCompensationForApprovedPayment(payment, actor) {
       status: "ALLOCATED"
     });
   }
+  Object.keys(affectedAgents).forEach(function (id) {
+    if (existingAgentId(id)) updateWalletProjection(id);
+  });
   return { ok: true, compensation: comp, duplicate: Boolean(existing) };
 }
 
