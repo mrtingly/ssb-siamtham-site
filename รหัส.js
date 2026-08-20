@@ -611,6 +611,10 @@ function doPost(e) {
         result = setProductVariantStatus(body);
         break;
 
+      case "saveSimpleProductModel":
+        result = saveSimpleProductModel(body);
+        break;
+
       case "listCollections":
         result = listCollections(body);
         break;
@@ -1735,6 +1739,8 @@ const PRODUCT_HEADERS = [
   "sku",
   "image_url",
   "asset_key",
+  "stock_quantity",
+  "stock_status",
   "display_order",
   "status",
   "created_at",
@@ -5513,7 +5519,7 @@ function getAdminDashboard(options) {
 ========================================================= */
 
 function ensureSalesSheets() {
-  const cacheKey = "SBOS_SALES_SHEETS_READY_V3_7C_1";
+  const cacheKey = "SBOS_SALES_SHEETS_READY_PRODUCT_SIMPLE_V1";
   try {
     const cache = CacheService.getScriptCache();
     if (cache.get(cacheKey) === "1") return;
@@ -6331,6 +6337,9 @@ function publicProduct(product) {
     sku: cleanString(product.sku, 120),
     image_url: cleanString(product.image_url, 500),
     asset_key: cleanString(product.asset_key, 180),
+    stock_quantity: stockQuantityValue(product),
+    stock_status: stockStatusValue(product),
+    stock_is_set: stockIsSet(product),
     display_order: catalogDisplayOrder(product.display_order),
     status: normalizeSalesStatus(product.status || "ACTIVE"),
     created_at: product.created_at || "",
@@ -6405,6 +6414,30 @@ function inferredThemeKey(collectionName, brand) {
 function catalogDisplayOrder(value) {
   const number = Number(value);
   return isFinite(number) ? number : 999;
+}
+
+function stockIsSet(product) {
+  return product && product.stock_quantity !== undefined && String(product.stock_quantity).trim() !== "";
+}
+
+function stockQuantityValue(product) {
+  if (!stockIsSet(product)) return null;
+  return Math.max(0, Math.floor(Number(product.stock_quantity || 0)));
+}
+
+function stockStatusValue(product) {
+  if (!stockIsSet(product)) return "NOT_SET";
+  return stockQuantityValue(product) > 0 ? "IN_STOCK" : "OUT_OF_STOCK";
+}
+
+function normalizeStockQuantity(value) {
+  if (value === undefined || value === null || String(value).trim() === "") return "";
+  return Math.max(0, Math.floor(Number(value || 0)));
+}
+
+function stockAllowsQuantity(product, quantity) {
+  if (!stockIsSet(product)) return true;
+  return Math.max(1, Number(quantity || 1)) <= stockQuantityValue(product);
 }
 
 function publicCollection(row) {
@@ -6626,6 +6659,9 @@ function productDisplay(product) {
     color_hex: cleanString(product.color_hex, 40),
     image_url: cleanString(product.image_url, 500),
     asset_key: cleanString(product.asset_key, 180),
+    stock_quantity: stockQuantityValue(product),
+    stock_status: stockStatusValue(product),
+    stock_is_set: stockIsSet(product),
     display_order: catalogDisplayOrder(product.display_order),
     description: [product.model, product.storage, product.color].filter(Boolean).join(" / "),
     status: normalizeSalesStatus(product.status || "ACTIVE")
@@ -6736,6 +6772,16 @@ function calculateBackendPricing(options) {
     return {
       ok: false,
       message: "Active product not found"
+    };
+  }
+
+  if (!stockAllowsQuantity(product, quantityResult.quantity)) {
+    return {
+      ok: false,
+      code: "INSUFFICIENT_STOCK",
+      message: "Requested quantity exceeds available stock",
+      stock_quantity: stockQuantityValue(product),
+      stock_status: stockStatusValue(product)
     };
   }
 
@@ -6934,6 +6980,9 @@ function listProductModels(params) {
       starting_price: null,
       default_product_id: "",
       default_sku: "",
+      total_stock: 0,
+      stock_set_count: 0,
+      low_stock_count: 0,
       storages: {},
       colors: {}
     });
@@ -6969,6 +7018,9 @@ function listProductModels(params) {
         starting_price: null,
         default_product_id: cleanString(product.product_id, 80),
         default_sku: cleanString(product.sku, 120),
+        total_stock: 0,
+        stock_set_count: 0,
+        low_stock_count: 0,
         status: normalizeCatalogStatus(product.status || "ACTIVE"),
         storages: {},
         colors: {}
@@ -6977,6 +7029,13 @@ function listProductModels(params) {
     map[key].sku_count += 1;
     map[key].storages[cleanString(product.storage, 80)] = true;
     map[key].colors[cleanString(product.color, 120)] = true;
+    if (stockIsSet(product)) {
+      map[key].stock_set_count += 1;
+      map[key].total_stock += stockQuantityValue(product);
+      if (stockQuantityValue(product) > 0 && stockQuantityValue(product) <= 3) {
+        map[key].low_stock_count += 1;
+      }
+    }
     const price = safeStartingPrice(product);
     if (price !== null && (map[key].starting_price === null || price < map[key].starting_price)) {
       map[key].starting_price = price;
@@ -7041,10 +7100,13 @@ function listProductVariants(params) {
       color_hex: cleanString(product.color_hex, 40),
       image_url: cleanString(product.image_url, 500),
       asset_key: cleanString(product.asset_key, 180),
+      stock_quantity: stockQuantityValue(product),
+      stock_status: stockStatusValue(product),
+      stock_is_set: stockIsSet(product),
       product_id: cleanString(product.product_id, 80),
       sku: cleanString(product.sku, 120),
       status: normalizeSalesStatus(product.status || "ACTIVE"),
-      available: normalizeSalesStatus(product.status || "ACTIVE") === "ACTIVE"
+      available: normalizeSalesStatus(product.status || "ACTIVE") === "ACTIVE" && (!stockIsSet(product) || stockQuantityValue(product) > 0)
     });
   });
   const variants = Object.keys(variantMap).map(function (key) {
@@ -7369,6 +7431,8 @@ function createProduct(body) {
     sku: sku,
     image_url: safeSheetText(body.image_url, 500),
     asset_key: safeSheetText(body.asset_key, 180),
+    stock_quantity: normalizeStockQuantity(body.stock_quantity !== undefined ? body.stock_quantity : body.stock),
+    stock_status: "",
     display_order: catalogDisplayOrder(body.display_order),
     status: normalizeCatalogStatus(body.status || "ACTIVE"),
     created_at: now,
@@ -7420,6 +7484,10 @@ function updateProduct(body) {
     sku: safeSheetText(body.sku || product.sku, 120),
     image_url: safeSheetText(body.image_url || product.image_url, 500),
     asset_key: safeSheetText(body.asset_key || product.asset_key, 180),
+    stock_quantity: body.stock_quantity !== undefined || body.stock !== undefined
+      ? normalizeStockQuantity(body.stock_quantity !== undefined ? body.stock_quantity : body.stock)
+      : product.stock_quantity,
+    stock_status: "",
     display_order: catalogDisplayOrder(body.display_order !== undefined ? body.display_order : product.display_order),
     status: normalizeCatalogStatus(body.status || product.status || "ACTIVE"),
     updated_at: new Date(),
@@ -7466,6 +7534,261 @@ function updateProductVariant(body) {
 
 function setProductVariantStatus(body) {
   return updateProduct(Object.assign({}, body || {}, { status: body && body.status }));
+}
+
+function simpleProductArray(value) {
+  if (Array.isArray(value)) return value;
+  return parseJsonValue(value, []);
+}
+
+function skuPart(value, fallback) {
+  const cleaned = cleanString(value || fallback || "", 80).toUpperCase().replace(/[^A-Z0-9]+/g, "");
+  return cleaned || "SKU";
+}
+
+function generatedSimpleSku(collectionName, modelCode, modelName, storage, color, existingSkus) {
+  const prefix = normalizeThemeKey(collectionName) === "gold" ? "GLD" : normalizeThemeKey(collectionName) === "platinum" ? "PLT" : "SIL";
+  const storagePart = skuPart(storage).replace(/GB$/, "").replace(/TB$/, "T");
+  const colorPart = skuPart(color).slice(0, 3);
+  const modelPart = skuPart(modelCode || modelName).slice(0, 8);
+  let sku = ["SSB", prefix, modelPart, storagePart, colorPart].filter(Boolean).join("-");
+  let counter = 2;
+  while (existingSkus[sku.toLowerCase()]) {
+    sku = ["SSB", prefix, modelPart, storagePart, colorPart, counter].filter(Boolean).join("-");
+    counter += 1;
+  }
+  existingSkus[sku.toLowerCase()] = true;
+  return sku;
+}
+
+function findProductByModelStorageColor(modelRow, storage, color) {
+  const modelId = cleanString(modelRow && modelRow.model_id, 80);
+  const key = catalogKey([
+    modelRow && modelRow.collection_name,
+    modelRow && modelRow.brand,
+    modelRow && modelRow.model_name,
+    storage,
+    color
+  ]);
+  return sheetToObjects(SHEET_NAMES.products).find(function (product) {
+    const sameId = modelId && cleanString(product.model_id, 80) === modelId;
+    const sameKey = catalogKey([product.collection, product.brand, product.model, product.storage, product.color]) === key;
+    const sameOption = cleanString(product.storage, 80).toLowerCase() === cleanString(storage, 80).toLowerCase() &&
+      cleanString(product.color, 120).toLowerCase() === cleanString(color, 120).toLowerCase();
+    return (sameId && sameOption) || sameKey;
+  }) || null;
+}
+
+function saveSimplePricingVersion(product, beforeVat, vatRate, admin, body) {
+  const active = activePricingAllocationForProduct(product);
+  const beforeVatSatang = Math.max(0, toSatang(beforeVat || 0));
+  const normalizedVatRate = Math.max(0, Math.min(1, Number(vatRate || DEFAULT_VAT_RATE)));
+  if (
+    active &&
+    toSatang(active.selling_price_before_vat || 0) === beforeVatSatang &&
+    Number(active.vat_rate || 0) === normalizedVatRate
+  ) {
+    return { changed: false, allocation: publicPricingAllocation(active, true) };
+  }
+
+  sheetToObjects(SHEET_NAMES.pricingAllocationVersions).forEach(function (item) {
+    if (
+      normalizeSalesStatus(item.status || "") === "ACTIVE" &&
+      (cleanString(item.product_id, 80) === cleanString(product.product_id, 80) ||
+        cleanString(item.sku, 120).toLowerCase() === cleanString(product.sku, 120).toLowerCase())
+    ) {
+      updateRowFields(SHEET_NAMES.pricingAllocationVersions, item._row, {
+        status: "INACTIVE",
+        effective_until: new Date(),
+        updated_at: new Date()
+      });
+    }
+  });
+
+  const data = normalizeAllocationBody(Object.assign({}, body || {}, {
+    product_id: product.product_id,
+    sku: product.sku,
+    status: "ACTIVE",
+    device_price: fromSatang(beforeVatSatang),
+    setup_fee: 0,
+    safety_book_cost: 0,
+    fingerprint_cost: 0,
+    signal_shield_cost: 0,
+    assembly_cost: 0,
+    annual_sim_cost: 0,
+    operation_cost: 0,
+    spc_cost: 0,
+    central_commission_pool: 0,
+    company_revenue_allocation: 0,
+    vat_rate: normalizedVatRate,
+    change_reason: "Simple product management price update"
+  }), product, null, admin);
+  const issues = pricingAllocationIssues(data);
+  if (issues.length) {
+    return financeError("PRICING_INTEGRITY_ERROR", "Pricing allocation does not reconcile.", { issues: issues });
+  }
+  data.approved_by = admin.actor_id;
+  appendObject(SHEET_NAMES.pricingAllocationVersions, data);
+  writeAccountingAudit("PRICING_ALLOCATION", data.pricing_version_id, "PRICING_VERSION_ACTIVATED", "SUCCESS", admin.actor_id, "Simple product pricing activated", data);
+  return { changed: true, allocation: publicPricingAllocation(data, true) };
+}
+
+function saveSimpleProductModel(body) {
+  return withCatalogLock(function () {
+    const admin = requireAdminActor(body || {});
+    if (!admin.ok) return admin;
+    ensureSalesSheets();
+    const collection = findCollectionRow(body || {});
+    const collectionName = safeSheetText((collection && collection.collection_name) || body.collection_name || body.collection, 180);
+    const brand = safeSheetText(body.brand || (collection && collection.brand), 120);
+    const modelName = safeSheetText(body.model_name || body.model, 160);
+    if (!collectionName || !brand || !modelName) {
+      return { ok: false, message: "Collection, brand and product model are required" };
+    }
+
+    const now = new Date();
+    let modelRow = cleanString(body.model_id || body.product_model_id, 80)
+      ? findModelRow({ model_id: body.model_id || body.product_model_id })
+      : findModelRow({ collection: collectionName, brand: brand, model: modelName });
+    const modelPayload = {
+      collection_id: collection ? collection.collection_id : catalogId("COL", [collectionName]),
+      collection_name: collectionName,
+      brand: brand,
+      series: safeSheetText(body.series || (collection && collection.series), 160),
+      model_name: modelName,
+      model_code: safeSheetText(body.model_code || body.modelCode, 80),
+      description: safeSheetText(body.description, 500),
+      image_url: safeSheetText(body.image_url, 500),
+      asset_key: safeSheetText(body.asset_key, 180),
+      display_order: catalogDisplayOrder(body.display_order),
+      status: normalizeCatalogStatus(body.status || "ACTIVE"),
+      updated_at: now,
+      updated_by: admin.actor_id
+    };
+
+    if (modelRow) {
+      updateRowFields(SHEET_NAMES.productModels, modelRow._row, modelPayload);
+      modelRow = Object.assign({}, modelRow, modelPayload);
+    } else {
+      modelRow = Object.assign({}, modelPayload, {
+        model_id: makeId("MDL"),
+        created_at: now,
+        created_by: admin.actor_id,
+        is_test: isQaRecord(body || {}),
+        qa_batch: qaBatchFor(body || {})
+      });
+      appendObject(SHEET_NAMES.productModels, modelRow);
+    }
+
+    const storages = simpleProductArray(body.storage_options || body.storages);
+    const colors = simpleProductArray(body.color_options || body.colors);
+    const combinations = simpleProductArray(body.combinations);
+    if (!storages.length || !colors.length || !combinations.length) {
+      return { ok: false, message: "At least one storage, one color and one valid combination are required" };
+    }
+
+    const storageMap = {};
+    storages.forEach(function (item) {
+      const label = safeSheetText(item && (item.storage || item.label), 80);
+      if (!label) return;
+      storageMap[label] = {
+        storage: label,
+        ram: safeSheetText(item.ram || item.ram_label, 80),
+        base_price: Math.max(0, Number(item.base_price || item.price || 0)),
+        status: normalizeCatalogStatus(item.status || (item.active === false ? "INACTIVE" : "ACTIVE")),
+        display_order: catalogDisplayOrder(item.display_order)
+      };
+    });
+
+    const colorMap = {};
+    colors.forEach(function (item) {
+      const name = safeSheetText(item && (item.color || item.name), 120);
+      if (!name) return;
+      colorMap[name] = {
+        color: name,
+        color_code: safeSheetText(item.color_code || item.code, 80),
+        color_hex: safeSheetText(item.color_hex || item.hex, 40),
+        price_adjustment: Number(item.price_adjustment || item.adjustment || 0),
+        image_url: safeSheetText(item.image_url, 500),
+        asset_key: safeSheetText(item.asset_key, 180),
+        status: normalizeCatalogStatus(item.status || (item.active === false ? "INACTIVE" : "ACTIVE"))
+      };
+    });
+
+    const existingSkus = {};
+    sheetToObjects(SHEET_NAMES.products).forEach(function (product) {
+      existingSkus[cleanString(product.sku, 120).toLowerCase()] = true;
+    });
+
+    const saved = [];
+    combinations.forEach(function (combo) {
+      const storage = storageMap[safeSheetText(combo.storage, 80)];
+      const color = colorMap[safeSheetText(combo.color, 120)];
+      if (!storage || !color) return;
+      const existing = findProductByModelStorageColor(modelRow, storage.storage, color.color);
+      const comboActive = combo.enabled !== false && storage.status === "ACTIVE" && color.status === "ACTIVE";
+      const sku = existing
+        ? cleanString(existing.sku, 120)
+        : safeSheetText(combo.sku, 120) || generatedSimpleSku(collectionName, modelPayload.model_code, modelName, storage.storage, color.color, existingSkus);
+      const duplicate = sheetToObjects(SHEET_NAMES.products).find(function (product) {
+        return cleanString(product.sku, 120).toLowerCase() === sku.toLowerCase() &&
+          (!existing || cleanString(product.product_id, 80) !== cleanString(existing.product_id, 80));
+      });
+      if (duplicate) throw new Error("Duplicate SKU: " + sku);
+      const productData = {
+        collection: collectionName,
+        brand: brand,
+        model_id: modelRow.model_id,
+        model: modelName,
+        storage: storage.storage,
+        memory_label: storage.ram || storage.storage,
+        color: color.color,
+        color_code: color.color_code,
+        color_hex: color.color_hex,
+        sku: sku,
+        image_url: safeSheetText(combo.image_url || color.image_url || modelPayload.image_url, 500),
+        asset_key: safeSheetText(combo.asset_key || color.asset_key || modelPayload.asset_key, 180),
+        stock_quantity: normalizeStockQuantity(combo.stock_quantity !== undefined ? combo.stock_quantity : combo.stock),
+        stock_status: "",
+        display_order: catalogDisplayOrder(combo.display_order || storage.display_order),
+        status: comboActive ? normalizeCatalogStatus(combo.status || "ACTIVE") : "INACTIVE",
+        updated_at: now,
+        updated_by: admin.actor_id
+      };
+      let productRow;
+      if (existing) {
+        updateRowFields(SHEET_NAMES.products, existing._row, productData);
+        productRow = Object.assign({}, existing, productData);
+      } else {
+        productRow = Object.assign({}, productData, {
+          product_id: makeId("PRD"),
+          created_at: now,
+          created_by: admin.actor_id,
+          is_test: isQaRecord(body || {}),
+          qa_batch: qaBatchFor(body || {})
+        });
+        appendObject(SHEET_NAMES.products, productRow);
+      }
+      const beforeVat = Math.max(0, Number(storage.base_price || 0) + Number(color.price_adjustment || 0));
+      const pricing = productRow.status === "ACTIVE"
+        ? saveSimplePricingVersion(productRow, beforeVat, Number(body.vat_rate || DEFAULT_VAT_RATE), admin, body)
+        : { changed: false, allocation: activePricingAllocationForProduct(productRow) ? publicPricingAllocation(activePricingAllocationForProduct(productRow), true) : null };
+      if (pricing && pricing.ok === false) throw new Error(pricing.message || "Pricing allocation failed");
+      saved.push({ product: publicProduct(productRow), pricing: pricing.allocation || null, price_changed: Boolean(pricing.changed) });
+    });
+
+    writeCatalogAudit("saveSimpleProductModel", "MODEL", modelRow.model_id, admin, null, {
+      model: publicProductModel(modelRow),
+      variants: saved.length
+    }, body.reason);
+
+    return {
+      ok: true,
+      model: publicProductModel(modelRow),
+      total_variants: saved.length,
+      variants: saved
+    };
+  });
 }
 
 function listPricing(params) {
@@ -7589,6 +7912,9 @@ function runProductIntegrityCheck(body) {
     if (!cleanString(product.storage, 80)) issues.push({ severity: "MEDIUM", type: "MISSING_VARIANT", product_id: productId, sku: sku });
     if (!cleanString(product.color, 120)) issues.push({ severity: "LOW", type: "MISSING_COLOR", product_id: productId, sku: sku });
     if (statusValue === "ACTIVE" && !activePricingAllocationForProduct(product)) issues.push({ severity: "HIGH", type: "ACTIVE_VARIANT_WITHOUT_ACTIVE_PRICING", product_id: productId, sku: sku });
+    if (stockIsSet(product) && Number(product.stock_quantity || 0) < 0) issues.push({ severity: "HIGH", type: "NEGATIVE_STOCK", product_id: productId, sku: sku });
+    if (statusValue === "ACTIVE" && !stockIsSet(product)) issues.push({ severity: "LOW", type: "STOCK_NOT_SET", product_id: productId, sku: sku });
+    if (statusValue === "ACTIVE" && !cleanString(product.image_url || product.asset_key, 500)) issues.push({ severity: "LOW", type: "IMAGE_NOT_SET", product_id: productId, sku: sku });
     if (statusValue === "ACTIVE" && collectionMeta && collectionMeta.status === "ARCHIVED") issues.push({ severity: "HIGH", type: "ARCHIVED_COLLECTION_WITH_ACTIVE_VARIANT", product_id: productId, sku: sku });
     if (statusValue === "ACTIVE" && modelMeta && modelMeta.status === "ARCHIVED") issues.push({ severity: "HIGH", type: "ARCHIVED_MODEL_WITH_ACTIVE_VARIANT", product_id: productId, sku: sku });
 
