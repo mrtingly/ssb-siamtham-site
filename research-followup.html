@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>แบบติดตามผลการทดลองใช้ SSBMS</title>
+  <style>
+    :root{--bg:#f5f8fc;--card:#fff;--text:#172033;--muted:#687385;--line:#dfe6ef;--accent:#0f5bd8;--danger:#b42318}
+    *{box-sizing:border-box} body{margin:0;font-family:Tahoma,"Noto Sans Thai",sans-serif;background:var(--bg);color:var(--text)}
+    .wrap{max-width:920px;margin:auto;padding:28px 16px 64px}.hero{background:linear-gradient(135deg,#ffffff,#edf4ff);border:1px solid var(--line);border-radius:22px;padding:28px;box-shadow:0 14px 36px rgba(30,55,90,.08)}
+    h1{margin:0 0 10px;font-size:clamp(26px,4vw,40px)} h2{font-size:22px;margin:0 0 14px}.lead{color:var(--muted);line-height:1.8;margin:0}.meta{margin-top:14px;font-size:14px;color:var(--muted)}
+    .section{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;margin-top:18px}.q{padding:14px 0;border-top:1px solid #edf1f6}.q:first-of-type{border-top:0}.q label.title{display:block;font-weight:700;margin-bottom:10px;line-height:1.6}
+    input[type=text],input[type=number],input[type=month],textarea,select{width:100%;border:1px solid #cbd5e1;border-radius:11px;padding:12px 13px;font:inherit;background:#fff}textarea{min-height:110px;resize:vertical}.choice{display:grid;gap:8px}.choice label{display:flex;gap:9px;align-items:flex-start;line-height:1.5}.hint{font-size:13px;color:var(--muted);margin-top:7px}.hidden{display:none!important}
+    .consent{background:#fff9e8;border-color:#f0dfaa}.incident{background:#f9fbff}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.btn{border:0;border-radius:12px;padding:13px 18px;font-weight:700;cursor:pointer}.primary{background:var(--accent);color:white}.secondary{background:#eaf1fb;color:#123}.status{margin-top:12px;padding:12px;border-radius:10px;background:#eef4ff;color:#214a85;display:none}.note{padding:12px 14px;border-left:4px solid var(--accent);background:#f2f7ff;border-radius:8px;line-height:1.7}.req{color:var(--danger)}
+  </style>
+</head>
+<body>
+<main class="wrap">
+  <section class="hero">
+    <h1>แบบติดตามผลการทดลองใช้ SSBMS และระบบต้นแบบ</h1>
+    <p class="lead">สำหรับติดตามผลการใช้งานจริงของผู้เข้าร่วมทดลอง ตั้งแต่ระบบ SIM รุ่นแรก, SSBM และ SSBMS เพื่อนำข้อมูลด้านพฤติกรรม เหตุการณ์ภัยคุกคาม ข้อจำกัด และผลลัพธ์ ไปใช้ในการวิจัยและพัฒนาระบบต่อไป</p>
+    <div class="meta">บริษัท สยามทำ จำกัด · Research Follow-up Form</div>
+  </section>
+
+  <form id="researchForm">
+    <section class="section consent">
+      <h2>ส่วนที่ 1 · การยืนยันและความยินยอม</h2>
+      <div class="note">ข้อมูลระบุตัวบุคคลควรใช้เพื่อจับคู่กับฐานข้อมูลเดิมเท่านั้น และแยกออกจากชุดข้อมูลวิเคราะห์ด้วย Research ID</div>
+      <div class="q"><label class="title">1. รหัสสมาชิก / รหัสผู้ทดลอง <span class="req">*</span></label><input name="member_id" type="text" required></div>
+      <div class="q"><label class="title">2. ชื่อ–นามสกุล <span class="req">*</span></label><input name="full_name" type="text" required></div>
+      <div class="q"><label class="title">3. ยินยอมให้เชื่อมโยงคำตอบนี้กับข้อมูลการใช้งานเดิมเพื่อการวิจัยหรือไม่ <span class="req">*</span></label><div class="choice"><label><input type="radio" name="consent_link" value="yes" required> ยินยอม</label><label><input type="radio" name="consent_link" value="no"> ไม่ยินยอม</label></div></div>
+      <div class="q"><label class="title">4. ยินยอมเข้าร่วมการติดตามผลครั้งนี้หรือไม่ <span class="req">*</span></label><div class="choice"><label><input type="radio" name="consent_participate" value="yes" required> ยินยอม</label><label><input type="radio" name="consent_participate" value="no"> ไม่ยินยอม</label></div></div>
+    </section>
+
+    <div id="mainSurvey">
+      <section class="section">
+        <h2>ส่วนที่ 2 · ประวัติการใช้งาน</h2>
+        <div class="q"><label class="title">5. ท่านเคยทดลองใช้ระบบใดบ้าง</label><div class="choice">
+          <label><input type="checkbox" name="generation" value="sim1"> รุ่นที่ 1 ระบบ SIM</label>
+          <label><input type="checkbox" name="generation" value="ssbm2"> รุ่นที่ 2 SSBM เครื่องเก็บเงิน</label>
+          <label><input type="checkbox" name="generation" value="ssbms3"> รุ่นที่ 3 SSBMS</label>
+          <label><input type="checkbox" name="generation" value="unknown"> ไม่แน่ใจ</label>
+        </div></div>
+        <div class="q"><label class="title">6. ปัจจุบันท่านยังใช้งานระบบอยู่หรือไม่</label><select name="usage_status"><option value="">-- เลือก --</option><option>ใช้อยู่เป็นประจำ</option><option>ใช้เป็นบางครั้ง</option><option>หยุดใช้ชั่วคราว</option><option>เลิกใช้แล้ว</option></select></div>
+        <div class="q"><label class="title">7. โดยประมาณ ท่านใช้งานระบบมาเป็นระยะเวลาเท่าใด</label><select name="usage_duration"><option value="">-- เลือก --</option><option>ต่ำกว่า 3 เดือน</option><option>3–6 เดือน</option><option>6–12 เดือน</option><option>1–2 ปี</option><option>2–3 ปี</option><option>มากกว่า 3 ปี</option></select></div>
+        <div class="q"><label class="title">8. หากหยุดใช้หรือเลิกใช้ สาเหตุสำคัญคืออะไร</label><textarea name="stop_reason"></textarea></div>
+      </section>
+
+      <section class="section hidden" id="simSection">
+        <h2>ส่วนที่ 3A · การใช้งานระบบ SIM รุ่นที่ 1</h2>
+        <div class="q"><label class="title">9. ระหว่างใช้งาน ท่านปฏิบัติตามข้อใดบ้าง</label><div class="choice">
+          <label><input type="checkbox" name="sim_practice" value="hide_number"> ไม่เปิดเผยหมายเลข SIM</label>
+          <label><input type="checkbox" name="sim_practice" value="code_topup"> ใช้รหัสแทนหมายเลขในการเติมเงิน</label>
+          <label><input type="checkbox" name="sim_practice" value="no_call"> ไม่โทรออก</label>
+          <label><input type="checkbox" name="sim_practice" value="no_receive"> ไม่รับสาย</label>
+          <label><input type="checkbox" name="sim_practice" value="no_app"> ไม่ใช้สมัครแอปหรือบริการทั่วไป</label>
+          <label><input type="checkbox" name="sim_practice" value="no_lend"> ไม่ให้บุคคลอื่นยืม</label>
+          <label><input type="checkbox" name="sim_practice" value="share_only"> ใช้ตามหลักการแชร์อินเทอร์เน็ตที่กำหนด</label>
+        </div></div>
+        <div class="q"><label class="title">10. ข้อใดที่ท่านไม่สามารถปฏิบัติตามได้เป็นประจำ และเพราะเหตุใด</label><textarea name="sim_noncompliance"></textarea></div>
+      </section>
+
+      <section class="section hidden" id="ssbmSection">
+        <h2>ส่วนที่ 3B · การใช้งาน SSBM รุ่นที่ 2</h2>
+        <div class="q"><label class="title">11. โดยปกติท่านปิดเครื่องเก็บเงินเมื่อไม่ได้ทำธุรกรรมหรือไม่</label><select name="ssbm_poweroff"><option value="">-- เลือก --</option><option>ทุกครั้ง</option><option>เกือบทุกครั้ง</option><option>บางครั้ง</option><option>ไม่ค่อยทำ</option><option>ไม่ทำ</option></select></div>
+        <div class="q"><label class="title">12. เคยนำเครื่องเก็บเงินไปใช้ทำกิจกรรมอื่นนอกเหนือจากการเงินหรือไม่</label><select name="ssbm_other_use"><option value="">-- เลือก --</option><option>ไม่เคย</option><option>เคย</option></select><textarea name="ssbm_other_use_detail" placeholder="ถ้าเคย โปรดระบุ"></textarea></div>
+        <div class="q"><label class="title">13. เคยติดตั้งแอปพลิเคชันอื่นเพิ่มเติมหรือไม่</label><select name="ssbm_extra_apps"><option value="">-- เลือก --</option><option>ไม่เคย</option><option>เคย</option></select></div>
+        <div class="q"><label class="title">14. เคยให้บุคคลอื่นยืมเครื่องเก็บเงินหรือไม่</label><select name="ssbm_lend"><option value="">-- เลือก --</option><option>ไม่เคย</option><option>เคย 1 ครั้ง</option><option>เคยหลายครั้ง</option></select></div>
+        <div class="q"><label class="title">15. หากเคยทำข้อ 12–14 ขณะนั้นท่านทราบหรือไม่ว่าการกระทำนั้นไม่เป็นไปตามหลักการของระบบ</label><select name="ssbm_awareness"><option value="">-- เลือก --</option><option>ไม่ทราบ</option><option>ทราบ แต่คิดว่าไม่น่ามีปัญหา</option><option>ทราบ แต่มีความจำเป็น</option><option>ทราบ แต่ไม่สะดวกที่จะปฏิบัติตาม</option></select></div>
+      </section>
+
+      <section class="section incident">
+        <h2>ส่วนที่ 4 · ประสบการณ์ภัยคุกคามจริง</h2>
+        <div class="q"><label class="title">16. ระหว่างใช้งานระบบ ท่านเคยเผชิญเหตุการณ์ที่สงสัยว่าเกี่ยวข้องกับมิจฉาชีพ ภัยคุกคามทางไซเบอร์ หรือการหลอกลวงทางการเงินหรือไม่ <span class="req">*</span></label><div class="choice"><label><input type="radio" name="has_incident" value="no" required> ไม่เคย</label><label><input type="radio" name="has_incident" value="yes"> เคย</label><label><input type="radio" name="has_incident" value="unsure"> ไม่แน่ใจ</label></div></div>
+      </section>
+
+      <section class="section hidden" id="incidentSection">
+        <h2>ส่วนที่ 5 · รายละเอียดเหตุการณ์</h2>
+        <div class="q"><label class="title">17. ท่านพบเหตุการณ์ประเภทใดบ้าง</label><div class="choice">
+          <label><input type="checkbox" name="incident_type" value="call"> สายโทรศัพท์ต้องสงสัย</label><label><input type="checkbox" name="incident_type" value="sms"> SMS/ลิงก์</label><label><input type="checkbox" name="incident_type" value="phishing"> Phishing</label><label><input type="checkbox" name="incident_type" value="remote_app"> หลอกติดตั้งแอป/Remote Control</label><label><input type="checkbox" name="incident_type" value="impersonation"> ปลอมเป็นเจ้าหน้าที่/ธนาคาร/องค์กร</label><label><input type="checkbox" name="incident_type" value="investment"> หลอกลงทุน</label><label><input type="checkbox" name="incident_type" value="transfer"> หลอกให้โอนเงิน</label><label><input type="checkbox" name="incident_type" value="other"> อื่น ๆ</label>
+        </div></div>
+        <div class="q"><label class="title">18. เหตุการณ์เกิดขึ้นประมาณเมื่อใด</label><input type="month" name="incident_month"></div>
+        <div class="q"><label class="title">19. ขณะเกิดเหตุ ท่านใช้ระบบรุ่นใด</label><select name="incident_generation"><option value="">-- เลือก --</option><option>SIM รุ่นที่ 1</option><option>SSBM รุ่นที่ 2</option><option>SSBMS รุ่นที่ 3</option><option>ไม่แน่ใจ</option></select></div>
+        <div class="q"><label class="title">20. ผู้ต้องสงสัยติดต่อผ่านช่องทางใด</label><input type="text" name="incident_channel" placeholder="เช่น โทรศัพท์, LINE, Facebook, SMS"></div>
+        <div class="q"><label class="title">21. ท่านทำตามคำแนะนำหรือคำสั่งของบุคคลนั้นเพียงใด</label><select name="follow_attacker"><option value="">-- เลือก --</option><option>ไม่ทำเลย</option><option>ทำบางส่วน</option><option>ทำเกือบทั้งหมด</option><option>ทำทั้งหมดก่อนรู้ตัว</option></select></div>
+        <div class="q"><label class="title">22. ท่านถูกชักจูงให้ติดตั้งแอปพลิเคชันหรือไม่</label><select name="installed_app"><option value="">-- เลือก --</option><option>ไม่</option><option>ใช่ แต่ไม่ได้ติดตั้ง</option><option>ใช่ และติดตั้ง</option></select></div>
+        <div class="q"><label class="title">23. หากติดตั้ง แอปดังกล่าวเข้าถึงหรือควบคุมเครื่องใช้งานทั่วไปได้หรือไม่</label><select name="fd_access"><option value="">-- เลือก --</option><option>ได้</option><option>ไม่ได้</option><option>ไม่ทราบ</option><option>ไม่เกี่ยวข้อง</option></select></div>
+        <div class="q"><label class="title">24. ผู้โจมตีสามารถเข้าถึง SSBM / เครื่องเก็บเงินได้หรือไม่</label><select name="ssbm_access"><option value="">-- เลือก --</option><option>ไม่สามารถเข้าถึง</option><option>สามารถเข้าถึง</option><option>ไม่ทราบ</option><option>ไม่เกี่ยวข้อง</option></select></div>
+        <div class="q"><label class="title">25. ผู้โจมตีสามารถเข้าถึง Mobile Banking ในเครื่องเก็บเงินได้หรือไม่</label><select name="banking_access"><option value="">-- เลือก --</option><option>ไม่สามารถเข้าถึง</option><option>สามารถเข้าถึง</option><option>ไม่ทราบ</option><option>ไม่เกี่ยวข้อง</option></select></div>
+        <div class="q"><label class="title">26. เหตุการณ์ทำให้เกิดการสูญเสียทรัพย์สินหรือไม่</label><select name="loss_status"><option value="">-- เลือก --</option><option>ไม่มีการสูญเสีย</option><option>มีการสูญเสีย</option><option>เกือบเกิดการสูญเสีย แต่หยุดได้ทัน</option></select></div>
+        <div class="q"><label class="title">27. หากมีความเสียหาย โปรดระบุมูลค่าโดยประมาณ</label><input type="number" name="loss_amount" min="0" step="1" placeholder="บาท"></div>
+        <div class="q"><label class="title">28. หากไม่มีความเสียหาย อะไรเป็นเหตุสำคัญที่ทำให้เหตุการณ์ยุติ</label><textarea name="stop_factor"></textarea></div>
+        <div class="q"><label class="title">29. โปรดเล่าเหตุการณ์โดยย่อ ตั้งแต่เริ่มต้นจนเหตุการณ์สิ้นสุด</label><textarea name="incident_story"></textarea></div>
+      </section>
+
+      <section class="section">
+        <h2>ส่วนที่ 6 · การออกนอกแนวทางของระบบ</h2>
+        <div class="q"><label class="title">30. ระหว่างใช้งาน ท่านเคยทำสิ่งต่อไปนี้หรือไม่</label><div class="choice"><label><input type="checkbox" name="drift" value="power_on"> เปิดเครื่องเก็บเงินทิ้งไว้โดยไม่จำเป็น</label><label><input type="checkbox" name="drift" value="general_use"> ใช้เครื่องเก็บเงินทำกิจกรรมทั่วไป</label><label><input type="checkbox" name="drift" value="extra_app"> ดาวน์โหลดแอปอื่น</label><label><input type="checkbox" name="drift" value="lend"> ให้บุคคลอื่นยืม</label><label><input type="checkbox" name="drift" value="disclose"> เปิดเผยข้อมูลที่ระบบกำหนดให้ปกปิด</label><label><input type="checkbox" name="drift" value="rush"> ไม่ทำตามขั้นตอนเพราะรีบ</label><label><input type="checkbox" name="drift" value="none"> ไม่เคย</label></div></div>
+        <div class="q"><label class="title">31. หากเคย เหตุผลหลักคืออะไร</label><textarea name="drift_reason"></textarea></div>
+        <div class="q"><label class="title">32. ในเหตุการณ์นั้น ท่านรู้หรือไม่ว่าควรปฏิบัติอย่างไร</label><select name="drift_awareness"><option value="">-- เลือก --</option><option>ไม่รู้</option><option>รู้บางส่วน</option><option>รู้ แต่ไม่ได้ปฏิบัติตาม</option><option>รู้และพยายามปฏิบัติตาม แต่สถานการณ์ไม่เอื้อ</option></select></div>
+      </section>
+
+      <section class="section hidden" id="ssbmsSection">
+        <h2>ส่วนที่ 7 · สำหรับผู้ใช้ SSBMS รุ่นที่ 3</h2>
+        <div class="q"><label class="title">33. ท่านเก็บ SSBM ไว้ใน SB ตามรูปแบบที่กำหนดหรือไม่</label><select name="sb_storage"><option value="">-- เลือก --</option><option>ทุกครั้ง</option><option>เกือบทุกครั้ง</option><option>บางครั้ง</option><option>ไม่ค่อยทำ</option><option>ไม่ทำ</option></select></div>
+        <div class="q"><label class="title">34. ก่อนนำ SSBM ออกมาใช้งาน ท่านตรวจสอบสภาพแวดล้อมหรือไม่</label><select name="environment_check"><option value="">-- เลือก --</option><option>ทุกครั้ง</option><option>เกือบทุกครั้ง</option><option>บางครั้ง</option><option>ไม่เคย</option></select></div>
+        <div class="q"><label class="title">35. หลังทำธุรกรรม ท่านปิด SSBM และนำกลับเข้าเก็บตามขั้นตอนหรือไม่</label><select name="post_transaction"><option value="">-- เลือก --</option><option>ทุกครั้ง</option><option>เกือบทุกครั้ง</option><option>บางครั้ง</option><option>ไม่ค่อยทำ</option><option>ไม่ทำ</option></select></div>
+        <div class="q"><label class="title">36. หากเกิดธุรกรรมที่รู้สึกสงสัย ท่านทราบหรือไม่ว่าควรหยุดและตรวจสอบก่อน</label><select name="risk_stop_awareness"><option value="">-- เลือก --</option><option>ทราบ</option><option>ไม่ทราบ</option><option>ไม่แน่ใจ</option></select></div>
+        <div class="q"><label class="title">37. ท่านเคยใช้บริการ SPC หรือไม่</label><select name="spc_use"><option value="">-- เลือก --</option><option>ไม่เคย</option><option>เคย 1 ครั้ง</option><option>เคยมากกว่า 1 ครั้ง</option></select></div>
+        <div class="q"><label class="title">38. หากเคยใช้ SPC ผลจากการตรวจสอบมีผลต่อการตัดสินใจอย่างไร</label><textarea name="spc_effect"></textarea></div>
+      </section>
+
+      <section class="section">
+        <h2>ส่วนที่ 8 · ประสบการณ์และข้อเสนอแนะ</h2>
+        <div class="q"><label class="title">39. โดยรวม ระบบใช้งานง่ายเพียงใด (1 = ยากมาก, 5 = ง่ายมาก)</label><select name="ease_score"><option value="">-- เลือก --</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></div>
+        <div class="q"><label class="title">40. ขั้นตอนใดที่รู้สึกว่ายุ่งยากหรือมีแนวโน้มไม่ปฏิบัติตามมากที่สุด</label><textarea name="hardest_step"></textarea></div>
+        <div class="q"><label class="title">41. เมื่อใช้งานเป็นเวลานาน ท่านปฏิบัติตามขั้นตอนน้อยลงหรือไม่</label><select name="behavior_drift"><option value="">-- เลือก --</option><option>ไม่ลดลง</option><option>ลดลงเล็กน้อย</option><option>ลดลงมาก</option><option>ไม่แน่ใจ</option></select></div>
+        <div class="q"><label class="title">42. อะไรจะช่วยให้ท่านปฏิบัติตามระบบได้ง่ายและต่อเนื่องมากขึ้น</label><textarea name="improvement_for_compliance"></textarea></div>
+        <div class="q"><label class="title">43. ระบบส่วนใดมีประโยชน์ต่อท่านมากที่สุด</label><textarea name="most_useful"></textarea></div>
+        <div class="q"><label class="title">44. ท่านพบปัญหาหรือจุดอ่อนใดที่ควรได้รับการแก้ไข</label><textarea name="weakness_feedback"></textarea></div>
+        <div class="q"><label class="title">45. หากมีระบบรุ่นใหม่ ท่านยินดีเข้าร่วมการทดลองต่อหรือไม่</label><select name="future_participation"><option value="">-- เลือก --</option><option>ยินดี</option><option>อาจเข้าร่วม</option><option>ไม่ประสงค์เข้าร่วม</option></select></div>
+      </section>
+
+      <div class="actions"><button class="btn primary" type="submit">ตรวจสอบและเตรียมส่งข้อมูล</button><button class="btn secondary" type="button" id="downloadBtn">ดาวน์โหลดข้อมูลตัวอย่าง (JSON)</button></div>
+      <div id="status" class="status"></div>
+    </div>
+  </form>
+</main>
+<script>
+  const form=document.getElementById('researchForm');
+  const mainSurvey=document.getElementById('mainSurvey');
+  const simSection=document.getElementById('simSection');
+  const ssbmSection=document.getElementById('ssbmSection');
+  const ssbmsSection=document.getElementById('ssbmsSection');
+  const incidentSection=document.getElementById('incidentSection');
+  const statusBox=document.getElementById('status');
+
+  function selectedValues(name){return [...document.querySelectorAll(`[name="${name}"]:checked`)].map(x=>x.value)}
+  function refreshGenerationSections(){const g=selectedValues('generation');simSection.classList.toggle('hidden',!g.includes('sim1'));ssbmSection.classList.toggle('hidden',!g.includes('ssbm2'));ssbmsSection.classList.toggle('hidden',!g.includes('ssbms3'))}
+  document.querySelectorAll('[name="generation"]').forEach(x=>x.addEventListener('change',refreshGenerationSections));
+  document.querySelectorAll('[name="has_incident"]').forEach(x=>x.addEventListener('change',()=>incidentSection.classList.toggle('hidden',x.value==='no')));
+  document.querySelectorAll('[name="consent_participate"]').forEach(x=>x.addEventListener('change',()=>{mainSurvey.classList.toggle('hidden',x.value==='no')}));
+
+  function formObject(){
+    const data={};
+    new FormData(form).forEach((v,k)=>{if(data[k]!==undefined){data[k]=Array.isArray(data[k])?[...data[k],v]:[data[k],v]}else data[k]=v});
+    data.submitted_at=new Date().toISOString();
+    data.form_version='research-followup-v1';
+    return data;
+  }
+
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    if(!form.reportValidity()) return;
+    const consent=new FormData(form).get('consent_participate');
+    if(consent!=='yes'){statusBox.style.display='block';statusBox.textContent='ไม่ได้บันทึกข้อมูล เนื่องจากผู้ตอบไม่ยินยอมเข้าร่วมการติดตามผล';return}
+    statusBox.style.display='block';
+    statusBox.textContent='ฟอร์มทำงานแล้ว แต่ branch นี้ยังไม่ได้เชื่อมฐานข้อมูลจริง เพื่อป้องกันข้อมูลสูญหายหรือส่งผิดปลายทาง ขั้นต่อไปคือเชื่อม Google Apps Script / Sheet หรือ API ที่กำหนด';
+    console.log(formObject());
+  });
+
+  document.getElementById('downloadBtn').addEventListener('click',()=>{
+    const blob=new Blob([JSON.stringify(formObject(),null,2)],{type:'application/json'});
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`ssbms-research-${Date.now()}.json`;a.click();URL.revokeObjectURL(a.href);
+  });
+</script>
+</body>
+</html>
