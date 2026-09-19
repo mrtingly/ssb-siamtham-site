@@ -40,6 +40,7 @@
 @media print{.bank-check{background:#fff!important;color:#000!important;box-shadow:none}.bank-question{break-inside:avoid}.bank-actions{display:none}.bank-option{border:1px solid #aaa}}
 </style>
 <style>
+.bank-check[hidden]{display:none!important}.bank-back-btn{display:inline-block;margin:12px 0;padding:9px 15px;border:1px solid #65b5e8;border-radius:10px;background:#156bb7;color:#fff!important;font:600 14px Prompt,sans-serif;cursor:pointer}.bank-back-btn:hover{background:#0b568f}
 /* Three equal selection cards, including the bank compatibility test */
 .survival-select .select-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
 .survival-select .select-card{min-width:0;padding:22px 14px;min-height:400px}
@@ -171,7 +172,7 @@
                 <small>กลับสู่หน้า SSB Mobile System เพื่อดูระบบความปลอดภัยทางการเงิน</small>
               </div>
             </a>
-            <a class="select-card bank-select sound-click" href="#bankCompatibility" aria-label="ไปยังแบบตรวจสอบธนาคารที่สามารถใช้กับ SSBMS ได้">
+            <a class="select-card bank-select sound-click" href="#bankCompatibility" id="openBankTest" aria-label="ไปยังแบบตรวจสอบธนาคารที่สามารถใช้กับ SSBMS ได้">
               <div class="select-img-wrap">
                 <div class="bank-select-art" aria-hidden="true">
                   <svg viewBox="0 0 180 180" role="img" focusable="false"><defs><linearGradient id="bankArtGradient" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#60d5ff"/><stop offset="1" stop-color="#1868c3"/></linearGradient></defs><circle cx="90" cy="90" r="81" fill="none" stroke="url(#bankArtGradient)" stroke-width="2" opacity=".55"/><path d="M90 32 27 65h126L90 32Zm-51 44h102M47 80v48m28-48v48m30-48v48m28-48v48M31 138h118M25 149h130" fill="none" stroke="url(#bankArtGradient)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="90" cy="107" r="26" fill="#123f7c" stroke="#a9eaff" stroke-width="3"/><path d="m77 107 9 9 18-20" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -413,10 +414,11 @@
         </div>
       </section>
 
-      <section class="bank-check" id="bankCompatibility" aria-labelledby="bankCheckTitle">
+      <section class="bank-check" id="bankCompatibility" aria-labelledby="bankCheckTitle" hidden>
         <div class="bank-kicker">SSBMS / BANK COMPATIBILITY</div>
+        <button type="button" id="bankBack" class="bank-back-btn">← กลับไปเลือกเมนู</button>
         <h2 id="bankCheckTitle">ตรวจสอบธนาคารก่อนเปิดบัญชีเครื่องเก็บเงิน (SSBM)</h2>
-        <p class="bank-intro">แบบตรวจสอบสำหรับบริษัท สยามทำ จำกัด เพื่อยืนยันว่าบริการธนาคารรองรับเครื่องเก็บเงิน (SSBM) และการแจ้งเตือนบนเครื่องล่อเป้า (FD) หรือไม่ เลือกโลโก้ธนาคารใต้คำตอบ <strong>ได้</strong> หรือ <strong>ไม่ได้</strong> ในแต่ละข้อ โดยติ๊กเฉพาะผลที่ได้รับการยืนยันจริง</p>
+        <p class="bank-intro">แบบตรวจสอบสำหรับบริษัท สยามทำ จำกัด เพื่อยืนยันว่าบริการแจ้งเตือนเงินเข้า–ออกของบัญชีเครื่องเก็บเงิน (SSBM) สามารถส่งถึงเครื่องล่อเป้า (FD) ได้หรือไม่ เลือกโลโก้ธนาคารใต้คำตอบ <strong>ได้</strong> หรือ <strong>ไม่ได้</strong> ในแต่ละข้อ โดยติ๊กเฉพาะผลที่ได้รับการยืนยันจริง</p>
         <p class="bank-footnote">ช่องว่างหมายถึงยังไม่ได้ตรวจสอบ ไม่ถือว่ารองรับหรือไม่รองรับ • โลโก้ใช้เพื่อระบุธนาคารเท่านั้น ไม่ใช่การรับรองจากธนาคาร</p>
         <div class="bank-actions"><button type="button" id="bankPrint">พิมพ์แบบตรวจสอบ</button><button type="button" id="bankCopy" class="secondary">คัดลอกผลตรวจสอบ</button><button type="button" id="bankReset" class="secondary">ล้างเครื่องหมาย</button></div>
         <div id="bankQuestions"></div>
@@ -489,8 +491,17 @@
 <script>
 (function(){
  const banks=[["KBANK","กสิกรไทย","kasikornbank.com"],["TTB","ทหารไทยธนชาต","ttbbank.com"],["SCB","ไทยพาณิชย์","scb.co.th"],["BBL","กรุงเทพ","bangkokbank.com"],["KTB","กรุงไทย","krungthai.com"],["BAY","กรุงศรีอยุธยา","krungsri.com"],["GSB","ออมสิน","gsb.or.th"],["KKP","เกียรตินาคินภัทร","kkpfg.com"],["UOB","ยูโอบี","uob.co.th"],["CIMB","ซีไอเอ็มบี ไทย","cimbthai.com"]];
- const questions=["ธนาคารสามารถแยกหมายเลข SIM ของ เครื่องเก็บเงิน (SSBM) สำหรับผูกบัญชีและยืนยันตัวตน ออกจากหมายเลข เครื่องล่อเป้า (FD) ที่ใช้ติดต่อทั่วไปได้หรือไม่?","ธนาคารสามารถใช้หมายเลข เครื่องล่อเป้า (FD) ติดต่อเรื่องทั่วไป โดยไม่ใช้หมายเลข เครื่องเก็บเงิน (SSBM) ติดต่อเรื่องทั่วไปได้หรือไม่?","ธนาคารสามารถส่งการแจ้งเตือนเงินเข้าบัญชี เครื่องเก็บเงิน (SSBM) ไปยัง เครื่องล่อเป้า (FD) ขณะที่ เครื่องเก็บเงิน (SSBM) ปิดอยู่ได้หรือไม่?","ธนาคารสามารถส่งการแจ้งเตือนเงินออกจากบัญชี เครื่องเก็บเงิน (SSBM) ไปยัง เครื่องล่อเป้า (FD) ขณะที่ เครื่องเก็บเงิน (SSBM) ปิดอยู่ได้หรือไม่?","ธนาคารสามารถส่งการแจ้งเตือนไปยัง Email ที่เปิดอ่านบน เครื่องล่อเป้า (FD) ได้หรือไม่?","ธนาคารสามารถส่งการแจ้งเตือนไปยัง LINE บน เครื่องล่อเป้า (FD) ได้หรือไม่?","ธนาคารสามารถส่ง SMS แจ้งเตือนไปยังหมายเลข เครื่องล่อเป้า (FD) ซึ่งต่างจาก SIM ของ เครื่องเก็บเงิน (SSBM) ได้หรือไม่?","เครื่องล่อเป้า (FD) สามารถรับแจ้งเตือนโดยไม่ต้องติดตั้งหรือลงชื่อเข้าใช้ Mobile Banking ของบัญชี เครื่องเก็บเงิน (SSBM) ได้หรือไม่?","เครื่องล่อเป้า (FD) สามารถรับแจ้งเตือนโดยไม่ต้องนำ SIM ของ เครื่องเก็บเงิน (SSBM) มาใส่ใน เครื่องล่อเป้า (FD) ได้หรือไม่?","ธนาคารมีช่องทางแจ้งเตือนที่ไม่แสดงเลขบัญชี เครื่องเก็บเงิน (SSBM) เต็มหมายเลขหรือไม่?","ธนาคารมีช่องทางแจ้งเตือนที่ไม่เปิดให้ดูเลขบัญชีเต็มหรือยอดคงเหลือโดยไม่ยืนยันตัวตนเพิ่มเติมหรือไม่?","บริการแจ้งเตือนเงินเข้า–ออกทุกจำนวนเงิน โดยไม่มีขั้นต่ำได้หรือไม่?","บริการแจ้งเตือนครอบคลุมประเภทธุรกรรมที่ผู้ใช้ต้องการเฝ้าระวังทั้งหมดได้หรือไม่?","ธนาคารมีช่องทางแจ้งเตือนที่ไม่มีค่าบริการหรือไม่?","ธนาคารสามารถเปิดใช้บริการแจ้งเตือนได้ภายในวันที่สมัครหรือไม่?","ผู้ใช้สามารถลงทะเบียนช่องทางแจ้งเตือนโดยยืนยันตัวตนผ่าน SIM ของ เครื่องเก็บเงิน (SSBM) หรือที่สาขา โดยไม่ต้องผูก Mobile Banking บน เครื่องล่อเป้า (FD) ได้หรือไม่?","หลังตั้งค่าบริการและทดลองโอนเงินออกจาก เครื่องเก็บเงิน (SSBM) แล้ว เครื่องล่อเป้า (FD) ได้รับข้อความแจ้งเตือนเงินออกจากบัญชี เครื่องเก็บเงิน (SSBM) ถูกต้องหรือไม่?"];
+ const questions=["ธนาคารสามารถส่งการแจ้งเตือนธุรกรรมของบัญชีเครื่องเก็บเงิน (SSBM) ไปยังเครื่องล่อเป้า (FD) ได้หรือไม่?","ธนาคารสามารถส่งการแจ้งเตือนผ่าน SMS ไปยังหมายเลขโทรศัพท์ของเครื่องล่อเป้า (FD) ได้หรือไม่?","ธนาคารสามารถส่งการแจ้งเตือนผ่าน LINE ที่ใช้งานบนเครื่องล่อเป้า (FD) ได้หรือไม่?","ธนาคารสามารถส่งการแจ้งเตือนผ่านอีเมลที่เปิดอ่านบนเครื่องล่อเป้า (FD) ได้หรือไม่?","เครื่องล่อเป้า (FD) สามารถรับการแจ้งเตือนโดยไม่ต้องติดตั้งหรือลงชื่อเข้าใช้ Mobile Banking ของบัญชีเครื่องเก็บเงิน (SSBM) ได้หรือไม่?","บริการสามารถแจ้งเตือนเมื่อมีเงินเข้าบัญชีเครื่องเก็บเงิน (SSBM) ได้หรือไม่?","บริการสามารถแจ้งเตือนเมื่อมีเงินออกจากบัญชีเครื่องเก็บเงิน (SSBM) ได้หรือไม่?","บริการสามารถแจ้งเตือนเงินเข้าทุกจำนวนเงิน โดยไม่มีวงเงินขั้นต่ำได้หรือไม่?","บริการสามารถแจ้งเตือนเงินออกทุกจำนวนเงิน โดยไม่มีวงเงินขั้นต่ำได้หรือไม่?","บริการสามารถแจ้งเตือนการโอนเงินออกผ่าน Mobile Banking ได้หรือไม่?","บริการสามารถแจ้งเตือนการถอนเงินหรือการตัดเงินออกจากบัญชีผ่านช่องทางอื่นของธนาคารได้หรือไม่?","เครื่องล่อเป้า (FD) สามารถรับการแจ้งเตือนเงินเข้าบัญชีขณะที่เครื่องเก็บเงิน (SSBM) ปิดอยู่ได้หรือไม่?","เครื่องล่อเป้า (FD) สามารถรับการแจ้งเตือนเงินออกจากบัญชีขณะที่เครื่องเก็บเงิน (SSBM) ปิดอยู่ได้หรือไม่?","บริการสามารถส่งการแจ้งเตือนไปยังเครื่องล่อเป้า (FD) โดยไม่ต้องนำ SIM ของเครื่องเก็บเงิน (SSBM) มาใส่ใน FD ได้หรือไม่?","ธนาคารมีช่องทางแจ้งเตือนที่ไม่มีค่าบริการหรือไม่?","ธนาคารสามารถเปิดใช้บริการแจ้งเตือนได้ภายในวันที่สมัครหรือไม่?","ธนาคารมีช่องทางแจ้งเตือนที่ไม่แสดงเลขบัญชีเครื่องเก็บเงิน (SSBM) เต็มหมายเลขหรือไม่?","เมื่อทดลองโอนเงินเข้าบัญชีเครื่องเก็บเงิน (SSBM) แล้ว เครื่องล่อเป้า (FD) ได้รับการแจ้งเตือนเงินเข้าถูกต้องหรือไม่?","เมื่อทดลองโอนเงินออกจากบัญชีเครื่องเก็บเงิน (SSBM) แล้ว เครื่องล่อเป้า (FD) ได้รับการแจ้งเตือนเงินออกจากบัญชีต้นทางถูกต้องหรือไม่?","เมื่อปิดเครื่องเก็บเงิน (SSBM) แล้วทดลองโอนเงินเข้าบัญชี เครื่องล่อเป้า (FD) ยังคงได้รับการแจ้งเตือนถูกต้องหรือไม่?"];
  const root=document.getElementById('bankQuestions');if(!root)return;
+ const bankPanel=document.getElementById('bankCompatibility');
+ const openBank=document.getElementById('openBankTest');
+ const backBank=document.getElementById('bankBack');
+ const selection=document.getElementById('survivalSelect');
+ const showBank=()=>{bankPanel.hidden=false;selection.hidden=true;bankPanel.scrollIntoView({behavior:'smooth',block:'start'});};
+ const hideBank=()=>{bankPanel.hidden=true;selection.hidden=false;selection.scrollIntoView({behavior:'smooth',block:'start'});};
+ openBank.addEventListener('click',e=>{e.preventDefault();showBank();});
+ backBank.addEventListener('click',hideBank);
+ if(location.hash==='#bankCompatibility')showBank();
  function render(){
   questions.forEach((q,qi)=>{
    const article=document.createElement('article');article.className='bank-question';
