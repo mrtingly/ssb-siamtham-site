@@ -35,6 +35,10 @@
   <link rel="stylesheet" href="css/survival-compare-base.css?v=1" />
   <link rel="stylesheet" href="css/survival-compare-popup.css?v=1" />
   <link rel="stylesheet" href="css/survival-compare-effects.css?v=1" />
+<style>
+.bank-check{max-width:1160px;margin:36px auto 12px;padding:clamp(18px,4vw,38px);border:1px solid rgba(80,171,246,.35);border-radius:26px;background:linear-gradient(145deg,#101f38,#132d49);color:#f2f8ff;font-family:Prompt,sans-serif;box-shadow:0 22px 65px #0003}.bank-check *{box-sizing:border-box}.bank-check h2{font-size:clamp(24px,3vw,36px);margin:8px 0}.bank-check p{line-height:1.8}.bank-kicker{color:#75d5ff;font-size:12px;font-weight:700;letter-spacing:2px}.bank-intro{color:#d2e4f3}.bank-actions{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}.bank-actions button{background:#156bb7;color:white;border:1px solid #59b8ed;border-radius:12px;padding:10px 18px;font:inherit;cursor:pointer}.bank-actions button.secondary{background:transparent}.bank-question{padding:20px;margin:16px 0;background:#ffffff0c;border:1px solid #ffffff24;border-radius:18px}.bank-question h3{font-size:17px;line-height:1.65;margin:0 0 15px}.bank-answer{margin:12px 0}.bank-answer-title{display:inline-block;font-weight:700;margin-bottom:9px;padding:3px 15px;border-radius:30px;background:#146b54;color:#fff}.bank-answer.no .bank-answer-title{background:#a04449}.bank-logo-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}.bank-option{min-width:0;display:flex;align-items:center;justify-content:center;gap:6px;padding:9px 4px;border:1px solid #ffffff35;border-radius:10px;background:#ffffff0b;cursor:pointer;transition:.15s}.bank-option:has(input:checked){background:#156b9d;border-color:#8de2ff}.bank-answer.no .bank-option:has(input:checked){background:#8c3b45;border-color:#ffb3bb}.bank-option input{width:16px;height:16px;accent-color:#35bdf6;flex-shrink:0}.bank-option img{width:26px;height:26px;object-fit:contain;background:#fff;border-radius:7px;padding:2px}.bank-option span{font-size:11px;font-weight:600;overflow:hidden;text-overflow:ellipsis}.bank-footnote{font-size:12px;color:#bdd0e0}.bank-check textarea{width:100%;min-height:90px;border:1px solid #ffffff50;border-radius:12px;background:#ffffff12;color:inherit;padding:12px;font:inherit}.light-mode .bank-check{background:linear-gradient(145deg,#f1f8ff,#e5f2fc);color:#102a43;border-color:#9ac6e9}.light-mode .bank-intro,.light-mode .bank-footnote{color:#375b75}.light-mode .bank-question{background:#fff;border-color:#c4dbea}.light-mode .bank-option{background:#eef5fb;border-color:#c4dbea}.light-mode .bank-check textarea{background:white;color:#102a43;border-color:#b4cadb}@media(max-width:580px){.bank-check{padding:14px;margin:20px 0}.bank-question{padding:12px}.bank-logo-grid{gap:4px}.bank-option{flex-direction:column;gap:3px;padding:7px 1px}.bank-option img{width:23px;height:23px}.bank-option span{font-size:9px}.bank-option input{width:15px;height:15px}}
+@media print{.bank-check{background:#fff!important;color:#000!important;box-shadow:none}.bank-question{break-inside:avoid}.bank-actions{display:none}.bank-option{border:1px solid #aaa}}
+</style>
 </head>
 
 <body>
@@ -382,6 +386,18 @@
           </div>
         </div>
       </section>
+
+      <section class="bank-check" id="bankCompatibility" aria-labelledby="bankCheckTitle">
+        <div class="bank-kicker">SSBMS / BANK COMPATIBILITY</div>
+        <h2 id="bankCheckTitle">ตรวจสอบธนาคารก่อนเปิดบัญชี SSBM</h2>
+        <p class="bank-intro">แบบตรวจสอบสำหรับบริษัท สยามทำ จำกัด เพื่อยืนยันว่าบริการธนาคารรองรับเครื่องเก็บเงิน (SSBM) และการแจ้งเตือนบนเครื่องทั่วไป (FD) หรือไม่ เลือกโลโก้ธนาคารใต้คำตอบ <strong>ได้</strong> หรือ <strong>ไม่ได้</strong> ในแต่ละข้อ โดยติ๊กเฉพาะผลที่ได้รับการยืนยันจริง</p>
+        <p class="bank-footnote">ช่องว่างหมายถึงยังไม่ได้ตรวจสอบ ไม่ถือว่ารองรับหรือไม่รองรับ • โลโก้ใช้เพื่อระบุธนาคารเท่านั้น ไม่ใช่การรับรองจากธนาคาร</p>
+        <div class="bank-actions"><button type="button" id="bankPrint">พิมพ์แบบตรวจสอบ</button><button type="button" id="bankCopy" class="secondary">คัดลอกผลตรวจสอบ</button><button type="button" id="bankReset" class="secondary">ล้างเครื่องหมาย</button></div>
+        <div id="bankQuestions"></div>
+        <label for="bankNotes"><strong>บันทึกแหล่งข้อมูล / สาขา / วันที่ / เงื่อนไขบริการ / ผลทดสอบ</strong></label>
+        <textarea id="bankNotes" placeholder="บันทึกข้อมูลยืนยันจากธนาคารและผลการทดสอบจริง"></textarea>
+        <p class="bank-footnote">ก่อนถือว่าพร้อมใช้งาน ต้องตรวจสอบการแจ้งเตือนเงินออกจากบัญชี SSBM ที่ส่งถึง FD จริง โดยไม่ติดตั้ง Mobile Banking ของบัญชี SSBM บน FD</p>
+      </section>
     </main>
 
     <footer class="ssb-footer">
@@ -444,5 +460,37 @@
   <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
   <audio id="clickSound" src="sounds/ui-click.mp3" preload="auto"></audio>
+<script>
+(function(){
+ const banks=[["KBANK","กสิกรไทย","kasikornbank.com"],["TTB","ทหารไทยธนชาต","ttbbank.com"],["SCB","ไทยพาณิชย์","scb.co.th"],["BBL","กรุงเทพ","bangkokbank.com"],["KTB","กรุงไทย","krungthai.com"],["BAY","กรุงศรีอยุธยา","krungsri.com"],["GSB","ออมสิน","gsb.or.th"],["KKP","เกียรตินาคินภัทร","kkpfg.com"],["UOB","ยูโอบี","uob.co.th"],["CIMB","ซีไอเอ็มบี ไทย","cimbthai.com"]];
+ const questions=["ธนาคารสามารถแยกหมายเลข SIM ของ SSBM สำหรับผูกบัญชีและยืนยันตัวตน ออกจากหมายเลข FD ที่ใช้ติดต่อทั่วไปได้หรือไม่?","ธนาคารสามารถใช้หมายเลข FD ติดต่อเรื่องทั่วไป โดยไม่ใช้หมายเลข SSBM ติดต่อเรื่องทั่วไปได้หรือไม่?","ธนาคารสามารถส่งการแจ้งเตือนเงินเข้าบัญชี SSBM ไปยัง FD ขณะที่ SSBM ปิดอยู่ได้หรือไม่?","ธนาคารสามารถส่งการแจ้งเตือนเงินออกจากบัญชี SSBM ไปยัง FD ขณะที่ SSBM ปิดอยู่ได้หรือไม่?","ธนาคารสามารถส่งการแจ้งเตือนไปยัง Email ที่เปิดอ่านบน FD ได้หรือไม่?","ธนาคารสามารถส่งการแจ้งเตือนไปยัง LINE บน FD ได้หรือไม่?","ธนาคารสามารถส่ง SMS แจ้งเตือนไปยังหมายเลข FD ซึ่งต่างจาก SIM ของ SSBM ได้หรือไม่?","FD สามารถรับแจ้งเตือนโดยไม่ต้องติดตั้งหรือลงชื่อเข้าใช้ Mobile Banking ของบัญชี SSBM ได้หรือไม่?","FD สามารถรับแจ้งเตือนโดยไม่ต้องนำ SIM ของ SSBM มาใส่ใน FD ได้หรือไม่?","ธนาคารมีช่องทางแจ้งเตือนที่ไม่แสดงเลขบัญชี SSBM เต็มหมายเลขหรือไม่?","ธนาคารมีช่องทางแจ้งเตือนที่ไม่เปิดให้ดูเลขบัญชีเต็มหรือยอดคงเหลือโดยไม่ยืนยันตัวตนเพิ่มเติมหรือไม่?","บริการแจ้งเตือนเงินเข้า–ออกทุกจำนวนเงิน โดยไม่มีขั้นต่ำได้หรือไม่?","บริการแจ้งเตือนครอบคลุมประเภทธุรกรรมที่ผู้ใช้ต้องการเฝ้าระวังทั้งหมดได้หรือไม่?","ธนาคารมีช่องทางแจ้งเตือนที่ไม่มีค่าบริการหรือไม่?","ธนาคารสามารถเปิดใช้บริการแจ้งเตือนได้ภายในวันที่สมัครหรือไม่?","ผู้ใช้สามารถลงทะเบียนช่องทางแจ้งเตือนโดยยืนยันตัวตนผ่าน SIM ของ SSBM หรือที่สาขา โดยไม่ต้องผูก Mobile Banking บน FD ได้หรือไม่?","หลังตั้งค่าบริการและทดลองโอนเงินออกจาก SSBM แล้ว FD ได้รับข้อความแจ้งเตือนเงินออกจากบัญชี SSBM ถูกต้องหรือไม่?"];
+ const root=document.getElementById('bankQuestions');if(!root)return;
+ function render(){
+  questions.forEach((q,qi)=>{
+   const article=document.createElement('article');article.className='bank-question';
+   const h=document.createElement('h3');h.textContent='คำถามที่ '+(qi+1)+' — '+q;article.appendChild(h);
+   ['yes','no'].forEach(a=>{
+    const block=document.createElement('div');block.className='bank-answer '+(a==='no'?'no':'');
+    const title=document.createElement('div');title.className='bank-answer-title';title.textContent=a==='yes'?'ได้':'ไม่ได้';block.appendChild(title);
+    const grid=document.createElement('div');grid.className='bank-logo-grid';
+    banks.forEach(([code,name,domain],bi)=>{
+     const label=document.createElement('label');label.className='bank-option';label.title=name;
+     const input=document.createElement('input');input.type='checkbox';input.name='bank-q'+qi+'-b'+bi;input.value=a;input.setAttribute('aria-label',name+' '+(a==='yes'?'ได้':'ไม่ได้'));
+     input.addEventListener('change',()=>{if(input.checked){const other=root.querySelector('input[name="'+input.name+'"][value="'+(a==='yes'?'no':'yes')+'"]');if(other)other.checked=false;}});
+     const img=document.createElement('img');img.src='https://www.google.com/s2/favicons?domain='+encodeURIComponent(domain)+'&sz=64';img.alt='โลโก้'+name;img.loading='lazy';img.onerror=()=>{img.style.display='none';};
+     const text=document.createElement('span');text.textContent=code;label.append(input,img,text);grid.appendChild(label);
+    });block.appendChild(grid);article.appendChild(block);
+   });root.appendChild(article);
+  });
+ }
+ render();
+ document.getElementById('bankPrint').addEventListener('click',()=>window.print());
+ document.getElementById('bankReset').addEventListener('click',()=>{if(!confirm('ล้างเครื่องหมายทั้งหมดหรือไม่?'))return;root.querySelectorAll('input').forEach(x=>x.checked=false);document.getElementById('bankNotes').value='';});
+ document.getElementById('bankCopy').addEventListener('click',async()=>{
+  const lines=questions.map((q,qi)=>'คำถามที่ '+(qi+1)+' '+q+'\nได้: '+(banks.filter((b,bi)=>root.querySelector('input[name="bank-q'+qi+'-b'+bi+'"][value="yes"]').checked).map(b=>b[0]).join(', ')||'-')+'\nไม่ได้: '+(banks.filter((b,bi)=>root.querySelector('input[name="bank-q'+qi+'-b'+bi+'"][value="no"]').checked).map(b=>b[0]).join(', ')||'-')).join('\n\n')+'\n\nหมายเหตุ: '+document.getElementById('bankNotes').value;
+  try{await navigator.clipboard.writeText(lines);alert('คัดลอกผลตรวจสอบแล้ว');}catch(e){alert('ไม่สามารถคัดลอกอัตโนมัติได้ กรุณาใช้คำสั่งพิมพ์แทน');}
+ });
+})();
+</script>
 </body>
 </html>
