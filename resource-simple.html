@@ -1,0 +1,144 @@
+<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>วิธีใช้ SSBM แบบง่ายที่สุด | Siamtham SSBMS</title><link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/base.css"><link rel="stylesheet" href="css/layout.css"><link rel="stylesheet" href="css/components.css"><link rel="stylesheet" href="css/responsive.css"><link rel="stylesheet" href="css/ssb-system.css"><link rel="stylesheet" href="css/ssb-system-logo.css"><link rel="stylesheet" href="css/ssb-system-footer.css"><link rel="stylesheet" href="css/ssb-system-mobile.css"><style>*{box-sizing:border-box}body{margin:0;font-family:Prompt,"Noto Sans Thai",sans-serif;background:#eef6ff;color:#183755}body.dark{background:#071524;color:#e8f4ff}.wrap{max-width:1180px;margin:34px auto;padding:0 20px}.hero{background:linear-gradient(110deg,#0a1c32,#164774);border:1px solid #3674a6;color:#fff;border-radius:24px;padding:32px}.hero small{color:#9fd5ff;letter-spacing:.12em}.hero h1{font-size:clamp(25px,4vw,40px);margin:10px 0}.menu{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:23px 0}.menu a{background:#fff;color:#15558e;text-decoration:none;border:1px solid #b5d4ef;border-radius:14px;padding:17px 8px;text-align:center;font-weight:700}.menu a[aria-current]{background:#1767bb;color:white}.content{background:#fff;border:1px solid #bfd8ef;border-radius:20px;padding:clamp(20px,4vw,40px)}.content article{padding:16px 0;border-bottom:1px solid #d2e4f5}.content article:last-child{border:0}.content h2{font-size:20px;margin:0 0 9px}.content p{line-height:1.9;margin:0 0 14px}.content p:last-child{margin-bottom:0}.back{display:inline-block;margin:25px 0;color:#1468bd;font-weight:700}.notice{background:#e9f4ff;padding:17px;border-radius:12px;margin-top:18px}.actions{display:flex;gap:10px;align-items:center;justify-content:flex-end;margin:14px 0}.actions button{background:#fff;color:#15548d;border:1px solid #9fc6e7;border-radius:20px;padding:7px 15px;cursor:pointer}body.dark .menu a,body.dark .content{background:#10283f;color:#e6f3ff;border-color:#345c7e}body.dark .menu a[aria-current]{background:#1d6bb5}body.dark .content article{border-color:#355c7d}body.dark .notice{background:#193a58}body.dark .back{color:#8dcfff}@media(max-width:850px){.menu{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:480px){.menu{grid-template-columns:1fr}} .ssb-topbar{width:100%}.ssb-footer{margin-top:45px}.site-wrap{min-height:100vh}.content{color:#183755}body.dark .content{color:#e6f3ff}</style></head><body><div class="site-wrap"><header class="ssb-topbar" role="banner">
+      <div class="topbar-inner">
+        <div class="brand-wrap">
+          <div class="brand-logo">
+            <img src="images/logo.png" alt="Stealth Safety Bank Logo" loading="eager" width="80" height="80" />
+          </div>
+
+          <div class="brand-text">
+            <div class="brand-line-1 th-font">บริษัท สยามทำ จำกัด</div>
+            <div class="brand-line-2 en-font">Siam Tham Co.,Ltd.</div>
+            <div class="brand-site en-font">
+              <a href="https://www.siamtham.com" target="_blank" rel="noopener">www.siamtham.com</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="header-search-wrap">
+          <form class="header-search" id="agentSearchForm" autocomplete="off" role="search" aria-label="ค้นหาตัวแทน">
+            <svg class="header-search-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="2"></circle>
+              <path d="M16 16L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+            </svg>
+
+            <input
+              id="agentSearchInput"
+              class="header-search-input"
+              type="text"
+              placeholder="ค้นหาตัวแทน / Search agent"
+              aria-label="ค้นหาตัวแทน"
+            />
+
+            <button class="header-search-btn sound-click" type="submit">ค้นหา</button>
+          </form>
+
+          <div class="agent-dropdown" id="agentDropdown" aria-live="polite">
+            <div class="agent-dropdown-card">
+              <div class="agent-dropdown-head th-font">ผลการค้นหาตัวแทน</div>
+              <div class="agent-results" id="agentResults"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          
+
+          <div class="theme-switch-wrap" id="desktopThemeSwitch">
+            <span class="mode-label">Dark</span>
+            <button id="themeToggle" class="theme-switch" type="button" aria-label="Toggle theme">
+              <span class="switch-knob"></span>
+            </button>
+            <span class="mode-label">Light</span>
+          </div>
+
+          <div class="lang-bar" aria-label="เลือกภาษา">
+            <button class="lang-btn sound-click active" type="button" data-lang="th" title="ไทย">
+              <img src="https://flagcdn.com/w40/th.png" alt="ไทย" loading="lazy" />
+            </button>
+            <button class="lang-btn sound-click" type="button" data-lang="en" title="English">
+              <img src="https://flagcdn.com/w40/us.png" alt="English" loading="lazy" />
+            </button>
+          </div>
+
+          <div id="google_translate_element"></div>
+        </div>
+      </div>
+    </header><main class="wrap"><div class="actions"><button type="button" id="theme">สว่าง / มืด</button></div><section class="hero"><small>SSBMS / USER RESOURCES</small><h1>📖 วิธีใช้ SSBM แบบง่ายที่สุด</h1><p>คู่มือและข้อมูลเพื่อการใช้งานระบบความปลอดภัยทางการเงิน</p></section><nav class="menu" aria-label="คู่มือการใช้งานและข้อมูลเพิ่มเติม"><a href="resource-setup.html">⚙️ การเตรียมใช้งาน</a><a href="resource-install.html">📲 การติดตั้ง Mobile Banking</a><a href="resource-simple.html" aria-current="page">📖 วิธีใช้แบบง่ายที่สุด</a></nav><section class="content" id="simple-guide"><article><h2>วิธีใช้ SSBM แบบง่ายที่สุด — 13 ขั้นตอน</h2><p>ทำตามลำดับทุกครั้งที่ต้องการใช้เครื่องเก็บเงิน SSBM</p></article>
+<article><h2>1. เก็บไว้ในที่ปลอดภัย</h2><p>เก็บ SB ไว้ที่ปลอดภัย เช่น ที่บ้าน หากไม่จำเป็น อย่าพกพาติดตัว</p></article>
+<article><h2>2. คิดก่อนใช้งาน</h2><p>เมื่อต้องใช้ ต้องรู้ตัวและคิดก่อนว่าเป็นธุรกรรมปกติหรือไม่ปกติ</p></article>
+<article><h2>3. หากไม่ปกติ ให้ตรวจสอบกับ SPC ก่อน</h2><p>ไม่ต้องเปิดเครื่อง เพียงนำ QR Code ของ SPC มาสแกน ก็สามารถนำเรื่องมาตรวจสอบหาความจริงกับ SPC ได้ทันที โดยสอบถามข้อมูลผู้ติดต่อ ได้แก่ ชื่อ–นามสกุล เบอร์โทรศัพท์ หน่วยงานที่เกี่ยวข้อง สังกัด และตำแหน่ง</p></article>
+<article><h2>4. หากเป็นธุรกรรมปกติ ให้เปิด SB</h2><p>นำ SB มาเปิด และเช็กอีกครั้งว่าไม่ได้เกิดจากการถูกเร่งให้ทำ</p></article>
+<article><h2>5. ตรวจดูรอบข้าง</h2><p>ก่อนนำเครื่องมาเปิด ให้ตรวจดูว่ามีใครเห็นหรือไม่ และเช็กอีกครั้งว่าไม่ได้เกิดจากการถูกเร่งให้ทำ</p></article>
+<article><h2>6. สแกนนิ้วมือ</h2><p>ปลดล็อก SB ด้วยลายนิ้วมือ และเช็กอีกครั้งว่าไม่ได้เกิดจากการถูกเร่งให้ทำ</p></article>
+<article><h2>7. นำ SSBM ออกจากซองกันสัญญาณ</h2><p>นำเครื่องเก็บเงินออกจากซอง และเช็กอีกครั้งว่าไม่ได้เกิดจากการถูกเร่งให้ทำ</p></article>
+<article><h2>8. เปิดเครื่อง SSBM</h2><p>เปิดเครื่อง และเช็กอีกครั้งว่าไม่ได้เกิดจากการถูกเร่งให้ทำ</p></article>
+<article><h2>9. ทำธุรกรรม</h2><p>ทำธุรกรรมที่ต้องการ และเช็กอีกครั้งว่าไม่ได้เกิดจากการถูกเร่งให้ทำ</p></article>
+<article><h2>10. ปิดเครื่อง</h2><p>เมื่อเสร็จแล้ว ปิดเครื่อง SSBM ให้สนิท</p></article>
+<article><h2>11. เก็บเข้าซอง</h2><p>นำ SSBM เก็บกลับเข้าซองกันสัญญาณ</p></article>
+<article><h2>12. ปิดฝาและสแกนนิ้ว</h2><p>ดำเนินการปิดฝา SB และล็อกด้วยระบบสแกนนิ้วมือ</p></article>
+<article><h2>13. เก็บ SB ในที่ปลอดภัย</h2><p>นำ SB ไปเก็บยังที่ปลอดภัย</p></article></section><a class="back" href="ssb-system.html#ssbResources">← กลับไปหน้าคู่มือและข้อมูลเพิ่มเติม</a></main><footer class="ssb-footer">
+      <div class="footer-shell">
+        <div class="footer-desktop-grid">
+          <div class="footer-desktop-left">
+            <div class="footer-company-th">บริษัท สยามทำ จำกัด</div>
+            <div class="footer-company-en">Siamtham Co.,Ltd.</div>
+            <div class="footer-address">54 ซอย 53 ถนนพุทธมณฑลสาย 1</div>
+            <div class="footer-address">แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ</div>
+            <div class="footer-reg">เลขทะเบียน 0105566099954</div>
+          </div>
+
+          <div class="footer-desktop-divider" aria-hidden="true"></div>
+
+          <div class="footer-desktop-center">
+            <div class="footer-icons">
+              <a href="https://maps.app.goo.gl/Dz4B1kpqVbmWhkYX7" target="_blank" rel="noopener" aria-label="Map">
+                <img src="https://cdn.simpleicons.org/googlemaps/EA4335" alt="Map" />
+              </a>
+              <a href="https://line.me/R/ti/p/@siamtham" target="_blank" rel="noopener" aria-label="LINE">
+                <img src="https://cdn.simpleicons.org/line/06C755" alt="LINE" />
+              </a>
+              <a href="https://www.facebook.com/profile.php?id=61556844339863" target="_blank" rel="noopener" aria-label="Facebook">
+                <img src="https://cdn.simpleicons.org/facebook/1877F2" alt="Facebook" />
+              </a>
+              <a href="https://www.youtube.com/@siamtham" target="_blank" rel="noopener" aria-label="YouTube">
+                <img src="https://cdn.simpleicons.org/youtube/FF0000" alt="YouTube" />
+              </a>
+              <a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">
+                <img src="https://cdn.simpleicons.org/tiktok/000000" alt="TikTok" />
+              </a>
+            </div>
+          </div>
+
+          <div class="footer-desktop-divider" aria-hidden="true"></div>
+
+          <div class="footer-desktop-right">
+            <div class="footer-phone-label">เบอร์โทรศัพท์</div>
+
+            <a class="footer-phone" href="tel:020432988">
+              <span class="footer-phone-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M6.6 10.8c1.6 3.1 3.5 5 6.6 6.6l2.2-2.2c.28-.28.7-.37 1.07-.24 1.2.4 2.5.62 3.83.62.4 0 .72.32.72.72V20c0 .4-.32.72-.72.72C10.87 20.72 3.28 13.13 3.28 3.72c0-.4.32-.72.72-.72H7.6c.4 0 .72.32.72.72 0 1.33.21 2.63.62 3.83.12.37.03.79-.25 1.07L6.6 10.8Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span>02-043-2988</span>
+            </a>
+
+            <a class="footer-phone" href="tel:0649514888">
+              <span class="footer-phone-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M6.6 10.8c1.6 3.1 3.5 5 6.6 6.6l2.2-2.2c.28-.28.7-.37 1.07-.24 1.2.4 2.5.62 3.83.62.4 0 .72.32.72.72V20c0 .4-.32.72-.72.72C10.87 20.72 3.28 13.13 3.28 3.72c0-.4.32-.72.72-.72H7.6c.4 0 .72.32.72.72 0 1.33.21 2.63.62 3.83.12.37.03.79-.25 1.07L6.6 10.8Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span>064-951-4888</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-bottom-line"></div>
+
+        <div class="footer-copy">
+          <div>@ Stealth Safety Bank Mobile System</div>
+          <div>BY Mr.Tingly Marketing Online</div>
+        </div>
+      </div>
+    </footer></div><script>(function(){const k="siamtham-resource-theme";const saved=localStorage.getItem(k);if(saved==="dark")document.body.classList.add("dark");document.getElementById("theme").addEventListener("click",()=>{document.body.classList.toggle("dark");localStorage.setItem(k,document.body.classList.contains("dark")?"dark":"light")})})();</script></body></html>
