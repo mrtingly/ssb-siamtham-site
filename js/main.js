@@ -524,8 +524,7 @@
         event.stopPropagation();
         closeAllSubmenus();
         pulseLogo();
-        runFlow("flow-company");
-        openCompanyPopupSafe();
+        window.location.href = "about.html";
       });
     });
 
@@ -636,7 +635,7 @@
       btn.addEventListener("click", event => {
         event.preventDefault();
         event.stopPropagation();
-        openCompanyPopupSafe();
+        window.location.href = "about.html";
       });
     });
 
