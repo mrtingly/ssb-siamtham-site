@@ -672,6 +672,14 @@ body.dark .about-quick-links .quick-icon{background:#164a74!important;color:#bce
 .about-quick-links a,body.dark .about-quick-links a{flex:0 0 calc((100% - 42px)/4)!important;min-width:0!important}
 @media(max-width:900px){.about-quick-links a,body.dark .about-quick-links a{flex-basis:calc((100% - 14px)/2)!important}}
 @media(max-width:600px){.about-quick-links a,body.dark .about-quick-links a{flex-basis:85%!important}}
+
+/* Keep the colored card header after removing its numeric label */
+.about-carousel .cards .card.card-link .card-top{display:block!important;flex:0 0 110px!important;height:110px!important;min-height:110px!important;width:100%!important;position:relative!important;background:radial-gradient(ellipse at 68% 40%,color-mix(in srgb,var(--card-accent) 57%,white),var(--card-accent) 78%)!important;border-radius:0!important}
+.about-carousel .cards .card.card-link .card-top:after{display:none!important}
+.about-carousel .cards .card.card-link .card-body{padding-top:0!important;gap:11px!important}
+.about-carousel .cards .card.card-link .art{margin-top:-33px!important;position:relative!important;z-index:1!important;background:#fff!important;box-shadow:0 5px 15px #123b6129!important}
+.about-carousel .cards .card.card-link{min-height:385px!important;padding-bottom:54px!important}
+body.dark .about-carousel .cards .card.card-link .art{background:#f6faff!important}
 </style></head><body>
 <header class="ssb-topbar" role="banner">
       <div class="topbar-inner">
