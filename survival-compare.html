@@ -41,6 +41,7 @@
 </style>
 <style>
 .bank-check[hidden]{display:none!important}.bank-back-btn{display:inline-block;margin:12px 0;padding:9px 15px;border:1px solid #65b5e8;border-radius:10px;background:#156bb7;color:#fff!important;font:600 14px Prompt,sans-serif;cursor:pointer}.bank-back-btn:hover{background:#0b568f}
+.bank-bottom-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:28px 0 4px;padding-top:22px;border-top:1px solid rgba(125,187,232,.4)}.bank-check .bank-bottom-nav .bank-nav-btn,.light-mode .bank-check .bank-bottom-nav .bank-nav-btn,.dark-mode .bank-check .bank-bottom-nav .bank-nav-btn{display:flex;align-items:center;justify-content:center;min-height:48px;padding:12px 14px;border-radius:12px;border:1px solid #59b8ed!important;background:#156bb7!important;color:#fff!important;-webkit-text-fill-color:#fff!important;text-decoration:none!important;text-align:center;font:600 14px Prompt,sans-serif;cursor:pointer}.bank-check .bank-bottom-nav .bank-nav-btn:hover{background:#0b568f!important}@media(max-width:580px){.bank-bottom-nav{grid-template-columns:1fr}}
 /* Three equal selection cards, including the bank compatibility test */
 .survival-select .select-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
 .survival-select .select-card{min-width:0;padding:22px 14px;min-height:400px}
@@ -425,6 +426,12 @@
         <label for="bankNotes"><strong>บันทึกแหล่งข้อมูล / สาขา / วันที่ / เงื่อนไขบริการ / ผลทดสอบ</strong></label>
         <textarea id="bankNotes" placeholder="บันทึกข้อมูลยืนยันจากธนาคารและผลการทดสอบจริง"></textarea>
         <p class="bank-footnote">ก่อนถือว่าพร้อมใช้งาน ต้องตรวจสอบการแจ้งเตือนเงินออกจากบัญชีเครื่องเก็บเงิน (SSBM) ที่ส่งถึงเครื่องล่อเป้า (FD) จริง โดยไม่ติดตั้ง Mobile Banking ของบัญชีเครื่องเก็บเงิน (SSBM) บนเครื่องล่อเป้า (FD)</p>
+        <nav class="bank-bottom-nav" aria-label="เมนูสำคัญหลังแบบตรวจสอบ">
+          <button type="button" id="bankBackBottom" class="bank-nav-btn">← กลับหน้าเลือก 3 ระบบ</button>
+          <a href="index.html" class="bank-nav-btn">⌂ กลับหน้าแรก</a>
+          <a href="ssb-system.html" class="bank-nav-btn">ดูระบบ SSBMS →</a>
+          <a href="#bankCheckTitle" class="bank-nav-btn">↑ กลับต้นแบบตรวจสอบ</a>
+        </nav>
       </section>
     </main>
 
@@ -501,6 +508,7 @@
  const hideBank=()=>{bankPanel.hidden=true;selection.hidden=false;selection.scrollIntoView({behavior:'smooth',block:'start'});};
  openBank.addEventListener('click',e=>{e.preventDefault();showBank();});
  backBank.addEventListener('click',hideBank);
+ document.getElementById('bankBackBottom').addEventListener('click',hideBank);
  if(location.hash==='#bankCompatibility')showBank();
  function render(){
   questions.forEach((q,qi)=>{
