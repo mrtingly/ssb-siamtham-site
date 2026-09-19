@@ -39,6 +39,20 @@
 .bank-check{max-width:1160px;margin:36px auto 12px;padding:clamp(18px,4vw,38px);border:1px solid rgba(80,171,246,.35);border-radius:26px;background:linear-gradient(145deg,#101f38,#132d49);color:#f2f8ff;font-family:Prompt,sans-serif;box-shadow:0 22px 65px #0003}.bank-check *{box-sizing:border-box}.bank-check h2{font-size:clamp(24px,3vw,36px);margin:8px 0}.bank-check p{line-height:1.8}.bank-kicker{color:#75d5ff;font-size:12px;font-weight:700;letter-spacing:2px}.bank-intro{color:#d2e4f3}.bank-actions{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}.bank-actions button{background:#156bb7;color:white;border:1px solid #59b8ed;border-radius:12px;padding:10px 18px;font:inherit;cursor:pointer}.bank-actions button.secondary{background:#eaf4ff;color:#123b5e!important;border-color:#72b4e9;font-weight:600}.bank-actions button.secondary:hover{background:#d6eafa;color:#092d4b!important}.bank-check .bank-actions button,.light-mode .bank-check .bank-actions button,.dark-mode .bank-check .bank-actions button{background:#156bb7!important;color:#fff!important;border:1px solid #59b8ed!important;opacity:1!important;-webkit-text-fill-color:#fff!important;text-shadow:none!important}.bank-check .bank-actions button:hover,.light-mode .bank-check .bank-actions button:hover,.dark-mode .bank-check .bank-actions button:hover{background:#0b568f!important;color:#fff!important;-webkit-text-fill-color:#fff!important}.bank-check .bank-actions button:disabled{opacity:.6!important;cursor:not-allowed}.bank-actions button.secondary:disabled{opacity:.65;color:#45627a!important}.light-mode .bank-actions button.secondary{background:#eaf4ff;color:#123b5e!important;border-color:#72b4e9}.light-mode .bank-actions button.secondary:hover{background:#d6eafa;color:#092d4b!important}.bank-question{padding:20px;margin:16px 0;background:#ffffff0c;border:1px solid #ffffff24;border-radius:18px}.bank-question h3{font-size:17px;line-height:1.65;margin:0 0 15px}.bank-answer{margin:12px 0}.bank-answer-title{display:inline-block;font-weight:700;margin-bottom:9px;padding:3px 15px;border-radius:30px;background:#146b54;color:#fff}.bank-answer.no .bank-answer-title{background:#a04449}.bank-logo-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}.bank-option{min-width:0;display:flex;align-items:center;justify-content:center;gap:6px;padding:9px 4px;border:1px solid #ffffff35;border-radius:10px;background:#ffffff0b;cursor:pointer;transition:.15s}.bank-option:has(input:checked){background:#156b9d;border-color:#8de2ff}.bank-answer.no .bank-option:has(input:checked){background:#8c3b45;border-color:#ffb3bb}.bank-option input{width:16px;height:16px;accent-color:#35bdf6;flex-shrink:0}.bank-option img{width:26px;height:26px;object-fit:contain;background:#fff;border-radius:7px;padding:2px}.bank-option span{font-size:11px;font-weight:600;overflow:hidden;text-overflow:ellipsis}.bank-footnote{font-size:12px;color:#bdd0e0}.bank-check textarea{width:100%;min-height:90px;border:1px solid #ffffff50;border-radius:12px;background:#ffffff12;color:inherit;padding:12px;font:inherit}.light-mode .bank-check{background:linear-gradient(145deg,#f1f8ff,#e5f2fc);color:#102a43;border-color:#9ac6e9}.light-mode .bank-intro,.light-mode .bank-footnote{color:#375b75}.light-mode .bank-question{background:#fff;border-color:#c4dbea;color:#102a43}.light-mode .bank-question h3,.light-mode .bank-question .bank-option span{color:#102a43!important}.light-mode .bank-answer-title{color:#fff!important}.light-mode .bank-check h2,.light-mode .bank-check label[for=bankNotes]{color:#102a43!important}.light-mode .bank-option{background:#eef5fb;border-color:#c4dbea}.light-mode .bank-check textarea{background:white;color:#102a43;border-color:#b4cadb}@media(max-width:580px){.bank-check{padding:14px;margin:20px 0}.bank-question{padding:12px}.bank-logo-grid{gap:4px}.bank-option{flex-direction:column;gap:3px;padding:7px 1px}.bank-option img{width:23px;height:23px}.bank-option span{font-size:9px}.bank-option input{width:15px;height:15px}}
 @media print{.bank-check{background:#fff!important;color:#000!important;box-shadow:none}.bank-question{break-inside:avoid}.bank-actions{display:none}.bank-option{border:1px solid #aaa}}
 </style>
+<style>
+/* Three equal selection cards, including the bank compatibility test */
+.survival-select .select-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.survival-select .select-card{min-width:0;padding:22px 14px;min-height:400px}
+.survival-select .select-img-wrap{height:235px;width:100%}
+.survival-select .f22-select .select-img-wrap img{max-width:100%;width:210px}
+.survival-select .ssb-select .select-img-wrap img{max-width:100%;width:245px}
+.survival-select .select-copy span{font-size:clamp(17px,1.65vw,24px)}
+.bank-select-art{width:205px;max-width:90%;filter:drop-shadow(0 8px 18px rgba(46,162,245,.3))}
+.bank-select-art svg{display:block;width:100%;height:auto}
+#bankCompatibility{scroll-margin-top:115px}
+@media(max-width:850px){.survival-select .select-grid{grid-template-columns:1fr 1fr}.survival-select .bank-select{grid-column:1/-1}.survival-select .select-card{min-height:360px}}
+@media(max-width:570px){.survival-select .select-grid{grid-template-columns:1fr}.survival-select .bank-select{grid-column:auto}.survival-select .select-card{min-height:350px}.survival-select .select-img-wrap{height:210px}}
+</style>
 </head>
 
 <body>
@@ -122,7 +136,7 @@
           <div class="select-title">
             <div class="select-kicker">SELECT SURVIVAL MODEL</div>
             <h2>เลือกระบบเพื่อดูหลักการเอาตัวรอด</h2>
-            <p>เลือก F-22 เพื่อดูระบบเอาตัวรอดจากการโจมตี หรือเลือก SSB เพื่อกลับสู่ระบบ SSBMS</p>
+            <p>เลือก F-22 เพื่อดูระบบเอาตัวรอด เลือก SSBMS เพื่อดูระบบความปลอดภัยทางการเงิน หรือเลือกตรวจสอบธนาคารเพื่อเข้าสู่แบบทดสอบความเข้ากันได้</p>
           </div>
 
           <div class="select-grid">
@@ -155,6 +169,18 @@
                 <span>STEALTH SAFETY BANK</span>
                 <strong>Siam Tham Co.,Ltd.</strong>
                 <small>กลับสู่หน้า SSB Mobile System เพื่อดูระบบความปลอดภัยทางการเงิน</small>
+              </div>
+            </a>
+            <a class="select-card bank-select sound-click" href="#bankCompatibility" aria-label="ไปยังแบบตรวจสอบธนาคารที่สามารถใช้กับ SSBMS ได้">
+              <div class="select-img-wrap">
+                <div class="bank-select-art" aria-hidden="true">
+                  <svg viewBox="0 0 180 180" role="img" focusable="false"><defs><linearGradient id="bankArtGradient" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#60d5ff"/><stop offset="1" stop-color="#1868c3"/></linearGradient></defs><circle cx="90" cy="90" r="81" fill="none" stroke="url(#bankArtGradient)" stroke-width="2" opacity=".55"/><path d="M90 32 27 65h126L90 32Zm-51 44h102M47 80v48m28-48v48m30-48v48m28-48v48M31 138h118M25 149h130" fill="none" stroke="url(#bankArtGradient)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="90" cy="107" r="26" fill="#123f7c" stroke="#a9eaff" stroke-width="3"/><path d="m77 107 9 9 18-20" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              </div>
+              <div class="select-copy">
+                <span>BANK COMPATIBILITY</span>
+                <strong>ธนาคารที่สามารถใช้กับ SSBMS ได้</strong>
+                <small>เข้าสู่แบบตรวจสอบบริการธนาคารสำหรับเครื่องเก็บเงิน (SSBM) และเครื่องล่อเป้า (FD)</small>
               </div>
             </a>
           </div>
