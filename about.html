@@ -20,6 +20,10 @@ body.dark .card p{color:#c2d5e8}body.dark .card h3{color:#f3f8ff}body.dark .card
 @media(max-width:700px){.container{padding:18px 13px 38px}.hero{padding:27px 22px;min-height:230px}.cards{gap:13px}.card{min-height:155px;grid-template-columns:64px minmax(0,1fr);gap:15px;padding:18px 16px}.art{width:64px;height:64px;border-radius:14px}.art svg{width:33px;height:33px}.card p{margin-bottom:9px}.intro{margin:30px 0 16px}}
 @media(prefers-reduced-motion:reduce){.card{transition:none}.card:hover{transform:none}}
 .company-story{padding:clamp(24px,4vw,48px);background:var(--about-surface)}.story-eyebrow{font-size:11px;letter-spacing:.2em;color:var(--about-accent);font-weight:700;margin-bottom:12px}.company-story>h2{font-size:clamp(24px,3vw,34px);margin-bottom:5px}.story-lead{font-size:17px!important;color:var(--about-ink)!important;margin:0 0 24px!important}.story-chapter{display:grid;grid-template-columns:44px minmax(0,1fr);gap:18px;padding:22px 0;border-top:1px solid var(--about-line)}.story-number{font:700 12px Orbitron,sans-serif;color:var(--about-accent);padding-top:5px}.story-chapter h3{font-size:clamp(17px,2vw,20px);margin:0 0 8px;color:var(--about-ink)}.story-chapter p{line-height:1.95;font-size:15px;margin:0;color:var(--about-muted)}@media(max-width:600px){.story-chapter{grid-template-columns:28px minmax(0,1fr);gap:9px}.story-chapter p{font-size:14px}}
+
+/* Public-page copying/printing deterrent; not a security boundary. */
+@media print{body{visibility:hidden!important}body:before{content:"ไม่อนุญาตให้พิมพ์เนื้อหาหน้านี้ © Siam Tham Co., Ltd.";visibility:visible!important;display:block!important;position:fixed;inset:35% 5% auto;text-align:center;font:700 20px Prompt,sans-serif;color:#222!important}}
+.company-story,.detail{ -webkit-user-select:none;user-select:none;-webkit-touch-callout:none }
 </style></head><body>
 <header class="ssb-topbar" role="banner">
       <div class="topbar-inner">
@@ -98,5 +102,17 @@ function apply(x){b.classList.toggle('dark',x==='dark');b.classList.toggle('ligh
 apply(v);t.addEventListener('click',()=>{v=b.classList.contains('dark')?'light':'dark';apply(v);try{localStorage.setItem('siamtham-about-theme',v)}catch(e){}});
 if(form)form.addEventListener('submit',e=>{e.preventDefault();const q=input.value.trim();if(q)window.location.href='index.html?agent='+encodeURIComponent(q)});
 document.querySelectorAll('.lang-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.lang-btn').forEach(x=>x.classList.toggle('active',x===btn));if(btn.dataset.lang==='en')window.location.href='index.html?lang=en';}));
+})();
+</script>
+<script>
+/* Discourage casual copying and printing of published company text. */
+(function(){
+ const protectedArea=e=>!!(e.target&&e.target.closest&&e.target.closest('.container'));
+ document.addEventListener('copy',e=>{if(protectedArea(e))e.preventDefault()});
+ document.addEventListener('cut',e=>{if(protectedArea(e))e.preventDefault()});
+ document.addEventListener('contextmenu',e=>{if(protectedArea(e))e.preventDefault()});
+ document.addEventListener('dragstart',e=>{if(protectedArea(e))e.preventDefault()});
+ document.addEventListener('keydown',e=>{const k=e.key.toLowerCase();if((e.ctrlKey||e.metaKey)&&['p','s'].includes(k)){e.preventDefault()}if((e.ctrlKey||e.metaKey)&&['c','x','a'].includes(k)&&document.activeElement&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){e.preventDefault()}});
+ window.addEventListener('beforeprint',()=>document.body.classList.add('print-blocked'));
 })();
 </script></body></html>
