@@ -1,0 +1,15 @@
+/* Siamtham secondary-page visual refresh. Homepage intentionally excluded. */
+:root{--ssb-accent:#57d5f5;--ssb-accent2:#71a9ff}
+body:not(.homepage){-webkit-font-smoothing:antialiased}
+body:not(.homepage) :is(.hero-card,.survival-card,.form-card,.hero,.content,.login-card){box-shadow:0 20px 60px #00162b20,0 2px 12px #00162b0d;transition:box-shadow .25s ease}
+body:not(.homepage) :is(.hero-card,.survival-card,.form-card,.hero,.content,.login-card):hover{box-shadow:0 24px 70px #00162b2b,0 4px 16px #00162b13}
+body:not(.homepage) :is(.select-card,.icon-card,.menu a,.contact-chip,.btn,.back-btn,.home-btn){transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease,filter .2s ease}
+body:not(.homepage) :is(.select-card,.icon-card,.menu a,.contact-chip,.btn,.back-btn,.home-btn):hover{transform:translateY(-2px);filter:brightness(1.06)}
+body:not(.homepage) :is(a,button,input,select,textarea):focus-visible{outline:3px solid var(--ssb-accent);outline-offset:3px}
+body:not(.homepage) :is(.main-content,.container,.wrap){scroll-margin-top:24px}
+body:not(.homepage) :is(.hero-title,.hero-head h1,.hero h1,.select-title){text-wrap:balance}
+body:not(.homepage) :is(.field .input,.field .select,.field .textarea,input,select,textarea){transition:border-color .2s ease,box-shadow .2s ease}
+body:not(.homepage) :is(input,select,textarea):focus{box-shadow:0 0 0 3px #57d5f52e}
+body:not(.homepage) :is(.ssb-topbar,.topbar){backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+@media(max-width:700px){body:not(.homepage) :is(.hero-card,.survival-card,.form-card,.hero,.content,.login-card){box-shadow:0 12px 35px #00162b1d}body:not(.homepage) :is(.hero-title,.hero h1){line-height:1.25}}
+@media(prefers-reduced-motion:reduce){body:not(.homepage) *,body:not(.homepage) *:before,body:not(.homepage) *:after{transition:none!important;animation-duration:.01ms!important}}
