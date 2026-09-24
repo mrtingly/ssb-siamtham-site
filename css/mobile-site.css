@@ -1,0 +1,31 @@
+/* Siamtham mobile-only improvements. No desktop declarations. */
+@media (max-width:767px){
+  html{font-size:16px;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+  *,*::before,*::after{box-sizing:border-box}
+  body{max-width:100%;overflow-x:clip}
+  img,video,canvas,svg,iframe{max-width:100%}
+  img,video{height:auto}
+  iframe{border:0}
+  main,article,section,header,footer,nav,.container,.wrapper,.content{min-width:0}
+  h1,h2,h3,p,li{overflow-wrap:break-word}
+  pre,code{max-width:100%}
+  pre{overflow-x:auto}
+  table{max-width:100%}
+  .table-responsive,.table-wrapper,.table-container,.data-table-wrapper{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  input:not([type="checkbox"]):not([type="radio"]),select,textarea{max-width:100%;font-size:16px}
+  button,a,input,select,textarea{touch-action:manipulation}
+  button,[role="button"],input[type="submit"],input[type="button"]{min-height:40px}
+  .modal,.modal-content,.popup,.popup-content,[role="dialog"]{max-width:calc(100vw - 24px);max-height:calc(100dvh - 24px);overflow-y:auto}
+  .grid,.cards,.card-grid,.product-grid,.feature-grid,.stats-grid{min-width:0}
+  .ssb-topbar .topbar-inner{max-width:100%;min-width:0;flex-wrap:wrap}
+  .ssb-topbar .header-search-wrap{order:3;flex:1 0 100%;width:100%;max-width:100%}
+  .ssb-topbar .header-search-input{min-width:0;font-size:16px}
+  .ssb-footer .footer-desktop-grid{max-width:100%}
+  .project-calculator .numbers{grid-template-columns:1fr}
+  .project-calculator .metric{min-width:0;overflow-wrap:anywhere}
+  .project-calculator .chart{max-width:100%;overflow:hidden}
+}
+@media (max-width:480px){
+  .modal,.modal-content,.popup,.popup-content,[role="dialog"]{max-width:calc(100vw - 16px)}
+  .table-responsive,.table-wrapper,.table-container{width:100%}
+}
