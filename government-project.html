@@ -1,4 +1,452 @@
-<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>โครงการเสนอภาครัฐ | สยามทำ</title><meta name="description" content="ข้อเสนอโครงการพัฒนาระบบเอาตัวรอดจากภัยคุกคามทางไซเบอร์ SSBMS"><link rel="icon" href="images/logo.png"><link rel="stylesheet" href="css/base.css"><link rel="stylesheet" href="css/layout.css"><link rel="stylesheet" href="css/components.css"><link rel="stylesheet" href="css/responsive.css"><link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet"><style>:root{--project-bg:#edf5ff;--project-surface:#fff;--project-ink:#183454;--project-line:#d4e4f5;--project-muted:#55718d;font-family:Prompt,sans-serif}*{box-sizing:border-box}body{margin:0;background:var(--project-bg);color:var(--project-ink)}body.dark{--project-bg:#071323;--project-surface:#142740;--project-ink:#f0f7ff;--project-line:#375e87;--project-muted:#c1d4e9}main{max-width:1100px;margin:auto;padding:25px 18px 60px}.hero{background:linear-gradient(125deg,#082e60,#1668b7);color:white;border-radius:22px;padding:clamp(24px,5vw,52px);box-shadow:0 15px 32px #0a3c7529}.hero h1{font-size:clamp(23px,3vw,36px);line-height:1.5;margin:12px 0}.hero p{opacity:.94;line-height:1.9}.pill{display:inline-block;border:1px solid #9bd6ff;border-radius:50px;padding:5px 13px;font-size:12px}.nav{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.nav a{background:var(--project-surface);border:1px solid var(--project-line);border-radius:20px;padding:8px 12px;text-decoration:none;color:var(--project-ink);font-size:12px}.section,.calc{background:var(--project-surface);border:1px solid var(--project-line);border-radius:18px;padding:clamp(18px,3vw,32px);margin:16px 0;box-shadow:0 6px 18px #174a7210}.section h2{font-size:21px;margin:0 0 14px}.section h2 span{color:#1571c8}.section p,.section li{line-height:2;font-size:15px}.section ol{padding-left:24px}.calc h2{margin-top:0}.controls{display:flex;justify-content:space-between;align-items:center;gap:12px}input[type=range]{width:100%;accent-color:#146ec9;margin:20px 0}.numbers{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.metric{background:var(--project-bg);padding:15px;border-radius:12px}.metric strong{font-size:clamp(18px,3vw,25px);display:block;color:var(--project-ink)}.chart{display:flex;align-items:end;gap:3px;height:220px;border-bottom:1px solid #aac4df;margin:20px 0 5px}.pair{flex:1;display:flex;gap:1px;align-items:end;height:100%}.bar{flex:1;min-width:1px;background:#14a6a0;border-radius:2px 2px 0 0}.bar.gov{background:#2868d8}.legend{font-size:12px;color:var(--project-muted)}.dot{display:inline-block;width:10px;height:10px;border-radius:2px;background:#14a6a0;margin-right:4px}.dot.gov{background:#2868d8;margin-left:15px}.small{font-size:12px;color:var(--project-muted);line-height:1.8}footer{text-align:center;color:var(--project-muted);padding:25px}@media(max-width:600px){.numbers{grid-template-columns:1fr}}@media print{header,.nav,.controls,.chart,.legend{display:none}body{background:white}.section,.calc,.hero{box-shadow:none;break-inside:avoid}} .ssb-topbar{background:linear-gradient(90deg,#1a5dbd 0%,#2f7fe3 52%,#5aa7ff 100%);color:white}.ssb-topbar a{color:inherit}body.dark .section,body.dark .calc{box-shadow:0 6px 18px #0004}body.dark .section p,body.dark .section li{color:var(--project-ink)}body.dark .metric{border:1px solid var(--project-line)}.project-links{display:flex;gap:9px;flex-wrap:wrap;margin:16px 0}.project-links a{background:var(--project-surface);color:var(--project-ink);border:1px solid var(--project-line);border-radius:25px;text-decoration:none;padding:9px 15px;font-size:13px}@media(max-width:700px){.topbar-inner{flex-wrap:wrap}.header-search-wrap{order:3;width:100%}}</style></head><body><header class="ssb-topbar" role="banner">
+<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>โครงการเสนอภาครัฐ | สยามทำ</title><meta name="description" content="ข้อเสนอโครงการพัฒนาระบบเอาตัวรอดจากภัยคุกคามทางไซเบอร์ SSBMS"><link rel="icon" href="images/logo.png"><link rel="stylesheet" href="css/base.css"><link rel="stylesheet" href="css/layout.css"><link rel="stylesheet" href="css/components.css"><link rel="stylesheet" href="css/responsive.css"><link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet"><style>:root{--project-bg:#edf5ff;--project-surface:#fff;--project-ink:#183454;--project-line:#d4e4f5;--project-muted:#55718d;font-family:Prompt,sans-serif}*{box-sizing:border-box}body{margin:0;background:var(--project-bg);color:var(--project-ink)}body.dark{--project-bg:#071323;--project-surface:#142740;--project-ink:#f0f7ff;--project-line:#375e87;--project-muted:#c1d4e9}main{max-width:1100px;margin:auto;padding:25px 18px 60px}.hero{background:linear-gradient(125deg,#082e60,#1668b7);color:white;border-radius:22px;padding:clamp(24px,5vw,52px);box-shadow:0 15px 32px #0a3c7529}.hero h1{font-size:clamp(23px,3vw,36px);line-height:1.5;margin:12px 0}.hero p{opacity:.94;line-height:1.9}.pill{display:inline-block;border:1px solid #9bd6ff;border-radius:50px;padding:5px 13px;font-size:12px}.nav{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.nav a{background:var(--project-surface);border:1px solid var(--project-line);border-radius:20px;padding:8px 12px;text-decoration:none;color:var(--project-ink);font-size:12px}.section,.calc{background:var(--project-surface);border:1px solid var(--project-line);border-radius:18px;padding:clamp(18px,3vw,32px);margin:16px 0;box-shadow:0 6px 18px #174a7210}.section h2{font-size:21px;margin:0 0 14px}.section h2 span{color:#1571c8}.section p,.section li{line-height:2;font-size:15px}.section ol{padding-left:24px}.calc h2{margin-top:0}.controls{display:flex;justify-content:space-between;align-items:center;gap:12px}input[type=range]{width:100%;accent-color:#146ec9;margin:20px 0}.numbers{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.metric{background:var(--project-bg);padding:15px;border-radius:12px}.metric strong{font-size:clamp(18px,3vw,25px);display:block;color:var(--project-ink)}.chart{display:flex;align-items:end;gap:3px;height:220px;border-bottom:1px solid #aac4df;margin:20px 0 5px}.pair{flex:1;display:flex;gap:1px;align-items:end;height:100%}.bar{flex:1;min-width:1px;background:#14a6a0;border-radius:2px 2px 0 0}.bar.gov{background:#2868d8}.legend{font-size:12px;color:var(--project-muted)}.dot{display:inline-block;width:10px;height:10px;border-radius:2px;background:#14a6a0;margin-right:4px}.dot.gov{background:#2868d8;margin-left:15px}.small{font-size:12px;color:var(--project-muted);line-height:1.8}footer{text-align:center;color:var(--project-muted);padding:25px}@media(max-width:600px){.numbers{grid-template-columns:1fr}}@media print{header,.nav,.controls,.chart,.legend{display:none}body{background:white}.section,.calc,.hero{box-shadow:none;break-inside:avoid}} .ssb-topbar{background:linear-gradient(90deg,#1a5dbd 0%,#2f7fe3 52%,#5aa7ff 100%);color:white}.ssb-topbar a{color:inherit}body.dark .section,body.dark .calc{box-shadow:0 6px 18px #0004}body.dark .section p,body.dark .section li{color:var(--project-ink)}body.dark .metric{border:1px solid var(--project-line)}.project-links{display:flex;gap:9px;flex-wrap:wrap;margin:16px 0}.project-links a{background:var(--project-surface);color:var(--project-ink);border:1px solid var(--project-line);border-radius:25px;text-decoration:none;padding:9px 15px;font-size:13px}@media(max-width:700px){.topbar-inner{flex-wrap:wrap}.header-search-wrap{order:3;width:100%}}.ssb-footer{background:linear-gradient(125deg,#2868bb,#5a9be9);color:#fff;margin-top:26px;padding:24px 22px 18px;font-family:inherit}
+body.dark .ssb-footer{background:linear-gradient(125deg,#0a1c32,#173f70);border-top:1px solid #385674}
+.ssb-footer .footer-shell{max-width:1180px;margin:auto}
+.ssb-footer .footer-desktop-grid{display:grid;grid-template-columns:minmax(0,1fr) 1px minmax(0,1fr) 1px minmax(0,1fr);gap:22px;align-items:center}
+.ssb-footer .footer-desktop-divider{height:68px;background:rgba(255,255,255,.28)}
+.ssb-footer .footer-company-th{font-size:17px;font-weight:800}
+.ssb-footer .footer-company-en{font-size:12px;font-weight:600;margin-bottom:8px}
+.ssb-footer .footer-address,.ssb-footer .footer-reg,.ssb-footer .footer-phone-label{font-size:12px;line-height:1.7}
+.ssb-footer .footer-icons{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.ssb-footer .footer-icons a{width:36px;height:36px;display:grid;place-items:center;border-radius:50%;background:#fff;box-shadow:0 3px 10px rgba(0,0,0,.12)}
+.ssb-footer .footer-icons img{width:21px;height:21px;object-fit:contain}
+.ssb-footer .footer-desktop-right{justify-self:end}
+.ssb-footer .footer-phone{display:flex;align-items:center;gap:8px;color:inherit;text-decoration:none;font-size:15px;font-weight:750;margin:5px 0}
+.ssb-footer .footer-phone-icon,.ssb-footer .footer-phone-icon svg{width:18px;height:18px;display:block}
+.ssb-footer .footer-bottom-line{height:1px;background:rgba(255,255,255,.2);margin:18px 0 10px}
+.ssb-footer .footer-copy{text-align:center;font-size:11px;line-height:1.6}
+.ssb-footer .footer-desktop-grid{grid-template-columns:1fr;gap:14px;text-align:center}
+.ssb-footer .footer-desktop-divider{display:none}
+.ssb-footer .footer-desktop-right{justify-self:center}
+.ssb-footer .footer-phone{justify-content:center}
+.ssb-footer {
+        position: relative;
+        overflow: hidden;
+        padding: 18px 26px 16px;
+        background:
+          linear-gradient(180deg, #4f8fe4 0%, #3f7fd7 52%, #3674cc 100%);
+        border-top: 1px solid rgba(255,255,255,.20);
+        box-shadow:
+          inset 0 1px 0 rgba(255,255,255,.16),
+          0 -10px 24px rgba(12,45,96,.08);
+      }
+.ssb-footer::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(circle at 18% 18%, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 28%),
+          radial-gradient(circle at 82% 22%, rgba(255,255,255,.08) 0%, rgba(255,255,255,0) 26%);
+        opacity: .9;
+      }
+.footer-shell {
+        position: relative;
+        z-index: 1;
+        max-width: 1360px;
+        margin: 0 auto;
+        padding: 16px 26px 14px;
+        border-radius: 24px;
+        background:
+          linear-gradient(180deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,.05) 100%);
+        border: 1px solid rgba(255,255,255,.14);
+        box-shadow:
+          inset 0 1px 0 rgba(255,255,255,.14),
+          0 14px 30px rgba(15,46,96,.10);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+.footer-desktop-grid {
+        display: grid;
+        grid-template-columns: 1fr 1px auto 1px 1fr;
+        align-items: center;
+        gap: 22px;
+      }
+.footer-desktop-col {
+        min-width: 0;
+      }
+.footer-desktop-left {
+        text-align: left;
+      }
+.footer-desktop-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+      }
+.footer-desktop-right {
+        text-align: right;
+      }
+.footer-desktop-divider {
+        width: 1px;
+        height: 96px;
+        background: linear-gradient(
+          180deg,
+          transparent 0%,
+          rgba(255,255,255,.30) 18%,
+          rgba(255,255,255,.30) 82%,
+          transparent 100%
+        );
+      }
+.footer-company-th {
+        font-size: 18px;
+        line-height: 1.2;
+        font-weight: 800;
+        color: #ffffff;
+        margin-bottom: 6px;
+        letter-spacing: 0;
+      }
+.footer-company-en {
+        font-size: 15px;
+        line-height: 1.35;
+        font-weight: 700;
+        color: rgba(255,255,255,.92);
+        margin-bottom: 10px;
+        letter-spacing: 0;
+      }
+.footer-address,
+      .footer-reg {
+        font-size: 14px;
+        line-height: 1.65;
+        font-weight: 500;
+        color: rgba(255,255,255,.88);
+        letter-spacing: 0;
+      }
+.footer-phone-label {
+        font-size: 14px;
+        line-height: 1.2;
+        font-weight: 700;
+        color: rgba(255,255,255,.78);
+        margin-bottom: 10px;
+        letter-spacing: 0;
+      }
+.footer-phone {
+        display: inline-flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 10px;
+        width: 100%;
+        font-size: 18px;
+        line-height: 1.35;
+        font-weight: 800;
+        color: #ffffff;
+        text-decoration: none;
+        margin-bottom: 8px;
+        white-space: nowrap;
+        letter-spacing: 0;
+      }
+.footer-phone-icon {
+        width: 18px;
+        height: 18px;
+        flex: 0 0 18px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255,255,255,.92);
+      }
+.footer-phone-icon svg {
+        width: 18px;
+        height: 18px;
+        display: block;
+      }
+.footer-icons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 14px;
+        width: 100%;
+        margin: 0 auto;
+      }
+.footer-icons a {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background:
+          linear-gradient(180deg, rgba(255,255,255,.98) 0%, rgba(244,248,255,.96) 100%);
+        border: 1px solid rgba(255,255,255,.28);
+        box-shadow:
+          0 10px 22px rgba(14,43,92,.16),
+          inset 0 1px 0 rgba(255,255,255,1);
+        text-decoration: none;
+        transition:
+          transform .18s ease,
+          box-shadow .18s ease,
+          border-color .18s ease;
+      }
+.footer-icons a:hover {
+        transform: translateY(-2px);
+        box-shadow:
+          0 14px 28px rgba(14,43,92,.20),
+          inset 0 1px 0 rgba(255,255,255,1);
+        border-color: rgba(255,255,255,.44);
+      }
+.footer-icons a:active {
+        transform: scale(.97);
+      }
+.footer-icons img {
+        width: 22px;
+        height: 22px;
+        object-fit: contain;
+        display: block;
+      }
+.footer-bottom-line {
+        height: 1px;
+        margin: 16px 0 12px;
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(255,255,255,.26) 14%,
+          rgba(255,255,255,.26) 86%,
+          transparent 100%
+        );
+      }
+.footer-copy {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+      }
+.footer-copy div:first-child {
+        font-size: 14px;
+        line-height: 1.45;
+        font-weight: 700;
+        color: rgba(255,255,255,.94);
+        margin-bottom: 2px;
+        letter-spacing: .2px;
+      }
+.footer-copy div:last-child {
+        font-size: 12px;
+        line-height: 1.45;
+        font-weight: 600;
+        color: rgba(255,255,255,.78);
+        letter-spacing: .2px;
+      }
+.ssb-footer {
+        position: relative;
+        overflow: hidden;
+        padding: 18px 26px 16px;
+        background:
+          linear-gradient(180deg, #4f8fe4 0%, #3f7fd7 52%, #3674cc 100%);
+        border-top: 1px solid rgba(255,255,255,.20);
+        box-shadow:
+          inset 0 1px 0 rgba(255,255,255,.16),
+          0 -10px 24px rgba(12,45,96,.08);
+      }
+.ssb-footer::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(circle at 18% 18%, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 28%),
+          radial-gradient(circle at 82% 22%, rgba(255,255,255,.08) 0%, rgba(255,255,255,0) 26%);
+        opacity: .9;
+      }
+.footer-shell {
+        position: relative;
+        z-index: 1;
+        max-width: 1360px;
+        margin: 0 auto;
+        padding: 16px 26px 14px;
+        border-radius: 24px;
+        background:
+          linear-gradient(180deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,.05) 100%);
+        border: 1px solid rgba(255,255,255,.14);
+        box-shadow:
+          inset 0 1px 0 rgba(255,255,255,.14),
+          0 14px 30px rgba(15,46,96,.10);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+.footer-desktop-grid {
+        display: grid;
+        grid-template-columns: 1fr 1px auto 1px 1fr;
+        align-items: center;
+        gap: 22px;
+      }
+.footer-desktop-col {
+        min-width: 0;
+      }
+.footer-desktop-left {
+        text-align: left;
+      }
+.footer-desktop-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+      }
+.footer-desktop-right {
+        text-align: right;
+      }
+.footer-desktop-divider {
+        width: 1px;
+        height: 96px;
+        background: linear-gradient(
+          180deg,
+          transparent 0%,
+          rgba(255,255,255,.30) 18%,
+          rgba(255,255,255,.30) 82%,
+          transparent 100%
+        );
+      }
+.footer-company-th {
+        font-size: 18px;
+        line-height: 1.2;
+        font-weight: 800;
+        color: #ffffff;
+        margin-bottom: 6px;
+        letter-spacing: 0;
+      }
+.footer-company-en {
+        font-size: 15px;
+        line-height: 1.35;
+        font-weight: 700;
+        color: rgba(255,255,255,.92);
+        margin-bottom: 10px;
+        letter-spacing: 0;
+      }
+.footer-address,
+      .footer-reg {
+        font-size: 14px;
+        line-height: 1.65;
+        font-weight: 500;
+        color: rgba(255,255,255,.88);
+        letter-spacing: 0;
+      }
+.footer-phone-label {
+        font-size: 14px;
+        line-height: 1.2;
+        font-weight: 700;
+        color: rgba(255,255,255,.78);
+        margin-bottom: 10px;
+        letter-spacing: 0;
+      }
+.footer-phone {
+        display: inline-flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 10px;
+        width: 100%;
+        font-size: 18px;
+        line-height: 1.35;
+        font-weight: 800;
+        color: #ffffff;
+        text-decoration: none;
+        margin-bottom: 8px;
+        white-space: nowrap;
+        letter-spacing: 0;
+      }
+.footer-phone-icon {
+        width: 18px;
+        height: 18px;
+        flex: 0 0 18px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255,255,255,.92);
+      }
+.footer-phone-icon svg {
+        width: 18px;
+        height: 18px;
+        display: block;
+      }
+.footer-icons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 14px;
+        width: 100%;
+        margin: 0 auto;
+      }
+.footer-icons a {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background:
+          linear-gradient(180deg, rgba(255,255,255,.98) 0%, rgba(244,248,255,.96) 100%);
+        border: 1px solid rgba(255,255,255,.28);
+        box-shadow:
+          0 10px 22px rgba(14,43,92,.16),
+          inset 0 1px 0 rgba(255,255,255,1);
+        text-decoration: none;
+        transition:
+          transform .18s ease,
+          box-shadow .18s ease,
+          border-color .18s ease;
+      }
+.footer-icons a:hover {
+        transform: translateY(-2px);
+        box-shadow:
+          0 14px 28px rgba(14,43,92,.20),
+          inset 0 1px 0 rgba(255,255,255,1);
+        border-color: rgba(255,255,255,.44);
+      }
+.footer-icons a:active {
+        transform: scale(.97);
+      }
+.footer-icons img {
+        width: 22px;
+        height: 22px;
+        object-fit: contain;
+        display: block;
+      }
+.footer-bottom-line {
+        height: 1px;
+        margin: 16px 0 12px;
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(255,255,255,.26) 14%,
+          rgba(255,255,255,.26) 86%,
+          transparent 100%
+        );
+      }
+.footer-copy {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+      }
+.footer-copy div:first-child {
+        font-size: 14px;
+        line-height: 1.45;
+        font-weight: 700;
+        color: rgba(255,255,255,.94);
+        margin-bottom: 2px;
+        letter-spacing: .2px;
+      }
+.footer-copy div:last-child {
+        font-size: 12px;
+        line-height: 1.45;
+        font-weight: 600;
+        color: rgba(255,255,255,.78);
+        letter-spacing: .2px;
+      }
+.ssb-footer{margin-top:26px;color:#fff}
+body.dark .ssb-footer{background:linear-gradient(180deg,#102b4b 0%,#0a1c33 100%);border-top-color:rgba(136,191,255,.25)}
+body.dark .ssb-footer .footer-shell{background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025))}
+.ssb-footer{padding:18px 12px}
+.ssb-footer .footer-shell{padding:18px 15px;border-radius:17px}
+.ssb-footer .footer-desktop-grid{grid-template-columns:1fr;gap:18px;text-align:center}
+.ssb-footer .footer-desktop-divider{display:none}
+.ssb-footer .footer-desktop-left,.ssb-footer .footer-desktop-right{text-align:center;justify-self:center}
+.ssb-footer .footer-phone{justify-content:center}
+.ssb-footer .footer-icons{gap:10px}
+.ssb-footer .footer-icons a{width:42px;height:42px}
+/* Project footer matches the About Company template. */
+</style></head><body><header class="ssb-topbar" role="banner">
       <div class="topbar-inner">
         <div class="brand-wrap">
           <div class="brand-logo">
@@ -74,4 +522,69 @@
 <section id="s11" class="section"><h2><span>11</span> งบประมาณตามการเข้าร่วม</h2><p>ฐานคำนวณสมมติ 26.30 ล้านครัวเรือน หากเข้าร่วม 1% เท่ากับ 263,000 ครัวเรือน ประชาชนจ่าย 1,841 ล้านบาท รัฐจ่าย 1,841 ล้านบาท หากเข้าร่วม 100% ฝ่ายละ 184,100 ล้านบาท เป็นเพดานเชิงสมมติ ไม่ใช่วงเงินขออนุมัติจริง งบพิสูจน์ระบบและงบ SPC ต้องกำหนดแยกภายหลัง</p></section>
 <section id="s12" class="section"><h2><span>12</span> ยุทธศาสตร์ชาติและหน่วยงานที่เกี่ยวข้อง</h2><p>เสนอความสอดคล้องกับยุทธศาสตร์ชาติ พ.ศ. 2561–2580 ด้านความมั่นคง ความสามารถในการแข่งขัน การพัฒนาทรัพยากรมนุษย์ ความเสมอภาค และการบริหารภาครัฐ หน่วยงานที่อาจพิจารณาตามภารกิจ ได้แก่ MDES, วช., NIA, สวทช., ธปท., สำนักงานตำรวจแห่งชาติ, กสทช., สกมช., สคส., กรมทรัพย์สินทางปัญญา สถาบันการเงิน และผู้ให้บริการโทรคมนาคม การระบุชื่อไม่ถือเป็นการตอบรับหรืออนุมัติ</p></section>
 <section id="s13" class="section"><h2><span>13</span> ผลผลิต ตัวชี้วัด และความเสี่ยง</h2><p>ผลผลิต ได้แก่ รายงานผลทดสอบอิสระของมหาวิทยาลัย รายการข้อจำกัด ข้อเสนอพัฒนา Blueprint ข้อเสนอนวัตกรรม รูปแบบ SPC และแผนขยายผล ตัวชี้วัดต้องกำหนดร่วมกันก่อนทดสอบ เช่น ผลการป้องกันการเข้าถึง ความถูกต้องของขั้นตอน เวลาตอบสนอง ความสะดวก และต้นทุน ความเสี่ยงรวมถึงการไม่ปฏิบัติตาม SOP การหลอกลวงนอกระบบ ความเข้ากันได้ของธนาคาร ความเป็นส่วนตัว และการพึ่งพาบุคลากร SPC</p></section>
-<section id="s14" class="section"><h2><span>14</span> การบริหาร ทรัพย์สินทางปัญญา และข้อเสนอ</h2><p>บริษัทคงสิทธิในทรัพย์สินทางปัญญาเดิมตามเอกสารสิทธิที่เกี่ยวข้อง ส่วนผลงานร่วมต้องตกลงสิทธิและการใช้ประโยชน์เป็นลายลักษณ์อักษร มหาวิทยาลัยกำหนดคณะทำงานและแผนทดสอบร่วมกับบริษัท ก่อนเสนอผลต่อภาครัฐและพิจารณาขยายผล ประโยชน์ที่คาดหวังคือเพิ่มทางเลือกให้ประชาชนลดความเสี่ยงต่อชีวิตและทรัพย์สินโดยไม่อ้างว่าปลอดภัยสมบูรณ์</p></section><section id="budget" class="calc"><h2>โปรแกรมคำนวณงบประมาณครัวเรือน 1–100%</h2><p class="small">ฐานสมมติ 26.30 ล้านครัวเรือน • ครัวเรือนละ 1 ระบบ • ประชาชนและรัฐฝ่ายละ 7,000 บาท • ไม่รวมงบ SPC และงบพิสูจน์ระบบ</p><div class="controls"><label for="percent">สัดส่วนครัวเรือนที่สมัครใจเข้าร่วม</label><strong id="pct">1%</strong></div><input id="percent" type="range" min="1" max="100" value="1" step="1" aria-label="เปอร์เซ็นต์ครัวเรือนเข้าร่วม"><div class="numbers"><div class="metric">ครัวเรือนเข้าร่วม<strong id="homes">263,000</strong></div><div class="metric">ประชาชนจ่าย<strong id="citizen">1,841 ล้านบาท</strong></div><div class="metric">รัฐสนับสนุน<strong id="state">1,841 ล้านบาท</strong></div><div class="metric">มูลค่ารวม<strong id="total">3,682 ล้านบาท</strong></div></div><div class="chart" id="chart" role="img" aria-label="กราฟแท่งเปรียบเทียบงบประชาชนและรัฐจาก 1 ถึง 100 เปอร์เซ็นต์"></div><div class="legend"><span class="dot"></span>ประชาชน <span class="dot gov"></span>ภาครัฐ &nbsp; (กราฟแสดงทุก 5% และ 1%)</div><p class="small">เป็นการคำนวณสถานการณ์สมมติ ไม่ใช่ยอดผู้สมัครจริงหรือวงเงินอนุมัติ การสนับสนุนขึ้นอยู่กับหลักเกณฑ์และการจัดสรรงบประมาณของรัฐ</p></section></main><footer>© บริษัท สยามทำ จำกัด · <a href="about.html">กลับหน้าเกี่ยวกับบริษัท</a></footer><script>const base=26300000,fmt=n=>n.toLocaleString('th-TH');const slider=document.getElementById('percent');function update(){const p=Number(slider.value),h=Math.round(base*p/100),one=h*7000;document.getElementById('pct').textContent=p+'%';document.getElementById('homes').textContent=fmt(h);document.getElementById('citizen').textContent=fmt(one/1e6)+' ล้านบาท';document.getElementById('state').textContent=fmt(one/1e6)+' ล้านบาท';document.getElementById('total').textContent=fmt(one*2/1e6)+' ล้านบาท'}slider.addEventListener('input',update);const chart=document.getElementById('chart');[1,...Array.from({length:20},(_,i)=>(i+1)*5)].forEach(p=>{const pair=document.createElement('div');pair.className='pair';pair.title=p+'%: ฝ่ายละ '+fmt(Math.round(base*p/100)*7000/1e6)+' ล้านบาท';for(let i=0;i<2;i++){const b=document.createElement('div');b.className='bar'+(i?' gov':'');b.style.height=p+'%';pair.appendChild(b)}chart.appendChild(pair)});update();</script><script>(function(){const b=document.body,t=document.getElementById('themeToggle'),form=document.getElementById('agentSearchForm'),input=document.getElementById('agentSearchInput');let v='light';try{v=localStorage.getItem('siamtham-about-theme')||'light'}catch(e){}function apply(x){b.classList.toggle('dark',x==='dark');b.classList.toggle('light-mode',x!=='dark');t.setAttribute('aria-pressed',String(x==='light'));t.setAttribute('aria-label',x==='dark'?'เปลี่ยนเป็นโหมดสว่าง':'เปลี่ยนเป็นโหมดมืด')}apply(v);t.addEventListener('click',()=>{v=b.classList.contains('dark')?'light':'dark';apply(v);try{localStorage.setItem('siamtham-about-theme',v)}catch(e){}});form.addEventListener('submit',e=>{e.preventDefault();const q=input.value.trim();if(q)window.location.href='index.html?agent='+encodeURIComponent(q)});document.querySelectorAll('.lang-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.lang-btn').forEach(x=>x.classList.toggle('active',x===btn));if(btn.dataset.lang==='en')window.location.href='index.html?lang=en';}));})();</script></body></html>
+<section id="s14" class="section"><h2><span>14</span> การบริหาร ทรัพย์สินทางปัญญา และข้อเสนอ</h2><p>บริษัทคงสิทธิในทรัพย์สินทางปัญญาเดิมตามเอกสารสิทธิที่เกี่ยวข้อง ส่วนผลงานร่วมต้องตกลงสิทธิและการใช้ประโยชน์เป็นลายลักษณ์อักษร มหาวิทยาลัยกำหนดคณะทำงานและแผนทดสอบร่วมกับบริษัท ก่อนเสนอผลต่อภาครัฐและพิจารณาขยายผล ประโยชน์ที่คาดหวังคือเพิ่มทางเลือกให้ประชาชนลดความเสี่ยงต่อชีวิตและทรัพย์สินโดยไม่อ้างว่าปลอดภัยสมบูรณ์</p></section><section id="budget" class="calc"><h2>โปรแกรมคำนวณงบประมาณครัวเรือน 1–100%</h2><p class="small">ฐานสมมติ 26.30 ล้านครัวเรือน • ครัวเรือนละ 1 ระบบ • ประชาชนและรัฐฝ่ายละ 7,000 บาท • ไม่รวมงบ SPC และงบพิสูจน์ระบบ</p><div class="controls"><label for="percent">สัดส่วนครัวเรือนที่สมัครใจเข้าร่วม</label><strong id="pct">1%</strong></div><input id="percent" type="range" min="1" max="100" value="1" step="1" aria-label="เปอร์เซ็นต์ครัวเรือนเข้าร่วม"><div class="numbers"><div class="metric">ครัวเรือนเข้าร่วม<strong id="homes">263,000</strong></div><div class="metric">ประชาชนจ่าย<strong id="citizen">1,841 ล้านบาท</strong></div><div class="metric">รัฐสนับสนุน<strong id="state">1,841 ล้านบาท</strong></div><div class="metric">มูลค่ารวม<strong id="total">3,682 ล้านบาท</strong></div></div><div class="chart" id="chart" role="img" aria-label="กราฟแท่งเปรียบเทียบงบประชาชนและรัฐจาก 1 ถึง 100 เปอร์เซ็นต์"></div><div class="legend"><span class="dot"></span>ประชาชน <span class="dot gov"></span>ภาครัฐ &nbsp; (กราฟแสดงทุก 5% และ 1%)</div><p class="small">เป็นการคำนวณสถานการณ์สมมติ ไม่ใช่ยอดผู้สมัครจริงหรือวงเงินอนุมัติ การสนับสนุนขึ้นอยู่กับหลักเกณฑ์และการจัดสรรงบประมาณของรัฐ</p></section></main><footer class="ssb-footer">
+      <div class="footer-shell">
+        <div class="footer-desktop-grid">
+          <div class="footer-desktop-col footer-desktop-left">
+            <div class="footer-company-th">บริษัท สยามทำ จำกัด</div>
+            <div class="footer-company-en">Siamtham Co.,Ltd.</div>
+            <div class="footer-address">54 ซอย 53 ถนนพุทธมณฑลสาย 1</div>
+            <div class="footer-address">แขวงฉิมพลี เขตตลิ่งชัน กรุงเทพ</div>
+            <div class="footer-reg">เลขทะเบียน 0105566099954</div>
+          </div>
+
+          <div class="footer-desktop-divider" aria-hidden="true"></div>
+
+          <div class="footer-desktop-col footer-desktop-center">
+            <div class="footer-icons">
+              <a href="https://maps.app.goo.gl/Dz4B1kpqVbmWhkYX7" target="_blank" rel="noopener" aria-label="Map">
+                <img src="https://cdn.simpleicons.org/googlemaps/EA4335" alt="Map">
+              </a>
+              <a href="https://line.me/R/ti/p/@siamtham" target="_blank" rel="noopener" aria-label="LINE">
+                <img src="https://cdn.simpleicons.org/line/06C755" alt="LINE">
+              </a>
+              <a href="https://www.facebook.com/profile.php?id=61556844339863" target="_blank" rel="noopener" aria-label="Facebook">
+                <img src="https://cdn.simpleicons.org/facebook/1877F2" alt="Facebook">
+              </a>
+              <a href="https://www.youtube.com/@siamtham" target="_blank" rel="noopener" aria-label="YouTube">
+                <img src="https://cdn.simpleicons.org/youtube/FF0000" alt="YouTube">
+              </a>
+              <a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">
+                <img src="https://cdn.simpleicons.org/tiktok/000000" alt="TikTok">
+              </a>
+            </div>
+          </div>
+
+          <div class="footer-desktop-divider" aria-hidden="true"></div>
+
+          <div class="footer-desktop-col footer-desktop-right">
+            <div class="footer-phone-label">เบอร์โทรศัพท์</div>
+
+            <a class="footer-phone" href="tel:020432988">
+              <span class="footer-phone-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M6.6 10.8c1.6 3.1 3.5 5 6.6 6.6l2.2-2.2c.28-.28.7-.37 1.07-.24 1.2.4 2.5.62 3.83.62.4 0 .72.32.72.72V20c0 .4-.32.72-.72.72C10.87 20.72 3.28 13.13 3.28 3.72c0-.4.32-.72.72-.72H7.6c.4 0 .72.32.72.72 0 1.33.21 2.63.62 3.83.12.37.03.79-.25 1.07L6.6 10.8Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span>02-043-2988</span>
+            </a>
+
+            <a class="footer-phone" href="tel:0649514888">
+              <span class="footer-phone-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M6.6 10.8c1.6 3.1 3.5 5 6.6 6.6l2.2-2.2c.28-.28.7-.37 1.07-.24 1.2.4 2.5.62 3.83.62.4 0 .72.32.72.72V20c0 .4-.32.72-.72.72C10.87 20.72 3.28 13.13 3.28 3.72c0-.4.32-.72.72-.72H7.6c.4 0 .72.32.72.72 0 1.33.21 2.63.62 3.83.12.37.03.79-.25 1.07L6.6 10.8Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span>064-951-4888</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-bottom-line"></div>
+
+        <div class="footer-copy">
+          <div>@ Stealth Safety Bank Mobile System</div>
+          <div>BY Mr.Tingly Marketing Online</div>
+        </div>
+      </div>
+    </footer><script>const base=26300000,fmt=n=>n.toLocaleString('th-TH');const slider=document.getElementById('percent');function update(){const p=Number(slider.value),h=Math.round(base*p/100),one=h*7000;document.getElementById('pct').textContent=p+'%';document.getElementById('homes').textContent=fmt(h);document.getElementById('citizen').textContent=fmt(one/1e6)+' ล้านบาท';document.getElementById('state').textContent=fmt(one/1e6)+' ล้านบาท';document.getElementById('total').textContent=fmt(one*2/1e6)+' ล้านบาท'}slider.addEventListener('input',update);const chart=document.getElementById('chart');[1,...Array.from({length:20},(_,i)=>(i+1)*5)].forEach(p=>{const pair=document.createElement('div');pair.className='pair';pair.title=p+'%: ฝ่ายละ '+fmt(Math.round(base*p/100)*7000/1e6)+' ล้านบาท';for(let i=0;i<2;i++){const b=document.createElement('div');b.className='bar'+(i?' gov':'');b.style.height=p+'%';pair.appendChild(b)}chart.appendChild(pair)});update();</script><script>(function(){const b=document.body,t=document.getElementById('themeToggle'),form=document.getElementById('agentSearchForm'),input=document.getElementById('agentSearchInput');let v='light';try{v=localStorage.getItem('siamtham-about-theme')||'light'}catch(e){}function apply(x){b.classList.toggle('dark',x==='dark');b.classList.toggle('light-mode',x!=='dark');t.setAttribute('aria-pressed',String(x==='light'));t.setAttribute('aria-label',x==='dark'?'เปลี่ยนเป็นโหมดสว่าง':'เปลี่ยนเป็นโหมดมืด')}apply(v);t.addEventListener('click',()=>{v=b.classList.contains('dark')?'light':'dark';apply(v);try{localStorage.setItem('siamtham-about-theme',v)}catch(e){}});form.addEventListener('submit',e=>{e.preventDefault();const q=input.value.trim();if(q)window.location.href='index.html?agent='+encodeURIComponent(q)});document.querySelectorAll('.lang-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.lang-btn').forEach(x=>x.classList.toggle('active',x===btn));if(btn.dataset.lang==='en')window.location.href='index.html?lang=en';}));})();</script></body></html>
