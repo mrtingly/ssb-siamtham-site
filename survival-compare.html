@@ -66,7 +66,22 @@
 .light-mode .f22-inspiration-note h3,.light-mode .f22-inspiration-note p,.light-mode .f22-inspiration-note small{color:#18354f!important}
 @media(max-width:580px){.f22-inspiration-note{padding:16px}}
 </style>
-<link rel="stylesheet" href="css/secondary-pages-polish.css" /></head>
+<link rel="stylesheet" href="css/secondary-pages-polish.css" /><style>
+/* Phone-only: F-22 first, related menus last. Desktop remains unchanged. */
+@media(max-width:767px){
+ .survival-card{display:flex;flex-direction:column}
+ .survival-card>.survival-head{order:0}
+ .survival-card>.survival-showcase{order:1}
+ .survival-card>.survival-bottom{order:2}
+ .survival-card>.survival-select{order:3;margin-top:20px}
+ .survival-card>.survival-select .select-title{padding-top:10px}
+ .survival-card>.survival-select .select-grid{display:grid;grid-template-columns:1fr;gap:12px}
+ .survival-card>.survival-select .select-card{min-width:0}
+ .survival-card>.survival-bottom #backToSelect{display:none}
+ .survival-card>.survival-showcase[hidden],.survival-card>.survival-bottom[hidden],.survival-card>.survival-select[hidden]{display:none!important}
+}
+</style>
+</head>
 
 <body>
   <div class="site-wrap">
@@ -552,6 +567,30 @@
   const lines=questions.map((q,qi)=>'คำถามที่ '+(qi+1)+' '+q+'\nได้: '+(banks.filter((b,bi)=>root.querySelector('input[name="bank-q'+qi+'-b'+bi+'"][value="yes"]').checked).map(b=>b[0]).join(', ')||'-')+'\nไม่ได้: '+(banks.filter((b,bi)=>root.querySelector('input[name="bank-q'+qi+'-b'+bi+'"][value="no"]').checked).map(b=>b[0]).join(', ')||'-')).join('\n\n')+'\n\nหมายเหตุ: '+document.getElementById('bankNotes').value;
   try{await navigator.clipboard.writeText(lines);alert('คัดลอกผลตรวจสอบแล้ว');}catch(e){alert('ไม่สามารถคัดลอกอัตโนมัติได้ กรุณาใช้คำสั่งพิมพ์แทน');}
  });
+})();
+</script>
+<script>
+/* Automatically open F-22 on phones, retaining other choices at the end. */
+(function(){
+ if(!window.matchMedia('(max-width:767px)').matches)return;
+ const select=document.getElementById('survivalSelect');
+ const show=document.getElementById('showcase');
+ const bottom=document.getElementById('survivalBottom');
+ const f22=document.getElementById('selectF22');
+ const bank=document.getElementById('openBankTest');
+ const bankPanel=document.getElementById('bankCompatibility');
+ if(!select||!show||!bottom||!f22)return;
+ f22.click();
+ select.hidden=false;
+ if(bank&&bankPanel){
+   bank.addEventListener('click',()=>{
+     show.hidden=true;bottom.hidden=true;
+   });
+   const restore=()=>{
+     if(bankPanel.hidden){show.hidden=false;bottom.hidden=false;select.hidden=false;show.classList.add('is-open');}
+   };
+   new MutationObserver(restore).observe(bankPanel,{attributes:true,attributeFilter:['hidden']});
+ }
 })();
 </script>
 </body>
