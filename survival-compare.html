@@ -154,7 +154,7 @@
   .survival-card>.survival-select[hidden]{display:none!important}
 }
 </style>
-</head>
+<style>@media(max-width:767px){.survival-card>.survival-select{position:relative!important;z-index:30!important}.survival-card>.survival-select .select-card{pointer-events:auto!important;cursor:pointer!important}.survival-card>.survival-select .select-card::before,.survival-card>.survival-select .select-card::after{pointer-events:none!important}}</style></head>
 
 <body>
   <div class="site-wrap">
@@ -635,27 +635,42 @@
 })();
 </script>
 <script>
-/* Automatically open F-22 on phones, retaining other choices at the end. */
+/* Phone navigation: all three cards are real actions. */
 (function(){
  if(!window.matchMedia('(max-width:767px)').matches)return;
  const select=document.getElementById('survivalSelect');
  const show=document.getElementById('showcase');
  const bottom=document.getElementById('survivalBottom');
  const f22=document.getElementById('selectF22');
+ const ssb=select?.querySelector('.ssb-select');
  const bank=document.getElementById('openBankTest');
  const bankPanel=document.getElementById('bankCompatibility');
  if(!select||!show||!bottom||!f22)return;
+ function openF22(){
+   if(bankPanel)bankPanel.hidden=true;
+   show.hidden=false;bottom.hidden=false;select.hidden=false;
+   show.classList.add('is-open');
+   show.scrollIntoView({behavior:'smooth',block:'start'});
+ }
  f22.click();
  select.hidden=false;
- if(bank&&bankPanel){
-   bank.addEventListener('click',()=>{
-     show.hidden=true;bottom.hidden=true;
-   });
-   const restore=()=>{
-     if(bankPanel.hidden){show.hidden=false;bottom.hidden=false;select.hidden=false;show.classList.add('is-open');}
-   };
-   new MutationObserver(restore).observe(bankPanel,{attributes:true,attributeFilter:['hidden']});
- }
+ f22.addEventListener('click',function(e){e.preventDefault();e.stopImmediatePropagation();openF22();},true);
+ if(ssb)ssb.addEventListener('click',function(e){
+   e.preventDefault();e.stopImmediatePropagation();
+   window.location.assign(ssb.getAttribute('href'));
+ },true);
+ if(bank&&bankPanel)bank.addEventListener('click',function(e){
+   e.preventDefault();e.stopImmediatePropagation();
+   show.hidden=true;bottom.hidden=true;select.hidden=false;
+   bankPanel.hidden=false;
+   bankPanel.scrollIntoView({behavior:'smooth',block:'start'});
+ },true);
+ const back=document.getElementById('bankBack');
+ const backBottom=document.getElementById('bankBackBottom');
+ [back,backBottom].forEach(el=>el?.addEventListener('click',function(){
+   select.hidden=false;show.hidden=false;bottom.hidden=false;
+   show.classList.add('is-open');
+ }));
 })();
 </script>
 </body>
