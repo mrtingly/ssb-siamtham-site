@@ -14,3 +14,42 @@ body:not(.homepage) :is(input,select,textarea):focus{box-shadow:0 0 0 3px #57d5f
 body:not(.homepage) :is(.ssb-topbar,.topbar){backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
 @media(max-width:700px){body:not(.homepage) :is(.hero-card,.survival-card,.form-card,.hero,.content,.login-card){box-shadow:0 12px 35px #00162b1d}body:not(.homepage) :is(.hero-title,.hero h1){line-height:1.25}}
 @media(prefers-reduced-motion:reduce){body:not(.homepage) *,body:not(.homepage) *:before,body:not(.homepage) *:after{transition:none!important;animation-duration:.01ms!important}}
+
+/* SSBMS: independent phone layout. Desktop untouched. */
+@media (max-width:767px){
+  .main-content{width:100%;max-width:100%;padding:10px 8px 18px}
+  .hero-card{padding:12px 8px 16px;max-width:100%;overflow:hidden}
+  .hero-head{margin-bottom:12px}
+  .hero-head h1{font-size:clamp(15px,4.5vw,21px);line-height:1.28;letter-spacing:0;overflow-wrap:normal}
+  .showcase{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"center center" "attacks systems";gap:12px 8px;min-height:0!important;height:auto!important;overflow:visible!important;padding:0 2px 12px}
+  .showcase .beam-rail,.showcase .beam-svg-wrap{display:none!important}
+  .showcase .center-stage{grid-area:center;position:relative!important;inset:auto!important;left:auto!important;right:auto!important;top:auto!important;transform:none!important;width:100%!important;max-width:100%;height:auto!important;min-height:250px!important;margin:0 auto;z-index:1}
+  .showcase .center-aura{max-width:100%}
+  .showcase .logo-mode{position:relative!important;inset:auto!important;transform:none!important;width:100%!important;min-height:225px!important;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .showcase .logo-orbit-wrap{width:min(60vw,230px)!important;height:min(60vw,230px)!important;max-width:100%;margin:0 auto}
+  .showcase .logo-core{z-index:5}
+  .showcase .center-caption{position:relative!important;inset:auto!important;transform:none!important;width:100%;padding:4px 4px 0;text-align:center}
+  .showcase .center-caption-main{font-size:clamp(16px,5vw,22px);line-height:1.3}
+  .showcase .center-caption-sub{font-size:12px;line-height:1.5}
+  .showcase .status-bar{position:relative!important;inset:auto!important;transform:none!important;max-width:100%;margin:6px auto 0;text-align:center;font-size:12px}
+  .showcase .icon-column{position:relative!important;inset:auto!important;top:auto!important;left:auto!important;right:auto!important;transform:none!important;width:100%!important;min-width:0;gap:8px;z-index:2;pointer-events:auto}
+  .showcase .icon-column.left{grid-area:attacks}
+  .showcase .icon-column.right{grid-area:systems}
+  .showcase .icon-card,.showcase .icon-column.left .icon-card,.showcase .icon-column.right .icon-card{position:relative;width:100%;transform:none!important;opacity:1!important;pointer-events:auto!important;transition:none!important}
+  .showcase .icon-btn,.showcase .icon-column.right .icon-btn{display:flex;flex-direction:column!important;align-items:center;justify-content:flex-start;gap:5px;width:100%;min-height:128px;padding:10px 6px;border:1px solid var(--border);border-radius:15px;background:var(--panel);text-align:center!important}
+  .showcase .icon-frame{width:52px;height:52px;flex:0 0 52px}
+  .showcase .icon-frame img{width:40px;height:40px;object-fit:contain}
+  .showcase .icon-meta{display:block;width:100%;min-width:0}
+  .showcase .icon-name{display:block;font-size:12px!important;line-height:1.35;overflow-wrap:anywhere}
+  .showcase .icon-sub{display:block;font-size:11px!important;line-height:1.45;overflow-wrap:anywhere}
+  .showcase .detail-mode{position:fixed!important;inset:0!important;z-index:1000;padding:12px;align-items:center;justify-content:center;background:rgba(2,12,30,.72)}
+  .showcase .detail-shell{width:100%!important;max-width:540px;max-height:calc(100dvh - 24px);border-radius:18px}
+  .showcase .detail-top{padding:14px;gap:8px}
+  .showcase .detail-title{font-size:21px}
+  .showcase .detail-body{grid-template-columns:1fr;padding:12px;gap:10px}
+  .showcase .detail-box{padding:12px}
+  .bottom-box{margin-top:12px;padding:14px 10px}
+  .bottom-box strong{display:block;text-align:center;font-size:14px;line-height:1.5}
+  .action-bottom.in-bottom-box{display:flex;flex-direction:column;gap:8px}
+  .action-bottom.in-bottom-box .action-btn{width:100%;min-height:44px}
+}
