@@ -100,6 +100,36 @@
  .ssb-mobile-model-card:focus-visible{outline:3px solid #2b85fa;outline-offset:2px}
 }
 </style>
+<style>
+/* Mobile: resource guides in a compact horizontal grid, desktop unchanged. */
+@media screen and (max-width:620px){
+ .ssb-resource-hub .resource-grid{
+   display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+   gap:8px!important;align-items:stretch!important;margin:14px 0!important;
+ }
+ .ssb-resource-hub .resource-grid .resource-card{
+   width:100%!important;min-width:0!important;margin:0!important;
+   padding:12px 6px!important;border-radius:13px!important;
+   display:flex!important;flex-direction:column;align-items:center;justify-content:flex-start;
+ }
+ .ssb-resource-hub .resource-grid .resource-icon{
+   font-size:27px!important;line-height:1.2!important;margin:0 0 7px!important;
+ }
+ .ssb-resource-hub .resource-grid h3{
+   font-size:12px!important;line-height:1.45!important;margin:0 0 5px!important;
+   overflow-wrap:anywhere;text-align:center;
+ }
+ .ssb-resource-hub .resource-grid p{
+   font-size:10px!important;line-height:1.45!important;margin:0 0 10px!important;
+   text-align:center;
+ }
+ .ssb-resource-hub .resource-grid .resource-link,
+ .ssb-resource-hub .resource-grid .resource-card a{
+   font-size:11px!important;padding:7px 11px!important;margin-top:auto!important;
+   min-height:32px!important;
+ }
+}
+</style>
 </head>
 
 <body>
