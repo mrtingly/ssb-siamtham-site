@@ -1,3 +1,4 @@
+@import url("./mobile-site.css") screen and (max-width: 767px);
 @import url("https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap");
 
 :where(html, body, button, input, select, textarea, table, dialog, .toast, .modal) {
