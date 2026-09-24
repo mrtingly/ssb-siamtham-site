@@ -81,7 +81,26 @@
 .ssb-resource-hub .resource-grid a.resource-card-link:hover,.ssb-resource-hub .resource-grid a.resource-card-link:focus-visible{transform:translateY(-5px);border-color:#4d9fe6;box-shadow:0 12px 28px #1565b035;outline-offset:3px}
 .ssb-resource-hub .resource-grid a.resource-card-link h3,.ssb-resource-hub .resource-grid a.resource-card-link p{text-decoration:none}
 </style>
-<link rel="stylesheet" href="css/secondary-pages-polish.css" /></head>
+<link rel="stylesheet" href="css/secondary-pages-polish.css" /><style>
+/* SSBMS three-card mobile menu, independently scoped: desktop untouched. */
+.ssb-mobile-model-menu{display:none}
+@media(max-width:767px){
+ .ssb-mobile-model-menu{display:block;width:calc(100% - 16px);max-width:100%;margin:14px auto 18px;padding:13px 8px 10px;border:1px solid #c8dffc;border-radius:17px;background:linear-gradient(155deg,#eaf5ff,#fff);box-shadow:0 5px 18px rgba(22,83,156,.10);box-sizing:border-box}
+ .ssb-mobile-model-heading{display:flex;flex-direction:column;align-items:center;text-align:center;gap:3px;margin-bottom:10px;color:#143967}
+ .ssb-mobile-model-heading span{font:700 10px/1.3 Orbitron,Prompt,sans-serif;letter-spacing:.6px;color:#1765d3}
+ .ssb-mobile-model-heading strong{font:700 13px/1.45 Prompt,sans-serif}
+ .ssb-mobile-model-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+ .ssb-mobile-model-card{min-width:0;height:124px;padding:9px 3px 6px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:5px;border:1px solid #cbdffa;border-radius:12px;background:#fff;box-shadow:0 3px 8px #174a8a16;text-align:center;text-decoration:none!important;color:#123b70!important;box-sizing:border-box;cursor:pointer}
+ .ssb-mobile-model-card.is-current{border-color:#65a9ff;background:#f4faff}
+ .ssb-mobile-model-card img{display:block;width:100%;height:68px;object-fit:contain;flex-shrink:0}
+ .ssb-mobile-bank-icon{height:68px;width:68px;max-width:100%;display:flex;align-items:center;justify-content:center;color:#2499e5;flex-shrink:0}
+ .ssb-mobile-bank-icon svg{height:64px;width:64px;max-width:100%}
+ .ssb-mobile-model-card strong{font:800 9px/1.25 Orbitron,Prompt,sans-serif;overflow-wrap:anywhere}
+ .ssb-mobile-model-card small{font:600 9px/1.3 Prompt,sans-serif;color:#2561a2}
+ .ssb-mobile-model-card:focus-visible{outline:3px solid #2b85fa;outline-offset:2px}
+}
+</style>
+</head>
 
 <body>
   <div class="site-wrap">
@@ -375,6 +394,23 @@
           </div>
         </div>
       </section>
+      <nav class="ssb-mobile-model-menu" aria-label="เมนูเลือกระบบ">
+        <div class="ssb-mobile-model-heading"><span>SELECT SURVIVAL MODEL</span><strong>เลือกระบบเพื่อดูข้อมูลเพิ่มเติม</strong></div>
+        <div class="ssb-mobile-model-grid">
+          <a class="ssb-mobile-model-card" href="survival-compare.html" aria-label="เปรียบเทียบ F-22">
+            <img src="images/f22-bright-mode/f-22-raptor-bright-mode.png" alt="F-22 Raptor" loading="lazy">
+            <strong>F-22 RAPTOR</strong><small>เปรียบเทียบ F-22</small>
+          </a>
+          <a class="ssb-mobile-model-card is-current" href="ssb-system.html" aria-current="page" aria-label="SSBMS หน้าปัจจุบัน">
+            <img src="images/ssb-mobile.png" alt="เครื่องเก็บเงิน SSBMS" loading="lazy">
+            <strong>SSBMS</strong><small>เครื่องเก็บเงิน</small>
+          </a>
+          <a class="ssb-mobile-model-card" href="survival-compare.html#bankCompatibility" aria-label="ตรวจสอบธนาคาร">
+            <span class="ssb-mobile-bank-icon" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none"><path d="M32 8 8 20h48L32 8ZM13 26h38M17 26v21m10-21v21m10-21v21m10-21v21M10 51h44M7 57h50" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="37" r="11" fill="#1559ac"/><path d="m26 37 4 4 8-9" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <strong>BANK COMPATIBILITY</strong><small>ตรวจสอบธนาคาร</small>
+          </a>
+        </div>
+      </nav>
 <div class="resource-scroll-cue"><a href="#ssbResources" aria-label="เลื่อนลงไปดูคู่มือและวิดีโอ">⌄ &nbsp; คู่มือการใช้งานและข้อมูลเพิ่มเติม &nbsp; ⌄</a></div>
 <section class="ssb-resource-hub" id="ssbResources" aria-labelledby="ssbResourcesTitle">
 <div class="resource-kicker">SSBMS / USER RESOURCES</div><h2 id="ssbResourcesTitle">คู่มือการใช้งานและข้อมูลเพิ่มเติม</h2><p>ศึกษาวิธีใช้งานเครื่องเก็บเงิน (SSBM) และเครื่องล่อเป้า (FD) พร้อมรับชมวิดีโอแนะนำระบบ</p>
