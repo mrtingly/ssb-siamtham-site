@@ -342,3 +342,35 @@
     scroll-behavior:auto !important;
   }
 }
+
+/* Mobile usability for the shared Siamtham header, About pages and government proposal.
+   Scoped to existing classes; desktop layout remains unchanged. */
+@media (max-width:767px){
+  html,body{max-width:100%;overflow-x:clip}
+  .ssb-topbar .topbar-inner{width:100%;max-width:100%;padding:10px 12px;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+  .ssb-topbar .topbar-inner>*{min-width:0}
+  .ssb-topbar .header-search-wrap{order:3;flex:1 0 100%;width:100%;max-width:100%;margin:0}
+  .ssb-topbar .header-search{width:100%;max-width:100%}
+  .ssb-topbar .header-search-input{min-width:0;width:100%;font-size:16px}
+  .ssb-topbar .topbar-actions{margin-left:auto;display:flex;align-items:center;gap:6px;flex-wrap:nowrap}
+  .ssb-topbar .topbar-actions button{flex-shrink:0}
+  .about-carousel,.about-quick-nav,.detail,.company-story{max-width:100%;min-width:0}
+  .about-carousel .cards{min-width:0;scroll-padding-inline:8px;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+  .about-carousel .card{flex-shrink:0}
+  .about-quick-links{min-width:0;-webkit-overflow-scrolling:touch}
+  .story-chapter{min-width:0;overflow-wrap:anywhere}
+  .story-chapter>div{min-width:0}
+  .listen-toolbar{display:flex;flex-wrap:wrap;gap:6px;max-width:100%}
+  .listen-toolbar button,.listen-toolbar select{min-height:40px}
+  .ssb-footer .footer-shell{width:calc(100% - 24px);max-width:100%;margin-inline:auto}
+  .ssb-footer .footer-desktop-grid{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+  .ssb-footer .footer-desktop-col{width:100%;min-width:0;align-items:center;text-align:center}
+  .ssb-footer .footer-desktop-divider{display:none}
+  .ssb-footer .footer-icons{display:flex;justify-content:center;flex-wrap:wrap}
+  .ssb-footer .footer-phone{justify-content:center}
+}
+@media (max-width:390px){
+  .ssb-topbar .topbar-inner{padding-inline:8px;gap:6px}
+  .ssb-topbar .topbar-actions{gap:3px}
+  .about-carousel .carousel-control,.about-quick-nav .about-quick-arrow{width:30px;min-width:30px}
+}
