@@ -92,6 +92,68 @@
  .survival-card>.survival-showcase[hidden],.survival-card>.survival-bottom[hidden],.survival-card>.survival-select[hidden]{display:none!important}
 }
 </style>
+<style>
+/* Mobile polish: compact navigation, no empty spacer; desktop unaffected. */
+@media screen and (max-width:767px){
+  .survival-main{padding-bottom:12px!important}
+  .survival-card{height:auto!important;min-height:0!important;padding-bottom:12px!important}
+  .survival-card>.survival-select{
+    display:block!important;flex:0 0 auto!important;align-self:stretch!important;
+    width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;
+    margin:14px 0 0!important;padding:15px 9px 12px!important;
+    border-radius:18px!important;background:linear-gradient(160deg,rgba(229,243,255,.94),rgba(255,255,255,.97))!important;
+    border:1px solid rgba(99,167,239,.25)!important;box-shadow:0 5px 18px rgba(15,72,143,.09)!important;
+  }
+  .survival-card>.survival-select .select-title{padding:0!important;margin:0 0 12px!important}
+  .survival-card>.survival-select .select-kicker{font-size:10px!important;letter-spacing:1px!important}
+  .survival-card>.survival-select .select-title h2{font-size:15px!important;line-height:1.45!important;margin:5px 0!important}
+  .survival-card>.survival-select .select-title p{display:none!important}
+  .survival-card>.survival-select .select-grid{
+    display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    grid-template-rows:auto!important;grid-auto-flow:row!important;gap:7px!important;
+    width:100%!important;max-width:100%!important;min-height:0!important;align-items:stretch!important;
+  }
+  .survival-card>.survival-select .select-grid>.select-card,
+  .survival-card>.survival-select .select-grid>.bank-select{
+    grid-column:auto!important;grid-row:auto!important;position:relative!important;
+    width:100%!important;min-width:0!important;max-width:none!important;
+    height:126px!important;min-height:126px!important;max-height:126px!important;
+    margin:0!important;padding:9px 3px 6px!important;border-radius:13px!important;
+    display:flex!important;flex-direction:column!important;justify-content:flex-start!important;
+    align-items:center!important;gap:5px!important;overflow:hidden!important;
+    background:#fff!important;border:1px solid #c9defb!important;
+    box-shadow:0 3px 9px rgba(24,86,164,.09)!important;transform:none!important;
+  }
+  .survival-card>.survival-select .select-img-wrap{
+    flex:0 0 73px!important;width:100%!important;height:73px!important;min-height:0!important;
+    padding:0!important;margin:0!important;display:flex!important;align-items:center!important;justify-content:center!important;
+  }
+  .survival-card>.survival-select .select-img-wrap img,
+  .survival-card>.survival-select .select-img-wrap svg{
+    display:block!important;width:auto!important;height:68px!important;max-width:95%!important;object-fit:contain!important;
+  }
+  .survival-card>.survival-select .bank-select-art{
+    width:68px!important;height:68px!important;min-height:0!important;margin:0!important;
+  }
+  .survival-card>.survival-select .select-copy{
+    display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;
+    width:100%!important;min-width:0!important;margin:0!important;padding:0!important;gap:2px!important;
+  }
+  .survival-card>.survival-select .select-copy strong,
+  .survival-card>.survival-select .select-copy span{
+    display:block!important;font-size:9px!important;line-height:1.35!important;font-weight:800!important;
+    text-align:center!important;overflow-wrap:anywhere!important;
+  }
+  .survival-card>.survival-select .select-copy small{display:none!important}
+  .survival-card>.survival-bottom{margin-bottom:0!important}
+  .survival-card>.survival-bottom .f22-inspiration-note{padding:15px 12px!important}
+  .survival-card>.survival-bottom .survival-principle{gap:6px!important}
+  .survival-card>.survival-bottom .principle-item{padding:10px 5px!important}
+  .survival-card>.survival-showcase[hidden],
+  .survival-card>.survival-bottom[hidden],
+  .survival-card>.survival-select[hidden]{display:none!important}
+}
+</style>
 </head>
 
 <body>
