@@ -1,3 +1,4 @@
+@import url("./mobile-site.css") screen and (max-width: 767px);
 /* Siamtham secondary-page visual refresh. Homepage intentionally excluded. */
 :root{--ssb-accent:#57d5f5;--ssb-accent2:#71a9ff}
 body:not(.homepage){-webkit-font-smoothing:antialiased}
