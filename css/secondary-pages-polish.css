@@ -78,3 +78,32 @@ body:not(.homepage) :is(.ssb-topbar,.topbar){backdrop-filter:blur(14px);-webkit-
   .hero-card .showcase .logo-radar-layer{inset:8%!important}
   .hero-card .showcase .center-caption{margin-top:0!important;padding-top:6px!important}
 }
+
+/* SSBMS mobile hero v3: readable phone and title beneath it; desktop unchanged. */
+@media (max-width:767px){
+  .hero-card .hero-head{display:none!important}
+  .hero-card .showcase .center-stage{padding-top:12px!important}
+  .hero-card .showcase .logo-orbit-wrap{
+    width:min(78vw,290px)!important;height:min(78vw,290px)!important;
+    transform:none!important;margin:0 auto!important;
+  }
+  .hero-card .showcase .logo-core{
+    width:min(65vw,230px)!important;height:min(65vw,230px)!important;
+    transform:none!important;display:flex;align-items:center;justify-content:center;
+  }
+  .hero-card .showcase .logo-core img{
+    width:170%!important;max-width:none!important;height:auto!important;max-height:none!important;
+    flex-shrink:0;object-fit:contain;transform:none!important;
+  }
+  .hero-card .showcase .center-caption{
+    margin-top:2px!important;display:flex;flex-direction:column;align-items:center;gap:5px;
+  }
+  .hero-card .showcase .center-caption::before{
+    content:"STEALTH SAFETY BANK MOBILE SYSTEM";display:block;
+    width:100%;max-width:340px;padding:8px 4px 10px;
+    color:var(--title);font-family:var(--font-tech);
+    font-size:clamp(14px,4vw,18px);font-weight:900;line-height:1.35;
+    text-align:center;letter-spacing:0;overflow-wrap:normal;
+    border-bottom:1px solid var(--border);
+  }
+}
