@@ -125,8 +125,6 @@
     if (!themeToggle) return;
 
     themeToggle.addEventListener("click", () => {
-      if (isMobileView()) return;
-
       body.classList.toggle("light-mode");
       localStorage.setItem(
         "theme",
