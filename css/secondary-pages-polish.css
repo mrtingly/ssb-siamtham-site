@@ -53,3 +53,28 @@ body:not(.homepage) :is(.ssb-topbar,.topbar){backdrop-filter:blur(14px);-webkit-
   .action-bottom.in-bottom-box{display:flex;flex-direction:column;gap:8px}
   .action-bottom.in-bottom-box .action-btn{width:100%;min-height:44px}
 }
+
+/* Fix phone overlapping the heading: reset fixed-size orbit and core on phones. */
+@media (max-width:767px){
+  .hero-card .hero-head{position:relative;z-index:3;margin:0 0 18px!important}
+  .hero-card .showcase{margin-top:0!important}
+  .hero-card .showcase .center-stage{padding-top:10px!important;min-height:0!important}
+  .hero-card .showcase .logo-mode{min-height:0!important;gap:8px}
+  .hero-card .showcase .logo-orbit-wrap{
+    width:min(62vw,220px)!important;height:min(62vw,220px)!important;
+    min-width:0!important;min-height:0!important;margin:0 auto!important;
+    overflow:visible;
+  }
+  .hero-card .showcase .logo-orbit-svg{
+    width:100%!important;height:100%!important;inset:0!important;
+  }
+  .hero-card .showcase .logo-core{
+    width:min(54vw,190px)!important;height:min(54vw,190px)!important;
+    max-width:100%;max-height:100%;margin:0 auto!important;
+  }
+  .hero-card .showcase .logo-core img{max-width:100%;max-height:100%;object-fit:contain}
+  .hero-card .showcase .logo-radar-grid,
+  .hero-card .showcase .logo-radar-cross,
+  .hero-card .showcase .logo-radar-layer{inset:8%!important}
+  .hero-card .showcase .center-caption{margin-top:0!important;padding-top:6px!important}
+}
