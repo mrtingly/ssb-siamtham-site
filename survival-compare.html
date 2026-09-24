@@ -75,7 +75,18 @@
  .survival-card>.survival-bottom{order:2}
  .survival-card>.survival-select{order:3;margin-top:20px}
  .survival-card>.survival-select .select-title{padding-top:10px}
- .survival-card>.survival-select .select-grid{display:grid;grid-template-columns:1fr;gap:12px}
+ .survival-card>.survival-select .select-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:5px!important;align-items:stretch}
+ .survival-card>.survival-select .select-card{width:100%!important;min-width:0!important;min-height:0!important;padding:7px 3px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:flex-start!important;gap:4px!important;border-radius:12px!important}
+ .survival-card>.survival-select .select-img-wrap{width:100%!important;height:72px!important;min-height:0!important;margin:0!important;display:flex!important;align-items:center!important;justify-content:center!important}
+ .survival-card>.survival-select .select-img-wrap img,.survival-card>.survival-select .select-img-wrap svg{width:auto!important;height:65px!important;max-width:95%!important;object-fit:contain!important}
+ .survival-card>.survival-select .bank-select-art{width:66px!important;height:66px!important;max-width:100%!important}
+ .survival-card>.survival-select .select-copy{width:100%!important;min-width:0!important;text-align:center!important;padding:0!important}
+ .survival-card>.survival-select .select-copy strong,.survival-card>.survival-select .select-copy span{font-size:9px!important;line-height:1.3!important;overflow-wrap:anywhere!important}
+ .survival-card>.survival-select .select-copy small{display:none!important}
+ .survival-card>.survival-select .select-title{margin-bottom:8px!important}
+ .survival-card>.survival-select .select-title h2{font-size:15px!important}
+ .survival-card>.survival-select .select-title p{font-size:11px!important;line-height:1.5!important}
+ @media(max-width:360px){.survival-card>.survival-select .select-grid{gap:3px!important}.survival-card>.survival-select .select-img-wrap{height:58px!important}.survival-card>.survival-select .select-img-wrap img,.survival-card>.survival-select .select-img-wrap svg{height:52px!important}}
  .survival-card>.survival-select .select-card{min-width:0}
  .survival-card>.survival-bottom #backToSelect{display:none}
  .survival-card>.survival-showcase[hidden],.survival-card>.survival-bottom[hidden],.survival-card>.survival-select[hidden]{display:none!important}
