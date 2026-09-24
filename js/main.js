@@ -109,7 +109,7 @@
 
   function applyThemeByViewport() {
     if (isMobileView()) {
-      body.classList.remove("light-mode");
+      body.classList.add("light-mode");
       return;
     }
 
