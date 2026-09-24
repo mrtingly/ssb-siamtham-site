@@ -332,6 +332,35 @@
     }
   </style>
   
+<style>
+/* Homepage phone header/footer: mirror desktop controls and three-column footer. */
+@media screen and (max-width:767px){
+ .ssb-topbar .theme-switch-wrap{display:flex!important;align-items:center!important;gap:3px!important;margin:0 5px 0 0!important}
+ .ssb-topbar .theme-switch-wrap .mode-label{display:none!important}
+ .ssb-topbar .theme-switch{display:flex!important;flex:0 0 auto!important;transform:scale(.78);transform-origin:center!important}
+ .ssb-topbar .topbar-actions{display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:2px!important}
+ .ssb-topbar .lang-bar{flex:0 0 auto!important}
+ .ssb-footer .footer-shell{width:calc(100% - 16px)!important;max-width:100%!important;padding:14px 8px 12px!important;margin:0 auto!important;border-radius:17px!important;box-sizing:border-box}
+ .ssb-footer .footer-desktop-grid{display:grid!important;grid-template-columns:minmax(0,1fr) 1px minmax(0,1fr) 1px minmax(0,1fr)!important;align-items:center!important;gap:5px!important;text-align:center!important}
+ .ssb-footer .footer-desktop-left,.ssb-footer .footer-desktop-center,.ssb-footer .footer-desktop-right{display:block!important;min-width:0!important;width:100%!important;text-align:center!important}
+ .ssb-footer .footer-desktop-divider{display:block!important;width:1px!important;height:88px!important;background:linear-gradient(transparent,#ffffff70,transparent)!important}
+ .ssb-footer .footer-company-th{font-size:clamp(10px,2.6vw,13px)!important;line-height:1.4!important;margin:0 0 3px!important}
+ .ssb-footer .footer-company-en{font-size:clamp(9px,2.2vw,11px)!important;margin:0 0 5px!important}
+ .ssb-footer .footer-address,.ssb-footer .footer-reg{font-size:clamp(8px,2vw,10px)!important;line-height:1.55!important;overflow-wrap:anywhere!important}
+ .ssb-footer .footer-icons{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;justify-items:center!important;gap:7px 2px!important;max-width:116px!important;margin:auto!important}
+ .ssb-footer .footer-icons a{grid-column:span 2!important;width:34px!important;height:34px!important;min-width:34px!important;min-height:34px!important;flex:0 0 34px!important}
+ .ssb-footer .footer-icons a:nth-child(4){grid-column:2/span 2!important}
+ .ssb-footer .footer-icons a:nth-child(5){grid-column:4/span 2!important}
+ .ssb-footer .footer-icons img{width:19px!important;height:19px!important;max-width:19px!important;max-height:19px!important}
+ .ssb-footer .footer-phone-label{font-size:10px!important;margin:0 0 8px!important}
+ .ssb-footer .footer-phone{display:flex!important;align-items:center!important;justify-content:center!important;gap:3px!important;width:100%!important;margin:0 0 9px!important;font-size:clamp(9px,2.4vw,12px)!important;line-height:1.35!important;white-space:normal!important}
+ .ssb-footer .footer-phone span:last-child{overflow-wrap:anywhere!important}
+ .ssb-footer .footer-phone-icon,.ssb-footer .footer-phone-icon svg{width:12px!important;height:12px!important;flex:0 0 12px!important}
+ .ssb-footer .footer-bottom-line{margin:12px 0 10px!important}
+ .ssb-footer .footer-copy div:first-child{font-size:11px!important}
+ .ssb-footer .footer-copy div:last-child{font-size:10px!important}
+}
+</style>
 </head>
 
 <body>
