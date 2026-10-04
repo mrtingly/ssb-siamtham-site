@@ -713,6 +713,11 @@ body.dark .about-carousel .cards .card.card-link .card-arrow{background:#247bc4!
 .about-carousel .cards .card.card-link .card-arrow{position:static!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;transform:none!important;flex:0 0 39px!important;margin:13px auto 0!important;width:39px!important;height:39px!important}
 .about-carousel .cards .card.card-link:hover .card-arrow{transform:none!important}
 .people-portrait-photo{padding:0!important;overflow:hidden;background:#eef6ff!important}.people-portrait-photo img{width:100%;height:100%;display:block;object-fit:cover;object-position:center top}
+
+/* Executive portraits: normalize framing and visual direction without altering source images */
+.people-grid-executives .people-portrait-photo img{width:100%;height:100%;object-fit:cover;object-position:center 18%;transform:none}
+.people-grid-executives .people-card:nth-child(1) .people-portrait-photo img{transform:scaleX(-1);object-position:center 18%}
+.people-grid-executives .people-card:nth-child(2) .people-portrait-photo img{transform:none;object-position:center 18%}
 </style></head><body>
 <header class="ssb-topbar" role="banner">
       <div class="topbar-inner">
